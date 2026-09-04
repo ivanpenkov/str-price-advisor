@@ -19,7 +19,7 @@ class PricingAnalyticsEngine:
         self,
         base_percentile: float = 78.0,
         cleaning_fee: float = 500.0,
-        urgent_pct_diff: float = 25.0,
+        urgent_pct_diff: float = 35.0,
         urgent_lead_days: int = 60,
         moderate_pct_diff: float = 10.0,
     ):
@@ -180,17 +180,10 @@ class PricingAnalyticsEngine:
         )
         rec_diff = round(rec_base - our_base, 0)
 
-        # Priority classification
+        # Priority classification: Normal (<10%), Review (10-35%), Urgent (>35%)
         abs_diff = abs(pct_diff)
-        is_urgent = (
-            abs_diff >= self.urgent_pct_diff
-            or (lead_days <= self.urgent_lead_days and abs_diff >= 15.0)
-        )
-        is_moderate = (
-            not is_urgent
-            and abs_diff >= self.moderate_pct_diff
-            and lead_days <= 180
-        )
+        is_urgent = abs_diff >= self.urgent_pct_diff
+        is_moderate = not is_urgent and abs_diff >= self.moderate_pct_diff
 
         # Sample size & statistical significance analysis
         n_comps = len(clean_comps)
@@ -224,11 +217,13 @@ class PricingAnalyticsEngine:
             tier_label = "✅ Competitive / Long Range"
             status = "ON TARGET"
 
-        action_summary = (
-            f"Adjust base from ${our_base:.0f} to ${rec_base:.0f} ({'+' if rec_diff > 0 else ''}{rec_diff:.0f})"
-            if abs(rec_diff) >= 20
-            else "Keep current price"
-        )
+        if abs_diff < 10.0 or rec_diff == 0:
+            action_summary = "Keep current price"
+        elif rec_diff < 0:
+            action_summary = f"↓ Reduce base from ${our_base:.0f} to ${rec_base:.0f} ({rec_diff:.0f})"
+        else:
+            action_summary = f"↑ Increase base from ${our_base:.0f} to ${rec_base:.0f} (+{rec_diff:.0f})"
+
         if sample_significance in ["SOLD_OUT", "VERY_LOW"]:
             action_summary += " • High compression"
 

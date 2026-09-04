@@ -21,9 +21,9 @@ strategy:
     - min_days: 0
       percentile: 65           # Last-minute unbooked protection
   anomaly_thresholds:
-    urgent_percent_diff: 25.0  # >25% discrepancy triggers weekly urgent action
+    urgent_percent_diff: 35.0  # >35% discrepancy triggers weekly urgent action
     urgent_lead_days: 60       # Unbooked dates <60 days away get elevated priority
-    moderate_percent_diff: 10.0 # 10-25% discrepancy for monthly adjustment
+    moderate_percent_diff: 10.0 # 10-35% discrepancy for monthly adjustment
 
 market:
   location: "Tempe, AZ"

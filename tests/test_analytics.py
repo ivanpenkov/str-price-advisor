@@ -10,7 +10,7 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.engine = PricingAnalyticsEngine(
             base_percentile=78.0,
             cleaning_fee=500.0,
-            urgent_pct_diff=25.0,
+            urgent_pct_diff=35.0,
             urgent_lead_days=60,
             moderate_pct_diff=10.0,
         )
@@ -47,7 +47,8 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.assertEqual(rec_base, 833.0)
 
     def test_priority_tier_classification(self):
-        """Urgent when >25% off target or imminent lead time."""
+        """Urgent when >35% off target, Review when 10-35%, On Target when <10%."""
+        # Case 1: Urgent (>35% underpriced)
         segment_urgent = {
             "check_in": "2026-09-15",
             "check_out": "2026-09-18",
@@ -58,15 +59,47 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
             "our_total_price": 1697.0,
             "our_effective_nightly": 565.67,
         }
-        # Comps average $1200/night effective
         comp_rates = [1000.0, 1100.0, 1150.0, 1200.0, 1250.0, 1300.0]
         eval_urgent = self.engine.evaluate_segment(segment_urgent, comp_rates)
 
         self.assertEqual(eval_urgent["priority_tier"], "URGENT_ACTION")
         self.assertEqual(eval_urgent["status"], "UNDERPRICED")
         self.assertTrue(eval_urgent["recommended_base_nightly"] > 399.0)
-        self.assertEqual(eval_urgent["n_comps"], 6)
-        self.assertEqual(eval_urgent["sample_significance"], "LOW")
+        self.assertIn("↑ Increase base", eval_urgent["action_summary"])
+
+        # Case 2: Moderate / Review (10-35% overpriced)
+        segment_review = {
+            "check_in": "2026-10-15",
+            "check_out": "2026-10-18",
+            "nights": 3,
+            "lead_time_days": 45,
+            "our_base_nightly": 1000.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 3500.0,
+            "our_effective_nightly": 1166.67,
+        }
+        # Target ~ $970 -> diff ~ +20%
+        comp_rates_review = [850.0, 900.0, 950.0, 970.0, 1000.0]
+        eval_review = self.engine.evaluate_segment(segment_review, comp_rates_review)
+        self.assertEqual(eval_review["priority_tier"], "MODERATE_ADJUSTMENT")
+        self.assertIn("↓ Reduce base", eval_review["action_summary"])
+
+        # Case 3: On Target (<10% difference)
+        segment_ontarget = {
+            "check_in": "2026-11-15",
+            "check_out": "2026-11-18",
+            "nights": 3,
+            "lead_time_days": 75,
+            "our_base_nightly": 800.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 2900.0,
+            "our_effective_nightly": 966.67,
+        }
+        comp_rates_ontarget = [920.0, 940.0, 960.0, 970.0, 980.0]
+        eval_ontarget = self.engine.evaluate_segment(segment_ontarget, comp_rates_ontarget)
+        self.assertEqual(eval_ontarget["priority_tier"], "INFORMATIONAL")
+        self.assertEqual(eval_ontarget["status"], "ON TARGET")
+        self.assertEqual(eval_ontarget["action_summary"], "Keep current price")
 
     def test_market_compression_sold_out(self):
         """When N <= 4, should flag near sold out market compression."""

@@ -113,7 +113,7 @@ class HTMLDashboardGenerator:
         analytics = PricingAnalyticsEngine(
             base_percentile=78.0,
             cleaning_fee=500.0,
-            urgent_pct_diff=25.0,
+            urgent_pct_diff=35.0,
             urgent_lead_days=60,
             moderate_pct_diff=10.0,
         )
@@ -1121,12 +1121,18 @@ class HTMLDashboardGenerator:
           </div>
 
           <div class="method-card">
-            <h3>📋 4. Action Guide for Kivoya Property Manager</h3>
-            <p>Share <strong>🚨 Urgent Action</strong> rate adjustments with Kivoya weekly (filter with 1-click using the <em>'🚨 Urgent Action Only'</em> pill button):</p>
+            <h3>📋 4. Action Guide & Priority Thresholds</h3>
+            <p>Priority tiers indicate how urgently rates should be adjusted in Kivoya's Streamline PMS rate manager:</p>
             <ul>
-              <li>Copy the <strong>Recommended Base Rate</strong> column into Kivoya's Streamline PMS rate manager.</li>
-              <li>Moderate adjustments (marked with ⚠️ Review) can be reviewed during monthly rate refreshes.</li>
-              <li>No change is needed for dates marked <em>"Keep current price"</em> (✅ On Target).</li>
+              <li><strong>🚨 Urgent Action (&gt; 35% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
+              <li><strong>⚠️ Moderate Review (10% – 35% Discrepancy):</strong> Review during monthly rate refreshes.</li>
+              <li><strong>✅ On Target (0% – 10% Discrepancy):</strong> Normal competitive range &mdash; <em>"Keep current price"</em>.</li>
+              <li><strong>Action Indicators:</strong>
+                <ul style="margin-top: 4px;">
+                  <li><strong style="color: #f87171;">↓ Reduce base</strong> (Red arrow): Price is above target effective cost; lower Kivoya base rate.</li>
+                  <li><strong style="color: #34d399;">↑ Increase base</strong> (Green arrow): Price is below target effective cost; raise Kivoya base rate to capture revenue.</li>
+                </ul>
+              </li>
             </ul>
           </div>
 
@@ -1435,8 +1441,8 @@ class HTMLDashboardGenerator:
           const baseDiff = Math.round(recBase - ourBase);
 
           const absDiff = Math.abs(diff);
-          const isUrgent = (absDiff >= 25.0) || (leadDays <= 60 && absDiff >= 15.0);
-          const isMod = !isUrgent && (absDiff >= 10.0) && (leadDays <= 180);
+          const isUrgent = (absDiff >= 35.0);
+          const isMod = !isUrgent && (absDiff >= 10.0);
 
           const statusEl = document.getElementById('status-' + rowId);
           const parentRow = document.getElementById('parent-' + rowId);
@@ -1465,9 +1471,9 @@ class HTMLDashboardGenerator:
 
           const diffEl = document.getElementById('diff-' + rowId);
           if (diffEl) {{
-            if (diff <= -25.0) {{
+            if (diff <= -35.0) {{
               diffEl.innerHTML = '<span class="badge-diff-under">' + diff.toFixed(1) + '%</span>';
-            }} else if (diff >= 25.0) {{
+            }} else if (diff >= 35.0) {{
               diffEl.innerHTML = '<span class="badge-diff-over">+' + diff.toFixed(1) + '%</span>';
             }} else if (Math.abs(diff) >= 10.0) {{
               diffEl.innerHTML = '<span style="color:#fbbf24; font-weight:700;">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%</span>';
@@ -1481,8 +1487,20 @@ class HTMLDashboardGenerator:
 
           const actionEl = document.getElementById('action-' + rowId);
           if (actionEl) {{
-            const actionText = Math.abs(baseDiff) >= 20 ? ('Adjust base from $' + Math.round(ourBase) + ' to $' + recBase + ' (' + (baseDiff > 0 ? '+' : '') + baseDiff + ')') : 'Keep current price';
-            actionEl.style.color = isUrgent ? '#f87171' : (isMod ? '#fbbf24' : (baseDiff > 0 ? '#34d399' : '#cbd5e1'));
+            let actionText;
+            if (absDiff < 10.0 || baseDiff === 0) {{
+              actionText = 'Keep current price';
+              actionEl.style.color = '#cbd5e1';
+            }} else if (baseDiff < 0) {{
+              actionText = '<span style="color:#f87171; font-weight:800; font-size:1.1em; margin-right:3px;">↓</span>Reduce base from $' + Math.round(ourBase) + ' to $' + recBase + ' (' + baseDiff + ')';
+              actionEl.style.color = isUrgent ? '#f87171' : '#fbbf24';
+            }} else {{
+              actionText = '<span style="color:#34d399; font-weight:800; font-size:1.1em; margin-right:3px;">↑</span>Increase base from $' + Math.round(ourBase) + ' to $' + recBase + ' (+' + baseDiff + ')';
+              actionEl.style.color = isUrgent ? '#f87171' : '#fbbf24';
+            }}
+            if (totalComps <= 4 && totalComps > 0) {{
+              actionText += ' • High compression';
+            }}
             actionEl.innerHTML = '<strong>' + actionText + '</strong>';
           }}
         }} else {{
@@ -1808,9 +1826,9 @@ class HTMLDashboardGenerator:
             else:
                 diff = s["price_diff_percent"]
 
-            if diff <= -25.0:
+            if diff <= -35.0:
                 diff_html = f'<span class="badge-diff-under">{diff:.1f}%</span>'
-            elif diff >= 25.0:
+            elif diff >= 35.0:
                 diff_html = f'<span class="badge-diff-over">+{diff:.1f}%</span>'
             elif abs(diff) >= 10.0:
                 diff_html = f'<span style="color:#fbbf24; font-weight:700;">{diff:+.1f}%</span>'
@@ -1819,9 +1837,8 @@ class HTMLDashboardGenerator:
 
             # Urgency / status classification
             abs_diff = abs(diff)
-            lead_days = s.get("lead_time_days", 0)
-            is_urgent = (abs_diff >= 25.0) or (lead_days <= 60 and abs_diff >= 15.0)
-            is_moderate = (not is_urgent) and (abs_diff >= 10.0) and (lead_days <= 180)
+            is_urgent = (abs_diff >= 35.0)
+            is_moderate = (not is_urgent) and (abs_diff >= 10.0)
 
             if is_urgent:
                 tier_code = "urgent"
@@ -1866,6 +1883,14 @@ class HTMLDashboardGenerator:
             target_pct = s.get("target_percentile", 78.0)
             target_pct_str = f"{target_pct:.1f}".rstrip("0").rstrip(".") + "%"
 
+            action_raw = s['action_summary']
+            if action_raw.startswith("↑"):
+                action_display_html = '<span style="color:#34d399; font-weight:800; font-size:1.1em; margin-right:3px;">↑</span>' + action_raw[1:].lstrip()
+            elif action_raw.startswith("↓"):
+                action_display_html = '<span style="color:#f87171; font-weight:800; font-size:1.1em; margin-right:3px;">↓</span>' + action_raw[1:].lstrip()
+            else:
+                action_display_html = action_raw
+
             rows.append(f"""
               <tr class="clickable-row interval-parent-row" id="parent-{row_id}" data-tier="{tier_code}" data-detail-id="{row_id}" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown" style="{row_border}">
                 <td id="status-{row_id}" style="text-align:center;">{status_html}</td>
@@ -1883,7 +1908,7 @@ class HTMLDashboardGenerator:
                 <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({target_pct_str})</span></td>
                 <td id="diff-{row_id}">{diff_html}</td>
                 <td id="rec-{row_id}"><span class="rec-price">${s['recommended_base_nightly']:.0f}</span></td>
-                <td id="action-{row_id}" style="font-size:0.85rem; {action_style}"><strong>{s['action_summary']}</strong></td>
+                <td id="action-{row_id}" style="font-size:0.85rem; {action_style}"><strong>{action_display_html}</strong></td>
               </tr>
               <tr id="{row_id}" class="comp-details-row" style="display: none;">
                 <td colspan="13">

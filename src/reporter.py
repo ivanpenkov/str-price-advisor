@@ -197,9 +197,9 @@ class PriceReportGenerator:
 
             diff = s["price_diff_percent"]
             diff_str = f"{'+' if diff > 0 else ''}{diff:.1f}%"
-            if diff >= 25.0:
+            if diff >= 35.0:
                 diff_str = f"🔴 **+{diff:.1f}%**"
-            elif diff <= -25.0:
+            elif diff <= -35.0:
                 diff_str = f"🔵 **{diff:.1f}%**"
             elif abs(diff) >= 10.0:
                 diff_str = f"🟡 {diff_str}"

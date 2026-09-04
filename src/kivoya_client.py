@@ -130,6 +130,38 @@ class KivoyaClient:
                 pass
         return result
 
+    @staticmethod
+    def _parse_interval_weekdays(interval_str: Optional[str]) -> set:
+        """Parse day-of-week interval string (e.g. 'Monday-Wednesday', 'Thursday-Sunday', 'All Days') into a set of weekday integers (0=Mon..6=Sun)."""
+        if not interval_str:
+            return set()
+        s = interval_str.strip().lower()
+        if s in ["all days", "alldays", "all"]:
+            return {0, 1, 2, 3, 4, 5, 6}
+
+        day_map = {
+            "monday": 0, "mon": 0,
+            "tuesday": 1, "tue": 1,
+            "wednesday": 2, "wed": 2,
+            "thursday": 3, "thu": 3,
+            "friday": 4, "fri": 4,
+            "saturday": 5, "sat": 5,
+            "sunday": 6, "sun": 6,
+        }
+
+        if "-" in s:
+            parts = s.split("-")
+            start_day = day_map.get(parts[0].strip())
+            end_day = day_map.get(parts[1].strip())
+            if start_day is not None and end_day is not None:
+                if start_day <= end_day:
+                    return set(range(start_day, end_day + 1))
+                else:
+                    return set(range(start_day, 7)) | set(range(0, end_day + 1))
+        elif s in day_map:
+            return {day_map[s]}
+        return set()
+
     def get_seasonal_rates(self) -> List[Dict[str, Any]]:
         """
         Fetch all configured seasonal rates.
@@ -140,7 +172,9 @@ class KivoyaClient:
                 "period_name": "Sep. 26",
                 "period_begin": "09/08/2026",
                 "period_end": "09/30/2026",
-                "nightly_rate": 599.0,
+                "nightly_rate": 399.0,
+                "first_price": 399.0,
+                "second_price": 549.0,
                 "currency": "USD",
                 "min_days": 3,
                 "begin_dt": datetime.date(2026, 9, 8),
@@ -161,8 +195,16 @@ class KivoyaClient:
         for rate in rates:
             b_str = rate.get("period_begin")
             e_str = rate.get("period_end")
-            price_str = rate.get("daily_first_interval_price", "$0.00")
-            cleaned_price = float(price_str.replace("$", "").replace(",", "").strip() or 0)
+            p1_str = rate.get("daily_first_interval_price", "$0.00")
+            cleaned_price = float(p1_str.replace("$", "").replace(",", "").strip() or 0)
+
+            p2_str = rate.get("daily_second_interval_price")
+            price2 = float(p2_str.replace("$", "").replace(",", "").strip()) if p2_str else None
+
+            int1_str = rate.get("daily_first_interval")
+            int2_str = rate.get("daily_second_interval")
+            days1 = self._parse_interval_weekdays(int1_str)
+            days2 = self._parse_interval_weekdays(int2_str)
 
             if b_str and e_str:
                 try:
@@ -175,6 +217,12 @@ class KivoyaClient:
                         "period_begin": b_str,
                         "period_end": e_str,
                         "nightly_rate": cleaned_price,
+                        "first_interval": int1_str,
+                        "first_price": cleaned_price,
+                        "first_days": days1,
+                        "second_interval": int2_str,
+                        "second_price": price2,
+                        "second_days": days2,
                         "currency": rate.get("currency", "USD"),
                         "min_days": int(rate.get("narrow_defined_days", 2)),
                         "begin_dt": b_dt,
@@ -185,12 +233,19 @@ class KivoyaClient:
         return sorted(parsed, key=lambda x: x["begin_dt"])
 
     def get_rate_for_date(self, target_date: date, rates: Optional[List[Dict[str, Any]]] = None) -> float:
-        """Find our base nightly rate for a given date from the seasonal schedule."""
+        """Find our base nightly rate for a given date from the seasonal schedule, honoring day-of-week intervals."""
         if rates is None:
             rates = self.get_seasonal_rates()
 
+        weekday = target_date.weekday()
         for r in rates:
             if r["begin_dt"] <= target_date <= r["end_dt"]:
+                # Check if second interval matches this day of the week (e.g. Thursday-Sunday weekend rate)
+                if r.get("second_price") is not None and weekday in r.get("second_days", set()):
+                    return r["second_price"]
+                # Check if first interval matches (e.g. Monday-Wednesday or All Days)
+                if r.get("first_price") is not None and (not r.get("first_days") or weekday in r["first_days"]):
+                    return r["first_price"]
                 return r["nightly_rate"]
 
         # Default fallback if outside defined periods

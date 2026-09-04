@@ -1087,8 +1087,7 @@ class HTMLDashboardGenerator:
               📅 12-Month Dynamic Pricing Schedule
             </div>
             <p class="section-desc" style="margin-top: 4px; margin-bottom: 0;">
-              All unbooked weekend and midweek intervals over the next 12 months. Click any row to expand competitor pricing details. 
-              Urgency is highlighted with status badges: <strong style="color:#f87171;">🚨 Urgent</strong> (&gt;35% discrepancy), <strong style="color:#fbbf24;">⚠️ Review</strong> (10%–35% variance), or <strong style="color:#34d399;">✅ On Target</strong>.
+              All unbooked weekend and midweek intervals over the next 12 months. Click any row to expand competitor pricing details.
             </p>
           </div>
         </div>

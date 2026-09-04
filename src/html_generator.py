@@ -960,13 +960,8 @@ class HTMLDashboardGenerator:
 
           <!-- Min Rating -->
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-            <label for="filterMinRating" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Min Rating:</label>
-            <div style="position: relative; display: flex; align-items: center;">
-              <span style="position: absolute; left: 10px; color: #fbbf24; font-size: 0.85rem;">★</span>
-              <input type="number" id="filterMinRating" value="4.5" min="0.0" max="5.0" step="0.1" 
-                     oninput="onFilterChange()"
-                     style="background: #0f172a; border: 1px solid var(--border-color); color: #f8fafc; padding: 6px 10px 6px 26px; border-radius: 6px; width: 75px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
-            </div>
+            <label style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Min Rating:</label>
+            <input type="hidden" id="filterMinRating" value="4.5">
             <div style="display: flex; gap: 4px;">
               <button class="filter-pill-btn" id="btn-rate-all" onclick="setFilterRating(0.0)">All</button>
               <button class="filter-pill-btn" id="btn-rate-40" onclick="setFilterRating(4.0)">4.0+ ★</button>
@@ -977,10 +972,8 @@ class HTMLDashboardGenerator:
 
           <!-- Min Reviews -->
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-            <label for="filterMinReviews" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Min Reviews:</label>
-            <input type="number" id="filterMinReviews" value="25" min="0" step="1" 
-                   oninput="onFilterChange()"
-                   style="background: #0f172a; border: 1px solid var(--border-color); color: #f8fafc; padding: 6px 10px; border-radius: 6px; width: 70px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
+            <label style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Min Reviews:</label>
+            <input type="hidden" id="filterMinReviews" value="25">
             <div style="display: flex; gap: 4px;">
               <button class="filter-pill-btn" id="btn-rev-0" onclick="setFilterReviews(0)">All (0+)</button>
               <button class="filter-pill-btn" id="btn-rev-5" onclick="setFilterReviews(5)">5+</button>

@@ -158,15 +158,14 @@ class PriceReportGenerator:
             "Dates",
             "Type",
             "Nights",
-            "Lead (Days)",
+            "Action Needed",
             "Comps (N)",
-            "Our Base",
-            "Our Eff. Nightly",
-            "Comp 50th",
+            "Kivoya",
+            "Effective Total",
+            "Comp Median",
             "Comp Target",
             "Market Diff",
             "Rec. Base Rate",
-            "Action Needed",
         ]
         rows = [
             "| " + " | ".join(headers) + " |",
@@ -177,7 +176,6 @@ class PriceReportGenerator:
             dates = f"`{s['check_in']} -> {s['check_out']}`"
             seg_type = s["segment_type"].capitalize()
             nights = str(s["nights"])
-            lead = f"{s['lead_time_days']}d"
             n = s.get("n_comps", s.get("comps_count", 0))
             if n <= 4:
                 n_str = f"🔥 {n} *(Near Sold Out)*"
@@ -191,6 +189,7 @@ class PriceReportGenerator:
                 our_eff = f"${s['our_effective_nightly']:.0f} ({pct_rank:.0f}%)"
             else:
                 our_eff = f"${s['our_effective_nightly']:.0f}"
+            p50 = f"${s['comp_p50_eff']:.0f}"
             tp = s.get("target_percentile", 78.0)
             tp_str = f"{tp:.1f}".rstrip("0").rstrip(".") + "%"
             target_pct = f"${s['comp_target_eff']:.0f} ({tp_str})"
@@ -211,7 +210,7 @@ class PriceReportGenerator:
                 dates,
                 seg_type,
                 nights,
-                lead,
+                action,
                 n_str,
                 our_base,
                 our_eff,
@@ -219,7 +218,6 @@ class PriceReportGenerator:
                 target_pct,
                 diff_str,
                 rec_base,
-                action,
             ]
             rows.append("| " + " | ".join(row) + " |")
 

@@ -1021,15 +1021,14 @@ class HTMLDashboardGenerator:
                 <th>Open Dates</th>
                 <th>Type</th>
                 <th>Nights</th>
-                <th>Lead Time</th>
+                <th>Action Needed</th>
                 <th>Comps (N)</th>
-                <th>Current Kivoya Base</th>
-                <th>Effective Total Cost</th>
-                <th>Comp Median (50th)</th>
+                <th>Kivoya</th>
+                <th>Effective Total</th>
+                <th>Comp Median</th>
                 <th>Comp Target</th>
                 <th>Market Gap</th>
                 <th>Recommended Base Rate</th>
-                <th>Action Needed</th>
               </tr>
             </thead>
             <tbody>
@@ -1900,7 +1899,7 @@ class HTMLDashboardGenerator:
                 </td>
                 <td><strong>{s['segment_type'].capitalize()}</strong></td>
                 <td>{s['nights']} nights</td>
-                <td>{s['lead_time_days']} days</td>
+                <td id="action-{row_id}" style="font-size:0.85rem; {action_style}"><strong>{action_display_html}</strong></td>
                 <td id="n-{row_id}">{n_html}</td>
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
                 <td id="eff-{row_id}" style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
@@ -1908,10 +1907,9 @@ class HTMLDashboardGenerator:
                 <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({target_pct_str})</span></td>
                 <td id="diff-{row_id}">{diff_html}</td>
                 <td id="rec-{row_id}"><span class="rec-price">${s['recommended_base_nightly']:.0f}</span></td>
-                <td id="action-{row_id}" style="font-size:0.85rem; {action_style}"><strong>{action_display_html}</strong></td>
               </tr>
               <tr id="{row_id}" class="comp-details-row" style="display: none;">
-                <td colspan="13">
+                <td colspan="12">
                   {subtable_html}
                 </td>
               </tr>

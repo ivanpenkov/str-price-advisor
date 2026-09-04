@@ -979,98 +979,45 @@ class HTMLDashboardGenerator:
         </div>
       </div>
 
-      <!-- Section 1: Urgent Updates -->
-      <div class="section-box section-urgent">
-        <div class="section-header">
-          <div class="section-title" style="color: #f87171;">
-            🚨 Section 1: Urgent Actions Required (Update This Week)
-          </div>
-          <span class="badge" style="background: var(--urgent-bg); color: var(--urgent-red); border-color: var(--urgent-border);">
-            {len(urgent)} Intervals Need Action
-          </span>
-        </div>
-        <p class="section-desc">
-          These dates have substantial market discrepancies (current Kivoya base rate is over 25% below market or arrival is within 60 days). 
-          <strong>Immediate price adjustment in Kivoya is strongly recommended</strong> to prevent leaving significant revenue on the table.
-        </p>
-        <div class="table-responsive">
-          <table>
-            <thead>
-              <tr>
-                <th>Open Dates</th>
-                <th>Type</th>
-                <th>Nights</th>
-                <th>Lead Time</th>
-                <th>Comps (N)</th>
-                <th>Current Kivoya Base</th>
-                <th>Effective Total Cost</th>
-                <th>Comp Median (50th)</th>
-                <th>Comp Target</th>
-                <th>Market Gap</th>
-                <th>Recommended Base Rate</th>
-                <th>Action Needed</th>
-              </tr>
-            </thead>
-            <tbody>
-              {self._render_table_rows(urgent, prefix="urgent")}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Section 2: Moderate Updates -->
-      <div class="section-box" style="border-color: var(--warning-border);">
-        <div class="section-header">
-          <div class="section-title" style="color: #fbbf24;">
-            ⚠️ Section 2: Moderate Adjustments (Review Within 30 Days)
-          </div>
-          <span class="badge" style="background: var(--warning-bg); color: var(--warning-amber); border-color: var(--warning-border);">
-            {len(moderate)} Intervals
-          </span>
-        </div>
-        <p class="section-desc">
-          Dates with a 10%–25% variance from our target percentile. Ideal for review during standard monthly rate updates with your property manager.
-        </p>
-        <div class="table-responsive">
-          <table>
-            <thead>
-              <tr>
-                <th>Open Dates</th>
-                <th>Type</th>
-                <th>Nights</th>
-                <th>Lead Time</th>
-                <th>Comps (N)</th>
-                <th>Current Kivoya Base</th>
-                <th>Effective Total Cost</th>
-                <th>Comp Median (50th)</th>
-                <th>Comp Target</th>
-                <th>Market Gap</th>
-                <th>Recommended Base Rate</th>
-                <th>Action Needed</th>
-              </tr>
-            </thead>
-            <tbody>
-              {self._render_table_rows(moderate, prefix="mod") if moderate else '<tr><td colspan="12" style="text-align:center; color:#94a3b8; padding:24px;">No moderate adjustments currently needed.</td></tr>'}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Section 3: All 12 Months -->
+      <!-- Unified 12-Month Dynamic Pricing Schedule -->
       <div class="section-box">
-        <div class="section-header">
-          <div class="section-title">
-            ℹ️ Section 3: Full 12-Month Calendar Schedule
+        <div class="section-header" style="flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div class="section-title" style="font-size: 1.3rem;">
+              📅 12-Month Dynamic Pricing Schedule
+            </div>
+            <p class="section-desc" style="margin-top: 4px; margin-bottom: 0;">
+              All unbooked weekend and midweek intervals over the next 12 months. Click any row to expand competitor pricing details. 
+              Urgency is highlighted with status badges: <strong style="color:#f87171;">🚨 Urgent</strong> (&gt;25% discrepancy or arrival &lt;60d), <strong style="color:#fbbf24;">⚠️ Review</strong> (10%–25% variance), or <strong style="color:#34d399;">✅ On Target</strong>.
+            </p>
           </div>
-          <span class="badge badge-dark">{len(all_sorted)} Total Open Intervals</span>
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <span class="badge" style="background: var(--urgent-bg); color: var(--urgent-red); border-color: var(--urgent-border);">
+              {len(urgent)} Urgent
+            </span>
+            <span class="badge" style="background: var(--warning-bg); color: var(--warning-amber); border-color: var(--warning-border);">
+              {len(moderate)} Moderate
+            </span>
+            <span class="badge badge-dark">
+              {len(all_sorted)} Total Intervals
+            </span>
+          </div>
         </div>
-        <p class="section-desc">
-          Complete schedule of all unbooked weekend and midweek intervals from today through the upcoming 12 months.
-        </p>
+
+        <!-- Quick View Filter Pills -->
+        <div class="interval-filter-pills" style="display: flex; gap: 8px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
+          <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 4px;">Show Intervals:</span>
+          <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals ({len(all_sorted)})</button>
+          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only ({len(urgent)})</button>
+          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review ({len(moderate)})</button>
+          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target ({len(all_sorted) - len(urgent) - len(moderate)})</button>
+        </div>
+
         <div class="table-responsive">
           <table>
             <thead>
               <tr>
+                <th style="width:130px; text-align:center;">Status</th>
                 <th>Open Dates</th>
                 <th>Type</th>
                 <th>Nights</th>
@@ -1086,7 +1033,7 @@ class HTMLDashboardGenerator:
               </tr>
             </thead>
             <tbody>
-              {self._render_table_rows(all_sorted, prefix="all")}
+              {self._render_table_rows(all_sorted, prefix="row")}
             </tbody>
           </table>
         </div>
@@ -1163,11 +1110,11 @@ class HTMLDashboardGenerator:
 
           <div class="method-card">
             <h3>📋 4. Action Guide for Kivoya Property Manager</h3>
-            <p>Share the <strong>Section 1 (Urgent Updates)</strong> table with Kivoya weekly:</p>
+            <p>Share <strong>🚨 Urgent Action</strong> rate adjustments with Kivoya weekly (filter with 1-click using the <em>'🚨 Urgent Action Only'</em> pill button):</p>
             <ul>
               <li>Copy the <strong>Recommended Base Rate</strong> column into Kivoya's Streamline PMS rate manager.</li>
-              <li>Section 2 can be adjusted in monthly bulk rate refreshes.</li>
-              <li>No change is needed for dates marked <em>"Keep current price"</em>.</li>
+              <li>Moderate adjustments (marked with ⚠️ Review) can be reviewed during monthly rate refreshes.</li>
+              <li>No change is needed for dates marked <em>"Keep current price"</em> (✅ On Target).</li>
             </ul>
           </div>
 
@@ -1267,6 +1214,27 @@ class HTMLDashboardGenerator:
       }}
     }}
 
+    function filterIntervalTier(tier, btn) {{
+      document.querySelectorAll('.interval-filter-pills .filter-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('.interval-parent-row').forEach(row => {{
+        const rowTier = row.dataset.tier;
+        const detailRowId = row.dataset.detailId;
+        const detailRow = detailRowId ? document.getElementById(detailRowId) : null;
+        if (tier === 'all' || rowTier === tier) {{
+          row.style.display = '';
+        }} else {{
+          row.style.display = 'none';
+          if (detailRow) detailRow.style.display = 'none';
+          const icon = document.getElementById('icon-' + detailRowId);
+          if (icon) {{
+            icon.textContent = '▶';
+            icon.style.color = '#60a5fa';
+          }}
+        }}
+      }});
+    }}
+
     function getPercentile(arr, pct) {{
       if (!arr || arr.length === 0) return 0;
       if (arr.length === 1) return arr[0];
@@ -1333,6 +1301,7 @@ class HTMLDashboardGenerator:
       document.querySelectorAll('.subtable-container').forEach(container => {{
         const rowId = container.dataset.rowId;
         const nights = parseInt(container.dataset.nights, 10) || 3;
+        const leadDays = parseInt(container.dataset.leadDays, 10) || 0;
         const ourBase = parseFloat(container.dataset.ourBase) || 0.0;
         const ourEff = parseFloat(container.dataset.ourEff) || 0.0;
         const isOurLive = container.dataset.isOurLive === 'true';
@@ -1453,6 +1422,28 @@ class HTMLDashboardGenerator:
           const recBase = Math.max(249, Math.min(2499, Math.round((Math.max(0, targetKivoyaTotal - 500)) / nights)));
           const baseDiff = Math.round(recBase - ourBase);
 
+          const absDiff = Math.abs(diff);
+          const isUrgent = (absDiff >= 25.0) || (leadDays <= 60 && absDiff >= 15.0);
+          const isMod = !isUrgent && (absDiff >= 10.0) && (leadDays <= 180);
+
+          const statusEl = document.getElementById('status-' + rowId);
+          const parentRow = document.getElementById('parent-' + rowId);
+          if (statusEl && parentRow) {{
+            if (isUrgent) {{
+              statusEl.innerHTML = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>';
+              parentRow.dataset.tier = 'urgent';
+              parentRow.style.borderLeft = '4px solid #ef4444';
+            }} else if (isMod) {{
+              statusEl.innerHTML = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>';
+              parentRow.dataset.tier = 'moderate';
+              parentRow.style.borderLeft = '4px solid #f59e0b';
+            }} else {{
+              statusEl.innerHTML = '<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>';
+              parentRow.dataset.tier = 'ok';
+              parentRow.style.borderLeft = '4px solid transparent';
+            }}
+          }}
+
           const p50El = document.getElementById('p50-' + rowId);
           if (p50El) p50El.textContent = '$' + Math.round(p50);
 
@@ -1478,10 +1469,17 @@ class HTMLDashboardGenerator:
           const actionEl = document.getElementById('action-' + rowId);
           if (actionEl) {{
             const actionText = Math.abs(baseDiff) >= 20 ? ('Adjust base from $' + Math.round(ourBase) + ' to $' + recBase + ' (' + (baseDiff > 0 ? '+' : '') + baseDiff + ')') : 'Keep current price';
-            actionEl.style.color = baseDiff > 0 ? '#34d399' : '#cbd5e1';
+            actionEl.style.color = isUrgent ? '#f87171' : (isMod ? '#fbbf24' : (baseDiff > 0 ? '#34d399' : '#cbd5e1'));
             actionEl.innerHTML = '<strong>' + actionText + '</strong>';
           }}
         }} else {{
+          const statusEl = document.getElementById('status-' + rowId);
+          const parentRow = document.getElementById('parent-' + rowId);
+          if (statusEl && parentRow) {{
+            statusEl.innerHTML = '<span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; border:1px solid rgba(148,163,184,0.3);">⚪ No Comps</span>';
+            parentRow.dataset.tier = 'none';
+            parentRow.style.borderLeft = '4px solid transparent';
+          }}
           const p50El = document.getElementById('p50-' + rowId);
           if (p50El) p50El.textContent = 'N/A';
           const targetEl = document.getElementById('target-' + rowId);
@@ -1737,6 +1735,7 @@ class HTMLDashboardGenerator:
           <div class="subtable-container"
                data-row-id="{row_id}"
                data-nights="{nights}"
+               data-lead-days="{s.get('lead_time_days', 0)}"
                data-our-base="{our_base}"
                data-our-eff="{our_eff}"
                data-is-our-live="{str(is_our_live).lower()}"
@@ -1805,6 +1804,28 @@ class HTMLDashboardGenerator:
             else:
                 diff_html = f'<span class="badge-diff-ok">{diff:+.1f}%</span>'
 
+            # Urgency / status classification
+            abs_diff = abs(diff)
+            lead_days = s.get("lead_time_days", 0)
+            is_urgent = (abs_diff >= 25.0) or (lead_days <= 60 and abs_diff >= 15.0)
+            is_moderate = (not is_urgent) and (abs_diff >= 10.0) and (lead_days <= 180)
+
+            if is_urgent:
+                tier_code = "urgent"
+                status_html = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                row_border = "border-left: 4px solid #ef4444;"
+                action_style = "color:#f87171; font-weight:700;"
+            elif is_moderate:
+                tier_code = "moderate"
+                status_html = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                row_border = "border-left: 4px solid #f59e0b;"
+                action_style = "color:#fbbf24; font-weight:700;"
+            else:
+                tier_code = "ok"
+                status_html = '<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
+                row_border = "border-left: 4px solid transparent;"
+                action_style = "color:#cbd5e1;"
+
             # Sample size N badge
             n = s.get("n_comps", s.get("comps_count", 0))
             is_live = s.get("is_live_scan", False)
@@ -1830,7 +1851,8 @@ class HTMLDashboardGenerator:
                 eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\">({stored_pct}%)</span>"
 
             rows.append(f"""
-              <tr class="clickable-row" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown">
+              <tr class="clickable-row interval-parent-row" id="parent-{row_id}" data-tier="{tier_code}" data-detail-id="{row_id}" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown" style="{row_border}">
+                <td id="status-{row_id}" style="text-align:center;">{status_html}</td>
                 <td>
                   <span class="caret-icon" id="icon-{row_id}">▶</span>
                   <span class="date-pill">{s['check_in']} &rarr; {s['check_out']}</span>
@@ -1845,10 +1867,10 @@ class HTMLDashboardGenerator:
                 <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({s['target_percentile']:.0f}%)</span></td>
                 <td id="diff-{row_id}">{diff_html}</td>
                 <td id="rec-{row_id}"><span class="rec-price">${s['recommended_base_nightly']:.0f}</span></td>
-                <td id="action-{row_id}" style="font-size:0.85rem; color:{'#34d399' if s['base_diff'] > 0 else '#cbd5e1'};"><strong>{s['action_summary']}</strong></td>
+                <td id="action-{row_id}" style="font-size:0.85rem; {action_style}"><strong>{s['action_summary']}</strong></td>
               </tr>
               <tr id="{row_id}" class="comp-details-row" style="display: none;">
-                <td colspan="12">
+                <td colspan="13">
                   {subtable_html}
                 </td>
               </tr>

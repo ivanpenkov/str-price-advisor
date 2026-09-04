@@ -71,20 +71,53 @@ python -m src.cli run --weekly
 
 ---
 
-## 📁 Output Reports
+## 📁 Output Reports & Static Dashboard
 
-Every run generates dated and latest reports in the `data/` directory:
-- `data/latest_report.md`: Formatted executive markdown summary with warning badges and actionable recommendations.
-- `data/latest_sheet.csv`: Structured spreadsheet for importing directly into Google Sheets or Kivoya.
-- `data/latest_report.json`: Machine-readable historical snapshot.
+Every run updates both static reporting documents and a responsive web dashboard:
+- **Interactive Web Dashboard (`docs/index.html`)**:
+  - **Tab 1 (Pricing Recommendations)**: 🚨 Urgent Actions (Weekly) &rarr; ⚠️ Moderate Adjustments (Monthly) &rarr; ℹ️ Full 12-Month Calendar.
+  - **Tab 2 (Curated Comps Registry)**: 109 verified competitors with search, filter pills, and direct **"Open on Airbnb ↗"** links.
+  - **Tab 3 (Methodology & Guide)**: Complete documentation for you and your Kivoya property manager.
+  - **Tab 4 (Live Data & Debug)**: Download buttons for CSV and Markdown reports + raw JSON inspect.
+- **`data/latest_report.md`**: Executive markdown summary with warning badges.
+- **`data/latest_sheet.csv`**: Structured spreadsheet for importing directly into Google Sheets or Kivoya.
 
 ---
 
-## ⚙️ Configuration (`config/settings.yaml`)
+## 🌐 Hosting on GitHub Pages
 
-You can easily adjust:
-- `strategy.base_percentile`: Target percentile (default: 78).
-- `strategy.lead_time_tiers`: Custom percentile tapering tiers.
-- `strategy.anomaly_thresholds.urgent_percent_diff`: Urgency threshold (default: 25.0%).
-- `market.corridors`: Target geographical corridors (Tempe, Scottsdale, Chandler, Mesa, Gilbert).
+The project includes an automatic deployment workflow (`.github/workflows/deploy.yml`):
+1. On GitHub, navigate to **Settings** &rarr; **Pages**.
+2. Under **Build and deployment** &rarr; **Source**, select **GitHub Actions** (recommended) or **Deploy from a branch** (`main` / `/docs`).
+3. Whenever you push to `main`, GitHub will automatically deploy the interactive dashboard!
+4. You can also view it locally anytime by double-clicking `docs/index.html` in your browser!
+
+---
+
+## 🚀 Quickstart & Usage
+
+### 1. Environment Setup
+```bash
+cd /Users/ivanpe/str-price-advisor
+source .venv/bin/activate
+```
+
+### 2. Verify Kivoya Connection
+```bash
+python -m src.cli test-kivoya
+```
+
+### 3. Generate or Refresh HTML Dashboard
+```bash
+python -m src.cli generate-html
+```
+
+### 4. Run Weekly Price Advisory Audit
+```bash
+# Run quick audit on upcoming intervals (e.g. next 12 intervals)
+python -m src.cli run --quick --limit 12
+
+# Run full 12-month annual scan
+python -m src.cli run --weekly
+```
 

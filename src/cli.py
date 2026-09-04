@@ -127,6 +127,15 @@ async def run_weekly_advisory(quick: bool = False, max_segments: int = 12):
         property_name=config["property"]["name"],
     )
 
+    # 5. HTML Dashboard Generation (docs/index.html)
+    print("\n[Step 5/5] Generating interactive static HTML dashboard in docs/...")
+    from src.html_generator import HTMLDashboardGenerator
+    import shutil
+    html_gen = HTMLDashboardGenerator(output_path="docs/index.html")
+    html_file = html_gen.generate(evaluated_segments=evaluated_results)
+    shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
+    shutil.copy("data/latest_report.md", "docs/latest_report.md")
+
     urgent_count = sum(1 for s in evaluated_results if s["priority_tier"] == "URGENT_ACTION")
     mod_count = sum(1 for s in evaluated_results if s["priority_tier"] == "MODERATE_ADJUSTMENT")
     info_count = sum(1 for s in evaluated_results if s["priority_tier"] == "INFORMATIONAL")
@@ -171,6 +180,8 @@ def main():
 
     subparsers.add_parser("test-kivoya", help="Verify Kivoya API connectivity and rates")
 
+    subparsers.add_parser("generate-html", help="Re-generate docs/index.html from existing data")
+
     bootstrap_parser = subparsers.add_parser("bootstrap-comps", help="Bootstrap and curate comp registry")
     bootstrap_parser.add_argument("--limit", type=int, default=40, help="Max listings per tier")
 
@@ -181,6 +192,16 @@ def main():
             asyncio.run(run_weekly_advisory(quick=True, max_segments=args.limit))
         else:
             asyncio.run(run_weekly_advisory(quick=False))
+    elif args.command == "generate-html":
+        from src.html_generator import HTMLDashboardGenerator
+        import shutil
+        html_gen = HTMLDashboardGenerator(output_path="docs/index.html")
+        out = html_gen.generate()
+        if Path("data/latest_sheet.csv").exists():
+            shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
+        if Path("data/latest_report.md").exists():
+            shutil.copy("data/latest_report.md", "docs/latest_report.md")
+        print(f"✅ Dashboard generated successfully at: {out}")
     elif args.command == "bootstrap-comps":
         from src.comp_curator import CompCurator
         curator = CompCurator()

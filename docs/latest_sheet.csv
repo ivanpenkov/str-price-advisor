@@ -1,0 +1,7 @@
+priority_tier,status,check_in,check_out,segment_type,nights,lead_time_days,our_base_nightly,our_cleaning_fee,our_total_price,our_effective_nightly,our_percentile_rank,target_percentile,comp_p50_eff,comp_p75_eff,comp_p80_eff,comp_target_eff,price_diff_percent,recommended_base_nightly,base_diff,action_summary
+URGENT_ACTION,UNDERPRICED,2026-09-06,2026-09-10,midweek,4,3,499.0,500,2496.0,624.0,37.0,65.0,723.62,1124.44,1254.75,995.69,-37.3,871.0,372.0,Adjust base from $499 to $871 (+372)
+URGENT_ACTION,UNDERPRICED,2026-09-13,2026-09-17,midweek,4,10,399.0,500,2096.0,524.0,22.2,65.0,688.62,1011.19,1111.2,860.86,-39.1,736.0,337.0,Adjust base from $399 to $736 (+337)
+URGENT_ACTION,UNDERPRICED,2026-09-20,2026-09-24,midweek,4,17,399.0,500,2096.0,524.0,24.5,65.0,676.25,1047.5,1195.25,828.75,-36.8,704.0,305.0,Adjust base from $399 to $704 (+305)
+URGENT_ACTION,UNDERPRICED,2026-09-24,2026-09-27,weekend,3,21,399.0,500,1697.0,565.67,9.5,65.0,911.17,1196.92,1222.8,1022.45,-44.7,856.0,457.0,Adjust base from $399 to $856 (+457)
+URGENT_ACTION,UNDERPRICED,2026-09-27,2026-09-30,midweek,3,24,399.0,500,1697.0,565.67,16.0,65.0,860.5,1184.0,1288.8,1106.18,-48.9,940.0,541.0,Adjust base from $399 to $940 (+541)
+URGENT_ACTION,UNDERPRICED,2026-10-11,2026-10-14,midweek,3,38,532.33,500,2097.0,699.0,32.6,72.0,871.66,1072.75,1157.67,1035.0,-32.5,868.0,336.0,Adjust base from $532 to $868 (+336)

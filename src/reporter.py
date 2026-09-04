@@ -153,6 +153,7 @@ class PriceReportGenerator:
 
         return "\n".join(lines)
 
+    def _format_table(self, segments: List[Dict[str, Any]], full: bool = False) -> str:
         headers = [
             "Dates",
             "Type",

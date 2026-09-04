@@ -31,7 +31,12 @@ def load_config(config_path: str = "config/settings.yaml") -> Dict[str, Any]:
         return yaml.safe_load(f)
 
 
-async def run_weekly_advisory(quick: bool = False, max_segments: int = 12):
+async def run_weekly_advisory(
+    quick: bool = False,
+    max_segments: int = 12,
+    start_date: str = None,
+    end_date: str = None,
+):
     """
     Execute full weekly pricing audit:
     1. Fetch Kivoya calendar & base seasonal rates
@@ -62,6 +67,13 @@ async def run_weekly_advisory(quick: bool = False, max_segments: int = 12):
     )
     segments = segmenter.generate_unbooked_segments()
     print(f"  ✓ Generated {len(segments)} unbooked intervals (weekends & midweeks).")
+
+    if start_date:
+        segments = [s for s in segments if s["check_in"] >= start_date]
+        print(f"  📅 Filtered to intervals starting >= {start_date}: {len(segments)} intervals")
+    if end_date:
+        segments = [s for s in segments if s["check_out"] <= end_date]
+        print(f"  📅 Filtered to intervals ending <= {end_date}: {len(segments)} intervals")
 
     if quick:
         print(f"  ⚡ Quick mode: Evaluating first {max_segments} upcoming intervals.")
@@ -189,6 +201,8 @@ def main():
     run_parser.add_argument("--weekly", action="store_true", help="Run full 12-month weekly scan")
     run_parser.add_argument("--quick", action="store_true", help="Run quick scan on first 10-12 intervals")
     run_parser.add_argument("--limit", type=int, default=12, help="Number of intervals for quick mode")
+    run_parser.add_argument("--start-date", type=str, default=None, help="Filter intervals starting on or after YYYY-MM-DD")
+    run_parser.add_argument("--end-date", type=str, default=None, help="Filter intervals ending on or before YYYY-MM-DD")
 
     subparsers.add_parser("test-kivoya", help="Verify Kivoya API connectivity and rates")
 
@@ -201,9 +215,18 @@ def main():
 
     if args.command == "run":
         if args.quick:
-            asyncio.run(run_weekly_advisory(quick=True, max_segments=args.limit))
+            asyncio.run(run_weekly_advisory(
+                quick=True,
+                max_segments=args.limit,
+                start_date=args.start_date,
+                end_date=args.end_date,
+            ))
         else:
-            asyncio.run(run_weekly_advisory(quick=False))
+            asyncio.run(run_weekly_advisory(
+                quick=False,
+                start_date=args.start_date,
+                end_date=args.end_date,
+            ))
     elif args.command == "generate-html":
         from src.html_generator import HTMLDashboardGenerator
         import shutil

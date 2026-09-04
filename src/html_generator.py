@@ -1125,11 +1125,11 @@ class HTMLDashboardGenerator:
             <ul>
               <li><strong>🚨 Urgent Action (&gt; 35% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
               <li><strong>⚠️ Moderate Review (10% – 35% Discrepancy):</strong> Review during monthly rate refreshes.</li>
-              <li><strong>✅ On Target (0% – 10% Discrepancy):</strong> Normal competitive range &mdash; <em>"Keep current price"</em>.</li>
+              <li><strong>✅ On Target (0% – 10% Discrepancy):</strong> Normal competitive range &mdash; cell left empty (no rate change needed).</li>
               <li><strong>Action Indicators:</strong>
                 <ul style="margin-top: 4px;">
-                  <li><strong style="color: #f87171;">↓ Reduce base</strong> (Red arrow): Price is above target effective cost; lower Kivoya base rate.</li>
-                  <li><strong style="color: #34d399;">↑ Increase base</strong> (Green arrow): Price is below target effective cost; raise Kivoya base rate to capture revenue.</li>
+                  <li><strong style="color: #f87171;">↓ Reduce base $X &rarr; $Y (-Z%)</strong> (Full Red Text): Price is above target effective cost; lower Kivoya base rate.</li>
+                  <li><strong style="color: #34d399;">↑ Increase base $X &rarr; $Y (+Z%)</strong> (Full Green Text): Price is below target effective cost; raise Kivoya base rate to capture revenue.</li>
                 </ul>
               </li>
             </ul>
@@ -1486,21 +1486,26 @@ class HTMLDashboardGenerator:
 
           const actionEl = document.getElementById('action-' + rowId);
           if (actionEl) {{
-            let actionText;
             if (absDiff < 10.0 || baseDiff === 0) {{
-              actionText = 'Keep current price';
-              actionEl.style.color = '#cbd5e1';
+              actionEl.innerHTML = '';
+              actionEl.style.color = '';
             }} else if (baseDiff < 0) {{
-              actionText = '<span style="color:#f87171; font-weight:800; font-size:1.1em; margin-right:3px;">↓</span>Reduce base from $' + Math.round(ourBase) + ' to $' + recBase + ' (' + baseDiff + ')';
-              actionEl.style.color = isUrgent ? '#f87171' : '#fbbf24';
+              const pct = Math.round((baseDiff / ourBase) * 100);
+              let actionText = '↓ Reduce base $' + Math.round(ourBase) + ' → $' + recBase + ' (' + pct + '%)';
+              if (totalComps <= 4 && totalComps > 0) {{
+                actionText += ' • High compression';
+              }}
+              actionEl.style.color = '#f87171';
+              actionEl.innerHTML = '<strong>' + actionText + '</strong>';
             }} else {{
-              actionText = '<span style="color:#34d399; font-weight:800; font-size:1.1em; margin-right:3px;">↑</span>Increase base from $' + Math.round(ourBase) + ' to $' + recBase + ' (+' + baseDiff + ')';
-              actionEl.style.color = isUrgent ? '#f87171' : '#fbbf24';
+              const pct = Math.round((baseDiff / ourBase) * 100);
+              let actionText = '↑ Increase base $' + Math.round(ourBase) + ' → $' + recBase + ' (+' + pct + '%)';
+              if (totalComps <= 4 && totalComps > 0) {{
+                actionText += ' • High compression';
+              }}
+              actionEl.style.color = '#34d399';
+              actionEl.innerHTML = '<strong>' + actionText + '</strong>';
             }}
-            if (totalComps <= 4 && totalComps > 0) {{
-              actionText += ' • High compression';
-            }}
-            actionEl.innerHTML = '<strong>' + actionText + '</strong>';
           }}
         }} else {{
           const statusEl = document.getElementById('status-' + rowId);
@@ -1843,17 +1848,14 @@ class HTMLDashboardGenerator:
                 tier_code = "urgent"
                 status_html = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                 row_border = "border-left: 4px solid #ef4444;"
-                action_style = "color:#f87171; font-weight:700;"
             elif is_moderate:
                 tier_code = "moderate"
                 status_html = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                 row_border = "border-left: 4px solid #f59e0b;"
-                action_style = "color:#fbbf24; font-weight:700;"
             else:
                 tier_code = "ok"
                 status_html = '<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                 row_border = "border-left: 4px solid transparent;"
-                action_style = "color:#cbd5e1;"
 
             # Sample size N badge
             n = s.get("n_comps", s.get("comps_count", 0))
@@ -1882,13 +1884,14 @@ class HTMLDashboardGenerator:
             target_pct = s.get("target_percentile", 78.0)
             target_pct_str = f"{target_pct:.1f}".rstrip("0").rstrip(".") + "%"
 
-            action_raw = s['action_summary']
+            action_raw = s.get('action_summary', '')
             if action_raw.startswith("↑"):
-                action_display_html = '<span style="color:#34d399; font-weight:800; font-size:1.1em; margin-right:3px;">↑</span>' + action_raw[1:].lstrip()
+                action_style = "color:#34d399; font-weight:700;"
             elif action_raw.startswith("↓"):
-                action_display_html = '<span style="color:#f87171; font-weight:800; font-size:1.1em; margin-right:3px;">↓</span>' + action_raw[1:].lstrip()
+                action_style = "color:#f87171; font-weight:700;"
             else:
-                action_display_html = action_raw
+                action_style = ""
+            action_display_html = action_raw
 
             rows.append(f"""
               <tr class="clickable-row interval-parent-row" id="parent-{row_id}" data-tier="{tier_code}" data-detail-id="{row_id}" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown" style="{row_border}">

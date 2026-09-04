@@ -45,6 +45,34 @@ class TestKivoyaAndSegmentation(unittest.TestCase):
             self.assertGreater(s["our_base_nightly"], 0)
             self.assertGreater(s["our_effective_nightly"], s["our_base_nightly"])
 
+    def test_daily_availability_api(self):
+        """Should retrieve parsed daily availability from Kivoya GetPropertyAvailabilityRawData."""
+        daily = self.client.get_daily_availability()
+        self.assertGreater(len(daily), 100)
+        # October 25, 2026 is occupied night (checkout Oct 26 morning)
+        oct_25 = date(2026, 10, 25)
+        oct_26 = date(2026, 10, 26)
+        if oct_25 in daily:
+            self.assertFalse(daily[oct_25]["available"])
+        if oct_26 in daily:
+            self.assertTrue(daily[oct_26]["available"])
+
+    def test_october_25_booked_exclusion(self):
+        """Verify October 25 is recognized as occupied, producing Oct 26-29 (3 nights) midweek."""
+        segmenter = CalendarSegmenter(kivoya_client=self.client, lookahead_days=365)
+        booked = segmenter.get_booked_dates_set(self.blocked)
+        self.assertIn(date(2026, 10, 25), booked)
+        self.assertNotIn(date(2026, 10, 26), booked)
+
+        segments = segmenter.generate_unbooked_segments()
+        check_ins = [s["check_in"] for s in segments]
+        self.assertNotIn("2026-10-25", check_ins, "2026-10-25 must not be an unbooked check-in date")
+        self.assertIn("2026-10-26", check_ins, "2026-10-26 should be the unbooked midweek check-in date")
+
+        oct_seg = next(s for s in segments if s["check_in"] == "2026-10-26")
+        self.assertEqual(oct_seg["check_out"], "2026-10-29")
+        self.assertEqual(oct_seg["nights"], 3)
+
 
 if __name__ == "__main__":
     unittest.main()

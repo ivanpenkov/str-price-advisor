@@ -4,7 +4,7 @@ Retrieves real-time calendar reservations (blocked periods) and seasonal base ra
 for Villa del Sol directly from Kivoya's property management endpoint.
 """
 
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 import json
 import ssl
 import urllib.parse
@@ -100,6 +100,35 @@ class KivoyaClient:
                 except ValueError:
                     continue
         return sorted(parsed, key=lambda x: x["start_dt"])
+
+    def get_daily_availability(self) -> Dict[date, Dict[str, Any]]:
+        """
+        Fetch daily availability directly from Kivoya Streamline API (GetPropertyAvailabilityRawData).
+        Maps date -> {"available": bool, "change_over": str}
+        """
+        raw_data = self._call_api(
+            "GetPropertyAvailabilityRawData",
+            {"unit_id": self.unit_id}
+        )
+        range_info = raw_data.get("range", {})
+        begin_str = range_info.get("beginDate")
+        avail_str = raw_data.get("availability", "")
+        change_str = raw_data.get("changeOver", "")
+
+        result: Dict[date, Dict[str, Any]] = {}
+        if begin_str and avail_str:
+            try:
+                begin_dt = datetime.strptime(begin_str, "%m/%d/%Y").date()
+                for idx, char in enumerate(avail_str):
+                    cur_dt = begin_dt + timedelta(days=idx)
+                    co = change_str[idx] if idx < len(change_str) else ""
+                    result[cur_dt] = {
+                        "available": (char == "Y"),
+                        "change_over": co,
+                    }
+            except Exception:
+                pass
+        return result
 
     def get_seasonal_rates(self) -> List[Dict[str, Any]]:
         """

@@ -25,15 +25,30 @@ class CalendarSegmenter:
         self.cleaning_fee = cleaning_fee
 
     def get_booked_dates_set(self, blocked_periods: List[Dict[str, Any]]) -> set:
-        """Expand blocked periods into a set of occupied nights (date objects)."""
+        """
+        Expand blocked periods into a set of occupied nights (date objects).
+        In Streamline VRS / Kivoya, enddate is the last occupied night of the reservation (inclusive).
+        Checkout occurs on the morning of enddate + 1 day.
+        """
         booked = set()
         for b in blocked_periods:
             cur = b["start_dt"]
             end = b["end_dt"]
-            # Reservation occupies each night from start date up to (but not including checkout)
-            while cur < end:
+            # Reservation occupies each night from start date up to and including end date
+            while cur <= end:
                 booked.add(cur)
                 cur += timedelta(days=1)
+
+        # Cross-reference with daily availability from Kivoya PMS if available
+        if hasattr(self.client, "get_daily_availability"):
+            try:
+                daily = self.client.get_daily_availability()
+                for d, info in daily.items():
+                    if not info.get("available", True):
+                        booked.add(d)
+            except Exception:
+                pass
+
         return booked
 
     def generate_unbooked_segments(

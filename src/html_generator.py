@@ -100,11 +100,20 @@ class HTMLDashboardGenerator:
         base_rates = [750, 850, 920, 980, 1050, 1150, 1250, 1350, 1450, 1600, 1750, 1900, 2100]
         results = []
         nights = seg.get("nights", 3)
+        c_in = seg.get("check_in")
+        c_out = seg.get("check_out")
         for idx, c in enumerate(all_comps):
             base_p = base_rates[idx % len(base_rates)]
             eff_rate = round(base_p * mult, 2)
+            cid = c.get("listing_id", f"cohort_{idx}")
+            if cid and c_in and c_out:
+                comp_url = f"https://www.airbnb.com/rooms/{cid}?check_in={c_in}&guests=10&adults=10&check_out={c_out}"
+            elif cid:
+                comp_url = f"https://www.airbnb.com/rooms/{cid}"
+            else:
+                comp_url = "https://www.airbnb.com"
             results.append({
-                "listing_id": c.get("listing_id", f"cohort_{idx}"),
+                "listing_id": cid,
                 "name": c.get("name", "Luxury Estate"),
                 "location": c.get("location", "Scottsdale / Phoenix Valley"),
                 "bedrooms": c.get("bedrooms", 6),
@@ -112,7 +121,7 @@ class HTMLDashboardGenerator:
                 "baths": c.get("baths", 4.0),
                 "effective_nightly": eff_rate,
                 "total_price": round(eff_rate * nights, 2),
-                "url": c.get("url") or f"https://www.airbnb.com/rooms/{c.get('listing_id', '')}",
+                "url": comp_url,
                 "rating": c.get("rating", 4.9),
                 "reviews": c.get("reviews", 25),
             })
@@ -1605,7 +1614,11 @@ class HTMLDashboardGenerator:
         kivoya_eff = float(s.get("our_effective_nightly", 0.0))
         channel_factor = (our_eff / kivoya_eff) if (is_our_live and kivoya_eff > 0) else float(s.get("channel_factor", 1.0))
 
-        # 1. Our property entry
+        our_url = (
+            f"https://www.airbnb.com/rooms/573857947793833342?check_in={c_in}&guests=10&adults=10&check_out={c_out}"
+            if (c_in and c_out)
+            else "https://www.airbnb.com/rooms/573857947793833342"
+        )
         our_entry = {
             "is_our_property": True,
             "listing_id": "573857947793833342",
@@ -1618,7 +1631,7 @@ class HTMLDashboardGenerator:
             "reviews": 76,
             "effective_nightly": our_eff,
             "total_price": our_total,
-            "url": "https://www.airbnb.com/rooms/573857947793833342",
+            "url": our_url,
         }
 
         # 2. Extract competitor comps
@@ -1666,7 +1679,13 @@ class HTMLDashboardGenerator:
             ba = sp.get("baths") or c.get("baths", 4.0)
             c_rating = c.get("rating")
             c_reviews = int(c.get("reviews", 0) or 0)
-            url = c.get("url") or (f"https://www.airbnb.com/rooms/{cid}" if cid else "https://www.airbnb.com")
+            if cid:
+                if c_in and c_out:
+                    url = f"https://www.airbnb.com/rooms/{cid}?check_in={c_in}&guests=10&adults=10&check_out={c_out}"
+                else:
+                    url = f"https://www.airbnb.com/rooms/{cid}"
+            else:
+                url = "https://www.airbnb.com"
 
             clean_comps.append({
                 "is_our_property": False,

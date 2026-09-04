@@ -139,7 +139,7 @@ class HTMLDashboardGenerator:
         segments = segmenter.generate_unbooked_segments()
 
         analytics = PricingAnalyticsEngine(
-            base_percentile=78.0,
+            base_percentile=70.0,
             cleaning_fee=500.0,
             urgent_pct_diff=35.0,
             urgent_lead_days=60,
@@ -972,7 +972,7 @@ class HTMLDashboardGenerator:
         <p>920 E Carver Rd, Tempe, AZ • 6 BR / 6 BA • Gated ¾-Acre Compound • Sleeps 16</p>
       </div>
       <div class="header-badges">
-        <span class="badge badge-primary">Dynamic Luxury Model (75th–80th %ile)</span>
+        <span class="badge badge-primary">Dynamic Luxury Model (50th–80th %ile)</span>
         <span class="badge badge-dark">Updated: {now_str}</span>
       </div>
     </header>
@@ -1190,18 +1190,18 @@ class HTMLDashboardGenerator:
             <ul>
               <li><strong>Weekend Targets:</strong>
                 <ul style="margin-top: 4px; margin-bottom: 6px;">
-                  <li><strong>&gt; 180 Days Out:</strong> 82nd Percentile (Capture early high-intent planners at top-dollar).</li>
-                  <li><strong>60 – 180 Days Out:</strong> 78th Percentile (Standard booking window).</li>
-                  <li><strong>30 – 60 Days Out:</strong> 72nd Percentile (Tapering to encourage booking).</li>
-                  <li><strong>&lt; 30 Days Out:</strong> 65th Percentile (Protect occupancy for near-term dates).</li>
+                  <li><strong>&gt; 180 Days Out:</strong> 80th Percentile (Capture early high-intent planners at top-dollar).</li>
+                  <li><strong>60 – 180 Days Out:</strong> 70th Percentile (Standard booking window).</li>
+                  <li><strong>30 – 60 Days Out:</strong> 60th Percentile (Tapering to encourage booking).</li>
+                  <li><strong>&lt; 30 Days Out:</strong> 50th Percentile (Protect occupancy for near-term dates).</li>
                 </ul>
               </li>
               <li><strong>Midweek Targets (30% Competitive Discount):</strong>
                 <ul style="margin-top: 4px;">
-                  <li><strong>&gt; 180 Days Out:</strong> 57.4th Percentile (0.82 &times; 0.70).</li>
-                  <li><strong>60 – 180 Days Out:</strong> 54.6th Percentile (0.78 &times; 0.70).</li>
-                  <li><strong>30 – 60 Days Out:</strong> 50.4th Percentile (0.72 &times; 0.70).</li>
-                  <li><strong>&lt; 30 Days Out:</strong> 45.5th Percentile (0.65 &times; 0.70) to win bookings in slow midweeks.</li>
+                  <li><strong>&gt; 180 Days Out:</strong> 56.0th Percentile (0.80 &times; 0.70).</li>
+                  <li><strong>60 – 180 Days Out:</strong> 49.0th Percentile (0.70 &times; 0.70).</li>
+                  <li><strong>30 – 60 Days Out:</strong> 42.0th Percentile (0.60 &times; 0.70).</li>
+                  <li><strong>&lt; 30 Days Out:</strong> 35.0th Percentile (0.50 &times; 0.70) to win bookings in slow midweeks.</li>
                 </ul>
               </li>
             </ul>
@@ -1438,7 +1438,7 @@ class HTMLDashboardGenerator:
         const ourBase = parseFloat(container.dataset.ourBase) || 0.0;
         const ourEff = parseFloat(container.dataset.ourEff) || 0.0;
         const isOurLive = container.dataset.isOurLive === 'true';
-        const targetPct = parseFloat(container.dataset.targetPct) || 78.0;
+        const targetPct = parseFloat(container.dataset.targetPct) || 70.0;
         const isLiveScan = container.dataset.isLiveScan === 'true';
         const channelFactor = parseFloat(container.dataset.channelFactor) || 1.0;
 
@@ -1917,7 +1917,7 @@ class HTMLDashboardGenerator:
                data-our-base="{our_base}"
                data-our-eff="{our_eff}"
                data-is-our-live="{str(is_our_live).lower()}"
-               data-target-pct="{s.get('target_percentile', 78.0)}"
+               data-target-pct="{s.get('target_percentile', 70.0)}"
                data-is-live-scan="{str(is_live).lower()}"
                data-channel-factor="{channel_factor:.4f}">
             <div class="subtable-scroll">
@@ -2007,7 +2007,7 @@ class HTMLDashboardGenerator:
                 stored_pct = round(s.get("our_percentile_rank", 50.0))
                 eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\">({stored_pct}%)</span>"
 
-            target_pct = s.get("target_percentile", 78.0)
+            target_pct = s.get("target_percentile", 70.0)
             target_pct_str = f"{target_pct:.1f}".rstrip("0").rstrip(".") + "%"
 
             action_raw = s.get('action_summary', '')

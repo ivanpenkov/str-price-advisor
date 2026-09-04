@@ -19,12 +19,13 @@ An autonomous AI agent system designed for **Villa del Sol** (920 E Carver Rd, T
    - **Tier B (Secondary Comps)**: 12–15 guests, 5+ bedrooms, luxury estates.
    - Uses Playwright stealth automation with randomized human delays (3–7s) and local disk caching to prevent redundant requests and protect IP reputation without third-party proxy subscriptions.
 4. **Dynamic Lead-Time Pricing Engine**:
-   - Benchmarks against the **75th–80th percentile** of luxury comps.
+   - Benchmarks against the luxury comps with dynamic lead-time and day-of-week tapering.
    - **Lead-time tapering curve**:
-     - `> 180 days`: 82nd percentile (capture early high-intent bookers).
-     - `60 – 180 days`: 78th percentile (standard prime booking window).
-     - `30 – 60 days`: 72nd percentile (tapering to protect occupancy).
-     - `< 30 days`: 65th percentile (last-minute booking conversion).
+     - `> 180 days`: 80th percentile (capture early high-intent bookers).
+     - `60 – 180 days`: 70th percentile (standard prime booking window).
+     - `30 – 60 days`: 60th percentile (tapering to encourage booking).
+     - `< 30 days`: 50th percentile (last-minute booking conversion).
+     - *Midweek*: 30% discount curve (56th, 49th, 42nd, and 35th percentiles).
    - Translates competitive effective total guest cost back into the **recommended base nightly rate** (accounting for our \$500 cleaning fee).
 5. **Actionable 3-Tier Reporting**:
    - **Section 1: Urgent Action Required (Weekly)**: Intervals where current price is >25% off market or imminent arrival (<60 days).

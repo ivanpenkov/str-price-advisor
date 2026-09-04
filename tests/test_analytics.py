@@ -8,7 +8,7 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
 
     def setUp(self):
         self.engine = PricingAnalyticsEngine(
-            base_percentile=78.0,
+            base_percentile=70.0,
             cleaning_fee=500.0,
             urgent_pct_diff=35.0,
             urgent_lead_days=60,
@@ -16,19 +16,19 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         )
 
     def test_lead_time_tapering(self):
-        """Lead time curves should taper from 82% far out to 65% close in for weekends."""
-        self.assertEqual(self.engine.get_target_percentile(200), 82.0)
-        self.assertEqual(self.engine.get_target_percentile(120), 78.0)
-        self.assertEqual(self.engine.get_target_percentile(45), 72.0)
-        self.assertEqual(self.engine.get_target_percentile(10), 65.0)
+        """Lead time curves should taper from 80% far out to 50% close in for weekends."""
+        self.assertEqual(self.engine.get_target_percentile(200), 80.0)
+        self.assertEqual(self.engine.get_target_percentile(120), 70.0)
+        self.assertEqual(self.engine.get_target_percentile(45), 60.0)
+        self.assertEqual(self.engine.get_target_percentile(10), 50.0)
 
     def test_midweek_target_percentiles(self):
         """Midweek target percentiles should be 30% lower than weekend percentiles."""
-        self.assertEqual(self.engine.get_target_percentile(200, segment_type="midweek"), 57.4)
-        self.assertEqual(self.engine.get_target_percentile(120, segment_type="midweek"), 54.6)
-        self.assertEqual(self.engine.get_target_percentile(45, segment_type="midweek"), 50.4)
-        # September / near-term midweek example: 65 * 0.70 = 45.5%
-        self.assertEqual(self.engine.get_target_percentile(10, segment_type="midweek"), 45.5)
+        self.assertEqual(self.engine.get_target_percentile(200, segment_type="midweek"), 56.0)
+        self.assertEqual(self.engine.get_target_percentile(120, segment_type="midweek"), 49.0)
+        self.assertEqual(self.engine.get_target_percentile(45, segment_type="midweek"), 42.0)
+        # September / near-term midweek example: 50 * 0.70 = 35.0%
+        self.assertEqual(self.engine.get_target_percentile(10, segment_type="midweek"), 35.0)
 
     def test_outlier_removal(self):
         """Should filter out extreme prices using IQR."""

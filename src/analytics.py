@@ -29,22 +29,33 @@ class PricingAnalyticsEngine:
         self.urgent_lead_days = urgent_lead_days
         self.moderate_pct_diff = moderate_pct_diff
 
-    def get_target_percentile(self, lead_time_days: int) -> float:
+    def get_target_percentile(self, lead_time_days: int, segment_type: str = "weekend") -> float:
         """
-        Dynamically adjust target percentile by lead time:
+        Dynamically adjust target percentile by lead time and segment type:
+        Weekend (Base Curve):
         - > 180 days: 82nd percentile (capture early high-intent bookers)
         - 60 to 180 days: 78th percentile (prime booking window)
         - 30 to 60 days: 72nd percentile (tapering to protect occupancy)
         - < 30 days: 65th percentile (last-minute booking capture)
+
+        Midweek (30% Lower Target Curve):
+        - > 180 days: 57.4th percentile (82 * 0.70)
+        - 60 to 180 days: 54.6th percentile (78 * 0.70)
+        - 30 to 60 days: 50.4th percentile (72 * 0.70)
+        - < 30 days: 45.5th percentile (65 * 0.70)
         """
         if lead_time_days > 180:
-            return 82.0
+            base = 82.0
         elif lead_time_days >= 60:
-            return 78.0
+            base = 78.0
         elif lead_time_days >= 30:
-            return 72.0
+            base = 72.0
         else:
-            return 65.0
+            base = 65.0
+
+        if str(segment_type).lower() in ["midweek", "mid-week", "weekday"]:
+            return round(base * 0.7, 1)
+        return base
 
     def remove_outliers(self, prices: List[float]) -> List[float]:
         """
@@ -150,7 +161,8 @@ class PricingAnalyticsEngine:
             channel_factor = 1.0
 
         clean_comps = self.remove_outliers(comp_effective_rates)
-        target_pct = self.get_target_percentile(lead_days)
+        seg_type = segment.get("segment_type", "weekend")
+        target_pct = self.get_target_percentile(lead_days, segment_type=seg_type)
         pct_stats = self.calculate_percentiles(clean_comps, target_pct)
         target_eff = pct_stats["target_val"]
 

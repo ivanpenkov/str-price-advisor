@@ -16,11 +16,19 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         )
 
     def test_lead_time_tapering(self):
-        """Lead time curves should taper from 82% far out to 65% close in."""
+        """Lead time curves should taper from 82% far out to 65% close in for weekends."""
         self.assertEqual(self.engine.get_target_percentile(200), 82.0)
         self.assertEqual(self.engine.get_target_percentile(120), 78.0)
         self.assertEqual(self.engine.get_target_percentile(45), 72.0)
         self.assertEqual(self.engine.get_target_percentile(10), 65.0)
+
+    def test_midweek_target_percentiles(self):
+        """Midweek target percentiles should be 30% lower than weekend percentiles."""
+        self.assertEqual(self.engine.get_target_percentile(200, segment_type="midweek"), 57.4)
+        self.assertEqual(self.engine.get_target_percentile(120, segment_type="midweek"), 54.6)
+        self.assertEqual(self.engine.get_target_percentile(45, segment_type="midweek"), 50.4)
+        # September / near-term midweek example: 65 * 0.70 = 45.5%
+        self.assertEqual(self.engine.get_target_percentile(10, segment_type="midweek"), 45.5)
 
     def test_outlier_removal(self):
         """Should filter out extreme prices using IQR."""

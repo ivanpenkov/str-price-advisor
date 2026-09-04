@@ -1098,13 +1098,25 @@ class HTMLDashboardGenerator:
           </div>
 
           <div class="method-card">
-            <h3>📉 3. Dynamic Lead-Time Tapering Curve</h3>
-            <p>Villa del Sol is a luxury resort compound (gated ¾-acre, heated pool/grotto, basketball court, putting green, casita). We benchmark against the top 20%–25% of luxury comps:</p>
+            <h3>📉 3. Dynamic Lead-Time Tapering Curve & Midweek Discount</h3>
+            <p>Villa del Sol is a luxury resort compound (gated ¾-acre, heated pool/grotto, basketball court, putting green, casita). We benchmark against the top 20%–25% of luxury comps on weekends, while applying a <strong>30% lower target percentile midweek</strong> to drive weekday occupancy where competitor pricing rarely adjusts:</p>
             <ul>
-              <li><strong>> 180 Days Out:</strong> 82nd Percentile (Capture early high-intent planners at top-dollar).</li>
-              <li><strong>60 – 180 Days Out:</strong> 78th Percentile (Standard booking window).</li>
-              <li><strong>30 – 60 Days Out:</strong> 72nd Percentile (Tapering to encourage booking).</li>
-              <li><strong>&lt; 30 Days Out:</strong> 65th Percentile (Protect occupancy for near-term dates).</li>
+              <li><strong>Weekend Targets:</strong>
+                <ul style="margin-top: 4px; margin-bottom: 6px;">
+                  <li><strong>&gt; 180 Days Out:</strong> 82nd Percentile (Capture early high-intent planners at top-dollar).</li>
+                  <li><strong>60 – 180 Days Out:</strong> 78th Percentile (Standard booking window).</li>
+                  <li><strong>30 – 60 Days Out:</strong> 72nd Percentile (Tapering to encourage booking).</li>
+                  <li><strong>&lt; 30 Days Out:</strong> 65th Percentile (Protect occupancy for near-term dates).</li>
+                </ul>
+              </li>
+              <li><strong>Midweek Targets (30% Competitive Discount):</strong>
+                <ul style="margin-top: 4px;">
+                  <li><strong>&gt; 180 Days Out:</strong> 57.4th Percentile (0.82 &times; 0.70).</li>
+                  <li><strong>60 – 180 Days Out:</strong> 54.6th Percentile (0.78 &times; 0.70).</li>
+                  <li><strong>30 – 60 Days Out:</strong> 50.4th Percentile (0.72 &times; 0.70).</li>
+                  <li><strong>&lt; 30 Days Out:</strong> 45.5th Percentile (0.65 &times; 0.70) to win bookings in slow midweeks.</li>
+                </ul>
+              </li>
             </ul>
           </div>
 
@@ -1447,8 +1459,9 @@ class HTMLDashboardGenerator:
           const p50El = document.getElementById('p50-' + rowId);
           if (p50El) p50El.textContent = '$' + Math.round(p50);
 
+          const targetPctLabel = (targetPct % 1 === 0) ? targetPct.toFixed(0) : targetPct.toFixed(1);
           const targetEl = document.getElementById('target-' + rowId);
-          if (targetEl) targetEl.innerHTML = '$' + Math.round(pTarget) + ' <span style="font-size:0.75rem; color:#94a3b8;">(' + Math.round(targetPct) + '%)</span>';
+          if (targetEl) targetEl.innerHTML = '$' + Math.round(pTarget) + ' <span style="font-size:0.75rem; color:#94a3b8;">(' + targetPctLabel + '%)</span>';
 
           const diffEl = document.getElementById('diff-' + rowId);
           if (diffEl) {{
@@ -1850,6 +1863,9 @@ class HTMLDashboardGenerator:
                 stored_pct = round(s.get("our_percentile_rank", 50.0))
                 eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\">({stored_pct}%)</span>"
 
+            target_pct = s.get("target_percentile", 78.0)
+            target_pct_str = f"{target_pct:.1f}".rstrip("0").rstrip(".") + "%"
+
             rows.append(f"""
               <tr class="clickable-row interval-parent-row" id="parent-{row_id}" data-tier="{tier_code}" data-detail-id="{row_id}" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown" style="{row_border}">
                 <td id="status-{row_id}" style="text-align:center;">{status_html}</td>
@@ -1864,7 +1880,7 @@ class HTMLDashboardGenerator:
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
                 <td id="eff-{row_id}" style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
                 <td id="p50-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">${s['comp_p50_eff']:.0f}</td>
-                <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({s['target_percentile']:.0f}%)</span></td>
+                <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({target_pct_str})</span></td>
                 <td id="diff-{row_id}">{diff_html}</td>
                 <td id="rec-{row_id}"><span class="rec-price">${s['recommended_base_nightly']:.0f}</span></td>
                 <td id="action-{row_id}" style="font-size:0.85rem; {action_style}"><strong>{s['action_summary']}</strong></td>

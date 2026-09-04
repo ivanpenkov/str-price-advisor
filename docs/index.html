@@ -635,7 +635,7 @@
       </div>
       <div class="header-badges">
         <span class="badge badge-primary">Dynamic Luxury Model (75th–80th %ile)</span>
-        <span class="badge badge-dark">Updated: September 03, 2026 at 10:43 PM</span>
+        <span class="badge badge-dark">Updated: September 03, 2026 at 10:56 PM</span>
       </div>
     </header>
 
@@ -648,12 +648,12 @@
       </div>
       <div class="kpi-card" style="border-color: var(--urgent-border);">
         <span class="kpi-label" style="color: var(--urgent-red);">🚨 Urgent Rate Alerts</span>
-        <div class="kpi-val" style="color: var(--urgent-red);">79</div>
+        <div class="kpi-val" style="color: var(--urgent-red);">57</div>
         <span class="kpi-desc">>25% market discrepancy or arrival &lt;60d</span>
       </div>
       <div class="kpi-card" style="border-color: var(--warning-border);">
         <span class="kpi-label" style="color: var(--warning-amber);">⚠️ Moderate Adjustments</span>
-        <div class="kpi-val" style="color: var(--warning-amber);">0</div>
+        <div class="kpi-val" style="color: var(--warning-amber);">4</div>
         <span class="kpi-desc">10%–25% variance (monthly review)</span>
       </div>
       <div class="kpi-card">
@@ -752,10 +752,10 @@
           </div>
           <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
             <span class="badge" style="background: var(--urgent-bg); color: var(--urgent-red); border-color: var(--urgent-border);">
-              79 Urgent
+              57 Urgent
             </span>
             <span class="badge" style="background: var(--warning-bg); color: var(--warning-amber); border-color: var(--warning-border);">
-              0 Moderate
+              4 Moderate
             </span>
             <span class="badge badge-dark">
               82 Total Intervals
@@ -767,9 +767,9 @@
         <div class="interval-filter-pills" style="display: flex; gap: 8px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
           <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 4px;">Show Intervals:</span>
           <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals (82)</button>
-          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only (79)</button>
-          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review (0)</button>
-          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target (3)</button>
+          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only (57)</button>
+          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review (4)</button>
+          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target (21)</button>
         </div>
 
         <div class="table-responsive">
@@ -793,8 +793,8 @@
             </thead>
             <tbody>
               
-              <tr class="clickable-row interval-parent-row" id="parent-row-0" data-tier="urgent" data-detail-id="row-0" onclick="toggleCompDetails('row-0', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-0" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-0" data-tier="ok" data-detail-id="row-0" onclick="toggleCompDetails('row-0', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-0" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-0">▶</span>
                   <span class="date-pill">2026-09-06 &rarr; 2026-09-10</span>
@@ -806,10 +806,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$499</td>
                 <td id="eff-row-0" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$694</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $694/night ($2774 total). Villa del Sol ranks #15 out of 34 competitors (44th percentile). Base Kivoya rate is $499.">(44%)</span></td>
                 <td id="p50-row-0" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$727</td>
-                <td id="target-row-0" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1051 <span style="font-size:0.75rem; color:#94a3b8;">(65%)</span></td>
-                <td id="diff-row-0"><span class="badge-diff-under">-34.0%</span></td>
-                <td id="rec-row-0"><span class="rec-price">$821</span></td>
-                <td id="action-row-0" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $499 to $821 (+322)</strong></td>
+                <td id="target-row-0" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$713 <span style="font-size:0.75rem; color:#94a3b8;">(45.5%)</span></td>
+                <td id="diff-row-0"><span class="badge-diff-ok">-2.7%</span></td>
+                <td id="rec-row-0"><span class="rec-price">$516</span></td>
+                <td id="action-row-0" style="font-size:0.85rem; color:#cbd5e1;"><strong>Keep current price</strong></td>
               </tr>
               <tr id="row-0" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -821,7 +821,7 @@
                data-our-base="499.0"
                data-our-eff="693.5"
                data-is-our-live="true"
-               data-target-pct="65.0"
+               data-target-pct="45.5"
                data-is-live-scan="true"
                data-channel-factor="1.1114">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -1673,8 +1673,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-1" data-tier="ok" data-detail-id="row-1" onclick="toggleCompDetails('row-1', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
-                <td id="status-row-1" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-1" data-tier="urgent" data-detail-id="row-1" onclick="toggleCompDetails('row-1', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+                <td id="status-row-1" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-1">▶</span>
                   <span class="date-pill">2026-09-13 &rarr; 2026-09-17</span>
@@ -1686,10 +1686,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-1" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$678</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $678/night ($2713 total). Villa del Sol ranks #24 out of 39 competitors (62th percentile). Base Kivoya rate is $399.">(62%)</span></td>
                 <td id="p50-row-1" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$599</td>
-                <td id="target-row-1" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$700 <span style="font-size:0.75rem; color:#94a3b8;">(65%)</span></td>
-                <td id="diff-row-1"><span class="badge-diff-ok">-3.1%</span></td>
-                <td id="rec-row-1"><span class="rec-price">$416</span></td>
-                <td id="action-row-1" style="font-size:0.85rem; color:#cbd5e1;"><strong>Keep current price</strong></td>
+                <td id="target-row-1" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$552 <span style="font-size:0.75rem; color:#94a3b8;">(45.5%)</span></td>
+                <td id="diff-row-1"><span style="color:#fbbf24; font-weight:700;">+22.9%</span></td>
+                <td id="rec-row-1"><span class="rec-price">$301</span></td>
+                <td id="action-row-1" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $301 (-98)</strong></td>
               </tr>
               <tr id="row-1" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -1701,7 +1701,7 @@
                data-our-base="399.0"
                data-our-eff="678.25"
                data-is-our-live="true"
-               data-target-pct="65.0"
+               data-target-pct="45.5"
                data-is-live-scan="true"
                data-channel-factor="1.2944">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -2668,8 +2668,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-2" data-tier="urgent" data-detail-id="row-2" onclick="toggleCompDetails('row-2', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-2" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-2" data-tier="ok" data-detail-id="row-2" onclick="toggleCompDetails('row-2', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-2" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-2">▶</span>
                   <span class="date-pill">2026-09-20 &rarr; 2026-09-24</span>
@@ -2681,10 +2681,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-2" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$524</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #16 out of 36 competitors (44th percentile in effective total guest cost)">(44%)</span></td>
                 <td id="p50-row-2" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$570</td>
-                <td id="target-row-2" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$635 <span style="font-size:0.75rem; color:#94a3b8;">(65%)</span></td>
-                <td id="diff-row-2"><span style="color:#fbbf24; font-weight:700;">-17.4%</span></td>
-                <td id="rec-row-2"><span class="rec-price">$510</span></td>
-                <td id="action-row-2" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $510 (+111)</strong></td>
+                <td id="target-row-2" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$525 <span style="font-size:0.75rem; color:#94a3b8;">(45.5%)</span></td>
+                <td id="diff-row-2"><span class="badge-diff-ok">-0.3%</span></td>
+                <td id="rec-row-2"><span class="rec-price">$400</span></td>
+                <td id="action-row-2" style="font-size:0.85rem; color:#cbd5e1;"><strong>Keep current price</strong></td>
               </tr>
               <tr id="row-2" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -2696,7 +2696,7 @@
                data-our-base="399.0"
                data-our-eff="524.0"
                data-is-our-live="false"
-               data-target-pct="65.0"
+               data-target-pct="45.5"
                data-is-live-scan="true"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -4451,8 +4451,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-4" data-tier="ok" data-detail-id="row-4" onclick="toggleCompDetails('row-4', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
-                <td id="status-row-4" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-4" data-tier="urgent" data-detail-id="row-4" onclick="toggleCompDetails('row-4', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+                <td id="status-row-4" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-4">▶</span>
                   <span class="date-pill">2026-09-27 &rarr; 2026-09-30</span>
@@ -4464,10 +4464,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-4" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$692</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $692/night ($2076 total). Villa del Sol ranks #22 out of 38 competitors (58th percentile). Base Kivoya rate is $399.">(58%)</span></td>
                 <td id="p50-row-4" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$576</td>
-                <td id="target-row-4" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$715 <span style="font-size:0.75rem; color:#94a3b8;">(65%)</span></td>
-                <td id="diff-row-4"><span class="badge-diff-ok">-3.2%</span></td>
-                <td id="rec-row-4"><span class="rec-price">$418</span></td>
-                <td id="action-row-4" style="font-size:0.85rem; color:#cbd5e1;"><strong>Keep current price</strong></td>
+                <td id="target-row-4" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$567 <span style="font-size:0.75rem; color:#94a3b8;">(45.5%)</span></td>
+                <td id="diff-row-4"><span style="color:#fbbf24; font-weight:700;">+22.1%</span></td>
+                <td id="rec-row-4"><span class="rec-price">$297</span></td>
+                <td id="action-row-4" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $297 (-102)</strong></td>
               </tr>
               <tr id="row-4" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -4479,7 +4479,7 @@
                data-our-base="399.0"
                data-our-eff="692.0"
                data-is-our-live="true"
-               data-target-pct="65.0"
+               data-target-pct="45.5"
                data-is-live-scan="true"
                data-channel-factor="1.2233">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -5436,10 +5436,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$532</td>
                 <td id="eff-row-5" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$810</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $810/night ($2430 total). Villa del Sol ranks #20 out of 37 competitors (54th percentile). Base Kivoya rate is $532.">(54%)</span></td>
                 <td id="p50-row-5" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$760</td>
-                <td id="target-row-5" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$891 <span style="font-size:0.75rem; color:#94a3b8;">(72%)</span></td>
-                <td id="diff-row-5"><span class="badge-diff-ok">-9.1%</span></td>
-                <td id="rec-row-5"><span class="rec-price">$602</span></td>
-                <td id="action-row-5" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $532 to $602 (+70)</strong></td>
+                <td id="target-row-5" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$761 <span style="font-size:0.75rem; color:#94a3b8;">(50.4%)</span></td>
+                <td id="diff-row-5"><span class="badge-diff-ok">+6.5%</span></td>
+                <td id="rec-row-5"><span class="rec-price">$490</span></td>
+                <td id="action-row-5" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $532 to $490 (-42)</strong></td>
               </tr>
               <tr id="row-5" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -5451,7 +5451,7 @@
                data-our-base="532.33"
                data-our-eff="810.0"
                data-is-our-live="true"
-               data-target-pct="72.0"
+               data-target-pct="50.4"
                data-is-live-scan="true"
                data-channel-factor="1.1588">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -6385,10 +6385,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-6" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$524</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #8 out of 37 competitors (22th percentile in effective total guest cost)">(22%)</span></td>
                 <td id="p50-row-6" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$919</td>
-                <td id="target-row-6" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1096 <span style="font-size:0.75rem; color:#94a3b8;">(72%)</span></td>
-                <td id="diff-row-6"><span class="badge-diff-under">-52.2%</span></td>
-                <td id="rec-row-6"><span class="rec-price">$971</span></td>
-                <td id="action-row-6" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $971 (+572)</strong></td>
+                <td id="target-row-6" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$920 <span style="font-size:0.75rem; color:#94a3b8;">(50.4%)</span></td>
+                <td id="diff-row-6"><span class="badge-diff-under">-43.0%</span></td>
+                <td id="rec-row-6"><span class="rec-price">$795</span></td>
+                <td id="action-row-6" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $795 (+396)</strong></td>
               </tr>
               <tr id="row-6" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -6400,7 +6400,7 @@
                data-our-base="399.0"
                data-our-eff="524.0"
                data-is-our-live="false"
-               data-target-pct="72.0"
+               data-target-pct="50.4"
                data-is-live-scan="true"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -7321,8 +7321,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-7" data-tier="urgent" data-detail-id="row-7" onclick="toggleCompDetails('row-7', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-7" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-7" data-tier="moderate" data-detail-id="row-7" onclick="toggleCompDetails('row-7', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+                <td id="status-row-7" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-7">▶</span>
                   <span class="date-pill">2026-11-08 &rarr; 2026-11-11</span>
@@ -7334,10 +7334,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-7" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$760</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $760/night ($2280 total). Villa del Sol ranks #13 out of 29 competitors (45th percentile). Base Kivoya rate is $399.">(45%)</span></td>
                 <td id="p50-row-7" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$884</td>
-                <td id="target-row-7" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1265 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-7"><span class="badge-diff-under">-39.9%</span></td>
-                <td id="rec-row-7"><span class="rec-price">$775</span></td>
-                <td id="action-row-7" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $775 (+376)</strong></td>
+                <td id="target-row-7" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$962 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-7"><span style="color:#fbbf24; font-weight:700;">-21.0%</span></td>
+                <td id="rec-row-7"><span class="rec-price">$550</span></td>
+                <td id="action-row-7" style="font-size:0.85rem; color:#fbbf24; font-weight:700;"><strong>Adjust base from $399 to $550 (+151)</strong></td>
               </tr>
               <tr id="row-7" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -7349,7 +7349,7 @@
                data-our-base="399.0"
                data-our-eff="760.0"
                data-is-our-live="true"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="true"
                data-channel-factor="1.3435">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -8086,8 +8086,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-8" data-tier="urgent" data-detail-id="row-8" onclick="toggleCompDetails('row-8', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-8" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-8" data-tier="moderate" data-detail-id="row-8" onclick="toggleCompDetails('row-8', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+                <td id="status-row-8" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-8">▶</span>
                   <span class="date-pill">2026-11-15 &rarr; 2026-11-19</span>
@@ -8099,10 +8099,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-8" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$694</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $694/night ($2774 total). Villa del Sol ranks #16 out of 39 competitors (41th percentile). Base Kivoya rate is $399.">(41%)</span></td>
                 <td id="p50-row-8" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$847</td>
-                <td id="target-row-8" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1191 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-8"><span class="badge-diff-under">-41.8%</span></td>
-                <td id="rec-row-8"><span class="rec-price">$775</span></td>
-                <td id="action-row-8" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $775 (+376)</strong></td>
+                <td id="target-row-8" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$897 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-8"><span style="color:#fbbf24; font-weight:700;">-22.7%</span></td>
+                <td id="rec-row-8"><span class="rec-price">$553</span></td>
+                <td id="action-row-8" style="font-size:0.85rem; color:#fbbf24; font-weight:700;"><strong>Adjust base from $399 to $553 (+154)</strong></td>
               </tr>
               <tr id="row-8" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -8114,7 +8114,7 @@
                data-our-base="399.0"
                data-our-eff="693.5"
                data-is-our-live="true"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="true"
                data-channel-factor="1.3235">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -9708,8 +9708,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-10" data-tier="urgent" data-detail-id="row-10" onclick="toggleCompDetails('row-10', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-10" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-10" data-tier="ok" data-detail-id="row-10" onclick="toggleCompDetails('row-10', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-10" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-10">▶</span>
                   <span class="date-pill">2026-11-29 &rarr; 2026-12-03</span>
@@ -9721,10 +9721,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$674</td>
                 <td id="eff-row-10" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$973</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $973/night ($3892 total). Villa del Sol ranks #25 out of 40 competitors (62th percentile). Base Kivoya rate is $674.">(62%)</span></td>
                 <td id="p50-row-10" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$836</td>
-                <td id="target-row-10" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1328 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-10"><span class="badge-diff-under">-26.7%</span></td>
-                <td id="rec-row-10"><span class="rec-price">$965</span></td>
-                <td id="action-row-10" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $674 to $965 (+291)</strong></td>
+                <td id="target-row-10" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$907 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-10"><span class="badge-diff-ok">+7.2%</span></td>
+                <td id="rec-row-10"><span class="rec-price">$620</span></td>
+                <td id="action-row-10" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $674 to $620 (-54)</strong></td>
               </tr>
               <tr id="row-10" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -9736,7 +9736,7 @@
                data-our-base="674.0"
                data-our-eff="973.0"
                data-is-our-live="true"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="true"
                data-channel-factor="1.2178">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -11537,8 +11537,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-12" data-tier="urgent" data-detail-id="row-12" onclick="toggleCompDetails('row-12', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-12" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-12" data-tier="moderate" data-detail-id="row-12" onclick="toggleCompDetails('row-12', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+                <td id="status-row-12" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-12">▶</span>
                   <span class="date-pill">2026-12-06 &rarr; 2026-12-10</span>
@@ -11550,10 +11550,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-12" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$694</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $694/night ($2774 total). Villa del Sol ranks #15 out of 31 competitors (48th percentile). Base Kivoya rate is $399.">(48%)</span></td>
                 <td id="p50-row-12" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$745</td>
-                <td id="target-row-12" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1099 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-12"><span class="badge-diff-under">-36.9%</span></td>
-                <td id="rec-row-12"><span class="rec-price">$705</span></td>
-                <td id="action-row-12" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $705 (+306)</strong></td>
+                <td id="target-row-12" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$775 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-12"><span style="color:#fbbf24; font-weight:700;">-10.5%</span></td>
+                <td id="rec-row-12"><span class="rec-price">$460</span></td>
+                <td id="action-row-12" style="font-size:0.85rem; color:#fbbf24; font-weight:700;"><strong>Adjust base from $399 to $460 (+61)</strong></td>
               </tr>
               <tr id="row-12" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -11565,7 +11565,7 @@
                data-our-base="399.0"
                data-our-eff="693.5"
                data-is-our-live="true"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="true"
                data-channel-factor="1.3235">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -13080,10 +13080,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-14" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$760</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $760/night ($2280 total). Villa del Sol ranks #10 out of 31 competitors (32th percentile). Base Kivoya rate is $399.">(32%)</span></td>
                 <td id="p50-row-14" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1107</td>
-                <td id="target-row-14" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1913 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-14"><span class="badge-diff-under">-60.3%</span></td>
-                <td id="rec-row-14"><span class="rec-price">$1257</span></td>
-                <td id="action-row-14" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $1257 (+858)</strong></td>
+                <td id="target-row-14" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1203 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-14"><span class="badge-diff-under">-36.8%</span></td>
+                <td id="rec-row-14"><span class="rec-price">$728</span></td>
+                <td id="action-row-14" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $399 to $728 (+329)</strong></td>
               </tr>
               <tr id="row-14" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -13095,7 +13095,7 @@
                data-our-base="399.0"
                data-our-eff="760.0"
                data-is-our-live="true"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="true"
                data-channel-factor="1.3435">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -13878,8 +13878,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-15" data-tier="urgent" data-detail-id="row-15" onclick="toggleCompDetails('row-15', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-15" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-15" data-tier="moderate" data-detail-id="row-15" onclick="toggleCompDetails('row-15', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+                <td id="status-row-15" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-15">▶</span>
                   <span class="date-pill">2026-12-27 &rarr; 2026-12-31</span>
@@ -13891,10 +13891,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$949</td>
                 <td id="eff-row-15" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1074</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #25 out of 95 competitors (26th percentile in effective total guest cost)">(26%)</span></td>
                 <td id="p50-row-15" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1400</td>
-                <td id="target-row-15" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1832 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-15"><span class="badge-diff-under">-41.4%</span></td>
-                <td id="rec-row-15"><span class="rec-price">$1707</span></td>
-                <td id="action-row-15" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $949 to $1707 (+758)</strong></td>
+                <td id="target-row-15" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1400 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-15"><span style="color:#fbbf24; font-weight:700;">-23.3%</span></td>
+                <td id="rec-row-15"><span class="rec-price">$1275</span></td>
+                <td id="action-row-15" style="font-size:0.85rem; color:#fbbf24; font-weight:700;"><strong>Adjust base from $949 to $1275 (+326)</strong></td>
               </tr>
               <tr id="row-15" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -13906,7 +13906,7 @@
                data-our-base="949.0"
                data-our-eff="1074.0"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -16174,10 +16174,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$724</td>
                 <td id="eff-row-16" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$849</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-16" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1438</td>
-                <td id="target-row-16" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1881 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-16"><span class="badge-diff-under">-54.9%</span></td>
-                <td id="rec-row-16"><span class="rec-price">$1756</span></td>
-                <td id="action-row-16" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $724 to $1756 (+1032)</strong></td>
+                <td id="target-row-16" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1438 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-16"><span class="badge-diff-under">-40.9%</span></td>
+                <td id="rec-row-16"><span class="rec-price">$1312</span></td>
+                <td id="action-row-16" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $724 to $1312 (+588)</strong></td>
               </tr>
               <tr id="row-16" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -16189,7 +16189,7 @@
                data-our-base="724.0"
                data-our-eff="849.0"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -20740,10 +20740,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$649</td>
                 <td id="eff-row-18" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$774</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-18" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1438</td>
-                <td id="target-row-18" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1881 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-18"><span class="badge-diff-under">-58.9%</span></td>
-                <td id="rec-row-18"><span class="rec-price">$1756</span></td>
-                <td id="action-row-18" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $649 to $1756 (+1107)</strong></td>
+                <td id="target-row-18" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1438 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-18"><span class="badge-diff-under">-46.2%</span></td>
+                <td id="rec-row-18"><span class="rec-price">$1312</span></td>
+                <td id="action-row-18" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $649 to $1312 (+663)</strong></td>
               </tr>
               <tr id="row-18" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -20755,7 +20755,7 @@
                data-our-base="649.0"
                data-our-eff="774.0"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -23023,10 +23023,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$649</td>
                 <td id="eff-row-19" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$816</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-19" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1438</td>
-                <td id="target-row-19" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1881 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-19"><span class="badge-diff-under">-56.6%</span></td>
-                <td id="rec-row-19"><span class="rec-price">$1715</span></td>
-                <td id="action-row-19" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $649 to $1715 (+1066)</strong></td>
+                <td id="target-row-19" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1438 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-19"><span class="badge-diff-under">-43.3%</span></td>
+                <td id="rec-row-19"><span class="rec-price">$1271</span></td>
+                <td id="action-row-19" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $649 to $1271 (+622)</strong></td>
               </tr>
               <tr id="row-19" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -23038,7 +23038,7 @@
                data-our-base="649.0"
                data-our-eff="815.67"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -27589,10 +27589,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$649</td>
                 <td id="eff-row-21" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$774</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-21" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1438</td>
-                <td id="target-row-21" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1881 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-21"><span class="badge-diff-under">-58.9%</span></td>
-                <td id="rec-row-21"><span class="rec-price">$1756</span></td>
-                <td id="action-row-21" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $649 to $1756 (+1107)</strong></td>
+                <td id="target-row-21" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1438 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-21"><span class="badge-diff-under">-46.2%</span></td>
+                <td id="rec-row-21"><span class="rec-price">$1312</span></td>
+                <td id="action-row-21" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $649 to $1312 (+663)</strong></td>
               </tr>
               <tr id="row-21" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -27604,7 +27604,7 @@
                data-our-base="649.0"
                data-our-eff="774.0"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -32155,10 +32155,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$724</td>
                 <td id="eff-row-23" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$849</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-23" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1438</td>
-                <td id="target-row-23" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1881 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-23"><span class="badge-diff-under">-54.9%</span></td>
-                <td id="rec-row-23"><span class="rec-price">$1756</span></td>
-                <td id="action-row-23" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $724 to $1756 (+1032)</strong></td>
+                <td id="target-row-23" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1438 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-23"><span class="badge-diff-under">-40.9%</span></td>
+                <td id="rec-row-23"><span class="rec-price">$1312</span></td>
+                <td id="action-row-23" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $724 to $1312 (+588)</strong></td>
               </tr>
               <tr id="row-23" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -32170,7 +32170,7 @@
                data-our-base="724.0"
                data-our-eff="849.0"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -36721,10 +36721,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
                 <td id="eff-row-25" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$916</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-25" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1688</td>
-                <td id="target-row-25" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2209 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-25"><span class="badge-diff-under">-58.5%</span></td>
-                <td id="rec-row-25"><span class="rec-price">$2042</span></td>
-                <td id="action-row-25" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $2042 (+1293)</strong></td>
+                <td id="target-row-25" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1688 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-25"><span class="badge-diff-under">-45.7%</span></td>
+                <td id="rec-row-25"><span class="rec-price">$1521</span></td>
+                <td id="action-row-25" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $1521 (+772)</strong></td>
               </tr>
               <tr id="row-25" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -36736,7 +36736,7 @@
                data-our-base="749.0"
                data-our-eff="915.67"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -41287,10 +41287,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
                 <td id="eff-row-27" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$874</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-27" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1688</td>
-                <td id="target-row-27" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2209 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-27"><span class="badge-diff-under">-60.4%</span></td>
-                <td id="rec-row-27"><span class="rec-price">$2084</span></td>
-                <td id="action-row-27" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $2084 (+1335)</strong></td>
+                <td id="target-row-27" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1688 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-27"><span class="badge-diff-under">-48.2%</span></td>
+                <td id="rec-row-27"><span class="rec-price">$1562</span></td>
+                <td id="action-row-27" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $1562 (+813)</strong></td>
               </tr>
               <tr id="row-27" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -41302,7 +41302,7 @@
                data-our-base="749.0"
                data-our-eff="874.0"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -45853,10 +45853,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
                 <td id="eff-row-29" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$874</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-29" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1688</td>
-                <td id="target-row-29" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2209 <span style="font-size:0.75rem; color:#94a3b8;">(78%)</span></td>
-                <td id="diff-row-29"><span class="badge-diff-under">-60.4%</span></td>
-                <td id="rec-row-29"><span class="rec-price">$2084</span></td>
-                <td id="action-row-29" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $2084 (+1335)</strong></td>
+                <td id="target-row-29" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1688 <span style="font-size:0.75rem; color:#94a3b8;">(54.6%)</span></td>
+                <td id="diff-row-29"><span class="badge-diff-under">-48.2%</span></td>
+                <td id="rec-row-29"><span class="rec-price">$1562</span></td>
+                <td id="action-row-29" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $1562 (+813)</strong></td>
               </tr>
               <tr id="row-29" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -45868,7 +45868,7 @@
                data-our-base="749.0"
                data-our-eff="874.0"
                data-is-our-live="false"
-               data-target-pct="78.0"
+               data-target-pct="54.6"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -50419,10 +50419,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
                 <td id="eff-row-31" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$874</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-31" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1625</td>
-                <td id="target-row-31" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2275 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-31"><span class="badge-diff-under">-61.6%</span></td>
-                <td id="rec-row-31"><span class="rec-price">$2150</span></td>
-                <td id="action-row-31" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $2150 (+1401)</strong></td>
+                <td id="target-row-31" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1755 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-31"><span class="badge-diff-under">-50.2%</span></td>
+                <td id="rec-row-31"><span class="rec-price">$1630</span></td>
+                <td id="action-row-31" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $1630 (+881)</strong></td>
               </tr>
               <tr id="row-31" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -50434,7 +50434,7 @@
                data-our-base="749.0"
                data-our-eff="874.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -54985,10 +54985,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
                 <td id="eff-row-33" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$916</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-33" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1625</td>
-                <td id="target-row-33" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2275 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-33"><span class="badge-diff-under">-59.8%</span></td>
-                <td id="rec-row-33"><span class="rec-price">$2108</span></td>
-                <td id="action-row-33" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $2108 (+1359)</strong></td>
+                <td id="target-row-33" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1755 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-33"><span class="badge-diff-under">-47.8%</span></td>
+                <td id="rec-row-33"><span class="rec-price">$1588</span></td>
+                <td id="action-row-33" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $749 to $1588 (+839)</strong></td>
               </tr>
               <tr id="row-33" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -55000,7 +55000,7 @@
                data-our-base="749.0"
                data-our-eff="915.67"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -57268,10 +57268,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
                 <td id="eff-row-34" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1224</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #25 out of 95 competitors (26th percentile in effective total guest cost)">(26%)</span></td>
                 <td id="p50-row-34" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1625</td>
-                <td id="target-row-34" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2275 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-34"><span class="badge-diff-under">-46.2%</span></td>
-                <td id="rec-row-34"><span class="rec-price">$2150</span></td>
-                <td id="action-row-34" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $1099 to $2150 (+1051)</strong></td>
+                <td id="target-row-34" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1755 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-34"><span class="badge-diff-under">-30.3%</span></td>
+                <td id="rec-row-34"><span class="rec-price">$1630</span></td>
+                <td id="action-row-34" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $1099 to $1630 (+531)</strong></td>
               </tr>
               <tr id="row-34" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -57283,7 +57283,7 @@
                data-our-base="1099.0"
                data-our-eff="1224.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -61834,10 +61834,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$836</td>
                 <td id="eff-row-36" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$962</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #1 out of 95 competitors (1th percentile in effective total guest cost)">(1%)</span></td>
                 <td id="p50-row-36" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1625</td>
-                <td id="target-row-36" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2275 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-36"><span class="badge-diff-under">-57.7%</span></td>
-                <td id="rec-row-36"><span class="rec-price">$2150</span></td>
-                <td id="action-row-36" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $836 to $2150 (+1314)</strong></td>
+                <td id="target-row-36" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1755 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-36"><span class="badge-diff-under">-45.2%</span></td>
+                <td id="rec-row-36"><span class="rec-price">$1630</span></td>
+                <td id="action-row-36" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $836 to $1630 (+794)</strong></td>
               </tr>
               <tr id="row-36" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -61849,7 +61849,7 @@
                data-our-base="836.5"
                data-our-eff="961.5"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -66387,8 +66387,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-38" data-tier="urgent" data-detail-id="row-38" onclick="toggleCompDetails('row-38', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-38" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-38" data-tier="ok" data-detail-id="row-38" onclick="toggleCompDetails('row-38', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-38" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-38">▶</span>
                   <span class="date-pill">2027-04-04 &rarr; 2027-04-08</span>
@@ -66400,10 +66400,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$999</td>
                 <td id="eff-row-38" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1124</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #33 out of 95 competitors (35th percentile in effective total guest cost)">(35%)</span></td>
                 <td id="p50-row-38" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1350</td>
-                <td id="target-row-38" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1890 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-38"><span class="badge-diff-under">-40.5%</span></td>
-                <td id="rec-row-38"><span class="rec-price">$1765</span></td>
-                <td id="action-row-38" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $999 to $1765 (+766)</strong></td>
+                <td id="target-row-38" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1458 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-38"><span style="color:#fbbf24; font-weight:700;">-22.9%</span></td>
+                <td id="rec-row-38"><span class="rec-price">$1333</span></td>
+                <td id="action-row-38" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $999 to $1333 (+334)</strong></td>
               </tr>
               <tr id="row-38" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -66415,7 +66415,7 @@
                data-our-base="999.0"
                data-our-eff="1124.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -70953,8 +70953,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-40" data-tier="urgent" data-detail-id="row-40" onclick="toggleCompDetails('row-40', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-40" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-40" data-tier="ok" data-detail-id="row-40" onclick="toggleCompDetails('row-40', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-40" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-40">▶</span>
                   <span class="date-pill">2027-04-11 &rarr; 2027-04-15</span>
@@ -70966,10 +70966,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$999</td>
                 <td id="eff-row-40" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1124</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #33 out of 95 competitors (35th percentile in effective total guest cost)">(35%)</span></td>
                 <td id="p50-row-40" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1350</td>
-                <td id="target-row-40" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1890 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-40"><span class="badge-diff-under">-40.5%</span></td>
-                <td id="rec-row-40"><span class="rec-price">$1765</span></td>
-                <td id="action-row-40" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $999 to $1765 (+766)</strong></td>
+                <td id="target-row-40" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1458 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-40"><span style="color:#fbbf24; font-weight:700;">-22.9%</span></td>
+                <td id="rec-row-40"><span class="rec-price">$1333</span></td>
+                <td id="action-row-40" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $999 to $1333 (+334)</strong></td>
               </tr>
               <tr id="row-40" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -70981,7 +70981,7 @@
                data-our-base="999.0"
                data-our-eff="1124.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -75519,8 +75519,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-42" data-tier="urgent" data-detail-id="row-42" onclick="toggleCompDetails('row-42', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-42" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-42" data-tier="ok" data-detail-id="row-42" onclick="toggleCompDetails('row-42', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-42" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-42">▶</span>
                   <span class="date-pill">2027-04-18 &rarr; 2027-04-22</span>
@@ -75532,10 +75532,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$999</td>
                 <td id="eff-row-42" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1124</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #33 out of 95 competitors (35th percentile in effective total guest cost)">(35%)</span></td>
                 <td id="p50-row-42" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1350</td>
-                <td id="target-row-42" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1890 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-42"><span class="badge-diff-under">-40.5%</span></td>
-                <td id="rec-row-42"><span class="rec-price">$1765</span></td>
-                <td id="action-row-42" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $999 to $1765 (+766)</strong></td>
+                <td id="target-row-42" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1458 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-42"><span style="color:#fbbf24; font-weight:700;">-22.9%</span></td>
+                <td id="rec-row-42"><span class="rec-price">$1333</span></td>
+                <td id="action-row-42" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $999 to $1333 (+334)</strong></td>
               </tr>
               <tr id="row-42" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -75547,7 +75547,7 @@
                data-our-base="999.0"
                data-our-eff="1124.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -80085,8 +80085,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-44" data-tier="urgent" data-detail-id="row-44" onclick="toggleCompDetails('row-44', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-44" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-44" data-tier="ok" data-detail-id="row-44" onclick="toggleCompDetails('row-44', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-44" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-44">▶</span>
                   <span class="date-pill">2027-04-25 &rarr; 2027-04-29</span>
@@ -80098,10 +80098,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$999</td>
                 <td id="eff-row-44" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1124</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #33 out of 95 competitors (35th percentile in effective total guest cost)">(35%)</span></td>
                 <td id="p50-row-44" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1350</td>
-                <td id="target-row-44" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1890 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-44"><span class="badge-diff-under">-40.5%</span></td>
-                <td id="rec-row-44"><span class="rec-price">$1765</span></td>
-                <td id="action-row-44" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $999 to $1765 (+766)</strong></td>
+                <td id="target-row-44" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1458 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-44"><span style="color:#fbbf24; font-weight:700;">-22.9%</span></td>
+                <td id="rec-row-44"><span class="rec-price">$1333</span></td>
+                <td id="action-row-44" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $999 to $1333 (+334)</strong></td>
               </tr>
               <tr id="row-44" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -80113,7 +80113,7 @@
                data-our-base="999.0"
                data-our-eff="1124.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -84664,10 +84664,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$659</td>
                 <td id="eff-row-46" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$784</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #9 out of 95 competitors (9th percentile in effective total guest cost)">(9%)</span></td>
                 <td id="p50-row-46" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1188</td>
-                <td id="target-row-46" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1662 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-46"><span class="badge-diff-under">-52.8%</span></td>
-                <td id="rec-row-46"><span class="rec-price">$1538</span></td>
-                <td id="action-row-46" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $659 to $1538 (+879)</strong></td>
+                <td id="target-row-46" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1282 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-46"><span class="badge-diff-under">-38.9%</span></td>
+                <td id="rec-row-46"><span class="rec-price">$1158</span></td>
+                <td id="action-row-46" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $659 to $1158 (+499)</strong></td>
               </tr>
               <tr id="row-46" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -84679,7 +84679,7 @@
                data-our-base="659.0"
                data-our-eff="784.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -89230,10 +89230,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$659</td>
                 <td id="eff-row-48" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$784</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #9 out of 95 competitors (9th percentile in effective total guest cost)">(9%)</span></td>
                 <td id="p50-row-48" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1188</td>
-                <td id="target-row-48" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1662 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-48"><span class="badge-diff-under">-52.8%</span></td>
-                <td id="rec-row-48"><span class="rec-price">$1538</span></td>
-                <td id="action-row-48" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $659 to $1538 (+879)</strong></td>
+                <td id="target-row-48" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1282 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-48"><span class="badge-diff-under">-38.9%</span></td>
+                <td id="rec-row-48"><span class="rec-price">$1158</span></td>
+                <td id="action-row-48" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $659 to $1158 (+499)</strong></td>
               </tr>
               <tr id="row-48" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -89245,7 +89245,7 @@
                data-our-base="659.0"
                data-our-eff="784.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -93796,10 +93796,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$659</td>
                 <td id="eff-row-50" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$784</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #9 out of 95 competitors (9th percentile in effective total guest cost)">(9%)</span></td>
                 <td id="p50-row-50" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1188</td>
-                <td id="target-row-50" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1662 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-50"><span class="badge-diff-under">-52.8%</span></td>
-                <td id="rec-row-50"><span class="rec-price">$1538</span></td>
-                <td id="action-row-50" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $659 to $1538 (+879)</strong></td>
+                <td id="target-row-50" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1282 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-50"><span class="badge-diff-under">-38.9%</span></td>
+                <td id="rec-row-50"><span class="rec-price">$1158</span></td>
+                <td id="action-row-50" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $659 to $1158 (+499)</strong></td>
               </tr>
               <tr id="row-50" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -93811,7 +93811,7 @@
                data-our-base="659.0"
                data-our-eff="784.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -98362,10 +98362,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$659</td>
                 <td id="eff-row-52" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$784</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #9 out of 95 competitors (9th percentile in effective total guest cost)">(9%)</span></td>
                 <td id="p50-row-52" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1188</td>
-                <td id="target-row-52" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1662 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-52"><span class="badge-diff-under">-52.8%</span></td>
-                <td id="rec-row-52"><span class="rec-price">$1538</span></td>
-                <td id="action-row-52" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $659 to $1538 (+879)</strong></td>
+                <td id="target-row-52" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1282 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-52"><span class="badge-diff-under">-38.9%</span></td>
+                <td id="rec-row-52"><span class="rec-price">$1158</span></td>
+                <td id="action-row-52" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $659 to $1158 (+499)</strong></td>
               </tr>
               <tr id="row-52" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -98377,7 +98377,7 @@
                data-our-base="659.0"
                data-our-eff="784.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -102928,10 +102928,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-54" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #9 out of 95 competitors (9th percentile in effective total guest cost)">(9%)</span></td>
                 <td id="p50-row-54" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$1188</td>
-                <td id="target-row-54" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1662 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-54"><span class="badge-diff-under">-56.5%</span></td>
-                <td id="rec-row-54"><span class="rec-price">$1538</span></td>
-                <td id="action-row-54" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $1538 (+939)</strong></td>
+                <td id="target-row-54" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1282 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-54"><span class="badge-diff-under">-43.5%</span></td>
+                <td id="rec-row-54"><span class="rec-price">$1158</span></td>
+                <td id="action-row-54" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $1158 (+559)</strong></td>
               </tr>
               <tr id="row-54" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -102943,7 +102943,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -107481,8 +107481,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-56" data-tier="urgent" data-detail-id="row-56" onclick="toggleCompDetails('row-56', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-56" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-56" data-tier="ok" data-detail-id="row-56" onclick="toggleCompDetails('row-56', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-56" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-56">▶</span>
                   <span class="date-pill">2027-06-06 &rarr; 2027-06-10</span>
@@ -107494,10 +107494,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-56" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #39 out of 95 competitors (41th percentile in effective total guest cost)">(41%)</span></td>
                 <td id="p50-row-56" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$812</td>
-                <td id="target-row-56" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1138 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-56"><span class="badge-diff-under">-36.4%</span></td>
-                <td id="rec-row-56"><span class="rec-price">$1012</span></td>
-                <td id="action-row-56" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $1012 (+413)</strong></td>
+                <td id="target-row-56" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$878 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-56"><span style="color:#fbbf24; font-weight:700;">-17.5%</span></td>
+                <td id="rec-row-56"><span class="rec-price">$752</span></td>
+                <td id="action-row-56" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $752 (+153)</strong></td>
               </tr>
               <tr id="row-56" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -107509,7 +107509,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -112047,8 +112047,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-58" data-tier="urgent" data-detail-id="row-58" onclick="toggleCompDetails('row-58', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-58" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-58" data-tier="ok" data-detail-id="row-58" onclick="toggleCompDetails('row-58', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-58" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-58">▶</span>
                   <span class="date-pill">2027-06-13 &rarr; 2027-06-17</span>
@@ -112060,10 +112060,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-58" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #39 out of 95 competitors (41th percentile in effective total guest cost)">(41%)</span></td>
                 <td id="p50-row-58" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$812</td>
-                <td id="target-row-58" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1138 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-58"><span class="badge-diff-under">-36.4%</span></td>
-                <td id="rec-row-58"><span class="rec-price">$1012</span></td>
-                <td id="action-row-58" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $1012 (+413)</strong></td>
+                <td id="target-row-58" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$878 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-58"><span style="color:#fbbf24; font-weight:700;">-17.5%</span></td>
+                <td id="rec-row-58"><span class="rec-price">$752</span></td>
+                <td id="action-row-58" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $752 (+153)</strong></td>
               </tr>
               <tr id="row-58" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -112075,7 +112075,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -116613,8 +116613,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-60" data-tier="urgent" data-detail-id="row-60" onclick="toggleCompDetails('row-60', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-60" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-60" data-tier="ok" data-detail-id="row-60" onclick="toggleCompDetails('row-60', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-60" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-60">▶</span>
                   <span class="date-pill">2027-06-20 &rarr; 2027-06-24</span>
@@ -116626,10 +116626,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-60" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #39 out of 95 competitors (41th percentile in effective total guest cost)">(41%)</span></td>
                 <td id="p50-row-60" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$812</td>
-                <td id="target-row-60" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1138 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-60"><span class="badge-diff-under">-36.4%</span></td>
-                <td id="rec-row-60"><span class="rec-price">$1012</span></td>
-                <td id="action-row-60" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $1012 (+413)</strong></td>
+                <td id="target-row-60" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$878 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-60"><span style="color:#fbbf24; font-weight:700;">-17.5%</span></td>
+                <td id="rec-row-60"><span class="rec-price">$752</span></td>
+                <td id="action-row-60" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $752 (+153)</strong></td>
               </tr>
               <tr id="row-60" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -116641,7 +116641,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -121179,8 +121179,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-62" data-tier="urgent" data-detail-id="row-62" onclick="toggleCompDetails('row-62', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-62" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-62" data-tier="ok" data-detail-id="row-62" onclick="toggleCompDetails('row-62', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-62" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-62">▶</span>
                   <span class="date-pill">2027-06-27 &rarr; 2027-07-01</span>
@@ -121192,10 +121192,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-62" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #39 out of 95 competitors (41th percentile in effective total guest cost)">(41%)</span></td>
                 <td id="p50-row-62" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$812</td>
-                <td id="target-row-62" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1138 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-62"><span class="badge-diff-under">-36.4%</span></td>
-                <td id="rec-row-62"><span class="rec-price">$1012</span></td>
-                <td id="action-row-62" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $1012 (+413)</strong></td>
+                <td id="target-row-62" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$878 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-62"><span style="color:#fbbf24; font-weight:700;">-17.5%</span></td>
+                <td id="rec-row-62"><span class="rec-price">$752</span></td>
+                <td id="action-row-62" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $752 (+153)</strong></td>
               </tr>
               <tr id="row-62" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -121207,7 +121207,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -125745,8 +125745,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-64" data-tier="urgent" data-detail-id="row-64" onclick="toggleCompDetails('row-64', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-64" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-64" data-tier="ok" data-detail-id="row-64" onclick="toggleCompDetails('row-64', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-64" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-64">▶</span>
                   <span class="date-pill">2027-07-04 &rarr; 2027-07-08</span>
@@ -125758,10 +125758,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-64" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-64" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$750</td>
-                <td id="target-row-64" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1050 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-64"><span class="badge-diff-under">-31.0%</span></td>
-                <td id="rec-row-64"><span class="rec-price">$925</span></td>
-                <td id="action-row-64" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $925 (+326)</strong></td>
+                <td id="target-row-64" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$810 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-64"><span style="color:#fbbf24; font-weight:700;">-10.6%</span></td>
+                <td id="rec-row-64"><span class="rec-price">$685</span></td>
+                <td id="action-row-64" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $685 (+86)</strong></td>
               </tr>
               <tr id="row-64" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -125773,7 +125773,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -130311,8 +130311,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-66" data-tier="urgent" data-detail-id="row-66" onclick="toggleCompDetails('row-66', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-66" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-66" data-tier="ok" data-detail-id="row-66" onclick="toggleCompDetails('row-66', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-66" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-66">▶</span>
                   <span class="date-pill">2027-07-11 &rarr; 2027-07-15</span>
@@ -130324,10 +130324,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-66" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-66" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$750</td>
-                <td id="target-row-66" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1050 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-66"><span class="badge-diff-under">-31.0%</span></td>
-                <td id="rec-row-66"><span class="rec-price">$925</span></td>
-                <td id="action-row-66" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $925 (+326)</strong></td>
+                <td id="target-row-66" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$810 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-66"><span style="color:#fbbf24; font-weight:700;">-10.6%</span></td>
+                <td id="rec-row-66"><span class="rec-price">$685</span></td>
+                <td id="action-row-66" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $685 (+86)</strong></td>
               </tr>
               <tr id="row-66" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -130339,7 +130339,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -134877,8 +134877,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-68" data-tier="urgent" data-detail-id="row-68" onclick="toggleCompDetails('row-68', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-68" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-68" data-tier="ok" data-detail-id="row-68" onclick="toggleCompDetails('row-68', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-68" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-68">▶</span>
                   <span class="date-pill">2027-07-18 &rarr; 2027-07-22</span>
@@ -134890,10 +134890,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-68" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-68" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$750</td>
-                <td id="target-row-68" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1050 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-68"><span class="badge-diff-under">-31.0%</span></td>
-                <td id="rec-row-68"><span class="rec-price">$925</span></td>
-                <td id="action-row-68" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $925 (+326)</strong></td>
+                <td id="target-row-68" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$810 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-68"><span style="color:#fbbf24; font-weight:700;">-10.6%</span></td>
+                <td id="rec-row-68"><span class="rec-price">$685</span></td>
+                <td id="action-row-68" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $685 (+86)</strong></td>
               </tr>
               <tr id="row-68" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -134905,7 +134905,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -139443,8 +139443,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-70" data-tier="urgent" data-detail-id="row-70" onclick="toggleCompDetails('row-70', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-70" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-70" data-tier="ok" data-detail-id="row-70" onclick="toggleCompDetails('row-70', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-70" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-70">▶</span>
                   <span class="date-pill">2027-07-25 &rarr; 2027-07-29</span>
@@ -139456,10 +139456,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-70" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-70" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$750</td>
-                <td id="target-row-70" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1050 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-70"><span class="badge-diff-under">-31.0%</span></td>
-                <td id="rec-row-70"><span class="rec-price">$925</span></td>
-                <td id="action-row-70" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $925 (+326)</strong></td>
+                <td id="target-row-70" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$810 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-70"><span style="color:#fbbf24; font-weight:700;">-10.6%</span></td>
+                <td id="rec-row-70"><span class="rec-price">$685</span></td>
+                <td id="action-row-70" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $685 (+86)</strong></td>
               </tr>
               <tr id="row-70" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -139471,7 +139471,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -144009,8 +144009,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-72" data-tier="urgent" data-detail-id="row-72" onclick="toggleCompDetails('row-72', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-72" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-72" data-tier="ok" data-detail-id="row-72" onclick="toggleCompDetails('row-72', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-72" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-72">▶</span>
                   <span class="date-pill">2027-08-01 &rarr; 2027-08-05</span>
@@ -144022,10 +144022,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-72" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-72" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$775</td>
-                <td id="target-row-72" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1085 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-72"><span class="badge-diff-under">-33.3%</span></td>
-                <td id="rec-row-72"><span class="rec-price">$960</span></td>
-                <td id="action-row-72" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $960 (+361)</strong></td>
+                <td id="target-row-72" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$837 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-72"><span style="color:#fbbf24; font-weight:700;">-13.5%</span></td>
+                <td id="rec-row-72"><span class="rec-price">$712</span></td>
+                <td id="action-row-72" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $712 (+113)</strong></td>
               </tr>
               <tr id="row-72" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -144037,7 +144037,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -148575,8 +148575,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-74" data-tier="urgent" data-detail-id="row-74" onclick="toggleCompDetails('row-74', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-74" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-74" data-tier="ok" data-detail-id="row-74" onclick="toggleCompDetails('row-74', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-74" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-74">▶</span>
                   <span class="date-pill">2027-08-08 &rarr; 2027-08-12</span>
@@ -148588,10 +148588,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-74" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-74" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$775</td>
-                <td id="target-row-74" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1085 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-74"><span class="badge-diff-under">-33.3%</span></td>
-                <td id="rec-row-74"><span class="rec-price">$960</span></td>
-                <td id="action-row-74" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $960 (+361)</strong></td>
+                <td id="target-row-74" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$837 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-74"><span style="color:#fbbf24; font-weight:700;">-13.5%</span></td>
+                <td id="rec-row-74"><span class="rec-price">$712</span></td>
+                <td id="action-row-74" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $712 (+113)</strong></td>
               </tr>
               <tr id="row-74" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -148603,7 +148603,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -153141,8 +153141,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-76" data-tier="urgent" data-detail-id="row-76" onclick="toggleCompDetails('row-76', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-76" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-76" data-tier="ok" data-detail-id="row-76" onclick="toggleCompDetails('row-76', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-76" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-76">▶</span>
                   <span class="date-pill">2027-08-15 &rarr; 2027-08-19</span>
@@ -153154,10 +153154,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-76" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-76" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$775</td>
-                <td id="target-row-76" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1085 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-76"><span class="badge-diff-under">-33.3%</span></td>
-                <td id="rec-row-76"><span class="rec-price">$960</span></td>
-                <td id="action-row-76" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $960 (+361)</strong></td>
+                <td id="target-row-76" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$837 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-76"><span style="color:#fbbf24; font-weight:700;">-13.5%</span></td>
+                <td id="rec-row-76"><span class="rec-price">$712</span></td>
+                <td id="action-row-76" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $712 (+113)</strong></td>
               </tr>
               <tr id="row-76" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -153169,7 +153169,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -157707,8 +157707,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-78" data-tier="urgent" data-detail-id="row-78" onclick="toggleCompDetails('row-78', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-78" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-78" data-tier="ok" data-detail-id="row-78" onclick="toggleCompDetails('row-78', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-78" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-78">▶</span>
                   <span class="date-pill">2027-08-22 &rarr; 2027-08-26</span>
@@ -157720,10 +157720,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-78" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-78" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$775</td>
-                <td id="target-row-78" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1085 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-78"><span class="badge-diff-under">-33.3%</span></td>
-                <td id="rec-row-78"><span class="rec-price">$960</span></td>
-                <td id="action-row-78" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $960 (+361)</strong></td>
+                <td id="target-row-78" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$837 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-78"><span style="color:#fbbf24; font-weight:700;">-13.5%</span></td>
+                <td id="rec-row-78"><span class="rec-price">$712</span></td>
+                <td id="action-row-78" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $712 (+113)</strong></td>
               </tr>
               <tr id="row-78" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -157735,7 +157735,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -162273,8 +162273,8 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-80" data-tier="urgent" data-detail-id="row-80" onclick="toggleCompDetails('row-80', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
-                <td id="status-row-80" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
+              <tr class="clickable-row interval-parent-row" id="parent-row-80" data-tier="ok" data-detail-id="row-80" onclick="toggleCompDetails('row-80', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+                <td id="status-row-80" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-80">▶</span>
                   <span class="date-pill">2027-08-29 &rarr; 2027-09-02</span>
@@ -162286,10 +162286,10 @@
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
                 <td id="eff-row-80" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$724</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #44 out of 95 competitors (46th percentile in effective total guest cost)">(46%)</span></td>
                 <td id="p50-row-80" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">$775</td>
-                <td id="target-row-80" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1085 <span style="font-size:0.75rem; color:#94a3b8;">(82%)</span></td>
-                <td id="diff-row-80"><span class="badge-diff-under">-33.3%</span></td>
-                <td id="rec-row-80"><span class="rec-price">$960</span></td>
-                <td id="action-row-80" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>Adjust base from $599 to $960 (+361)</strong></td>
+                <td id="target-row-80" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$837 <span style="font-size:0.75rem; color:#94a3b8;">(57.4%)</span></td>
+                <td id="diff-row-80"><span style="color:#fbbf24; font-weight:700;">-13.5%</span></td>
+                <td id="rec-row-80"><span class="rec-price">$712</span></td>
+                <td id="action-row-80" style="font-size:0.85rem; color:#cbd5e1;"><strong>Adjust base from $599 to $712 (+113)</strong></td>
               </tr>
               <tr id="row-80" class="comp-details-row" style="display: none;">
                 <td colspan="13">
@@ -162301,7 +162301,7 @@
                data-our-base="599.0"
                data-our-eff="724.0"
                data-is-our-live="false"
-               data-target-pct="82.0"
+               data-target-pct="57.4"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
@@ -169080,13 +169080,25 @@
           </div>
 
           <div class="method-card">
-            <h3>📉 3. Dynamic Lead-Time Tapering Curve</h3>
-            <p>Villa del Sol is a luxury resort compound (gated ¾-acre, heated pool/grotto, basketball court, putting green, casita). We benchmark against the top 20%–25% of luxury comps:</p>
+            <h3>📉 3. Dynamic Lead-Time Tapering Curve & Midweek Discount</h3>
+            <p>Villa del Sol is a luxury resort compound (gated ¾-acre, heated pool/grotto, basketball court, putting green, casita). We benchmark against the top 20%–25% of luxury comps on weekends, while applying a <strong>30% lower target percentile midweek</strong> to drive weekday occupancy where competitor pricing rarely adjusts:</p>
             <ul>
-              <li><strong>> 180 Days Out:</strong> 82nd Percentile (Capture early high-intent planners at top-dollar).</li>
-              <li><strong>60 – 180 Days Out:</strong> 78th Percentile (Standard booking window).</li>
-              <li><strong>30 – 60 Days Out:</strong> 72nd Percentile (Tapering to encourage booking).</li>
-              <li><strong>&lt; 30 Days Out:</strong> 65th Percentile (Protect occupancy for near-term dates).</li>
+              <li><strong>Weekend Targets:</strong>
+                <ul style="margin-top: 4px; margin-bottom: 6px;">
+                  <li><strong>&gt; 180 Days Out:</strong> 82nd Percentile (Capture early high-intent planners at top-dollar).</li>
+                  <li><strong>60 – 180 Days Out:</strong> 78th Percentile (Standard booking window).</li>
+                  <li><strong>30 – 60 Days Out:</strong> 72nd Percentile (Tapering to encourage booking).</li>
+                  <li><strong>&lt; 30 Days Out:</strong> 65th Percentile (Protect occupancy for near-term dates).</li>
+                </ul>
+              </li>
+              <li><strong>Midweek Targets (30% Competitive Discount):</strong>
+                <ul style="margin-top: 4px;">
+                  <li><strong>&gt; 180 Days Out:</strong> 57.4th Percentile (0.82 &times; 0.70).</li>
+                  <li><strong>60 – 180 Days Out:</strong> 54.6th Percentile (0.78 &times; 0.70).</li>
+                  <li><strong>30 – 60 Days Out:</strong> 50.4th Percentile (0.72 &times; 0.70).</li>
+                  <li><strong>&lt; 30 Days Out:</strong> 45.5th Percentile (0.65 &times; 0.70) to win bookings in slow midweeks.</li>
+                </ul>
+              </li>
             </ul>
           </div>
 
@@ -169625,21 +169637,21 @@
     "sample_significance": "ROBUST",
     "sample_label": "\u2705 Robust (N=33)",
     "sample_note": "33 comps analyzed.",
-    "target_percentile": 65.0,
+    "target_percentile": 45.5,
     "our_percentile_rank": 42.4,
     "comp_p50_eff": 727.0,
     "comp_p75_eff": 1254.75,
     "comp_p80_eff": 1313.0,
-    "comp_target_eff": 1051.25,
+    "comp_target_eff": 712.66,
     "comp_min_eff": 354.25,
     "comp_max_eff": 2168.25,
-    "price_diff_percent": -34.0,
-    "recommended_base_nightly": 821.0,
-    "base_diff": 322.0,
-    "priority_tier": "URGENT_ACTION",
-    "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
-    "status": "UNDERPRICED",
-    "action_summary": "Adjust base from $499 to $821 (+322)",
+    "price_diff_percent": -2.7,
+    "recommended_base_nightly": 516.0,
+    "base_diff": 17.0,
+    "priority_tier": "INFORMATIONAL",
+    "priority_label": "\u2705 Competitive / Long Range",
+    "status": "ON TARGET",
+    "action_summary": "Keep current price",
     "is_live_scan": true
   },
   {
@@ -170211,21 +170223,21 @@
     "sample_significance": "ROBUST",
     "sample_label": "\u2705 Robust (N=37)",
     "sample_note": "37 comps analyzed.",
-    "target_percentile": 65.0,
+    "target_percentile": 45.5,
     "our_percentile_rank": 62.2,
     "comp_p50_eff": 599.25,
     "comp_p75_eff": 796.5,
     "comp_p80_eff": 825.5,
-    "comp_target_eff": 700.05,
+    "comp_target_eff": 552.03,
     "comp_min_eff": 344.75,
     "comp_max_eff": 1252.75,
-    "price_diff_percent": -3.1,
-    "recommended_base_nightly": 416.0,
-    "base_diff": 17.0,
-    "priority_tier": "INFORMATIONAL",
-    "priority_label": "\u2705 Competitive / Long Range",
-    "status": "ON TARGET",
-    "action_summary": "Keep current price",
+    "price_diff_percent": 22.9,
+    "recommended_base_nightly": 301.0,
+    "base_diff": -98.0,
+    "priority_tier": "URGENT_ACTION",
+    "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
+    "status": "OVERPRICED",
+    "action_summary": "Adjust base from $399 to $301 (-98)",
     "is_live_scan": true
   },
   {
@@ -170752,21 +170764,21 @@
     "sample_significance": "ROBUST",
     "sample_label": "\u2705 Robust (N=32)",
     "sample_note": "32 comps analyzed.",
-    "target_percentile": 65.0,
+    "target_percentile": 45.5,
     "our_percentile_rank": 46.9,
     "comp_p50_eff": 570.25,
     "comp_p75_eff": 690.38,
     "comp_p80_eff": 742.95,
-    "comp_target_eff": 634.6,
+    "comp_target_eff": 525.38,
     "comp_min_eff": 363.38,
     "comp_max_eff": 1097.0,
-    "price_diff_percent": -17.4,
-    "recommended_base_nightly": 510.0,
-    "base_diff": 111.0,
-    "priority_tier": "URGENT_ACTION",
-    "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
-    "status": "UNDERPRICED",
-    "action_summary": "Adjust base from $399 to $510 (+111)",
+    "price_diff_percent": -0.3,
+    "recommended_base_nightly": 400.0,
+    "base_diff": 1.0,
+    "priority_tier": "INFORMATIONAL",
+    "priority_label": "\u2705 Competitive / Long Range",
+    "status": "ON TARGET",
+    "action_summary": "Keep current price",
     "is_live_scan": true
   }
 ]</pre>
@@ -170777,7 +170789,7 @@
     <!-- Footer -->
     <footer>
       <p>STR Competitive Price Advisor for Villa del Sol • Automated Analysis Engine</p>
-      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 03, 2026 at 10:43 PM</p>
+      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 03, 2026 at 10:56 PM</p>
     </footer>
   </div>
 
@@ -171073,8 +171085,9 @@
           const p50El = document.getElementById('p50-' + rowId);
           if (p50El) p50El.textContent = '$' + Math.round(p50);
 
+          const targetPctLabel = (targetPct % 1 === 0) ? targetPct.toFixed(0) : targetPct.toFixed(1);
           const targetEl = document.getElementById('target-' + rowId);
-          if (targetEl) targetEl.innerHTML = '$' + Math.round(pTarget) + ' <span style="font-size:0.75rem; color:#94a3b8;">(' + Math.round(targetPct) + '%)</span>';
+          if (targetEl) targetEl.innerHTML = '$' + Math.round(pTarget) + ' <span style="font-size:0.75rem; color:#94a3b8;">(' + targetPctLabel + '%)</span>';
 
           const diffEl = document.getElementById('diff-' + rowId);
           if (diffEl) {

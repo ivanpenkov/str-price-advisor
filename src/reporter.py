@@ -191,8 +191,9 @@ class PriceReportGenerator:
                 our_eff = f"${s['our_effective_nightly']:.0f} ({pct_rank:.0f}%)"
             else:
                 our_eff = f"${s['our_effective_nightly']:.0f}"
-            p50 = f"${s['comp_p50_eff']:.0f}"
-            target_pct = f"${s['comp_target_eff']:.0f} ({s['target_percentile']:.0f}%)"
+            tp = s.get("target_percentile", 78.0)
+            tp_str = f"{tp:.1f}".rstrip("0").rstrip(".") + "%"
+            target_pct = f"${s['comp_target_eff']:.0f} ({tp_str})"
 
             diff = s["price_diff_percent"]
             diff_str = f"{'+' if diff > 0 else ''}{diff:.1f}%"

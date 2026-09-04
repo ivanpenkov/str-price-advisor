@@ -262,7 +262,12 @@ class AirbnbCollector:
                         const href = link.getAttribute('href') || '';
                         const m = href.match(/rooms\\/([0-9]+)/);
                         if (!m) continue;
-                        results.push({ id: m[1], text: c.innerText, href: href });
+                        let photoUrl = null;
+                        const img = c.querySelector('img[src*="/Hosting-"], img[src*="/pictures/miso/"], img[src*="/pictures/prohost-api/"], img[src*="/pictures/"]');
+                        if (img) {
+                            photoUrl = img.getAttribute('src') || img.src || null;
+                        }
+                        results.push({ id: m[1], text: c.innerText, href: href, photo_url: photoUrl });
                     }
                     return results;
                 }""")
@@ -297,6 +302,8 @@ class AirbnbCollector:
 
                     parsed = self._parse_card_text(cid, c["text"], nights)
                     if parsed:
+                        if c.get("photo_url"):
+                            parsed["photo_url"] = c["photo_url"]
                         loc_results.append(parsed)
                         all_listings[cid] = parsed
 

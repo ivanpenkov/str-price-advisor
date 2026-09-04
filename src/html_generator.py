@@ -715,16 +715,39 @@ class HTMLDashboardGenerator:
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 14px;
-      padding: 20px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }}
 
     .comp-card:hover {{
-      transform: translateY(-3px);
-      border-color: #475569;
+      transform: translateY(-4px);
+      border-color: #3b82f6;
+      box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.45);
+    }}
+
+    .comp-img-wrapper {{
+      position: relative;
+      width: 100%;
+      height: 190px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #0f172a;
+    }}
+
+    .comp-img {{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }}
+
+    .comp-card:hover .comp-img {{
+      transform: scale(1.05);
     }}
 
     .comp-header {{
@@ -1900,10 +1923,17 @@ class HTMLDashboardGenerator:
                 rating_str = f"⭐ (No star) ({rev})"
             else:
                 rating_str = "⭐ New (0)"
+            photo_url = c.get("photo_url")
+            img_html = (
+                f'<div class="comp-img-wrapper"><img src="{photo_url}" alt="{c.get("name", "Comp")}" class="comp-img" loading="lazy" onerror="this.parentElement.style.display=\'none\'" /></div>'
+                if photo_url else
+                '<div class="comp-img-wrapper" style="display:flex; align-items:center; justify-content:center; background:#1e293b; color:#64748b; font-size:2.2rem;">🏡</div>'
+            )
 
             cards.append(f"""
               <div class="comp-card" data-tier="{tier_code}" data-location="{c.get('location', '')}">
                 <div>
+                  {img_html}
                   <div class="comp-header">
                     <span class="badge" style="{badge_style}; font-size:0.75rem;">{tier_label}</span>
                     <span style="font-size:0.8rem; color:#94a3b8;">{c.get('location', 'Phoenix Valley')}</span>

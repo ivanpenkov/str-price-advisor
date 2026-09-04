@@ -100,6 +100,7 @@ class CompCurator:
                                 "reviews": c["reviews"],
                                 "url": f"https://www.airbnb.com/rooms/{cid}",
                                 "discovered_at_sample": f"{s_in} to {s_out}",
+                                "photo_url": c.get("photo_url"),
                             }
 
                     print(f"    Total {tier_code} unique comps registered so far: {len(tier_dict)}")

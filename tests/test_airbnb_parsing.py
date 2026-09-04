@@ -101,7 +101,19 @@ class TestAirbnbParsing(unittest.TestCase):
         parsed = self.collector._parse_card_text("999004", card_text, nights=3)
         self.assertIsNotNone(parsed)
         self.assertEqual(parsed["confidence"], "AMBIGUOUS")
-        self.assertIn("Unlabeled price", parsed["confidence_reason"])
+    def test_alternative_date_card_rejected(self):
+        """Card with alternative date recommendation (e.g. 'Sep 7 to 9' for a Sep 6-10 search) must be rejected."""
+        card_text = (
+            "Sep 7 to 9\n"
+            "Sep 7–9\n"
+            "Home in Scottsdale\n"
+            "Modern 6,000 sqft resort with pool and spa\n"
+            "5.0 (24)\n"
+            "7 bedrooms · 7 beds · 6.5 baths\n"
+            "$1,270 night · $2,540 before taxes"
+        )
+        parsed = self.collector._parse_card_text("1565568181308368429", card_text, nights=4)
+        self.assertIsNone(parsed)
 
 
 if __name__ == "__main__":

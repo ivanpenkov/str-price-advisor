@@ -76,6 +76,20 @@ class AirbnbCollector:
         """Parse card innerText to extract listing attributes and price deterministically without hardcoded thresholds."""
         nights = max(1, nights)
 
+        # 0. Reject cards that Airbnb injected with alternative / flexible dates
+        # (e.g. "Sep 7 to 9", "Sep 7–9", "Nov 30 to Dec 2" when listing is not available for requested dates)
+        alt_date_match = re.search(
+            r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d+\s*(?:to|–|-)\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+)?\d+",
+            text[:200],
+            re.IGNORECASE,
+        )
+        if alt_date_match:
+            return None
+
+        lower_snippet = text[:300].lower()
+        if any(w in lower_snippet for w in ["similar dates", "available for part of your stay", "check other dates", "different dates"]):
+            return None
+
         # 1. Look for explicit total stay price:
         # e.g. "$1,417 before taxes", "$1,417 total", "$1,417 for 4 nights", "$1,417 total before taxes"
         total_match = re.search(
@@ -244,7 +258,7 @@ class AirbnbCollector:
                         const href = link.getAttribute('href') || '';
                         const m = href.match(/rooms\\/([0-9]+)/);
                         if (!m) continue;
-                        results.push({ id: m[1], text: c.innerText });
+                        results.push({ id: m[1], text: c.innerText, href: href });
                     }
                     return results;
                 }""")
@@ -254,6 +268,12 @@ class AirbnbCollector:
                     cid = c["id"]
                     if cid in seen_in_loc or cid == "573857947793833342":  # Exclude our own property!
                         continue
+
+                    # Verify href does not specify different checkin dates
+                    href = c.get("href", "")
+                    if "check_in=" in href and f"check_in={check_in}" not in href:
+                        continue
+
                     seen_in_loc.add(cid)
 
                     parsed = self._parse_card_text(cid, c["text"], nights)

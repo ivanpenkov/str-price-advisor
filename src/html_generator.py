@@ -9,9 +9,10 @@ featuring:
 """
 
 import json
+import re
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 
 from src.kivoya_client import KivoyaClient
 from src.segmentation import CalendarSegmenter
@@ -39,6 +40,11 @@ class HTMLDashboardGenerator:
                 pass
         return {"tier_a": {}, "tier_b": {}, "metadata": {"total_count": 0}}
 
+    ALT_DATE_REGEX = re.compile(
+        r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d+\s*(?:to|–|-)\s*(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+)?\d+",
+        re.IGNORECASE,
+    )
+
     def _load_cached_comps_by_key(self) -> Dict[str, Dict[str, Dict[str, Any]]]:
         """Load all pre-fetched comp items from data/cache keyed by checkin_checkout."""
         cache_dir = Path("data/cache")
@@ -57,7 +63,13 @@ class HTMLDashboardGenerator:
                     for item in data:
                         cid = item.get("listing_id")
                         rate = item.get("effective_nightly")
-                        if cid and rate and 200.0 <= rate <= 8000.0:
+                        raw_snip = item.get("raw_snippet", "")
+                        # Reject listings that Airbnb suggested for alternative/flexible dates
+                        if self.ALT_DATE_REGEX.search(raw_snip):
+                            continue
+                        if any(w in raw_snip.lower() for w in ["similar dates", "available for part of your stay", "check other dates", "different dates"]):
+                            continue
+                        if cid and rate and rate > 0.0:
                             cached[key][str(cid)] = item
                 except Exception:
                     pass
@@ -1169,6 +1181,14 @@ class HTMLDashboardGenerator:
             cid = str(c.get("listing_id") or "")
             if cid and cid in comps_seen:
                 continue
+
+            raw_snippet = c.get("raw_snippet", "")
+            # Filter out listings that Airbnb suggested for alternative/flexible dates
+            if self.ALT_DATE_REGEX.search(raw_snippet):
+                continue
+            if any(w in raw_snippet.lower() for w in ["similar dates", "available for part of your stay", "check other dates", "different dates"]):
+                continue
+
             if cid:
                 comps_seen.add(cid)
 

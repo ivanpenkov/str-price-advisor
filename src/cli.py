@@ -36,6 +36,7 @@ async def run_weekly_advisory(
     max_segments: int = 12,
     start_date: str = None,
     end_date: str = None,
+    push: bool = False,
 ):
     """
     Execute full weekly pricing audit:
@@ -176,6 +177,26 @@ async def run_weekly_advisory(
     print(f"  - Raw JSON Archive:  {outputs['json']}")
     print("=" * 70)
 
+    if push:
+        push_to_github(commit_msg=f"Update pricing dashboard and reports ({date.today().isoformat()})")
+
+
+def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports"):
+    """Stage docs/ and data/, commit, and push to origin/main."""
+    import subprocess
+    print("\n🚀 Pushing updates to GitHub (GitHub Pages)...")
+    try:
+        subprocess.run(["git", "add", "docs/", "data/"], check=True)
+        res = subprocess.run(["git", "diff", "--staged", "--quiet"])
+        if res.returncode != 0:
+            subprocess.run(["git", "commit", "-m", commit_msg], check=True)
+            subprocess.run(["git", "push", "origin", "main"], check=True)
+            print("  ✓ Successfully pushed to origin/main! Live dashboard will update in ~30–60 seconds.")
+        else:
+            print("  ✓ No new changes to push (already up to date with remote).")
+    except Exception as e:
+        print(f"  ❌ Git push error: {e}")
+
 
 def test_kivoya_only():
     """Diagnostic tool to inspect Kivoya connectivity."""
@@ -203,10 +224,12 @@ def main():
     run_parser.add_argument("--limit", type=int, default=12, help="Number of intervals for quick mode")
     run_parser.add_argument("--start-date", type=str, default=None, help="Filter intervals starting on or after YYYY-MM-DD")
     run_parser.add_argument("--end-date", type=str, default=None, help="Filter intervals ending on or before YYYY-MM-DD")
+    run_parser.add_argument("--push", action="store_true", help="Automatically commit and push updated docs and data to GitHub")
 
     subparsers.add_parser("test-kivoya", help="Verify Kivoya API connectivity and rates")
 
-    subparsers.add_parser("generate-html", help="Re-generate docs/index.html from existing data")
+    gen_parser = subparsers.add_parser("generate-html", help="Re-generate docs/index.html from existing data")
+    gen_parser.add_argument("--push", action="store_true", help="Automatically commit and push docs to GitHub")
 
     bootstrap_parser = subparsers.add_parser("bootstrap-comps", help="Bootstrap and curate comp registry")
     bootstrap_parser.add_argument("--limit", type=int, default=40, help="Max listings per tier")
@@ -220,12 +243,14 @@ def main():
                 max_segments=args.limit,
                 start_date=args.start_date,
                 end_date=args.end_date,
+                push=args.push,
             ))
         else:
             asyncio.run(run_weekly_advisory(
                 quick=False,
                 start_date=args.start_date,
                 end_date=args.end_date,
+                push=args.push,
             ))
     elif args.command == "generate-html":
         from src.html_generator import HTMLDashboardGenerator
@@ -237,6 +262,8 @@ def main():
         if Path("data/latest_report.md").exists():
             shutil.copy("data/latest_report.md", "docs/latest_report.md")
         print(f"✅ Dashboard generated successfully at: {out}")
+        if args.push:
+            push_to_github(commit_msg="Update static HTML dashboard and reports")
     elif args.command == "bootstrap-comps":
         from src.comp_curator import CompCurator
         curator = CompCurator()

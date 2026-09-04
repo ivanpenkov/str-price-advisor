@@ -1,0 +1,108 @@
+"""Unit tests for deterministic Airbnb card text price parsing."""
+
+import unittest
+from src.airbnb_collector import AirbnbCollector
+
+
+class TestAirbnbParsing(unittest.TestCase):
+
+    def setUp(self):
+        self.collector = AirbnbCollector()
+
+    def test_discounted_nightly_and_total_before_taxes(self):
+        """Card with strikethrough original nightly, discounted nightly, and total before taxes."""
+        card_text = (
+            "Guest favorite\n"
+            "Home in Scottsdale\n"
+            "Heated Pool & Spa | 6BR Golf Estate\n"
+            "4.95 (19)\n"
+            "6 bedrooms · 6 beds · 4.5 baths\n"
+            "$379.75 $354 night · $1,417 before taxes"
+        )
+        parsed = self.collector._parse_card_text("1350253802489041827", card_text, nights=4)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["total_price"], 1417.0)
+        self.assertEqual(parsed["effective_nightly"], 354.25)
+        self.assertEqual(parsed["confidence"], "CONFIRMED")
+        self.assertEqual(parsed["bedrooms"], 6)
+        self.assertEqual(parsed["baths"], 4.5)
+
+    def test_regular_nightly_and_total_before_taxes(self):
+        """Card with standard nightly and total before taxes."""
+        card_text = (
+            "Guest favorite\n"
+            "Entire home in Scottsdale\n"
+            "Speakeasy mansion with a sports court\n"
+            "5.0 (45)\n"
+            "7 bedrooms · 7 beds · 4 baths\n"
+            "$815 night · $3,259 before taxes"
+        )
+        parsed = self.collector._parse_card_text("1260105010563602721", card_text, nights=4)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["total_price"], 3259.0)
+        self.assertEqual(parsed["effective_nightly"], 814.75)
+        self.assertEqual(parsed["confidence"], "CONFIRMED")
+        self.assertEqual(parsed["bedrooms"], 7)
+        self.assertEqual(parsed["baths"], 4.0)
+
+    def test_slash_night_format(self):
+        """Card with '$650 / night' format."""
+        card_text = (
+            "Home in Mesa\n"
+            "Resort Compound\n"
+            "5.0 (10)\n"
+            "6 bedrooms · 6 beds · 4 baths\n"
+            "$650 / night"
+        )
+        parsed = self.collector._parse_card_text("999001", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["effective_nightly"], 650.0)
+        self.assertEqual(parsed["total_price"], 1950.0)
+        self.assertEqual(parsed["confidence"], "CONFIRMED")
+
+    def test_total_for_nights_format(self):
+        """Card with '$3,000 for 3 nights' format."""
+        card_text = (
+            "Home in Chandler\n"
+            "Desert Compound\n"
+            "4.9 (20)\n"
+            "6 bedrooms · 6 beds · 4 baths\n"
+            "$3,000 for 3 nights"
+        )
+        parsed = self.collector._parse_card_text("999002", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["total_price"], 3000.0)
+        self.assertEqual(parsed["effective_nightly"], 1000.0)
+        self.assertEqual(parsed["confidence"], "CONFIRMED")
+
+    def test_conflicting_prices_flagged_ambiguous(self):
+        """Card with mathematically contradictory nightly and total should be flagged AMBIGUOUS."""
+        card_text = (
+            "Home in Scottsdale\n"
+            "Glitchy Villa\n"
+            "4.8 (5)\n"
+            "6 bedrooms · 6 beds · 4 baths\n"
+            "$900 night · $1,200 before taxes"
+        )
+        parsed = self.collector._parse_card_text("999003", card_text, nights=4)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["confidence"], "AMBIGUOUS")
+        self.assertIn("Conflict", parsed["confidence_reason"])
+
+    def test_unlabeled_price_flagged_ambiguous(self):
+        """Card with bare dollar number without 'night' or 'total'/'before taxes' label is flagged AMBIGUOUS."""
+        card_text = (
+            "Home in Scottsdale\n"
+            "Bare Price Estate\n"
+            "4.9 (15)\n"
+            "6 bedrooms · 6 beds · 4 baths\n"
+            "$1,200"
+        )
+        parsed = self.collector._parse_card_text("999004", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["confidence"], "AMBIGUOUS")
+        self.assertIn("Unlabeled price", parsed["confidence_reason"])
+
+
+if __name__ == "__main__":
+    unittest.main()

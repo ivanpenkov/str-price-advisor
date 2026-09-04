@@ -73,40 +73,74 @@ class AirbnbCollector:
             await self.browser.close()
 
     def _parse_card_text(self, card_id: str, text: str, nights: int) -> Optional[Dict[str, Any]]:
-        """Parse card innerText to extract listing attributes and price."""
-        # Check for explicit total price:
-        # e.g. "$1,417 before taxes", "$1,417 total", "$1,417 for 4 nights"
-        total_match = re.search(r"\$([0-9,]+)\s*(?:before taxes|total|for\s+\d+\s+nights)", text, re.IGNORECASE)
+        """Parse card innerText to extract listing attributes and price deterministically without hardcoded thresholds."""
+        nights = max(1, nights)
 
-        # Check for explicit nightly rate:
+        # 1. Look for explicit total stay price:
+        # e.g. "$1,417 before taxes", "$1,417 total", "$1,417 for 4 nights", "$1,417 total before taxes"
+        total_match = re.search(
+            r"\$([0-9,]+(?:\.[0-9]{2})?)\s*(?:before taxes|total(?:\s+before taxes)?|for\s+\d+\s+nights)",
+            text,
+            re.IGNORECASE,
+        )
+
+        # 2. Look for explicit nightly rate:
         # e.g. "$354 night", "$354 / night"
-        nightly_matches = re.findall(r"\$([0-9,]+)\s*(?:night|/\s*night)", text, re.IGNORECASE)
+        nightly_matches = re.findall(
+            r"\$([0-9,]+(?:\.[0-9]{2})?)\s*(?:night|/\s*night)",
+            text,
+            re.IGNORECASE,
+        )
 
-        all_dollar_matches = [int(p.replace(",", "")) for p in re.findall(r"\$([0-9,]+)", text) if int(p.replace(",", "")) > 0]
-        if not all_dollar_matches:
+        all_dollars = [
+            float(p.replace(",", ""))
+            for p in re.findall(r"\$([0-9,]+(?:\.[0-9]{2})?)", text)
+            if float(p.replace(",", "")) > 0
+        ]
+        if not all_dollars:
             return None
 
-        if total_match:
-            total_stay_price = float(total_match.group(1).replace(",", ""))
-            effective_nightly = round(total_stay_price / nights, 2) if nights > 0 else total_stay_price
-        elif len(all_dollar_matches) >= 2:
-            # On Airbnb cards with multiple prices, the last price is ALWAYS the total stay price
-            total_stay_price = float(all_dollar_matches[-1])
-            effective_nightly = round(total_stay_price / nights, 2) if nights > 0 else total_stay_price
-        elif nightly_matches:
-            effective_nightly = float(nightly_matches[-1].replace(",", ""))
-            total_stay_price = round(effective_nightly * nights, 2)
-        else:
-            p = float(all_dollar_matches[0])
-            if p >= 400 and nights >= 2:
-                total_stay_price = p
-                effective_nightly = round(total_stay_price / nights, 2)
-            else:
-                effective_nightly = p
-                total_stay_price = round(p * nights, 2)
+        extracted_total = float(total_match.group(1).replace(",", "")) if total_match else None
+        extracted_nightly = float(nightly_matches[-1].replace(",", "")) if nightly_matches else None
 
-        # Sanity check for large luxury estate (should be >= $200/night total)
-        if effective_nightly < 150.0 or effective_nightly > 10000.0:
+        # Build raw price snippet for transparency and verification
+        price_snippet = " | ".join(
+            [m.group(0).strip() for m in re.finditer(r"\$[0-9,]+(?:\.[0-9]{2})?[^$\n]*", text)][:3]
+        )
+
+        if extracted_total is not None and extracted_nightly is not None:
+            expected_total = extracted_nightly * nights
+            pct_diff = abs(extracted_total - expected_total) / max(1.0, expected_total)
+            if pct_diff <= 0.25:
+                # Both match within standard discount/fee tolerance
+                total_stay_price = extracted_total
+                effective_nightly = round(total_stay_price / nights, 2)
+                confidence = "CONFIRMED"
+                confidence_reason = "Nightly & total labels match mathematically"
+            else:
+                total_stay_price = extracted_total
+                effective_nightly = round(total_stay_price / nights, 2)
+                confidence = "AMBIGUOUS"
+                confidence_reason = f"Conflict: nightly (${extracted_nightly:.0f}) vs total (${extracted_total:.0f}) for {nights}n"
+        elif extracted_total is not None:
+            total_stay_price = extracted_total
+            effective_nightly = round(total_stay_price / nights, 2)
+            confidence = "CONFIRMED"
+            confidence_reason = "Total explicitly labeled ('before taxes'/'total')"
+        elif extracted_nightly is not None:
+            effective_nightly = extracted_nightly
+            total_stay_price = round(effective_nightly * nights, 2)
+            confidence = "CONFIRMED"
+            confidence_reason = "Nightly explicitly labeled ('night')"
+        else:
+            # Unlabeled price: dollar amount without 'night' or 'total'/'before taxes' label
+            # Do NOT guess with magic thresholds! Flag for host review.
+            total_stay_price = all_dollars[-1]
+            effective_nightly = round(total_stay_price / nights, 2)
+            confidence = "AMBIGUOUS"
+            confidence_reason = f"Unlabeled price (${total_stay_price:.0f}): missing 'night' or 'total'/'before taxes' label"
+
+        if total_stay_price <= 0.0 or effective_nightly <= 0.0:
             return None
 
         # Extract bedrooms
@@ -151,6 +185,9 @@ class AirbnbCollector:
             "effective_nightly": effective_nightly,
             "rating": rating,
             "reviews": reviews,
+            "confidence": confidence,
+            "confidence_reason": confidence_reason,
+            "price_snippet": price_snippet,
             "raw_snippet": " | ".join(lines[:4]),
         }
 

@@ -1173,7 +1173,7 @@ class HTMLDashboardGenerator:
                 comps_seen.add(cid)
 
             eff_rate = float(c.get("effective_nightly") or 0.0)
-            if eff_rate < 150.0:
+            if eff_rate <= 0.0:
                 continue
             tot_price = float(c.get("total_price") or (eff_rate * nights))
 
@@ -1206,6 +1206,9 @@ class HTMLDashboardGenerator:
                 "effective_nightly": eff_rate,
                 "total_price": tot_price,
                 "url": url,
+                "confidence": c.get("confidence", "CONFIRMED"),
+                "confidence_reason": c.get("confidence_reason", ""),
+                "price_snippet": c.get("price_snippet", ""),
             })
 
         # Combine all and sort by effective_nightly ascending
@@ -1251,11 +1254,19 @@ class HTMLDashboardGenerator:
                 else:
                     diff_badge = '<span style="color:#94a3b8; font-size:0.8rem;">≈ Similar rate</span>'
 
+                confidence = item.get("confidence", "CONFIRMED")
+                reason = item.get("confidence_reason", "")
+                snippet = item.get("price_snippet", "")
+                review_badge = ""
+                if confidence == "AMBIGUOUS":
+                    tooltip = f"⚠️ Ambiguous pricing: {reason}" + (f" | Raw: {snippet}" if snippet else "")
+                    review_badge = f'<span class="badge" style="background:rgba(245,158,11,0.25); color:#fbbf24; border:1px solid #f59e0b; font-size:0.68rem; padding:2px 6px; border-radius:4px; margin-left:6px; cursor:help;" title="{tooltip}">⚠️ Needs Review</span>'
+
                 subtable_rows.append(f"""
                   <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
                     <td style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">{rank}</td>
                     <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <strong style="color:#f1f5f9;">${item['effective_nightly']:.0f}</strong><span style="color:#94a3b8; font-size:0.75rem;">/night</span>
+                      <strong style="color:#f1f5f9;">${item['effective_nightly']:.0f}</strong><span style="color:#94a3b8; font-size:0.75rem;">/night</span>{review_badge}
                       <div style="font-size:0.72rem; color:#64748b;">${item['total_price']:.0f} total stay</div>
                     </td>
                     <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">{item['bedrooms']} BR</td>

@@ -220,11 +220,10 @@ class PricingAnalyticsEngine:
         if abs_diff < 10.0 or rec_diff == 0:
             action_summary = ""
         else:
-            base_pct = round((rec_diff / our_base) * 100.0) if our_base > 0 else 0
             if rec_diff < 0:
-                action_summary = f"↓ Reduce base ${our_base:.0f} → ${rec_base:.0f} ({base_pct:.0f}%)"
+                action_summary = f"↓ Reduce base ${our_base:.0f} → ${rec_base:.0f}"
             else:
-                action_summary = f"↑ Increase base ${our_base:.0f} → ${rec_base:.0f} (+{base_pct:.0f}%)"
+                action_summary = f"↑ Increase base ${our_base:.0f} → ${rec_base:.0f}"
 
         if action_summary and sample_significance in ["SOLD_OUT", "VERY_LOW"]:
             action_summary += " • High compression"

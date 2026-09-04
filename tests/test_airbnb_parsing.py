@@ -116,5 +116,48 @@ class TestAirbnbParsing(unittest.TestCase):
         self.assertIsNone(parsed)
 
 
+    def test_rating_and_reviews_extraction(self):
+        """Extract rating and review counts accurately."""
+        card_text = (
+            "Home in Scottsdale\n"
+            "Heated Pool & Spa | 6BR Golf Estate\n"
+            "Rating 4.95 out of 5; 19 reviews\n"
+            "4.95 (19)\n"
+            "6 bedrooms · 6 beds · 4.5 baths\n"
+            "$354 night · $1,417 before taxes"
+        )
+        parsed = self.collector._parse_card_text("1350253802489041827", card_text, nights=4)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["rating"], 4.95)
+        self.assertEqual(parsed["reviews"], 19)
+
+    def test_rating_5_point_0_two_reviews(self):
+        """User example: rated 5.0 with 2 reviews."""
+        card_text = (
+            "Home in Paradise Valley\n"
+            "Luxury Villa\n"
+            "5.0 (2)\n"
+            "6 bedrooms · 6 beds · 5 baths\n"
+            "$950 night · $2,850 before taxes"
+        )
+        parsed = self.collector._parse_card_text("999123", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["rating"], 5.0)
+        self.assertEqual(parsed["reviews"], 2)
+
+    def test_unrated_new_listing(self):
+        """Brand new listing with no rating shows None rating and 0 reviews."""
+        card_text = (
+            "Home in Gilbert\n"
+            "New! 6br Gilbert Retreat: Pool, Hot Tub, Game Room\n"
+            "6 bedrooms · 6 beds · 4 baths\n"
+            "$450 night · $1,350 before taxes"
+        )
+        parsed = self.collector._parse_card_text("1746855567446910912", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertIsNone(parsed["rating"])
+        self.assertEqual(parsed["reviews"], 0)
+
+
 if __name__ == "__main__":
     unittest.main()

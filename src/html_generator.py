@@ -815,6 +815,46 @@ class HTMLDashboardGenerator:
       margin: 12px 0;
     }}
 
+    /* Filter Bar Styles */
+    .filter-card {{
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }}
+
+    .filter-pill-btn {{
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: #94a3b8;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }}
+
+    .filter-pill-btn:hover {{
+      background: rgba(255, 255, 255, 0.1);
+      color: #f8fafc;
+      border-color: #64748b;
+    }}
+
+    .filter-pill-btn.active {{
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #3b82f6;
+      font-weight: 700;
+    }}
+
     /* Footer */
     footer {{
       margin-top: 48px;
@@ -875,7 +915,7 @@ class HTMLDashboardGenerator:
     <!-- TAB 1: PRICING RECOMMENDATIONS -->
     <div id="tab-pricing" class="tab-content active">
       <!-- Interactive Tip Banner -->
-      <div style="background: rgba(37,99,235,0.12); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div style="background: rgba(37,99,235,0.12); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
         <div style="display: flex; align-items: center; gap: 12px;">
           <span style="font-size: 1.4rem;">💡</span>
           <div style="font-size: 0.9rem; color: #cbd5e1;">
@@ -885,6 +925,58 @@ class HTMLDashboardGenerator:
         <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.8rem;">
           ▶ Click Any Row to Expand
         </span>
+      </div>
+
+      <!-- Competitor Quality Filter Bar -->
+      <div class="filter-card">
+        <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.25rem;">🔍</span>
+            <strong style="color: #f8fafc; font-size: 0.95rem;">Comp Quality Filter:</strong>
+          </div>
+
+          <!-- Min Rating -->
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <label for="filterMinRating" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Min Rating:</label>
+            <div style="position: relative; display: flex; align-items: center;">
+              <span style="position: absolute; left: 10px; color: #fbbf24; font-size: 0.85rem;">★</span>
+              <input type="number" id="filterMinRating" value="4.0" min="0.0" max="5.0" step="0.1" 
+                     oninput="onFilterChange()"
+                     style="background: #0f172a; border: 1px solid var(--border-color); color: #f8fafc; padding: 6px 10px 6px 26px; border-radius: 6px; width: 75px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
+            </div>
+            <div style="display: flex; gap: 4px;">
+              <button class="filter-pill-btn" id="btn-rate-all" onclick="setFilterRating(0.0)">All</button>
+              <button class="filter-pill-btn active" id="btn-rate-40" onclick="setFilterRating(4.0)">4.0+ ★</button>
+              <button class="filter-pill-btn" id="btn-rate-45" onclick="setFilterRating(4.5)">4.5+ ★</button>
+              <button class="filter-pill-btn" id="btn-rate-48" onclick="setFilterRating(4.8)">4.8+ ★</button>
+            </div>
+          </div>
+
+          <!-- Min Reviews -->
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <label for="filterMinReviews" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Min Reviews:</label>
+            <input type="number" id="filterMinReviews" value="10" min="0" step="1" 
+                   oninput="onFilterChange()"
+                   style="background: #0f172a; border: 1px solid var(--border-color); color: #f8fafc; padding: 6px 10px; border-radius: 6px; width: 70px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
+            <div style="display: flex; gap: 4px;">
+              <button class="filter-pill-btn" id="btn-rev-0" onclick="setFilterReviews(0)">All (0+)</button>
+              <button class="filter-pill-btn" id="btn-rev-5" onclick="setFilterReviews(5)">5+</button>
+              <button class="filter-pill-btn active" id="btn-rev-10" onclick="setFilterReviews(10)">10+ (Default)</button>
+              <button class="filter-pill-btn" id="btn-rev-25" onclick="setFilterReviews(25)">25+</button>
+              <button class="filter-pill-btn" id="btn-rev-50" onclick="setFilterReviews(50)">50+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status & Reset -->
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span id="filterStatusBadge" class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.8rem;">
+            Active Filters: Rating &ge; 4.0 ★ &bull; Reviews &ge; 10
+          </span>
+          <button onclick="resetFilters()" style="background: transparent; border: 1px solid var(--border-color); color: #94a3b8; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.color='#f8fafc'; this.style.borderColor='#64748b';" onmouseout="this.style.color='#94a3b8'; this.style.borderColor='var(--border-color)';">
+            🔄 Reset
+          </button>
+        </div>
       </div>
 
       <!-- Section 1: Urgent Updates -->
@@ -1174,12 +1266,254 @@ class HTMLDashboardGenerator:
         icon.style.color = isHidden ? '#fbbf24' : '#60a5fa';
       }}
     }}
+
+    function getPercentile(arr, pct) {{
+      if (!arr || arr.length === 0) return 0;
+      if (arr.length === 1) return arr[0];
+      const idx = (pct / 100) * (arr.length - 1);
+      const lower = Math.floor(idx);
+      const upper = Math.ceil(idx);
+      const weight = idx - lower;
+      return arr[lower] * (1 - weight) + arr[upper] * weight;
+    }}
+
+    function onFilterChange() {{
+      const r = parseFloat(document.getElementById('filterMinRating').value);
+      const rev = parseInt(document.getElementById('filterMinReviews').value, 10);
+
+      document.querySelectorAll('.filter-pill-btn').forEach(btn => btn.classList.remove('active'));
+      const rBtnId = (r && r > 0) ? ('btn-rate-' + String(r).replace('.', '')) : 'btn-rate-all';
+      const rBtn = document.getElementById(rBtnId);
+      if (rBtn) rBtn.classList.add('active');
+      const revBtn = document.getElementById('btn-rev-' + rev);
+      if (revBtn) revBtn.classList.add('active');
+
+      applyGlobalFilters();
+    }}
+
+    function setFilterRating(val) {{
+      document.getElementById('filterMinRating').value = val > 0 ? val.toFixed(1) : '0';
+      onFilterChange();
+    }}
+
+    function setFilterReviews(val) {{
+      document.getElementById('filterMinReviews').value = val;
+      onFilterChange();
+    }}
+
+    function resetFilters() {{
+      document.getElementById('filterMinRating').value = '4.0';
+      document.getElementById('filterMinReviews').value = '10';
+      onFilterChange();
+    }}
+
+    function applyGlobalFilters() {{
+      const minRatingInput = document.getElementById('filterMinRating');
+      const minReviewsInput = document.getElementById('filterMinReviews');
+      if (!minRatingInput || !minReviewsInput) return;
+
+      const minRating = parseFloat(minRatingInput.value) || 0.0;
+      const minReviews = parseInt(minReviewsInput.value, 10) || 0;
+
+      const statusBadge = document.getElementById('filterStatusBadge');
+      if (statusBadge) {{
+        if (minRating === 0 && minReviews === 0) {{
+          statusBadge.textContent = 'All Comps Visible (Unfiltered)';
+          statusBadge.style.background = 'rgba(59, 130, 246, 0.15)';
+          statusBadge.style.color = '#93c5fd';
+          statusBadge.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+        }} else {{
+          statusBadge.textContent = 'Active Filters: Rating ≥ ' + minRating.toFixed(1) + ' ★ • Reviews ≥ ' + minReviews;
+          statusBadge.style.background = 'rgba(16, 185, 129, 0.15)';
+          statusBadge.style.color = '#34d399';
+          statusBadge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+        }}
+      }}
+
+      document.querySelectorAll('.subtable-container').forEach(container => {{
+        const rowId = container.dataset.rowId;
+        const nights = parseInt(container.dataset.nights, 10) || 3;
+        const ourBase = parseFloat(container.dataset.ourBase) || 0.0;
+        const ourEff = parseFloat(container.dataset.ourEff) || 0.0;
+        const isOurLive = container.dataset.isOurLive === 'true';
+        const targetPct = parseFloat(container.dataset.targetPct) || 78.0;
+        const isLiveScan = container.dataset.isLiveScan === 'true';
+        const channelFactor = parseFloat(container.dataset.channelFactor) || 1.0;
+
+        const allCompRows = container.querySelectorAll('.comp-item-row');
+        const visibleComps = [];
+        let ourRow = null;
+
+        allCompRows.forEach(row => {{
+          if (row.dataset.isOur === 'true') {{
+            ourRow = row;
+            row.style.display = '';
+            return;
+          }}
+
+          const r = row.dataset.rating ? parseFloat(row.dataset.rating) : null;
+          const rev = parseInt(row.dataset.reviews, 10) || 0;
+
+          const passesRating = (minRating <= 0) || (r !== null && !isNaN(r) && r >= minRating);
+          const passesReviews = (minReviews <= 0) || (rev >= minReviews);
+
+          if (passesRating && passesReviews) {{
+            row.style.display = '';
+            visibleComps.push(row);
+          }} else {{
+            row.style.display = 'none';
+          }}
+        }});
+
+        // Rank visible rows
+        let rank = 1;
+        let cheaperCount = 0;
+        let higherCount = 0;
+        const visibleRates = [];
+
+        const combinedVisible = [];
+        let ourInserted = false;
+        visibleComps.forEach(compRow => {{
+          const price = parseFloat(compRow.dataset.price);
+          if (!ourInserted && price >= ourEff) {{
+            if (ourRow) combinedVisible.push(ourRow);
+            ourInserted = true;
+          }}
+          combinedVisible.push(compRow);
+        }});
+        if (!ourInserted && ourRow) {{
+          combinedVisible.push(ourRow);
+        }}
+
+        let ourRank = 1;
+        combinedVisible.forEach(row => {{
+          if (row.dataset.isOur === 'true') {{
+            ourRank = rank;
+          }} else {{
+            const rankCell = row.querySelector('.comp-rank-cell');
+            if (rankCell) rankCell.textContent = rank;
+            const price = parseFloat(row.dataset.price);
+            visibleRates.push(price);
+            if (price < ourEff) cheaperCount++;
+            else if (price > ourEff) higherCount++;
+            rank++;
+          }}
+        }});
+
+        const totalComps = visibleComps.length;
+        const ourPct = totalComps > 0 ? Math.round((ourRank / totalComps) * 100) : 50;
+
+        if (ourRow) {{
+          const ourRankBadge = ourRow.querySelector('.our-rank-badge');
+          if (ourRankBadge) ourRankBadge.textContent = '★ YOU (#' + ourRank + ')';
+          const ourPosBadge = ourRow.querySelector('.our-position-badge');
+          if (ourPosBadge) ourPosBadge.textContent = '★ OUR POSITION (#' + ourRank + ' of ' + totalComps + ' • ' + ourPct + '%)';
+        }}
+
+        const statsEl = container.querySelector('.subtable-stats');
+        if (statsEl) {{
+          statsEl.innerHTML = '<strong style="color:#34d399;">' + cheaperCount + ' cheaper</strong> than us &bull; <strong style="color:#f87171;">' + higherCount + ' more expensive</strong> &bull; Villa del Sol is <strong>#' + ourRank + ' of ' + totalComps + ' (' + ourPct + '%)</strong>';
+        }}
+        const countBadge = container.querySelector('.subtable-count-badge');
+        if (countBadge) {{
+          countBadge.textContent = totalComps + ' Competitors Evaluated';
+        }}
+
+        // Update main table parent row cells
+        const nEl = document.getElementById('n-' + rowId);
+        if (nEl) {{
+          if (totalComps === 0) {{
+            nEl.innerHTML = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.35);" title="Zero comps meet rating/review filter">🔥 0 (Filtered)</span>';
+          }} else if (totalComps <= 4) {{
+            nEl.innerHTML = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.35);" title="Market compression: only ' + totalComps + ' high-quality comps unsold">🔥 N=' + totalComps + ' (High Power)</span>';
+          }} else if (isLiveScan) {{
+            nEl.innerHTML = '<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search: ' + totalComps + ' vetted comps">🟢 Live N=' + totalComps + '</span>';
+          }} else {{
+            nEl.innerHTML = '<span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Cohort baseline: ' + totalComps + ' vetted comps">📊 Cohort N=' + totalComps + '</span>';
+          }}
+        }}
+
+        const effEl = document.getElementById('eff-' + rowId);
+        if (effEl) {{
+          const liveDot = isOurLive ? '<span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span>' : '';
+          const tooltip = isOurLive
+            ? ('Live Airbnb Rate: $' + Math.round(ourEff) + '/night. Villa del Sol ranks #' + ourRank + ' of ' + totalComps + ' competitors (' + ourPct + 'th percentile). Base Kivoya rate is $' + Math.round(ourBase) + '.')
+            : ('Villa del Sol ranks #' + ourRank + ' out of ' + totalComps + ' competitors (' + ourPct + 'th percentile in effective total guest cost)');
+          effEl.innerHTML = '<strong style="color:#f1f5f9;">$' + Math.round(ourEff) + '</strong>' + liveDot + ' <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="' + tooltip + '">(' + ourPct + '%)</span>';
+        }}
+
+        if (visibleRates.length > 0) {{
+          visibleRates.sort((a, b) => a - b);
+          const p50 = getPercentile(visibleRates, 50);
+          const pTarget = getPercentile(visibleRates, targetPct);
+
+          const diff = pTarget > 0 ? (((ourEff - pTarget) / pTarget) * 100) : 0;
+          const targetStayTotal = pTarget * nights;
+          const targetKivoyaTotal = targetStayTotal / Math.max(0.5, channelFactor);
+          const recBase = Math.max(249, Math.min(2499, Math.round((Math.max(0, targetKivoyaTotal - 500)) / nights)));
+          const baseDiff = Math.round(recBase - ourBase);
+
+          const p50El = document.getElementById('p50-' + rowId);
+          if (p50El) p50El.textContent = '$' + Math.round(p50);
+
+          const targetEl = document.getElementById('target-' + rowId);
+          if (targetEl) targetEl.innerHTML = '$' + Math.round(pTarget) + ' <span style="font-size:0.75rem; color:#94a3b8;">(' + Math.round(targetPct) + '%)</span>';
+
+          const diffEl = document.getElementById('diff-' + rowId);
+          if (diffEl) {{
+            if (diff <= -25.0) {{
+              diffEl.innerHTML = '<span class="badge-diff-under">' + diff.toFixed(1) + '%</span>';
+            }} else if (diff >= 25.0) {{
+              diffEl.innerHTML = '<span class="badge-diff-over">+' + diff.toFixed(1) + '%</span>';
+            }} else if (Math.abs(diff) >= 10.0) {{
+              diffEl.innerHTML = '<span style="color:#fbbf24; font-weight:700;">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%</span>';
+            }} else {{
+              diffEl.innerHTML = '<span class="badge-diff-ok">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%</span>';
+            }}
+          }}
+
+          const recEl = document.getElementById('rec-' + rowId);
+          if (recEl) recEl.innerHTML = '<span class="rec-price">$' + recBase + '</span>';
+
+          const actionEl = document.getElementById('action-' + rowId);
+          if (actionEl) {{
+            const actionText = Math.abs(baseDiff) >= 20 ? ('Adjust base from $' + Math.round(ourBase) + ' to $' + recBase + ' (' + (baseDiff > 0 ? '+' : '') + baseDiff + ')') : 'Keep current price';
+            actionEl.style.color = baseDiff > 0 ? '#34d399' : '#cbd5e1';
+            actionEl.innerHTML = '<strong>' + actionText + '</strong>';
+          }}
+        }} else {{
+          const p50El = document.getElementById('p50-' + rowId);
+          if (p50El) p50El.textContent = 'N/A';
+          const targetEl = document.getElementById('target-' + rowId);
+          if (targetEl) targetEl.textContent = 'N/A';
+          const diffEl = document.getElementById('diff-' + rowId);
+          if (diffEl) diffEl.innerHTML = '<span style="color:#94a3b8;">N/A</span>';
+          const recEl = document.getElementById('rec-' + rowId);
+          if (recEl) recEl.innerHTML = '<span class="rec-price">$' + Math.round(ourBase) + '</span>';
+          const actionEl = document.getElementById('action-' + rowId);
+          if (actionEl) actionEl.innerHTML = '<strong style="color:#cbd5e1;">No comps meet filter</strong>';
+        }}
+      }});
+    }}
+
+    document.addEventListener('DOMContentLoaded', () => {{
+      applyGlobalFilters();
+    }});
   </script>
 </body>
 </html>"""
 
         self.output_path.write_text(html, encoding="utf-8")
         return str(self.output_path)
+
+    def _format_rating_display(self, rating: Optional[float], reviews: int) -> str:
+        """Format listing rating and reviews count (e.g. '5.0 (2)', '4.95 (19)', 'New (0)')."""
+        if rating is not None and rating > 0:
+            return f'<span style="font-weight:700; color:#fbbf24;">★ {rating:.2f}</span> <span style="color:#94a3b8; font-size:0.75rem;">({reviews})</span>'
+        elif reviews > 0:
+            return f'<span style="color:#cbd5e1;">(No star)</span> <span style="color:#94a3b8; font-size:0.75rem;">({reviews})</span>'
+        else:
+            return '<span style="color:#64748b; font-style:italic; font-size:0.8rem;">New (0)</span>'
 
     def _render_comp_subtable(self, s: Dict[str, Any], row_id: str) -> Tuple[str, int, int, int, float, bool]:
         """Render expandable nested subtable of all comps sorted by price with Villa del Sol highlighted."""
@@ -1211,6 +1545,9 @@ class HTMLDashboardGenerator:
             our_eff = float(s.get("our_effective_nightly", 0.0))
             our_total = float(s.get("our_total_price", our_eff * nights))
 
+        kivoya_eff = float(s.get("our_effective_nightly", 0.0))
+        channel_factor = (our_eff / kivoya_eff) if (is_our_live and kivoya_eff > 0) else float(s.get("channel_factor", 1.0))
+
         # 1. Our property entry
         our_entry = {
             "is_our_property": True,
@@ -1220,6 +1557,8 @@ class HTMLDashboardGenerator:
             "bedrooms": 6,
             "beds": "11 beds",
             "baths": "6.0 BA",
+            "rating": 4.83,
+            "reviews": 76,
             "effective_nightly": our_eff,
             "total_price": our_total,
             "url": "https://www.airbnb.com/rooms/573857947793833342",
@@ -1266,6 +1605,8 @@ class HTMLDashboardGenerator:
             br = c.get("bedrooms", 6)
             beds = c.get("beds", br)
             ba = c.get("baths", 4.0)
+            c_rating = c.get("rating")
+            c_reviews = int(c.get("reviews", 0) or 0)
             url = c.get("url") or (f"https://www.airbnb.com/rooms/{cid}" if cid else "https://www.airbnb.com")
 
             clean_comps.append({
@@ -1276,6 +1617,8 @@ class HTMLDashboardGenerator:
                 "bedrooms": br,
                 "beds": f"{beds} beds",
                 "baths": f"{ba} BA",
+                "rating": c_rating,
+                "reviews": c_reviews,
                 "effective_nightly": eff_rate,
                 "total_price": tot_price,
                 "url": url,
@@ -1309,13 +1652,16 @@ class HTMLDashboardGenerator:
                     '<span class="badge" style="background:rgba(59,130,246,0.2); color:#93c5fd; font-size:0.68rem; margin-left:6px; vertical-align:middle;">📊 Kivoya PMS Est.</span>'
                 )
                 subtable_rows.append(f"""
-                  <tr class="our-property-row">
+                  <tr class="comp-item-row our-property-row" data-is-our="true" data-price="{item['effective_nightly']:.2f}" data-rating="4.83" data-reviews="76">
                     <td style="padding:10px 14px; text-align:center;">
-                      <span class="badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem; padding:3px 8px;">★ YOU (#{our_rank})</span>
+                      <span class="badge our-rank-badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem; padding:3px 8px;">★ YOU (#{our_rank})</span>
                     </td>
                     <td style="padding:10px 14px; font-family:'JetBrains Mono',monospace;">
                       <strong style="color:#fbbf24; font-size:0.95rem;">${item['effective_nightly']:.0f}</strong><span style="color:#fde68a; font-size:0.75rem;">/night</span>{live_pill}
                       <div style="font-size:0.72rem; color:#fde68a; margin-top:2px;">{source_note}</div>
+                    </td>
+                    <td style="padding:10px 14px; text-align:center;">
+                      <span style="font-weight:800; color:#fbbf24;">★ 4.83</span> <span style="color:#fde68a; font-size:0.75rem;">(76)</span>
                     </td>
                     <td style="padding:10px 14px; text-align:center; font-weight:700; color:#f8fafc;">6 BR</td>
                     <td style="padding:10px 14px; text-align:center; font-weight:700; color:#f8fafc;">11 beds</td>
@@ -1327,7 +1673,7 @@ class HTMLDashboardGenerator:
                       <div style="font-size:0.75rem; color:#cbd5e1; margin-top:2px;">South Tempe, AZ • Sleeps 16 • Private Pool & Resort Compound</div>
                     </td>
                     <td style="padding:10px 14px;">
-                      <span class="badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem;">★ OUR POSITION (#{our_rank} of {total_comps} &bull; {our_pct}%)</span>
+                      <span class="badge our-position-badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem;">★ OUR POSITION (#{our_rank} of {total_comps} &bull; {our_pct}%)</span>
                     </td>
                   </tr>
                 """)
@@ -1348,12 +1694,19 @@ class HTMLDashboardGenerator:
                     tooltip = f"⚠️ Ambiguous pricing: {reason}" + (f" | Raw: {snippet}" if snippet else "")
                     review_badge = f'<span class="badge" style="background:rgba(245,158,11,0.25); color:#fbbf24; border:1px solid #f59e0b; font-size:0.68rem; padding:2px 6px; border-radius:4px; margin-left:6px; cursor:help;" title="{tooltip}">⚠️ Needs Review</span>'
 
+                r_str = f"{item['rating']:.2f}" if item['rating'] is not None else ""
+                rev_val = item['reviews']
+                rating_html = self._format_rating_display(item['rating'], rev_val)
+
                 subtable_rows.append(f"""
-                  <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-                    <td style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">{rank}</td>
+                  <tr class="comp-item-row" data-is-our="false" data-price="{item['effective_nightly']:.2f}" data-rating="{r_str}" data-reviews="{rev_val}" style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">{rank}</td>
                     <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
                       <strong style="color:#f1f5f9;">${item['effective_nightly']:.0f}</strong><span style="color:#94a3b8; font-size:0.75rem;">/night</span>{review_badge}
                       <div style="font-size:0.72rem; color:#64748b;">${item['total_price']:.0f} total stay</div>
+                    </td>
+                    <td style="padding:9px 14px; text-align:center;">
+                      {rating_html}
                     </td>
                     <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">{item['bedrooms']} BR</td>
                     <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">{item['beds']}</td>
@@ -1381,18 +1734,26 @@ class HTMLDashboardGenerator:
         rows_html = "".join(subtable_rows)
 
         subtable_html = f"""
-          <div class="subtable-container">
+          <div class="subtable-container"
+               data-row-id="{row_id}"
+               data-nights="{nights}"
+               data-our-base="{our_base}"
+               data-our-eff="{our_eff}"
+               data-is-our-live="{str(is_our_live).lower()}"
+               data-target-pct="{s.get('target_percentile', 78.0)}"
+               data-is-live-scan="{str(is_live).lower()}"
+               data-channel-factor="{channel_factor:.4f}">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
               <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                 <span style="font-weight:700; font-size:0.95rem; color:#f8fafc;">
                   🔍 Competitor Breakdown for {s['check_in']} &rarr; {s['check_out']} ({nights} nights)
                 </span>
                 {mode_badge}
-                <span class="badge" style="background:rgba(255,255,255,0.06); color:#cbd5e1; font-size:0.75rem;">
+                <span class="badge subtable-count-badge" style="background:rgba(255,255,255,0.06); color:#cbd5e1; font-size:0.75rem;">
                   {len(clean_comps)} Competitors Evaluated
                 </span>
               </div>
-              <div style="font-size:0.8rem; color:#94a3b8;">
+              <div class="subtable-stats" style="font-size:0.8rem; color:#94a3b8;">
                 <strong style="color:#34d399;">{cheaper_count} cheaper</strong> than us &bull;
                 <strong style="color:#f87171;">{higher_count} more expensive</strong> &bull;
                 Villa del Sol is <strong>#{our_rank} of {total_comps} ({our_pct}%)</strong>
@@ -1405,6 +1766,7 @@ class HTMLDashboardGenerator:
                   <tr>
                     <th style="width:65px; text-align:center;">#</th>
                     <th style="width:160px;">Price</th>
+                    <th style="width:110px; text-align:center;">Rating</th>
                     <th style="width:90px; text-align:center;">Bedrooms</th>
                     <th style="width:85px; text-align:center;">Beds</th>
                     <th style="width:80px; text-align:center;">Baths</th>
@@ -1476,14 +1838,14 @@ class HTMLDashboardGenerator:
                 <td><strong>{s['segment_type'].capitalize()}</strong></td>
                 <td>{s['nights']} nights</td>
                 <td>{s['lead_time_days']} days</td>
-                <td>{n_html}</td>
+                <td id="n-{row_id}">{n_html}</td>
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
-                <td style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
-                <td style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">${s['comp_p50_eff']:.0f}</td>
-                <td style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({s['target_percentile']:.0f}%)</span></td>
-                <td>{diff_html}</td>
-                <td><span class="rec-price">${s['recommended_base_nightly']:.0f}</span></td>
-                <td style="font-size:0.85rem; color:{'#34d399' if s['base_diff'] > 0 else '#cbd5e1'};"><strong>{s['action_summary']}</strong></td>
+                <td id="eff-{row_id}" style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
+                <td id="p50-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">${s['comp_p50_eff']:.0f}</td>
+                <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({s['target_percentile']:.0f}%)</span></td>
+                <td id="diff-{row_id}">{diff_html}</td>
+                <td id="rec-{row_id}"><span class="rec-price">${s['recommended_base_nightly']:.0f}</span></td>
+                <td id="action-{row_id}" style="font-size:0.85rem; color:{'#34d399' if s['base_diff'] > 0 else '#cbd5e1'};"><strong>{s['action_summary']}</strong></td>
               </tr>
               <tr id="{row_id}" class="comp-details-row" style="display: none;">
                 <td colspan="12">
@@ -1499,7 +1861,15 @@ class HTMLDashboardGenerator:
         badge_style = "background:rgba(37,99,235,0.2); color:#60a5fa; border:1px solid rgba(59,130,246,0.3);" if tier_code == "tier_a" else "background:rgba(148,163,184,0.15); color:#cbd5e1; border:1px solid rgba(148,163,184,0.3);"
 
         for c in comps:
-            rating_str = f"⭐ {c.get('rating', 4.9):.2f} ({c.get('reviews', 10)})"
+            r = c.get("rating")
+            rev = c.get("reviews") or 0
+            if r is not None and float(r) > 0:
+                rating_str = f"⭐ {float(r):.2f} ({rev})"
+            elif rev > 0:
+                rating_str = f"⭐ (No star) ({rev})"
+            else:
+                rating_str = "⭐ New (0)"
+
             cards.append(f"""
               <div class="comp-card" data-tier="{tier_code}" data-location="{c.get('location', '')}">
                 <div>

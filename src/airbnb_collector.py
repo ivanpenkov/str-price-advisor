@@ -179,13 +179,17 @@ class AirbnbCollector:
                 break
 
         # Rating & reviews
-        rating = 4.9
-        rating_match = re.search(r"(\d\.\d+)\s*\(([\d,]+)\)", text)
+        rating = None
+        reviews = 0
+        rating_match = re.search(r"\b(\d(?:\.\d+)?)\s*\(([\d,]+)\)", text)
+        if not rating_match:
+            rating_match = re.search(r"Rating\s+(\d(?:\.\d+)?)\s+out\s+of\s+5;?\s*([\d,]+)?\s*reviews?", text, re.IGNORECASE)
         if rating_match:
-            rating = float(rating_match.group(1))
-            reviews = int(rating_match.group(2).replace(",", ""))
-        else:
-            reviews = 10
+            try:
+                rating = float(rating_match.group(1))
+                reviews = int(rating_match.group(2).replace(",", "")) if rating_match.group(2) else 0
+            except Exception:
+                pass
 
         return {
             "listing_id": card_id,

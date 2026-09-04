@@ -8,6 +8,7 @@ featuring:
 4. Raw Data / JSON Tab
 """
 
+import html
 import json
 import re
 from datetime import datetime
@@ -681,6 +682,52 @@ class HTMLDashboardGenerator:
       border: 1px solid rgba(16, 185, 129, 0.3);
     }}
 
+    /* Tooltip Hover Popup */
+    .tooltip-container {{
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }}
+
+    .tooltip-container .tooltip-text {{
+      visibility: hidden;
+      opacity: 0;
+      width: 260px;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      text-align: left;
+      border-radius: 8px;
+      padding: 8px 12px;
+      position: absolute;
+      z-index: 100;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.78rem;
+      line-height: 1.35;
+      font-weight: 500;
+      border: 1px solid #334155;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
+      pointer-events: none;
+    }}
+
+    .tooltip-container .tooltip-text::after {{
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #334155 transparent transparent transparent;
+    }}
+
+    .tooltip-container:hover .tooltip-text {{
+      visibility: visible;
+      opacity: 1;
+    }}
+
     /* Comps Grid */
     .comps-toolbar {{
       display: flex;
@@ -1009,12 +1056,22 @@ class HTMLDashboardGenerator:
               <button class="filter-pill-btn" id="btn-rev-50" onclick="setFilterReviews(50)">50+</button>
             </div>
           </div>
+
+          <!-- Premium Location Checkbox -->
+          <div class="tooltip-container" style="margin-left: 4px;" title="Includes premium locations (e.g. Scottsdale and Paradise Valley)">
+            <label style="display: flex; align-items: center; gap: 7px; cursor: pointer; font-size: 0.85rem; color: #cbd5e1; font-weight: 600; user-select: none;">
+              <input type="checkbox" id="filterPremiumLocation" onchange="onFilterChange()" style="width: 16px; height: 16px; accent-color: #3b82f6; cursor: pointer; border-radius: 4px;">
+              <span>Premium Location</span>
+              <span style="font-size: 0.8rem; color: #94a3b8; cursor: help;">ℹ️</span>
+            </label>
+            <span class="tooltip-text">Includes premium locations (e.g. Scottsdale and Paradise Valley). Unchecked by default to benchmark strictly against direct East Valley corridor comps (Tempe, Mesa, Chandler, Gilbert).</span>
+          </div>
         </div>
 
         <!-- Status & Reset -->
         <div style="display: flex; align-items: center; gap: 12px;">
           <span id="filterStatusBadge" class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.8rem;">
-            Active Filters: Rating &ge; 4.5 ★ &bull; Reviews &ge; 25
+            Active Filters: Rating &ge; 4.5 ★ &bull; Reviews &ge; 25 &bull; Excl. Scottsdale & PV
           </span>
           <button onclick="resetFilters()" style="background: transparent; border: 1px solid var(--border-color); color: #94a3b8; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.color='#f8fafc'; this.style.borderColor='#64748b';" onmouseout="this.style.color='#94a3b8'; this.style.borderColor='var(--border-color)';">
             🔄 Reset
@@ -1039,10 +1096,10 @@ class HTMLDashboardGenerator:
         <!-- Quick View Filter Pills -->
         <div class="interval-filter-pills" style="display: flex; gap: 8px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
           <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 4px;">Show Intervals:</span>
-          <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals ({len(all_sorted)})</button>
-          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only ({len(urgent)})</button>
-          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review ({len(moderate)})</button>
-          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target ({len(all_sorted) - len(urgent) - len(moderate)})</button>
+          <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals (<span id="count-interval-all">{len(all_sorted)}</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only (<span id="count-interval-urgent">{len(urgent)}</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review (<span id="count-interval-mod">{len(moderate)}</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target (<span id="count-interval-ok">{len(all_sorted) - len(urgent) - len(moderate)}</span>)</button>
         </div>
 
         <div class="table-responsive">
@@ -1263,14 +1320,23 @@ class HTMLDashboardGenerator:
       }}
     }}
 
+    let currentIntervalTier = 'all';
+
     function filterIntervalTier(tier, btn) {{
+      currentIntervalTier = tier || currentIntervalTier || 'all';
       document.querySelectorAll('.interval-filter-pills .filter-pill-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
+      let activeBtn = btn;
+      if (!activeBtn) {{
+        let btnId = 'btn-interval-' + (currentIntervalTier === 'moderate' ? 'mod' : currentIntervalTier);
+        activeBtn = document.getElementById(btnId);
+      }}
+      if (activeBtn) activeBtn.classList.add('active');
+
       document.querySelectorAll('.interval-parent-row').forEach(row => {{
         const rowTier = row.dataset.tier;
         const detailRowId = row.dataset.detailId;
         const detailRow = detailRowId ? document.getElementById(detailRowId) : null;
-        if (tier === 'all' || rowTier === tier) {{
+        if (currentIntervalTier === 'all' || rowTier === currentIntervalTier) {{
           row.style.display = '';
         }} else {{
           row.style.display = 'none';
@@ -1321,7 +1387,15 @@ class HTMLDashboardGenerator:
     function resetFilters() {{
       document.getElementById('filterMinRating').value = '4.5';
       document.getElementById('filterMinReviews').value = '25';
+      const premCheckbox = document.getElementById('filterPremiumLocation');
+      if (premCheckbox) premCheckbox.checked = false;
       onFilterChange();
+    }}
+
+    function isPremiumLocation(locStr) {{
+      if (!locStr) return false;
+      const l = locStr.toLowerCase();
+      return l.includes('scottsdale') || l.includes('paradise valley') || l.includes('kierland') || l.includes('fashion square');
     }}
 
     function applyGlobalFilters() {{
@@ -1331,16 +1405,27 @@ class HTMLDashboardGenerator:
 
       const minRating = parseFloat(minRatingInput.value) || 0.0;
       const minReviews = parseInt(minReviewsInput.value, 10) || 0;
+      const premCheckbox = document.getElementById('filterPremiumLocation');
+      const includePremium = premCheckbox ? premCheckbox.checked : false;
 
       const statusBadge = document.getElementById('filterStatusBadge');
       if (statusBadge) {{
-        if (minRating === 0 && minReviews === 0) {{
+        let parts = [];
+        if (minRating > 0) parts.push('Rating ≥ ' + minRating.toFixed(1) + ' ★');
+        if (minReviews > 0) parts.push('Reviews ≥ ' + minReviews);
+        if (!includePremium) {{
+          parts.push('Excl. Scottsdale & PV');
+        }} else {{
+          parts.push('Incl. Premium Loc.');
+        }}
+
+        if (minRating === 0 && minReviews === 0 && includePremium) {{
           statusBadge.textContent = 'All Comps Visible (Unfiltered)';
           statusBadge.style.background = 'rgba(59, 130, 246, 0.15)';
           statusBadge.style.color = '#93c5fd';
           statusBadge.style.borderColor = 'rgba(59, 130, 246, 0.3)';
         }} else {{
-          statusBadge.textContent = 'Active Filters: Rating ≥ ' + minRating.toFixed(1) + ' ★ • Reviews ≥ ' + minReviews;
+          statusBadge.textContent = 'Active Filters: ' + parts.join(' • ');
           statusBadge.style.background = 'rgba(16, 185, 129, 0.15)';
           statusBadge.style.color = '#34d399';
           statusBadge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
@@ -1371,11 +1456,14 @@ class HTMLDashboardGenerator:
 
           const r = row.dataset.rating ? parseFloat(row.dataset.rating) : null;
           const rev = parseInt(row.dataset.reviews, 10) || 0;
+          const loc = row.dataset.location || '';
+          const isPremium = isPremiumLocation(loc);
 
           const passesRating = (minRating <= 0) || (r !== null && !isNaN(r) && r >= minRating);
           const passesReviews = (minReviews <= 0) || (rev >= minReviews);
+          const passesLocation = includePremium || !isPremium;
 
-          if (passesRating && passesReviews) {{
+          if (passesRating && passesReviews && passesLocation) {{
             row.style.display = '';
             visibleComps.push(row);
           }} else {{
@@ -1427,11 +1515,12 @@ class HTMLDashboardGenerator:
           const ourPosBadge = ourRow.querySelector('.our-position-badge');
           if (ourPosBadge) ourPosBadge.textContent = '★ OUR POSITION (#' + ourRank + ' of ' + totalComps + ' • ' + ourPct + '%)';
         }}
+
         // Update main table parent row cells
         const nEl = document.getElementById('n-' + rowId);
         if (nEl) {{
           if (totalComps === 0) {{
-            nEl.innerHTML = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.35);" title="Zero comps meet rating/review filter">🔥 0 (Filtered)</span>';
+            nEl.innerHTML = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.35);" title="Zero comps meet rating/review/location filter">🔥 0 (Filtered)</span>';
           }} else if (totalComps <= 4) {{
             nEl.innerHTML = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.35);" title="Market compression: only ' + totalComps + ' high-quality comps unsold">🔥 N=' + totalComps + ' (High Power)</span>';
           }} else if (isLiveScan) {{
@@ -1447,7 +1536,8 @@ class HTMLDashboardGenerator:
           const tooltip = isOurLive
             ? ('Live Airbnb Rate: $' + Math.round(ourEff) + '/night. Villa del Sol ranks #' + ourRank + ' of ' + totalComps + ' competitors (' + ourPct + 'th percentile). Base Kivoya rate is $' + Math.round(ourBase) + '.')
             : ('Villa del Sol ranks #' + ourRank + ' out of ' + totalComps + ' competitors (' + ourPct + 'th percentile in effective total guest cost)');
-          effEl.innerHTML = '<strong style="color:#f1f5f9;">$' + Math.round(ourEff) + '</strong>' + liveDot + ' <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="' + tooltip + '">(' + ourPct + '%)</span>';
+          const pctText = totalComps > 0 ? (' <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="' + tooltip + '">(' + ourPct + '%)</span>') : '';
+          effEl.innerHTML = '<strong style="color:#f1f5f9;">$' + Math.round(ourEff) + '</strong>' + liveDot + pctText;
         }}
 
         if (visibleRates.length > 0) {{
@@ -1549,6 +1639,31 @@ class HTMLDashboardGenerator:
           if (actionEl) actionEl.innerHTML = '<strong style="color:#cbd5e1;">No comps meet filter</strong>';
         }}
       }});
+
+      // Update interval filter pill counts
+      let totalUrgent = 0;
+      let totalMod = 0;
+      let totalOk = 0;
+      let totalAll = 0;
+      document.querySelectorAll('.interval-parent-row').forEach(row => {{
+        totalAll++;
+        const tier = row.dataset.tier;
+        if (tier === 'urgent') totalUrgent++;
+        else if (tier === 'moderate') totalMod++;
+        else if (tier === 'ok') totalOk++;
+      }});
+
+      const countAll = document.getElementById('count-interval-all');
+      if (countAll) countAll.textContent = totalAll;
+      const countUrgent = document.getElementById('count-interval-urgent');
+      if (countUrgent) countUrgent.textContent = totalUrgent;
+      const countMod = document.getElementById('count-interval-mod');
+      if (countMod) countMod.textContent = totalMod;
+      const countOk = document.getElementById('count-interval-ok');
+      if (countOk) countOk.textContent = totalOk;
+
+      // Re-apply interval filter to match current tier selection
+      filterIntervalTier(currentIntervalTier);
     }}
 
     document.addEventListener('DOMContentLoaded', () => {{
@@ -1719,7 +1834,7 @@ class HTMLDashboardGenerator:
                     '<span class="badge" style="background:rgba(59,130,246,0.2); color:#93c5fd; font-size:0.68rem; margin-left:6px; vertical-align:middle;">📊 Kivoya PMS Est.</span>'
                 )
                 subtable_rows.append(f"""
-                  <tr class="comp-item-row our-property-row" data-is-our="true" data-price="{item['effective_nightly']:.2f}" data-rating="4.83" data-reviews="76">
+                  <tr class="comp-item-row our-property-row" data-is-our="true" data-location="South Tempe, AZ" data-price="{item['effective_nightly']:.2f}" data-rating="4.83" data-reviews="76">
                     <td style="padding:10px 14px; text-align:center;">
                       <span class="badge our-rank-badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem; padding:3px 8px;">★ YOU (#{our_rank})</span>
                     </td>
@@ -1764,9 +1879,10 @@ class HTMLDashboardGenerator:
                 r_str = f"{item['rating']:.2f}" if item['rating'] is not None else ""
                 rev_val = item['reviews']
                 rating_html = self._format_rating_display(item['rating'], rev_val)
+                loc_escaped = html.escape(str(item.get('location', '')), quote=True)
 
                 subtable_rows.append(f"""
-                  <tr class="comp-item-row" data-is-our="false" data-price="{item['effective_nightly']:.2f}" data-rating="{r_str}" data-reviews="{rev_val}" style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                  <tr class="comp-item-row" data-is-our="false" data-location="{loc_escaped}" data-price="{item['effective_nightly']:.2f}" data-rating="{r_str}" data-reviews="{rev_val}" style="border-bottom:1px solid rgba(255,255,255,0.05);">
                     <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">{rank}</td>
                     <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
                       <strong style="color:#f1f5f9;">${item['effective_nightly']:.0f}</strong><span style="color:#94a3b8; font-size:0.75rem;">/night</span>{review_badge}

@@ -26,7 +26,7 @@ The following dates are 10%–35% off the target percentile for future dates:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2027-01-04 -> 2027-01-07` | Midweek | 3 | ↑ Increase base $649 → $785 (+21%) | 42 | $649 | $816 (36%) | $1122 | $1154 (54.6%) | 🟡 -14.3% | **$785** |
+| `2026-09-21 -> 2026-09-24` | Midweek | 3 | ↑ Increase base $399 → $518 (+30%) | 37 | $399 | $566 (35%) | $799 | $790 (45.5%) | 🟡 -17.4% | **$518** |
 
 ---
 
@@ -35,7 +35,7 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2027-01-04 -> 2027-01-07` | Midweek | 3 | ↑ Increase base $649 → $785 (+21%) | 42 | $649 | $816 (36%) | $1122 | $1154 (54.6%) | 🟡 -14.3% | **$785** |
+| `2026-09-21 -> 2026-09-24` | Midweek | 3 | ↑ Increase base $399 → $518 (+30%) | 37 | $399 | $566 (35%) | $799 | $790 (45.5%) | 🟡 -17.4% | **$518** |
 
 ---
 *Generated autonomously by STR Price Advisor Agent.*

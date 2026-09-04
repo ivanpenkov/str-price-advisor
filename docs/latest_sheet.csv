@@ -1,2 +1,2 @@
 priority_tier,status,check_in,check_out,segment_type,nights,lead_time_days,our_base_nightly,our_cleaning_fee,our_total_price,our_effective_nightly,our_percentile_rank,target_percentile,comp_p50_eff,comp_p75_eff,comp_p80_eff,comp_target_eff,price_diff_percent,recommended_base_nightly,base_diff,action_summary
-MODERATE_ADJUSTMENT,SLIGHTLY LOW,2027-01-04,2027-01-07,midweek,3,122,649.0,500,2447.0,815.67,35.7,54.6,1121.5,1641.0,1675.0,1153.65,-14.3,785.0,136.0,↑ Increase base $649 → $785 (+21%)
+MODERATE_ADJUSTMENT,SLIGHTLY LOW,2026-09-21,2026-09-24,midweek,3,17,399.0,500,1697.0,565.67,35.1,45.5,799.0,1186.67,1260.0,790.02,-17.4,518.0,119.0,↑ Increase base $399 → $518 (+30%)

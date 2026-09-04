@@ -1216,6 +1216,9 @@ class HTMLDashboardGenerator:
 
         cheaper_count = sum(1 for c in clean_comps if c["effective_nightly"] < our_eff)
         higher_count = sum(1 for c in clean_comps if c["effective_nightly"] > our_eff)
+        total_comps = len(clean_comps)
+        our_rank = cheaper_count + 1
+        our_pct = round((our_rank / total_comps) * 100) if total_comps > 0 else round(s.get("our_percentile_rank", 50.0))
 
         # Build subtable rows
         subtable_rows = []
@@ -1225,7 +1228,7 @@ class HTMLDashboardGenerator:
                 subtable_rows.append(f"""
                   <tr class="our-property-row">
                     <td style="padding:10px 14px; text-align:center;">
-                      <span class="badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem; padding:3px 8px;">★ YOU</span>
+                      <span class="badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem; padding:3px 8px;">★ YOU (#{our_rank})</span>
                     </td>
                     <td style="padding:10px 14px; font-family:'JetBrains Mono',monospace;">
                       <strong style="color:#fbbf24; font-size:0.95rem;">${item['effective_nightly']:.0f}</strong><span style="color:#fde68a; font-size:0.75rem;">/night</span>
@@ -1241,7 +1244,7 @@ class HTMLDashboardGenerator:
                       <div style="font-size:0.75rem; color:#cbd5e1; margin-top:2px;">South Tempe, AZ • Sleeps 16 • Private Pool & Resort Compound</div>
                     </td>
                     <td style="padding:10px 14px;">
-                      <span class="badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem;">★ OUR POSITION</span>
+                      <span class="badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem;">★ OUR POSITION (#{our_rank} of {total_comps} &bull; {our_pct}%)</span>
                     </td>
                   </tr>
                 """)
@@ -1294,7 +1297,7 @@ class HTMLDashboardGenerator:
 
         rows_html = "".join(subtable_rows)
 
-        return f"""
+        subtable_html = f"""
           <div class="subtable-container">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
               <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
@@ -1309,7 +1312,7 @@ class HTMLDashboardGenerator:
               <div style="font-size:0.8rem; color:#94a3b8;">
                 <strong style="color:#34d399;">{cheaper_count} cheaper</strong> than us &bull;
                 <strong style="color:#f87171;">{higher_count} more expensive</strong> &bull;
-                Sorted lowest to highest price
+                Villa del Sol is <strong>#{our_rank} of {total_comps} ({our_pct}%)</strong>
               </div>
             </div>
 
@@ -1317,13 +1320,13 @@ class HTMLDashboardGenerator:
               <table class="subtable">
                 <thead>
                   <tr>
-                    <th style="width:50px; text-align:center;">#</th>
+                    <th style="width:65px; text-align:center;">#</th>
                     <th style="width:160px;">Price</th>
                     <th style="width:90px; text-align:center;">Bedrooms</th>
                     <th style="width:85px; text-align:center;">Beds</th>
                     <th style="width:80px; text-align:center;">Baths</th>
                     <th>Name of Comp (Click to open on Airbnb)</th>
-                    <th style="width:150px;">Position vs Us</th>
+                    <th style="width:180px;">Position vs Us</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1333,6 +1336,7 @@ class HTMLDashboardGenerator:
             </div>
           </div>
         """
+        return subtable_html, our_rank, total_comps, our_pct
 
     def _render_table_rows(self, segments: List[Dict[str, Any]], prefix: str = "row") -> str:
         rows = []
@@ -1360,7 +1364,14 @@ class HTMLDashboardGenerator:
             else:
                 n_html = f'<span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Statistical model using curated {n}-comp cohort baseline">📊 Cohort N={n}</span>'
 
-            subtable_html = self._render_comp_subtable(s, row_id)
+            subtable_html, our_rank, total_comps, our_pct = self._render_comp_subtable(s, row_id)
+
+            if total_comps > 0:
+                rank_tooltip = f"Villa del Sol ranks #{our_rank} out of {total_comps} competitors ({our_pct}th percentile in effective total guest cost)"
+                eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${s['our_effective_nightly']:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\" title=\"{rank_tooltip}\">({our_pct}%)</span>"
+            else:
+                stored_pct = round(s.get("our_percentile_rank", 50.0))
+                eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${s['our_effective_nightly']:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\">({stored_pct}%)</span>"
 
             rows.append(f"""
               <tr class="clickable-row" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown">
@@ -1373,7 +1384,7 @@ class HTMLDashboardGenerator:
                 <td>{s['lead_time_days']} days</td>
                 <td>{n_html}</td>
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
-                <td style="font-family:'JetBrains Mono',monospace;">${s['our_effective_nightly']:.0f}/n</td>
+                <td style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
                 <td style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">${s['comp_p50_eff']:.0f}</td>
                 <td style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({s['target_percentile']:.0f}%)</span></td>
                 <td>{diff_html}</td>

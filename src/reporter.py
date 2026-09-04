@@ -186,7 +186,11 @@ class PriceReportGenerator:
             else:
                 n_str = f"{n}"
             our_base = f"${s['our_base_nightly']:.0f}"
-            our_eff = f"${s['our_effective_nightly']:.0f}"
+            pct_rank = s.get("our_percentile_rank")
+            if pct_rank is not None:
+                our_eff = f"${s['our_effective_nightly']:.0f} ({pct_rank:.0f}%)"
+            else:
+                our_eff = f"${s['our_effective_nightly']:.0f}"
             p50 = f"${s['comp_p50_eff']:.0f}"
             target_pct = f"${s['comp_target_eff']:.0f} ({s['target_percentile']:.0f}%)"
 

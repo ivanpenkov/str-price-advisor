@@ -1395,16 +1395,6 @@ class HTMLDashboardGenerator:
           const ourPosBadge = ourRow.querySelector('.our-position-badge');
           if (ourPosBadge) ourPosBadge.textContent = '★ OUR POSITION (#' + ourRank + ' of ' + totalComps + ' • ' + ourPct + '%)';
         }}
-
-        const statsEl = container.querySelector('.subtable-stats');
-        if (statsEl) {{
-          statsEl.innerHTML = '<strong style="color:#34d399;">' + cheaperCount + ' cheaper</strong> than us &bull; <strong style="color:#f87171;">' + higherCount + ' more expensive</strong> &bull; Villa del Sol is <strong>#' + ourRank + ' of ' + totalComps + ' (' + ourPct + '%)</strong>';
-        }}
-        const countBadge = container.querySelector('.subtable-count-badge');
-        if (countBadge) {{
-          countBadge.textContent = totalComps + ' Competitors Evaluated';
-        }}
-
         // Update main table parent row cells
         const nEl = document.getElementById('n-' + rowId);
         if (nEl) {{
@@ -1758,12 +1748,6 @@ class HTMLDashboardGenerator:
                 rank += 1
 
         is_live = s.get("is_live_scan", False)
-        mode_badge = (
-            '<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; font-size:0.75rem;">🟢 Live Airbnb Scrape</span>'
-            if is_live else
-            '<span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; font-size:0.75rem;">📊 Curated Cohort Model</span>'
-        )
-
         rows_html = "".join(subtable_rows)
 
         subtable_html = f"""
@@ -1777,23 +1761,6 @@ class HTMLDashboardGenerator:
                data-target-pct="{s.get('target_percentile', 78.0)}"
                data-is-live-scan="{str(is_live).lower()}"
                data-channel-factor="{channel_factor:.4f}">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
-              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-                <span style="font-weight:700; font-size:0.95rem; color:#f8fafc;">
-                  🔍 Competitor Breakdown for {s['check_in']} &rarr; {s['check_out']} ({nights} nights)
-                </span>
-                {mode_badge}
-                <span class="badge subtable-count-badge" style="background:rgba(255,255,255,0.06); color:#cbd5e1; font-size:0.75rem;">
-                  {len(clean_comps)} Competitors Evaluated
-                </span>
-              </div>
-              <div class="subtable-stats" style="font-size:0.8rem; color:#94a3b8;">
-                <strong style="color:#34d399;">{cheaper_count} cheaper</strong> than us &bull;
-                <strong style="color:#f87171;">{higher_count} more expensive</strong> &bull;
-                Villa del Sol is <strong>#{our_rank} of {total_comps} ({our_pct}%)</strong>
-              </div>
-            </div>
-
             <div class="subtable-scroll">
               <table class="subtable">
                 <thead>

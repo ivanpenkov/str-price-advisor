@@ -153,8 +153,15 @@ class AirbnbCollector:
             total_stay_price = round(effective_nightly * nights, 2)
             confidence = "CONFIRMED"
             confidence_reason = "Nightly explicitly labeled ('night')"
+        elif len(all_dollars) >= 2 and all_dollars[1] < all_dollars[0] and (0.40 <= all_dollars[1] / all_dollars[0] < 1.0):
+            # Promotional strikethrough total: e.g. "$4,884 $4,445" (Early bird / weekly discount)
+            total_stay_price = all_dollars[1]
+            effective_nightly = round(total_stay_price / nights, 2)
+            discount_pct = round((1.0 - (all_dollars[1] / all_dollars[0])) * 100)
+            confidence = "CONFIRMED"
+            confidence_reason = f"Promotional stay total (${all_dollars[1]:.0f} discounted from ${all_dollars[0]:.0f}, -{discount_pct}%)"
         else:
-            # Unlabeled price: dollar amount without 'night' or 'total'/'before taxes' label
+            # Unlabeled single price: dollar amount without 'night' or 'total'/'before taxes' label
             # Do NOT guess with magic thresholds! Flag for host review.
             total_stay_price = all_dollars[-1]
             effective_nightly = round(total_stay_price / nights, 2)

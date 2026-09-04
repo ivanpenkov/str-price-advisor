@@ -101,6 +101,24 @@ class TestAirbnbParsing(unittest.TestCase):
         parsed = self.collector._parse_card_text("999004", card_text, nights=3)
         self.assertIsNotNone(parsed)
         self.assertEqual(parsed["confidence"], "AMBIGUOUS")
+
+    def test_promotional_discount_total_confirmed(self):
+        """Card with original total strikethrough and discounted total (e.g. Shangri-La $4,884 -> $4,445) is CONFIRMED."""
+        card_text = (
+            "Guest favorite\n"
+            "Home in Tempe\n"
+            "Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16\n"
+            "4.86 (174)\n"
+            "6 bedrooms · 6 beds · 3 baths\n"
+            "$4,884\n"
+            "$4,445"
+        )
+        parsed = self.collector._parse_card_text("51303548", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["confidence"], "CONFIRMED")
+        self.assertEqual(parsed["total_price"], 4445.0)
+        self.assertEqual(parsed["effective_nightly"], 1481.67)
+        self.assertIn("Promotional", parsed["confidence_reason"])
     def test_alternative_date_card_rejected(self):
         """Card with alternative date recommendation (e.g. 'Sep 7 to 9' for a Sep 6-10 search) must be rejected."""
         card_text = (

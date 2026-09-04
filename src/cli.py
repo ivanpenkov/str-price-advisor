@@ -156,7 +156,7 @@ async def run_weekly_advisory(
     from src.html_generator import HTMLDashboardGenerator
     import shutil
     html_gen = HTMLDashboardGenerator(output_path="docs/index.html")
-    html_file = html_gen.generate(evaluated_segments=evaluated_results)
+    html_file = html_gen.generate()
     shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
     shutil.copy("data/latest_report.md", "docs/latest_report.md")
 

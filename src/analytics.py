@@ -210,6 +210,7 @@ class PricingAnalyticsEngine:
             "n_comps": n_comps,
             "comps_count": n_comps,
             "comps_raw_count": len(comp_effective_rates),
+            "comps_list": comp_metadata or [],
             "sample_significance": sample_significance,
             "sample_label": sample_label,
             "sample_note": sample_note,

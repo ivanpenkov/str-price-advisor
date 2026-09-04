@@ -109,9 +109,10 @@ async def run_weekly_advisory(quick: bool = False, max_segments: int = 12):
                     nights=nights,
                     tier="tier_b",
                 )
+                comps.extend(comps_b)
                 comp_rates.extend([c["effective_nightly"] for c in comps_b])
 
-            evaluated = analytics.evaluate_segment(seg, comp_rates)
+            evaluated = analytics.evaluate_segment(seg, comp_rates, comp_metadata=comps)
             evaluated_results.append(evaluated)
 
             status_icon = "🚨" if evaluated["priority_tier"] == "URGENT_ACTION" else ("⚠️" if evaluated["priority_tier"] == "MODERATE_ADJUSTMENT" else "✅")

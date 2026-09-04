@@ -103,16 +103,19 @@ class PricingAnalyticsEngine:
         nights: int,
         floor_rate: float = 249.0,
         ceiling_rate: float = 2499.0,
+        channel_factor: float = 1.0,
     ) -> float:
         """
         Convert target effective nightly guest cost back into recommended base nightly rate,
-        subtracting our $500 cleaning fee.
+        subtracting our $500 cleaning fee and accounting for OTA channel distribution markup.
         target_total = target_effective_nightly * nights
-        recommended_base_total = target_total - cleaning_fee
+        target_kivoya_total = target_total / channel_factor
+        recommended_base_total = target_kivoya_total - cleaning_fee
         recommended_base_nightly = recommended_base_total / nights
         """
         target_total = target_effective_nightly * nights
-        rec_base_total = max(0.0, target_total - self.cleaning_fee)
+        target_kivoya_total = target_total / max(0.5, channel_factor)
+        rec_base_total = max(0.0, target_kivoya_total - self.cleaning_fee)
         rec_base_nightly = rec_base_total / nights
         clamped = max(floor_rate, min(ceiling_rate, rec_base_nightly))
         return round(clamped, 0)
@@ -134,8 +137,17 @@ class PricingAnalyticsEngine:
         """
         lead_days = segment["lead_time_days"]
         nights = segment["nights"]
-        our_eff = segment["our_effective_nightly"]
         our_base = segment["our_base_nightly"]
+
+        # Prefer live Airbnb guest checkout rate if available for pure apples-to-apples comparison
+        live_eff = segment.get("our_airbnb_effective_nightly")
+        if live_eff and live_eff > 0:
+            our_eff = float(live_eff)
+            kivoya_eff = segment["our_effective_nightly"]
+            channel_factor = our_eff / kivoya_eff if kivoya_eff > 0 else 1.0
+        else:
+            our_eff = segment["our_effective_nightly"]
+            channel_factor = 1.0
 
         clean_comps = self.remove_outliers(comp_effective_rates)
         target_pct = self.get_target_percentile(lead_days)
@@ -150,7 +162,10 @@ class PricingAnalyticsEngine:
         else:
             pct_diff = 0.0
 
-        rec_base = self.translate_to_recommended_base_rate(target_eff, nights) if target_eff > 0 else our_base
+        rec_base = (
+            self.translate_to_recommended_base_rate(target_eff, nights, channel_factor=channel_factor)
+            if target_eff > 0 else our_base
+        )
         rec_diff = round(rec_base - our_base, 0)
 
         # Priority classification

@@ -266,7 +266,22 @@ class AirbnbCollector:
                 seen_in_loc = set()
                 for c in cards:
                     cid = c["id"]
-                    if cid in seen_in_loc or cid == "573857947793833342":  # Exclude our own property!
+                    if cid in seen_in_loc:
+                        continue
+
+                    # If this is our own property, capture its live Airbnb price for apples-to-apples comparison!
+                    if cid == "573857947793833342":
+                        parsed_our = self._parse_card_text(cid, c["text"], nights)
+                        if parsed_our:
+                            our_cache_file = Path(f"data/cache/our_property_{check_in}_{check_out}.json")
+                            our_cache_file.write_text(json.dumps({
+                                "listing_id": cid,
+                                "check_in": check_in,
+                                "check_out": check_out,
+                                "nights": nights,
+                                "airbnb_total": parsed_our["total_price"],
+                                "airbnb_effective_nightly": parsed_our["effective_nightly"],
+                            }, indent=2), encoding="utf-8")
                         continue
 
                     # Verify href does not specify different checkin dates
@@ -293,4 +308,53 @@ class AirbnbCollector:
             await asyncio.sleep(random.uniform(self.min_delay, self.max_delay))
 
         return list(all_listings.values())
+
+    async def fetch_our_listing_price(
+        self, check_in: str, check_out: str, nights: int, use_cache: bool = True
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Fetch Villa del Sol's live guest-facing price directly from its Airbnb listing page.
+        Returns dict with: airbnb_total, airbnb_effective_nightly.
+        """
+        cache_file = Path(f"data/cache/our_property_{check_in}_{check_out}.json")
+        if use_cache and cache_file.exists():
+            try:
+                return json.loads(cache_file.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        room_id = "573857947793833342"
+        url = f"https://www.airbnb.com/rooms/{room_id}?check_in={check_in}&check_out={check_out}&adults=1"
+
+        page = await self.context.new_page()
+        try:
+            await page.goto(url, wait_until="domcontentloaded", timeout=25000)
+            await page.wait_for_timeout(4000)
+
+            body_text = await page.evaluate("() => document.body.innerText")
+
+            m = re.search(r"\$([0-9,]+(?:\.[0-9]{2})?)\s*for\s+\d+\s+nights", body_text, re.IGNORECASE)
+            if m:
+                total_stay = float(m.group(1).replace(",", ""))
+            else:
+                m2 = re.search(r"\$([0-9,]+(?:\.[0-9]{2})?)\s*(?:before taxes|total)", body_text, re.IGNORECASE)
+                total_stay = float(m2.group(1).replace(",", "")) if m2 else None
+
+            if total_stay:
+                eff = round(total_stay / max(1, nights), 2)
+                res = {
+                    "listing_id": room_id,
+                    "check_in": check_in,
+                    "check_out": check_out,
+                    "nights": nights,
+                    "airbnb_total": total_stay,
+                    "airbnb_effective_nightly": eff,
+                }
+                cache_file.write_text(json.dumps(res, indent=2), encoding="utf-8")
+                return res
+        except Exception as e:
+            print(f"Warning: could not fetch our listing price for {check_in}: {e}")
+        finally:
+            await page.close()
+        return None
 

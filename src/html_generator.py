@@ -153,6 +153,20 @@ class HTMLDashboardGenerator:
             m = dt.month
             cache_key = f"{c_in}_{c_out}"
 
+            # Check if live Villa del Sol Airbnb rate was scraped/cached
+            our_cache_file = Path(f"data/cache/our_property_{c_in}_{c_out}.json")
+            if our_cache_file.exists():
+                try:
+                    our_data = json.loads(our_cache_file.read_text(encoding="utf-8"))
+                    live_eff = our_data.get("airbnb_effective_nightly")
+                    live_tot = our_data.get("airbnb_total")
+                    if live_eff and float(live_eff) > 0:
+                        seg["our_airbnb_effective_nightly"] = float(live_eff)
+                        seg["our_airbnb_total"] = float(live_tot) if live_tot else float(live_eff) * seg["nights"]
+                        seg["is_our_airbnb_live"] = True
+                except Exception:
+                    pass
+
             if cache_key in cached_comps and len(cached_comps[cache_key]) >= 5:
                 comps_list = list(cached_comps[cache_key].values())
                 rates = [c["effective_nightly"] for c in comps_list]
@@ -183,6 +197,20 @@ class HTMLDashboardGenerator:
                 8: 0.62, 9: 0.85, 10: 1.00, 11: 1.05, 12: 1.12, 1: 1.15,
             }
             for s in evaluated_segments:
+                c_in = s["check_in"]
+                c_out = s["check_out"]
+                our_cache_file = Path(f"data/cache/our_property_{c_in}_{c_out}.json")
+                if not s.get("our_airbnb_effective_nightly") and our_cache_file.exists():
+                    try:
+                        our_data = json.loads(our_cache_file.read_text(encoding="utf-8"))
+                        live_eff = our_data.get("airbnb_effective_nightly")
+                        live_tot = our_data.get("airbnb_total")
+                        if live_eff and float(live_eff) > 0:
+                            s["our_airbnb_effective_nightly"] = float(live_eff)
+                            s["our_airbnb_total"] = float(live_tot) if live_tot else float(live_eff) * s["nights"]
+                            s["is_our_airbnb_live"] = True
+                    except Exception:
+                        pass
                 if not s.get("comps_list"):
                     cache_key = f"{s['check_in']}_{s['check_out']}"
                     if cache_key in cached_comps and len(cached_comps[cache_key]) >= 5:
@@ -1020,11 +1048,13 @@ class HTMLDashboardGenerator:
           </div>
 
           <div class="method-card">
-            <h3>⚖️ 2. Total Guest Cost Normalization</h3>
-            <p>Guests on Airbnb evaluate <strong>Total Stay Cost</strong> (Base + Cleaning Fee + Service Fee), not just nightly rates.</p>
-            <p>Villa del Sol has a fixed <strong>$500 Cleaning Fee</strong>. Our model compares total effective guest costs, then translates the target back into your recommended PMS base rate:</p>
+            <h3>⚖️ 2. Apples-to-Apples Live Airbnb Guest Checkout Pricing</h3>
+            <p>Guests on Airbnb evaluate <strong>Total Stay Cost</strong> (Base + Cleaning Fee + Channel Markup + Service Fee), not internal PMS rates.</p>
+            <p>We scrape Villa del Sol's <strong>actual guest checkout price directly from Airbnb</strong> (e.g. <em>$693.50/night</em> for Sep 6&ndash;10) rather than relying solely on internal Kivoya rates ($499 base + $500 clean = $624/night). This captures Streamline VRS / Kivoya OTA distribution markups, ensuring that our market percentiles, comp rankings, and subtable comparisons are 100% apples-to-apples against competitor Airbnb listings.</p>
+            <p>When computing your recommended PMS rate, we factor in the OTA markup so your adjustment in Kivoya accurately hits the Airbnb target:</p>
             <div class="formula-box">
-              Rec Base Rate = (Target Comp Effective × Nights - $500) / Nights
+              Target Kivoya Total = (Target Airbnb Stay Total) &divide; Channel Factor<br>
+              Rec Base Rate = (Target Kivoya Total &minus; $500 Clean) &divide; Nights
             </div>
           </div>
 
@@ -1151,12 +1181,35 @@ class HTMLDashboardGenerator:
         self.output_path.write_text(html, encoding="utf-8")
         return str(self.output_path)
 
-    def _render_comp_subtable(self, s: Dict[str, Any], row_id: str) -> str:
+    def _render_comp_subtable(self, s: Dict[str, Any], row_id: str) -> Tuple[str, int, int, int, float, bool]:
         """Render expandable nested subtable of all comps sorted by price with Villa del Sol highlighted."""
         nights = s.get("nights", 3)
-        our_eff = float(s.get("our_effective_nightly", 0.0))
+        c_in = s.get("check_in")
+        c_out = s.get("check_out")
         our_base = float(s.get("our_base_nightly", 0.0))
-        our_total = float(s.get("our_total_price", our_eff * nights))
+
+        # Check if live Airbnb price exists for our property
+        is_our_live = False
+        our_cache_file = Path(f"data/cache/our_property_{c_in}_{c_out}.json")
+        if s.get("is_our_airbnb_live") and s.get("our_airbnb_effective_nightly"):
+            our_eff = float(s["our_airbnb_effective_nightly"])
+            our_total = float(s.get("our_airbnb_total", our_eff * nights))
+            is_our_live = True
+        elif our_cache_file.exists():
+            try:
+                our_data = json.loads(our_cache_file.read_text(encoding="utf-8"))
+                live_eff = our_data.get("airbnb_effective_nightly")
+                live_tot = our_data.get("airbnb_total")
+                if live_eff and float(live_eff) > 0:
+                    our_eff = float(live_eff)
+                    our_total = float(live_tot) if live_tot else our_eff * nights
+                    is_our_live = True
+            except Exception:
+                pass
+
+        if not is_our_live:
+            our_eff = float(s.get("our_effective_nightly", 0.0))
+            our_total = float(s.get("our_total_price", our_eff * nights))
 
         # 1. Our property entry
         our_entry = {
@@ -1245,14 +1298,24 @@ class HTMLDashboardGenerator:
         rank = 1
         for item in all_entries:
             if item["is_our_property"]:
+                source_note = (
+                    f"${item['total_price']:.0f} total on Airbnb &bull; Base Kivoya: ${our_base:.0f}/n"
+                    if is_our_live else
+                    f"${item['total_price']:.0f} total (${our_base:.0f} base + $500 clean)"
+                )
+                live_pill = (
+                    '<span class="badge" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.68rem; margin-left:6px; border:1px solid rgba(16,185,129,0.4); vertical-align:middle;">🟢 Live Airbnb Rate</span>'
+                    if is_our_live else
+                    '<span class="badge" style="background:rgba(59,130,246,0.2); color:#93c5fd; font-size:0.68rem; margin-left:6px; vertical-align:middle;">📊 Kivoya PMS Est.</span>'
+                )
                 subtable_rows.append(f"""
                   <tr class="our-property-row">
                     <td style="padding:10px 14px; text-align:center;">
                       <span class="badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem; padding:3px 8px;">★ YOU (#{our_rank})</span>
                     </td>
                     <td style="padding:10px 14px; font-family:'JetBrains Mono',monospace;">
-                      <strong style="color:#fbbf24; font-size:0.95rem;">${item['effective_nightly']:.0f}</strong><span style="color:#fde68a; font-size:0.75rem;">/night</span>
-                      <div style="font-size:0.72rem; color:#fde68a;">${item['total_price']:.0f} total (${our_base:.0f} base + $500 clean)</div>
+                      <strong style="color:#fbbf24; font-size:0.95rem;">${item['effective_nightly']:.0f}</strong><span style="color:#fde68a; font-size:0.75rem;">/night</span>{live_pill}
+                      <div style="font-size:0.72rem; color:#fde68a; margin-top:2px;">{source_note}</div>
                     </td>
                     <td style="padding:10px 14px; text-align:center; font-weight:700; color:#f8fafc;">6 BR</td>
                     <td style="padding:10px 14px; text-align:center; font-weight:700; color:#f8fafc;">11 beds</td>
@@ -1356,13 +1419,21 @@ class HTMLDashboardGenerator:
             </div>
           </div>
         """
-        return subtable_html, our_rank, total_comps, our_pct
+        return subtable_html, our_rank, total_comps, our_pct, our_eff, is_our_live
 
     def _render_table_rows(self, segments: List[Dict[str, Any]], prefix: str = "row") -> str:
         rows = []
         for idx, s in enumerate(segments):
             row_id = f"{prefix}-{idx}"
-            diff = s["price_diff_percent"]
+
+            subtable_html, our_rank, total_comps, our_pct, our_eff, is_our_live = self._render_comp_subtable(s, row_id)
+
+            target_eff = float(s.get("comp_target_eff") or 0.0)
+            if is_our_live and target_eff > 0:
+                diff = round(((our_eff - target_eff) / target_eff) * 100.0, 1)
+            else:
+                diff = s["price_diff_percent"]
+
             if diff <= -25.0:
                 diff_html = f'<span class="badge-diff-under">{diff:.1f}%</span>'
             elif diff >= 25.0:
@@ -1384,14 +1455,17 @@ class HTMLDashboardGenerator:
             else:
                 n_html = f'<span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Statistical model using curated {n}-comp cohort baseline">📊 Cohort N={n}</span>'
 
-            subtable_html, our_rank, total_comps, our_pct = self._render_comp_subtable(s, row_id)
-
             if total_comps > 0:
-                rank_tooltip = f"Villa del Sol ranks #{our_rank} out of {total_comps} competitors ({our_pct}th percentile in effective total guest cost)"
-                eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${s['our_effective_nightly']:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\" title=\"{rank_tooltip}\">({our_pct}%)</span>"
+                if is_our_live:
+                    live_dot = '<span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span>'
+                    rank_tooltip = f"Live Airbnb Rate: ${our_eff:.0f}/night (${s.get('our_airbnb_total', our_eff * s['nights']):.0f} total). Villa del Sol ranks #{our_rank} out of {total_comps} competitors ({our_pct}th percentile). Base Kivoya rate is ${s['our_base_nightly']:.0f}."
+                else:
+                    live_dot = ''
+                    rank_tooltip = f"Villa del Sol ranks #{our_rank} out of {total_comps} competitors ({our_pct}th percentile in effective total guest cost)"
+                eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong>{live_dot} <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\" title=\"{rank_tooltip}\">({our_pct}%)</span>"
             else:
                 stored_pct = round(s.get("our_percentile_rank", 50.0))
-                eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${s['our_effective_nightly']:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\">({stored_pct}%)</span>"
+                eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\">({stored_pct}%)</span>"
 
             rows.append(f"""
               <tr class="clickable-row" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown">

@@ -111,6 +111,17 @@ async def run_weekly_advisory(quick: bool = False, max_segments: int = 12):
                 )
                 comps.extend(comps_b)
                 comp_rates.extend([c["effective_nightly"] for c in comps_b])
+            # Fetch Villa del Sol live guest checkout rate from Airbnb for apples-to-apples comparison
+            our_rate_data = await collector.fetch_our_listing_price(
+                check_in=c_in,
+                check_out=c_out,
+                nights=nights,
+                use_cache=True,
+            )
+            if our_rate_data and our_rate_data.get("airbnb_effective_nightly"):
+                seg["our_airbnb_effective_nightly"] = our_rate_data["airbnb_effective_nightly"]
+                seg["our_airbnb_total"] = our_rate_data["airbnb_total"]
+                seg["is_our_airbnb_live"] = True
 
             evaluated = analytics.evaluate_segment(seg, comp_rates, comp_metadata=comps)
             evaluated_results.append(evaluated)

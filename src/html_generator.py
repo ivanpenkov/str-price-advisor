@@ -1024,7 +1024,7 @@ class HTMLDashboardGenerator:
 
       <!-- Unified 12-Month Dynamic Pricing Schedule -->
       <div class="section-box">
-        <div class="section-header" style="flex-wrap: wrap; gap: 12px;">
+        <div class="section-header" style="margin-bottom: 12px;">
           <div>
             <div class="section-title" style="font-size: 1.3rem;">
               📅 12-Month Dynamic Pricing Schedule
@@ -1033,17 +1033,6 @@ class HTMLDashboardGenerator:
               All unbooked weekend and midweek intervals over the next 12 months. Click any row to expand competitor pricing details. 
               Urgency is highlighted with status badges: <strong style="color:#f87171;">🚨 Urgent</strong> (&gt;35% discrepancy), <strong style="color:#fbbf24;">⚠️ Review</strong> (10%–35% variance), or <strong style="color:#34d399;">✅ On Target</strong>.
             </p>
-          </div>
-          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-            <span class="badge" style="background: var(--urgent-bg); color: var(--urgent-red); border-color: var(--urgent-border);">
-              {len(urgent)} Urgent
-            </span>
-            <span class="badge" style="background: var(--warning-bg); color: var(--warning-amber); border-color: var(--warning-border);">
-              {len(moderate)} Moderate
-            </span>
-            <span class="badge badge-dark">
-              {len(all_sorted)} Total Intervals
-            </span>
           </div>
         </div>
 
@@ -1309,7 +1298,7 @@ class HTMLDashboardGenerator:
       const r = parseFloat(document.getElementById('filterMinRating').value);
       const rev = parseInt(document.getElementById('filterMinReviews').value, 10);
 
-      document.querySelectorAll('.filter-pill-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.filter-card .filter-pill-btn').forEach(btn => btn.classList.remove('active'));
       const rBtnId = (r && r > 0) ? ('btn-rate-' + String(r).replace('.', '')) : 'btn-rate-all';
       const rBtn = document.getElementById(rBtnId);
       if (rBtn) rBtn.classList.add('active');

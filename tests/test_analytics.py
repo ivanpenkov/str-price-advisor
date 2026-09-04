@@ -57,6 +57,27 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.assertEqual(eval_urgent["priority_tier"], "URGENT_ACTION")
         self.assertEqual(eval_urgent["status"], "UNDERPRICED")
         self.assertTrue(eval_urgent["recommended_base_nightly"] > 399.0)
+        self.assertEqual(eval_urgent["n_comps"], 6)
+        self.assertEqual(eval_urgent["sample_significance"], "LOW")
+
+    def test_market_compression_sold_out(self):
+        """When N <= 4, should flag near sold out market compression."""
+        segment = {
+            "check_in": "2027-02-12",
+            "check_out": "2027-02-15",
+            "nights": 3,
+            "lead_time_days": 160,
+            "our_base_nightly": 599.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 2297.0,
+            "our_effective_nightly": 765.67,
+        }
+        # Only 2 comps left
+        comp_rates = [1800.0, 2200.0]
+        result = self.engine.evaluate_segment(segment, comp_rates)
+        self.assertEqual(result["n_comps"], 2)
+        self.assertEqual(result["sample_significance"], "VERY_LOW")
+        self.assertIn("High compression", result["action_summary"])
 
 
 if __name__ == "__main__":

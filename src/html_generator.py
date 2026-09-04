@@ -715,6 +715,7 @@ class HTMLDashboardGenerator:
                 <th>Type</th>
                 <th>Nights</th>
                 <th>Lead Time</th>
+                <th>Comps (N)</th>
                 <th>Current Kivoya Base</th>
                 <th>Effective Total Cost</th>
                 <th>Comp Median (50th)</th>
@@ -752,6 +753,7 @@ class HTMLDashboardGenerator:
                 <th>Type</th>
                 <th>Nights</th>
                 <th>Lead Time</th>
+                <th>Comps (N)</th>
                 <th>Current Kivoya Base</th>
                 <th>Effective Total Cost</th>
                 <th>Comp Median (50th)</th>
@@ -762,7 +764,7 @@ class HTMLDashboardGenerator:
               </tr>
             </thead>
             <tbody>
-              {self._render_table_rows(moderate) if moderate else '<tr><td colspan="11" style="text-align:center; color:#94a3b8; padding:24px;">No moderate adjustments currently needed.</td></tr>'}
+              {self._render_table_rows(moderate) if moderate else '<tr><td colspan="12" style="text-align:center; color:#94a3b8; padding:24px;">No moderate adjustments currently needed.</td></tr>'}
             </tbody>
           </table>
         </div>
@@ -787,6 +789,7 @@ class HTMLDashboardGenerator:
                 <th>Type</th>
                 <th>Nights</th>
                 <th>Lead Time</th>
+                <th>Comps (N)</th>
                 <th>Current Kivoya Base</th>
                 <th>Effective Total Cost</th>
                 <th>Comp Median (50th)</th>
@@ -879,6 +882,16 @@ class HTMLDashboardGenerator:
               <li>No change is needed for dates marked <em>"Keep current price"</em>.</li>
             </ul>
           </div>
+
+          <div class="method-card" style="border-color: rgba(245, 158, 11, 0.35);">
+            <h3 style="color: #fbbf24;">📊 5. Understanding 'N' (Comps Count) & Sold-Out Alerts</h3>
+            <p>The <strong>Comps (N)</strong> column tracks how many comparable properties are available for each specific date:</p>
+            <ul>
+              <li><strong>High N (N &ge; 15):</strong> Robust available inventory in the market. High statistical significance for percentiles.</li>
+              <li><strong>Low N (N &le; 4): 🔥 Near Sold Out / Market Compression Alert:</strong> When N is very low, almost all direct competitors are <strong>already booked</strong> (e.g. Phoenix Open, Spring Training, major conventions).</li>
+              <li><strong>Action on Low N:</strong> <em>Do not discount!</em> Your pricing power is at its peak. Hold rates high or increase them as remaining guests scramble for scarce inventory.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -969,12 +982,24 @@ class HTMLDashboardGenerator:
             else:
                 diff_html = f'<span class="badge-diff-ok">{diff:+.1f}%</span>'
 
+            # Sample size N badge
+            n = s.get("n_comps", s.get("comps_count", 0))
+            if n == 0:
+                n_html = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.35);" title="Market 100% booked!">🔥 0 (Sold Out)</span>'
+            elif n <= 4:
+                n_html = f'<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.35);" title="Market compression: only {n} comps unsold! High pricing power.">🔥 N={n} (Near Sold Out)</span>'
+            elif n < 10:
+                n_html = f'<span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Moderate sample size">N={n} comps</span>'
+            else:
+                n_html = f'<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="High statistical confidence sample">N={n} comps</span>'
+
             rows.append(f"""
               <tr>
                 <td><span class="date-pill">{s['check_in']} &rarr; {s['check_out']}</span></td>
                 <td><strong>{s['segment_type'].capitalize()}</strong></td>
                 <td>{s['nights']} nights</td>
                 <td>{s['lead_time_days']} days</td>
+                <td>{n_html}</td>
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_effective_nightly']:.0f}/n</td>
                 <td style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">${s['comp_p50_eff']:.0f}</td>
@@ -1014,3 +1039,4 @@ class HTMLDashboardGenerator:
               </div>
             """)
         return "\n".join(cards)
+

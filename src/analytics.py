@@ -165,6 +165,25 @@ class PricingAnalyticsEngine:
             and lead_days <= 180
         )
 
+        # Sample size & statistical significance analysis
+        n_comps = len(clean_comps)
+        if n_comps == 0:
+            sample_significance = "SOLD_OUT"
+            sample_label = "🔥 Sold Out (N=0)"
+            sample_note = "Zero available luxury comps in market (100% booked)."
+        elif n_comps <= 4:
+            sample_significance = "VERY_LOW"
+            sample_label = f"🔥 Near Sold Out (N={n_comps})"
+            sample_note = f"Only {n_comps} comps available. Extreme market compression."
+        elif n_comps < 10:
+            sample_significance = "LOW"
+            sample_label = f"⚠️ Low Sample (N={n_comps})"
+            sample_note = f"{n_comps} comps available. Lower statistical confidence."
+        else:
+            sample_significance = "ROBUST"
+            sample_label = f"✅ Robust (N={n_comps})"
+            sample_note = f"{n_comps} comps analyzed."
+
         if is_urgent:
             tier = "URGENT_ACTION"
             tier_label = "🚨 Urgent Update (This Week)"
@@ -183,11 +202,17 @@ class PricingAnalyticsEngine:
             if abs(rec_diff) >= 20
             else "Keep current price"
         )
+        if sample_significance in ["SOLD_OUT", "VERY_LOW"]:
+            action_summary += " • High compression"
 
         return {
             **segment,
-            "comps_count": len(clean_comps),
+            "n_comps": n_comps,
+            "comps_count": n_comps,
             "comps_raw_count": len(comp_effective_rates),
+            "sample_significance": sample_significance,
+            "sample_label": sample_label,
+            "sample_note": sample_note,
             "target_percentile": target_pct,
             "our_percentile_rank": our_rank,
             "comp_p50_eff": pct_stats["p50"],

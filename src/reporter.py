@@ -153,13 +153,12 @@ class PriceReportGenerator:
 
         return "\n".join(lines)
 
-    def _format_table(self, segments: List[Dict[str, Any]], full: bool = False) -> str:
-        """Render markdown table for segments."""
         headers = [
             "Dates",
             "Type",
             "Nights",
             "Lead (Days)",
+            "Comps (N)",
             "Our Base",
             "Our Eff. Nightly",
             "Comp 50th",
@@ -178,6 +177,13 @@ class PriceReportGenerator:
             seg_type = s["segment_type"].capitalize()
             nights = str(s["nights"])
             lead = f"{s['lead_time_days']}d"
+            n = s.get("n_comps", s.get("comps_count", 0))
+            if n <= 4:
+                n_str = f"🔥 {n} *(Near Sold Out)*"
+            elif n < 10:
+                n_str = f"⚠️ {n}"
+            else:
+                n_str = f"{n}"
             our_base = f"${s['our_base_nightly']:.0f}"
             our_eff = f"${s['our_effective_nightly']:.0f}"
             p50 = f"${s['comp_p50_eff']:.0f}"
@@ -200,6 +206,7 @@ class PriceReportGenerator:
                 seg_type,
                 nights,
                 lead,
+                n_str,
                 our_base,
                 our_eff,
                 p50,

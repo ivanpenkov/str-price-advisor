@@ -10,16 +10,16 @@ property:
   min_nights_default: 2
 
 strategy:
-  base_percentile: 70          # Target 70th percentile for luxury estate standard window
+  base_percentile: 65          # Target 65th percentile for luxury estate standard window
   lead_time_tiers:
     - min_days: 180
-      percentile: 80           # High-intent early planners
+      percentile: 70           # High-intent early planners
     - min_days: 60
-      percentile: 70           # Standard booking window
+      percentile: 65           # Standard booking window
     - min_days: 30
-      percentile: 60           # Approaching window
+      percentile: 55           # Approaching window
     - min_days: 0
-      percentile: 50           # Last-minute unbooked protection
+      percentile: 45           # Last-minute unbooked protection
   anomaly_thresholds:
     urgent_percent_diff: 35.0  # >35% discrepancy triggers weekly urgent action
     urgent_lead_days: 60       # Unbooked dates <60 days away get elevated priority

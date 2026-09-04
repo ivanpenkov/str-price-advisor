@@ -2,7 +2,7 @@
 Pricing Analytics & Revenue Management Engine.
 Implements:
 - Outlier filtering (IQR method)
-- Dynamic lead-time percentile targeting (80th percentile far out, tapering to 50th close in)
+- Dynamic lead-time percentile targeting (70th percentile far out, tapering to 45th close in)
 - Total price vs effective nightly rate translation
 - Recommended base nightly rate generation (factoring in $500 cleaning fee)
 - 3-tier priority classification (Urgent weekly, Moderate monthly, Informational)
@@ -17,7 +17,7 @@ class PricingAnalyticsEngine:
 
     def __init__(
         self,
-        base_percentile: float = 70.0,
+        base_percentile: float = 65.0,
         cleaning_fee: float = 500.0,
         urgent_pct_diff: float = 35.0,
         urgent_lead_days: int = 60,
@@ -33,25 +33,25 @@ class PricingAnalyticsEngine:
         """
         Dynamically adjust target percentile by lead time and segment type:
         Weekend (Base Curve):
-        - > 180 days: 80th percentile (capture early high-intent bookers)
-        - 60 to 180 days: 70th percentile (prime booking window)
-        - 30 to 60 days: 60th percentile (tapering to protect occupancy)
-        - < 30 days: 50th percentile (last-minute booking capture)
+        - > 180 days: 70th percentile (capture early high-intent bookers)
+        - 60 to 180 days: 65th percentile (standard booking window)
+        - 30 to 60 days: 55th percentile (tapering to encourage booking)
+        - < 30 days: 45th percentile (protect occupancy for near-term dates)
 
         Midweek (30% Lower Target Curve):
-        - > 180 days: 56.0th percentile (80 * 0.70)
-        - 60 to 180 days: 49.0th percentile (70 * 0.70)
-        - 30 to 60 days: 42.0th percentile (60 * 0.70)
-        - < 30 days: 35.0th percentile (50 * 0.70)
+        - > 180 days: 49.0th percentile (70 * 0.70)
+        - 60 to 180 days: 45.5th percentile (65 * 0.70)
+        - 30 to 60 days: 38.5th percentile (55 * 0.70)
+        - < 30 days: 31.5th percentile (45 * 0.70)
         """
         if lead_time_days > 180:
-            base = 80.0
-        elif lead_time_days >= 60:
             base = 70.0
+        elif lead_time_days >= 60:
+            base = 65.0
         elif lead_time_days >= 30:
-            base = 60.0
+            base = 55.0
         else:
-            base = 50.0
+            base = 45.0
 
         if str(segment_type).lower() in ["midweek", "mid-week", "weekday"]:
             return round(base * 0.7, 1)

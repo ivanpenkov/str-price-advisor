@@ -21,11 +21,11 @@ An autonomous AI agent system designed for **Villa del Sol** (920 E Carver Rd, T
 4. **Dynamic Lead-Time Pricing Engine**:
    - Benchmarks against the luxury comps with dynamic lead-time and day-of-week tapering.
    - **Lead-time tapering curve**:
-     - `> 180 days`: 80th percentile (capture early high-intent bookers).
-     - `60 – 180 days`: 70th percentile (standard prime booking window).
-     - `30 – 60 days`: 60th percentile (tapering to encourage booking).
-     - `< 30 days`: 50th percentile (last-minute booking conversion).
-     - *Midweek*: 30% discount curve (56th, 49th, 42nd, and 35th percentiles).
+     - `> 180 days`: 70th percentile (capture early high-intent bookers).
+     - `60 – 180 days`: 65th percentile (standard prime booking window).
+     - `30 – 60 days`: 55th percentile (tapering to encourage booking).
+     - `< 30 days`: 45th percentile (last-minute booking conversion).
+     - *Midweek*: 30% discount curve (49th, 45.5th, 38.5th, and 31.5th percentiles).
    - Translates competitive effective total guest cost back into the **recommended base nightly rate** (accounting for our \$500 cleaning fee).
 5. **Actionable 3-Tier Reporting**:
    - **Section 1: Urgent Action Required (Weekly)**: Intervals where current price is >25% off market or imminent arrival (<60 days).

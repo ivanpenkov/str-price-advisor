@@ -7,63 +7,62 @@
 
 ## 📊 Executive Summary
 - **Total Open Calendar Intervals**: 15
-- 🚨 **Urgent Adjustments (This Week)**: **15** intervals
-- ⚠️ **Moderate Adjustments (Monthly Review)**: **0** intervals
-- ✅ **Competitive / On Target**: **0** intervals
+- 🚨 **Urgent Adjustments (This Week)**: **5** intervals
+- ⚠️ **Moderate Adjustments (Monthly Review)**: **6** intervals
+- ✅ **Competitive / On Target**: **4** intervals
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
-> Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market or imminent arrival) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
+> Review **Section 1** immediately. These intervals are substantially mispriced (>35% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
 
 ---
 
 ## 🚨 Section 1: Urgent Action Required (Action This Week)
 The following dates have major pricing anomalies that require immediate update in the PMS rate sheet:
 
-| Dates | Type | Nights | Lead (Days) | Comps (N) | Our Base | Our Eff. Nightly | Comp 50th | Comp Target | Market Diff | Rec. Base Rate | Action Needed |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-12-20 -> 2026-12-23` | Midweek | 3 | 108d | 39 | $399 | $566 | $1181 | $1786 (78%) | 🔵 **-68.3%** | **$1619** | Adjust base from $399 to $1619 (+1220) |
-| `2026-12-03 -> 2026-12-06` | Weekend | 3 | 91d | 39 | $399 | $566 | $1119 | $1686 (78%) | 🔵 **-66.4%** | **$1519** | Adjust base from $399 to $1519 (+1120) |
-| `2026-12-18 -> 2026-12-20` | Weekend | 2 | 106d | 41 | $399 | $649 | $1398 | $1749 (78%) | 🔵 **-62.9%** | **$1499** | Adjust base from $399 to $1499 (+1100) |
-| `2026-11-15 -> 2026-11-19` | Midweek | 4 | 73d | 48 | $399 | $524 | $847 | $1347 (78%) | 🔵 **-61.1%** | **$1222** | Adjust base from $399 to $1222 (+823) |
-| `2026-12-06 -> 2026-12-10` | Midweek | 4 | 94d | 44 | $399 | $524 | $809 | $1275 (78%) | 🔵 **-58.9%** | **$1150** | Adjust base from $399 to $1150 (+751) |
-| `2026-11-08 -> 2026-11-11` | Midweek | 3 | 66d | 39 | $399 | $566 | $988 | $1305 (78%) | 🔵 **-56.7%** | **$1139** | Adjust base from $399 to $1139 (+740) |
-| `2026-10-25 -> 2026-10-29` | Midweek | 4 | 52d | 49 | $399 | $524 | $935 | $1205 (72%) | 🔵 **-56.5%** | **$1080** | Adjust base from $399 to $1080 (+681) |
-| `2026-11-27 -> 2026-11-29` | Weekend | 2 | 85d | 29 | $949 | $1199 | $1904 | $2411 (78%) | 🔵 **-50.3%** | **$2161** | Adjust base from $949 to $2161 (+1212) |
-| `2026-09-27 -> 2026-09-30` | Midweek | 3 | 24d | 50 | $399 | $566 | $860 | $1106 (65%) | 🔵 **-48.9%** | **$940** | Adjust base from $399 to $940 (+541) |
-| `2026-09-24 -> 2026-09-27` | Weekend | 3 | 21d | 42 | $399 | $566 | $911 | $1022 (65%) | 🔵 **-44.7%** | **$856** | Adjust base from $399 to $856 (+457) |
-| `2026-11-29 -> 2026-12-03` | Midweek | 4 | 87d | 51 | $674 | $799 | $836 | $1330 (78%) | 🔵 **-39.9%** | **$1205** | Adjust base from $674 to $1205 (+531) |
-| `2026-09-13 -> 2026-09-17` | Midweek | 4 | 10d | 54 | $399 | $524 | $689 | $861 (65%) | 🔵 **-39.1%** | **$736** | Adjust base from $399 to $736 (+337) |
-| `2026-09-06 -> 2026-09-10` | Midweek | 4 | 3d | 46 | $499 | $624 | $724 | $996 (65%) | 🔵 **-37.3%** | **$871** | Adjust base from $499 to $871 (+372) |
-| `2026-09-20 -> 2026-09-24` | Midweek | 4 | 17d | 49 | $399 | $524 | $676 | $829 (65%) | 🔵 **-36.8%** | **$704** | Adjust base from $399 to $704 (+305) |
-| `2026-10-11 -> 2026-10-14` | Midweek | 3 | 38d | 46 | $532 | $699 | $872 | $1035 (72%) | 🔵 **-32.5%** | **$868** | Adjust base from $532 to $868 (+336) |
+| Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `2026-12-18 -> 2026-12-20` | Weekend | 2 | ↑ Increase base $399 → $1560 (+291%) | 27 | $399 | $649 (44%) | $742 | $1810 (78%) | 🔵 **-64.2%** | **$1560** |
+| `2026-11-27 -> 2026-11-29` | Weekend | 2 | ↑ Increase base $949 → $2499 (+163%) | 20 | $949 | $1199 (35%) | $1922 | $2816 (78%) | 🔵 **-57.4%** | **$2499** |
+| `2026-12-03 -> 2026-12-06` | Weekend | 3 | ↑ Increase base $399 → $912 (+129%) | 29 | $399 | $566 (41%) | $1026 | $1765 (78%) | 🔵 **-47.6%** | **$912** |
+| `2026-10-25 -> 2026-10-29` | Midweek | 4 | ↑ Increase base $399 → $795 (+99%) | 36 | $399 | $524 (19%) | $919 | $920 (50.4%) | 🔵 **-43.0%** | **$795** |
+| `2026-12-20 -> 2026-12-23` | Midweek | 3 | ↑ Increase base $399 → $728 (+82%) | 31 | $399 | $566 (29%) | $1107 | $1203 (54.6%) | 🔵 **-36.8%** | **$728** |
 
 ---
 
 ## ⚠️ Section 2: Moderate Adjustments (Review Within 30 Days)
-*(No moderate price adjustments needed at this time.)*
+The following dates are 10%–35% off the target percentile for future dates:
+
+| Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↑ Increase base $399 → $569 (+43%) | 32 | $399 | $566 (47%) | $819 | $1002 (65%) | 🟡 -23.1% | **$569** |
+| `2026-09-13 -> 2026-09-17` | Midweek | 4 | ↓ Reduce base $399 → $301 (-25%) | 37 | $399 | $524 (62%) | $599 | $552 (45.5%) | 🟡 +22.9% | **$301** |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↑ Increase base $399 → $553 (+39%) | 37 | $399 | $524 (40%) | $847 | $897 (54.6%) | 🟡 -22.7% | **$553** |
+| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce base $399 → $297 (-26%) | 36 | $399 | $566 (58%) | $576 | $567 (45.5%) | 🟡 +22.1% | **$297** |
+| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↑ Increase base $399 → $550 (+38%) | 28 | $399 | $566 (43%) | $884 | $962 (54.6%) | 🟡 -21.0% | **$550** |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↑ Increase base $399 → $460 (+15%) | 31 | $399 | $524 (45%) | $745 | $775 (54.6%) | 🟡 -10.5% | **$460** |
 
 ---
 
 ## ℹ️ Section 3: All Open Intervals (Complete Schedule)
 Complete 12-month calendar of unbooked intervals and market benchmarks:
 
-| Dates | Type | Nights | Lead (Days) | Comps (N) | Our Base | Our Eff. Nightly | Comp 50th | Comp Target | Market Diff | Rec. Base Rate | Action Needed |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-12-20 -> 2026-12-23` | Midweek | 3 | 108d | 39 | $399 | $566 | $1181 | $1786 (78%) | 🔵 **-68.3%** | **$1619** | Adjust base from $399 to $1619 (+1220) |
-| `2026-12-03 -> 2026-12-06` | Weekend | 3 | 91d | 39 | $399 | $566 | $1119 | $1686 (78%) | 🔵 **-66.4%** | **$1519** | Adjust base from $399 to $1519 (+1120) |
-| `2026-12-18 -> 2026-12-20` | Weekend | 2 | 106d | 41 | $399 | $649 | $1398 | $1749 (78%) | 🔵 **-62.9%** | **$1499** | Adjust base from $399 to $1499 (+1100) |
-| `2026-11-15 -> 2026-11-19` | Midweek | 4 | 73d | 48 | $399 | $524 | $847 | $1347 (78%) | 🔵 **-61.1%** | **$1222** | Adjust base from $399 to $1222 (+823) |
-| `2026-12-06 -> 2026-12-10` | Midweek | 4 | 94d | 44 | $399 | $524 | $809 | $1275 (78%) | 🔵 **-58.9%** | **$1150** | Adjust base from $399 to $1150 (+751) |
-| `2026-11-08 -> 2026-11-11` | Midweek | 3 | 66d | 39 | $399 | $566 | $988 | $1305 (78%) | 🔵 **-56.7%** | **$1139** | Adjust base from $399 to $1139 (+740) |
-| `2026-10-25 -> 2026-10-29` | Midweek | 4 | 52d | 49 | $399 | $524 | $935 | $1205 (72%) | 🔵 **-56.5%** | **$1080** | Adjust base from $399 to $1080 (+681) |
-| `2026-11-27 -> 2026-11-29` | Weekend | 2 | 85d | 29 | $949 | $1199 | $1904 | $2411 (78%) | 🔵 **-50.3%** | **$2161** | Adjust base from $949 to $2161 (+1212) |
-| `2026-09-27 -> 2026-09-30` | Midweek | 3 | 24d | 50 | $399 | $566 | $860 | $1106 (65%) | 🔵 **-48.9%** | **$940** | Adjust base from $399 to $940 (+541) |
-| `2026-09-24 -> 2026-09-27` | Weekend | 3 | 21d | 42 | $399 | $566 | $911 | $1022 (65%) | 🔵 **-44.7%** | **$856** | Adjust base from $399 to $856 (+457) |
-| `2026-11-29 -> 2026-12-03` | Midweek | 4 | 87d | 51 | $674 | $799 | $836 | $1330 (78%) | 🔵 **-39.9%** | **$1205** | Adjust base from $674 to $1205 (+531) |
-| `2026-09-13 -> 2026-09-17` | Midweek | 4 | 10d | 54 | $399 | $524 | $689 | $861 (65%) | 🔵 **-39.1%** | **$736** | Adjust base from $399 to $736 (+337) |
-| `2026-09-06 -> 2026-09-10` | Midweek | 4 | 3d | 46 | $499 | $624 | $724 | $996 (65%) | 🔵 **-37.3%** | **$871** | Adjust base from $499 to $871 (+372) |
-| `2026-09-20 -> 2026-09-24` | Midweek | 4 | 17d | 49 | $399 | $524 | $676 | $829 (65%) | 🔵 **-36.8%** | **$704** | Adjust base from $399 to $704 (+305) |
-| `2026-10-11 -> 2026-10-14` | Midweek | 3 | 38d | 46 | $532 | $699 | $872 | $1035 (72%) | 🔵 **-32.5%** | **$868** | Adjust base from $532 to $868 (+336) |
+| Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `2026-12-18 -> 2026-12-20` | Weekend | 2 | ↑ Increase base $399 → $1560 (+291%) | 27 | $399 | $649 (44%) | $742 | $1810 (78%) | 🔵 **-64.2%** | **$1560** |
+| `2026-11-27 -> 2026-11-29` | Weekend | 2 | ↑ Increase base $949 → $2499 (+163%) | 20 | $949 | $1199 (35%) | $1922 | $2816 (78%) | 🔵 **-57.4%** | **$2499** |
+| `2026-12-03 -> 2026-12-06` | Weekend | 3 | ↑ Increase base $399 → $912 (+129%) | 29 | $399 | $566 (41%) | $1026 | $1765 (78%) | 🔵 **-47.6%** | **$912** |
+| `2026-10-25 -> 2026-10-29` | Midweek | 4 | ↑ Increase base $399 → $795 (+99%) | 36 | $399 | $524 (19%) | $919 | $920 (50.4%) | 🔵 **-43.0%** | **$795** |
+| `2026-12-20 -> 2026-12-23` | Midweek | 3 | ↑ Increase base $399 → $728 (+82%) | 31 | $399 | $566 (29%) | $1107 | $1203 (54.6%) | 🔵 **-36.8%** | **$728** |
+| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↑ Increase base $399 → $569 (+43%) | 32 | $399 | $566 (47%) | $819 | $1002 (65%) | 🟡 -23.1% | **$569** |
+| `2026-09-13 -> 2026-09-17` | Midweek | 4 | ↓ Reduce base $399 → $301 (-25%) | 37 | $399 | $524 (62%) | $599 | $552 (45.5%) | 🟡 +22.9% | **$301** |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↑ Increase base $399 → $553 (+39%) | 37 | $399 | $524 (40%) | $847 | $897 (54.6%) | 🟡 -22.7% | **$553** |
+| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce base $399 → $297 (-26%) | 36 | $399 | $566 (58%) | $576 | $567 (45.5%) | 🟡 +22.1% | **$297** |
+| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↑ Increase base $399 → $550 (+38%) | 28 | $399 | $566 (43%) | $884 | $962 (54.6%) | 🟡 -21.0% | **$550** |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↑ Increase base $399 → $460 (+15%) | 31 | $399 | $524 (45%) | $745 | $775 (54.6%) | 🟡 -10.5% | **$460** |
+| `2026-09-06 -> 2026-09-10` | Midweek | 4 | - | 33 | $499 | $624 (42%) | $727 | $713 (45.5%) | -2.7% | **$516** |
+| `2026-09-20 -> 2026-09-24` | Midweek | 4 | - | 32 | $399 | $524 (47%) | $570 | $525 (45.5%) | -0.3% | **$400** |
+| `2026-10-11 -> 2026-10-14` | Midweek | 3 | - | 31 | $532 | $699 (61%) | $760 | $761 (50.4%) | +6.5% | **$490** |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | - | 39 | $674 | $799 (62%) | $836 | $907 (54.6%) | +7.2% | **$620** |
 
 ---
 *Generated autonomously by STR Price Advisor Agent.*

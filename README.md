@@ -86,11 +86,15 @@ Every run updates both static reporting documents and a responsive web dashboard
 
 ## 🌐 Hosting on GitHub Pages
 
-The project includes an automatic deployment workflow (`.github/workflows/deploy.yml`):
-1. On GitHub, navigate to **Settings** &rarr; **Pages**.
-2. Under **Build and deployment** &rarr; **Source**, select **GitHub Actions** (recommended) or **Deploy from a branch** (`main` / `/docs`).
-3. Whenever you push to `main`, GitHub will automatically deploy the interactive dashboard!
-4. You can also view it locally anytime by double-clicking `docs/index.html` in your browser!
+The dashboard is generated into `docs/index.html` and is designed for direct GitHub Pages hosting:
+1. On GitHub, go to your repository: [github.com/ivanpenkov/str-price-advisor](https://github.com/ivanpenkov/str-price-advisor)
+2. Click **Settings** &rarr; **Pages** (on the left sidebar).
+3. Under **Build and deployment**:
+   - **Source**: Select **Deploy from a branch**.
+   - **Branch**: Select **`main`** and choose the folder **`/docs`**.
+   - Click **Save**.
+4. GitHub Pages will publish your dashboard at your personal GitHub URL!
+5. You can also view it locally anytime by double-clicking `docs/index.html` on your Mac.
 
 ---
 

@@ -30,6 +30,13 @@ class HTMLDashboardGenerator:
         self.output_path = Path(output_path)
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
         self.comps_path = Path(comps_registry_path)
+        self.specs_path = Path("config/listing_specs.json")
+        self.listing_specs: Dict[str, Dict[str, Any]] = {}
+        if self.specs_path.exists():
+            try:
+                self.listing_specs = json.loads(self.specs_path.read_text(encoding="utf-8"))
+            except Exception:
+                pass
 
     def load_comps(self) -> Dict[str, Any]:
         """Load curated comps from registry."""
@@ -70,7 +77,18 @@ class HTMLDashboardGenerator:
                         if any(w in raw_snip.lower() for w in ["similar dates", "available for part of your stay", "check other dates", "different dates"]):
                             continue
                         if cid and rate and rate > 0.0:
-                            cached[key][str(cid)] = item
+                            cid_str = str(cid)
+                            if cid_str in self.listing_specs:
+                                sp = self.listing_specs[cid_str]
+                                if sp.get("beds"):
+                                    item["beds"] = sp["beds"]
+                                if sp.get("bedrooms"):
+                                    item["bedrooms"] = sp["bedrooms"]
+                                if sp.get("baths"):
+                                    item["baths"] = sp["baths"]
+                                if sp.get("photo_url") and not item.get("photo_url"):
+                                    item["photo_url"] = sp["photo_url"]
+                            cached[key][cid_str] = item
                 except Exception:
                     pass
         return cached
@@ -1641,9 +1659,11 @@ class HTMLDashboardGenerator:
                 name = c.get("name") or "Luxury Estate"
 
             loc = c.get("location", "Phoenix Valley")
-            br = c.get("bedrooms", 6)
-            beds = c.get("beds", br)
-            ba = c.get("baths", 4.0)
+            cid_str = str(cid)
+            sp = self.listing_specs.get(cid_str, {})
+            br = sp.get("bedrooms") or c.get("bedrooms", 6)
+            beds = sp.get("beds") or c.get("beds", br)
+            ba = sp.get("baths") or c.get("baths", 4.0)
             c_rating = c.get("rating")
             c_reviews = int(c.get("reviews", 0) or 0)
             url = c.get("url") or (f"https://www.airbnb.com/rooms/{cid}" if cid else "https://www.airbnb.com")

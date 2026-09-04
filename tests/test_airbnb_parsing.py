@@ -159,5 +159,53 @@ class TestAirbnbParsing(unittest.TestCase):
         self.assertEqual(parsed["reviews"], 0)
 
 
+    def test_bed_extraction_compound_title(self):
+        """Extract beds when formatted as '8King Beds' in title/snippet."""
+        card_text = (
+            "Guest favorite\n"
+            "Home in Paradise Valley\n"
+            "Casa Nuda 7BR 8King Beds\n"
+            "4.89 (55)\n"
+            "7 bedrooms · 6 baths\n"
+            "$492 night · $1,477 before taxes"
+        )
+        parsed = self.collector._parse_card_text("1081331699304657121", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["bedrooms"], 7)
+        self.assertEqual(parsed["beds"], 8)
+        self.assertEqual(parsed["baths"], 6.0)
+
+    def test_bed_extraction_from_listing_specs_fallback(self):
+        """When card snippet omits bed count (e.g. AI subtitle), fall back to canonical listing specs."""
+        card_text = (
+            "Guest favorite\n"
+            "Home in Paradise Valley\n"
+            "Desert contemporary with 20-foot ceilings\n"
+            "4.89 (55)\n"
+            "7 bedrooms · 6 baths\n"
+            "$492 night · $1,477 before taxes"
+        )
+        parsed = self.collector._parse_card_text("1081331699304657121", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["bedrooms"], 7)
+        self.assertEqual(parsed["beds"], 8)
+        self.assertEqual(parsed["baths"], 6.0)
+
+    def test_bed_extraction_explicit_beds(self):
+        """Listing with 'Exhale@Yale 8 Br 12beds' extracts 8 bedrooms and 12 beds."""
+        card_text = (
+            "Top guest favorite\n"
+            "Home in Phoenix\n"
+            "Exhale@Yale 8 Br 12beds\n"
+            "4.95 (40)\n"
+            "8 bedrooms · 4 baths\n"
+            "$600 night · $1,800 before taxes"
+        )
+        parsed = self.collector._parse_card_text("12141154", card_text, nights=3)
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["bedrooms"], 8)
+        self.assertEqual(parsed["beds"], 12)
+
+
 if __name__ == "__main__":
     unittest.main()

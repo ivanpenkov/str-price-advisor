@@ -44,6 +44,13 @@ class AirbnbCollector:
         self.max_delay = max_delay
         self.browser: Optional[Browser] = None
         self.context: Optional[BrowserContext] = None
+        self.specs_path = Path("config/listing_specs.json")
+        self.listing_specs: Dict[str, Dict[str, Any]] = {}
+        if self.specs_path.exists():
+            try:
+                self.listing_specs = json.loads(self.specs_path.read_text(encoding="utf-8"))
+            except Exception:
+                pass
 
     def _get_cache_key(self, check_in: str, check_out: str, location: str, tier: str) -> Path:
         raw = f"{check_in}_{check_out}_{location}_{tier}"
@@ -157,17 +164,28 @@ class AirbnbCollector:
         if total_stay_price <= 0.0 or effective_nightly <= 0.0:
             return None
 
+        spec = self.listing_specs.get(str(card_id), {})
+
         # Extract bedrooms
         br_match = re.search(r"(\d+)\s*bedrooms?", text, re.IGNORECASE)
-        bedrooms = int(br_match.group(1)) if br_match else 6
+        bedrooms = int(br_match.group(1)) if br_match else spec.get("bedrooms", 6)
 
         # Extract beds
-        bed_match = re.search(r"(\d+)\s*beds?", text, re.IGNORECASE)
-        beds = int(bed_match.group(1)) if bed_match else bedrooms
+        bed_match = re.search(
+            r"\b(\d+)\s*(?:[-–]|(?:(?:king|queen|double|single|bunk|twin|sofa|day|murphy)\s*)*)?beds?\b(?!rooms?)",
+            text,
+            re.IGNORECASE,
+        )
+        if bed_match:
+            beds = int(bed_match.group(1))
+        elif spec.get("beds"):
+            beds = int(spec["beds"])
+        else:
+            beds = bedrooms
 
         # Extract baths
         ba_match = re.search(r"(\d+(?:\.\d+)?)\s*baths?", text, re.IGNORECASE)
-        baths = float(ba_match.group(1)) if ba_match else 3.0
+        baths = float(ba_match.group(1)) if ba_match else spec.get("baths", 3.0)
 
         # Extract title / location
         lines = [line.strip() for line in text.split("\n") if line.strip()]

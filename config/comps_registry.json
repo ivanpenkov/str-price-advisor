@@ -545,6 +545,19 @@
       "url": "https://www.airbnb.com/rooms/711609909194570058",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-711609909194570058/original/65197a11-fa3d-42f6-b469-6d4f6986ae67.jpeg?im_w=720&width=720&quality=70&auto=webp"
+    },
+    "1081331699304657121": {
+      "listing_id": "1081331699304657121",
+      "name": "Desert contemporary with 20-foot ceilings (Casa Nuda)",
+      "location": "Paradise Valley",
+      "bedrooms": 7,
+      "beds": 8,
+      "baths": 6.0,
+      "rating": 4.89,
+      "reviews": 55,
+      "url": "https://www.airbnb.com/rooms/1081331699304657121",
+      "discovered_at_sample": "2026-09-24 to 2026-09-27",
+      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
     }
   },
   "tier_b": {
@@ -1422,6 +1435,6 @@
   },
   "metadata": {
     "last_updated": "2026-09-03T19:49:26.446509",
-    "total_count": 109
+    "total_count": 110
   }
 }

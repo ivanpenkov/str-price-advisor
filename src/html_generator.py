@@ -31,6 +31,11 @@ class HTMLDashboardGenerator:
         self.output_path = Path(output_path)
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
         self.comps_path = Path(comps_registry_path)
+        self.comps_data = self.load_comps()
+        self.comps_dict: Dict[str, Dict[str, Any]] = {}
+        for tier in ("tier_a", "tier_b"):
+            for cid, comp in self.comps_data.get(tier, {}).items():
+                self.comps_dict[str(cid)] = comp
         self.specs_path = Path("config/listing_specs.json")
         self.listing_specs: Dict[str, Dict[str, Any]] = {}
         if self.specs_path.exists():
@@ -1098,13 +1103,17 @@ class HTMLDashboardGenerator:
           </div>
         </div>
 
-        <!-- Quick View Filter Pills & Open Calendar Filter -->
+        <!-- Quick View Filter Pills & Open Calendar Filter & Adjusted Rates Filter -->
         <div class="interval-filter-pills" style="display: flex; gap: 10px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
-          <div style="display: flex; align-items: center; gap: 8px; margin-right: 6px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-right: 6px; flex-wrap: wrap;">
             <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Show Intervals:</span>
             <label title="Kivoya booking calendar is open through May 31, 2027 (closed from June 2027 onwards). Uncheck to show all 12 months." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #38bdf8; font-weight: 600; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
               <input type="checkbox" id="filterOpenCalendar" checked onchange="onOpenCalendarToggle()" style="width: 15px; height: 15px; accent-color: #38bdf8; cursor: pointer; border-radius: 4px;">
               <span>Open Calendar Only</span>
+            </label>
+            <label title="When checked, competitor rates are adjusted based on property quality/desirability relative to Villa del Sol, and invalid comps are excluded. Uncheck to view raw unadjusted market rates." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #a78bfa; font-weight: 600; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+              <input type="checkbox" id="filterAdjustedComps" checked onchange="toggleAdjustedComps()" style="width: 15px; height: 15px; accent-color: #a78bfa; cursor: pointer; border-radius: 4px;">
+              <span>🎯 Adjusted Comp Rates</span>
             </label>
           </div>
           <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals (<span id="count-interval-all">{len(open_segments)}</span>)</button>
@@ -1156,6 +1165,8 @@ class HTMLDashboardGenerator:
           <button class="pill-btn active" onclick="filterTier('all', this)">All Comps ({len(tier_a_comps) + len(tier_b_comps)})</button>
           <button class="pill-btn" onclick="filterTier('tier_a', this)">Tier A: Direct 16+ Guests ({len(tier_a_comps)})</button>
           <button class="pill-btn" onclick="filterTier('tier_b', this)">Tier B: 12-15 Guests ({len(tier_b_comps)})</button>
+          <button class="pill-btn" onclick="filterValidity('valid', this)" style="border-color: rgba(52,211,153,0.4); color:#34d399;">✅ Valid Comps Only</button>
+          <button class="pill-btn" onclick="filterValidity('disqualified', this)" style="border-color: rgba(239,68,68,0.4); color:#f87171;">⛔ Disqualified Comps</button>
           <button class="pill-btn" onclick="filterCity('scottsdale', this)">Scottsdale</button>
           <button class="pill-btn" onclick="filterCity('tempe', this)">Tempe</button>
           <button class="pill-btn" onclick="filterCity('mesa', this)">Mesa / Gilbert</button>
@@ -1315,6 +1326,25 @@ class HTMLDashboardGenerator:
       }});
     }}
 
+    function filterValidity(val, btn) {{
+      document.querySelectorAll('.filter-pills .pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const cards = document.querySelectorAll('.comp-card');
+      cards.forEach(card => {{
+        if (val === 'valid') {{
+          card.style.display = card.dataset.valid === 'true' ? 'flex' : 'none';
+        }} else if (val === 'disqualified') {{
+          card.style.display = card.dataset.valid === 'false' ? 'flex' : 'none';
+        }} else {{
+          card.style.display = 'flex';
+        }}
+      }});
+    }}
+
+    function toggleAdjustedComps() {{
+      applyGlobalFilters();
+    }}
+
     function toggleCompDetails(rowId, event) {{
       if (event && event.target && event.target.closest('a')) {{
         return;
@@ -1431,9 +1461,12 @@ class HTMLDashboardGenerator:
       const premCheckbox = document.getElementById('filterPremiumLocation');
       const includePremium = premCheckbox ? premCheckbox.checked : false;
 
+      const isAdj = document.getElementById('filterAdjustedComps') ? document.getElementById('filterAdjustedComps').checked : true;
+
       const statusBadge = document.getElementById('filterStatusBadge');
       if (statusBadge) {{
         let parts = [];
+        parts.push(isAdj ? 'Adjusted Rates (Quality Weighted)' : 'Raw Rates (Unadjusted)');
         if (minRating > 0) parts.push('Rating ≥ ' + minRating.toFixed(1) + ' ★');
         if (minReviews > 0) parts.push('Reviews ≥ ' + minReviews);
         if (!includePremium) {{
@@ -1443,7 +1476,7 @@ class HTMLDashboardGenerator:
         }}
 
         if (minRating === 0 && minReviews === 0 && includePremium) {{
-          statusBadge.textContent = 'All Comps Visible (Unfiltered)';
+          statusBadge.textContent = (isAdj ? 'All Comps Visible (Adjusted)' : 'All Comps Visible (Raw)');
           statusBadge.style.background = 'rgba(59, 130, 246, 0.15)';
           statusBadge.style.color = '#93c5fd';
           statusBadge.style.borderColor = 'rgba(59, 130, 246, 0.3)';
@@ -1468,6 +1501,8 @@ class HTMLDashboardGenerator:
 
         const allCompRows = container.querySelectorAll('.comp-item-row');
         const visibleComps = [];
+        const disqualifiedVisible = [];
+        const hiddenRows = [];
         let ourRow = null;
 
         allCompRows.forEach(row => {{
@@ -1481,34 +1516,82 @@ class HTMLDashboardGenerator:
           const rev = parseInt(row.dataset.reviews, 10) || 0;
           const loc = row.dataset.location || '';
           const isPremium = isPremiumLocation(loc);
+          const isValid = row.dataset.valid === 'true';
 
           const passesRating = (minRating <= 0) || (r !== null && !isNaN(r) && r >= minRating);
           const passesReviews = (minReviews <= 0) || (rev >= minReviews);
           const passesLocation = includePremium || !isPremium;
 
-          if (passesRating && passesReviews && passesLocation) {{
-            row.style.display = '';
-            visibleComps.push(row);
-          }} else {{
+          if (!passesRating || !passesReviews || !passesLocation) {{
             row.style.display = 'none';
+            hiddenRows.push(row);
+            return;
+          }}
+
+          row.style.display = '';
+          const rawPrice = parseFloat(row.dataset.rawPrice) || parseFloat(row.dataset.price);
+          const adjPrice = parseFloat(row.dataset.adjPrice) || rawPrice;
+          const activePrice = isAdj ? adjPrice : rawPrice;
+
+          // Update price display labels
+          const priceVal = row.querySelector('.price-val');
+          if (priceVal) priceVal.textContent = '$' + Math.round(activePrice);
+          const priceLabel = row.querySelector('.price-label');
+          if (priceLabel) {{
+            priceLabel.textContent = isAdj ? '/n (adj)' : '/n';
+            priceLabel.style.color = isAdj ? '#a78bfa' : '#94a3b8';
+          }}
+          const rawNote = row.querySelector('.raw-price-note');
+          if (rawNote) {{
+            rawNote.style.display = isAdj ? '' : 'none';
+          }}
+
+          // Update diff cell
+          const diffCell = row.querySelector('.comp-diff-cell');
+          if (diffCell) {{
+            if (isAdj && !isValid) {{
+              diffCell.innerHTML = '<span style="color:#64748b; font-size:0.75rem;">Excluded</span>';
+            }} else {{
+              const diffVal = activePrice - ourEff;
+              if (diffVal <= -10.0) {{
+                diffCell.innerHTML = '<span style="color:#34d399; font-weight:700; font-size:0.8rem;">▼ $' + Math.round(Math.abs(diffVal)) + '/n cheaper</span>';
+              }} else if (diffVal >= 10.0) {{
+                diffCell.innerHTML = '<span style="color:#f87171; font-weight:700; font-size:0.8rem;">▲ +$' + Math.round(diffVal) + '/n higher</span>';
+              }} else {{
+                diffCell.innerHTML = '<span style="color:#94a3b8; font-size:0.8rem;">≈ Similar rate</span>';
+              }}
+            }}
+          }}
+
+          if (isAdj && !isValid) {{
+            // Disqualified comps are excluded from pricing percentiles in adjusted mode
+            const rankCell = row.querySelector('.comp-rank-cell');
+            if (rankCell) rankCell.textContent = '-';
+            row.style.opacity = '0.55';
+            disqualifiedVisible.push(row);
+          }} else {{
+            row.style.opacity = '1.0';
+            visibleComps.push({{ row: row, price: activePrice }});
           }}
         }});
 
-        // Rank visible rows
+        // Sort visible comps ascending by active price
+        visibleComps.sort((a, b) => a.price - b.price);
+
+        // Rank visible rows and find our position
         let rank = 1;
         let cheaperCount = 0;
         let higherCount = 0;
         const visibleRates = [];
-
         const combinedVisible = [];
         let ourInserted = false;
-        visibleComps.forEach(compRow => {{
-          const price = parseFloat(compRow.dataset.price);
-          if (!ourInserted && price >= ourEff) {{
+
+        visibleComps.forEach(item => {{
+          if (!ourInserted && item.price >= ourEff) {{
             if (ourRow) combinedVisible.push(ourRow);
             ourInserted = true;
           }}
-          combinedVisible.push(compRow);
+          combinedVisible.push(item.row);
         }});
         if (!ourInserted && ourRow) {{
           combinedVisible.push(ourRow);
@@ -1521,13 +1604,21 @@ class HTMLDashboardGenerator:
           }} else {{
             const rankCell = row.querySelector('.comp-rank-cell');
             if (rankCell) rankCell.textContent = rank;
-            const price = parseFloat(row.dataset.price);
-            visibleRates.push(price);
-            if (price < ourEff) cheaperCount++;
-            else if (price > ourEff) higherCount++;
+            const p = isAdj ? (parseFloat(row.dataset.adjPrice) || parseFloat(row.dataset.price)) : (parseFloat(row.dataset.rawPrice) || parseFloat(row.dataset.price));
+            visibleRates.push(p);
+            if (p < ourEff) cheaperCount++;
+            else if (p > ourEff) higherCount++;
             rank++;
           }}
         }});
+
+        // Reorder DOM rows to match price sorting
+        const tbody = container.querySelector('tbody');
+        if (tbody) {{
+          combinedVisible.forEach(r => tbody.appendChild(r));
+          disqualifiedVisible.forEach(r => tbody.appendChild(r));
+          hiddenRows.forEach(r => tbody.appendChild(r));
+        }}
 
         const totalComps = visibleComps.length;
         const ourPct = totalComps > 0 ? Math.round((ourRank / totalComps) * 100) : 50;
@@ -1818,6 +1909,16 @@ class HTMLDashboardGenerator:
             else:
                 url = "https://www.airbnb.com"
 
+            cid_str = str(cid)
+            comp_eval = self.comps_dict.get(cid_str, {})
+            is_valid = c.get("is_valid_comp") if "is_valid_comp" in c else comp_eval.get("is_valid_comp", True)
+            ratio = float(c.get("desirability_ratio") or comp_eval.get("desirability_ratio") or 1.0)
+            adj_rate = round(eff_rate / ratio, 2) if is_valid and ratio > 0 else eff_rate
+            rationale = c.get("rationale") or comp_eval.get("rationale", "")
+            validity_reason = c.get("validity_reason") or comp_eval.get("validity_reason", "")
+            cat_scores = c.get("category_scores") or comp_eval.get("category_scores", {})
+            score = float(c.get("composite_score") or comp_eval.get("composite_score") or 88.0)
+
             clean_comps.append({
                 "is_our_property": False,
                 "listing_id": cid,
@@ -1829,6 +1930,13 @@ class HTMLDashboardGenerator:
                 "rating": c_rating,
                 "reviews": c_reviews,
                 "effective_nightly": eff_rate,
+                "adjusted_effective_nightly": adj_rate,
+                "desirability_ratio": ratio,
+                "is_valid_comp": is_valid,
+                "validity_reason": validity_reason,
+                "rationale": rationale,
+                "category_scores": cat_scores,
+                "composite_score": score,
                 "total_price": tot_price,
                 "url": url,
                 "confidence": c.get("confidence", "CONFIRMED"),
@@ -1836,14 +1944,22 @@ class HTMLDashboardGenerator:
                 "price_snippet": c.get("price_snippet", ""),
             })
 
-        # Combine all and sort by effective_nightly ascending
-        all_entries = sorted(clean_comps + [our_entry], key=lambda x: x["effective_nightly"])
+        # Sort entries: valid comps sorted by adjusted_effective_nightly, followed by our property in proper place
+        def comp_sort_key(item):
+            if item["is_our_property"]:
+                return (0, our_eff)
+            if item.get("is_valid_comp", True):
+                return (0, item.get("adjusted_effective_nightly", item["effective_nightly"]))
+            return (1, item["effective_nightly"])
 
-        cheaper_count = sum(1 for c in clean_comps if c["effective_nightly"] < our_eff)
-        higher_count = sum(1 for c in clean_comps if c["effective_nightly"] > our_eff)
-        total_comps = len(clean_comps)
+        all_entries = sorted(clean_comps + [our_entry], key=comp_sort_key)
+
+        valid_comps = [c for c in clean_comps if c.get("is_valid_comp", True)]
+        cheaper_count = sum(1 for c in valid_comps if c["adjusted_effective_nightly"] < our_eff)
+        higher_count = sum(1 for c in valid_comps if c["adjusted_effective_nightly"] > our_eff)
+        total_comps = len(valid_comps)
         our_rank = cheaper_count + 1
-        our_pct = round((our_rank / total_comps) * 100) if total_comps > 0 else round(s.get("our_percentile_rank", 50.0))
+        our_pct = round((our_rank / total_comps) * 100) if total_comps > 0 else round(s.get("our_percentile_rank_adj", 50.0))
 
         # Build subtable rows
         subtable_rows = []
@@ -1861,13 +1977,17 @@ class HTMLDashboardGenerator:
                     '<span class="badge" style="background:rgba(59,130,246,0.2); color:#93c5fd; font-size:0.68rem; margin-left:6px; vertical-align:middle;">📊 Kivoya PMS Est.</span>'
                 )
                 subtable_rows.append(f"""
-                  <tr class="comp-item-row our-property-row" data-is-our="true" data-location="South Tempe, AZ" data-price="{item['effective_nightly']:.2f}" data-rating="4.83" data-reviews="76">
+                  <tr class="comp-item-row our-property-row" data-is-our="true" data-location="South Tempe, AZ" data-price="{item['effective_nightly']:.2f}" data-raw-price="{item['effective_nightly']:.2f}" data-adj-price="{item['effective_nightly']:.2f}" data-valid="true" data-rating="4.83" data-reviews="76">
                     <td style="padding:10px 14px; text-align:center;">
                       <span class="badge our-rank-badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem; padding:3px 8px;">★ YOU (#{our_rank})</span>
                     </td>
                     <td style="padding:10px 14px; font-family:'JetBrains Mono',monospace;">
                       <strong style="color:#fbbf24; font-size:0.95rem;">${item['effective_nightly']:.0f}</strong><span style="color:#fde68a; font-size:0.75rem;">/night</span>{live_pill}
                       <div style="font-size:0.72rem; color:#fde68a; margin-top:2px;">{source_note}</div>
+                    </td>
+                    <td style="padding:10px 14px;">
+                      <span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700; font-size:0.75rem;">★ 1.00x (Baseline)</span>
+                      <div style="font-size:0.72rem; color:#cbd5e1; margin-top:2px;">Our Luxury Compound Benchmark</div>
                     </td>
                     <td style="padding:10px 14px; text-align:center;">
                       <span style="font-weight:800; color:#fbbf24;">★ 4.83</span> <span style="color:#fde68a; font-size:0.75rem;">(76)</span>
@@ -1887,7 +2007,14 @@ class HTMLDashboardGenerator:
                   </tr>
                 """)
             else:
-                diff = item["effective_nightly"] - our_eff
+                is_valid = item.get("is_valid_comp", True)
+                ratio = float(item.get("desirability_ratio") or 1.0)
+                adj_rate = float(item.get("adjusted_effective_nightly") or item["effective_nightly"])
+                raw_rate = item["effective_nightly"]
+                rationale = item.get("rationale", "")
+                validity_reason = item.get("validity_reason", "")
+
+                diff = adj_rate - our_eff
                 if diff <= -10.0:
                     diff_badge = f'<span style="color:#34d399; font-weight:700; font-size:0.8rem;">▼ ${abs(diff):.0f}/n cheaper</span>'
                 elif diff >= 10.0:
@@ -1908,13 +2035,38 @@ class HTMLDashboardGenerator:
                 rating_html = self._format_rating_display(item['rating'], rev_val)
                 loc_escaped = html.escape(str(item.get('location', '')), quote=True)
 
+                if is_valid:
+                    if ratio >= 1.05:
+                        ratio_badge = f'<span class="badge" style="background:rgba(96,165,250,0.2); color:#60a5fa; border:1px solid rgba(96,165,250,0.35); font-weight:700; font-size:0.75rem;" title="{rationale}">💎 {ratio:.2f}x (Superior)</span>'
+                    elif ratio <= 0.95:
+                        ratio_badge = f'<span class="badge" style="background:rgba(251,191,36,0.2); color:#fbbf24; border:1px solid rgba(251,191,36,0.35); font-weight:700; font-size:0.75rem;" title="{rationale}">📉 {ratio:.2f}x (Discount)</span>'
+                    else:
+                        ratio_badge = f'<span class="badge" style="background:rgba(52,211,153,0.2); color:#34d399; border:1px solid rgba(52,211,153,0.35); font-weight:700; font-size:0.75rem;" title="{rationale}">🎯 {ratio:.2f}x (Peer)</span>'
+                    ratio_td = f"""<td style="padding:9px 14px;">
+                      {ratio_badge}
+                      <div style="font-size:0.72rem; color:#94a3b8; margin-top:3px; line-height:1.25;">{rationale}</div>
+                    </td>"""
+                    row_style = "border-bottom:1px solid rgba(255,255,255,0.05);"
+                else:
+                    ratio_badge = f'<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="{validity_reason}">⛔ Disqualified Comp</span>'
+                    ratio_td = f"""<td style="padding:9px 14px;">
+                      {ratio_badge}
+                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">{validity_reason or rationale}</div>
+                    </td>"""
+                    diff_badge = '<span style="color:#64748b; font-size:0.75rem;">Excluded</span>'
+                    row_style = "border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;"
+
                 subtable_rows.append(f"""
-                  <tr class="comp-item-row" data-is-our="false" data-location="{loc_escaped}" data-price="{item['effective_nightly']:.2f}" data-rating="{r_str}" data-reviews="{rev_val}" style="border-bottom:1px solid rgba(255,255,255,0.05);">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">{rank}</td>
+                  <tr class="comp-item-row" data-is-our="false" data-location="{loc_escaped}" data-price="{adj_rate:.2f}" data-raw-price="{raw_rate:.2f}" data-adj-price="{adj_rate:.2f}" data-valid="{str(is_valid).lower()}" data-rating="{r_str}" data-reviews="{rev_val}" style="{row_style}">
+                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">{rank if is_valid else '-'}</td>
                     <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <strong style="color:#f1f5f9;">${item['effective_nightly']:.0f}</strong><span style="color:#94a3b8; font-size:0.75rem;">/night</span>{review_badge}
+                      <div class="comp-price-display">
+                        <strong class="price-val" style="color:#f1f5f9;">${adj_rate:.0f}</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>{review_badge}
+                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: ${raw_rate:.0f}/night</div>
+                      </div>
                       <div style="font-size:0.72rem; color:#64748b;">${item['total_price']:.0f} total stay</div>
                     </td>
+                    {ratio_td}
                     <td style="padding:9px 14px; text-align:center;">
                       {rating_html}
                     </td>
@@ -1927,12 +2079,13 @@ class HTMLDashboardGenerator:
                       </a>
                       <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">({item['location']})</span>
                     </td>
-                    <td style="padding:9px 14px;">
+                    <td class="comp-diff-cell" style="padding:9px 14px;">
                       {diff_badge}
                     </td>
                   </tr>
                 """)
-                rank += 1
+                if is_valid:
+                    rank += 1
 
         is_live = s.get("is_live_scan", False)
         rows_html = "".join(subtable_rows)
@@ -1953,14 +2106,15 @@ class HTMLDashboardGenerator:
               <table class="subtable">
                 <thead>
                   <tr>
-                    <th style="width:65px; text-align:center;">#</th>
+                    <th style="width:55px; text-align:center;">#</th>
                     <th style="width:160px;">Price</th>
+                    <th style="width:230px;">Quality Ratio & Valuation</th>
                     <th style="width:110px; text-align:center;">Rating</th>
                     <th style="width:90px; text-align:center;">Bedrooms</th>
                     <th style="width:85px; text-align:center;">Beds</th>
                     <th style="width:80px; text-align:center;">Baths</th>
                     <th>Name of Comp (Click to open on Airbnb)</th>
-                    <th style="width:180px;">Position vs Us</th>
+                    <th style="width:170px;">Position vs Us</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1979,50 +2133,80 @@ class HTMLDashboardGenerator:
 
             subtable_html, our_rank, total_comps, our_pct, our_eff, is_our_live = self._render_comp_subtable(s, row_id)
 
-            target_eff = float(s.get("comp_target_eff") or 0.0)
-            if is_our_live and target_eff > 0:
-                diff = round(((our_eff - target_eff) / target_eff) * 100.0, 1)
-            else:
-                diff = s["price_diff_percent"]
+            # Raw and adjusted metrics
+            diff_raw = s["price_diff_percent"]
+            diff_adj = s.get("price_diff_percent_adj", diff_raw)
 
-            if diff <= -35.0:
-                diff_html = f'<span class="badge-diff-under">{diff:.1f}%</span>'
-            elif diff >= 35.0:
-                diff_html = f'<span class="badge-diff-over">+{diff:.1f}%</span>'
-            elif abs(diff) >= 10.0:
-                diff_html = f'<span style="color:#fbbf24; font-weight:700;">{diff:+.1f}%</span>'
-            else:
-                diff_html = f'<span class="badge-diff-ok">{diff:+.1f}%</span>'
+            rec_raw = s["recommended_base_nightly"]
+            rec_adj = s.get("recommended_base_nightly_adj", rec_raw)
 
-            # Urgency / status classification
-            abs_diff = abs(diff)
-            is_urgent = (abs_diff >= 35.0)
-            is_moderate = (not is_urgent) and (abs_diff >= 10.0)
+            p50_raw = s["comp_p50_eff"]
+            p50_adj = s.get("comp_p50_adj", p50_raw)
 
-            if is_urgent:
-                tier_code = "urgent"
-                status_html = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
-                row_border = "border-left: 4px solid #ef4444;"
-            elif is_moderate:
-                tier_code = "moderate"
-                status_html = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                row_border = "border-left: 4px solid #f59e0b;"
-            else:
-                tier_code = "ok"
-                status_html = '<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
-                row_border = "border-left: 4px solid transparent;"
+            target_raw = s["comp_target_eff"]
+            target_adj = s.get("comp_target_adj", target_raw)
 
-            # Sample size N badge
-            n = s.get("n_comps", s.get("comps_count", 0))
+            n_raw = s.get("n_comps", s.get("comps_count", 0))
+            n_adj = s.get("n_comps_adj", n_raw)
+
+            action_raw = s.get("action_summary", "")
+            action_adj = s.get("action_summary_adj", action_raw)
+
+            def get_diff_badge(val: float) -> str:
+                if val <= -35.0:
+                    return f'<span class="badge-diff-under">{val:.1f}%</span>'
+                elif val >= 35.0:
+                    return f'<span class="badge-diff-over">+{val:.1f}%</span>'
+                elif abs(val) >= 10.0:
+                    return f'<span style="color:#fbbf24; font-weight:700;">{val:+.1f}%</span>'
+                else:
+                    return f'<span class="badge-diff-ok">{val:+.1f}%</span>'
+
+            diff_html_raw = get_diff_badge(diff_raw)
+            diff_html_adj = get_diff_badge(diff_adj)
+
+            def get_tier_and_status(val: float) -> Tuple[str, str, str]:
+                abs_val = abs(val)
+                if abs_val >= 35.0:
+                    tier = "urgent"
+                    status = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                    border = "border-left: 4px solid #ef4444;"
+                elif abs_val >= 10.0:
+                    tier = "moderate"
+                    status = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                    border = "border-left: 4px solid #f59e0b;"
+                else:
+                    tier = "ok"
+                    status = '<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
+                    border = "border-left: 4px solid transparent;"
+                return tier, status, border
+
+            tier_raw, status_html_raw, border_raw = get_tier_and_status(diff_raw)
+            tier_adj, status_html_adj, border_adj = get_tier_and_status(diff_adj)
+
             is_live = s.get("is_live_scan", False)
-            if n == 0:
-                n_html = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.35);" title="Market 100% booked!">🔥 0 (Sold Out)</span>'
-            elif n <= 4:
-                n_html = f'<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.35);" title="Market compression: only {n} comps unsold! High pricing power.">🔥 N={n} (Near Sold Out)</span>'
-            elif is_live:
-                n_html = f'<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N={n}</span>'
-            else:
-                n_html = f'<span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Statistical model using curated {n}-comp cohort baseline">📊 Cohort N={n}</span>'
+            def get_n_badge(count: int) -> str:
+                if count == 0:
+                    return '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.35);" title="Market 100% booked!">🔥 0 (Sold Out)</span>'
+                elif count <= 4:
+                    return f'<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.35);" title="Market compression: only {count} comps unsold!">🔥 N={count} (Near Sold Out)</span>'
+                elif is_live:
+                    return f'<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N={count}</span>'
+                else:
+                    return f'<span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N={count}</span>'
+
+            n_html_raw = get_n_badge(n_raw)
+            n_html_adj = get_n_badge(n_adj)
+
+            def get_action_style(txt: str) -> str:
+                if txt.startswith("↑"):
+                    return "color:#34d399; font-weight:700;"
+                elif txt.startswith("↓"):
+                    return "color:#f87171; font-weight:700;"
+                return ""
+
+            action_style_raw = get_action_style(action_raw)
+            action_style_adj = get_action_style(action_adj)
 
             if total_comps > 0:
                 if is_our_live:
@@ -2033,42 +2217,61 @@ class HTMLDashboardGenerator:
                     rank_tooltip = f"Villa del Sol ranks #{our_rank} out of {total_comps} competitors ({our_pct}th percentile in effective total guest cost)"
                 eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong>{live_dot} <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\" title=\"{rank_tooltip}\">({our_pct}%)</span>"
             else:
-                stored_pct = round(s.get("our_percentile_rank", 50.0))
+                stored_pct = round(s.get("our_percentile_rank_adj", s.get("our_percentile_rank", 50.0)))
                 eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\">({stored_pct}%)</span>"
 
             target_pct = s.get("target_percentile", 65.0)
             target_pct_str = f"{target_pct:.1f}".rstrip("0").rstrip(".") + "%"
 
-            action_raw = s.get('action_summary', '')
-            if action_raw.startswith("↑"):
-                action_style = "color:#34d399; font-weight:700;"
-            elif action_raw.startswith("↓"):
-                action_style = "color:#f87171; font-weight:700;"
-            else:
-                action_style = ""
-            action_display_html = action_raw
-
             is_cal_open = s.get("is_calendar_open", True)
             cal_open_str = str(is_cal_open).lower()
             closed_tag = '' if is_cal_open else ' <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>'
 
+            # Default initial render is the ADJUSTED model (since checkbox is checked by default)
             rows.append(f"""
-              <tr class="clickable-row interval-parent-row" id="parent-{row_id}" data-tier="{tier_code}" data-calendar-open="{cal_open_str}" data-detail-id="{row_id}" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown" style="{row_border}">
-                <td id="status-{row_id}" style="text-align:center;">{status_html}</td>
+              <tr class="clickable-row interval-parent-row" id="parent-{row_id}"
+                  data-tier="{tier_adj}"
+                  data-calendar-open="{cal_open_str}"
+                  data-detail-id="{row_id}"
+                  data-adj-tier="{tier_adj}"
+                  data-raw-tier="{tier_raw}"
+                  data-adj-diff-html='{diff_html_adj}'
+                  data-raw-diff-html='{diff_html_raw}'
+                  data-adj-status-html='{status_html_adj}'
+                  data-raw-status-html='{status_html_raw}'
+                  data-adj-action-html='<strong>{action_adj}</strong>'
+                  data-raw-action-html='<strong>{action_raw}</strong>'
+                  data-adj-action-style='font-size:0.85rem; {action_style_adj}'
+                  data-raw-action-style='font-size:0.85rem; {action_style_raw}'
+                  data-adj-n-html='{n_html_adj}'
+                  data-raw-n-html='{n_html_raw}'
+                  data-adj-p50='{p50_adj:.0f}'
+                  data-raw-p50='{p50_raw:.0f}'
+                  data-adj-target='{target_adj:.0f}'
+                  data-raw-target='{target_raw:.0f}'
+                  data-adj-rec='{rec_adj:.0f}'
+                  data-raw-rec='{rec_raw:.0f}'
+                  data-target-pct-str='{target_pct_str}'
+                  data-adj-border='{border_adj}'
+                  data-raw-border='{border_raw}'
+                  onclick="toggleCompDetails('{row_id}', event)"
+                  title="Click to view full competitor price breakdown"
+                  style="{border_adj}">
+                <td id="status-{row_id}" style="text-align:center;">{status_html_adj}</td>
                 <td>
                   <span class="caret-icon" id="icon-{row_id}">▶</span>
                   <span class="date-pill">{s['check_in']} &rarr; {s['check_out']}</span>{closed_tag}
                 </td>
                 <td><strong>{s['segment_type'].capitalize()}</strong></td>
                 <td>{s['nights']} nights</td>
-                <td id="diff-{row_id}">{diff_html}</td>
-                <td id="action-{row_id}" style="font-size:0.85rem; {action_style}"><strong>{action_display_html}</strong></td>
-                <td id="n-{row_id}">{n_html}</td>
+                <td id="diff-{row_id}">{diff_html_adj}</td>
+                <td id="action-{row_id}" style="font-size:0.85rem; {action_style_adj}"><strong>{action_adj}</strong></td>
+                <td id="n-{row_id}">{n_html_adj}</td>
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
                 <td id="eff-{row_id}" style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
-                <td id="p50-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">${s['comp_p50_eff']:.0f}</td>
-                <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${s['comp_target_eff']:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({target_pct_str})</span></td>
-                <td id="rec-{row_id}"><span class="rec-price">${s['recommended_base_nightly']:.0f}</span></td>
+                <td id="p50-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">${p50_adj:.0f}</td>
+                <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${target_adj:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({target_pct_str})</span></td>
+                <td id="rec-{row_id}"><span class="rec-price">${rec_adj:.0f}</span></td>
               </tr>
               <tr id="{row_id}" class="comp-details-row" style="display: none;">
                 <td colspan="12">
@@ -2099,12 +2302,67 @@ class HTMLDashboardGenerator:
                 '<div class="comp-img-wrapper" style="display:flex; align-items:center; justify-content:center; background:#1e293b; color:#64748b; font-size:2.2rem;">🏡</div>'
             )
 
+            is_valid = c.get("is_valid_comp", True)
+            ratio = float(c.get("desirability_ratio") or 1.0)
+            score = float(c.get("composite_score") or 88.0)
+            cat_scores = c.get("category_scores", {})
+            rationale = c.get("rationale", "")
+            validity_reason = c.get("validity_reason", "")
+
+            if is_valid:
+                valid_pill = '<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3); font-size:0.75rem;">✅ Valid Comp</span>'
+                if ratio >= 1.05:
+                    ratio_pill = f'<span class="badge" style="background:rgba(96,165,250,0.2); color:#60a5fa; border:1px solid rgba(96,165,250,0.35); font-weight:700; font-size:0.78rem;">💎 Ratio: {ratio:.2f}x (Superior)</span>'
+                elif ratio <= 0.95:
+                    ratio_pill = f'<span class="badge" style="background:rgba(251,191,36,0.2); color:#fbbf24; border:1px solid rgba(251,191,36,0.35); font-weight:700; font-size:0.78rem;">📉 Ratio: {ratio:.2f}x (Discount)</span>'
+                else:
+                    ratio_pill = f'<span class="badge" style="background:rgba(52,211,153,0.2); color:#34d399; border:1px solid rgba(52,211,153,0.35); font-weight:700; font-size:0.78rem;">🎯 Ratio: {ratio:.2f}x (Peer)</span>'
+
+                scores_row = ""
+                if cat_scores:
+                    scores_row = f"""
+                    <div style="display:flex; gap:6px; flex-wrap:wrap; font-size:0.72rem; color:#94a3b8; margin-top:6px; padding-top:6px; border-top:1px solid rgba(255,255,255,0.06);">
+                      <span title="Outdoor Resort Yard & Pool (30% weight)">🏊 Yard: <strong style="color:#e2e8f0;">{cat_scores.get('outdoor', 80)}</strong></span>
+                      <span title="Bedrooms, Bathrooms & Capacity (25% weight)">🛏️ Beds: <strong style="color:#e2e8f0;">{cat_scores.get('capacity', 80)}</strong></span>
+                      <span title="Interior Luxury & Games (20% weight)">✨ Luxury: <strong style="color:#e2e8f0;">{cat_scores.get('interior', 80)}</strong></span>
+                      <span title="Location & Corridor (15% weight)">📍 Loc: <strong style="color:#e2e8f0;">{cat_scores.get('location', 80)}</strong></span>
+                    </div>
+                    """
+
+                eval_block = f"""
+                <div style="margin-top:10px; background:rgba(30,41,59,0.5); border:1px solid rgba(148,163,184,0.15); border-radius:8px; padding:8px 10px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap;">
+                    {ratio_pill}
+                    <span style="font-size:0.72rem; color:#94a3b8;">Score: {score:.1f}/100</span>
+                  </div>
+                  {scores_row}
+                  <div style="font-size:0.78rem; color:#cbd5e1; margin-top:6px; line-height:1.35; border-left:3px solid #38bdf8; padding-left:7px;">
+                    {rationale}
+                  </div>
+                </div>
+                """
+                card_style = ""
+            else:
+                valid_pill = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-size:0.75rem;">⛔ Disqualified Comp</span>'
+                eval_block = f"""
+                <div style="margin-top:10px; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25); border-radius:8px; padding:8px 10px;">
+                  <div style="font-size:0.8rem; font-weight:700; color:#f87171;">Excluded from pricing model</div>
+                  <div style="font-size:0.78rem; color:#fca5a5; margin-top:4px; line-height:1.35;">
+                    {validity_reason or rationale}
+                  </div>
+                </div>
+                """
+                card_style = "border: 1px solid rgba(239,68,68,0.35); opacity: 0.85;"
+
             cards.append(f"""
-              <div class="comp-card" data-tier="{tier_code}" data-location="{c.get('location', '')}">
+              <div class="comp-card" data-tier="{tier_code}" data-valid="{str(is_valid).lower()}" data-location="{c.get('location', '')}" style="{card_style}">
                 <div>
                   {img_html}
                   <div class="comp-header">
-                    <span class="badge" style="{badge_style}; font-size:0.75rem;">{tier_label}</span>
+                    <div style="display:flex; gap:6px; align-items:center;">
+                      <span class="badge" style="{badge_style}; font-size:0.75rem;">{tier_label}</span>
+                      {valid_pill}
+                    </div>
                     <span style="font-size:0.8rem; color:#94a3b8;">{c.get('location', 'Phoenix Valley')}</span>
                   </div>
                   <div class="comp-title">{c.get('name', 'Luxury Estate')}</div>
@@ -2114,6 +2372,7 @@ class HTMLDashboardGenerator:
                     <span>🚿 {c.get('baths', 4)} Baths</span>
                     <span>{rating_str}</span>
                   </div>
+                  {eval_block}
                 </div>
                 <a href="{c.get('url', 'https://airbnb.com')}" target="_blank" rel="noopener noreferrer" class="comp-link">
                   Open on Airbnb ↗

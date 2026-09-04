@@ -8,8 +8,10 @@ Implements:
 - 3-tier priority classification (Urgent weekly, Moderate monthly, Informational)
 """
 
-import numpy as np
+import json
+from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
+import numpy as np
 
 
 class PricingAnalyticsEngine:
@@ -22,12 +24,28 @@ class PricingAnalyticsEngine:
         urgent_pct_diff: float = 35.0,
         urgent_lead_days: int = 60,
         moderate_pct_diff: float = 10.0,
+        registry_path: str = "config/comps_registry.json",
     ):
         self.base_percentile = base_percentile
         self.cleaning_fee = cleaning_fee
         self.urgent_pct_diff = urgent_pct_diff
         self.urgent_lead_days = urgent_lead_days
         self.moderate_pct_diff = moderate_pct_diff
+        self.registry_path = Path(registry_path)
+        self.comp_registry: Dict[str, Dict[str, Any]] = self._load_registry()
+
+    def _load_registry(self) -> Dict[str, Dict[str, Any]]:
+        """Load and index comps from registry by listing_id."""
+        comps = {}
+        if self.registry_path.exists():
+            try:
+                data = json.loads(self.registry_path.read_text(encoding="utf-8"))
+                for tier in ("tier_a", "tier_b"):
+                    for cid, comp in data.get(tier, {}).items():
+                        comps[str(cid)] = comp
+            except Exception:
+                pass
+        return comps
 
     def get_target_percentile(self, lead_time_days: int, segment_type: str = "weekend") -> float:
         """
@@ -160,6 +178,38 @@ class PricingAnalyticsEngine:
             our_eff = segment["our_effective_nightly"]
             channel_factor = 1.0
 
+        # Enrich comp metadata with quality evaluation from registry and compute adjusted rates
+        enriched_comps_list = []
+        adj_comp_effective_rates = []
+        for c in (comp_metadata or []):
+            comp_dict = dict(c)
+            cid = str(comp_dict.get("listing_id") or "")
+            reg_comp = self.comp_registry.get(cid, {})
+            is_valid = reg_comp.get("is_valid_comp", comp_dict.get("is_valid_comp", True))
+            ratio = float(reg_comp.get("desirability_ratio", comp_dict.get("desirability_ratio", 1.0)))
+            eff_rate = float(comp_dict.get("effective_nightly") or 0.0)
+
+            comp_dict["is_valid_comp"] = is_valid
+            comp_dict["desirability_ratio"] = ratio
+            comp_dict["validity_reason"] = reg_comp.get("validity_reason", comp_dict.get("validity_reason", ""))
+            comp_dict["rationale"] = reg_comp.get("rationale", comp_dict.get("rationale", ""))
+            comp_dict["category_scores"] = reg_comp.get("category_scores", comp_dict.get("category_scores", {}))
+            comp_dict["composite_score"] = reg_comp.get("composite_score", comp_dict.get("composite_score", 88.0))
+
+            if eff_rate > 0 and is_valid and ratio > 0:
+                adj_rate = round(eff_rate / ratio, 2)
+                comp_dict["adjusted_effective_nightly"] = adj_rate
+                adj_comp_effective_rates.append(adj_rate)
+            else:
+                comp_dict["adjusted_effective_nightly"] = eff_rate
+                if is_valid and eff_rate > 0:
+                    adj_comp_effective_rates.append(eff_rate)
+
+            enriched_comps_list.append(comp_dict)
+
+        if not adj_comp_effective_rates and comp_effective_rates:
+            adj_comp_effective_rates = comp_effective_rates
+
         clean_comps = self.remove_outliers(comp_effective_rates)
         seg_type = segment.get("segment_type", "weekend")
         target_pct = self.get_target_percentile(lead_days, segment_type=seg_type)
@@ -168,11 +218,23 @@ class PricingAnalyticsEngine:
 
         our_rank = self.compute_our_percentile_rank(our_eff, clean_comps)
 
+        # Adjusted statistics (for valid comps adjusted by desirability ratio)
+        clean_adj_comps = self.remove_outliers(adj_comp_effective_rates)
+        adj_pct_stats = self.calculate_percentiles(clean_adj_comps, target_pct)
+        adj_target_eff = adj_pct_stats["target_val"]
+        adj_p50_eff = adj_pct_stats["p50"]
+        adj_rank = self.compute_our_percentile_rank(our_eff, clean_adj_comps)
+
         # Percent discrepancy relative to target
         if target_eff > 0:
             pct_diff = round(((our_eff - target_eff) / target_eff) * 100.0, 1)
         else:
             pct_diff = 0.0
+
+        if adj_target_eff > 0:
+            adj_pct_diff = round(((our_eff - adj_target_eff) / adj_target_eff) * 100.0, 1)
+        else:
+            adj_pct_diff = 0.0
 
         rec_base = (
             self.translate_to_recommended_base_rate(target_eff, nights, channel_factor=channel_factor)
@@ -180,10 +242,20 @@ class PricingAnalyticsEngine:
         )
         rec_diff = round(rec_base - our_base, 0)
 
+        adj_rec_base = (
+            self.translate_to_recommended_base_rate(adj_target_eff, nights, channel_factor=channel_factor)
+            if adj_target_eff > 0 else our_base
+        )
+        adj_rec_diff = round(adj_rec_base - our_base, 0)
+
         # Priority classification: Normal (<10%), Review (10-35%), Urgent (>35%)
         abs_diff = abs(pct_diff)
         is_urgent = abs_diff >= self.urgent_pct_diff
         is_moderate = not is_urgent and abs_diff >= self.moderate_pct_diff
+
+        adj_abs_diff = abs(adj_pct_diff)
+        is_adj_urgent = adj_abs_diff >= self.urgent_pct_diff
+        is_adj_moderate = not is_adj_urgent and adj_abs_diff >= self.moderate_pct_diff
 
         # Sample size & statistical significance analysis
         n_comps = len(clean_comps)
@@ -217,6 +289,19 @@ class PricingAnalyticsEngine:
             tier_label = "✅ Competitive / Long Range"
             status = "ON TARGET"
 
+        if is_adj_urgent:
+            adj_tier = "URGENT_ACTION"
+            adj_tier_label = "🚨 Urgent Update (This Week)"
+            adj_status = "OVERPRICED" if adj_pct_diff > 0 else "UNDERPRICED"
+        elif is_adj_moderate:
+            adj_tier = "MODERATE_ADJUSTMENT"
+            adj_tier_label = "⚠️ Moderate Adjustment (Monthly)"
+            adj_status = "SLIGHTLY HIGH" if adj_pct_diff > 0 else "SLIGHTLY LOW"
+        else:
+            adj_tier = "INFORMATIONAL"
+            adj_tier_label = "✅ Competitive / Long Range"
+            adj_status = "ON TARGET"
+
         if abs_diff < 10.0 or rec_diff == 0:
             action_summary = ""
         else:
@@ -228,12 +313,23 @@ class PricingAnalyticsEngine:
         if action_summary and sample_significance in ["SOLD_OUT", "VERY_LOW"]:
             action_summary += " • High compression"
 
+        if adj_abs_diff < 10.0 or adj_rec_diff == 0:
+            adj_action_summary = ""
+        else:
+            if adj_rec_diff < 0:
+                adj_action_summary = f"↓ Reduce base ${our_base:.0f} → ${adj_rec_base:.0f}"
+            else:
+                adj_action_summary = f"↑ Increase base ${our_base:.0f} → ${adj_rec_base:.0f}"
+
+        if adj_action_summary and len(clean_adj_comps) <= 4 and len(clean_adj_comps) > 0:
+            adj_action_summary += " • High compression"
+
         return {
             **segment,
             "n_comps": n_comps,
             "comps_count": n_comps,
             "comps_raw_count": len(comp_effective_rates),
-            "comps_list": comp_metadata or [],
+            "comps_list": enriched_comps_list,
             "sample_significance": sample_significance,
             "sample_label": sample_label,
             "sample_note": sample_note,
@@ -252,4 +348,16 @@ class PricingAnalyticsEngine:
             "priority_label": tier_label,
             "status": status,
             "action_summary": action_summary,
+            # Adjusted metrics
+            "n_comps_adj": len(clean_adj_comps),
+            "comp_p50_adj": adj_p50_eff,
+            "comp_target_adj": adj_target_eff,
+            "price_diff_percent_adj": adj_pct_diff,
+            "recommended_base_nightly_adj": adj_rec_base,
+            "base_diff_adj": adj_rec_diff,
+            "priority_tier_adj": adj_tier,
+            "priority_label_adj": adj_tier_label,
+            "status_adj": adj_status,
+            "action_summary_adj": adj_action_summary,
+            "our_percentile_rank_adj": adj_rank,
         }

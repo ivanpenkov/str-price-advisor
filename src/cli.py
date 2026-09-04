@@ -234,6 +234,15 @@ def main():
     bootstrap_parser = subparsers.add_parser("bootstrap-comps", help="Bootstrap and curate comp registry")
     bootstrap_parser.add_argument("--limit", type=int, default=40, help="Max listings per tier")
 
+    eval_parser = subparsers.add_parser("evaluate-comps", help="Evaluate all comps in registry with 5-factor quality rubric and desirability ratios")
+    eval_parser.add_argument("--no-save", action="store_true", help="Do not write results back to comps_registry.json")
+
+    enrich_parser = subparsers.add_parser("enrich-comps", help="Deep scrape amenities, photos, and specs for registry comps")
+    enrich_parser.add_argument("--concurrency", type=int, default=2, help="Number of concurrent browser pages")
+    enrich_parser.add_argument("--limit", type=int, default=None, help="Limit number of comps to enrich")
+    enrich_parser.add_argument("--force", action="store_true", help="Force re-scraping cached comps")
+    enrich_parser.add_argument("--our-property", action="store_true", help="Enrich Villa del Sol property profile specifically")
+
     args = parser.parse_args()
 
     if args.command == "run":
@@ -268,6 +277,21 @@ def main():
         from src.comp_curator import CompCurator
         curator = CompCurator()
         asyncio.run(curator.bootstrap_market(limit_per_tier=args.limit))
+    elif args.command == "evaluate-comps":
+        from src.comp_evaluator import CompEvaluator
+        evaluator = CompEvaluator()
+        evaluator.evaluate_all_in_registry(save=not args.no_save)
+    elif args.command == "enrich-comps":
+        from src.listing_enricher import ListingEnricher
+        enricher = ListingEnricher(headless=True)
+        if args.our_property:
+            asyncio.run(enricher.enrich_our_property(force_refresh=args.force))
+        else:
+            asyncio.run(enricher.enrich_all_comps(
+                concurrency=args.concurrency,
+                limit=args.limit,
+                force_refresh=args.force,
+            ))
     elif args.command == "test-kivoya":
         test_kivoya_only()
     else:

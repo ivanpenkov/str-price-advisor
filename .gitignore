@@ -5,3 +5,4 @@ data/cache/
 *.log
 .DS_Store
 .vscode/
+scratch/

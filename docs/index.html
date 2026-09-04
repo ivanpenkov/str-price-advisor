@@ -635,7 +635,7 @@
       </div>
       <div class="header-badges">
         <span class="badge badge-primary">Dynamic Luxury Model (75th–80th %ile)</span>
-        <span class="badge badge-dark">Updated: September 03, 2026 at 11:27 PM</span>
+        <span class="badge badge-dark">Updated: September 03, 2026 at 11:32 PM</span>
       </div>
     </header>
 
@@ -649,12 +649,12 @@
       <div class="kpi-card" style="border-color: var(--urgent-border);">
         <span class="kpi-label" style="color: var(--urgent-red);">🚨 Urgent Rate Alerts</span>
         <div class="kpi-val" style="color: var(--urgent-red);">48</div>
-        <span class="kpi-desc">>25% market discrepancy or arrival &lt;60d</span>
+        <span class="kpi-desc">>35% market discrepancy</span>
       </div>
       <div class="kpi-card" style="border-color: var(--warning-border);">
         <span class="kpi-label" style="color: var(--warning-amber);">⚠️ Moderate Adjustments</span>
         <div class="kpi-val" style="color: var(--warning-amber);">30</div>
-        <span class="kpi-desc">10%–25% variance (monthly review)</span>
+        <span class="kpi-desc">10%–35% variance (monthly review)</span>
       </div>
       <div class="kpi-card">
         <span class="kpi-label">Curated Comps Registry</span>
@@ -699,14 +699,14 @@
             <label for="filterMinRating" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Min Rating:</label>
             <div style="position: relative; display: flex; align-items: center;">
               <span style="position: absolute; left: 10px; color: #fbbf24; font-size: 0.85rem;">★</span>
-              <input type="number" id="filterMinRating" value="4.0" min="0.0" max="5.0" step="0.1" 
+              <input type="number" id="filterMinRating" value="4.5" min="0.0" max="5.0" step="0.1" 
                      oninput="onFilterChange()"
                      style="background: #0f172a; border: 1px solid var(--border-color); color: #f8fafc; padding: 6px 10px 6px 26px; border-radius: 6px; width: 75px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
             </div>
             <div style="display: flex; gap: 4px;">
               <button class="filter-pill-btn" id="btn-rate-all" onclick="setFilterRating(0.0)">All</button>
-              <button class="filter-pill-btn active" id="btn-rate-40" onclick="setFilterRating(4.0)">4.0+ ★</button>
-              <button class="filter-pill-btn" id="btn-rate-45" onclick="setFilterRating(4.5)">4.5+ ★</button>
+              <button class="filter-pill-btn" id="btn-rate-40" onclick="setFilterRating(4.0)">4.0+ ★</button>
+              <button class="filter-pill-btn active" id="btn-rate-45" onclick="setFilterRating(4.5)">4.5+ ★ (Default)</button>
               <button class="filter-pill-btn" id="btn-rate-48" onclick="setFilterRating(4.8)">4.8+ ★</button>
             </div>
           </div>
@@ -714,14 +714,14 @@
           <!-- Min Reviews -->
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             <label for="filterMinReviews" style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Min Reviews:</label>
-            <input type="number" id="filterMinReviews" value="10" min="0" step="1" 
+            <input type="number" id="filterMinReviews" value="25" min="0" step="1" 
                    oninput="onFilterChange()"
                    style="background: #0f172a; border: 1px solid var(--border-color); color: #f8fafc; padding: 6px 10px; border-radius: 6px; width: 70px; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
             <div style="display: flex; gap: 4px;">
               <button class="filter-pill-btn" id="btn-rev-0" onclick="setFilterReviews(0)">All (0+)</button>
               <button class="filter-pill-btn" id="btn-rev-5" onclick="setFilterReviews(5)">5+</button>
-              <button class="filter-pill-btn active" id="btn-rev-10" onclick="setFilterReviews(10)">10+ (Default)</button>
-              <button class="filter-pill-btn" id="btn-rev-25" onclick="setFilterReviews(25)">25+</button>
+              <button class="filter-pill-btn" id="btn-rev-10" onclick="setFilterReviews(10)">10+</button>
+              <button class="filter-pill-btn active" id="btn-rev-25" onclick="setFilterReviews(25)">25+ (Default)</button>
               <button class="filter-pill-btn" id="btn-rev-50" onclick="setFilterReviews(50)">50+</button>
             </div>
           </div>
@@ -730,7 +730,7 @@
         <!-- Status & Reset -->
         <div style="display: flex; align-items: center; gap: 12px;">
           <span id="filterStatusBadge" class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.8rem;">
-            Active Filters: Rating &ge; 4.0 ★ &bull; Reviews &ge; 10
+            Active Filters: Rating &ge; 4.5 ★ &bull; Reviews &ge; 25
           </span>
           <button onclick="resetFilters()" style="background: transparent; border: 1px solid var(--border-color); color: #94a3b8; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.color='#f8fafc'; this.style.borderColor='#64748b';" onmouseout="this.style.color='#94a3b8'; this.style.borderColor='var(--border-color)';">
             🔄 Reset
@@ -747,7 +747,7 @@
             </div>
             <p class="section-desc" style="margin-top: 4px; margin-bottom: 0;">
               All unbooked weekend and midweek intervals over the next 12 months. Click any row to expand competitor pricing details. 
-              Urgency is highlighted with status badges: <strong style="color:#f87171;">🚨 Urgent</strong> (&gt;25% discrepancy or arrival &lt;60d), <strong style="color:#fbbf24;">⚠️ Review</strong> (10%–25% variance), or <strong style="color:#34d399;">✅ On Target</strong>.
+              Urgency is highlighted with status badges: <strong style="color:#f87171;">🚨 Urgent</strong> (&gt;35% discrepancy), <strong style="color:#fbbf24;">⚠️ Review</strong> (10%–35% variance), or <strong style="color:#34d399;">✅ On Target</strong>.
             </p>
           </div>
           <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
@@ -170712,7 +170712,7 @@
     <!-- Footer -->
     <footer>
       <p>STR Competitive Price Advisor for Villa del Sol • Automated Analysis Engine</p>
-      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 03, 2026 at 11:27 PM</p>
+      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 03, 2026 at 11:32 PM</p>
     </footer>
   </div>
 
@@ -170831,8 +170831,8 @@
     }
 
     function resetFilters() {
-      document.getElementById('filterMinRating').value = '4.0';
-      document.getElementById('filterMinReviews').value = '10';
+      document.getElementById('filterMinRating').value = '4.5';
+      document.getElementById('filterMinReviews').value = '25';
       onFilterChange();
     }
 

@@ -113,7 +113,7 @@ class PriceReportGenerator:
             f"- ✅ **Competitive / On Target**: **{len(info)}** intervals",
             f"",
             f"> 💡 **Action Guidance for Kivoya Property Manager**:",
-            f"> Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market or imminent arrival) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.",
+            f"> Review **Section 1** immediately. These intervals are substantially mispriced (>35% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.",
             f"",
             f"---",
             f"",
@@ -136,7 +136,7 @@ class PriceReportGenerator:
         if not moderate:
             lines.append("*(No moderate price adjustments needed at this time.)*\n")
         else:
-            lines.append("The following dates are 10%–25% off the target percentile for future dates:\n")
+            lines.append("The following dates are 10%–35% off the target percentile for future dates:\n")
             lines.append(self._format_table(moderate))
             lines.append("")
 

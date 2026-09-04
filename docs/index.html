@@ -704,7 +704,7 @@
       </div>
       <div class="header-badges">
         <span class="badge badge-primary">Dynamic Luxury Model (50th–80th %ile)</span>
-        <span class="badge badge-dark">Updated: September 04, 2026 at 02:11 AM</span>
+        <span class="badge badge-dark">Updated: September 04, 2026 at 02:32 AM</span>
       </div>
     </header>
 
@@ -823,13 +823,19 @@
           </div>
         </div>
 
-        <!-- Quick View Filter Pills -->
-        <div class="interval-filter-pills" style="display: flex; gap: 8px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
-          <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 4px;">Show Intervals:</span>
-          <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals (<span id="count-interval-all">79</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only (<span id="count-interval-urgent">14</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review (<span id="count-interval-mod">47</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target (<span id="count-interval-ok">18</span>)</button>
+        <!-- Quick View Filter Pills & Open Calendar Filter -->
+        <div class="interval-filter-pills" style="display: flex; gap: 10px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-right: 6px;">
+            <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Show Intervals:</span>
+            <label title="Kivoya booking calendar is open through May 31, 2027 (closed from June 2027 onwards). Uncheck to show all 12 months." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #38bdf8; font-weight: 600; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+              <input type="checkbox" id="filterOpenCalendar" checked onchange="onOpenCalendarToggle()" style="width: 15px; height: 15px; accent-color: #38bdf8; cursor: pointer; border-radius: 4px;">
+              <span>Open Calendar Only</span>
+            </label>
+          </div>
+          <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals (<span id="count-interval-all">52</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only (<span id="count-interval-urgent">5</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review (<span id="count-interval-mod">38</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target (<span id="count-interval-ok">9</span>)</button>
         </div>
 
         <div class="table-responsive">
@@ -852,7 +858,7 @@
             </thead>
             <tbody>
               
-              <tr class="clickable-row interval-parent-row" id="parent-row-0" data-tier="moderate" data-detail-id="row-0" onclick="toggleCompDetails('row-0', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-0" data-tier="moderate" data-calendar-open="true" data-detail-id="row-0" onclick="toggleCompDetails('row-0', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-0" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-0">▶</span>
@@ -880,6 +886,7 @@
                data-our-eff="693.5"
                data-is-our-live="true"
                data-target-pct="35.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.1114">
             <div class="subtable-scroll">
@@ -1714,7 +1721,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-1" data-tier="moderate" data-detail-id="row-1" onclick="toggleCompDetails('row-1', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-1" data-tier="moderate" data-calendar-open="true" data-detail-id="row-1" onclick="toggleCompDetails('row-1', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-1" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-1">▶</span>
@@ -1742,6 +1749,7 @@
                data-our-eff="678.25"
                data-is-our-live="true"
                data-target-pct="35.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2079">
             <div class="subtable-scroll">
@@ -2691,7 +2699,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-2" data-tier="ok" data-detail-id="row-2" onclick="toggleCompDetails('row-2', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-2" data-tier="ok" data-calendar-open="true" data-detail-id="row-2" onclick="toggleCompDetails('row-2', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-2" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-2">▶</span>
@@ -2719,6 +2727,7 @@
                data-our-eff="652.67"
                data-is-our-live="true"
                data-target-pct="35.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.1538">
             <div class="subtable-scroll">
@@ -3668,7 +3677,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-3" data-tier="ok" data-detail-id="row-3" onclick="toggleCompDetails('row-3', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-3" data-tier="ok" data-calendar-open="true" data-detail-id="row-3" onclick="toggleCompDetails('row-3', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-3" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-3">▶</span>
@@ -3696,6 +3705,7 @@
                data-our-eff="770.67"
                data-is-our-live="true"
                data-target-pct="50.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.0769">
             <div class="subtable-scroll">
@@ -4507,7 +4517,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-4" data-tier="moderate" data-detail-id="row-4" onclick="toggleCompDetails('row-4', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-4" data-tier="moderate" data-calendar-open="true" data-detail-id="row-4" onclick="toggleCompDetails('row-4', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-4" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-4">▶</span>
@@ -4535,6 +4545,7 @@
                data-our-eff="692.0"
                data-is-our-live="true"
                data-target-pct="35.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.1240">
             <div class="subtable-scroll">
@@ -5461,7 +5472,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-5" data-tier="moderate" data-detail-id="row-5" onclick="toggleCompDetails('row-5', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-5" data-tier="moderate" data-calendar-open="true" data-detail-id="row-5" onclick="toggleCompDetails('row-5', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-5" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-5">▶</span>
@@ -5489,6 +5500,7 @@
                data-our-eff="810.0"
                data-is-our-live="true"
                data-target-pct="42.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.1588">
             <div class="subtable-scroll">
@@ -6392,7 +6404,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-6" data-tier="moderate" data-detail-id="row-6" onclick="toggleCompDetails('row-6', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-6" data-tier="moderate" data-calendar-open="true" data-detail-id="row-6" onclick="toggleCompDetails('row-6', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-6" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-6">▶</span>
@@ -6420,6 +6432,7 @@
                data-our-eff="565.67"
                data-is-our-live="false"
                data-target-pct="42.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -7323,7 +7336,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-7" data-tier="moderate" data-detail-id="row-7" onclick="toggleCompDetails('row-7', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-7" data-tier="moderate" data-calendar-open="true" data-detail-id="row-7" onclick="toggleCompDetails('row-7', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-7" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-7">▶</span>
@@ -7351,6 +7364,7 @@
                data-our-eff="760.0"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2019">
             <div class="subtable-scroll">
@@ -8070,7 +8084,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-8" data-tier="moderate" data-detail-id="row-8" onclick="toggleCompDetails('row-8', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-8" data-tier="moderate" data-calendar-open="true" data-detail-id="row-8" onclick="toggleCompDetails('row-8', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-8" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-8">▶</span>
@@ -8098,6 +8112,7 @@
                data-our-eff="693.5"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2082">
             <div class="subtable-scroll">
@@ -9047,7 +9062,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-9" data-tier="moderate" data-detail-id="row-9" onclick="toggleCompDetails('row-9', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-9" data-tier="moderate" data-calendar-open="true" data-detail-id="row-9" onclick="toggleCompDetails('row-9', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-9" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-9">▶</span>
@@ -9075,6 +9090,7 @@
                data-our-eff="973.0"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2178">
             <div class="subtable-scroll">
@@ -10047,7 +10063,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-10" data-tier="urgent" data-detail-id="row-10" onclick="toggleCompDetails('row-10', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-10" data-tier="urgent" data-calendar-open="true" data-detail-id="row-10" onclick="toggleCompDetails('row-10', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-10" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-10">▶</span>
@@ -10075,6 +10091,7 @@
                data-our-eff="925.33"
                data-is-our-live="true"
                data-target-pct="70.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2085">
             <div class="subtable-scroll">
@@ -10840,7 +10857,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-11" data-tier="ok" data-detail-id="row-11" onclick="toggleCompDetails('row-11', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-11" data-tier="ok" data-calendar-open="true" data-detail-id="row-11" onclick="toggleCompDetails('row-11', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-11" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-11">▶</span>
@@ -10868,6 +10885,7 @@
                data-our-eff="693.5"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2082">
             <div class="subtable-scroll">
@@ -11633,7 +11651,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-12" data-tier="moderate" data-detail-id="row-12" onclick="toggleCompDetails('row-12', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-12" data-tier="moderate" data-calendar-open="true" data-detail-id="row-12" onclick="toggleCompDetails('row-12', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-12" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-12">▶</span>
@@ -11661,6 +11679,7 @@
                data-our-eff="760.0"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2019">
             <div class="subtable-scroll">
@@ -12426,7 +12445,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-13" data-tier="moderate" data-detail-id="row-13" onclick="toggleCompDetails('row-13', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-13" data-tier="moderate" data-calendar-open="true" data-detail-id="row-13" onclick="toggleCompDetails('row-13', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-13" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-13">▶</span>
@@ -12454,6 +12473,7 @@
                data-our-eff="1314.5"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2239">
             <div class="subtable-scroll">
@@ -13173,7 +13193,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-14" data-tier="moderate" data-detail-id="row-14" onclick="toggleCompDetails('row-14', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-14" data-tier="moderate" data-calendar-open="true" data-detail-id="row-14" onclick="toggleCompDetails('row-14', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-14" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-14">▶</span>
@@ -13201,6 +13221,7 @@
                data-our-eff="988.33"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2117">
             <div class="subtable-scroll">
@@ -14288,7 +14309,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-15" data-tier="moderate" data-detail-id="row-15" onclick="toggleCompDetails('row-15', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-15" data-tier="moderate" data-calendar-open="true" data-detail-id="row-15" onclick="toggleCompDetails('row-15', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-15" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-15">▶</span>
@@ -14316,6 +14337,7 @@
                data-our-eff="1297.33"
                data-is-our-live="true"
                data-target-pct="70.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2174">
             <div class="subtable-scroll">
@@ -15196,7 +15218,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-16" data-tier="moderate" data-detail-id="row-16" onclick="toggleCompDetails('row-16', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-16" data-tier="moderate" data-calendar-open="true" data-detail-id="row-16" onclick="toggleCompDetails('row-16', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-16" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-16">▶</span>
@@ -15224,6 +15246,7 @@
                data-our-eff="1019.75"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2191">
             <div class="subtable-scroll">
@@ -16173,7 +16196,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-17" data-tier="moderate" data-detail-id="row-17" onclick="toggleCompDetails('row-17', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-17" data-tier="moderate" data-calendar-open="true" data-detail-id="row-17" onclick="toggleCompDetails('row-17', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-17" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-17">▶</span>
@@ -16201,6 +16224,7 @@
                data-our-eff="899.0"
                data-is-our-live="false"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -18461,7 +18485,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-18" data-tier="moderate" data-detail-id="row-18" onclick="toggleCompDetails('row-18', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-18" data-tier="moderate" data-calendar-open="true" data-detail-id="row-18" onclick="toggleCompDetails('row-18', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-18" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-18">▶</span>
@@ -18489,6 +18513,7 @@
                data-our-eff="1297.33"
                data-is-our-live="true"
                data-target-pct="70.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2174">
             <div class="subtable-scroll">
@@ -19277,7 +19302,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-19" data-tier="ok" data-detail-id="row-19" onclick="toggleCompDetails('row-19', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-19" data-tier="ok" data-calendar-open="true" data-detail-id="row-19" onclick="toggleCompDetails('row-19', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-19" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-19">▶</span>
@@ -19305,6 +19330,7 @@
                data-our-eff="1019.75"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2191">
             <div class="subtable-scroll">
@@ -20185,7 +20211,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-20" data-tier="moderate" data-detail-id="row-20" onclick="toggleCompDetails('row-20', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-20" data-tier="moderate" data-calendar-open="true" data-detail-id="row-20" onclick="toggleCompDetails('row-20', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-20" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-20">▶</span>
@@ -20213,6 +20239,7 @@
                data-our-eff="1297.33"
                data-is-our-live="true"
                data-target-pct="70.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2174">
             <div class="subtable-scroll">
@@ -21116,7 +21143,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-21" data-tier="moderate" data-detail-id="row-21" onclick="toggleCompDetails('row-21', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-21" data-tier="moderate" data-calendar-open="true" data-detail-id="row-21" onclick="toggleCompDetails('row-21', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-21" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-21">▶</span>
@@ -21144,6 +21171,7 @@
                data-our-eff="1112.75"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2208">
             <div class="subtable-scroll">
@@ -22093,7 +22121,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-22" data-tier="moderate" data-detail-id="row-22" onclick="toggleCompDetails('row-22', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-22" data-tier="moderate" data-calendar-open="true" data-detail-id="row-22" onclick="toggleCompDetails('row-22', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-22" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-22">▶</span>
@@ -22121,6 +22149,7 @@
                data-our-eff="1545.33"
                data-is-our-live="true"
                data-target-pct="70.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2210">
             <div class="subtable-scroll">
@@ -22886,7 +22915,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-23" data-tier="moderate" data-detail-id="row-23" onclick="toggleCompDetails('row-23', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-23" data-tier="moderate" data-calendar-open="true" data-detail-id="row-23" onclick="toggleCompDetails('row-23', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-23" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-23">▶</span>
@@ -22914,6 +22943,7 @@
                data-our-eff="1256.67"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2173">
             <div class="subtable-scroll">
@@ -23679,7 +23709,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-24" data-tier="ok" data-detail-id="row-24" onclick="toggleCompDetails('row-24', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-24" data-tier="ok" data-calendar-open="true" data-detail-id="row-24" onclick="toggleCompDetails('row-24', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-24" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-24">▶</span>
@@ -23707,6 +23737,7 @@
                data-our-eff="1174.75"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2218">
             <div class="subtable-scroll">
@@ -24426,7 +24457,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-25" data-tier="moderate" data-detail-id="row-25" onclick="toggleCompDetails('row-25', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-25" data-tier="moderate" data-calendar-open="true" data-detail-id="row-25" onclick="toggleCompDetails('row-25', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-25" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-25">▶</span>
@@ -24454,6 +24485,7 @@
                data-our-eff="1545.33"
                data-is-our-live="true"
                data-target-pct="70.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2210">
             <div class="subtable-scroll">
@@ -25311,7 +25343,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-26" data-tier="ok" data-detail-id="row-26" onclick="toggleCompDetails('row-26', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-26" data-tier="ok" data-calendar-open="true" data-detail-id="row-26" onclick="toggleCompDetails('row-26', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-26" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-26">▶</span>
@@ -25339,6 +25371,7 @@
                data-our-eff="1174.75"
                data-is-our-live="true"
                data-target-pct="49.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2218">
             <div class="subtable-scroll">
@@ -26173,7 +26206,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-27" data-tier="moderate" data-detail-id="row-27" onclick="toggleCompDetails('row-27', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-27" data-tier="moderate" data-calendar-open="true" data-detail-id="row-27" onclick="toggleCompDetails('row-27', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-27" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-27">▶</span>
@@ -26201,6 +26234,7 @@
                data-our-eff="1669.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2224">
             <div class="subtable-scroll">
@@ -26989,7 +27023,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-28" data-tier="ok" data-detail-id="row-28" onclick="toggleCompDetails('row-28', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-28" data-tier="ok" data-calendar-open="true" data-detail-id="row-28" onclick="toggleCompDetails('row-28', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-28" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-28">▶</span>
@@ -27017,6 +27051,7 @@
                data-our-eff="1205.75"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2223">
             <div class="subtable-scroll">
@@ -27874,7 +27909,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-29" data-tier="moderate" data-detail-id="row-29" onclick="toggleCompDetails('row-29', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-29" data-tier="moderate" data-calendar-open="true" data-detail-id="row-29" onclick="toggleCompDetails('row-29', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-29" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-29">▶</span>
@@ -27902,6 +27937,7 @@
                data-our-eff="1669.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2224">
             <div class="subtable-scroll">
@@ -28713,7 +28749,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-30" data-tier="moderate" data-detail-id="row-30" onclick="toggleCompDetails('row-30', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-30" data-tier="moderate" data-calendar-open="true" data-detail-id="row-30" onclick="toggleCompDetails('row-30', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-30" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-30">▶</span>
@@ -28741,6 +28777,7 @@
                data-our-eff="1298.0"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2180">
             <div class="subtable-scroll">
@@ -29575,7 +29612,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-31" data-tier="ok" data-detail-id="row-31" onclick="toggleCompDetails('row-31', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-31" data-tier="ok" data-calendar-open="true" data-detail-id="row-31" onclick="toggleCompDetails('row-31', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-31" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-31">▶</span>
@@ -29603,6 +29640,7 @@
                data-our-eff="1499.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2251">
             <div class="subtable-scroll">
@@ -30460,7 +30498,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-32" data-tier="moderate" data-detail-id="row-32" onclick="toggleCompDetails('row-32', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-32" data-tier="moderate" data-calendar-open="true" data-detail-id="row-32" onclick="toggleCompDetails('row-32', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-32" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-32">▶</span>
@@ -30488,6 +30526,7 @@
                data-our-eff="1545.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2210">
             <div class="subtable-scroll">
@@ -31276,7 +31315,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-33" data-tier="moderate" data-detail-id="row-33" onclick="toggleCompDetails('row-33', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-33" data-tier="moderate" data-calendar-open="true" data-detail-id="row-33" onclick="toggleCompDetails('row-33', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-33" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-33">▶</span>
@@ -31304,6 +31343,7 @@
                data-our-eff="1174.75"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2218">
             <div class="subtable-scroll">
@@ -32161,7 +32201,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-34" data-tier="moderate" data-detail-id="row-34" onclick="toggleCompDetails('row-34', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-34" data-tier="moderate" data-calendar-open="true" data-detail-id="row-34" onclick="toggleCompDetails('row-34', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-34" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-34">▶</span>
@@ -32189,6 +32229,7 @@
                data-our-eff="1669.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2224">
             <div class="subtable-scroll">
@@ -33000,7 +33041,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-35" data-tier="moderate" data-detail-id="row-35" onclick="toggleCompDetails('row-35', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-35" data-tier="moderate" data-calendar-open="true" data-detail-id="row-35" onclick="toggleCompDetails('row-35', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-35" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-35">▶</span>
@@ -33028,6 +33069,7 @@
                data-our-eff="1437.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2244">
             <div class="subtable-scroll">
@@ -34092,7 +34134,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-36" data-tier="moderate" data-detail-id="row-36" onclick="toggleCompDetails('row-36', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-36" data-tier="moderate" data-calendar-open="true" data-detail-id="row-36" onclick="toggleCompDetails('row-36', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-36" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-36">▶</span>
@@ -34120,6 +34162,7 @@
                data-our-eff="1669.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2224">
             <div class="subtable-scroll">
@@ -35023,7 +35066,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-37" data-tier="moderate" data-detail-id="row-37" onclick="toggleCompDetails('row-37', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-37" data-tier="moderate" data-calendar-open="true" data-detail-id="row-37" onclick="toggleCompDetails('row-37', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-37" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-37">▶</span>
@@ -35051,6 +35094,7 @@
                data-our-eff="1437.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2244">
             <div class="subtable-scroll">
@@ -36115,7 +36159,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-38" data-tier="moderate" data-detail-id="row-38" onclick="toggleCompDetails('row-38', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-38" data-tier="moderate" data-calendar-open="true" data-detail-id="row-38" onclick="toggleCompDetails('row-38', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-38" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-38">▶</span>
@@ -36143,6 +36187,7 @@
                data-our-eff="1669.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2224">
             <div class="subtable-scroll">
@@ -37069,7 +37114,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-39" data-tier="moderate" data-detail-id="row-39" onclick="toggleCompDetails('row-39', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-39" data-tier="moderate" data-calendar-open="true" data-detail-id="row-39" onclick="toggleCompDetails('row-39', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-39" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-39">▶</span>
@@ -37097,6 +37142,7 @@
                data-our-eff="1437.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2244">
             <div class="subtable-scroll">
@@ -38092,7 +38138,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-40" data-tier="moderate" data-detail-id="row-40" onclick="toggleCompDetails('row-40', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-40" data-tier="moderate" data-calendar-open="true" data-detail-id="row-40" onclick="toggleCompDetails('row-40', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-40" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-40">▶</span>
@@ -38120,6 +38166,7 @@
                data-our-eff="1669.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2224">
             <div class="subtable-scroll">
@@ -39161,7 +39208,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-41" data-tier="moderate" data-detail-id="row-41" onclick="toggleCompDetails('row-41', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-41" data-tier="moderate" data-calendar-open="true" data-detail-id="row-41" onclick="toggleCompDetails('row-41', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-41" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-41">▶</span>
@@ -39189,6 +39236,7 @@
                data-our-eff="1437.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2244">
             <div class="subtable-scroll">
@@ -40276,7 +40324,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-42" data-tier="moderate" data-detail-id="row-42" onclick="toggleCompDetails('row-42', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-42" data-tier="moderate" data-calendar-open="true" data-detail-id="row-42" onclick="toggleCompDetails('row-42', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-42" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-42">▶</span>
@@ -40304,6 +40352,7 @@
                data-our-eff="1483.67"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2205">
             <div class="subtable-scroll">
@@ -41207,7 +41256,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-43" data-tier="moderate" data-detail-id="row-43" onclick="toggleCompDetails('row-43', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-43" data-tier="moderate" data-calendar-open="true" data-detail-id="row-43" onclick="toggleCompDetails('row-43', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-43" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-43">▶</span>
@@ -41235,6 +41284,7 @@
                data-our-eff="982.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2182">
             <div class="subtable-scroll">
@@ -42437,7 +42487,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-44" data-tier="moderate" data-detail-id="row-44" onclick="toggleCompDetails('row-44', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-44" data-tier="moderate" data-calendar-open="true" data-detail-id="row-44" onclick="toggleCompDetails('row-44', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-44" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-44">▶</span>
@@ -42465,6 +42515,7 @@
                data-our-eff="1112.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2148">
             <div class="subtable-scroll">
@@ -43552,7 +43603,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-45" data-tier="moderate" data-detail-id="row-45" onclick="toggleCompDetails('row-45', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-45" data-tier="moderate" data-calendar-open="true" data-detail-id="row-45" onclick="toggleCompDetails('row-45', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-45" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-45">▶</span>
@@ -43580,6 +43631,7 @@
                data-our-eff="982.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2182">
             <div class="subtable-scroll">
@@ -44759,7 +44811,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-46" data-tier="urgent" data-detail-id="row-46" onclick="toggleCompDetails('row-46', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-46" data-tier="urgent" data-calendar-open="true" data-detail-id="row-46" onclick="toggleCompDetails('row-46', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-46" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-46">▶</span>
@@ -44787,6 +44839,7 @@
                data-our-eff="1112.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2148">
             <div class="subtable-scroll">
@@ -45874,7 +45927,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-47" data-tier="moderate" data-detail-id="row-47" onclick="toggleCompDetails('row-47', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-47" data-tier="moderate" data-calendar-open="true" data-detail-id="row-47" onclick="toggleCompDetails('row-47', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-47" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-47">▶</span>
@@ -45902,6 +45955,7 @@
                data-our-eff="982.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2182">
             <div class="subtable-scroll">
@@ -47127,7 +47181,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-48" data-tier="urgent" data-detail-id="row-48" onclick="toggleCompDetails('row-48', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-48" data-tier="urgent" data-calendar-open="true" data-detail-id="row-48" onclick="toggleCompDetails('row-48', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-48" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-48">▶</span>
@@ -47155,6 +47209,7 @@
                data-our-eff="1112.33"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2148">
             <div class="subtable-scroll">
@@ -48265,7 +48320,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-49" data-tier="ok" data-detail-id="row-49" onclick="toggleCompDetails('row-49', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-49" data-tier="ok" data-calendar-open="true" data-detail-id="row-49" onclick="toggleCompDetails('row-49', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-49" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-49">▶</span>
@@ -48293,6 +48348,7 @@
                data-our-eff="982.5"
                data-is-our-live="true"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2182">
             <div class="subtable-scroll">
@@ -49472,7 +49528,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-50" data-tier="urgent" data-detail-id="row-50" onclick="toggleCompDetails('row-50', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-50" data-tier="urgent" data-calendar-open="true" data-detail-id="row-50" onclick="toggleCompDetails('row-50', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-50" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-50">▶</span>
@@ -49500,6 +49556,7 @@
                data-our-eff="987.67"
                data-is-our-live="true"
                data-target-pct="80.0"
+               data-calendar-open="true"
                data-is-live-scan="true"
                data-channel-factor="1.2109">
             <div class="subtable-scroll">
@@ -50495,7 +50552,7 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-51" data-tier="urgent" data-detail-id="row-51" onclick="toggleCompDetails('row-51', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-51" data-tier="urgent" data-calendar-open="true" data-detail-id="row-51" onclick="toggleCompDetails('row-51', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-51" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-51">▶</span>
@@ -50523,6 +50580,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="true"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -52783,11 +52841,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-52" data-tier="urgent" data-detail-id="row-52" onclick="toggleCompDetails('row-52', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-52" data-tier="urgent" data-calendar-open="false" data-detail-id="row-52" onclick="toggleCompDetails('row-52', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-52" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-52">▶</span>
-                  <span class="date-pill">2027-06-03 &rarr; 2027-06-06</span>
+                  <span class="date-pill">2027-06-03 &rarr; 2027-06-06</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -52811,6 +52869,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -55071,11 +55130,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-53" data-tier="moderate" data-detail-id="row-53" onclick="toggleCompDetails('row-53', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-53" data-tier="moderate" data-calendar-open="false" data-detail-id="row-53" onclick="toggleCompDetails('row-53', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-53" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-53">▶</span>
-                  <span class="date-pill">2027-06-06 &rarr; 2027-06-10</span>
+                  <span class="date-pill">2027-06-06 &rarr; 2027-06-10</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -55099,6 +55158,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -57359,11 +57419,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-54" data-tier="urgent" data-detail-id="row-54" onclick="toggleCompDetails('row-54', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-54" data-tier="urgent" data-calendar-open="false" data-detail-id="row-54" onclick="toggleCompDetails('row-54', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-54" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-54">▶</span>
-                  <span class="date-pill">2027-06-10 &rarr; 2027-06-13</span>
+                  <span class="date-pill">2027-06-10 &rarr; 2027-06-13</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -57387,6 +57447,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -59647,11 +59708,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-55" data-tier="moderate" data-detail-id="row-55" onclick="toggleCompDetails('row-55', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-55" data-tier="moderate" data-calendar-open="false" data-detail-id="row-55" onclick="toggleCompDetails('row-55', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-55" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-55">▶</span>
-                  <span class="date-pill">2027-06-13 &rarr; 2027-06-17</span>
+                  <span class="date-pill">2027-06-13 &rarr; 2027-06-17</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -59675,6 +59736,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -61935,11 +61997,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-56" data-tier="urgent" data-detail-id="row-56" onclick="toggleCompDetails('row-56', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-56" data-tier="urgent" data-calendar-open="false" data-detail-id="row-56" onclick="toggleCompDetails('row-56', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-56" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-56">▶</span>
-                  <span class="date-pill">2027-06-17 &rarr; 2027-06-20</span>
+                  <span class="date-pill">2027-06-17 &rarr; 2027-06-20</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -61963,6 +62025,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -64223,11 +64286,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-57" data-tier="moderate" data-detail-id="row-57" onclick="toggleCompDetails('row-57', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-57" data-tier="moderate" data-calendar-open="false" data-detail-id="row-57" onclick="toggleCompDetails('row-57', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-57" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-57">▶</span>
-                  <span class="date-pill">2027-06-20 &rarr; 2027-06-24</span>
+                  <span class="date-pill">2027-06-20 &rarr; 2027-06-24</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -64251,6 +64314,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -66511,11 +66575,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-58" data-tier="urgent" data-detail-id="row-58" onclick="toggleCompDetails('row-58', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-58" data-tier="urgent" data-calendar-open="false" data-detail-id="row-58" onclick="toggleCompDetails('row-58', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-58" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-58">▶</span>
-                  <span class="date-pill">2027-06-24 &rarr; 2027-06-27</span>
+                  <span class="date-pill">2027-06-24 &rarr; 2027-06-27</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -66539,6 +66603,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -68799,11 +68864,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-59" data-tier="moderate" data-detail-id="row-59" onclick="toggleCompDetails('row-59', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-59" data-tier="moderate" data-calendar-open="false" data-detail-id="row-59" onclick="toggleCompDetails('row-59', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-59" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-59">▶</span>
-                  <span class="date-pill">2027-06-27 &rarr; 2027-07-01</span>
+                  <span class="date-pill">2027-06-27 &rarr; 2027-07-01</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -68827,6 +68892,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -71087,11 +71153,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-60" data-tier="moderate" data-detail-id="row-60" onclick="toggleCompDetails('row-60', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-60" data-tier="moderate" data-calendar-open="false" data-detail-id="row-60" onclick="toggleCompDetails('row-60', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-60" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-60">▶</span>
-                  <span class="date-pill">2027-07-01 &rarr; 2027-07-04</span>
+                  <span class="date-pill">2027-07-01 &rarr; 2027-07-04</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -71115,6 +71181,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -73375,11 +73442,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-61" data-tier="ok" data-detail-id="row-61" onclick="toggleCompDetails('row-61', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-61" data-tier="ok" data-calendar-open="false" data-detail-id="row-61" onclick="toggleCompDetails('row-61', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-61" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-61">▶</span>
-                  <span class="date-pill">2027-07-04 &rarr; 2027-07-08</span>
+                  <span class="date-pill">2027-07-04 &rarr; 2027-07-08</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -73403,6 +73470,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -75663,11 +75731,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-62" data-tier="moderate" data-detail-id="row-62" onclick="toggleCompDetails('row-62', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-62" data-tier="moderate" data-calendar-open="false" data-detail-id="row-62" onclick="toggleCompDetails('row-62', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-62" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-62">▶</span>
-                  <span class="date-pill">2027-07-08 &rarr; 2027-07-11</span>
+                  <span class="date-pill">2027-07-08 &rarr; 2027-07-11</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -75691,6 +75759,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -77951,11 +78020,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-63" data-tier="ok" data-detail-id="row-63" onclick="toggleCompDetails('row-63', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-63" data-tier="ok" data-calendar-open="false" data-detail-id="row-63" onclick="toggleCompDetails('row-63', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-63" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-63">▶</span>
-                  <span class="date-pill">2027-07-11 &rarr; 2027-07-15</span>
+                  <span class="date-pill">2027-07-11 &rarr; 2027-07-15</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -77979,6 +78048,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -80239,11 +80309,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-64" data-tier="moderate" data-detail-id="row-64" onclick="toggleCompDetails('row-64', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-64" data-tier="moderate" data-calendar-open="false" data-detail-id="row-64" onclick="toggleCompDetails('row-64', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-64" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-64">▶</span>
-                  <span class="date-pill">2027-07-15 &rarr; 2027-07-18</span>
+                  <span class="date-pill">2027-07-15 &rarr; 2027-07-18</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -80267,6 +80337,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -82527,11 +82598,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-65" data-tier="ok" data-detail-id="row-65" onclick="toggleCompDetails('row-65', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-65" data-tier="ok" data-calendar-open="false" data-detail-id="row-65" onclick="toggleCompDetails('row-65', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-65" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-65">▶</span>
-                  <span class="date-pill">2027-07-18 &rarr; 2027-07-22</span>
+                  <span class="date-pill">2027-07-18 &rarr; 2027-07-22</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -82555,6 +82626,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -84815,11 +84887,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-66" data-tier="moderate" data-detail-id="row-66" onclick="toggleCompDetails('row-66', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-66" data-tier="moderate" data-calendar-open="false" data-detail-id="row-66" onclick="toggleCompDetails('row-66', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-66" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-66">▶</span>
-                  <span class="date-pill">2027-07-22 &rarr; 2027-07-25</span>
+                  <span class="date-pill">2027-07-22 &rarr; 2027-07-25</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -84843,6 +84915,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -87103,11 +87176,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-67" data-tier="ok" data-detail-id="row-67" onclick="toggleCompDetails('row-67', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-67" data-tier="ok" data-calendar-open="false" data-detail-id="row-67" onclick="toggleCompDetails('row-67', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-67" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-67">▶</span>
-                  <span class="date-pill">2027-07-25 &rarr; 2027-07-29</span>
+                  <span class="date-pill">2027-07-25 &rarr; 2027-07-29</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -87131,6 +87204,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -89391,11 +89465,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-68" data-tier="moderate" data-detail-id="row-68" onclick="toggleCompDetails('row-68', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-68" data-tier="moderate" data-calendar-open="false" data-detail-id="row-68" onclick="toggleCompDetails('row-68', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #f59e0b;">
                 <td id="status-row-68" style="text-align:center;"><span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-68">▶</span>
-                  <span class="date-pill">2027-07-29 &rarr; 2027-08-01</span>
+                  <span class="date-pill">2027-07-29 &rarr; 2027-08-01</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -89419,6 +89493,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -91679,11 +91754,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-69" data-tier="ok" data-detail-id="row-69" onclick="toggleCompDetails('row-69', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-69" data-tier="ok" data-calendar-open="false" data-detail-id="row-69" onclick="toggleCompDetails('row-69', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-69" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-69">▶</span>
-                  <span class="date-pill">2027-08-01 &rarr; 2027-08-05</span>
+                  <span class="date-pill">2027-08-01 &rarr; 2027-08-05</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -91707,6 +91782,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -93967,11 +94043,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-70" data-tier="urgent" data-detail-id="row-70" onclick="toggleCompDetails('row-70', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-70" data-tier="urgent" data-calendar-open="false" data-detail-id="row-70" onclick="toggleCompDetails('row-70', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-70" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-70">▶</span>
-                  <span class="date-pill">2027-08-05 &rarr; 2027-08-08</span>
+                  <span class="date-pill">2027-08-05 &rarr; 2027-08-08</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -93995,6 +94071,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -96255,11 +96332,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-71" data-tier="ok" data-detail-id="row-71" onclick="toggleCompDetails('row-71', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-71" data-tier="ok" data-calendar-open="false" data-detail-id="row-71" onclick="toggleCompDetails('row-71', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-71" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-71">▶</span>
-                  <span class="date-pill">2027-08-08 &rarr; 2027-08-12</span>
+                  <span class="date-pill">2027-08-08 &rarr; 2027-08-12</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -96283,6 +96360,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -98543,11 +98621,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-72" data-tier="urgent" data-detail-id="row-72" onclick="toggleCompDetails('row-72', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-72" data-tier="urgent" data-calendar-open="false" data-detail-id="row-72" onclick="toggleCompDetails('row-72', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-72" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-72">▶</span>
-                  <span class="date-pill">2027-08-12 &rarr; 2027-08-15</span>
+                  <span class="date-pill">2027-08-12 &rarr; 2027-08-15</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -98571,6 +98649,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -100831,11 +100910,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-73" data-tier="ok" data-detail-id="row-73" onclick="toggleCompDetails('row-73', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-73" data-tier="ok" data-calendar-open="false" data-detail-id="row-73" onclick="toggleCompDetails('row-73', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-73" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-73">▶</span>
-                  <span class="date-pill">2027-08-15 &rarr; 2027-08-19</span>
+                  <span class="date-pill">2027-08-15 &rarr; 2027-08-19</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -100859,6 +100938,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -103119,11 +103199,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-74" data-tier="urgent" data-detail-id="row-74" onclick="toggleCompDetails('row-74', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-74" data-tier="urgent" data-calendar-open="false" data-detail-id="row-74" onclick="toggleCompDetails('row-74', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-74" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-74">▶</span>
-                  <span class="date-pill">2027-08-19 &rarr; 2027-08-22</span>
+                  <span class="date-pill">2027-08-19 &rarr; 2027-08-22</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -103147,6 +103227,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -105407,11 +105488,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-75" data-tier="ok" data-detail-id="row-75" onclick="toggleCompDetails('row-75', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-75" data-tier="ok" data-calendar-open="false" data-detail-id="row-75" onclick="toggleCompDetails('row-75', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-75" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-75">▶</span>
-                  <span class="date-pill">2027-08-22 &rarr; 2027-08-26</span>
+                  <span class="date-pill">2027-08-22 &rarr; 2027-08-26</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -105435,6 +105516,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -107695,11 +107777,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-76" data-tier="urgent" data-detail-id="row-76" onclick="toggleCompDetails('row-76', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-76" data-tier="urgent" data-calendar-open="false" data-detail-id="row-76" onclick="toggleCompDetails('row-76', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-76" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-76">▶</span>
-                  <span class="date-pill">2027-08-26 &rarr; 2027-08-29</span>
+                  <span class="date-pill">2027-08-26 &rarr; 2027-08-29</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -107723,6 +107805,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -109983,11 +110066,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-77" data-tier="ok" data-detail-id="row-77" onclick="toggleCompDetails('row-77', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-77" data-tier="ok" data-calendar-open="false" data-detail-id="row-77" onclick="toggleCompDetails('row-77', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid transparent;">
                 <td id="status-row-77" style="text-align:center;"><span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-77">▶</span>
-                  <span class="date-pill">2027-08-29 &rarr; 2027-09-02</span>
+                  <span class="date-pill">2027-08-29 &rarr; 2027-09-02</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
@@ -110011,6 +110094,7 @@
                data-our-eff="724.0"
                data-is-our-live="false"
                data-target-pct="56.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -112271,11 +112355,11 @@
               </tr>
             
 
-              <tr class="clickable-row interval-parent-row" id="parent-row-78" data-tier="urgent" data-detail-id="row-78" onclick="toggleCompDetails('row-78', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
+              <tr class="clickable-row interval-parent-row" id="parent-row-78" data-tier="urgent" data-calendar-open="false" data-detail-id="row-78" onclick="toggleCompDetails('row-78', event)" title="Click to view full competitor price breakdown" style="border-left: 4px solid #ef4444;">
                 <td id="status-row-78" style="text-align:center;"><span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span></td>
                 <td>
                   <span class="caret-icon" id="icon-row-78">▶</span>
-                  <span class="date-pill">2027-09-02 &rarr; 2027-09-05</span>
+                  <span class="date-pill">2027-09-02 &rarr; 2027-09-05</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
@@ -112299,6 +112383,7 @@
                data-our-eff="765.67"
                data-is-our-live="false"
                data-target-pct="80.0"
+               data-calendar-open="false"
                data-is-live-scan="false"
                data-channel-factor="1.0000">
             <div class="subtable-scroll">
@@ -117006,6 +117091,8 @@
     "our_cleaning_fee": 500.0,
     "our_total_price": 2496.0,
     "our_effective_nightly": 624.0,
+    "is_calendar_open": true,
+    "calendar_open_end_date": "2027-05-31",
     "our_airbnb_effective_nightly": 693.5,
     "our_airbnb_total": 2774.0,
     "is_our_airbnb_live": true,
@@ -117545,6 +117632,8 @@
     "our_cleaning_fee": 500.0,
     "our_total_price": 2246.0,
     "our_effective_nightly": 561.5,
+    "is_calendar_open": true,
+    "calendar_open_end_date": "2027-05-31",
     "our_airbnb_effective_nightly": 678.25,
     "our_airbnb_total": 2713.0,
     "is_our_airbnb_live": true,
@@ -118164,6 +118253,8 @@
     "our_cleaning_fee": 500.0,
     "our_total_price": 1697.0,
     "our_effective_nightly": 565.67,
+    "is_calendar_open": true,
+    "calendar_open_end_date": "2027-05-31",
     "our_airbnb_effective_nightly": 652.67,
     "our_airbnb_total": 1958.0,
     "is_our_airbnb_live": true,
@@ -118902,7 +118993,7 @@
     <!-- Footer -->
     <footer>
       <p>STR Competitive Price Advisor for Villa del Sol • Automated Analysis Engine</p>
-      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 04, 2026 at 02:11 AM</p>
+      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 04, 2026 at 02:32 AM</p>
     </footer>
   </div>
 
@@ -118967,6 +119058,10 @@
 
     let currentIntervalTier = 'all';
 
+    function onOpenCalendarToggle() {
+      applyGlobalFilters();
+    }
+
     function filterIntervalTier(tier, btn) {
       currentIntervalTier = tier || currentIntervalTier || 'all';
       document.querySelectorAll('.interval-filter-pills .filter-pill-btn').forEach(b => b.classList.remove('active'));
@@ -118977,11 +119072,19 @@
       }
       if (activeBtn) activeBtn.classList.add('active');
 
+      const openCalendarCheckbox = document.getElementById('filterOpenCalendar');
+      const openOnly = openCalendarCheckbox ? openCalendarCheckbox.checked : true;
+
       document.querySelectorAll('.interval-parent-row').forEach(row => {
         const rowTier = row.dataset.tier;
+        const rowIsOpen = row.dataset.calendarOpen === 'true';
         const detailRowId = row.dataset.detailId;
         const detailRow = detailRowId ? document.getElementById(detailRowId) : null;
-        if (currentIntervalTier === 'all' || rowTier === currentIntervalTier) {
+
+        const calendarMatch = (!openOnly || rowIsOpen);
+        const tierMatch = (currentIntervalTier === 'all' || rowTier === currentIntervalTier);
+
+        if (calendarMatch && tierMatch) {
           row.style.display = '';
         } else {
           row.style.display = 'none';
@@ -119286,16 +119389,22 @@
       });
 
       // Update interval filter pill counts
+      const openCalendarCheckbox = document.getElementById('filterOpenCalendar');
+      const openOnly = openCalendarCheckbox ? openCalendarCheckbox.checked : true;
+
       let totalUrgent = 0;
       let totalMod = 0;
       let totalOk = 0;
       let totalAll = 0;
       document.querySelectorAll('.interval-parent-row').forEach(row => {
-        totalAll++;
-        const tier = row.dataset.tier;
-        if (tier === 'urgent') totalUrgent++;
-        else if (tier === 'moderate') totalMod++;
-        else if (tier === 'ok') totalOk++;
+        const rowIsOpen = row.dataset.calendarOpen === 'true';
+        if (!openOnly || rowIsOpen) {
+          totalAll++;
+          const tier = row.dataset.tier;
+          if (tier === 'urgent') totalUrgent++;
+          else if (tier === 'moderate') totalMod++;
+          else if (tier === 'ok') totalOk++;
+        }
       });
 
       const countAll = document.getElementById('count-interval-all');

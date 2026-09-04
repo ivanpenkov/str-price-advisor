@@ -265,6 +265,12 @@ class HTMLDashboardGenerator:
         moderate.sort(key=lambda x: (x["check_in_dt"]))
         all_sorted = sorted(evaluated_segments, key=lambda x: x["check_in_dt"])
 
+        # Open calendar subsets (calendar open through May 2027 by default)
+        open_segments = [s for s in all_sorted if s.get("is_calendar_open", True)]
+        open_urgent = [s for s in urgent if s.get("is_calendar_open", True)]
+        open_moderate = [s for s in moderate if s.get("is_calendar_open", True)]
+        open_ok = [s for s in open_segments if s["priority_tier"] not in ["URGENT_ACTION", "MODERATE_ADJUSTMENT"]]
+
         now_str = datetime.now().strftime("%B %d, %Y at %I:%M %p")
 
         html = f"""<!DOCTYPE html>
@@ -1092,13 +1098,19 @@ class HTMLDashboardGenerator:
           </div>
         </div>
 
-        <!-- Quick View Filter Pills -->
-        <div class="interval-filter-pills" style="display: flex; gap: 8px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
-          <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 4px;">Show Intervals:</span>
-          <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals (<span id="count-interval-all">{len(all_sorted)}</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only (<span id="count-interval-urgent">{len(urgent)}</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review (<span id="count-interval-mod">{len(moderate)}</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target (<span id="count-interval-ok">{len(all_sorted) - len(urgent) - len(moderate)}</span>)</button>
+        <!-- Quick View Filter Pills & Open Calendar Filter -->
+        <div class="interval-filter-pills" style="display: flex; gap: 10px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-right: 6px;">
+            <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Show Intervals:</span>
+            <label title="Kivoya booking calendar is open through May 31, 2027 (closed from June 2027 onwards). Uncheck to show all 12 months." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #38bdf8; font-weight: 600; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+              <input type="checkbox" id="filterOpenCalendar" checked onchange="onOpenCalendarToggle()" style="width: 15px; height: 15px; accent-color: #38bdf8; cursor: pointer; border-radius: 4px;">
+              <span>Open Calendar Only</span>
+            </label>
+          </div>
+          <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals (<span id="count-interval-all">{len(open_segments)}</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only (<span id="count-interval-urgent">{len(open_urgent)}</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review (<span id="count-interval-mod">{len(open_moderate)}</span>)</button>
+          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target (<span id="count-interval-ok">{len(open_ok)}</span>)</button>
         </div>
 
         <div class="table-responsive">
@@ -1321,6 +1333,10 @@ class HTMLDashboardGenerator:
 
     let currentIntervalTier = 'all';
 
+    function onOpenCalendarToggle() {{
+      applyGlobalFilters();
+    }}
+
     function filterIntervalTier(tier, btn) {{
       currentIntervalTier = tier || currentIntervalTier || 'all';
       document.querySelectorAll('.interval-filter-pills .filter-pill-btn').forEach(b => b.classList.remove('active'));
@@ -1331,11 +1347,19 @@ class HTMLDashboardGenerator:
       }}
       if (activeBtn) activeBtn.classList.add('active');
 
+      const openCalendarCheckbox = document.getElementById('filterOpenCalendar');
+      const openOnly = openCalendarCheckbox ? openCalendarCheckbox.checked : true;
+
       document.querySelectorAll('.interval-parent-row').forEach(row => {{
         const rowTier = row.dataset.tier;
+        const rowIsOpen = row.dataset.calendarOpen === 'true';
         const detailRowId = row.dataset.detailId;
         const detailRow = detailRowId ? document.getElementById(detailRowId) : null;
-        if (currentIntervalTier === 'all' || rowTier === currentIntervalTier) {{
+
+        const calendarMatch = (!openOnly || rowIsOpen);
+        const tierMatch = (currentIntervalTier === 'all' || rowTier === currentIntervalTier);
+
+        if (calendarMatch && tierMatch) {{
           row.style.display = '';
         }} else {{
           row.style.display = 'none';
@@ -1640,16 +1664,22 @@ class HTMLDashboardGenerator:
       }});
 
       // Update interval filter pill counts
+      const openCalendarCheckbox = document.getElementById('filterOpenCalendar');
+      const openOnly = openCalendarCheckbox ? openCalendarCheckbox.checked : true;
+
       let totalUrgent = 0;
       let totalMod = 0;
       let totalOk = 0;
       let totalAll = 0;
       document.querySelectorAll('.interval-parent-row').forEach(row => {{
-        totalAll++;
-        const tier = row.dataset.tier;
-        if (tier === 'urgent') totalUrgent++;
-        else if (tier === 'moderate') totalMod++;
-        else if (tier === 'ok') totalOk++;
+        const rowIsOpen = row.dataset.calendarOpen === 'true';
+        if (!openOnly || rowIsOpen) {{
+          totalAll++;
+          const tier = row.dataset.tier;
+          if (tier === 'urgent') totalUrgent++;
+          else if (tier === 'moderate') totalMod++;
+          else if (tier === 'ok') totalOk++;
+        }}
       }});
 
       const countAll = document.getElementById('count-interval-all');
@@ -1918,6 +1948,7 @@ class HTMLDashboardGenerator:
                data-our-eff="{our_eff}"
                data-is-our-live="{str(is_our_live).lower()}"
                data-target-pct="{s.get('target_percentile', 70.0)}"
+               data-calendar-open="{str(s.get('is_calendar_open', True)).lower()}"
                data-is-live-scan="{str(is_live).lower()}"
                data-channel-factor="{channel_factor:.4f}">
             <div class="subtable-scroll">
@@ -2019,12 +2050,16 @@ class HTMLDashboardGenerator:
                 action_style = ""
             action_display_html = action_raw
 
+            is_cal_open = s.get("is_calendar_open", True)
+            cal_open_str = str(is_cal_open).lower()
+            closed_tag = '' if is_cal_open else ' <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>'
+
             rows.append(f"""
-              <tr class="clickable-row interval-parent-row" id="parent-{row_id}" data-tier="{tier_code}" data-detail-id="{row_id}" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown" style="{row_border}">
+              <tr class="clickable-row interval-parent-row" id="parent-{row_id}" data-tier="{tier_code}" data-calendar-open="{cal_open_str}" data-detail-id="{row_id}" onclick="toggleCompDetails('{row_id}', event)" title="Click to view full competitor price breakdown" style="{row_border}">
                 <td id="status-{row_id}" style="text-align:center;">{status_html}</td>
                 <td>
                   <span class="caret-icon" id="icon-{row_id}">▶</span>
-                  <span class="date-pill">{s['check_in']} &rarr; {s['check_out']}</span>
+                  <span class="date-pill">{s['check_in']} &rarr; {s['check_out']}</span>{closed_tag}
                 </td>
                 <td><strong>{s['segment_type'].capitalize()}</strong></td>
                 <td>{s['nights']} nights</td>

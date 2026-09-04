@@ -66,6 +66,7 @@ class CalendarSegmenter:
         blocked = self.client.get_blocked_periods()
         rates = self.client.get_seasonal_rates()
         booked_nights = self.get_booked_dates_set(blocked)
+        open_end_date = getattr(self.client, "get_calendar_open_end_date", lambda: None)()
 
         segments: List[Dict[str, Any]] = []
 
@@ -80,10 +81,10 @@ class CalendarSegmenter:
                 thu, fri, sat = cur, cur + timedelta(days=1), cur + timedelta(days=2)
                 sun = cur + timedelta(days=3)
                 if thu not in booked_nights and fri not in booked_nights and sat not in booked_nights:
-                    segments.append(self._create_segment(thu, sun, "weekend", rates, today))
+                    segments.append(self._create_segment(thu, sun, "weekend", rates, today, open_end_date))
                 elif fri not in booked_nights and sat not in booked_nights:
                     # 2-night weekend fallback
-                    segments.append(self._create_segment(fri, sun, "weekend", rates, today))
+                    segments.append(self._create_segment(fri, sun, "weekend", rates, today, open_end_date))
 
             # Candidate Midweek: Sunday to Thursday (4 nights)
             elif weekday == 6:  # Sunday
@@ -91,7 +92,7 @@ class CalendarSegmenter:
                 mon, tue, wed = cur + timedelta(days=1), cur + timedelta(days=2), cur + timedelta(days=3)
                 thu = cur + timedelta(days=4)
                 if all(d not in booked_nights for d in [sun, mon, tue, wed]):
-                    segments.append(self._create_segment(sun, thu, "midweek", rates, today))
+                    segments.append(self._create_segment(sun, thu, "midweek", rates, today, open_end_date))
                 else:
                     # Check for partial midweek (Mon-Thu 3 nights, or Tue-Thu 2 nights)
                     open_midweek = [d for d in [sun, mon, tue, wed] if d not in booked_nights]
@@ -105,7 +106,7 @@ class CalendarSegmenter:
                             else:
                                 break
                         if (c_end - c_start).days >= 2:
-                            segments.append(self._create_segment(c_start, c_end, "midweek", rates, today))
+                            segments.append(self._create_segment(c_start, c_end, "midweek", rates, today, open_end_date))
 
             cur += timedelta(days=1)
 
@@ -118,6 +119,7 @@ class CalendarSegmenter:
         seg_type: str,
         rates: List[Dict[str, Any]],
         today: date,
+        open_end_date: Optional[date] = None,
     ) -> Dict[str, Any]:
         """Build standard segment record with rate calculation."""
         nights = (check_out - check_in).days
@@ -134,6 +136,9 @@ class CalendarSegmenter:
         total_guest_price = round(total_base + self.cleaning_fee, 2)
         effective_nightly = round(total_guest_price / nights, 2)
 
+        is_cal_open = (check_in <= open_end_date) if open_end_date else True
+        cal_end_str = open_end_date.strftime("%Y-%m-%d") if open_end_date else None
+
         return {
             "check_in": check_in.strftime("%Y-%m-%d"),
             "check_out": check_out.strftime("%Y-%m-%d"),
@@ -146,4 +151,6 @@ class CalendarSegmenter:
             "our_cleaning_fee": self.cleaning_fee,
             "our_total_price": total_guest_price,
             "our_effective_nightly": effective_nightly,
+            "is_calendar_open": is_cal_open,
+            "calendar_open_end_date": cal_end_str,
         }

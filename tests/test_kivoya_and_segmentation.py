@@ -85,6 +85,31 @@ class TestKivoyaAndSegmentation(unittest.TestCase):
         self.assertEqual(self.client.get_rate_for_date(jan_fri), 899.0)
         self.assertEqual(self.client.get_rate_for_date(jan_tue), 649.0)
 
+    def test_calendar_open_end_date_detection(self):
+        """Verify KivoyaClient detects calendar open through May 31, 2027 and closed starting June 1, 2027."""
+        open_end = self.client.get_calendar_open_end_date()
+        self.assertEqual(open_end, date(2027, 5, 31))
+
+        closed_start = self.client.get_calendar_closed_start_date()
+        self.assertEqual(closed_start, date(2027, 6, 1))
+
+    def test_segments_calendar_open_tagging(self):
+        """Verify CalendarSegmenter tags intervals in May 2027 or earlier as open, and June 2027 onwards as closed."""
+        segmenter = CalendarSegmenter(kivoya_client=self.client, lookahead_days=365)
+        segments = segmenter.generate_unbooked_segments()
+
+        open_segments = [s for s in segments if s.get("is_calendar_open")]
+        closed_segments = [s for s in segments if not s.get("is_calendar_open")]
+
+        self.assertGreater(len(open_segments), 0)
+        self.assertGreater(len(closed_segments), 0)
+        self.assertEqual(len(open_segments) + len(closed_segments), len(segments))
+
+        # Check that last open segment check-in is <= 2027-05-31
+        self.assertTrue(all(s["check_in"] <= "2027-05-31" for s in open_segments))
+        # Check that closed segments start after 2027-05-31 (on or after June 1, 2027)
+        self.assertTrue(all(s["check_in"] >= "2027-06-01" for s in closed_segments))
+
 
 if __name__ == "__main__":
     unittest.main()

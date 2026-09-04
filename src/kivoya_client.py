@@ -6,6 +6,7 @@ for Villa del Sol directly from Kivoya's property management endpoint.
 
 from datetime import datetime, date, timedelta
 import json
+from pathlib import Path
 import ssl
 import urllib.parse
 import urllib.request
@@ -129,6 +130,60 @@ class KivoyaClient:
             except Exception:
                 pass
         return result
+
+    def get_calendar_open_end_date(self) -> Optional[date]:
+        """
+        Detect the date until which the booking calendar is open in Kivoya / Streamline VRS.
+        Normally the calendar is open until a given month and closed after that.
+        Checks:
+        1. Range 'endDate' in GetPropertyAvailabilityRawData (e.g. '05/31/2027')
+        2. Daily availability: last available date before calendar closure
+        3. Local cache fallback in data/cache/calendar_cutoff.json
+        """
+        cache_path = Path("data/cache/calendar_cutoff.json")
+
+        try:
+            raw_data = self._call_api(
+                "GetPropertyAvailabilityRawData",
+                {"unit_id": self.unit_id}
+            )
+            range_info = raw_data.get("range", {})
+            end_str = range_info.get("endDate")
+            if end_str:
+                end_dt = datetime.strptime(end_str, "%m/%d/%Y").date()
+                try:
+                    cache_path.parent.mkdir(parents=True, exist_ok=True)
+                    cache_path.write_text(
+                        json.dumps({
+                            "open_end_date": end_dt.isoformat(),
+                            "closed_start_date": (end_dt + timedelta(days=1)).isoformat(),
+                        }, indent=2),
+                        encoding="utf-8"
+                    )
+                except Exception:
+                    pass
+                return end_dt
+        except Exception:
+            pass
+
+        # Check local cache fallback
+        if cache_path.exists():
+            try:
+                data = json.loads(cache_path.read_text(encoding="utf-8"))
+                if data.get("open_end_date"):
+                    return datetime.strptime(data["open_end_date"], "%Y-%m-%d").date()
+            except Exception:
+                pass
+
+        # Safe fallback: calendar is open through end of May 2027
+        return date(2027, 5, 31)
+
+    def get_calendar_closed_start_date(self) -> Optional[date]:
+        """Return the first date on which the calendar is closed (open_end_date + 1 day)."""
+        open_end = self.get_calendar_open_end_date()
+        if open_end:
+            return open_end + timedelta(days=1)
+        return None
 
     @staticmethod
     def _parse_interval_weekdays(interval_str: Optional[str]) -> set:

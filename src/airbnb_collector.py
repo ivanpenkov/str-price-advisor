@@ -74,35 +74,36 @@ class AirbnbCollector:
 
     def _parse_card_text(self, card_id: str, text: str, nights: int) -> Optional[Dict[str, Any]]:
         """Parse card innerText to extract listing attributes and price."""
-        # Find all dollar amounts
-        price_matches = re.findall(r"\$([0-9,]+)", text)
-        if not price_matches:
+        # Check for explicit total price:
+        # e.g. "$1,417 before taxes", "$1,417 total", "$1,417 for 4 nights"
+        total_match = re.search(r"\$([0-9,]+)\s*(?:before taxes|total|for\s+\d+\s+nights)", text, re.IGNORECASE)
+
+        # Check for explicit nightly rate:
+        # e.g. "$354 night", "$354 / night"
+        nightly_matches = re.findall(r"\$([0-9,]+)\s*(?:night|/\s*night)", text, re.IGNORECASE)
+
+        all_dollar_matches = [int(p.replace(",", "")) for p in re.findall(r"\$([0-9,]+)", text) if int(p.replace(",", "")) > 0]
+        if not all_dollar_matches:
             return None
 
-        # Clean numbers
-        prices = [int(p.replace(",", "")) for p in price_matches if int(p.replace(",", "")) > 0]
-        if not prices:
-            return None
-
-        # If strikethrough (e.g. $4,354 $2,998), the second is active price.
-        # Otherwise the last valid price before 'Show price breakdown' is the total price.
-        # Airbnb usually shows either:
-        # - '$850 / night, $2,550 total'
-        # - '$4,354 $2,998 for 3 nights'
-        # Total price for multi-night stays is generally >= nights * 200.
-        total_price = prices[-1]
-        if len(prices) >= 2 and prices[-1] < 100:
-            total_price = prices[-2]
-
-        # Check if Airbnb gave per-night rate vs total price
-        if "night" in text.lower() and "total" not in text.lower() and total_price < 1500:
-            # Stated per night
-            effective_nightly = float(total_price)
-            total_stay_price = effective_nightly * nights
-        else:
-            # Stated total
-            total_stay_price = float(total_price)
+        if total_match:
+            total_stay_price = float(total_match.group(1).replace(",", ""))
             effective_nightly = round(total_stay_price / nights, 2) if nights > 0 else total_stay_price
+        elif len(all_dollar_matches) >= 2:
+            # On Airbnb cards with multiple prices, the last price is ALWAYS the total stay price
+            total_stay_price = float(all_dollar_matches[-1])
+            effective_nightly = round(total_stay_price / nights, 2) if nights > 0 else total_stay_price
+        elif nightly_matches:
+            effective_nightly = float(nightly_matches[-1].replace(",", ""))
+            total_stay_price = round(effective_nightly * nights, 2)
+        else:
+            p = float(all_dollar_matches[0])
+            if p >= 400 and nights >= 2:
+                total_stay_price = p
+                effective_nightly = round(total_stay_price / nights, 2)
+            else:
+                effective_nightly = p
+                total_stay_price = round(p * nights, 2)
 
         # Sanity check for large luxury estate (should be >= $200/night total)
         if effective_nightly < 150.0 or effective_nightly > 10000.0:

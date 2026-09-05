@@ -95,6 +95,64 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertTrue(res["is_valid_comp"])
         self.assertTrue(res["pool_specs"]["has_pool"])
 
+    def test_comp_evaluator_pool_table_only_disqualified(self):
+        """A property with only a pool table and no swimming pool must be disqualified."""
+        comp = {
+            "listing_id": "808846110563567565",
+            "name": "Dolphin Huge 4,080 SqFt cul-de-sac Home",
+            "bedrooms": 6,
+            "baths": 3.5,
+            "accommodates": 16,
+            "rating": 4.95,
+            "reviews": 40,
+            "location": "Mesa, AZ",
+            "amenities": ["Wifi", "Kitchen", "Pool table", "Self check-in", "Smart TV"],
+            "description": "Spacious cul-de-sac home with high ceilings, pool table in game area, and large yard.",
+        }
+        res = self.evaluator.evaluate_comp(comp)
+        self.assertFalse(res["is_valid_comp"])
+        self.assertFalse(res["pool_specs"]["has_pool"])
+        self.assertIn("swimming pool", res["validity_reason"].lower())
+
+    def test_comp_evaluator_whirlpool_appliance_disqualified(self):
+        """Whirlpool appliances or billiard terminology must not trigger swimming pool detection."""
+        comp = {
+            "listing_id": "730689822646393395",
+            "name": "Modern Central E Valley Sleeps 13",
+            "bedrooms": 5,
+            "baths": 3.0,
+            "accommodates": 13,
+            "rating": 4.88,
+            "reviews": 25,
+            "location": "Gilbert, AZ",
+            "amenities": ["Wifi", "Whirlpool stainless steel electric stove", "Pool table", "Dishwasher"],
+            "description": "Modern home featuring Whirlpool appliances, full billiards setup with pool sticks and balls.",
+        }
+        res = self.evaluator.evaluate_comp(comp)
+        self.assertFalse(res["is_valid_comp"])
+        self.assertFalse(res["pool_specs"]["has_pool"])
+        self.assertIn("swimming pool", res["validity_reason"].lower())
+
+    def test_comp_evaluator_pool_table_and_swimming_pool_valid(self):
+        """A property that has BOTH a swimming pool and a pool table must be valid and receive interior billiards points."""
+        comp = {
+            "listing_id": "1724283236825333743",
+            "name": "Scottsdale-Heated Pool-Spa-Pool Table-PickleBall",
+            "bedrooms": 6,
+            "baths": 5.0,
+            "accommodates": 16,
+            "rating": 4.98,
+            "reviews": 32,
+            "location": "Scottsdale, AZ",
+            "amenities": ["Heated pool", "Pool table", "Hot tub", "Pickleball court", "Wifi"],
+            "description": "Luxury retreat with private heated swimming pool, hot tub, and an indoor pool table.",
+        }
+        res = self.evaluator.evaluate_comp(comp)
+        self.assertTrue(res["is_valid_comp"])
+        self.assertTrue(res["pool_specs"]["has_pool"])
+        self.assertGreaterEqual(res["category_scores"]["interior"], 78)
+
+
     def test_adjustment_ratio_math(self):
         """Verify adjusted rate formula: adjusted_price = raw_price / ratio."""
         # 10% less desirable comp (ratio = 0.90) asking $900 -> adjusted price $1000

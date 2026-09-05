@@ -717,18 +717,18 @@
       "amenities_count": 73,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.99,
       "category_scores": {
         "outdoor": 70,
         "capacity": 100,
-        "interior": 81,
+        "interior": 88,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 86.2,
+      "composite_score": 87.6,
       "rationale": "Direct peer comp (near-equal quality, Winter). 8BR / 8.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "winter_ratio": 0.96,
-      "summer_ratio": 1.07,
+      "winter_ratio": 0.99,
+      "summer_ratio": 1.1,
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
@@ -737,24 +737,24 @@
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 86.2,
-      "summer_composite_score": 91.0,
+      "winter_composite_score": 87.6,
+      "summer_composite_score": 92.5,
       "winter_category_scores": {
         "outdoor": 70,
         "capacity": 100,
-        "interior": 81,
+        "interior": 88,
         "location": 95,
         "reputation": 98
       },
       "summer_category_scores": {
         "outdoor": 86,
         "capacity": 100,
-        "interior": 81,
+        "interior": 88,
         "location": 95,
         "reputation": 98
       },
       "winter_rationale": "Direct peer comp (near-equal quality, Winter). 8BR / 8.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Premium comp (7% superior desirability, Summer). Features private sauna, heated spa, 8 bedrooms."
+      "summer_rationale": "Premium comp (10% superior desirability, Summer). Features private sauna, heated spa, 8 bedrooms."
     },
     "1442265380006443515": {
       "listing_id": "1442265380006443515",
@@ -771,18 +771,18 @@
       "amenities_count": 52,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Apartment In Scottsdale.",
-      "desirability_ratio": 0.65,
+      "desirability_ratio": 0.73,
       "category_scores": {
-        "outdoor": 50,
-        "capacity": 75,
-        "interior": 75,
+        "outdoor": 59,
+        "capacity": 85,
+        "interior": 70,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 71.8,
-      "rationale": "Moderate comp (35% lower desirability, Winter). Features Scottsdale location premium, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "winter_ratio": 0.65,
-      "summer_ratio": 0.77,
+      "composite_score": 76.0,
+      "rationale": "Moderate comp (27% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.0 baths.",
+      "winter_ratio": 0.73,
+      "summer_ratio": 0.84,
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
@@ -791,24 +791,24 @@
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 71.8,
-      "summer_composite_score": 77.8,
+      "winter_composite_score": 76.0,
+      "summer_composite_score": 80.8,
       "winter_category_scores": {
-        "outdoor": 50,
-        "capacity": 75,
-        "interior": 75,
+        "outdoor": 59,
+        "capacity": 85,
+        "interior": 70,
         "location": 95,
         "reputation": 88
       },
       "summer_category_scores": {
-        "outdoor": 70,
-        "capacity": 75,
-        "interior": 75,
+        "outdoor": 75,
+        "capacity": 85,
+        "interior": 70,
         "location": 95,
         "reputation": 88
       },
-      "winter_rationale": "Moderate comp (35% lower desirability, Winter). Features Scottsdale location premium, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "summer_rationale": "Moderate comp (23% lower desirability, Summer). Features Scottsdale location premium, but noted gaps: 3.0 baths."
+      "winter_rationale": "Moderate comp (27% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.0 baths.",
+      "summer_rationale": "Moderate comp (16% lower desirability, Summer). Features heated spa, but noted gaps: 3.0 baths."
     },
     "1640779184675228639": {
       "listing_id": "1640779184675228639",
@@ -825,18 +825,18 @@
       "amenities_count": 67,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.68,
+      "desirability_ratio": 0.73,
       "category_scores": {
         "outdoor": 64,
-        "capacity": 75,
+        "capacity": 85,
         "interior": 76,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 73.7,
-      "rationale": "Moderate comp (32% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "winter_ratio": 0.68,
-      "summer_ratio": 0.78,
+      "composite_score": 76.2,
+      "rationale": "Moderate comp (27% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.0 baths.",
+      "winter_ratio": 0.73,
+      "summer_ratio": 0.84,
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
@@ -845,24 +845,24 @@
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 73.7,
-      "summer_composite_score": 78.5,
+      "winter_composite_score": 76.2,
+      "summer_composite_score": 81.0,
       "winter_category_scores": {
         "outdoor": 64,
-        "capacity": 75,
+        "capacity": 85,
         "interior": 76,
         "location": 78,
         "reputation": 88
       },
       "summer_category_scores": {
         "outdoor": 80,
-        "capacity": 75,
+        "capacity": 85,
         "interior": 76,
         "location": 78,
         "reputation": 88
       },
-      "winter_rationale": "Moderate comp (32% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "summer_rationale": "Moderate comp (22% lower desirability, Summer). Features heated spa, but noted gaps: 3.0 baths, Mesa location discount."
+      "winter_rationale": "Moderate comp (27% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.0 baths.",
+      "summer_rationale": "Moderate comp (16% lower desirability, Summer). Features heated spa, but noted gaps: 3.0 baths, Mesa location discount."
     },
     "1257280665542111508": {
       "listing_id": "1257280665542111508",
@@ -879,44 +879,44 @@
       "amenities_count": 66,
       "is_valid_comp": true,
       "validity_reason": "Valid 7BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 0.88,
+      "desirability_ratio": 1.15,
       "category_scores": {
-        "outdoor": 64,
-        "capacity": 91,
+        "outdoor": 100,
+        "capacity": 95,
         "interior": 84,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 82.8,
-      "rationale": "Moderate comp (12% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.5 baths.",
-      "winter_ratio": 0.88,
-      "summer_ratio": 0.99,
+      "composite_score": 94.6,
+      "rationale": "Premium comp (15% superior desirability, Winter). Features heated pool, dedicated sports court, heated spa.",
+      "winter_ratio": 1.15,
+      "summer_ratio": 1.15,
       "pool_specs": {
         "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
+        "heating": "standard_heated",
+        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 82.8,
-      "summer_composite_score": 87.6,
+      "winter_composite_score": 94.6,
+      "summer_composite_score": 94.6,
       "winter_category_scores": {
-        "outdoor": 64,
-        "capacity": 91,
+        "outdoor": 100,
+        "capacity": 95,
         "interior": 84,
         "location": 95,
         "reputation": 98
       },
       "summer_category_scores": {
-        "outdoor": 80,
-        "capacity": 91,
+        "outdoor": 100,
+        "capacity": 95,
         "interior": 84,
         "location": 95,
         "reputation": 98
       },
-      "winter_rationale": "Moderate comp (12% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.5 baths.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). 7BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier."
+      "winter_rationale": "Premium comp (15% superior desirability, Winter). Features heated pool, dedicated sports court, heated spa.",
+      "summer_rationale": "Premium comp (15% superior desirability, Summer). Features heated pool, dedicated sports court, heated spa."
     },
     "1494470117199033651": {
       "listing_id": "1494470117199033651",
@@ -2306,27 +2306,27 @@
       "discovered_at_sample": "2026-09-24 to 2026-09-27",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg",
       "amenities_count": 58,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 7BR luxury estate comp in Paradise Valley.",
-      "desirability_ratio": 0.88,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Property lacks a private swimming pool.",
+      "desirability_ratio": 0.5,
       "category_scores": {
-        "outdoor": 59,
-        "capacity": 100,
-        "interior": 85,
-        "location": 95,
-        "reputation": 88
+        "outdoor": 30,
+        "capacity": 60,
+        "interior": 60,
+        "location": 70,
+        "reputation": 70
       },
-      "composite_score": 82.8,
-      "rationale": "Moderate comp (12% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter.",
+      "composite_score": 52.0,
+      "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
       "accommodates": 16,
-      "winter_ratio": 0.88,
-      "summer_ratio": 0.99,
+      "winter_ratio": 0.5,
+      "summer_ratio": 0.5,
       "pool_specs": {
-        "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
+        "has_pool": false,
+        "heating": "none",
+        "heating_source": "No swimming pool found",
+        "pool_size": "none",
+        "size_source": "No swimming pool found",
         "gallons": null
       },
       "winter_composite_score": 82.8,
@@ -2526,9 +2526,9 @@
       "amenities_count": 55,
       "is_valid_comp": true,
       "validity_reason": "Valid 7BR luxury estate comp in Phoenix.",
-      "desirability_ratio": 0.85,
-      "winter_ratio": 0.85,
-      "summer_ratio": 0.83,
+      "desirability_ratio": 0.91,
+      "winter_ratio": 0.91,
+      "summer_ratio": 0.89,
       "pool_specs": {
         "has_pool": true,
         "heating": "standard_heated",
@@ -2537,33 +2537,33 @@
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "composite_score": 81.2,
-      "winter_composite_score": 81.2,
-      "summer_composite_score": 80.6,
+      "composite_score": 83.9,
+      "winter_composite_score": 83.9,
+      "summer_composite_score": 83.3,
       "category_scores": {
-        "outdoor": 76,
+        "outdoor": 81,
         "capacity": 95,
-        "interior": 70,
+        "interior": 76,
         "location": 75,
         "reputation": 94
       },
       "winter_category_scores": {
-        "outdoor": 76,
+        "outdoor": 81,
         "capacity": 95,
-        "interior": 70,
+        "interior": 76,
         "location": 75,
         "reputation": 94
       },
       "summer_category_scores": {
-        "outdoor": 74,
+        "outdoor": 79,
         "capacity": 95,
-        "interior": 70,
+        "interior": 76,
         "location": 75,
         "reputation": 94
       },
-      "rationale": "Moderate comp (15% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
-      "winter_rationale": "Moderate comp (15% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
-      "summer_rationale": "Moderate comp (17% lower desirability, Summer). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
+      "rationale": "Moderate comp (9% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
+      "winter_rationale": "Moderate comp (9% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
+      "summer_rationale": "Moderate comp (11% lower desirability, Summer). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
       "discovered_at_sample": "2026-09-05 manual addition",
       "accommodates": 22
     },
@@ -3516,27 +3516,27 @@
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/f9153204-0185-4184-86fb-7db7f6ecc6f7.jpg",
       "amenities_count": 66,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 5BR luxury estate comp in Tempe.",
-      "desirability_ratio": 0.78,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Property lacks a private swimming pool.",
+      "desirability_ratio": 0.5,
       "category_scores": {
-        "outdoor": 59,
-        "capacity": 74,
-        "interior": 96,
-        "location": 95,
-        "reputation": 88
+        "outdoor": 30,
+        "capacity": 60,
+        "interior": 60,
+        "location": 70,
+        "reputation": 70
       },
-      "composite_score": 78.5,
-      "rationale": "Moderate comp (22% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 5 BR vs our 6 BR.",
+      "composite_score": 52.0,
+      "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
       "accommodates": 14,
-      "winter_ratio": 0.78,
-      "summer_ratio": 0.89,
+      "winter_ratio": 0.5,
+      "summer_ratio": 0.5,
       "pool_specs": {
-        "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
+        "has_pool": false,
+        "heating": "none",
+        "heating_source": "No swimming pool found",
+        "pool_size": "none",
+        "size_source": "No swimming pool found",
         "gallons": null
       },
       "winter_composite_score": 78.5,
@@ -3681,27 +3681,27 @@
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1689250872259091459/original/4ab53d9e-c042-40da-9c9a-9fa8607c46a0.jpeg",
       "amenities_count": 45,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Tempe.",
-      "desirability_ratio": 0.75,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Property lacks a private swimming pool.",
+      "desirability_ratio": 0.5,
       "category_scores": {
-        "outdoor": 59,
-        "capacity": 81,
-        "interior": 84,
-        "location": 88,
-        "reputation": 88
+        "outdoor": 30,
+        "capacity": 60,
+        "interior": 60,
+        "location": 70,
+        "reputation": 70
       },
-      "composite_score": 76.8,
-      "rationale": "Moderate comp (25% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.0 baths.",
+      "composite_score": 52.0,
+      "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
       "accommodates": 14,
-      "winter_ratio": 0.75,
-      "summer_ratio": 0.85,
+      "winter_ratio": 0.5,
+      "summer_ratio": 0.5,
       "pool_specs": {
-        "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
+        "has_pool": false,
+        "heating": "none",
+        "heating_source": "No swimming pool found",
+        "pool_size": "none",
+        "size_source": "No swimming pool found",
         "gallons": null
       },
       "winter_composite_score": 76.8,
@@ -4450,18 +4450,18 @@
       "amenities_count": 73,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.99,
       "category_scores": {
         "outdoor": 70,
         "capacity": 100,
-        "interior": 81,
+        "interior": 88,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 86.2,
+      "composite_score": 87.6,
       "rationale": "Direct peer comp (near-equal quality, Winter). 8BR / 8.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "winter_ratio": 0.96,
-      "summer_ratio": 1.07,
+      "winter_ratio": 0.99,
+      "summer_ratio": 1.1,
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
@@ -4470,24 +4470,24 @@
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 86.2,
-      "summer_composite_score": 91.0,
+      "winter_composite_score": 87.6,
+      "summer_composite_score": 92.5,
       "winter_category_scores": {
         "outdoor": 70,
         "capacity": 100,
-        "interior": 81,
+        "interior": 88,
         "location": 95,
         "reputation": 98
       },
       "summer_category_scores": {
         "outdoor": 86,
         "capacity": 100,
-        "interior": 81,
+        "interior": 88,
         "location": 95,
         "reputation": 98
       },
       "winter_rationale": "Direct peer comp (near-equal quality, Winter). 8BR / 8.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Premium comp (7% superior desirability, Summer). Features private sauna, heated spa, 8 bedrooms."
+      "summer_rationale": "Premium comp (10% superior desirability, Summer). Features private sauna, heated spa, 8 bedrooms."
     },
     "661489175613477267": {
       "listing_id": "661489175613477267",
@@ -5437,27 +5437,27 @@
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/77f7c6d5-b04e-4db5-934c-7c83f3473dd1.jpg",
       "amenities_count": 60,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.69,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Property lacks a private swimming pool.",
+      "desirability_ratio": 0.5,
       "category_scores": {
-        "outdoor": 54,
-        "capacity": 73,
-        "interior": 90,
-        "location": 82,
-        "reputation": 94
+        "outdoor": 30,
+        "capacity": 60,
+        "interior": 60,
+        "location": 70,
+        "reputation": 70
       },
-      "composite_score": 74.2,
-      "rationale": "Moderate comp (31% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 5 BR vs our 6 BR.",
+      "composite_score": 52.0,
+      "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
       "accommodates": 13,
-      "winter_ratio": 0.69,
-      "summer_ratio": 0.8,
+      "winter_ratio": 0.5,
+      "summer_ratio": 0.5,
       "pool_specs": {
-        "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
+        "has_pool": false,
+        "heating": "none",
+        "heating_source": "No swimming pool found",
+        "pool_size": "none",
+        "size_source": "No swimming pool found",
         "gallons": null
       },
       "winter_composite_score": 74.2,
@@ -6194,11 +6194,11 @@
     }
   },
   "metadata": {
-    "last_updated": "2026-09-05T04:12:31.655031",
+    "last_updated": "2026-09-05T04:23:14.606918",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
-    "valid_comps_count": 110,
-    "disqualified_comps_count": 3,
+    "valid_comps_count": 109,
+    "disqualified_comps_count": 4,
     "total_comps": 113
   },
   "excluded_comps": {
@@ -6207,6 +6207,12 @@
       "name": "Playhouse near Old Town: Hot Tub | Game Room",
       "reason": "Disqualified / user-removed comp",
       "excluded_at": "2026-09-05T04:12:31.655021"
+    },
+    "1561864558173852118": {
+      "listing_id": "1561864558173852118",
+      "name": "Listing 1561864558173852118",
+      "reason": "Disqualified / user-removed comp",
+      "excluded_at": "2026-09-05T04:23:14.606903"
     }
   }
 }

@@ -98,16 +98,41 @@ class CompEvaluator:
         amenities_lower = [a.lower() for a in amenities]
 
         # 1. Has Pool Check
-        has_pool = any("pool" in a and "table" not in a for a in amenities_lower) or any(
-            w in text_lower for w in [
-                "swimming pool", "private pool", "heated pool", "resort pool", "lap pool",
-                "plunge pool", "swim-up bar", "swim up bar", "swimup bar", "swim-up",
-                "swim up", "swimming", "swim spa", "private swimming", "pool bar"
-            ]
+        # Clean false-pool brand names/words (e.g. Whirlpool appliances, carpool, liverpool)
+        text_clean = re.sub(r"\b(?:whirlpool|carpool|liverpool)\b", "", text_lower)
+
+        # Lookahead pattern matching "pool" ONLY if not followed by billiard/table terms
+        pool_not_table_pattern = r"\bpool\b(?!\s*(?:table|cue|cues|stick|sticks|ball|balls|hall|billiard|billiards|tournament))"
+
+        # 1a. Check amenities (excluding table games / appliances)
+        has_pool_amenity = False
+        for a in amenities_lower:
+            a_clean = re.sub(r"\b(?:whirlpool|carpool|liverpool)\b", "", a)
+            if re.search(pool_not_table_pattern, a_clean):
+                has_pool_amenity = True
+                break
+
+        # 1b. Check explicit swimming terms in listing text
+        swim_indicators = [
+            "swimming pool", "private pool", "heated pool", "resort pool", "lap pool",
+            "plunge pool", "swim-up bar", "swim up bar", "swimup bar", "swim-up",
+            "swim up", "swimming", "swim spa", "private swimming", "pool bar"
+        ]
+        has_swim_text = any(w in text_clean for w in swim_indicators)
+
+        # 1c. Generic "pool" mention in text (ensuring not followed by table/cue/etc)
+        has_generic_pool = bool(re.search(pool_not_table_pattern, text_clean))
+
+        # Check explicit negation ("no pool", "without a pool", "does not have a pool", "no swimming pool")
+        # Ensure we do not match "no pool heat fee" as "no pool"
+        is_negated = bool(
+            re.search(
+                r"\b(?:no\s+(?:swimming\s+)?pool(?!\s+heat)|without\s+a\s+pool|does\s+not\s+have\s+a\s+pool)\b",
+                text_clean,
+            )
         )
-        if not has_pool and ("pool" in text_lower or "swim-up" in text_lower or "swim up" in text_lower):
-            if not any(neg in text_lower for neg in ["no pool", "without a pool", "does not have a pool", "no swimming pool"]):
-                has_pool = True
+
+        has_pool = has_pool_amenity or has_swim_text or (has_generic_pool and not is_negated)
 
         if not has_pool:
             return {

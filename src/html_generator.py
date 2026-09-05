@@ -1128,7 +1128,6 @@ class HTMLDashboardGenerator:
           <table>
             <thead>
               <tr>
-                <th style="width:130px; text-align:center;">Status</th>
                 <th>Open Dates</th>
                 <th>Type</th>
                 <th>Nights</th>
@@ -1768,18 +1767,25 @@ class HTMLDashboardGenerator:
           const isMod = !isUrgent && (absDiff >= 10.0);
 
           const statusEl = document.getElementById('status-' + rowId);
-          const parentRow = document.getElementById('parent-' + rowId);
-          if (statusEl && parentRow) {{
+          if (statusEl) {{
             if (isUrgent) {{
               statusEl.innerHTML = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>';
+            }} else if (isMod) {{
+              statusEl.innerHTML = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>';
+            }} else {{
+              statusEl.innerHTML = '<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>';
+            }}
+          }}
+
+          const parentRow = document.getElementById('parent-' + rowId);
+          if (parentRow) {{
+            if (isUrgent) {{
               parentRow.dataset.tier = 'urgent';
               parentRow.style.borderLeft = '4px solid #ef4444';
             }} else if (isMod) {{
-              statusEl.innerHTML = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>';
               parentRow.dataset.tier = 'moderate';
               parentRow.style.borderLeft = '4px solid #f59e0b';
             }} else {{
-              statusEl.innerHTML = '<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>';
               parentRow.dataset.tier = 'ok';
               parentRow.style.borderLeft = '4px solid transparent';
             }}
@@ -1831,9 +1837,11 @@ class HTMLDashboardGenerator:
           }}
         }} else {{
           const statusEl = document.getElementById('status-' + rowId);
-          const parentRow = document.getElementById('parent-' + rowId);
-          if (statusEl && parentRow) {{
+          if (statusEl) {{
             statusEl.innerHTML = '<span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; border:1px solid rgba(148,163,184,0.3);">⚪ No Comps</span>';
+          }}
+          const parentRow = document.getElementById('parent-' + rowId);
+          if (parentRow) {{
             parentRow.dataset.tier = 'none';
             parentRow.style.borderLeft = '4px solid transparent';
           }}
@@ -2355,7 +2363,6 @@ class HTMLDashboardGenerator:
                   onclick="toggleCompDetails('{row_id}', event)"
                   title="Click to view full competitor price breakdown"
                   style="{border_adj}">
-                <td id="status-{row_id}" style="text-align:center;">{status_html_adj}</td>
                 <td>
                   <span class="caret-icon" id="icon-{row_id}">▶</span>
                   <span class="date-pill">{s['check_in']} &rarr; {s['check_out']}</span>{closed_tag}
@@ -2372,7 +2379,7 @@ class HTMLDashboardGenerator:
                 <td id="rec-{row_id}"><span class="rec-price">${rec_adj:.0f}</span></td>
               </tr>
               <tr id="{row_id}" class="comp-details-row" style="display: none;">
-                <td colspan="12">
+                <td colspan="11">
                   {subtable_html}
                 </td>
               </tr>

@@ -28,7 +28,7 @@
       "is_our_airbnb_live": true,
       "n_comps": 40,
       "comps_count": 40,
-      "comps_raw_count": 41,
+      "comps_raw_count": 40,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -155,24 +155,6 @@
           "price_snippet": "$4,057 | $4,057 for 3 nights | $0 today",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated pool and hot tub, near Oldtown",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1111676539264652338/original/80cbd97e-48b1-4fc0-b563-f798da52d554.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 3,
-          "total_price": 3666.0,
-          "effective_nightly": 1222.0,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,666 | $3,666 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "715477450251712841",
@@ -3232,9 +3214,9 @@
       "our_airbnb_effective_nightly": 1112.33,
       "our_airbnb_total": 3337.0,
       "is_our_airbnb_live": true,
-      "n_comps": 43,
-      "comps_count": 43,
-      "comps_raw_count": 46,
+      "n_comps": 45,
+      "comps_count": 45,
+      "comps_raw_count": 45,
       "comps_list": [
         {
           "listing_id": "1437923503258269457",
@@ -3270,24 +3252,6 @@
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,204 | $5,204 for 3 nights",
           "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Pickleball, hot tub, and a fire pit",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 3,
-          "total_price": 3660.0,
-          "effective_nightly": 1220.0,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,660 | $3,660 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -5460,9 +5424,9 @@
       "our_airbnb_effective_nightly": 1545.33,
       "our_airbnb_total": 4636.0,
       "is_our_airbnb_live": true,
-      "n_comps": 31,
-      "comps_count": 31,
-      "comps_raw_count": 31,
+      "n_comps": 30,
+      "comps_count": 30,
+      "comps_raw_count": 30,
       "comps_list": [
         {
           "listing_id": "1350253802489041827",
@@ -5715,24 +5679,6 @@
           "price_snippet": "$5,282 | $5,282 for 3 nights | $0 today",
           "raw_snippet": "Guest favorite | Guest favorite | Villa in Scottsdale | Scottsdale Big House - Sleeps 30 - 6bed/4ba",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-28898989/original/7aa6973c-3755-45ad-ada1-b1bf0fe74928.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 7,
-          "baths": 4.5,
-          "nights": 3,
-          "total_price": 4799.0,
-          "effective_nightly": 1599.67,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$4,799 | $4,799 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | Beautiful New Luxury Build in the Heart of Tempe",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "762951451304031409",
@@ -6059,9 +6005,9 @@
       "our_airbnb_effective_nightly": 1545.33,
       "our_airbnb_total": 4636.0,
       "is_our_airbnb_live": true,
-      "n_comps": 35,
-      "comps_count": 35,
-      "comps_raw_count": 35,
+      "n_comps": 34,
+      "comps_count": 34,
+      "comps_raw_count": 34,
       "comps_list": [
         {
           "listing_id": "715477450251712841",
@@ -6331,24 +6277,6 @@
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,561 | $3,561 for 3 nights",
           "raw_snippet": "Top guest favorite | Guest favorite | Villa in Mesa | Resort-Style Tropical Escape w/ Pool, Spa & Cabana",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 7,
-          "baths": 4.5,
-          "nights": 3,
-          "total_price": 5335.0,
-          "effective_nightly": 1778.33,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$5,335 | $5,335 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | Beautiful New Luxury Build in the Heart of Tempe",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -7347,9 +7275,9 @@
       "our_airbnb_effective_nightly": 1112.33,
       "our_airbnb_total": 3337.0,
       "is_our_airbnb_live": true,
-      "n_comps": 41,
-      "comps_count": 41,
-      "comps_raw_count": 45,
+      "n_comps": 44,
+      "comps_count": 44,
+      "comps_raw_count": 44,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -7548,24 +7476,6 @@
           "price_snippet": "$4,878 | $4,878 for 3 nights",
           "raw_snippet": "Luxe | Luxe | Home in Phoenix | Floor-to-ceiling glass and a heated pool",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1592191797631601721/original/212a7c5f-2f5e-44f2-9e24-c6dc9598d110.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 3,
-          "total_price": 3839.0,
-          "effective_nightly": 1279.67,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,839 | $3,839 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "1597428839019993636",
@@ -8905,9 +8815,9 @@
       "our_airbnb_effective_nightly": 1112.33,
       "our_airbnb_total": 3337.0,
       "is_our_airbnb_live": true,
-      "n_comps": 43,
-      "comps_count": 43,
-      "comps_raw_count": 45,
+      "n_comps": 44,
+      "comps_count": 44,
+      "comps_raw_count": 44,
       "comps_list": [
         {
           "listing_id": "1437923503258269457",
@@ -9016,24 +8926,6 @@
           "price_snippet": "$4,524 | $4,524 for 3 nights",
           "raw_snippet": "Luxe | Luxe | Home in Phoenix | Floor-to-ceiling glass and a heated pool",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1592191797631601721/original/212a7c5f-2f5e-44f2-9e24-c6dc9598d110.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 3,
-          "total_price": 3806.0,
-          "effective_nightly": 1268.67,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,806 | $3,806 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "715477450251712841",
@@ -16246,9 +16138,9 @@
       "our_airbnb_effective_nightly": 925.33,
       "our_airbnb_total": 2776.0,
       "is_our_airbnb_live": true,
-      "n_comps": 29,
-      "comps_count": 29,
-      "comps_raw_count": 31,
+      "n_comps": 30,
+      "comps_count": 30,
+      "comps_raw_count": 30,
       "comps_list": [
         {
           "listing_id": "1254737517099224843",
@@ -16489,21 +16381,6 @@
           "reviews": 12,
           "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Golf Simulator, Pool, Theatre & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1559652898884891337/original/a4188449-5e25-47ef-81cf-3e50ab312bf3.jpeg?im_w=720&width=720&quality=70&auto=webp"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 7,
-          "baths": 4.5,
-          "nights": 3,
-          "total_price": 3385.0,
-          "effective_nightly": 1128.33,
-          "rating": 5.0,
-          "reviews": 16,
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | Beautiful New Luxury Build in the Heart of Tempe",
-          "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561864558173852118/original/d2c395c6-1220-4f4d-9b9b-7c7d61a1b963.jpeg?im_w=720&width=720&quality=70&auto=webp"
         },
         {
           "listing_id": "699377737281744698",
@@ -19511,7 +19388,7 @@
       "calendar_open_end_date": "2027-05-31",
       "n_comps": 36,
       "comps_count": 36,
-      "comps_raw_count": 37,
+      "comps_raw_count": 36,
       "comps_list": [
         {
           "listing_id": "862891705248130792",
@@ -19710,24 +19587,6 @@
           "price_snippet": "$1,813 | $1,813 for 2 nights",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Phoenix | Serene Home, Heated Pool & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-918812982062542680/original/dfc1df47-74d9-4161-bdcd-533558cb57d0.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 2,
-          "total_price": 2146.0,
-          "effective_nightly": 1073.0,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Promotional stay total ($2146 discounted from $2405, -11%)",
-          "price_snippet": "$2,405 | $2,146 | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | Beautiful New Luxury Build in the Heart of Tempe",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "1019666581527351903",
@@ -21614,7 +21473,7 @@
       "is_our_airbnb_live": true,
       "n_comps": 36,
       "comps_count": 36,
-      "comps_raw_count": 37,
+      "comps_raw_count": 36,
       "comps_list": [
         {
           "listing_id": "1599560226163525836",
@@ -21849,24 +21708,6 @@
           "price_snippet": "$4,013 | $4,013 for 3 nights",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Mesa | Private pickleball court, pool, and game room",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1558065119520691944/original/2cdac939-8462-4f0c-b1d9-5b310b5a6b6d.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 3,
-          "total_price": 3976.0,
-          "effective_nightly": 1325.33,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,976 | $3,976 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "16363441",
@@ -26907,9 +26748,9 @@
       "our_airbnb_effective_nightly": 982.5,
       "our_airbnb_total": 3930.0,
       "is_our_airbnb_live": true,
-      "n_comps": 49,
-      "comps_count": 49,
-      "comps_raw_count": 49,
+      "n_comps": 48,
+      "comps_count": 48,
+      "comps_raw_count": 48,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -27180,24 +27021,6 @@
           "price_snippet": "$5,446 | $5,446 for 4 nights",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Phoenix | California modern with a rooftop mountain deck",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-858613170601453396/original/b0ee4f26-27e8-46d8-aa3e-8699d182c3d0.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 4,
-          "total_price": 4393.0,
-          "effective_nightly": 1098.25,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$4,393 | $4,393 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "734144221994093791",
@@ -27830,9 +27653,9 @@
       "our_airbnb_effective_nightly": 982.5,
       "our_airbnb_total": 3930.0,
       "is_our_airbnb_live": true,
-      "n_comps": 46,
-      "comps_count": 46,
-      "comps_raw_count": 49,
+      "n_comps": 48,
+      "comps_count": 48,
+      "comps_raw_count": 48,
       "comps_list": [
         {
           "listing_id": "1254737517099224843",
@@ -27923,24 +27746,6 @@
           "price_snippet": "$3,459 | $3,459 for 4 nights",
           "raw_snippet": "Superhost | Superhost | Home in Scottsdale | Private resort with pool, sauna, and pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1729894920712555430/original/1c9cc479-0424-4d0e-aed2-33dea1beae77.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 4,
-          "total_price": 5417.0,
-          "effective_nightly": 1354.25,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$5,417 | $5,417 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "1531460523661217428",
@@ -28755,7 +28560,7 @@
       "is_our_airbnb_live": true,
       "n_comps": 50,
       "comps_count": 50,
-      "comps_raw_count": 51,
+      "comps_raw_count": 50,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -28882,24 +28687,6 @@
           "price_snippet": "$3,285 | $3,285 for 4 nights | $0 today",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated pool and hot tub, near Oldtown",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1111676539264652338/original/80cbd97e-48b1-4fc0-b563-f798da52d554.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 4,
-          "total_price": 4047.0,
-          "effective_nightly": 1011.75,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$4,047 | $4,047 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "44394253",
@@ -29712,9 +29499,9 @@
       "our_airbnb_effective_nightly": 982.5,
       "our_airbnb_total": 3930.0,
       "is_our_airbnb_live": true,
-      "n_comps": 45,
-      "comps_count": 45,
-      "comps_raw_count": 49,
+      "n_comps": 48,
+      "comps_count": 48,
+      "comps_raw_count": 48,
       "comps_list": [
         {
           "listing_id": "1599560226163525836",
@@ -29768,24 +29555,6 @@
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$2,961 | $2,961 for 4 nights",
           "raw_snippet": "Top guest favorite | Guest favorite | Home in Chandler | Heated pool and mini golf backyard",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
-          "listing_id": "1561864558173852118",
-          "title": "Home in Tempe",
-          "location": "Tempe",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 4.5,
-          "nights": 4,
-          "total_price": 3786.0,
-          "effective_nightly": 946.5,
-          "rating": 5.0,
-          "reviews": 16,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,786 | $3,786 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Tempe | New build with a hot tub and putting green",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {

@@ -149,12 +149,53 @@ class ListingEnricher:
             "amenities_count": len(amenity_titles),
         }
 
-    @staticmethod
-    def parse_json_ld(ld_data: Dict[str, Any]) -> Dict[str, Any]:
+    @classmethod
+    def clean_profile_title(cls, s: Optional[str]) -> Optional[str]:
+        """
+        Clean and normalize an Airbnb profile title from DOM <h1>, og:title, page title, or JSON-LD.
+        Strips trailing Airbnb platform suffixes like ' - Houses for Rent in ... - Airbnb'
+        and rejects generic location prefixes (e.g. 'Home in Tempe').
+        """
+        if not s or not isinstance(s, str):
+            return None
+        t = s.strip().strip('"\'')
+        if not t:
+            return None
+
+        # Strip trailing " - Airbnb"
+        if t.endswith(" - Airbnb"):
+            t = t[:-9].strip()
+        elif " - Airbnb" in t:
+            t = t.split(" - Airbnb")[0].strip()
+
+        # Strip trailing " - <Property Type> for Rent in <Location>" or " - Entire home in <Location>"
+        t = re.sub(
+            r"\s*-\s*(?:Houses|Homes|Entire home|Villas|Places to stay|Rooms|Condos|Apartments|Guest suites|Estates|Chalets)?\s*(?:for Rent in|in)\s+[^-]+$",
+            "",
+            t,
+            flags=re.IGNORECASE,
+        ).strip().strip('"\'')
+
+        if not t or t.lower().startswith("503 service"):
+            return None
+
+        t_lower = t.lower()
+        if any(t_lower.startswith(pref) for pref in [
+            "home in ", "entire home in ", "villa in ", "room in ",
+            "cabin in ", "place to stay in ", "guesthouse in ", "townhouse in "
+        ]):
+            return None
+        if t_lower in ["home", "villa", "entire home", "luxury estate", "house"]:
+            return None
+        if re.match(r"^\d+\s*bedrooms?$", t_lower) or re.match(r"^\d+\s*beds?$", t_lower):
+            return None
+
+        return t
+
+    @classmethod
+    def parse_json_ld(cls, ld_data: Dict[str, Any]) -> Dict[str, Any]:
         """Extract name, description, rating, reviews, image, and address from schema.org JSON-LD."""
-        title = ld_data.get("name")
-        if title and title.startswith("503 Service"):
-            title = None
+        title = cls.clean_profile_title(ld_data.get("name"))
 
         description = ld_data.get("description", "")
         rating_obj = ld_data.get("aggregateRating", {})
@@ -194,20 +235,25 @@ class ListingEnricher:
         dom_overview: Optional[List[str]] = None,
         dom_description: Optional[str] = None,
         dom_photo: Optional[str] = None,
+        dom_h1: Optional[str] = None,
+        og_title: Optional[str] = None,
         listing_id: str = "",
     ) -> Dict[str, Any]:
         """Combine all page sources into a normalized listing profile dictionary."""
         deferred_parsed = cls.parse_deferred_state(deferred_text)
         ld_parsed = cls.parse_json_ld(ld_data or {})
 
-        # Title resolution
-        title = ld_parsed.get("title")
-        if not title and page_title:
-            t = page_title
-            if " - Airbnb" in t:
-                t = t.split(" - Airbnb")[0].strip()
-            if not t.startswith("503 Service"):
-                title = t
+        # Title resolution order:
+        # 1. DOM <h1> (exact marketing title rendered on the listing page)
+        # 2. og:title meta tag (cleaned)
+        # 3. page_title document title (cleaned of Airbnb suffixes)
+        # 4. JSON-LD name (if non-generic)
+        title = None
+        for candidate in (dom_h1, og_title, page_title, ld_parsed.get("title")):
+            cleaned = cls.clean_profile_title(candidate)
+            if cleaned:
+                title = cleaned
+                break
 
         description = ld_parsed.get("description") or dom_description or ""
         photo_url = ld_parsed.get("photo_url") or dom_photo
@@ -274,6 +320,14 @@ class ListingEnricher:
         )
 
         # 3. DOM Overviews, Title, Description, Meta photo
+        dom_h1 = await page.evaluate("""() => {
+            const h1 = document.querySelector("h1, [data-section-id='TITLE_DEFAULT'] h1");
+            return h1 ? h1.innerText.trim() : null;
+        }""")
+        og_title = await page.evaluate("""() => {
+            const meta = document.querySelector("meta[property='og:title']");
+            return meta ? meta.getAttribute("content") : null;
+        }""")
         dom_overview = await page.evaluate("""() => {
             const items = Array.from(document.querySelectorAll("ol li, div[data-section-id='OVERVIEW_DEFAULT'] li, [data-testid='overview'] li"));
             return items.map(e => e.innerText.trim()).filter(t => t.length > 0 && t.length < 50 && !t.includes('\\n'));
@@ -295,6 +349,8 @@ class ListingEnricher:
             dom_overview=dom_overview,
             dom_description=dom_desc,
             dom_photo=dom_photo,
+            dom_h1=dom_h1,
+            og_title=og_title,
             listing_id=listing_id,
         )
 
@@ -402,8 +458,10 @@ class ListingEnricher:
                     page = await self.context.new_page()
                     try:
                         enriched = await self.enrich_listing(page, cid, force_refresh=force_refresh)
-                        if enriched.get("title") and (comp.get("name") in ("Home in Scottsdale", "Home in Tempe", "Home in Mesa", "Home in Chandler") or comp.get("name", "").startswith("503 Service")):
-                            comp["name"] = enriched["title"]
+                        if enriched.get("title"):
+                            cur_name = comp.get("name", "")
+                            if not cur_name or self.clean_profile_title(cur_name) is None or cur_name.startswith("503 Service"):
+                                comp["name"] = enriched["title"]
                         if enriched.get("photo_url") and not comp.get("photo_url"):
                             comp["photo_url"] = enriched["photo_url"]
                         if enriched.get("bedrooms"):

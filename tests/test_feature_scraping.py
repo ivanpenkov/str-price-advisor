@@ -200,6 +200,86 @@ class TestFeatureScraping(unittest.TestCase):
         self.assertEqual(parsed["reviews"], 101)
         self.assertEqual(parsed["total_price"], 2218.0)
 
+    def test_clean_profile_title_from_h1(self):
+        """Verify clean_profile_title returns clean host marketing headline intact."""
+        title = "HUGE Golf course home-FREE Heated Pool/Theatre/Gym"
+        self.assertEqual(self.enricher.clean_profile_title(title), title)
+
+    def test_clean_profile_title_strips_airbnb_suffixes(self):
+        """Verify Airbnb document title and location suffixes are cleanly stripped."""
+        cases = [
+            (
+                "HUGE Golf course home-FREE Heated Pool/Theatre/Gym - Houses for Rent in Tempe, Arizona, United States - Airbnb",
+                "HUGE Golf course home-FREE Heated Pool/Theatre/Gym",
+            ),
+            (
+                "The Desert Diamond - LUXE Desert GOLD - Old Town - Houses for Rent in Scottsdale, Arizona, United States - Airbnb",
+                "The Desert Diamond - LUXE Desert GOLD - Old Town",
+            ),
+            (
+                "Stunning 6BR Resort Estate - Airbnb",
+                "Stunning 6BR Resort Estate",
+            ),
+            (
+                "Luxe Oasis! Pool, Spa, Golf, Theater & Games! - Entire home in Mesa, Arizona, United States - Airbnb",
+                "Luxe Oasis! Pool, Spa, Golf, Theater & Games!",
+            ),
+        ]
+        for raw, expected in cases:
+            self.assertEqual(self.enricher.clean_profile_title(raw), expected)
+
+    def test_clean_profile_title_rejects_generic_location_placeholders(self):
+        """Verify generic location headers and error strings are disqualified."""
+        generics = [
+            "Home in Tempe",
+            "Entire home in Scottsdale, Arizona",
+            "Villa in Paradise Valley",
+            "Guesthouse in Gilbert",
+            "503 Service Unavailable - Airbnb",
+            "6 bedrooms",
+            "14 beds",
+            "Luxury Estate",
+            "",
+            None,
+        ]
+        for item in generics:
+            self.assertIsNone(self.enricher.clean_profile_title(item))
+
+    def test_parse_page_content_title_resolution_precedence(self):
+        """
+        Verify title resolution hierarchy in parse_page_content:
+        dom_h1 > og_title > cleaned page_title > valid JSON-LD name,
+        and verify generic JSON-LD ('Home in Tempe') is ignored in favor of real marketing title.
+        """
+        # Scenario 1: Comp 790605881020674983 with generic JSON-LD but explicit DOM h1
+        profile = self.enricher.parse_page_content(
+            deferred_text="",
+            ld_data={"name": "Home in Tempe", "description": "Spacious golf retreat."},
+            page_title="HUGE Golf course home-FREE Heated Pool/Theatre/Gym - Houses for Rent in Tempe, Arizona, United States - Airbnb",
+            dom_h1="HUGE Golf course home-FREE Heated Pool/Theatre/Gym",
+            listing_id="790605881020674983",
+        )
+        self.assertEqual(profile["title"], "HUGE Golf course home-FREE Heated Pool/Theatre/Gym")
+
+        # Scenario 2: dom_h1 absent, falls back to cleaned page_title rather than generic JSON-LD
+        profile2 = self.enricher.parse_page_content(
+            deferred_text="",
+            ld_data={"name": "Home in Tempe", "description": "Spacious golf retreat."},
+            page_title="The Desert Diamond - LUXE Desert GOLD - Old Town - Houses for Rent in Scottsdale, Arizona, United States - Airbnb",
+            listing_id="1493069124077219890",
+        )
+        self.assertEqual(profile2["title"], "The Desert Diamond - LUXE Desert GOLD - Old Town")
+
+        # Scenario 3: og:title used when dom_h1 is absent
+        profile3 = self.enricher.parse_page_content(
+            deferred_text="",
+            ld_data={"name": "Home in Mesa"},
+            og_title="Game Time - 6 Bedroom Elite Vacation Paradise",
+            page_title="Home in Mesa - Airbnb",
+            listing_id="1143202699620728397",
+        )
+        self.assertEqual(profile3["title"], "Game Time - 6 Bedroom Elite Vacation Paradise")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -97,6 +97,8 @@ class HTMLDashboardGenerator:
                 self.listing_specs = json.loads(self.specs_path.read_text(encoding="utf-8"))
             except Exception:
                 pass
+        from src.comp_evaluator import CompEvaluator
+        self.evaluator = CompEvaluator()
 
     def load_comps(self) -> Dict[str, Any]:
         """Load curated comps from registry."""
@@ -2067,6 +2069,12 @@ class HTMLDashboardGenerator:
 
             cid_str = str(cid)
             comp_eval = self.comps_dict.get(cid_str, {})
+            if not comp_eval and hasattr(self, "evaluator") and self.evaluator:
+                eval_input = {**sp, **c, "listing_id": cid_str}
+                try:
+                    comp_eval = self.evaluator.evaluate_comp(eval_input)
+                except Exception:
+                    comp_eval = {}
             is_valid = c.get("is_valid_comp") if "is_valid_comp" in c else comp_eval.get("is_valid_comp", True)
             ratio = float(c.get("desirability_ratio") or comp_eval.get("desirability_ratio") or 1.0)
             adj_rate = round(eff_rate / ratio, 2) if is_valid and ratio > 0 else eff_rate

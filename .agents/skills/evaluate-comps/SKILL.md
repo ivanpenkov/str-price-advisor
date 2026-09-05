@@ -22,7 +22,7 @@ This skill guides the AI assistant in systematically evaluating short-term renta
 Always compare competitor listings against Villa del Sol's verified specs from `data/our_property_profile.json`:
 
 - **Location**: Quiet, gated luxury enclave in **South Tempe, AZ** (minutes from ASU Research Park, Sky Harbor, East Valley corridors, 15–20 min to Old Town Scottsdale).
-- **Lot & Space**: Gated **¾-acre private compound** with main house + detached 1BR/1BA luxury guest casita.
+- **Lot & Space**: Gated **¾-acre private compound** with main house + detached 1BR/1BA luxury guest casita, totaling **5,400 sq ft**.
 - **Capacity**: **6 Bedrooms**, **6 Bathrooms** (5.5 on Airbnb), **11 Beds**, **16 Guests**.
 - **Outdoor Resort Amenities (30,000-gal saltwater pool)**:
   - Massive heated saltwater pool with custom rock waterfall grotto.
@@ -43,32 +43,32 @@ Always compare competitor listings against Villa del Sol's verified specs from `
 Evaluate each comp across five distinct dimensions on a scale of **0 to 100**:
 
 ### A. Outdoor Resort Yard & Amenities (Weight: 30%)
-- **100**: Outstanding private resort yard: large heated pool with grotto/slide, spa, dedicated sports court (basketball or pickleball), putting green, expansive covered patio, outdoor kitchen, high privacy.
-- **80–90**: Great pool & spa, nice turf yard, outdoor games (cornhole/ping pong), BBQ, but lacks full sports court (basketball/pickleball) or has smaller lot.
-- **60–75**: Standard backyard pool and patio, basic furniture, no spa or extra sports amenities.
+- **100**: Outstanding private resort compound: large heated pool with grotto/slide, spa, **full regulation tennis court** or multi-sport complex (tennis + pickleball + basketball), **private sauna / cold plunge / wellness**, putting green, outdoor kitchen pavilion, high privacy.
+- **85–95**: Great heated pool & spa, dedicated basketball half-court or pickleball court, putting green, BBQ pavilion, fire pit, turf yard.
+- **70–84**: Standard backyard pool and patio, basic furniture, no sports courts or spa.
 - **< 60**: Small or unheated plunge pool, cramped yard, close neighbors with zero privacy, or no pool (Disqualify).
 
 ### B. Bedrooms, Bathrooms & Capacity (Weight: 25%)
-- **100**: 6+ large bedrooms, 6+ bathrooms (nearly all ensuites), sleeps 16+ comfortably in real beds (kings/queens), detached casita for multi-family privacy.
-- **80–90**: 5–6 bedrooms, 4–5 bathrooms, sleeps 14–16, good balance of king/queen beds.
-- **60–75**: 5 bedrooms with fewer bathrooms (e.g. 3 baths for 14 guests), heavy reliance on triple bunks or sofa beds.
-- **< 60**: < 5 bedrooms, < 3 bathrooms, or unable to host 12+ adults comfortably (Disqualify).
+- **100**: 7+ large bedrooms, 6+ bathrooms (nearly all ensuites), sleeps 16+ comfortably in real beds (kings/queens), **$\ge 6,500$ sq ft expansive estate footprint**, detached casita for multi-family privacy.
+- **85–95**: 6 bedrooms, 5–6 bathrooms, sleeps 16, **5,000–6,400 sq ft** (Villa del Sol ground truth), detached casita or spacious suites.
+- **70–84**: 5 bedrooms with fewer bathrooms (e.g. 3–4 baths for 14 guests), **$< 4,000$ sq ft** dense layout, heavy reliance on bunks.
+- **< 60**: < 4 bedrooms, < 3 bathrooms, or unable to host 12+ adults comfortably (Disqualify).
 
-### C. Interior Luxury & Finishes (Weight: 20%)
-- **100**: Modern designer remodel, chef-grade kitchen, high-end stone/quartz counters, game room with pool table/arcade, luxury furnishings and linens.
-- **80–90**: Clean, contemporary aesthetic, stainless appliances, dedicated game space or billiards.
-- **60–75**: Standard builder-grade finishes, older furniture, minimal indoor entertainment.
+### C. Interior Luxury, Entertainment & Finishes (Weight: 20%)
+- **100**: Modern designer estate remodel, **private movie theater / cinema**, championship billiards table, arcade / game room, chef-grade kitchen with SubZero / Miele / Viking / Wolf appliances, Savant / Sonos audio, luxury linens.
+- **85–95**: Clean contemporary luxury aesthetic, billiards or dedicated game room, stainless appliances, quartz/granite counters.
+- **70–84**: Standard builder-grade finishes, older furniture, basic TV setup, minimal indoor entertainment.
 - **< 60**: Outdated 1990s interiors, worn furnishings, low ceilings.
 
 ### D. Location Corridor & Neighborhood (Weight: 15%)
-- **100**: Prime Paradise Valley or central Old Town Scottsdale luxury corridor (+5% to +15% peak seasonal market premium).
+- **100**: Prime Paradise Valley or central Old Town Scottsdale luxury corridor (+10% to +25% peak seasonal market demand).
 - **85–90**: South Tempe (Villa del Sol baseline) / North Central Chandler / South Scottsdale / Arcadia periphery.
 - **70–80**: Gilbert / Central Mesa / South Chandler.
 - **< 70**: Peripheral suburbs (far East Mesa, Queen Creek, Apache Junction) located >35 minutes from airport/events.
 
 ### E. Reviews & Track Record (Weight: 10%)
-- **100**: 4.95+ rating with 50+ reviews, Guest Favorite / Superhost status.
-- **85–95**: 4.80–4.94 rating with 20+ reviews (matches Villa del Sol).
+- **100**: 4.95+ rating with 30+ reviews, Guest Favorite / Superhost status.
+- **85–95**: 4.80–4.94 rating with 20+ reviews (matches Villa del Sol: 4.83 with 76 reviews).
 - **70–84**: 4.60–4.79 rating, or new listing with < 5 reviews.
 - **< 70**: < 4.60 rating, or reviews mentioning cleanliness, noise, or maintenance issues.
 
@@ -79,20 +79,31 @@ Evaluate each comp across five distinct dimensions on a scale of **0 to 100**:
 Compute the holistic composite score:
 $$\text{Comp Score} = 0.30 A + 0.25 B + 0.20 C + 0.15 D + 0.10 E$$
 
-Villa del Sol baseline score is approximately **88 / 100**.
+Villa del Sol baseline score is **88.0 / 100**.
 
-Calculate the **Desirability Ratio**:
-$$\text{Ratio} = \frac{\text{Comp Score}}{\text{Our Score (88)}}$$
-*(Clamped to a realistic luxury comp range of 0.65 to 1.35)*.
+### Sensitivity-Scaled Expansion Formula
+To avoid artificial mathematical compression where scores near 100 max out at only 1.14x, the system applies a **sensitivity factor ($\text{Sensitivity} = 2.0$)** centered at Villa del Sol's 88.0 benchmark:
+
+$$\text{Delta} = \frac{\text{Comp Score} - 88.0}{88.0}$$
+$$\text{Ratio} = \text{round}\left(\max\left(0.65, \min\left(1.35, 1.0 + 2.0 \times \text{Delta}\right)\right), 2\right)$$
+
+- **Equal Quality Comp (Score 88.0)**:
+  $$\text{Ratio} = 1.0 + 2.0 \times \frac{0}{88.0} = \mathbf{1.00x} \quad \text{(Peer)}$$
+- **Superior Luxury Estate (Score 98.8, e.g. 7BR, 7k sq ft, Tennis, Sauna)**:
+  $$\text{Delta} = \frac{98.8 - 88.0}{88.0} = +0.1227 \implies \text{Ratio} = 1.0 + 2.0 \times 0.1227 = \mathbf{1.25x} \quad \text{(Superior)}$$
+- **Top Tier Mega Compound (Score 100.0, e.g. 9BR, 10k sq ft PV Resort)**:
+  $$\text{Delta} = \frac{100.0 - 88.0}{88.0} = +0.1364 \implies \text{Ratio} = 1.0 + 2.0 \times 0.1364 = \mathbf{1.27x} \quad \text{(Top Tier)}$$
+- **Moderate Comp (Score 76.0, e.g. 5BR Mesa basic house)**:
+  $$\text{Delta} = \frac{76.0 - 88.0}{88.0} = -0.1364 \implies \text{Ratio} = 1.0 + 2.0 \times (-0.1364) = \mathbf{0.73x} \quad \text{(Discount)}$$
 
 ### Adjustment Price Formula
 When guests evaluate prices on Airbnb:
 $$\text{Adjusted Comp Rate} = \frac{\text{Raw Effective Rate}}{\text{Ratio}}$$
 
-- **Inferior Comp (Ratio 0.85)**: The comp is 15% less desirable than Villa del Sol. Its \$850 rate adjusts to:
-  $$\frac{\$850}{0.85} = \$1,000$$
-- **Superior Comp (Ratio 1.15)**: The comp is 15% more luxurious than Villa del Sol (e.g. PV estate). Its \$1,150 rate adjusts to:
-  $$\frac{\$1,150}{1.15} = \$1,000$$
+- **Discount Comp (Ratio 0.75)**: The comp is 25% less desirable than Villa del Sol. Its \$600 rate adjusts to:
+  $$\frac{\$600}{0.75} = \$800$$
+- **Superior Comp (Ratio 1.25)**: The comp is 25% more desirable than Villa del Sol (e.g. 7k sq ft tennis estate). Its \$1,250 rate adjusts to:
+  $$\frac{\$1,250}{1.25} = \$1,000$$
 
 ---
 

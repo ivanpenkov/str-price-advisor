@@ -14,17 +14,17 @@
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1077813310260513265/original/123122b6-3b05-41bc-abb0-db4ae36dad8b.jpeg",
       "amenities_count": 82,
       "is_valid_comp": true,
-      "validity_reason": "Valid 7BR luxury estate comp in Scottsdale with tennis, pickleball, and sauna.",
-      "desirability_ratio": 1.1,
+      "validity_reason": "Valid 7BR luxury estate comp in Scottsdale.",
+      "desirability_ratio": 1.25,
       "category_scores": {
-        "outdoor": 95,
+        "outdoor": 100,
         "capacity": 100,
-        "interior": 95,
+        "interior": 99,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 96.6,
-      "rationale": "Superior comp (10% higher desirability). 7BR/6.5BA 7,000 sq ft Scottsdale estate with full tennis & pickleball courts, private sauna, movie theater, and 4.97★ rating."
+      "composite_score": 98.8,
+      "rationale": "Premium comp (25% superior desirability). Features private tennis court, private sauna, movie theater."
     },
     "628534576871518102": {
       "listing_id": "628534576871518102",
@@ -41,7 +41,7 @@
       "amenities_count": 80,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 80,
         "capacity": 85,
@@ -67,7 +67,7 @@
       "amenities_count": 79,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.99,
       "category_scores": {
         "outdoor": 85,
         "capacity": 90,
@@ -93,15 +93,15 @@
       "amenities_count": 58,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.03,
+      "desirability_ratio": 1.02,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 90,
         "capacity": 95,
-        "interior": 93,
+        "interior": 89,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 90.4,
+      "composite_score": 89.0,
       "rationale": "Direct peer comp (near-equal quality). 8BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "746927337513825183": {
@@ -119,16 +119,16 @@
       "amenities_count": 68,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.07,
+      "desirability_ratio": 1.14,
       "category_scores": {
         "outdoor": 85,
         "capacity": 100,
-        "interior": 100,
+        "interior": 98,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 94.5,
-      "rationale": "Premium comp (7% superior desirability). Features heated spa, pool table, 8 bedrooms."
+      "composite_score": 94.1,
+      "rationale": "Premium comp (14% superior desirability). Features movie theater, heated spa, pool table."
     },
     "1561864558173852118": {
       "listing_id": "1561864558173852118",
@@ -171,15 +171,15 @@
       "amenities_count": 87,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 85,
         "capacity": 85,
-        "interior": 95,
+        "interior": 91,
         "location": 88,
         "reputation": 88
       },
-      "composite_score": 87.8,
+      "composite_score": 87.0,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "1442997693061036066": {
@@ -223,16 +223,16 @@
       "amenities_count": 65,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.06,
+      "desirability_ratio": 1.12,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 90,
-        "interior": 93,
+        "interior": 89,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 93.2,
-      "rationale": "Premium comp (6% superior desirability). Features dedicated sports court, heated spa, pool table."
+      "composite_score": 93.3,
+      "rationale": "Premium comp (12% superior desirability). Features dedicated sports court, heated spa, pool table."
     },
     "1628548270397523375": {
       "listing_id": "1628548270397523375",
@@ -249,16 +249,16 @@
       "amenities_count": 72,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.03,
+      "desirability_ratio": 1.07,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 85,
-        "interior": 88,
+        "interior": 84,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 91.0,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier."
+      "composite_score": 91.1,
+      "rationale": "Premium comp (7% superior desirability). Features dedicated sports court, private sauna, heated spa."
     },
     "1136293547142522527": {
       "listing_id": "1136293547142522527",
@@ -275,16 +275,16 @@
       "amenities_count": 62,
       "is_valid_comp": true,
       "validity_reason": "Valid 7BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.09,
+      "desirability_ratio": 1.22,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 100,
-        "interior": 93,
+        "interior": 97,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 95.7,
-      "rationale": "Premium comp (9% superior desirability). Features dedicated sports court, heated spa, pool table."
+      "composite_score": 97.5,
+      "rationale": "Premium comp (22% superior desirability). Features dedicated sports court, movie theater, heated spa."
     },
     "1240027547507854574": {
       "listing_id": "1240027547507854574",
@@ -301,15 +301,15 @@
       "amenities_count": 64,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 85,
         "capacity": 85,
-        "interior": 85,
+        "interior": 83,
         "location": 95,
         "reputation": 94
       },
-      "composite_score": 87.4,
+      "composite_score": 87.0,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "1384784550322094986": {
@@ -327,7 +327,7 @@
       "amenities_count": 57,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.97,
       "category_scores": {
         "outdoor": 80,
         "capacity": 95,
@@ -353,7 +353,7 @@
       "amenities_count": 77,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.94,
+      "desirability_ratio": 0.88,
       "category_scores": {
         "outdoor": 80,
         "capacity": 100,
@@ -362,7 +362,7 @@
         "reputation": 70
       },
       "composite_score": 82.7,
-      "rationale": "Moderate comp (6% lower desirability). Noted gaps: lacks basketball court, Mesa location discount."
+      "rationale": "Moderate comp (12% lower desirability). Noted gaps: lacks basketball court, Mesa location discount."
     },
     "48680831": {
       "listing_id": "48680831",
@@ -379,16 +379,16 @@
       "amenities_count": 73,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.04,
+      "desirability_ratio": 1.1,
       "category_scores": {
-        "outdoor": 85,
+        "outdoor": 91,
         "capacity": 100,
-        "interior": 83,
+        "interior": 81,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 91.1,
-      "rationale": "Direct peer comp (near-equal quality). 8BR / 8.0BA estate matching Villa del Sol's capacity and luxury tier."
+      "composite_score": 92.5,
+      "rationale": "Premium comp (10% superior desirability). Features private sauna, heated spa, 8 bedrooms."
     },
     "1442265380006443515": {
       "listing_id": "1442265380006443515",
@@ -405,7 +405,7 @@
       "amenities_count": 52,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Apartment In Scottsdale.",
-      "desirability_ratio": 0.88,
+      "desirability_ratio": 0.77,
       "category_scores": {
         "outdoor": 70,
         "capacity": 75,
@@ -414,7 +414,7 @@
         "reputation": 88
       },
       "composite_score": 77.8,
-      "rationale": "Moderate comp (12% lower desirability). Noted gaps: lacks basketball court, 3.0 baths."
+      "rationale": "Moderate comp (23% lower desirability). Noted gaps: lacks basketball court, 3.0 baths."
     },
     "1640779184675228639": {
       "listing_id": "1640779184675228639",
@@ -431,16 +431,16 @@
       "amenities_count": 67,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.91,
+      "desirability_ratio": 0.82,
       "category_scores": {
         "outdoor": 85,
         "capacity": 75,
-        "interior": 78,
+        "interior": 76,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 80.3,
-      "rationale": "Moderate comp (9% lower desirability). Noted gaps: lacks basketball court, 3.0 baths, Mesa location discount."
+      "composite_score": 80.0,
+      "rationale": "Moderate comp (18% lower desirability). Noted gaps: lacks basketball court, 3.0 baths, Mesa location discount."
     },
     "1257280665542111508": {
       "listing_id": "1257280665542111508",
@@ -461,11 +461,11 @@
       "category_scores": {
         "outdoor": 85,
         "capacity": 91,
-        "interior": 88,
+        "interior": 84,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 89.9,
+      "composite_score": 89.1,
       "rationale": "Direct peer comp (near-equal quality). 7BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "1494470117199033651": {
@@ -483,15 +483,15 @@
       "amenities_count": 73,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 85,
         "capacity": 90,
-        "interior": 93,
+        "interior": 89,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 88.1,
+      "composite_score": 87.3,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -510,16 +510,16 @@
       "amenities_count": 60,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Villa In Scottsdale.",
-      "desirability_ratio": 1.1,
+      "desirability_ratio": 1.19,
       "category_scores": {
         "outdoor": 100,
         "capacity": 100,
-        "interior": 93,
+        "interior": 89,
         "location": 95,
         "reputation": 94
       },
-      "composite_score": 97.2,
-      "rationale": "Premium comp (10% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 96.5,
+      "rationale": "Premium comp (19% superior desirability). Features dedicated sports court, heated spa, pool table.",
       "accommodates": 16
     },
     "628256621164272951": {
@@ -537,16 +537,16 @@
       "amenities_count": 58,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Villa In North Scottsdale.",
-      "desirability_ratio": 1.09,
+      "desirability_ratio": 1.18,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 100,
-        "interior": 93,
+        "interior": 89,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 95.7,
-      "rationale": "Premium comp (9% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 95.8,
+      "rationale": "Premium comp (18% superior desirability). Features dedicated sports court, private sauna, heated spa.",
       "accommodates": 20
     },
     "1650904135823994226": {
@@ -564,16 +564,16 @@
       "amenities_count": 71,
       "is_valid_comp": true,
       "validity_reason": "Valid 9BR luxury estate comp in North Scottsdale.",
-      "desirability_ratio": 1.1,
+      "desirability_ratio": 1.18,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 95,
         "capacity": 100,
-        "interior": 100,
+        "interior": 98,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 97.1,
-      "rationale": "Premium comp (10% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 96.1,
+      "rationale": "Premium comp (18% superior desirability). Features dedicated sports court, movie theater, heated spa.",
       "accommodates": 16
     },
     "1135701668320730178": {
@@ -591,16 +591,16 @@
       "amenities_count": 73,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in North Scottsdale.",
-      "desirability_ratio": 1.1,
+      "desirability_ratio": 1.2,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 100,
-        "interior": 93,
+        "interior": 89,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 96.7,
-      "rationale": "Premium comp (10% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 96.8,
+      "rationale": "Premium comp (20% superior desirability). Features dedicated sports court, heated spa, pool table.",
       "accommodates": 16
     },
     "1762462636165970118": {
@@ -618,7 +618,7 @@
       "amenities_count": 72,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 1.09,
+      "desirability_ratio": 1.18,
       "category_scores": {
         "outdoor": 100,
         "capacity": 100,
@@ -627,7 +627,7 @@
         "reputation": 88
       },
       "composite_score": 96.0,
-      "rationale": "Premium comp (9% superior desirability). Features dedicated sports court, heated spa, Scottsdale location premium.",
+      "rationale": "Premium comp (18% superior desirability). Features dedicated sports court, movie theater, heated spa.",
       "accommodates": 16
     },
     "757175004186905494": {
@@ -645,16 +645,16 @@
       "amenities_count": 66,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.06,
+      "desirability_ratio": 1.11,
       "category_scores": {
         "outdoor": 90,
         "capacity": 90,
-        "interior": 100,
+        "interior": 96,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 93.5,
-      "rationale": "Premium comp (6% superior desirability). Features heated spa, pool table, Scottsdale location premium.",
+      "composite_score": 92.8,
+      "rationale": "Premium comp (11% superior desirability). Features heated spa, pool table, Scottsdale location premium.",
       "accommodates": 16
     },
     "22569614": {
@@ -672,15 +672,15 @@
       "amenities_count": 62,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Kierland.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.99,
       "category_scores": {
         "outdoor": 85,
         "capacity": 90,
-        "interior": 85,
+        "interior": 83,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 88.0,
+      "composite_score": 87.6,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 18
     },
@@ -699,16 +699,16 @@
       "amenities_count": 63,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.04,
+      "desirability_ratio": 1.07,
       "category_scores": {
         "outdoor": 80,
         "capacity": 100,
-        "interior": 93,
+        "interior": 91,
         "location": 95,
         "reputation": 94
       },
-      "composite_score": 91.2,
-      "rationale": "Direct peer comp (near-equal quality). 8BR / 5.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 90.9,
+      "rationale": "Premium comp (7% superior desirability). Features movie theater, heated spa, pool table.",
       "accommodates": 16
     },
     "1547101536396069219": {
@@ -726,16 +726,16 @@
       "amenities_count": 63,
       "is_valid_comp": true,
       "validity_reason": "Valid 7BR luxury estate comp in Chandler.",
-      "desirability_ratio": 1.08,
+      "desirability_ratio": 1.16,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 100,
-        "interior": 93,
+        "interior": 89,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 94.8,
-      "rationale": "Premium comp (8% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 94.9,
+      "rationale": "Premium comp (16% superior desirability). Features dedicated sports court, heated spa, pool table.",
       "accommodates": 20
     },
     "1254737517099224843": {
@@ -753,7 +753,7 @@
       "amenities_count": 76,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.95,
+      "desirability_ratio": 0.9,
       "category_scores": {
         "outdoor": 85,
         "capacity": 85,
@@ -762,7 +762,7 @@
         "reputation": 98
       },
       "composite_score": 83.8,
-      "rationale": "Moderate comp (5% lower desirability). Noted gaps: lacks basketball court, 3.0 baths.",
+      "rationale": "Moderate comp (10% lower desirability). Noted gaps: lacks basketball court, 3.0 baths.",
       "accommodates": 16
     },
     "646572770933564861": {
@@ -780,16 +780,16 @@
       "amenities_count": 55,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 1.05,
+      "desirability_ratio": 1.1,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 85,
-        "interior": 100,
+        "interior": 96,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 92.4,
-      "rationale": "Premium comp (5% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 92.5,
+      "rationale": "Premium comp (10% superior desirability). Features dedicated sports court, heated spa, pool table.",
       "accommodates": 16
     },
     "1125598445109401829": {
@@ -807,15 +807,15 @@
       "amenities_count": 55,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 80,
         "capacity": 100,
-        "interior": 85,
+        "interior": 83,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 87.5,
+      "composite_score": 87.1,
       "rationale": "Direct peer comp (near-equal quality). 8BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -834,16 +834,16 @@
       "amenities_count": 85,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Villa In Mesa.",
-      "desirability_ratio": 1.02,
+      "desirability_ratio": 1.06,
       "category_scores": {
         "outdoor": 85,
-        "capacity": 95,
+        "capacity": 99,
         "interior": 100,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 89.8,
-      "rationale": "Direct peer comp (near-equal quality). 8BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 90.8,
+      "rationale": "Premium comp (6% superior desirability). Features movie theater, heated spa, pool table.",
       "accommodates": 24
     },
     "1543607622549442899": {
@@ -861,7 +861,7 @@
       "amenities_count": 93,
       "is_valid_comp": true,
       "validity_reason": "Valid 9BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.12,
+      "desirability_ratio": 1.25,
       "category_scores": {
         "outdoor": 100,
         "capacity": 100,
@@ -870,7 +870,7 @@
         "reputation": 98
       },
       "composite_score": 99.0,
-      "rationale": "Premium comp (12% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "rationale": "Premium comp (25% superior desirability). Features dedicated sports court, private sauna, movie theater.",
       "accommodates": 32
     },
     "1550824215338770978": {
@@ -888,7 +888,7 @@
       "amenities_count": 58,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 1.04,
+      "desirability_ratio": 1.08,
       "category_scores": {
         "outdoor": 100,
         "capacity": 100,
@@ -897,7 +897,7 @@
         "reputation": 94
       },
       "composite_score": 91.7,
-      "rationale": "Direct peer comp (near-equal quality). 8BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
+      "rationale": "Premium comp (8% superior desirability). Features dedicated sports court, heated spa, 8 bedrooms.",
       "accommodates": 16
     },
     "1247200709739597595": {
@@ -915,16 +915,16 @@
       "amenities_count": 57,
       "is_valid_comp": true,
       "validity_reason": "Valid 7BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.05,
+      "desirability_ratio": 1.07,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 95,
         "capacity": 100,
-        "interior": 85,
+        "interior": 83,
         "location": 78,
         "reputation": 94
       },
-      "composite_score": 92.2,
-      "rationale": "Premium comp (5% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 91.2,
+      "rationale": "Premium comp (7% superior desirability). Features dedicated sports court, heated spa, pool table.",
       "accommodates": 16
     },
     "1520493073616950985": {
@@ -942,15 +942,15 @@
       "amenities_count": 66,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 80,
         "capacity": 85,
-        "interior": 93,
+        "interior": 89,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 87.9,
+      "composite_score": 87.1,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -969,16 +969,16 @@
       "amenities_count": 52,
       "is_valid_comp": true,
       "validity_reason": "Valid 9BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.97,
+      "desirability_ratio": 0.93,
       "category_scores": {
         "outdoor": 80,
         "capacity": 95,
-        "interior": 83,
+        "interior": 81,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 85.4,
-      "rationale": "Direct peer comp (near-equal quality). 9BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 85.0,
+      "rationale": "Moderate comp (7% lower desirability). Noted gaps: lacks basketball court, 3.5 baths.",
       "accommodates": 16
     },
     "1144613690916964707": {
@@ -996,15 +996,15 @@
       "amenities_count": 46,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.99,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 95,
         "capacity": 100,
-        "interior": 78,
+        "interior": 76,
         "location": 78,
         "reputation": 70
       },
-      "composite_score": 88.4,
+      "composite_score": 87.4,
       "rationale": "Direct peer comp (near-equal quality). 8BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 30
     },
@@ -1023,16 +1023,16 @@
       "amenities_count": 65,
       "is_valid_comp": true,
       "validity_reason": "Valid 11BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.09,
+      "desirability_ratio": 1.19,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 96,
         "capacity": 100,
-        "interior": 100,
+        "interior": 98,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 95.6,
-      "rationale": "Premium comp (9% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 96.5,
+      "rationale": "Premium comp (19% superior desirability). Features dedicated sports court, private sauna, movie theater.",
       "accommodates": 16
     },
     "16363441": {
@@ -1051,16 +1051,16 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.95,
       "category_scores": {
         "outdoor": 80,
         "capacity": 90,
-        "interior": 92,
+        "interior": 90,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 86.0,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier."
+      "composite_score": 85.6,
+      "rationale": "Moderate comp (5% lower desirability). Noted gaps: lacks basketball court, 4.0 baths."
     },
     "1625632307698164475": {
       "listing_id": "1625632307698164475",
@@ -1077,7 +1077,7 @@
       "amenities_count": 64,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.05,
+      "desirability_ratio": 1.09,
       "category_scores": {
         "outdoor": 100,
         "capacity": 100,
@@ -1086,7 +1086,7 @@
         "reputation": 88
       },
       "composite_score": 92.1,
-      "rationale": "Premium comp (5% superior desirability). Features dedicated sports court, heated spa.",
+      "rationale": "Premium comp (9% superior desirability). Features dedicated sports court, movie theater, heated spa.",
       "accommodates": 20
     },
     "1341229760130810280": {
@@ -1104,15 +1104,15 @@
       "amenities_count": 87,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 1.04,
       "category_scores": {
-        "outdoor": 85,
+        "outdoor": 91,
         "capacity": 85,
-        "interior": 95,
+        "interior": 99,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 87.2,
+      "composite_score": 89.8,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -1131,7 +1131,7 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Villa In Mesa.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.92,
       "category_scores": {
         "outdoor": 80,
         "capacity": 90,
@@ -1140,7 +1140,7 @@
         "reputation": 98
       },
       "composite_score": 84.4,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "rationale": "Moderate comp (8% lower desirability). Noted gaps: lacks basketball court, 4.0 baths, Villa In Mesa location discount.",
       "accommodates": 16
     },
     "1081331699304657121": {
@@ -1185,16 +1185,16 @@
       "amenities_count": 78,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.05,
+      "desirability_ratio": 1.09,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 81,
-        "interior": 93,
+        "interior": 89,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 92.0,
-      "rationale": "Premium comp (5% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 92.1,
+      "rationale": "Premium comp (9% superior desirability). Features private tennis court, heated spa, pool table.",
       "accommodates": 14
     }
   },
@@ -1214,16 +1214,16 @@
       "amenities_count": 66,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.94,
+      "desirability_ratio": 0.88,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
-        "interior": 90,
+        "interior": 88,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 83.0,
-      "rationale": "Moderate comp (6% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 82.6,
+      "rationale": "Moderate comp (12% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 13
     },
     "1119722139111767613": {
@@ -1241,16 +1241,16 @@
       "amenities_count": 89,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.95,
       "category_scores": {
         "outdoor": 90,
         "capacity": 68,
-        "interior": 93,
+        "interior": 89,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 86.6,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 85.8,
+      "rationale": "Moderate comp (5% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "47868708": {
@@ -1268,7 +1268,7 @@
       "amenities_count": 69,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Tempe.",
-      "desirability_ratio": 0.89,
+      "desirability_ratio": 0.77,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
@@ -1277,7 +1277,7 @@
         "reputation": 98
       },
       "composite_score": 78.0,
-      "rationale": "Moderate comp (11% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "rationale": "Moderate comp (23% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "1517450883597399267": {
@@ -1295,16 +1295,16 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Tempe.",
-      "desirability_ratio": 0.93,
+      "desirability_ratio": 0.85,
       "category_scores": {
         "outdoor": 80,
         "capacity": 78,
-        "interior": 78,
+        "interior": 76,
         "location": 88,
         "reputation": 94
       },
-      "composite_score": 81.7,
-      "rationale": "Moderate comp (7% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 81.3,
+      "rationale": "Moderate comp (15% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 16
     },
     "1249420525058947765": {
@@ -1322,16 +1322,16 @@
       "amenities_count": 46,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Phoenix.",
-      "desirability_ratio": 0.91,
+      "desirability_ratio": 0.82,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
-        "interior": 87,
+        "interior": 85,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 80.5,
-      "rationale": "Moderate comp (9% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 80.1,
+      "rationale": "Moderate comp (18% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "42545559": {
@@ -1349,7 +1349,7 @@
       "amenities_count": 70,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.89,
+      "desirability_ratio": 0.79,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
@@ -1358,7 +1358,7 @@
         "reputation": 94
       },
       "composite_score": 78.7,
-      "rationale": "Moderate comp (11% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "rationale": "Moderate comp (21% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "942270039710528411": {
@@ -1376,16 +1376,16 @@
       "amenities_count": 80,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.89,
       "category_scores": {
         "outdoor": 85,
-        "capacity": 78,
-        "interior": 100,
+        "capacity": 68,
+        "interior": 96,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 86.5,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 83.2,
+      "rationale": "Moderate comp (11% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "1322763359166708040": {
@@ -1403,7 +1403,7 @@
       "amenities_count": 74,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Tempe.",
-      "desirability_ratio": 0.91,
+      "desirability_ratio": 0.83,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
@@ -1412,7 +1412,7 @@
         "reputation": 98
       },
       "composite_score": 80.4,
-      "rationale": "Moderate comp (9% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "rationale": "Moderate comp (17% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "27905914": {
@@ -1430,16 +1430,16 @@
       "amenities_count": 71,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Villa In Phoenix.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.95,
       "category_scores": {
         "outdoor": 85,
         "capacity": 83,
-        "interior": 90,
+        "interior": 88,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 86.3,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 86.0,
+      "rationale": "Moderate comp (5% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 4.0 baths.",
       "accommodates": 16
     },
     "1607018564200076881": {
@@ -1457,7 +1457,7 @@
       "amenities_count": 70,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.93,
+      "desirability_ratio": 0.86,
       "category_scores": {
         "outdoor": 80,
         "capacity": 80,
@@ -1466,7 +1466,7 @@
         "reputation": 88
       },
       "composite_score": 82.0,
-      "rationale": "Moderate comp (7% lower desirability). Noted gaps: lacks basketball court, 4.0 baths.",
+      "rationale": "Moderate comp (14% lower desirability). Noted gaps: lacks basketball court, 4.0 baths.",
       "accommodates": 12
     },
     "931203617899460144": {
@@ -1484,7 +1484,7 @@
       "amenities_count": 45,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.97,
+      "desirability_ratio": 0.94,
       "category_scores": {
         "outdoor": 80,
         "capacity": 89,
@@ -1493,7 +1493,7 @@
         "reputation": 98
       },
       "composite_score": 85.3,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 5.5BA estate matching Villa del Sol's capacity and luxury tier.",
+      "rationale": "Moderate comp (6% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR.",
       "accommodates": 14
     },
     "39090468": {
@@ -1511,15 +1511,15 @@
       "amenities_count": 79,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.01,
+      "desirability_ratio": 1.0,
       "category_scores": {
         "outdoor": 85,
         "capacity": 78,
-        "interior": 100,
+        "interior": 96,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 89.0,
+      "composite_score": 88.2,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -1538,15 +1538,15 @@
       "amenities_count": 53,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Tempe.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.96,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 90,
         "capacity": 73,
-        "interior": 88,
+        "interior": 84,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 87.5,
+      "composite_score": 86.1,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 12
     },
@@ -1565,16 +1565,16 @@
       "amenities_count": 66,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.94,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 95,
         "capacity": 68,
-        "interior": 88,
+        "interior": 84,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 86.7,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 85.3,
+      "rationale": "Moderate comp (6% lower desirability). Noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "628534576871518102": {
@@ -1592,7 +1592,7 @@
       "amenities_count": 80,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 80,
         "capacity": 85,
@@ -1644,16 +1644,16 @@
       "amenities_count": 57,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.88,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 90,
         "capacity": 74,
-        "interior": 88,
+        "interior": 84,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 84.2,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 2.5BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 82.8,
+      "rationale": "Moderate comp (12% lower desirability). Noted gaps: 5 BR vs our 6 BR, 2.5 baths, Mesa location discount.",
       "accommodates": 14
     },
     "39946904": {
@@ -1702,11 +1702,11 @@
       "category_scores": {
         "outdoor": 80,
         "capacity": 91,
-        "interior": 95,
+        "interior": 91,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 89.8,
+      "composite_score": 89.0,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 5.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 14
     },
@@ -1725,16 +1725,16 @@
       "amenities_count": 70,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.93,
+      "desirability_ratio": 0.85,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
-        "interior": 85,
+        "interior": 83,
         "location": 95,
         "reputation": 94
       },
-      "composite_score": 81.7,
-      "rationale": "Moderate comp (7% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 81.2,
+      "rationale": "Moderate comp (15% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "1689250872259091459": {
@@ -1779,16 +1779,16 @@
       "amenities_count": 66,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Tempe.",
-      "desirability_ratio": 0.94,
+      "desirability_ratio": 0.88,
       "category_scores": {
         "outdoor": 80,
         "capacity": 85,
-        "interior": 78,
+        "interior": 76,
         "location": 88,
         "reputation": 88
       },
-      "composite_score": 82.8,
-      "rationale": "Moderate comp (6% lower desirability). Noted gaps: lacks basketball court.",
+      "composite_score": 82.5,
+      "rationale": "Moderate comp (12% lower desirability). Noted gaps: lacks basketball court.",
       "accommodates": 12
     },
     "1165319935245172999": {
@@ -1806,15 +1806,15 @@
       "amenities_count": 67,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Fashion Square.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 1.0,
       "category_scores": {
         "outdoor": 80,
-        "capacity": 73,
-        "interior": 93,
+        "capacity": 83,
+        "interior": 97,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 84.9,
+      "composite_score": 88.2,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -1833,7 +1833,7 @@
       "amenities_count": 64,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Arcadia.",
-      "desirability_ratio": 1.01,
+      "desirability_ratio": 1.02,
       "category_scores": {
         "outdoor": 85,
         "capacity": 91,
@@ -1860,16 +1860,16 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 0.93,
+      "desirability_ratio": 0.85,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
-        "interior": 85,
+        "interior": 83,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 82.0,
-      "rationale": "Moderate comp (7% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 81.6,
+      "rationale": "Moderate comp (15% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "746195521284356998": {
@@ -1887,15 +1887,15 @@
       "amenities_count": 68,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 1.03,
+      "desirability_ratio": 1.01,
       "category_scores": {
-        "outdoor": 97,
-        "capacity": 78,
-        "interior": 92,
+        "outdoor": 95,
+        "capacity": 73,
+        "interior": 90,
         "location": 95,
         "reputation": 94
       },
-      "composite_score": 90.7,
+      "composite_score": 88.4,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 7
     },
@@ -1914,16 +1914,16 @@
       "amenities_count": 65,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.04,
+      "desirability_ratio": 1.1,
       "category_scores": {
         "outdoor": 85,
         "capacity": 93,
-        "interior": 93,
+        "interior": 97,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 91.4,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 5.5BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 92.2,
+      "rationale": "Premium comp (10% superior desirability). Features movie theater, heated spa, pool table.",
       "accommodates": 16
     },
     "1329097682770073862": {
@@ -1941,16 +1941,16 @@
       "amenities_count": 65,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 1.06,
+      "desirability_ratio": 1.12,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 90,
-        "interior": 93,
+        "interior": 89,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 93.2,
-      "rationale": "Premium comp (6% superior desirability). Features dedicated sports court, heated spa, pool table."
+      "composite_score": 93.3,
+      "rationale": "Premium comp (12% superior desirability). Features dedicated sports court, heated spa, pool table."
     },
     "1442997693061036066": {
       "listing_id": "1442997693061036066",
@@ -1993,16 +1993,16 @@
       "amenities_count": 70,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.9,
       "category_scores": {
         "outdoor": 80,
         "capacity": 78,
-        "interior": 83,
+        "interior": 81,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 84.1,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 83.8,
+      "rationale": "Moderate comp (10% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 4.0 baths.",
       "accommodates": 12
     },
     "1628548270397523375": {
@@ -2020,16 +2020,16 @@
       "amenities_count": 72,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.03,
+      "desirability_ratio": 1.07,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 85,
-        "interior": 88,
+        "interior": 84,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 91.0,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier."
+      "composite_score": 91.1,
+      "rationale": "Premium comp (7% superior desirability). Features dedicated sports court, private sauna, heated spa."
     },
     "891168360613545464": {
       "listing_id": "891168360613545464",
@@ -2046,15 +2046,15 @@
       "amenities_count": 60,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.01,
+      "desirability_ratio": 1.0,
       "category_scores": {
         "outdoor": 85,
         "capacity": 84,
-        "interior": 90,
+        "interior": 88,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 88.5,
+      "composite_score": 88.1,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 14
     },
@@ -2073,16 +2073,16 @@
       "amenities_count": 86,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in North Scottsdale.",
-      "desirability_ratio": 1.11,
+      "desirability_ratio": 1.19,
       "category_scores": {
         "outdoor": 100,
         "capacity": 93,
-        "interior": 100,
+        "interior": 96,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 97.3,
-      "rationale": "Premium comp (11% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 96.5,
+      "rationale": "Premium comp (19% superior desirability). Features dedicated sports court, heated spa, pool table.",
       "accommodates": 16
     },
     "739707480178231807": {
@@ -2100,15 +2100,15 @@
       "amenities_count": 43,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 1.02,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 96,
         "capacity": 78,
-        "interior": 88,
+        "interior": 84,
         "location": 95,
         "reputation": 94
       },
-      "composite_score": 88.3,
+      "composite_score": 88.8,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 18
     },
@@ -2127,16 +2127,16 @@
       "amenities_count": 73,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.04,
+      "desirability_ratio": 1.1,
       "category_scores": {
-        "outdoor": 85,
+        "outdoor": 91,
         "capacity": 100,
-        "interior": 83,
+        "interior": 81,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 91.1,
-      "rationale": "Direct peer comp (near-equal quality). 8BR / 8.0BA estate matching Villa del Sol's capacity and luxury tier."
+      "composite_score": 92.5,
+      "rationale": "Premium comp (10% superior desirability). Features private sauna, heated spa, 8 bedrooms."
     },
     "661489175613477267": {
       "listing_id": "661489175613477267",
@@ -2153,16 +2153,16 @@
       "amenities_count": 44,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.95,
+      "desirability_ratio": 0.89,
       "category_scores": {
         "outdoor": 85,
         "capacity": 81,
-        "interior": 83,
+        "interior": 81,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 83.5,
-      "rationale": "Moderate comp (5% lower desirability). Noted gaps: lacks basketball court, 3.0 baths.",
+      "composite_score": 83.0,
+      "rationale": "Moderate comp (11% lower desirability). Noted gaps: lacks basketball court, 3.0 baths.",
       "accommodates": 14
     },
     "1599760926842009555": {
@@ -2180,16 +2180,16 @@
       "amenities_count": 60,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 1.02,
+      "desirability_ratio": 1.06,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 91,
         "interior": 75,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 89.9,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 5.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 90.8,
+      "rationale": "Premium comp (6% superior desirability). Features private tennis court, heated spa, Scottsdale location premium.",
       "accommodates": 14
     },
     "16363441": {
@@ -2208,16 +2208,16 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.95,
       "category_scores": {
         "outdoor": 80,
         "capacity": 90,
-        "interior": 92,
+        "interior": 90,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 86.0,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier."
+      "composite_score": 85.6,
+      "rationale": "Moderate comp (5% lower desirability). Noted gaps: lacks basketball court, 4.0 baths."
     },
     "1371960459560609432": {
       "listing_id": "1371960459560609432",
@@ -2234,16 +2234,16 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.94,
       "category_scores": {
         "outdoor": 85,
         "capacity": 79,
-        "interior": 95,
+        "interior": 91,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 86.3,
-      "rationale": "Direct peer comp (near-equal quality). 5BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 85.5,
+      "rationale": "Moderate comp (6% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.5 baths.",
       "accommodates": 14
     },
     "1608243763033582138": {
@@ -2261,16 +2261,16 @@
       "amenities_count": 55,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.9,
+      "desirability_ratio": 0.78,
       "category_scores": {
         "outdoor": 80,
         "capacity": 73,
-        "interior": 78,
+        "interior": 76,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 79.0,
-      "rationale": "Moderate comp (10% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 4.0 baths.",
+      "composite_score": 78.5,
+      "rationale": "Moderate comp (22% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 4.0 baths.",
       "accommodates": 12
     },
     "695672305834920067": {
@@ -2288,16 +2288,16 @@
       "amenities_count": 90,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.94,
+      "desirability_ratio": 0.87,
       "category_scores": {
         "outdoor": 80,
         "capacity": 78,
-        "interior": 85,
+        "interior": 83,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 82.6,
-      "rationale": "Moderate comp (6% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 82.2,
+      "rationale": "Moderate comp (13% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 16
     },
     "1637937154787852120": {
@@ -2315,16 +2315,16 @@
       "amenities_count": 70,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.9,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 95,
         "capacity": 75,
-        "interior": 78,
+        "interior": 76,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 84.5,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 83.5,
+      "rationale": "Moderate comp (10% lower desirability). Noted gaps: 3.0 baths.",
       "accommodates": 12
     },
     "1547101536396069219": {
@@ -2342,16 +2342,16 @@
       "amenities_count": 63,
       "is_valid_comp": true,
       "validity_reason": "Valid 7BR luxury estate comp in Chandler.",
-      "desirability_ratio": 1.08,
+      "desirability_ratio": 1.16,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 100,
-        "interior": 93,
+        "interior": 89,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 94.8,
-      "rationale": "Premium comp (8% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 94.9,
+      "rationale": "Premium comp (16% superior desirability). Features dedicated sports court, heated spa, pool table.",
       "accommodates": 20
     },
     "620502220252141438": {
@@ -2369,15 +2369,15 @@
       "amenities_count": 59,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 1.02,
+      "desirability_ratio": 1.03,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 90,
         "capacity": 100,
         "interior": 77,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 90.1,
+      "composite_score": 89.5,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 5.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 14
     },
@@ -2396,7 +2396,7 @@
       "amenities_count": 76,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.95,
+      "desirability_ratio": 0.9,
       "category_scores": {
         "outdoor": 85,
         "capacity": 85,
@@ -2405,7 +2405,7 @@
         "reputation": 98
       },
       "composite_score": 83.8,
-      "rationale": "Moderate comp (5% lower desirability). Noted gaps: lacks basketball court, 3.0 baths.",
+      "rationale": "Moderate comp (10% lower desirability). Noted gaps: lacks basketball court, 3.0 baths.",
       "accommodates": 16
     },
     "52455358": {
@@ -2423,16 +2423,16 @@
       "amenities_count": 101,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.93,
+      "desirability_ratio": 0.85,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
-        "interior": 95,
+        "interior": 91,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 82.1,
-      "rationale": "Moderate comp (7% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 2.0 baths.",
+      "composite_score": 81.3,
+      "rationale": "Moderate comp (15% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 2.0 baths.",
       "accommodates": 12
     },
     "566971333177879197": {
@@ -2477,16 +2477,16 @@
       "amenities_count": 65,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.95,
+      "desirability_ratio": 0.88,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 90,
         "capacity": 68,
-        "interior": 85,
+        "interior": 83,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 83.7,
-      "rationale": "Moderate comp (5% lower desirability). Noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 82.7,
+      "rationale": "Moderate comp (12% lower desirability). Noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 10
     },
     "1358887338136661145": {
@@ -2504,16 +2504,16 @@
       "amenities_count": 62,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 1.02,
+      "desirability_ratio": 1.06,
       "category_scores": {
         "outdoor": 100,
         "capacity": 80,
-        "interior": 93,
+        "interior": 97,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 89.7,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 90.5,
+      "rationale": "Premium comp (6% superior desirability). Features dedicated sports court, movie theater, heated spa.",
       "accommodates": 12
     },
     "1319814591019877062": {
@@ -2531,16 +2531,16 @@
       "amenities_count": 58,
       "is_valid_comp": true,
       "validity_reason": "Valid 7BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.06,
+      "desirability_ratio": 1.16,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 96,
         "capacity": 100,
-        "interior": 95,
+        "interior": 99,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 93.1,
-      "rationale": "Premium comp (6% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 95.1,
+      "rationale": "Premium comp (16% superior desirability). Features dedicated sports court, movie theater, heated spa.",
       "accommodates": 15
     },
     "1498682060046080673": {
@@ -2558,15 +2558,15 @@
       "amenities_count": 88,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.97,
       "category_scores": {
         "outdoor": 85,
         "capacity": 88,
-        "interior": 95,
+        "interior": 91,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 87.6,
+      "composite_score": 86.8,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -2585,7 +2585,7 @@
       "amenities_count": 76,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.9,
+      "desirability_ratio": 0.8,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
@@ -2594,7 +2594,7 @@
         "reputation": 94
       },
       "composite_score": 79.1,
-      "rationale": "Moderate comp (10% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 2.5 baths.",
+      "rationale": "Moderate comp (20% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 2.5 baths.",
       "accommodates": 12
     },
     "1686281156322769090": {
@@ -2612,16 +2612,16 @@
       "amenities_count": 69,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.89,
+      "desirability_ratio": 0.77,
       "category_scores": {
         "outdoor": 80,
         "capacity": 68,
-        "interior": 78,
+        "interior": 76,
         "location": 82,
         "reputation": 94
       },
-      "composite_score": 78.3,
-      "rationale": "Moderate comp (11% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 77.9,
+      "rationale": "Moderate comp (23% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12
     },
     "730689822646393395": {
@@ -2639,16 +2639,16 @@
       "amenities_count": 60,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.92,
+      "desirability_ratio": 0.83,
       "category_scores": {
         "outdoor": 75,
         "capacity": 73,
-        "interior": 92,
+        "interior": 90,
         "location": 82,
         "reputation": 94
       },
-      "composite_score": 80.9,
-      "rationale": "Moderate comp (8% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 80.5,
+      "rationale": "Moderate comp (17% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 13
     },
     "646572770933564861": {
@@ -2666,16 +2666,16 @@
       "amenities_count": 55,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 1.05,
+      "desirability_ratio": 1.1,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 100,
         "capacity": 85,
-        "interior": 100,
+        "interior": 96,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 92.4,
-      "rationale": "Premium comp (5% superior desirability). Features dedicated sports court, heated spa, pool table.",
+      "composite_score": 92.5,
+      "rationale": "Premium comp (10% superior desirability). Features dedicated sports court, heated spa, pool table.",
       "accommodates": 16
     },
     "1485481343360527002": {
@@ -2693,15 +2693,15 @@
       "amenities_count": 73,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.97,
       "category_scores": {
         "outdoor": 85,
         "capacity": 78,
-        "interior": 100,
+        "interior": 98,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 87.1,
+      "composite_score": 86.7,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -2720,16 +2720,16 @@
       "amenities_count": 58,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.92,
+      "desirability_ratio": 0.82,
       "category_scores": {
         "outdoor": 85,
         "capacity": 74,
-        "interior": 78,
+        "interior": 76,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 80.7,
-      "rationale": "Moderate comp (8% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 2.5 baths.",
+      "composite_score": 80.3,
+      "rationale": "Moderate comp (18% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 2.5 baths.",
       "accommodates": 14
     },
     "52867134": {
@@ -2747,16 +2747,16 @@
       "amenities_count": 60,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.91,
+      "desirability_ratio": 0.81,
       "category_scores": {
         "outdoor": 85,
         "capacity": 68,
-        "interior": 80,
+        "interior": 78,
         "location": 82,
         "reputation": 94
       },
-      "composite_score": 80.2,
-      "rationale": "Moderate comp (9% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 79.8,
+      "rationale": "Moderate comp (19% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 13
     },
     "740490197885439898": {
@@ -2774,7 +2774,7 @@
       "amenities_count": 57,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.91,
+      "desirability_ratio": 0.81,
       "category_scores": {
         "outdoor": 80,
         "capacity": 79,
@@ -2783,7 +2783,7 @@
         "reputation": 98
       },
       "composite_score": 79.8,
-      "rationale": "Moderate comp (9% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 4.0 baths.",
+      "rationale": "Moderate comp (19% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, 4.0 baths.",
       "accommodates": 14
     },
     "1734227719495774011": {
@@ -2801,15 +2801,15 @@
       "amenities_count": 71,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 1.02,
       "category_scores": {
-        "outdoor": 97,
+        "outdoor": 95,
         "capacity": 83,
-        "interior": 90,
+        "interior": 96,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 88.3,
+      "composite_score": 89.0,
       "rationale": "Direct peer comp (near-equal quality). 5BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 20
     },
@@ -2828,7 +2828,7 @@
       "amenities_count": 87,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.97,
       "category_scores": {
         "outdoor": 85,
         "capacity": 78,
@@ -2855,7 +2855,7 @@
       "amenities_count": 64,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.94,
+      "desirability_ratio": 0.89,
       "category_scores": {
         "outdoor": 85,
         "capacity": 86,
@@ -2864,7 +2864,7 @@
         "reputation": 88
       },
       "composite_score": 83.1,
-      "rationale": "Moderate comp (6% lower desirability). Noted gaps: lacks basketball court, 4.0 baths, Mesa location discount.",
+      "rationale": "Moderate comp (11% lower desirability). Noted gaps: lacks basketball court, 4.0 baths, Mesa location discount.",
       "accommodates": 15
     },
     "1558065119520691944": {
@@ -2882,15 +2882,15 @@
       "amenities_count": 58,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.03,
+      "desirability_ratio": 1.02,
       "category_scores": {
-        "outdoor": 92,
+        "outdoor": 90,
         "capacity": 95,
-        "interior": 93,
+        "interior": 89,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 90.4,
+      "composite_score": 89.0,
       "rationale": "Direct peer comp (near-equal quality). 8BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "1143202699620728397": {
@@ -2908,15 +2908,15 @@
       "amenities_count": 87,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 85,
         "capacity": 85,
-        "interior": 95,
+        "interior": 91,
         "location": 88,
         "reputation": 88
       },
-      "composite_score": 87.8,
+      "composite_score": 87.0,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "816204349600160886": {
@@ -2934,7 +2934,7 @@
       "amenities_count": 23,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.89,
+      "desirability_ratio": 0.77,
       "category_scores": {
         "outdoor": 80,
         "capacity": 78,
@@ -2943,7 +2943,7 @@
         "reputation": 88
       },
       "composite_score": 78.0,
-      "rationale": "Moderate comp (11% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, Mesa location discount.",
+      "rationale": "Moderate comp (23% lower desirability). Noted gaps: lacks basketball court, 5 BR vs our 6 BR, Mesa location discount.",
       "accommodates": 12
     },
     "1494470117199033651": {
@@ -2961,15 +2961,15 @@
       "amenities_count": 73,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.98,
       "category_scores": {
         "outdoor": 85,
         "capacity": 90,
-        "interior": 93,
+        "interior": 89,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 88.1,
+      "composite_score": 87.3,
       "rationale": "Direct peer comp (near-equal quality). 6BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16
     },
@@ -2988,7 +2988,7 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Villa In Mesa.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.92,
       "category_scores": {
         "outdoor": 80,
         "capacity": 90,
@@ -2997,7 +2997,7 @@
         "reputation": 98
       },
       "composite_score": 84.4,
-      "rationale": "Direct peer comp (near-equal quality). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "rationale": "Moderate comp (8% lower desirability). Noted gaps: lacks basketball court, 4.0 baths, Villa In Mesa location discount.",
       "accommodates": 16
     }
   },
@@ -3005,7 +3005,7 @@
     "last_updated": "2026-09-03T19:49:26.446509",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
-    "valid_comps_count": 105,
+    "valid_comps_count": 106,
     "disqualified_comps_count": 6
   }
 }

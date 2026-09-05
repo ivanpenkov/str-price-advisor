@@ -33,7 +33,9 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         }
         res = self.evaluator.evaluate_comp(comp)
         self.assertTrue(res["is_valid_comp"])
-        self.assertAlmostEqual(res["desirability_ratio"], res["composite_score"] / 88.0, places=2)
+        delta = (res["composite_score"] - 88.0) / 88.0
+        expected_ratio = round(max(0.65, min(1.35, 1.0 + 2.0 * delta)), 2)
+        self.assertEqual(res["desirability_ratio"], expected_ratio)
         self.assertGreater(res["composite_score"], 70.0)
         self.assertIn("outdoor", res["category_scores"])
         self.assertIn("capacity", res["category_scores"])
@@ -153,6 +155,78 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         action_summary = eval_res.get("action_summary", "")
         self.assertNotIn("%", action_summary)
         self.assertTrue("$" in action_summary or action_summary == "")
+
+    def test_comp_evaluator_square_footage_scaling(self):
+        """Properties with >=6,500 sq ft receive an estate capacity bonus; <4,000 sq ft receive a penalty."""
+        comp_large = {
+            "listing_id": "70001",
+            "name": "Expansive Estate",
+            "bedrooms": 6,
+            "baths": 6.0,
+            "guests": 16,
+            "location": "Scottsdale",
+            "description": "Stunning 7,000 sq ft luxury estate with heated pool.",
+        }
+        res_large = self.evaluator.evaluate_comp(comp_large)
+
+        comp_compact = {
+            "listing_id": "70002",
+            "name": "Compact House",
+            "bedrooms": 6,
+            "baths": 6.0,
+            "guests": 16,
+            "location": "Scottsdale",
+            "description": "Lovely 3,200 sq ft house with pool.",
+        }
+        res_compact = self.evaluator.evaluate_comp(comp_compact)
+
+        self.assertGreater(res_large["category_scores"]["capacity"], res_compact["category_scores"]["capacity"])
+        self.assertIn("7,000 sq ft estate", res_large["rationale"])
+
+    def test_comp_evaluator_wellness_and_tennis_court(self):
+        """Properties with private sauna and full tennis court score higher in outdoor category."""
+        comp_tennis_sauna = {
+            "listing_id": "80001",
+            "name": "Wellness & Tennis Compound",
+            "bedrooms": 7,
+            "baths": 6.5,
+            "rating": 4.97,
+            "reviews": 30,
+            "location": "Scottsdale",
+            "raw_snippet": "Home in Scottsdale | 7,000 sq ft with courts and pool",
+            "description": "Features full private tennis court, pickleball, private sauna, movie theater, billiards table, heated pool, and hot tub.",
+            "amenities": ["Pool", "Private hot tub", "Private tennis court", "Pickleball", "Private sauna", "Movie theater", "Pool table", "SubZero refrigerator"],
+        }
+        res = self.evaluator.evaluate_comp(comp_tennis_sauna)
+        self.assertTrue(res["is_valid_comp"])
+        self.assertGreaterEqual(res["category_scores"]["outdoor"], 95)
+        self.assertGreaterEqual(res["desirability_ratio"], 1.20)
+        self.assertIn("private tennis court", res["rationale"])
+        self.assertIn("private sauna", res["rationale"])
+
+    def test_html_generator_fallback_evaluates_unregistered_comp(self):
+        """HTMLDashboardGenerator should dynamically evaluate unregistered comps on the fly instead of defaulting to 1.0."""
+        from src.html_generator import HTMLDashboardGenerator
+        gen = HTMLDashboardGenerator()
+
+        # Listing not in comps_registry.json
+        unregistered_comp = {
+            "listing_id": "999999999999999",
+            "name": "Hidden Gem Estate",
+            "location": "Scottsdale",
+            "bedrooms": 7,
+            "beds": 10,
+            "baths": 6.5,
+            "rating": 4.98,
+            "reviews": 35,
+            "effective_nightly": 1200.0,
+            "total_price": 4800.0,
+            "description": "7,000 sq ft estate with tennis court, sauna, movie theater, billiards, and heated pool.",
+            "amenities": ["Pool", "Private hot tub", "Private tennis court", "Private sauna", "Movie theater", "Pool table"],
+        }
+        eval_res = gen.evaluator.evaluate_comp(unregistered_comp)
+        self.assertTrue(eval_res["is_valid_comp"])
+        self.assertGreaterEqual(eval_res["desirability_ratio"], 1.15)
 
 
 if __name__ == "__main__":

@@ -18,6 +18,7 @@ Computes:
 
 import json
 import logging
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -79,10 +80,20 @@ class CompEvaluator:
                     pass
 
         # Combine metadata and enriched details
-        title = enriched.get("title") or comp_meta.get("name", "Luxury Estate")
+        title = enriched.get("title") or comp_meta.get("name") or comp_meta.get("title", "Luxury Estate")
         desc = (enriched.get("description") or comp_meta.get("description") or "").lower()
         amenities = [a.lower() for a in (enriched.get("amenities") or comp_meta.get("amenities") or [])]
-        all_text = (title + " " + desc + " " + " ".join(amenities)).lower()
+        raw_snippet = (comp_meta.get("raw_snippet") or enriched.get("raw_snippet") or "").lower()
+        all_text = (title + " " + desc + " " + raw_snippet + " " + " ".join(amenities)).lower()
+
+        # Extract square footage if mentioned in all_text
+        sqft = None
+        m_sqft = re.search(r"(\d[\d,]*)\s*(?:sq\s*ft|sqft|square\s*feet|sq\s*feet)", all_text)
+        if m_sqft:
+            try:
+                sqft = int(m_sqft.group(1).replace(",", ""))
+            except Exception:
+                sqft = None
 
         br = comp_meta.get("bedrooms") or enriched.get("bedrooms", 5)
         try:
@@ -191,9 +202,14 @@ class CompEvaluator:
         # 2. CATEGORY SCORING (0 to 100)
         # -------------------------------------------------------------
         # A. Outdoor Yard (30%)
-        # Features: pool, spa/hot tub, sports court (basketball, pickleball), putting green, BBQ, acreage
+        # Features: pool, spa/hot tub, sports courts (tennis, pickleball, basketball), sauna/wellness, putting green, BBQ, acreage
         has_spa = any(w in all_text for w in ["spa", "hot tub", "jacuzzi", "whirlpool"])
-        has_court = any(w in all_text for w in ["basketball", "pickleball", "tennis court", "sports court", "sport court", "half court"])
+        has_tennis = any(w in all_text for w in ["tennis court", "tennis"])
+        has_court = any(w in all_text for w in ["basketball", "pickleball", "sports court", "sport court", "half court"]) or has_tennis
+        has_multiple_courts = (has_tennis and any(w in all_text for w in ["pickleball", "basketball"])) or (
+            "pickleball" in all_text and "basketball" in all_text
+        )
+        has_sauna = any(w in all_text for w in ["sauna", "steam room", "cold plunge", "ice bath"])
         has_green = any(w in all_text for w in ["putting green", "mini golf", "turf"])
         has_bbq_fire = any(w in all_text for w in ["bbq", "grill", "fire pit", "outdoor kitchen", "cabana", "gazebo"])
         has_grotto = any(w in all_text for w in ["grotto", "waterfall", "slide", "lazy river"])
@@ -201,8 +217,14 @@ class CompEvaluator:
         outdoor_score = 65  # Base for having a pool
         if has_spa:
             outdoor_score += 10
-        if has_court:
-            outdoor_score += 12
+        if has_multiple_courts:
+            outdoor_score += 16
+        elif has_tennis:
+            outdoor_score += 14
+        elif has_court:
+            outdoor_score += 10
+        if has_sauna:
+            outdoor_score += 6
         if has_green:
             outdoor_score += 5
         if has_bbq_fire:
@@ -212,7 +234,7 @@ class CompEvaluator:
         outdoor_score = min(100, outdoor_score)
 
         # B. Bedrooms & Bathrooms (25%)
-        # Villa del Sol: 6 BR, 6 BA, 16 guests, detached casita
+        # Villa del Sol: 6 BR, 6 BA, 16 guests, detached casita, 5,400 sq ft
         capacity_score = 60
         if br >= 7:
             capacity_score += 20
@@ -236,20 +258,32 @@ class CompEvaluator:
         has_casita = any(w in all_text for w in ["casita", "guest house", "guesthouse", "guest suite", "detached"])
         if has_casita:
             capacity_score += 5
-        capacity_score = min(100, capacity_score)
+
+        if sqft:
+            if sqft >= 6500:
+                capacity_score += 8
+            elif sqft >= 5000:
+                capacity_score += 4
+            elif sqft < 4000:
+                capacity_score -= 5
+
+        capacity_score = min(100, max(40, capacity_score))
 
         # C. Interior Luxury & Entertainment (20%)
-        # Features: pool table / billiards, arcade / game room, chef kitchen, luxury remodel
+        # Features: pool table / billiards, theater, arcade / game room, chef kitchen, luxury remodel
         has_billiards = any(w in all_text for w in ["pool table", "billiards", "billiard"])
-        has_game_room = any(w in all_text for w in ["game room", "arcade", "ping pong", "foosball", "shuffleboard", "theatre", "theater"])
-        has_chef_kitchen = any(w in all_text for w in ["chef", "stainless", "sub-zero", "viking", "wine cooler", "granite", "quartz"])
+        has_theater = any(w in all_text for w in ["theatre", "theater", "cinema", "movie room"])
+        has_game_room = any(w in all_text for w in ["game room", "arcade", "ping pong", "foosball", "shuffleboard"])
+        has_chef_kitchen = any(w in all_text for w in ["chef", "stainless", "sub-zero", "subzero", "viking", "miele", "wolf", "wine cooler", "granite", "quartz"])
         has_luxury_vibe = any(w in all_text for w in ["luxury", "estate", "remodeled", "designer", "mansion", "resort"])
 
         interior_score = 70
         if has_billiards:
-            interior_score += 10
-        if has_game_room:
             interior_score += 8
+        if has_theater:
+            interior_score += 8
+        if has_game_room:
+            interior_score += 6
         if has_chef_kitchen:
             interior_score += 7
         if has_luxury_vibe:
@@ -299,8 +333,11 @@ class CompEvaluator:
         )
         composite = round(composite, 1)
 
-        # Ratio = Comp Score / Our Score (88.0)
-        raw_ratio = composite / self.OUR_BASELINE_SCORE
+        # Sensitivity-scaled expansion (sensitivity = 2.0 centered at 88.0)
+        # Unlocks the full 0.65x - 1.35x realistic luxury range, preventing linear compression.
+        SENSITIVITY = 2.0
+        delta = (composite - self.OUR_BASELINE_SCORE) / self.OUR_BASELINE_SCORE
+        raw_ratio = 1.0 + (SENSITIVITY * delta)
         ratio = round(max(0.65, min(1.35, raw_ratio)), 2)
 
         # -------------------------------------------------------------
@@ -309,16 +346,25 @@ class CompEvaluator:
         highlights = []
         shortcomings = []
 
-        if has_court:
+        if has_tennis:
+            highlights.append("private tennis court")
+        elif has_court:
             highlights.append("dedicated sports court")
         elif "basketball" in self.our_profile.get("description", "").lower():
             shortcomings.append("lacks basketball court")
 
+        if has_sauna:
+            highlights.append("private sauna")
+        if has_theater:
+            highlights.append("movie theater")
         if has_spa:
             highlights.append("heated spa")
         if has_billiards:
             highlights.append("pool table")
-        if br >= 7:
+
+        if sqft and sqft >= 6500:
+            highlights.append(f"{sqft:,} sq ft estate")
+        elif br >= 7:
             highlights.append(f"{br} bedrooms")
         elif br < 6:
             shortcomings.append(f"{br} BR vs our 6 BR")
@@ -337,7 +383,11 @@ class CompEvaluator:
         elif ratio <= 0.95:
             delta = round((1.0 - ratio) * 100)
             summary = f"Moderate comp ({delta}% lower desirability). "
-            if shortcomings:
+            if highlights and shortcomings:
+                summary += f"Features {highlights[0]}, but noted gaps: " + ", ".join(shortcomings[:2]) + "."
+            elif highlights:
+                summary += "Features " + ", ".join(highlights[:2]) + "."
+            elif shortcomings:
                 summary += "Noted gaps: " + ", ".join(shortcomings[:3]) + "."
             else:
                 summary += f"{br}BR estate in {location.title()} with standard luxury amenities."

@@ -1,7 +1,11 @@
 {
   "listing_id": "1257280665542111508",
-  "title": "Backyard Basecamp | Pool, Hoops & Arcade - Houses for Rent in Scottsdale, Arizona, United States - Airbnb",
-  "description": "",
+  "title": "Backyard Basecamp | Pool, Hoops & Arcade",
+  "description": "Cannonball into the pool, then challenge the crew to pickleball and pinball before s'mores at the fire pit!\n- 7 bedrooms, sleeps up to 17\n- Private heated pool & hot tub\n- Basketball/pickleball court\n- Arcade, pool table & foosball\n- Kid's playground w/ climbing dome\n- Fire pit & outdoor dining",
+  "bedrooms": 7,
+  "beds": 12,
+  "baths": 3.5,
+  "guests": "16+",
   "amenities": [
     "Air conditioning",
     "Arcade games",
@@ -71,11 +75,19 @@
     "Wine glasses"
   ],
   "amenities_count": 66,
-  "overview": [],
-  "rating": null,
-  "reviews": null,
-  "address": null,
+  "overview": [
+    "16+ guests",
+    "7 bedrooms",
+    "12 beds",
+    "3.5 baths"
+  ],
+  "rating": 4.95,
+  "reviews": 61,
+  "address": {
+    "addressLocality": "Scottsdale"
+  },
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1257280665542111508/original/022d8542-8b44-4aaa-8392-34a3714b66bd.jpeg",
   "url": "https://www.airbnb.com/rooms/1257280665542111508",
-  "enriched_at": "2026-09-04T15:25:40.561789"
+  "review_snippets": [],
+  "enriched_at": "2026-09-05T03:52:15.705055"
 }

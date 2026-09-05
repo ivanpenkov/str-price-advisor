@@ -1,0 +1,51 @@
+{
+  "listing_id": "816204349600160886",
+  "title": "5BR with Pool, Hot Tub, Putting Green & Trampoline",
+  "description": "Looking for a great deal? Discounts are automatically applied based on your length of stay—whether it’s 5 nights, 7 nights, 28 nights, or more! No need for promo codes or requests. The total price you see includes your savings, so you can book with confidence. Discounts may display differently across booking platforms, but rest assured, they’re built into your final price!",
+  "bedrooms": 5,
+  "beds": 8,
+  "baths": 4.5,
+  "guests": "12",
+  "amenities": [
+    "Air conditioning",
+    "Carbon monoxide alarm",
+    "Coffee maker",
+    "Dedicated workspace",
+    "Dishwasher",
+    "Dryer",
+    "Free parking on premises",
+    "Hair dryer",
+    "Heating",
+    "Hot tub",
+    "Indoor fireplace",
+    "Iron",
+    "Keypad",
+    "Kitchen",
+    "Microwave",
+    "Patio or balcony",
+    "Pool",
+    "Refrigerator",
+    "Self check-in",
+    "Smoke alarm",
+    "TV",
+    "Washer",
+    "Wifi"
+  ],
+  "amenities_count": 23,
+  "overview": [
+    "12 guests",
+    "· 5 bedrooms",
+    "· 8 beds",
+    "· 4.5 baths",
+    "Superhost",
+    "· 6 years hosting"
+  ],
+  "rating": 5.0,
+  "reviews": 6,
+  "address": {
+    "addressLocality": "Mesa"
+  },
+  "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-816204349600160886/original/1e90850d-3f3f-4499-bc76-3a27dd97c60a.jpeg",
+  "url": "https://www.airbnb.com/rooms/816204349600160886",
+  "enriched_at": "2026-09-04T19:56:59.595772"
+}

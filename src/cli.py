@@ -244,6 +244,25 @@ def main():
     enrich_parser.add_argument("--our-property", action="store_true", help="Enrich Villa del Sol property profile specifically")
     enrich_parser.add_argument("--sync-cached", action="store_true", help="Sync existing cached profiles under data/enriched_comps/ to registry and listing specs without scraping")
 
+    add_comp_parser = subparsers.add_parser("add-comp", help="Deep scrape, evaluate, and register a new competitor listing")
+    add_comp_parser.add_argument("identifier", type=str, help="Airbnb listing ID or URL")
+    add_comp_parser.add_argument("--tier", choices=["tier_a", "tier_b"], default=None, help="Force assign to specific tier (default: auto-detect based on BR/capacity)")
+    add_comp_parser.add_argument("--scrape-prices", action="store_true", help="Automatically scrape prices across open intervals after adding")
+    add_comp_parser.add_argument("--limit", type=int, default=None, help="Limit number of intervals to price scrape")
+    add_comp_parser.add_argument("--force", action="store_true", help="Force refresh listing profile even if cached")
+    add_comp_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
+
+    remove_comp_parser = subparsers.add_parser("remove-comp", help="Remove competitor listing from registry, purge cache, and update dashboard")
+    remove_comp_parser.add_argument("identifier", type=str, help="Airbnb listing ID or URL")
+    remove_comp_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
+
+    scrape_prices_parser = subparsers.add_parser("scrape-comp-prices", help="Scrape live checkout prices for a specific comp across open intervals")
+    scrape_prices_parser.add_argument("identifier", type=str, help="Airbnb listing ID or URL")
+    scrape_prices_parser.add_argument("--limit", type=int, default=None, help="Limit number of intervals to scrape")
+    scrape_prices_parser.add_argument("--start-date", type=str, default=None, help="Filter intervals starting on or after YYYY-MM-DD")
+    scrape_prices_parser.add_argument("--end-date", type=str, default=None, help="Filter intervals ending on or before YYYY-MM-DD")
+    scrape_prices_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
+
     args = parser.parse_args()
 
     if args.command == "run":
@@ -297,6 +316,35 @@ def main():
             ))
     elif args.command == "test-kivoya":
         test_kivoya_only()
+    elif args.command == "add-comp":
+        from src.comp_manager import CompManager
+        manager = CompManager()
+        asyncio.run(manager.add_comp(
+            identifier=args.identifier,
+            tier=args.tier,
+            scrape_prices=args.scrape_prices,
+            limit_intervals=args.limit,
+            force_refresh=args.force,
+        ))
+        if args.push:
+            push_to_github(commit_msg=f"Add comp {args.identifier} and update dashboard")
+    elif args.command == "remove-comp":
+        from src.comp_manager import CompManager
+        manager = CompManager()
+        success = manager.remove_comp(identifier=args.identifier)
+        if success and args.push:
+            push_to_github(commit_msg=f"Remove comp {args.identifier} and update dashboard")
+    elif args.command == "scrape-comp-prices":
+        from src.comp_manager import CompManager
+        manager = CompManager()
+        asyncio.run(manager.scrape_comp_interval_prices(
+            identifier=args.identifier,
+            limit=args.limit,
+            start_date=args.start_date,
+            end_date=args.end_date,
+        ))
+        if args.push:
+            push_to_github(commit_msg=f"Scrape interval prices for comp {args.identifier}")
     else:
         parser.print_help()
 

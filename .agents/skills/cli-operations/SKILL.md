@@ -20,6 +20,9 @@ This skill provides a complete reference for all command-line operations in `src
 | `generate-html` | Re-render static HTML dashboard from data | **No** (Local only) | `--push` |
 | `evaluate-comps`| Compute 5-factor quality scores & desirability ratios | **No** (Local evaluation) | `--no-save` |
 | `enrich-comps` | Deep scrape / sync listing features (beds, baths, amenities) | **Yes** for live (`--sync-cached` is offline) | `--concurrency`, `--limit`, `--force`, `--sync-cached`, `--our-property` |
+| `add-comp` | Deep scrape, evaluate, and register new competitor listing | **Yes** (NordVPN proxy) | `--tier`, `--scrape-prices`, `--limit`, `--force`, `--push` |
+| `remove-comp` | Remove comp from registry, purge cache, and update dashboard | **No** (Local only) | `--push` |
+| `scrape-comp-prices` | Scrape live checkout rates for a single comp across intervals | **Yes** (NordVPN proxy) | `--limit`, `--start-date`, `--end-date`, `--push` |
 | `bootstrap-comps`| Discover and curate initial competitor registry | **Yes** (Airbnb proxy) | `--limit` |
 | `test-kivoya` | Verify Kivoya / Streamline VRS PMS connection | **Yes** (Direct Kivoya API) | None |
 
@@ -122,6 +125,53 @@ Enriches competitor listings with verified data extracted from Apollo client def
 
 ---
 
+### `add-comp`: Add, Evaluate, and Register Competitor Listing
+
+Scrapes listing profile via NordVPN proxy, scores quality against Villa del Sol using the 5-factor luxury rubric, registers into `config/comps_registry.json` and `config/listing_specs.json`, and optionally triggers interval price scraping.
+
+#### Usage:
+```bash
+# Add comp and automatically scrape prices across open intervals
+.venv/bin/python -m src.cli add-comp 1493069124077219890 --scrape-prices
+
+# Add comp with explicit tier assignment
+.venv/bin/python -m src.cli add-comp https://www.airbnb.com/rooms/1493069124077219890 --tier tier_a
+
+# Add comp and scrape first 5 upcoming intervals
+.venv/bin/python -m src.cli add-comp 1493069124077219890 --scrape-prices --limit 5
+```
+
+---
+
+### `remove-comp`: Clean Competitor Removal & Dashboard Refresh
+
+Completely unregisters a competitor listing from `config/comps_registry.json` and `config/listing_specs.json`, purges its single-comp cache (`data/cache/search_*_comp_{id}.json`), deletes `data/enriched_comps/{id}.json`, and updates `docs/index.html`.
+
+#### Usage:
+```bash
+.venv/bin/python -m src.cli remove-comp 1493069124077219890
+```
+
+---
+
+### `scrape-comp-prices`: Single-Comp Interval Checkout Price Scraper
+
+Directly checks live guest checkout prices for a single comp across open calendar intervals using the mandatory NordVPN proxy, intercepting Airbnb GraphQL pricing and saving to `data/cache/search_{c_in}_{c_out}_comp_{id}.json`. Automatically refreshes `docs/index.html`.
+
+#### Usage:
+```bash
+# Scrape all open intervals
+.venv/bin/python -m src.cli scrape-comp-prices 1493069124077219890
+
+# Scrape first N intervals
+.venv/bin/python -m src.cli scrape-comp-prices 1493069124077219890 --limit 5
+
+# Scrape within specific date range
+.venv/bin/python -m src.cli scrape-comp-prices 1493069124077219890 --start-date 2026-10-01 --end-date 2026-12-31
+```
+
+---
+
 ### `bootstrap-comps`: Market Discovery & Registry Seeding
 
 Discovers luxury comps across Phoenix East Valley (Scottsdale, Tempe, Chandler, Mesa, Gilbert) via Airbnb search cards and populates initial `config/comps_registry.json`.
@@ -185,6 +235,13 @@ When the user wants a quick turnaround on upcoming dates without running the ent
 To inspect pricing around major local demand drivers (e.g. WM Phoenix Open, Spring Training):
 ```bash
 .venv/bin/python -m src.cli run --quick --start-date 2027-02-01 --end-date 2027-03-31
+```
+
+### Workflow 5: Adding a Competitor Listing and Populating Dates
+When a user requests adding a new listing by URL or ID:
+```bash
+# Add comp profile, evaluate quality, and populate checkout pricing across upcoming intervals
+.venv/bin/python -m src.cli add-comp <airbnb_url_or_id> --scrape-prices --limit 10
 ```
 
 ---

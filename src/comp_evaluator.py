@@ -110,6 +110,9 @@ class CompEvaluator:
             }
 
         # 2. Pool Heating Status
+        # Determine if we have comprehensive listing details (verified amenities list or detailed description)
+        has_full_details = len(amenities) >= 10 or len(text_lower) > 250
+
         free_patterns = [
             "free pool heat", "free heated pool", "free pool heating", "complimentary pool heat",
             "complimentary heated pool", "pool heat included", "pool heat is included",
@@ -123,8 +126,14 @@ class CompEvaluator:
             "pool heat avail", "pool heating available for a fee", "fee for pool heating"
         ]
 
-        heating = "unheated"
-        heating_source = "Unheated (no pool heating mentioned)"
+        # Default: if full amenities/description not yet scraped, assume standard heated for luxury cohort.
+        # Only declare as confirmed unheated when full profile details have been verified and lack heating.
+        heating = "standard_heated" if not has_full_details else "unheated"
+        heating_source = (
+            "Heated pool assumed (standard luxury tier default - full amenities not yet scraped)"
+            if not has_full_details
+            else "Unheated (no pool heating mentioned in verified amenities/description)"
+        )
 
         if any(p in text_lower for p in free_patterns):
             heating = "free"

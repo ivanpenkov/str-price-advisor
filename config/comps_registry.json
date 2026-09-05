@@ -336,7 +336,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -390,7 +390,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -714,7 +714,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -768,7 +768,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -822,7 +822,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -876,7 +876,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -930,7 +930,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -1095,7 +1095,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -1260,7 +1260,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -1315,7 +1315,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "large",
         "size_source": "Large / resort-scale pool with water features",
         "gallons": null
@@ -1425,7 +1425,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "large",
         "size_source": "Large / resort-scale pool with water features",
         "gallons": null
@@ -1480,7 +1480,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -1645,7 +1645,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -1810,7 +1810,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "large",
         "size_source": "Large / resort-scale pool with water features",
         "gallons": null
@@ -1865,7 +1865,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -1975,7 +1975,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -2030,7 +2030,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -2360,7 +2360,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -2438,6 +2438,61 @@
       },
       "winter_rationale": "Premium comp (9% superior desirability, Winter). Features heated pool, private tennis court, heated spa.",
       "summer_rationale": "Premium comp (9% superior desirability, Summer). Features heated pool, private tennis court, heated spa."
+    },
+    "944305567506818495": {
+      "listing_id": "944305567506818495",
+      "name": "Indigo Oasis, Pool, Sleeps 18",
+      "location": "Phoenix",
+      "bedrooms": 6,
+      "beds": 9,
+      "baths": 3.0,
+      "rating": 4.84,
+      "reviews": 109,
+      "url": "https://www.airbnb.com/rooms/944305567506818495",
+      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-944305567506818495/original/96633032-1d31-4c7e-a2e1-d470c94d47bf.jpeg",
+      "amenities_count": 49,
+      "is_valid_comp": true,
+      "validity_reason": "Valid 6BR luxury estate comp in Phoenix.",
+      "desirability_ratio": 0.84,
+      "winter_ratio": 0.84,
+      "summer_ratio": 0.82,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "standard_heated",
+        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "composite_score": 80.8,
+      "winter_composite_score": 80.8,
+      "summer_composite_score": 80.2,
+      "category_scores": {
+        "outdoor": 81,
+        "capacity": 85,
+        "interior": 76,
+        "location": 75,
+        "reputation": 88
+      },
+      "winter_category_scores": {
+        "outdoor": 81,
+        "capacity": 85,
+        "interior": 76,
+        "location": 75,
+        "reputation": 88
+      },
+      "summer_category_scores": {
+        "outdoor": 79,
+        "capacity": 85,
+        "interior": 76,
+        "location": 75,
+        "reputation": 88
+      },
+      "rationale": "Moderate comp (16% lower desirability, Winter). Features heated pool, but noted gaps: 3.0 baths, Phoenix location discount.",
+      "winter_rationale": "Moderate comp (16% lower desirability, Winter). Features heated pool, but noted gaps: 3.0 baths, Phoenix location discount.",
+      "summer_rationale": "Moderate comp (18% lower desirability, Summer). Features heated pool, but noted gaps: 3.0 baths, Phoenix location discount.",
+      "discovered_at_sample": "2026-09-05 manual addition",
+      "accommodates": 18
     }
   },
   "tier_b": {
@@ -2582,7 +2637,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -2692,7 +2747,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -2912,7 +2967,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -2967,7 +3022,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -3132,7 +3187,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -3332,7 +3387,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -3387,7 +3442,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -3552,7 +3607,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -3662,7 +3717,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -3717,7 +3772,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -3882,7 +3937,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -3990,7 +4045,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -4045,7 +4100,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -4318,7 +4373,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -4373,7 +4428,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -4593,7 +4648,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -4703,7 +4758,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -4758,7 +4813,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -4813,7 +4868,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -5345,7 +5400,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -5455,7 +5510,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -5785,7 +5840,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -5893,7 +5948,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -5948,7 +6003,7 @@
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned)",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -6084,10 +6139,11 @@
     }
   },
   "metadata": {
-    "last_updated": "2026-09-03T19:49:26.446509",
+    "last_updated": "2026-09-05T03:06:01.717036",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
-    "valid_comps_count": 109,
-    "disqualified_comps_count": 3
+    "valid_comps_count": 110,
+    "disqualified_comps_count": 3,
+    "total_comps": 113
   }
 }

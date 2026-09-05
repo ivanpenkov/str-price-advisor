@@ -246,13 +246,20 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertTrue(specs_fee["has_pool"])
         self.assertEqual(specs_fee["heating"], "fee")
 
-        # 3. Unheated pool
+        # 3. Unheated pool (verified with full amenities list)
         specs_unheated = CompEvaluator.extract_pool_specs(
             "Backyard with swimming pool and patio table.",
-            ["Pool", "Wifi"],
+            ["Pool", "Wifi", "Kitchen", "Air conditioning", "Washer", "Dryer", "TV", "Iron", "Heating", "Hair dryer", "Essentials"],
         )
         self.assertTrue(specs_unheated["has_pool"])
         self.assertEqual(specs_unheated["heating"], "unheated")
+
+        # 3b. Unenriched comp with sparse snippet assumes standard heated (no false penalty)
+        specs_unenriched = CompEvaluator.extract_pool_specs(
+            "Home in Phoenix | Indigo Oasis, Pool, Sleeps 18",
+            [],
+        )
+        self.assertEqual(specs_unenriched["heating"], "standard_heated")
 
         # 4. Plunge pool
         specs_plunge = CompEvaluator.extract_pool_specs(
@@ -286,7 +293,7 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
             "reviews": 25,
             "location": "Scottsdale",
             "description": "6BR home with standard private swimming pool and BBQ.",
-            "amenities": ["Pool", "Wifi", "Kitchen"],
+            "amenities": ["Pool", "Wifi", "Kitchen", "Air conditioning", "Washer", "Dryer", "TV", "Iron", "Heating", "Hair dryer", "Essentials"],
         }
         res = self.evaluator.evaluate_comp(comp_unheated)
         self.assertTrue(res["is_valid_comp"])

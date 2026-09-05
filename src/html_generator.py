@@ -1076,17 +1076,17 @@ class HTMLDashboardGenerator:
           <!-- Tier Status Checkboxes -->
           <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierUrgent" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #ef4444; cursor: pointer; border-radius: 4px;">
-            <span>🚨 Urgent Action (<span id="count-interval-urgent">{len(open_urgent)}</span>)</span>
+            <span>Urgent Action (<span id="count-interval-urgent">{len(open_urgent)}</span>)</span>
           </label>
 
           <label title="Show intervals with 10%–35% market variance for monthly review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierModerate" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #f59e0b; cursor: pointer; border-radius: 4px;">
-            <span>⚠️ Moderate Review (<span id="count-interval-mod">{len(open_moderate)}</span>)</span>
+            <span>Moderate Review (<span id="count-interval-mod">{len(open_moderate)}</span>)</span>
           </label>
 
           <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierOk" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #10b981; cursor: pointer; border-radius: 4px;">
-            <span>✅ On Target (<span id="count-interval-ok">{len(open_ok)}</span>)</span>
+            <span>On Target (<span id="count-interval-ok">{len(open_ok)}</span>)</span>
           </label>
 
           <span style="height: 18px; width: 1px; background: rgba(255,255,255,0.15); margin: 0 4px;"></span>
@@ -1099,7 +1099,7 @@ class HTMLDashboardGenerator:
 
           <label title="When checked, competitor rates are adjusted based on property quality/desirability relative to Villa del Sol, and invalid comps are excluded. Uncheck to view raw unadjusted market rates." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #a78bfa; font-weight: 600; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterAdjustedComps" checked onchange="toggleAdjustedComps()" style="width: 15px; height: 15px; accent-color: #a78bfa; cursor: pointer; border-radius: 4px;">
-            <span>🎯 Adjusted Comp Rates</span>
+            <span>Adjusted Comp Rates</span>
           </label>
         </div>
 

@@ -615,10 +615,9 @@ class HTMLDashboardGenerator:
     }}
 
     .subtable-scroll {{
-      max-height: 480px;
-      overflow-y: auto;
       border: 1px solid var(--border-color);
       border-radius: 8px;
+      overflow-x: auto;
     }}
 
     .subtable {{
@@ -629,11 +628,7 @@ class HTMLDashboardGenerator:
     }}
 
     .subtable thead {{
-      position: sticky;
-      top: 0;
       background: #0f172a;
-      z-index: 2;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }}
 
     .subtable th {{

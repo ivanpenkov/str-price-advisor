@@ -1064,8 +1064,14 @@ class HTMLDashboardGenerator:
               All unbooked weekend and midweek intervals over the next 12 months. Click any row to expand competitor pricing details.
             </p>
           </div>
-          <button id="btnCopySchedule" onclick="copyPricingSchedule()" title="Copy visible schedule in plain text format (date range, type, price action)" style="display: inline-flex; align-items: center; gap: 7px; background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.35); padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.25)';" onmouseout="this.style.background='rgba(59,130,246,0.15)';">
-            <span id="copyIcon">📋</span> <span id="copyBtnText">Copy Schedule</span>
+          <button id="btnCopySchedule" onclick="copyPricingSchedule()" title="Copy visible schedule in plain text format (date range, type, price action)" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.35); padding: 7px 14px; border-radius: 7px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.15s ease-in-out; user-select: none;" onmouseover="this.style.background='rgba(59,130,246,0.25)'; this.style.borderColor='rgba(59,130,246,0.5)';" onmouseout="this.style.background='rgba(59,130,246,0.15)'; this.style.borderColor='rgba(59,130,246,0.35)';" onmousedown="this.style.transform='scale(0.96)';" onmouseup="this.style.transform='scale(1)';">
+            <span id="copyIconContainer" style="display: inline-flex; align-items: center;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </span>
+            <span id="copyBtnText">Copy Schedule</span>
           </button>
         </div>
 
@@ -1340,6 +1346,8 @@ class HTMLDashboardGenerator:
         icon.textContent = isHidden ? '▼' : '▶';
         icon.style.color = isHidden ? '#fbbf24' : '#60a5fa';
       }}
+    }}
+
     function copyPricingSchedule() {{
       const rows = document.querySelectorAll('.interval-parent-row');
       const lines = [];
@@ -1359,9 +1367,9 @@ class HTMLDashboardGenerator:
         const actionHtml = isAdj ? (row.dataset.adjActionHtml || '') : (row.dataset.rawActionHtml || '');
 
         let actionText = '';
-        if (actionHtml.includes('Increase') || (parseInt(recPrice) > parseInt(basePrice) && !actionHtml.includes('Reduce'))) {{
+        if (actionHtml.includes('Increase') || (parseInt(recPrice, 10) > parseInt(basePrice, 10) && !actionHtml.includes('Reduce'))) {{
           actionText = `Increase price from $${{basePrice}} to $${{recPrice}}`;
-        }} else if (actionHtml.includes('Reduce') || (parseInt(recPrice) < parseInt(basePrice) && !actionHtml.includes('Increase'))) {{
+        }} else if (actionHtml.includes('Reduce') || (parseInt(recPrice, 10) < parseInt(basePrice, 10) && !actionHtml.includes('Increase'))) {{
           actionText = `Reduce price from $${{basePrice}} to $${{recPrice}}`;
         }} else {{
           actionText = `Keep price at $${{basePrice}}`;
@@ -1371,17 +1379,21 @@ class HTMLDashboardGenerator:
       }});
 
       if (lines.length === 0) {{
-        alert('No visible rows to copy.');
+        alert('No visible rows to copy under current filters.');
         return;
       }}
 
       const text = lines.join('\\n');
       const copyBtn = document.getElementById('btnCopySchedule');
       const btnText = document.getElementById('copyBtnText');
-      const originalText = btnText ? btnText.innerText : 'Copy Schedule';
+      const copyIconContainer = document.getElementById('copyIconContainer');
+      const originalText = 'Copy Schedule';
+      const defaultSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+      const checkSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><polyline points="20 6 9 17 4 12"></polyline></svg>';
 
       function onSuccess() {{
-        if (btnText) btnText.innerText = `✓ Copied (${{lines.length}} rows)!`;
+        if (btnText) btnText.innerText = `✓ Copied (${{lines.length}} rows)`;
+        if (copyIconContainer) copyIconContainer.innerHTML = checkSvg;
         if (copyBtn) {{
           copyBtn.style.borderColor = '#10b981';
           copyBtn.style.color = '#34d399';
@@ -1389,16 +1401,18 @@ class HTMLDashboardGenerator:
         }}
         setTimeout(() => {{
           if (btnText) btnText.innerText = originalText;
+          if (copyIconContainer) copyIconContainer.innerHTML = defaultSvg;
           if (copyBtn) {{
             copyBtn.style.borderColor = 'rgba(59,130,246,0.35)';
-            copyBtn.style.color = '#60a5fa';
+            copyBtn.style.color = '#93c5fd';
             copyBtn.style.background = 'rgba(59,130,246,0.15)';
           }}
         }}, 2500);
       }}
 
-      if (navigator.clipboard && navigator.clipboard.writeText) {{
-        navigator.clipboard.writeText(text).then(onSuccess).catch(() => {{
+      if (navigator.clipboard && window.isSecureContext) {{
+        navigator.clipboard.writeText(text).then(onSuccess).catch(err => {{
+          console.warn('navigator.clipboard write failed, attempting fallback', err);
           fallbackCopyText(text);
           onSuccess();
         }});
@@ -1411,11 +1425,14 @@ class HTMLDashboardGenerator:
     function fallbackCopyText(text) {{
       const ta = document.createElement('textarea');
       ta.value = text;
+      ta.setAttribute('readonly', '');
       ta.style.position = 'fixed';
       ta.style.left = '-9999px';
+      ta.style.top = '0';
       document.body.appendChild(ta);
       ta.focus();
       ta.select();
+      ta.setSelectionRange(0, 99999);
       try {{
         document.execCommand('copy');
       }} catch (e) {{

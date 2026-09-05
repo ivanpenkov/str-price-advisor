@@ -65,9 +65,15 @@ class CompEvaluator:
         }
 
     @classmethod
-    def extract_pool_specs(cls, all_text: str, amenities: List[str], listing_id: str = "") -> Dict[str, Any]:
+    def extract_pool_specs(
+        cls,
+        all_text: str,
+        amenities: List[str],
+        listing_id: str = "",
+        reviews: Optional[List[str]] = None,
+    ) -> Dict[str, Any]:
         """
-        Extract pool heating status and pool size from amenities and textual highlights.
+        Extract pool heating status and pool size from amenities, textual highlights, and guest reviews.
         Returns:
             {
                 "has_pool": bool,
@@ -146,6 +152,44 @@ class CompEvaluator:
         ):
             heating = "standard_heated"
             heating_source = "Heated pool declared in amenities/title (standard/unspecified fee)"
+
+        # 2b. Guest Review Signals
+        # Guest reviews provide strong empirical ground-truth on pool heating and fees
+        reviews_combined = " ".join(reviews or []).lower()
+        if reviews_combined:
+            review_free_patterns = [
+                "free heated pool", "free pool heat", "pool heat was included",
+                "pool heat included", "complimentary pool heat", "complimentary heated pool",
+            ]
+            review_fee_patterns = [
+                "paid for pool heat", "paid the pool heat", "pool heat fee",
+                "fee to heat the pool", "paid to heat the pool", "extra for pool heat",
+                "charged for pool heat", "pool heating fee",
+            ]
+            review_heated_patterns = [
+                "pool was heated", "heated pool was", "heated the pool", "pool was warm",
+                "warm pool", "loved the heated pool", "enjoyed the heated pool",
+                "pool temp was", "pool temperature was", "heated pool is great",
+                "swam in the heated pool", "kids loved the heated pool",
+            ]
+            review_unheated_patterns = [
+                "pool was unheated", "unheated pool", "pool was freezing",
+                "pool was too cold to swim", "no pool heater", "pool has no heat",
+                "could not use the pool", "couldn't use the pool because it was cold",
+            ]
+
+            if any(p in reviews_combined for p in review_free_patterns):
+                heating = "free"
+                heating_source = "Free pool heat confirmed by guest reviews"
+            elif any(p in reviews_combined for p in review_fee_patterns) and heating != "free":
+                heating = "fee"
+                heating_source = "Pool heating fee confirmed by guest reviews"
+            elif any(p in reviews_combined for p in review_heated_patterns) and heating in ("unheated", "standard_heated"):
+                heating = "standard_heated"
+                heating_source = "Heated pool confirmed by guest reviews"
+            elif any(p in reviews_combined for p in review_unheated_patterns) and heating not in ("free", "standard_heated", "fee"):
+                heating = "unheated"
+                heating_source = "Unheated / cold pool reported by guest reviews"
 
         # 3. Pool Size & Volume
         gallons = None
@@ -471,8 +515,14 @@ class CompEvaluator:
         raw_snippet = (comp_meta.get("raw_snippet") or enriched.get("raw_snippet") or "").lower()
         all_text = (title + " " + desc + " " + raw_snippet + " " + " ".join(amenities)).lower()
 
-        # Extract pool specs
-        pool_specs = self.extract_pool_specs(all_text, amenities, listing_id=cid)
+        # Extract pool specs (including guest review signals)
+        reviews = (
+            enriched.get("review_snippets")
+            or enriched.get("reviews_samples")
+            or comp_meta.get("review_snippets")
+            or []
+        )
+        pool_specs = self.extract_pool_specs(all_text, amenities, listing_id=cid, reviews=reviews)
 
         # Extract square footage if mentioned in all_text
         sqft = None

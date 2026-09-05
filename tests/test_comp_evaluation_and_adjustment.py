@@ -360,6 +360,61 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertIn("Summer", subtable_summer)
         self.assertIn("0.95x", subtable_summer)
 
+    def test_pool_specs_extraction_from_guest_reviews(self):
+        """Guest reviews should provide empirical evidence for pool heating, fees, or cold pools."""
+        # 1. Heated pool confirmed by review when amenity list only says "Pool"
+        specs_heated = CompEvaluator.extract_pool_specs(
+            "Lovely home with private pool and patio.",
+            ["Pool", "Wifi", "Kitchen", "Air conditioning", "Washer", "Dryer", "TV", "Iron", "Heating", "Hair dryer", "Essentials"],
+            reviews=["The heated pool was 85 degrees and our kids swam every day in January!"],
+        )
+        self.assertEqual(specs_heated["heating"], "standard_heated")
+        self.assertIn("guest reviews", specs_heated["heating_source"].lower())
+
+        # 2. Pool heat fee revealed by guest review
+        specs_fee = CompEvaluator.extract_pool_specs(
+            "Lovely home with private pool and patio.",
+            ["Pool", "Wifi", "Kitchen", "Air conditioning", "Washer", "Dryer", "TV", "Iron", "Heating", "Hair dryer", "Essentials"],
+            reviews=["We paid for pool heat and it was worth every penny during our Christmas stay."],
+        )
+        self.assertEqual(specs_fee["heating"], "fee")
+        self.assertIn("fee confirmed by guest reviews", specs_fee["heating_source"].lower())
+
+        # 3. Free pool heat confirmed by guest review
+        specs_free = CompEvaluator.extract_pool_specs(
+            "Luxury villa with swimming pool.",
+            ["Pool", "Wifi", "Kitchen", "Air conditioning", "Washer", "Dryer", "TV", "Iron", "Heating", "Hair dryer", "Essentials"],
+            reviews=["Free pool heat included in our stay was the highlight!"],
+        )
+        self.assertEqual(specs_free["heating"], "free")
+        self.assertIn("free pool heat confirmed by guest reviews", specs_free["heating_source"].lower())
+
+        # 4. Unheated pool reported by guest review
+        specs_unheated = CompEvaluator.extract_pool_specs(
+            "Standard residential home with pool.",
+            ["Pool", "Wifi", "Kitchen", "Air conditioning", "Washer", "Dryer", "TV", "Iron", "Heating", "Hair dryer", "Essentials"],
+            reviews=["The pool was freezing and unheated so we could not swim in February."],
+        )
+        self.assertEqual(specs_unheated["heating"], "unheated")
+        self.assertIn("unheated / cold pool reported by guest reviews", specs_unheated["heating_source"].lower())
+
+    def test_unenriched_comp_no_false_unheated_penalty(self):
+        """Unenriched comps with sparse 10-word snippets must never suffer false unheated winter penalty."""
+        comp_unenriched = {
+            "listing_id": "944305567506818495",
+            "title": "Home in Phoenix",
+            "location": "Phoenix",
+            "bedrooms": 6,
+            "baths": 3.0,
+            "raw_snippet": "Guest favorite | Home in Phoenix | Indigo Oasis, Pool, Sleeps 18",
+            # No full amenities array scraped yet
+        }
+        res = self.evaluator.evaluate_comp(comp_unenriched)
+        self.assertTrue(res["is_valid_comp"])
+        # Should NOT have the -10 winter penalty or "unheated pool in winter" in rationale
+        self.assertNotIn("unheated pool in winter", res["winter_rationale"])
+        self.assertGreaterEqual(res["winter_ratio"], 0.80)
+
 
 if __name__ == "__main__":
     unittest.main()

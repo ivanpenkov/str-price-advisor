@@ -216,6 +216,12 @@ class ListingEnricher:
         if isinstance(photo_url, list) and photo_url:
             photo_url = photo_url[0]
 
+        reviews_samples = []
+        if ld_data and isinstance(ld_data.get("review"), list):
+            for r in ld_data["review"]:
+                if isinstance(r, dict) and r.get("reviewBody"):
+                    reviews_samples.append(r["reviewBody"].strip())
+
         address = ld_data.get("address")
         return {
             "title": title,
@@ -224,6 +230,7 @@ class ListingEnricher:
             "reviews": reviews,
             "photo_url": photo_url,
             "address": address,
+            "reviews_samples": reviews_samples,
         }
 
     @classmethod
@@ -238,6 +245,7 @@ class ListingEnricher:
         dom_h1: Optional[str] = None,
         og_title: Optional[str] = None,
         listing_id: str = "",
+        dom_reviews: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """Combine all page sources into a normalized listing profile dictionary."""
         deferred_parsed = cls.parse_deferred_state(deferred_text)
@@ -257,6 +265,9 @@ class ListingEnricher:
 
         description = ld_parsed.get("description") or dom_description or ""
         photo_url = ld_parsed.get("photo_url") or dom_photo
+
+        # Review snippets for pool heating, noise, and condition ground truth
+        all_reviews = list(dict.fromkeys((ld_parsed.get("reviews_samples") or []) + (dom_reviews or [])))
 
         bedrooms = deferred_parsed.get("bedrooms")
         beds = deferred_parsed.get("beds")
@@ -293,11 +304,12 @@ class ListingEnricher:
             "address": ld_parsed.get("address"),
             "photo_url": photo_url,
             "url": url,
+            "review_snippets": all_reviews[:15],
             "enriched_at": datetime.now().isoformat(),
         }
 
     async def extract_listing_data(self, page: Page, listing_id: str) -> Dict[str, Any]:
-        """Navigate to listing page and extract all available metadata, description, and amenities."""
+        """Navigate to listing page and extract all available metadata, description, amenities, and reviews."""
         url = f"https://www.airbnb.com/rooms/{listing_id}"
         await page.goto(url, wait_until="domcontentloaded", timeout=30000)
         await page.wait_for_timeout(3000)
@@ -319,7 +331,7 @@ class ListingEnricher:
             "() => { const el = document.getElementById('data-deferred-state-0'); return el ? el.innerText : ''; }"
         )
 
-        # 3. DOM Overviews, Title, Description, Meta photo
+        # 3. DOM Overviews, Title, Description, Meta photo, Reviews
         dom_h1 = await page.evaluate("""() => {
             const h1 = document.querySelector("h1, [data-section-id='TITLE_DEFAULT'] h1");
             return h1 ? h1.innerText.trim() : null;
@@ -341,6 +353,16 @@ class ListingEnricher:
             const img = document.querySelector("meta[property='og:image']");
             return img ? img.getAttribute("content") : null;
         }""")
+        dom_reviews = await page.evaluate("""() => {
+            const items = [];
+            document.querySelectorAll("[data-review-id] span, [data-section-id='REVIEWS_DEFAULT'] span, div[role='article'] span").forEach(el => {
+                const t = el.innerText.trim();
+                if (t.length > 25 && t.length < 500 && !t.includes('\\n') && !t.startsWith('★')) {
+                    items.push(t);
+                }
+            });
+            return Array.from(new Set(items)).slice(0, 15);
+        }""")
 
         return self.parse_page_content(
             deferred_text=deferred_text or "",
@@ -352,6 +374,7 @@ class ListingEnricher:
             dom_h1=dom_h1,
             og_title=og_title,
             listing_id=listing_id,
+            dom_reviews=dom_reviews,
         )
 
     async def enrich_listing(self, page: Page, listing_id: str, force_refresh: bool = False) -> Dict[str, Any]:

@@ -1106,18 +1106,18 @@ class HTMLDashboardGenerator:
           <!-- Premium Location Checkbox -->
           <div class="tooltip-container" style="margin-left: 4px;" title="Includes premium locations (e.g. Scottsdale and Paradise Valley)">
             <label style="display: flex; align-items: center; gap: 7px; cursor: pointer; font-size: 0.85rem; color: #cbd5e1; font-weight: 600; user-select: none;">
-              <input type="checkbox" id="filterPremiumLocation" onchange="onFilterChange()" style="width: 16px; height: 16px; accent-color: #3b82f6; cursor: pointer; border-radius: 4px;">
+              <input type="checkbox" id="filterPremiumLocation" checked onchange="onFilterChange()" style="width: 16px; height: 16px; accent-color: #3b82f6; cursor: pointer; border-radius: 4px;">
               <span>Premium Location</span>
               <span style="font-size: 0.8rem; color: #94a3b8; cursor: help;">ℹ️</span>
             </label>
-            <span class="tooltip-text">Includes premium locations (e.g. Scottsdale and Paradise Valley). Unchecked by default to benchmark strictly against direct East Valley corridor comps (Tempe, Mesa, Chandler, Gilbert).</span>
+            <span class="tooltip-text">Includes premium locations (e.g. Scottsdale and Paradise Valley). Checked by default. Uncheck to benchmark strictly against direct East Valley corridor comps (Tempe, Mesa, Chandler, Gilbert).</span>
           </div>
         </div>
 
         <!-- Status & Reset -->
         <div style="display: flex; align-items: center; gap: 12px;">
           <span id="filterStatusBadge" class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.8rem;">
-            Active Filters: Rating &ge; 4.5 ★ &bull; Reviews &ge; 25 &bull; Excl. Scottsdale & PV
+            Active Filters: Rating &ge; 4.5 ★ &bull; Reviews &ge; 25 &bull; Incl. Premium Loc.
           </span>
           <button onclick="resetFilters()" style="background: transparent; border: 1px solid var(--border-color); color: #94a3b8; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.color='#f8fafc'; this.style.borderColor='#64748b';" onmouseout="this.style.color='#94a3b8'; this.style.borderColor='var(--border-color)';">
             🔄 Reset
@@ -1584,7 +1584,7 @@ class HTMLDashboardGenerator:
       document.getElementById('filterMinRating').value = '4.5';
       document.getElementById('filterMinReviews').value = '25';
       const premCheckbox = document.getElementById('filterPremiumLocation');
-      if (premCheckbox) premCheckbox.checked = false;
+      if (premCheckbox) premCheckbox.checked = true;
       const urg = document.getElementById('filterTierUrgent');
       if (urg) urg.checked = true;
       const mod = document.getElementById('filterTierModerate');

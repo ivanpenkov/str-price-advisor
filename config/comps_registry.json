@@ -1,5 +1,31 @@
 {
   "tier_a": {
+    "1077813310260513265": {
+      "listing_id": "1077813310260513265",
+      "name": "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna",
+      "location": "Scottsdale",
+      "bedrooms": 7,
+      "beds": 11,
+      "baths": 6.5,
+      "rating": 4.97,
+      "reviews": 30,
+      "url": "https://www.airbnb.com/rooms/1077813310260513265",
+      "discovered_at_sample": "2026-09-05 evaluation",
+      "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1077813310260513265/original/123122b6-3b05-41bc-abb0-db4ae36dad8b.jpeg",
+      "amenities_count": 82,
+      "is_valid_comp": true,
+      "validity_reason": "Valid 7BR luxury estate comp in Scottsdale with tennis, pickleball, and sauna.",
+      "desirability_ratio": 1.1,
+      "category_scores": {
+        "outdoor": 95,
+        "capacity": 100,
+        "interior": 95,
+        "location": 95,
+        "reputation": 98
+      },
+      "composite_score": 96.6,
+      "rationale": "Superior comp (10% higher desirability). 7BR/6.5BA 7,000 sq ft Scottsdale estate with full tennis & pickleball courts, private sauna, movie theater, and 4.97★ rating."
+    },
     "628534576871518102": {
       "listing_id": "628534576871518102",
       "name": "The Mulberry | Lux Pool/Hot Tub Mins to Old Town",

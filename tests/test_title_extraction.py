@@ -135,6 +135,33 @@ class TestTitleExtraction(unittest.TestCase):
         # Listing 806022522654917324 should display its headline, NOT "6 bedrooms ↗"
         self.assertIn("Outdoor bowling alley and a movie theater", subtable_html)
 
+        # Listing 1077813310260513265 should display its real title, NOT "7,000 sq ft with courts and pool ↗"
+        self.assertIn("Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna", subtable_html)
+        self.assertNotIn("7,000 sq ft with courts and pool ↗", subtable_html)
+
+    def test_comp_1077813310260513265_specs_title_takes_precedence_over_tagline(self):
+        """extract_clean_listing_title prefers registered/specs title over search snippet amenity taglines."""
+        snippet = "Guest favorite | Guest favorite | Home in Scottsdale | 7,000 sq ft with courts and pool"
+        real_title = "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna"
+        res = extract_clean_listing_title(
+            raw_snippet=snippet,
+            default_title="Home in Scottsdale",
+            registered_name=real_title,
+        )
+        self.assertEqual(res, real_title)
+
+    def test_clean_profile_title_handles_abbreviations_and_slashes(self):
+        """Verify clean_profile_title correctly handles complex titles with slashes, abbreviations, and amenities."""
+        from src.listing_enricher import ListingEnricher
+        enricher = ListingEnricher()
+        title = "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna"
+        cleaned = enricher.clean_profile_title(title)
+        self.assertEqual(cleaned, "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna")
+
+        with_suffix = f"{title} - Houses for Rent in Scottsdale, Arizona, United States - Airbnb"
+        cleaned_suffix = enricher.clean_profile_title(with_suffix)
+        self.assertEqual(cleaned_suffix, title)
+
 
 if __name__ == "__main__":
     unittest.main()

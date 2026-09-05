@@ -542,8 +542,9 @@ class ListingEnricher:
                 if not cached:
                     continue
 
-                if cached.get("title") and not cached.get("title", "").startswith("503 Service"):
-                    comp["name"] = cached["title"]
+                clean_title = self.clean_profile_title(cached.get("title"))
+                if clean_title:
+                    comp["name"] = clean_title
                 if cached.get("photo_url"):
                     comp["photo_url"] = cached["photo_url"]
                 if cached.get("bedrooms") is not None:
@@ -564,16 +565,53 @@ class ListingEnricher:
                 cid_str = str(cid)
                 if cid_str not in specs:
                     specs[cid_str] = {"listing_id": cid_str}
-                specs[cid_str]["title"] = comp.get("name")
-                specs[cid_str]["location"] = comp.get("location")
-                specs[cid_str]["bedrooms"] = comp.get("bedrooms")
-                specs[cid_str]["beds"] = comp.get("beds")
-                specs[cid_str]["baths"] = comp.get("baths")
-                specs[cid_str]["rating"] = comp.get("rating")
-                specs[cid_str]["reviews"] = comp.get("reviews")
+                if comp.get("name"):
+                    specs[cid_str]["title"] = comp.get("name")
+                if comp.get("location"):
+                    specs[cid_str]["location"] = comp.get("location")
+                if comp.get("bedrooms") is not None:
+                    specs[cid_str]["bedrooms"] = comp.get("bedrooms")
+                if comp.get("beds") is not None:
+                    specs[cid_str]["beds"] = comp.get("beds")
+                if comp.get("baths") is not None:
+                    specs[cid_str]["baths"] = comp.get("baths")
+                if comp.get("rating") is not None:
+                    specs[cid_str]["rating"] = comp.get("rating")
+                if comp.get("reviews") is not None:
+                    specs[cid_str]["reviews"] = comp.get("reviews")
                 if comp.get("photo_url"):
                     specs[cid_str]["photo_url"] = comp.get("photo_url")
                 updated_count += 1
+
+        # Also sync any cached profiles that may not be in registry (e.g. cohort comps)
+        if self.ENRICHED_DIR.exists():
+            for f in self.ENRICHED_DIR.glob("*.json"):
+                try:
+                    c_data = json.loads(f.read_text(encoding="utf-8"))
+                    c_id = str(c_data.get("listing_id") or f.stem)
+                    clean_t = self.clean_profile_title(c_data.get("title"))
+                    if c_id not in specs:
+                        specs[c_id] = {"listing_id": c_id}
+                    if clean_t:
+                        specs[c_id]["title"] = clean_t
+                    if c_data.get("address", {}).get("addressLocality") and not specs[c_id].get("location"):
+                        specs[c_id]["location"] = c_data["address"]["addressLocality"]
+                    if c_data.get("location") and not specs[c_id].get("location"):
+                        specs[c_id]["location"] = c_data["location"]
+                    if c_data.get("bedrooms") is not None:
+                        specs[c_id]["bedrooms"] = c_data["bedrooms"]
+                    if c_data.get("beds") is not None:
+                        specs[c_id]["beds"] = c_data["beds"]
+                    if c_data.get("baths") is not None:
+                        specs[c_id]["baths"] = c_data["baths"]
+                    if c_data.get("rating") is not None:
+                        specs[c_id]["rating"] = c_data["rating"]
+                    if c_data.get("reviews") is not None:
+                        specs[c_id]["reviews"] = c_data["reviews"]
+                    if c_data.get("photo_url"):
+                        specs[c_id]["photo_url"] = c_data["photo_url"]
+                except Exception:
+                    pass
 
         self.REGISTRY_PATH.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
         self.SPECS_PATH.write_text(json.dumps(specs, indent=2, ensure_ascii=False), encoding="utf-8")

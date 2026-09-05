@@ -1620,9 +1620,9 @@
       "our_airbnb_effective_nightly": 1437.5,
       "our_airbnb_total": 5750.0,
       "is_our_airbnb_live": true,
-      "n_comps": 43,
-      "comps_count": 43,
-      "comps_raw_count": 43,
+      "n_comps": 42,
+      "comps_count": 42,
+      "comps_raw_count": 42,
       "comps_list": [
         {
           "listing_id": "1011635413453672886",
@@ -2001,24 +2001,6 @@
           "price_snippet": "$3,255 | $2,964",
           "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Gather at the Social 7",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 5061.0,
-          "effective_nightly": 1265.25,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$5,061 | $5,061 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "40981086",
@@ -4807,9 +4789,9 @@
       "our_airbnb_effective_nightly": 1669.33,
       "our_airbnb_total": 5008.0,
       "is_our_airbnb_live": true,
-      "n_comps": 32,
-      "comps_count": 32,
-      "comps_raw_count": 32,
+      "n_comps": 31,
+      "comps_count": 31,
+      "comps_raw_count": 31,
       "comps_list": [
         {
           "listing_id": "1350253802489041827",
@@ -5118,24 +5100,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1009427386291096368/original/f575b5ae-9263-4803-8717-55375fa7ea34.jpeg?im_w=720"
         },
         {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 7695.0,
-          "effective_nightly": 2565.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$7,695 | $7,695 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
-        },
-        {
           "listing_id": "980478690835407775",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -5424,9 +5388,9 @@
       "our_airbnb_effective_nightly": 1545.33,
       "our_airbnb_total": 4636.0,
       "is_our_airbnb_live": true,
-      "n_comps": 30,
-      "comps_count": 30,
-      "comps_raw_count": 30,
+      "n_comps": 29,
+      "comps_count": 29,
+      "comps_raw_count": 29,
       "comps_list": [
         {
           "listing_id": "1350253802489041827",
@@ -5697,24 +5661,6 @@
           "price_snippet": "$5,323 | $4,826",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Glamorous Renovated Desert Oasis, Heated Pool, Tub",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-762951451304031409/original/48399414-1bab-4f51-8e91-9a48b6c302d9.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 7647.0,
-          "effective_nightly": 2549.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$7,647 | $7,647 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1724283236825333743",
@@ -6658,9 +6604,9 @@
       "our_airbnb_effective_nightly": 1669.33,
       "our_airbnb_total": 5008.0,
       "is_our_airbnb_live": true,
-      "n_comps": 32,
-      "comps_count": 32,
-      "comps_raw_count": 32,
+      "n_comps": 31,
+      "comps_count": 31,
+      "comps_raw_count": 31,
       "comps_list": [
         {
           "listing_id": "1437923503258269457",
@@ -6841,24 +6787,6 @@
           "price_snippet": "$5,905 | $5,905 for 3 nights | $0 today",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 7287.0,
-          "effective_nightly": 2429.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$7,287 | $7,287 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1558065119520691944",
@@ -8108,9 +8036,9 @@
       "our_airbnb_effective_nightly": 1297.33,
       "our_airbnb_total": 3892.0,
       "is_our_airbnb_live": true,
-      "n_comps": 37,
-      "comps_count": 37,
-      "comps_raw_count": 37,
+      "n_comps": 36,
+      "comps_count": 36,
+      "comps_raw_count": 36,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -8453,24 +8381,6 @@
           "price_snippet": "$6M Estate with Lagoon Pool | $7,578 | $7,578 for 3 nights",
           "raw_snippet": "Luxe | Luxe | Home in Paradise Valley | Entertainers Paradise! $6M Estate with Lagoon Pool",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1354532747362290532/original/a0e021cf-3a37-4cf1-8be8-69d9720b15b4.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 6537.0,
-          "effective_nightly": 2179.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,537 | $6,537 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "980478690835407775",
@@ -9648,9 +9558,9 @@
       "our_airbnb_effective_nightly": 1314.5,
       "our_airbnb_total": 5258.0,
       "is_our_airbnb_live": true,
-      "n_comps": 29,
-      "comps_count": 29,
-      "comps_raw_count": 29,
+      "n_comps": 28,
+      "comps_count": 28,
+      "comps_raw_count": 28,
       "comps_list": [
         {
           "listing_id": "1437874139258015032",
@@ -9705,24 +9615,6 @@
           "price_snippet": "$6,831 | $5,817 | $0 today",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 9044.0,
-          "effective_nightly": 2261.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$9,044 | $9,044 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1632016888415540889",
@@ -10211,9 +10103,9 @@
       "our_airbnb_effective_nightly": 760.0,
       "our_airbnb_total": 2280.0,
       "is_our_airbnb_live": true,
-      "n_comps": 31,
-      "comps_count": 31,
-      "comps_raw_count": 31,
+      "n_comps": 30,
+      "comps_count": 30,
+      "comps_raw_count": 30,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -10349,21 +10241,6 @@
           "reviews": 39,
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Lincoln Villa | 7 Bedroom 5.5 Bath 12+ Beds",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1496405343001968622/original/bb2e8c98-4f6f-49d4-afe7-0cfb23b88e0a.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 4805.0,
-          "effective_nightly": 1601.67,
-          "rating": 4.89,
-          "reviews": 55,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1143202699620728397",
@@ -10716,9 +10593,9 @@
       "our_airbnb_effective_nightly": 1437.5,
       "our_airbnb_total": 5750.0,
       "is_our_airbnb_live": true,
-      "n_comps": 43,
-      "comps_count": 43,
-      "comps_raw_count": 43,
+      "n_comps": 42,
+      "comps_count": 42,
+      "comps_raw_count": 42,
       "comps_list": [
         {
           "listing_id": "1011635413453672886",
@@ -11117,24 +10994,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1468117953831878998/original/47928319-7c2f-4ff8-8402-9ddddea4b39c.jpeg?im_w=720"
         },
         {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 5573.0,
-          "effective_nightly": 1393.25,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$5,573 | $5,573 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
-        },
-        {
           "listing_id": "1110315706828570513",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -11531,9 +11390,9 @@
       "our_airbnb_effective_nightly": 1669.33,
       "our_airbnb_total": 5008.0,
       "is_our_airbnb_live": true,
-      "n_comps": 36,
-      "comps_count": 36,
-      "comps_raw_count": 36,
+      "n_comps": 35,
+      "comps_count": 35,
+      "comps_raw_count": 35,
       "comps_list": [
         {
           "listing_id": "715477450251712841",
@@ -11858,24 +11717,6 @@
           "price_snippet": "$6,501 | $6,501 for 3 nights | $0 today",
           "raw_snippet": "Top guest favorite | Guest favorite | Home in Paradise Valley | The Estate at Gold Dust",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 6792.0,
-          "effective_nightly": 2264.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,792 | $6,792 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1223288373737501268",
@@ -12220,9 +12061,9 @@
       "our_airbnb_effective_nightly": 1545.33,
       "our_airbnb_total": 4636.0,
       "is_our_airbnb_live": true,
-      "n_comps": 31,
-      "comps_count": 31,
-      "comps_raw_count": 31,
+      "n_comps": 30,
+      "comps_count": 30,
+      "comps_raw_count": 30,
       "comps_list": [
         {
           "listing_id": "1437923503258269457",
@@ -12513,24 +12354,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1343620499602124818/original/78285035-ef0d-4098-b508-f1399196a608.jpeg?im_w=720"
         },
         {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 6664.0,
-          "effective_nightly": 2221.33,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,664 | $6,664 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
-        },
-        {
           "listing_id": "1274771708549859649",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -12819,9 +12642,9 @@
       "our_airbnb_effective_nightly": 1669.33,
       "our_airbnb_total": 5008.0,
       "is_our_airbnb_live": true,
-      "n_comps": 32,
-      "comps_count": 32,
-      "comps_raw_count": 32,
+      "n_comps": 31,
+      "comps_count": 31,
+      "comps_raw_count": 31,
       "comps_list": [
         {
           "listing_id": "1143202699620728397",
@@ -13130,24 +12953,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 7672.0,
-          "effective_nightly": 2557.33,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$7,672 | $7,672 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
-        },
-        {
           "listing_id": "54242734",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -13436,9 +13241,9 @@
       "our_airbnb_effective_nightly": 1298.0,
       "our_airbnb_total": 3894.0,
       "is_our_airbnb_live": true,
-      "n_comps": 33,
-      "comps_count": 33,
-      "comps_raw_count": 33,
+      "n_comps": 32,
+      "comps_count": 32,
+      "comps_raw_count": 32,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -13747,24 +13552,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1354532747362290532/original/a0e021cf-3a37-4cf1-8be8-69d9720b15b4.jpeg?im_w=720"
         },
         {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 6510.0,
-          "effective_nightly": 2170.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,510 | $6,510 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
-        },
-        {
           "listing_id": "1570647626527929893",
           "title": "6 bedrooms",
           "location": "Scottsdale",
@@ -14071,9 +13858,9 @@
       "our_airbnb_effective_nightly": 1669.33,
       "our_airbnb_total": 5008.0,
       "is_our_airbnb_live": true,
-      "n_comps": 38,
-      "comps_count": 38,
-      "comps_raw_count": 38,
+      "n_comps": 37,
+      "comps_count": 37,
+      "comps_raw_count": 37,
       "comps_list": [
         {
           "listing_id": "715477450251712841",
@@ -14308,24 +14095,6 @@
           "price_snippet": "$3M Lux | Movie Room, HtdPool, &more! | $6,593 | $6,593 for 3 nights",
           "raw_snippet": "Luxe | Luxe | Home in Phoenix | The Rowan | $3M Lux | Movie Room, HtdPool, &more!",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1592191797631601721/original/212a7c5f-2f5e-44f2-9e24-c6dc9598d110.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 6289.0,
-          "effective_nightly": 2096.33,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,289 | $6,289 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1136049536841227041",
@@ -14796,9 +14565,9 @@
       "our_airbnb_effective_nightly": 1256.67,
       "our_airbnb_total": 3770.0,
       "is_our_airbnb_live": true,
-      "n_comps": 31,
-      "comps_count": 31,
-      "comps_raw_count": 31,
+      "n_comps": 30,
+      "comps_count": 30,
+      "comps_raw_count": 30,
       "comps_list": [
         {
           "listing_id": "1019666581527351903",
@@ -15087,24 +14856,6 @@
           "price_snippet": "$6,563 | $6,001",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | WaterslideLuxury+3 houses+SportCrt+Shuffle+GolfSpa",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1004539979180335661/original/aea464b5-9248-496d-8d94-2143ef83dfd3.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 6105.0,
-          "effective_nightly": 2035.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,105 | $6,105 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1570647626527929893",
@@ -15397,7 +15148,7 @@
       "is_our_airbnb_live": true,
       "n_comps": 38,
       "comps_count": 38,
-      "comps_raw_count": 39,
+      "comps_raw_count": 38,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -15778,24 +15529,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1110315706828570513/original/9393d18e-3279-4eb6-a9d6-be1e6d8e42f4.jpeg?im_w=720"
         },
         {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 6453.0,
-          "effective_nightly": 1613.25,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,453 | $6,453 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
-        },
-        {
           "listing_id": "1650901748780121272",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -16138,9 +15871,9 @@
       "our_airbnb_effective_nightly": 925.33,
       "our_airbnb_total": 2776.0,
       "is_our_airbnb_live": true,
-      "n_comps": 30,
-      "comps_count": 30,
-      "comps_raw_count": 30,
+      "n_comps": 29,
+      "comps_count": 29,
+      "comps_raw_count": 29,
       "comps_list": [
         {
           "listing_id": "1254737517099224843",
@@ -16306,21 +16039,6 @@
           "reviews": 9,
           "raw_snippet": "Guest favorite | Guest favorite | Home in Gilbert | Gilbert Grand: Pool, Pickleball, Putt, Escape Room",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640797970778273498/original/1357f2aa-1fd9-43a1-a23d-52b2423e51d1.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 5749.0,
-          "effective_nightly": 1916.33,
-          "rating": 4.89,
-          "reviews": 55,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1136049536841227041",
@@ -16630,7 +16348,7 @@
       "is_our_airbnb_live": true,
       "n_comps": 31,
       "comps_count": 31,
-      "comps_raw_count": 32,
+      "comps_raw_count": 31,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -16775,24 +16493,6 @@
           "price_snippet": "$6,844 | $6,844 for 3 nights",
           "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Resort Backyard! Heated Pool+Hot Tub, Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 5561.0,
-          "effective_nightly": 1853.67,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$5,561 | $5,561 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1136293547142522527",
@@ -17245,9 +16945,9 @@
       "our_airbnb_effective_nightly": 1297.33,
       "our_airbnb_total": 3892.0,
       "is_our_airbnb_live": true,
-      "n_comps": 36,
-      "comps_count": 36,
-      "comps_raw_count": 36,
+      "n_comps": 35,
+      "comps_count": 35,
+      "comps_raw_count": 35,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -17410,24 +17110,6 @@
           "price_snippet": "$4,246 | $4,246 for 3 nights",
           "raw_snippet": "Superhost | Superhost | Home in Scottsdale | Heated Pool, Spa, Sauna, Mini Golf, Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1729894920712555430/original/1c9cc479-0424-4d0e-aed2-33dea1beae77.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 3,
-          "total_price": 4886.0,
-          "effective_nightly": 1628.67,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$4,886 | $4,886 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1558065119520691944",
@@ -17936,7 +17618,7 @@
       "is_our_airbnb_live": true,
       "n_comps": 39,
       "comps_count": 39,
-      "comps_raw_count": 40,
+      "comps_raw_count": 39,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -18177,21 +17859,6 @@
           "reviews": 37,
           "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Golf Simulator & Resort Pool, Hot Tub",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1375463518753338462/original/d50ce9ee-df9c-4c03-94b1-0c020e17337c.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 5124.0,
-          "effective_nightly": 1281.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "48646816",
@@ -20075,9 +19742,9 @@
       "our_airbnb_effective_nightly": 1019.75,
       "our_airbnb_total": 4079.0,
       "is_our_airbnb_live": true,
-      "n_comps": 39,
-      "comps_count": 39,
-      "comps_raw_count": 39,
+      "n_comps": 38,
+      "comps_count": 38,
+      "comps_raw_count": 38,
       "comps_list": [
         {
           "listing_id": "862891705248130792",
@@ -20348,24 +20015,6 @@
           "price_snippet": "$2,501 | $2,296",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Deluxe Desert Getaway, Heated Pool & Hot Tub",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1019666581527351903/original/249ae04e-6cd5-4a62-b906-820fa0998b1a.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 5056.0,
-          "effective_nightly": 1264.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$5,056 | $5,056 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1572042347098316490",
@@ -20818,9 +20467,9 @@
       "our_airbnb_effective_nightly": 1174.75,
       "our_airbnb_total": 4699.0,
       "is_our_airbnb_live": true,
-      "n_comps": 34,
-      "comps_count": 34,
-      "comps_raw_count": 34,
+      "n_comps": 33,
+      "comps_count": 33,
+      "comps_raw_count": 33,
       "comps_list": [
         {
           "listing_id": "862891705248130792",
@@ -21073,24 +20722,6 @@
           "price_snippet": "$4,668 | $4,668 for 4 nights | $0 today",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 6098.0,
-          "effective_nightly": 1524.5,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,098 | $6,098 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1558065119520691944",
@@ -22160,9 +21791,9 @@
       "our_airbnb_effective_nightly": 1499.5,
       "our_airbnb_total": 5998.0,
       "is_our_airbnb_live": true,
-      "n_comps": 34,
-      "comps_count": 34,
-      "comps_raw_count": 34,
+      "n_comps": 33,
+      "comps_count": 33,
+      "comps_raw_count": 33,
       "comps_list": [
         {
           "listing_id": "1011635413453672886",
@@ -22379,24 +22010,6 @@
           "price_snippet": "$6,763 | $6,763 for 4 nights",
           "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Stunning Acre Resort Home Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 6506.0,
-          "effective_nightly": 1626.5,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,506 | $6,506 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1729894920712555430",
@@ -23666,9 +23279,9 @@
       "our_airbnb_effective_nightly": 693.5,
       "our_airbnb_total": 2774.0,
       "is_our_airbnb_live": true,
-      "n_comps": 31,
-      "comps_count": 31,
-      "comps_raw_count": 31,
+      "n_comps": 30,
+      "comps_count": 30,
+      "comps_raw_count": 30,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -23926,21 +23539,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 4668.0,
-          "effective_nightly": 1167.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
-        },
-        {
           "listing_id": "980478690835407775",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -24172,9 +23770,9 @@
       "our_airbnb_effective_nightly": 1019.75,
       "our_airbnb_total": 4079.0,
       "is_our_airbnb_live": true,
-      "n_comps": 33,
-      "comps_count": 33,
-      "comps_raw_count": 36,
+      "n_comps": 35,
+      "comps_count": 35,
+      "comps_raw_count": 35,
       "comps_list": [
         {
           "listing_id": "862891705248130792",
@@ -24445,24 +24043,6 @@
           "price_snippet": "$2,734 | $2,734 for 4 nights | $0 today",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Mesa | Free Heated Pool I Game Room I Lux Home I Western",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQzMjE4ODcxMDgzNjIyMTc3MQ==/original/b928c4ac-87a9-4f43-b347-4fc8d8806500.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 5804.0,
-          "effective_nightly": 1451.0,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$5,804 | $5,804 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "1421921829579892334",
@@ -26077,9 +25657,9 @@
       "our_airbnb_effective_nightly": 1205.75,
       "our_airbnb_total": 4823.0,
       "is_our_airbnb_live": true,
-      "n_comps": 33,
-      "comps_count": 33,
-      "comps_raw_count": 35,
+      "n_comps": 34,
+      "comps_count": 34,
+      "comps_raw_count": 34,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -26314,24 +25894,6 @@
           "price_snippet": "$5,523 | $5,018",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Phoenix | Serene Home, Heated Pool & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-918812982062542680/original/dfc1df47-74d9-4161-bdcd-533558cb57d0.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "1081331699304657121",
-          "title": "Home in Paradise Valley",
-          "location": "Paradise Valley",
-          "bedrooms": 7,
-          "beds": 8,
-          "baths": 6.0,
-          "nights": 4,
-          "total_price": 6413.0,
-          "effective_nightly": 1603.25,
-          "rating": 4.89,
-          "reviews": 55,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$6,413 | $6,413 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Paradise Valley | Casa Nuda 7BR 8King Beds",
-          "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg?im_w=720"
         },
         {
           "listing_id": "22583822",

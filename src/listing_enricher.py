@@ -447,7 +447,7 @@ class ListingEnricher:
         """Fetch and cache listing profile."""
         if not force_refresh:
             cached = self.get_cached_profile(listing_id)
-            if cached and cached.get("amenities_count", 0) > 0 and cached.get("description"):
+            if cached and cached.get("amenities_count", 0) > 0 and len(cached.get("description", "")) >= 600:
                 return cached
 
         logger.info(f"Enriching listing {listing_id}...")
@@ -559,6 +559,15 @@ class ListingEnricher:
                 for cid, comp in registry.get(tier_key, {}).items():
                     all_comps.append(comp)
 
+        # Prioritize comps with truncated or missing descriptions (<600 chars)
+        if not force_refresh and not listing_ids:
+            all_comps.sort(
+                key=lambda c: (
+                    len((self.get_cached_profile(str(c.get("listing_id"))) or {}).get("description", "")) >= 600,
+                    len((self.get_cached_profile(str(c.get("listing_id"))) or {}).get("description", "")),
+                )
+            )
+
         if not all_comps:
             if unenriched_only:
                 print("🎉 All discovered listings in config/listing_specs.json are already fully enriched!")
@@ -567,14 +576,16 @@ class ListingEnricher:
             return registry
 
         # If targeting registry by default and not forcing, check if all are already cached
+        # If targeting registry by default and not forcing, check if all are already cached with full descriptions
         if not force_refresh and not unenriched_only and not listing_ids:
             cached_count = sum(
                 1 for c in all_comps
                 if (cached := self.get_cached_profile(str(c.get("listing_id"))))
                 and cached.get("amenities_count", 0) > 0
+                and len(cached.get("description", "")) >= 600
             )
             if cached_count == len(all_comps):
-                print(f"⚡ All {cached_count} active comps in comps_registry.json are already enriched and cached in data/enriched_comps/!")
+                print(f"⚡ All {cached_count} active comps in comps_registry.json are already fully enriched with complete descriptions and cached in data/enriched_comps/!")
                 print("💡 To enrich other listings or re-scrape:")
                 print("  • Enrich unenriched discovered comps:  python -m src.cli enrich-comps --unenriched --concurrency 2")
                 print("  • Enrich with limit:                   python -m src.cli enrich-comps --unenriched --limit 10")
@@ -597,10 +608,10 @@ class ListingEnricher:
             async def process_comp(comp: Dict[str, Any]):
                 cid = str(comp["listing_id"])
                 async with sem:
-                    # Check cache first before opening a page
+                    # Check cache first before opening a page (must have amenities AND full description >= 600 chars)
                     if not force_refresh:
                         cached = self.get_cached_profile(cid)
-                        if cached and cached.get("amenities_count", 0) > 0 and (not unenriched_only or cached.get("description")):
+                        if cached and cached.get("amenities_count", 0) > 0 and len(cached.get("description", "")) >= 600:
                             cur_name = comp.get("name") or comp.get("title") or ""
                             if cached.get("title") and (cur_name in ("Home in Scottsdale", "Home in Tempe", "Home in Mesa", "Home in Chandler") or cur_name.startswith("503 Service") or not cur_name):
                                 comp["name"] = cached["title"]

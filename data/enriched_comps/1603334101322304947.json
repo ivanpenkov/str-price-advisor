@@ -64,13 +64,9 @@
   "amenities_count": 53,
   "overview": [
     "12 guests",
-    "· 5 bedrooms",
-    "· 7 beds",
-    "· 3.5 baths",
-    "Superhost",
-    "· 2 years hosting",
-    "Airbnb",
-    "United States"
+    "5 bedrooms",
+    "7 beds",
+    "3.5 baths"
   ],
   "rating": 5.0,
   "reviews": 24,
@@ -79,5 +75,6 @@
   },
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1603334101322304947/original/04c35839-7c85-461d-bc18-d25b5d7c2440.jpeg",
   "url": "https://www.airbnb.com/rooms/1603334101322304947",
-  "enriched_at": "2026-09-04T19:55:08.186878"
+  "review_snippets": [],
+  "enriched_at": "2026-09-05T04:57:56.545077"
 }

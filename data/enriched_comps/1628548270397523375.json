@@ -1,7 +1,11 @@
 {
   "listing_id": "1628548270397523375",
   "title": "Fun-Filled Oasis • Pool, Pickleball, Games Galore",
-  "description": "This 6-bedroom home is an expansive retreat with every amenity you could imagine, both inside and out, set against the stunning desert landscape and golf course for the ultimate Scottsdale getaway.\n\n• Private Sports Court for Basketball & Pickleball\n• Corn Hole, Snookball, Ping Pong, & Giant Connect 4\n• Mini Golf Putting Green & Horseshoe Pit\n• Heated Private Pool\n• Hot Tub\n• Private Sauna & Cold Plunge\n• Golf Practice Net\n• Kid’s Playground\n• Outdoor Patio/Dining + TV\n• BBQ Grill\n• Golf Course",
+  "description": "This 6-bedroom home is an expansive retreat with every amenity you could imagine, both inside and out, set against the stunning desert landscape and golf course for the ultimate Scottsdale getaway.\n\n• Private Sports Court for Basketball & Pickleball\n• Corn Hole, Snookball, Ping Pong, & Giant Connect 4\n• Mini Golf Putting Green & Horseshoe Pit\n• Heated Private Pool\n• Hot Tub\n• Private Sauna & Cold Plunge\n• Golf Practice Net\n• Kid’s Playground\n• Outdoor Patio/Dining + TV\n• BBQ Grill\n• Golf Course\n\n The space \nExperience the ultimate Scottsdale escape in this stunning 6-bedroom, 3-bathroom retreat, comfortably hosting up to 18 guests. Perfect for family vacations or friends’ getaways, every corner of this home is designed for relaxation, fun, and unforgettable memories.\n\nSet against the breathtaking desert and golf course backdrop, and just minutes from Scottsdale’s top attractions, dining, shopping, and world-class golf, this home effortlessly combines luxury, convenience, and endless entertainment for the perfect desert retreat.\n\nMAIN SPACES OF THE HOME:\n\n– 6 BEDROOMS & 3 BATHROOMS –\n\nBEDROOM 1:\n* King-sized Bed\n* Smart TV\n* Nightstand & Lamps\n* Plush Seating\n* Direct Outdoor Access\n\nBEDROOM 2:\n* Queen-sized Bed\n* Smart TV\n* Nightstand & Lamps\n* Mirror\n\nBEDROOM 3:\n* 2 Queen over Queen-sized Bunk Beds\n* Smart TV\n* Children’s Books & Toys\n\nBEDROOM 4:\n* King-sized Bed\n* Smart TV\n* Nightstand & Lamps\n* Dedicated Workspace\n\nBEDROOM 5:\n* King-sized Bed\n* Smart TV\n* Nightstand & Lamps\n* Plush Seating\n\nBEDROOM 6:\n* King-sized Bed\n* Smart TV\n* Nightstand & Lamps\n* Plush Seating\n\n– 3 BATHROOMS –\n* Full Bathroom with a Tub & Walk-in Shower\n* Full Bathroom with Walk-in Shower\n* Full Bathroom with Walk-in Shower\n\n– CHEF’S KITCHEN –\n* Fully Stocked\n* High-end Stainless Appliances\n* Ample Cabinetry \n* Large Island w/ High seating\n* Coffee Maker: Keurig \n\n– LIVING ROOM –\n* 65” Smart TV\n* Large Plush Sofa \n\n– GAME ROOM –\n* Arcade Games\n* Pool Table\n* Foosball Table\n* Speakeasy Room + Poker Table\n\n– MOVIE THEATER –\n* Smart TV\n* Large Plush Sofa\n\n– HOME GYM –\n* Yoga Mats\n* Treadmills\n* Dumbells\n\n– OUTDOOR FUN & AMENITIES –\n* Heated Private Pool ( $125/night)\n* Sports Court: Basketball & Pickleball\n* Private Sauna & Cold Plunge\n* Hot Tub\n* Fire Pit\n* Golf Practice Net\n* Mini Golf \n* Corn Hole\n* Ping-Pong\n* Giant Connect4\n* Snook Ball\n* Horseshoes\n* Outdoor Patio/Dining + TV\n* BBQ Grill\n* Poolside Loungers + Umbrellas\n* Kid’s Playground\n\n Guest access \nThe guest has access to the entire home minus the locked cleaners' closet.\n\n Other things to note \nSTR: 2043000\n\nCheck-in is at 4pm\nCheck-out is at 10am\n\n- Up to 2 dogs are allowed for $125 per stay, no cats please. We kindly ask that your dog is crate trained and that you pick up after your dog.\n- No parties allowed—violations may result in immediate termination of the stay. We aim to maintain a respectful environment for our neighbors.\n- An exterior camera is installed solely to monitor our cleaning team for quality and security purposes.\n- Parking is available for 6 vehicles in the driveway. Please note that street parking is not allowed.\n- If you're interested in a long-term stay, please reach out to inquire about availability\n- Heated pool fee is $125/night. We recommend heating the pool in the months between October and May each year. We require at least a 3-day notice before your arrival if you'd like the pool heated. Pool must be heated for the entirety of your stay. Thank you! \n- Guests must be 25 years or older to book this property. \n\nGUEST VERIFICATION:\nTo help ensure a smooth and secure stay for all guests, the primary guest listed on the reservation may be asked to complete a quick verification process within 48 hours of booking, depending on the platform used to book the reservation.\n\nPrior to check-in, guests may also be asked to sign a Rental Agreement that includes agreeing to our rental terms and conditions and, on certain booking platforms, providing a valid government-issued ID and matching credit card before arrival.\n\nIncluded with your booking is our damage waiver coverage, which helps protect against accidental, self-reported damage during your stay when reported prior to check-out.",
+  "bedrooms": 6,
+  "beds": 9,
+  "baths": 3.0,
+  "guests": "18",
   "amenities": [
     "Air conditioning",
     "Arcade games",
@@ -78,14 +82,10 @@
   ],
   "amenities_count": 72,
   "overview": [
-    "16+ guests",
-    "· 6 bedrooms",
-    "· 9 beds",
-    "· 3 baths",
-    "Superhost",
-    "· 3 years hosting",
-    "Airbnb",
-    "United States"
+    "18 guests",
+    "6 bedrooms",
+    "9 beds",
+    "3 baths"
   ],
   "rating": 4.92,
   "reviews": 12,
@@ -94,5 +94,6 @@
   },
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1628548270397523375/original/ad8e466f-d256-42b9-ae0f-0879789ef3d1.jpeg",
   "url": "https://www.airbnb.com/rooms/1628548270397523375",
-  "enriched_at": "2026-09-04T15:25:34.962138"
+  "review_snippets": [],
+  "enriched_at": "2026-09-05T04:57:44.322672"
 }

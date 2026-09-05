@@ -26,7 +26,12 @@ def _is_spec_or_generic_title(s: str) -> bool:
         return True
     s_clean = s.strip()
     s_lower = s_clean.lower()
-    if "$" in s_clean or "before taxes" in s_lower or re.search(r"for\s+\d+\s+nights?", s_lower) or r"/\s*night" in s_lower:
+    if (
+        re.search(r"\$\s*[\d,]+(?:\.\d+)?(?:\s*(?:/\s*night|night|total|stay|for\s+\d+\s*nights?|before\s+taxes)|\s*$)", s_lower)
+        or "before taxes" in s_lower
+        or re.search(r"for\s+\d+\s+nights?", s_lower)
+        or r"/\s*night" in s_lower
+    ):
         return True
     if "single comp sweep" in s_lower:
         return True
@@ -2121,6 +2126,8 @@ class HTMLDashboardGenerator:
                 or 88.0
             )
             pool_specs = c.get("pool_specs") or comp_eval.get("pool_specs", {})
+            clean_win_ratio = float(c.get("winter_ratio") or comp_eval.get("winter_ratio") or c.get("desirability_ratio") or comp_eval.get("desirability_ratio") or ratio)
+            clean_sum_ratio = float(c.get("summer_ratio") or comp_eval.get("summer_ratio") or c.get("desirability_ratio") or comp_eval.get("desirability_ratio") or ratio)
 
             clean_comps.append({
                 "is_our_property": False,
@@ -2135,6 +2142,8 @@ class HTMLDashboardGenerator:
                 "effective_nightly": eff_rate,
                 "adjusted_effective_nightly": adj_rate,
                 "desirability_ratio": ratio,
+                "winter_ratio": clean_win_ratio,
+                "summer_ratio": clean_sum_ratio,
                 "is_valid_comp": is_valid,
                 "validity_reason": validity_reason,
                 "rationale": rationale,
@@ -2241,18 +2250,28 @@ class HTMLDashboardGenerator:
                 loc_escaped = html.escape(str(item.get('location', '')), quote=True)
 
                 if is_valid:
-                    season_label = "Winter" if item.get("is_winter", True) else "Summer"
+                    is_winter = item.get("is_winter", True)
+                    win_ratio = item.get("winter_ratio")
+                    sum_ratio = item.get("summer_ratio")
+                    has_seasonal_diff = (
+                        win_ratio is not None
+                        and sum_ratio is not None
+                        and abs(win_ratio - sum_ratio) >= 0.01
+                    )
+                    season_label = "Winter" if is_winter else "Summer"
+                    season_prefix = f"{season_label} " if has_seasonal_diff else ""
+
                     pool_sp = item.get("pool_specs", {})
                     heat_val = pool_sp.get("heating", "")
                     heat_str = f" • {heat_val.replace('_', ' ').title()} Pool" if heat_val and heat_val != "none" else ""
                     tt = f"{rationale} ({season_label}{heat_str})"
 
                     if ratio >= 1.05:
-                        ratio_badge = f'<span class="badge" style="background:rgba(96,165,250,0.2); color:#60a5fa; border:1px solid rgba(96,165,250,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">💎 {ratio:.2f}x ({season_label} Superior)</span>'
+                        ratio_badge = f'<span class="badge" style="background:rgba(96,165,250,0.2); color:#60a5fa; border:1px solid rgba(96,165,250,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">💎 {ratio:.2f}x ({season_prefix}Superior)</span>'
                     elif ratio <= 0.95:
-                        ratio_badge = f'<span class="badge" style="background:rgba(251,191,36,0.2); color:#fbbf24; border:1px solid rgba(251,191,36,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">📉 {ratio:.2f}x ({season_label} Discount)</span>'
+                        ratio_badge = f'<span class="badge" style="background:rgba(251,191,36,0.2); color:#fbbf24; border:1px solid rgba(251,191,36,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">📉 {ratio:.2f}x ({season_prefix}Discount)</span>'
                     else:
-                        ratio_badge = f'<span class="badge" style="background:rgba(52,211,153,0.2); color:#34d399; border:1px solid rgba(52,211,153,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">🎯 {ratio:.2f}x ({season_label} Peer)</span>'
+                        ratio_badge = f'<span class="badge" style="background:rgba(52,211,153,0.2); color:#34d399; border:1px solid rgba(52,211,153,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">🎯 {ratio:.2f}x ({season_prefix}Peer)</span>'
                     ratio_td = f"""<td style="padding:9px 14px;">
                       {ratio_badge}
                       <div style="font-size:0.72rem; color:#94a3b8; margin-top:3px; line-height:1.25;">{rationale}</div>

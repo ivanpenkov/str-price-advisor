@@ -176,6 +176,15 @@ class TestTitleExtraction(unittest.TestCase):
         )
         self.assertEqual(res, "The Showstopper Escape")
 
+    def test_marketing_headline_with_property_valuation_preserved(self):
+        """Property valuation marketing titles like '$6M Estate' must not be rejected as night prices."""
+        snippet = "Luxe | Luxe | Home in Paradise Valley | Entertainers Paradise! $6M Estate with Lagoon Pool"
+        res = extract_clean_listing_title(
+            raw_snippet=snippet,
+            default_title="Home in Paradise Valley",
+        )
+        self.assertEqual(res, "Entertainers Paradise! $6M Estate with Lagoon Pool")
+
 
 if __name__ == "__main__":
     unittest.main()

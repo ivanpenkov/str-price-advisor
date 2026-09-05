@@ -188,6 +188,37 @@ class TestTitleExtraction(unittest.TestCase):
         )
         self.assertEqual(res, "Entertainers Paradise! $6M Estate with Lagoon Pool")
 
+    def test_parse_deferred_state_extracts_full_description(self):
+        """ListingEnricher.parse_deferred_state extracts longDescriptionHtml from deferred client state."""
+        import json
+        from src.listing_enricher import ListingEnricher
+
+        mock_deferred = {
+            "niobeClientData": [
+                [
+                    "ROOT_QUERY",
+                    {
+                        "data": {
+                            "node": {
+                                "pdpPresentation": {
+                                    "descriptions": {
+                                        "longDescriptionHtml": {
+                                            "source": "<b>The space</b><br />6 bedrooms<br /><br /><b>Other things to note</b><br />Pool Heat (Optional):<br />We offer pool heating at $100/night with a 3-night minimum."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                ]
+            ]
+        }
+        res = ListingEnricher.parse_deferred_state(json.dumps(mock_deferred))
+        self.assertIsNotNone(res["description"])
+        self.assertIn("pool heating at $100/night", res["description"].lower())
+        self.assertIn("other things to note", res["description"].lower())
+
+
 
 if __name__ == "__main__":
     unittest.main()

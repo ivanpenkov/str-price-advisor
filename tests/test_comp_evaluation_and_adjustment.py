@@ -152,6 +152,31 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertTrue(res["pool_specs"]["has_pool"])
         self.assertGreaterEqual(res["category_scores"]["interior"], 78)
 
+    def test_comp_evaluator_optional_pool_heat_fee_detection(self):
+        """A property that discloses optional pool heat with a dollar fee must be classified as fee-based."""
+        comp = {
+            "listing_id": "1354532747362290532",
+            "name": "Entertainers Paradise! $6M Estate with Lagoon Pool",
+            "bedrooms": 6,
+            "baths": 6.0,
+            "accommodates": 16,
+            "rating": 4.92,
+            "reviews": 39,
+            "location": "Paradise Valley, AZ",
+            "amenities": ["Private outdoor pool - available all year, open 24 hours, heated", "Hot tub", "Wifi"],
+            "description": (
+                "Outside, enjoy PV's only lagoon-style pool.\n"
+                "Other things to note\n"
+                "Pool Heat (Optional):\n"
+                "We offer pool heating at $100/night with a 3-night minimum. The system will typically maintain low to mid-80s."
+            ),
+        }
+        res = self.evaluator.evaluate_comp(comp)
+        self.assertTrue(res["is_valid_comp"])
+        self.assertEqual(res["pool_specs"]["heating"], "fee")
+        self.assertIn("fee disclosed", res["pool_specs"]["heating_source"].lower())
+
+
 
     def test_adjustment_ratio_math(self):
         """Verify adjusted rate formula: adjusted_price = raw_price / ratio."""

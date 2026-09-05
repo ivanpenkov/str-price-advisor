@@ -158,8 +158,17 @@ class CompEvaluator:
             "pool heat fee", "pool heating fee", "fee to heat", "heat is available for $",
             "pool heat is $", "pool heat is available upon request", "additional fee for pool heat",
             "pool heating upon request", "pool heating available upon request", "optional pool heat",
-            "pool heat avail", "pool heating available for a fee", "fee for pool heating"
+            "optional pool heating", "pool heat (optional)", "pool heat optional", "pool heating (optional)",
+            "pool heating optional", "offer pool heating at $", "pool heating at $", "pool heat at $",
+            "charge for pool heating", "charge for pool heat", "fee for pool heat", "fee for pool heating",
+            "pool heat avail", "pool heating available for a fee",
         ]
+        fee_regex = re.compile(
+            r"(?:heated\s+pool|pool\s+heat(?:ing)?|heat(?:ing)?\s+(?:the\s+)?pool)[^$\.\n]*\$\d+"
+            r"|\$\d+[^.\n]*(?:pool\s+heat|to\s+heat\s+the\s+pool|for\s+pool\s+heat)"
+            r"|pool\s+heat[^\.\$]*\$\d+",
+            re.IGNORECASE,
+        )
 
         # Default: if full amenities/description not yet scraped, assume standard heated for luxury cohort.
         # Only declare as confirmed unheated when full profile details have been verified and lack heating.
@@ -173,7 +182,7 @@ class CompEvaluator:
         if any(p in text_lower for p in free_patterns):
             heating = "free"
             heating_source = "Explicit free / complimentary pool heat mentioned in listing text"
-        elif any(p in text_lower for p in fee_patterns) or re.search(r"pool heat[^\.\n\$\d]*\$\d+", text_lower):
+        elif any(p in text_lower for p in fee_patterns) or fee_regex.search(text_lower):
             heating = "fee"
             heating_source = "Explicit pool heating fee disclosed in listing text"
         elif any("heated" in a and "pool" in a for a in amenities_lower) or any(

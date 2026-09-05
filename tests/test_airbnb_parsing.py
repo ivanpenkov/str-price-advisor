@@ -8,6 +8,7 @@ class TestAirbnbParsing(unittest.TestCase):
 
     def setUp(self):
         self.collector = AirbnbCollector()
+        self.collector.excluded_comps = set()
 
     def test_discounted_nightly_and_total_before_taxes(self):
         """Card with strikethrough original nightly, discounted nightly, and total before taxes."""
@@ -203,6 +204,7 @@ class TestAirbnbParsing(unittest.TestCase):
             "7 bedrooms · 6 baths\n"
             "$492 night · $1,477 before taxes"
         )
+        self.collector.listing_specs["1081331699304657121"] = {"bedrooms": 7, "beds": 8, "baths": 6.0}
         parsed = self.collector._parse_card_text("1081331699304657121", card_text, nights=3)
         self.assertIsNotNone(parsed)
         self.assertEqual(parsed["bedrooms"], 7)

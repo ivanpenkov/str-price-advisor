@@ -87,6 +87,7 @@ class ListingEnricher:
         Extracts bedrooms, beds, baths, guest capacity, and all available amenities.
         """
         amenity_titles: List[str] = []
+        extracted_description: Optional[str] = None
         if deferred_text:
             try:
                 data = json.loads(deferred_text)
@@ -104,6 +105,33 @@ class ListingEnricher:
                             search_amenities(item)
 
                 search_amenities(data)
+
+                # Extract complete listing description (including The Space, Guest Access, Other Things To Note)
+                desc_candidates: List[str] = []
+
+                def search_description(obj):
+                    if isinstance(obj, dict):
+                        for key in ("longDescriptionHtml", "description", "details"):
+                            if key in obj and isinstance(obj[key], dict):
+                                val = obj[key].get("source") or obj[key].get("htmlText")
+                                if val and isinstance(val, str) and len(val) > 100:
+                                    desc_candidates.append(val)
+                        for v in obj.values():
+                            search_description(v)
+                    elif isinstance(obj, list):
+                        for item in obj:
+                            search_description(item)
+
+                search_description(data)
+                if desc_candidates:
+                    desc_candidates.sort(key=lambda x: len(x), reverse=True)
+                    clean = re.sub(r"<br\s*/?>", "\n", desc_candidates[0], flags=re.IGNORECASE)
+                    clean = re.sub(r"<[^>]+>", " ", clean)
+                    clean = re.sub(r"&[a-z]+;", " ", clean)
+                    clean = re.sub(r"[ \t]+", " ", clean)
+                    clean = re.sub(r"\n\s*\n+", "\n\n", clean).strip()
+                    if clean:
+                        extracted_description = clean
             except Exception as e:
                 logger.warning(f"Error parsing deferred state JSON: {e}")
 
@@ -147,6 +175,7 @@ class ListingEnricher:
             "guests": extracted_guests,
             "amenities": sorted(list(set(amenity_titles))),
             "amenities_count": len(amenity_titles),
+            "description": extracted_description,
         }
 
     @classmethod
@@ -265,7 +294,10 @@ class ListingEnricher:
                 title = cleaned
                 break
 
-        description = ld_parsed.get("description") or dom_description or ""
+        deferred_desc = deferred_parsed.get("description") or ""
+        ld_desc = ld_parsed.get("description") or ""
+        # Prefer complete description from deferred state (which includes The space and Other things to note) over truncated schema.org summary
+        description = deferred_desc if len(deferred_desc) > len(ld_desc) else (ld_desc or dom_description or "")
         photo_url = ld_parsed.get("photo_url") or dom_photo
 
         # Review snippets for pool heating, noise, and condition ground truth

@@ -2293,61 +2293,6 @@
       "winter_rationale": "Moderate comp (7% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths, Villa In Mesa location discount.",
       "summer_rationale": "Moderate comp (9% lower desirability, Summer). Features heated pool, but noted gaps: 4.0 baths, Villa In Mesa location discount."
     },
-    "1081331699304657121": {
-      "listing_id": "1081331699304657121",
-      "name": "Casa Nuda 7BR 8King Beds",
-      "location": "Paradise Valley",
-      "bedrooms": 7,
-      "beds": 8,
-      "baths": 6.0,
-      "rating": 4.89,
-      "reviews": 55,
-      "url": "https://www.airbnb.com/rooms/1081331699304657121",
-      "discovered_at_sample": "2026-09-24 to 2026-09-27",
-      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1081331699304657121/original/35447177-8893-423c-ab5d-cf1af7bbee4d.jpeg",
-      "amenities_count": 58,
-      "is_valid_comp": false,
-      "validity_reason": "Disqualified: Property lacks a private swimming pool.",
-      "desirability_ratio": 0.5,
-      "category_scores": {
-        "outdoor": 30,
-        "capacity": 60,
-        "interior": 60,
-        "location": 70,
-        "reputation": 70
-      },
-      "composite_score": 52.0,
-      "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
-      "accommodates": 16,
-      "winter_ratio": 0.5,
-      "summer_ratio": 0.5,
-      "pool_specs": {
-        "has_pool": false,
-        "heating": "none",
-        "heating_source": "No swimming pool found",
-        "pool_size": "none",
-        "size_source": "No swimming pool found",
-        "gallons": null
-      },
-      "winter_composite_score": 82.8,
-      "summer_composite_score": 87.5,
-      "winter_category_scores": {
-        "outdoor": 59,
-        "capacity": 100,
-        "interior": 85,
-        "location": 95,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 75,
-        "capacity": 100,
-        "interior": 85,
-        "location": 95,
-        "reputation": 88
-      },
-      "winter_rationale": "Moderate comp (12% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). 7BR / 6.0BA estate matching Villa del Sol's capacity and luxury tier."
-    },
     "1493069124077219890": {
       "listing_id": "1493069124077219890",
       "name": "The Desert Diamond - LUXE Desert GOLD - Old Town",
@@ -3503,61 +3448,6 @@
       "winter_rationale": "Moderate comp (26% lower desirability, Winter). Features dedicated sports court, but noted gaps: unheated pool in winter, 5 BR vs our 6 BR.",
       "summer_rationale": "Moderate comp (15% lower desirability, Summer). Features dedicated sports court, but noted gaps: 5 BR vs our 6 BR, 2.5 baths."
     },
-    "39946904": {
-      "listing_id": "39946904",
-      "name": "LOCATION to Everything! This is IT, Don't Miss!",
-      "location": "Tempe",
-      "bedrooms": 5,
-      "beds": 6,
-      "baths": 3.0,
-      "rating": 4.89,
-      "reviews": 171,
-      "url": "https://www.airbnb.com/rooms/39946904",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/f9153204-0185-4184-86fb-7db7f6ecc6f7.jpg",
-      "amenities_count": 66,
-      "is_valid_comp": false,
-      "validity_reason": "Disqualified: Property lacks a private swimming pool.",
-      "desirability_ratio": 0.5,
-      "category_scores": {
-        "outdoor": 30,
-        "capacity": 60,
-        "interior": 60,
-        "location": 70,
-        "reputation": 70
-      },
-      "composite_score": 52.0,
-      "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
-      "accommodates": 14,
-      "winter_ratio": 0.5,
-      "summer_ratio": 0.5,
-      "pool_specs": {
-        "has_pool": false,
-        "heating": "none",
-        "heating_source": "No swimming pool found",
-        "pool_size": "none",
-        "size_source": "No swimming pool found",
-        "gallons": null
-      },
-      "winter_composite_score": 78.5,
-      "summer_composite_score": 83.2,
-      "winter_category_scores": {
-        "outdoor": 59,
-        "capacity": 74,
-        "interior": 96,
-        "location": 95,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 75,
-        "capacity": 74,
-        "interior": 96,
-        "location": 95,
-        "reputation": 88
-      },
-      "winter_rationale": "Moderate comp (22% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 5 BR vs our 6 BR.",
-      "summer_rationale": "Moderate comp (11% lower desirability, Summer). Features heated spa, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
-    },
     "1460921252920714269": {
       "listing_id": "1460921252920714269",
       "name": "Old Town - 6BD/5BA + Heated Pool + BBQ + Hot Tub",
@@ -3667,61 +3557,6 @@
       },
       "winter_rationale": "Moderate comp (15% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
       "summer_rationale": "Moderate comp (16% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
-    },
-    "1689250872259091459": {
-      "listing_id": "1689250872259091459",
-      "name": "Madrid's Manor with Hot Tub, Firepit, and BBQ",
-      "location": "Tempe",
-      "bedrooms": 6,
-      "beds": 7,
-      "baths": 3.0,
-      "rating": 5.0,
-      "reviews": 1,
-      "url": "https://www.airbnb.com/rooms/1689250872259091459",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1689250872259091459/original/4ab53d9e-c042-40da-9c9a-9fa8607c46a0.jpeg",
-      "amenities_count": 45,
-      "is_valid_comp": false,
-      "validity_reason": "Disqualified: Property lacks a private swimming pool.",
-      "desirability_ratio": 0.5,
-      "category_scores": {
-        "outdoor": 30,
-        "capacity": 60,
-        "interior": 60,
-        "location": 70,
-        "reputation": 70
-      },
-      "composite_score": 52.0,
-      "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
-      "accommodates": 14,
-      "winter_ratio": 0.5,
-      "summer_ratio": 0.5,
-      "pool_specs": {
-        "has_pool": false,
-        "heating": "none",
-        "heating_source": "No swimming pool found",
-        "pool_size": "none",
-        "size_source": "No swimming pool found",
-        "gallons": null
-      },
-      "winter_composite_score": 76.8,
-      "summer_composite_score": 81.5,
-      "winter_category_scores": {
-        "outdoor": 59,
-        "capacity": 81,
-        "interior": 84,
-        "location": 88,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 75,
-        "capacity": 81,
-        "interior": 84,
-        "location": 88,
-        "reputation": 88
-      },
-      "winter_rationale": "Moderate comp (25% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "summer_rationale": "Moderate comp (15% lower desirability, Summer). Features heated spa, but noted gaps: 3.0 baths."
     },
     "900910545853532444": {
       "listing_id": "900910545853532444",
@@ -5424,61 +5259,6 @@
       "winter_rationale": "Moderate comp (18% lower desirability, Winter). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
       "summer_rationale": "Moderate comp (22% lower desirability, Summer). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
     },
-    "730689822646393395": {
-      "listing_id": "730689822646393395",
-      "name": "Modern | Central E Valley | Mins to 60 | Sleeps 13",
-      "location": "Mesa",
-      "bedrooms": 5,
-      "beds": 7,
-      "baths": 3.0,
-      "rating": 4.91,
-      "reviews": 190,
-      "url": "https://www.airbnb.com/rooms/730689822646393395",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/77f7c6d5-b04e-4db5-934c-7c83f3473dd1.jpg",
-      "amenities_count": 60,
-      "is_valid_comp": false,
-      "validity_reason": "Disqualified: Property lacks a private swimming pool.",
-      "desirability_ratio": 0.5,
-      "category_scores": {
-        "outdoor": 30,
-        "capacity": 60,
-        "interior": 60,
-        "location": 70,
-        "reputation": 70
-      },
-      "composite_score": 52.0,
-      "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
-      "accommodates": 13,
-      "winter_ratio": 0.5,
-      "summer_ratio": 0.5,
-      "pool_specs": {
-        "has_pool": false,
-        "heating": "none",
-        "heating_source": "No swimming pool found",
-        "pool_size": "none",
-        "size_source": "No swimming pool found",
-        "gallons": null
-      },
-      "winter_composite_score": 74.2,
-      "summer_composite_score": 79.0,
-      "winter_category_scores": {
-        "outdoor": 54,
-        "capacity": 73,
-        "interior": 90,
-        "location": 82,
-        "reputation": 94
-      },
-      "summer_category_scores": {
-        "outdoor": 70,
-        "capacity": 73,
-        "interior": 90,
-        "location": 82,
-        "reputation": 94
-      },
-      "winter_rationale": "Moderate comp (31% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 5 BR vs our 6 BR.",
-      "summer_rationale": "Moderate comp (20% lower desirability, Summer). Features heated spa, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
-    },
     "646572770933564861": {
       "listing_id": "646572770933564861",
       "name": "The Grand Saguaro, Heated Pool-Hot Tub-Pickleball",
@@ -6194,12 +5974,12 @@
     }
   },
   "metadata": {
-    "last_updated": "2026-09-05T04:23:14.606918",
+    "last_updated": "2026-09-05T04:34:20.278557",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
     "valid_comps_count": 109,
     "disqualified_comps_count": 4,
-    "total_comps": 113
+    "total_comps": 109
   },
   "excluded_comps": {
     "809687707688713264": {
@@ -6213,6 +5993,30 @@
       "name": "Listing 1561864558173852118",
       "reason": "Disqualified / user-removed comp",
       "excluded_at": "2026-09-05T04:23:14.606903"
+    },
+    "1689250872259091459": {
+      "listing_id": "1689250872259091459",
+      "name": "Madrid's Manor with Hot Tub, Firepit, and BBQ",
+      "reason": "Disqualified: Property lacks a private swimming pool.",
+      "excluded_at": "2026-09-05T04:33:49.038140"
+    },
+    "730689822646393395": {
+      "listing_id": "730689822646393395",
+      "name": "Modern | Central E Valley | Mins to 60 | Sleeps 13",
+      "reason": "Disqualified: Property lacks a private swimming pool.",
+      "excluded_at": "2026-09-05T04:34:01.223401"
+    },
+    "39946904": {
+      "listing_id": "39946904",
+      "name": "LOCATION to Everything! This is IT, Don't Miss!",
+      "reason": "Disqualified: Property lacks a private swimming pool.",
+      "excluded_at": "2026-09-05T04:34:10.969826"
+    },
+    "1081331699304657121": {
+      "listing_id": "1081331699304657121",
+      "name": "Casa Nuda 7BR 8King Beds",
+      "reason": "Disqualified: Property lacks a private swimming pool.",
+      "excluded_at": "2026-09-05T04:34:20.278540"
     }
   }
 }

@@ -237,7 +237,10 @@ def main():
     eval_parser = subparsers.add_parser("evaluate-comps", help="Evaluate all comps in registry with 5-factor quality rubric and desirability ratios")
     eval_parser.add_argument("--no-save", action="store_true", help="Do not write results back to comps_registry.json")
 
-    enrich_parser = subparsers.add_parser("enrich-comps", help="Deep scrape amenities, photos, and specs for registry comps")
+    enrich_parser = subparsers.add_parser("enrich-comps", help="Deep scrape amenities, photos, and specs for comps")
+    enrich_parser.add_argument("ids", nargs="*", default=[], help="Optional specific Airbnb listing ID(s) or URLs to enrich")
+    enrich_parser.add_argument("--unenriched", action="store_true", help="Target discovered comps in config/listing_specs.json that lack deep descriptions/amenities (189 comps)")
+    enrich_parser.add_argument("--all-discovered", action="store_true", dest="unenriched", help="Alias for --unenriched")
     enrich_parser.add_argument("--concurrency", type=int, default=2, help="Number of concurrent browser pages")
     enrich_parser.add_argument("--limit", type=int, default=None, help="Limit number of comps to enrich")
     enrich_parser.add_argument("--force", action="store_true", help="Force re-scraping cached comps")
@@ -309,10 +312,13 @@ def main():
         elif args.our_property:
             asyncio.run(enricher.enrich_our_property(force_refresh=args.force))
         else:
+            ids = [i.strip() for i in args.ids if i.strip()] if getattr(args, "ids", None) else None
             asyncio.run(enricher.enrich_all_comps(
                 concurrency=args.concurrency,
                 limit=args.limit,
                 force_refresh=args.force,
+                unenriched_only=bool(args.unenriched),
+                listing_ids=ids,
             ))
     elif args.command == "test-kivoya":
         test_kivoya_only()

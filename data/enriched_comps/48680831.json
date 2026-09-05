@@ -1,7 +1,11 @@
 {
   "listing_id": "48680831",
-  "title": "Magnificent Mountainside Estate with Ultimate Priv - Houses for Rent in Scottsdale, Arizona, United States - Airbnb",
-  "description": "",
+  "title": "Magnificent Mountainside Estate with Ultimate Priv",
+  "description": "Welcome to Scottsdale’s most exclusive vacation rental residence. Nestled on five acres, this estate has mountain views from every room. 8,500 sq. ft with eight bedrooms, nine bathrooms, two living rooms, a game room, five work stations, two roof top decks and luscious outdoor spaces. Top it off by adding on one of our many concierge services available - Private chef, massage therapists, or pre-made meals to easily heat and serve at your leisure.",
+  "bedrooms": 8,
+  "beds": 9,
+  "baths": 8.0,
+  "guests": "16+",
   "amenities": [
     "Arcade games",
     "BBQ grill",
@@ -78,11 +82,19 @@
     "Wine glasses"
   ],
   "amenities_count": 73,
-  "overview": [],
-  "rating": null,
-  "reviews": null,
-  "address": null,
+  "overview": [
+    "16+ guests",
+    "8 bedrooms",
+    "9 beds",
+    "8 baths"
+  ],
+  "rating": 4.99,
+  "reviews": 78,
+  "address": {
+    "addressLocality": "Scottsdale"
+  },
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-48680831/original/83c63c9a-8d20-41e7-acc9-4230b297bb3d.jpeg",
   "url": "https://www.airbnb.com/rooms/48680831",
-  "enriched_at": "2026-09-04T15:25:40.268458"
+  "review_snippets": [],
+  "enriched_at": "2026-09-05T03:37:55.031046"
 }

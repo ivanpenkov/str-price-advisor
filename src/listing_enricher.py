@@ -415,7 +415,7 @@ class ListingEnricher:
         """Fetch and cache listing profile."""
         if not force_refresh:
             cached = self.get_cached_profile(listing_id)
-            if cached and cached.get("amenities_count", 0) > 0:
+            if cached and cached.get("amenities_count", 0) > 0 and cached.get("description"):
                 return cached
 
         logger.info(f"Enriching listing {listing_id}...")
@@ -468,22 +468,94 @@ class ListingEnricher:
         logger.info(f"Saved our property profile to {self.OUR_PROFILE_PATH}")
         return profile
 
-    async def enrich_all_comps(self, limit: Optional[int] = None, force_refresh: bool = False, concurrency: int = 4) -> Dict[str, Any]:
-        """Iterate through comp registry and enrich all listings concurrently with full descriptions and amenities."""
-        if not self.REGISTRY_PATH.exists():
-            raise FileNotFoundError(f"Registry not found at {self.REGISTRY_PATH}")
+    async def enrich_all_comps(
+        self,
+        limit: Optional[int] = None,
+        force_refresh: bool = False,
+        concurrency: int = 4,
+        unenriched_only: bool = False,
+        listing_ids: Optional[List[str]] = None,
+    ) -> Dict[str, Any]:
+        """Iterate through comp registry or discovered specs and enrich listings concurrently with full descriptions and amenities."""
+        registry = {}
+        if self.REGISTRY_PATH.exists():
+            try:
+                registry = json.loads(self.REGISTRY_PATH.read_text(encoding="utf-8"))
+            except Exception:
+                registry = {}
 
-        registry = json.loads(self.REGISTRY_PATH.read_text(encoding="utf-8"))
+        specs = {}
+        if self.SPECS_PATH.exists():
+            try:
+                specs = json.loads(self.SPECS_PATH.read_text(encoding="utf-8"))
+            except Exception:
+                specs = {}
+
         all_comps: List[Dict[str, Any]] = []
-        for tier_key in ("tier_a", "tier_b"):
-            for cid, comp in registry.get(tier_key, {}).items():
-                all_comps.append(comp)
+
+        if listing_ids:
+            seen_ids = set()
+            for raw_id in listing_ids:
+                m = re.search(r"(\d{5,})", str(raw_id))
+                cid = m.group(1) if m else str(raw_id).strip()
+                if not cid or cid in seen_ids:
+                    continue
+                seen_ids.add(cid)
+                comp_data = None
+                for tier in ("tier_a", "tier_b"):
+                    if cid in registry.get(tier, {}):
+                        comp_data = dict(registry[tier][cid])
+                        break
+                if not comp_data and cid in specs:
+                    comp_data = dict(specs[cid])
+                if not comp_data:
+                    comp_data = {"listing_id": cid, "name": f"Listing {cid}"}
+                all_comps.append(comp_data)
+        elif unenriched_only:
+            for cid, spec in specs.items():
+                cid_str = str(cid)
+                cached = self.get_cached_profile(cid_str)
+                is_enriched = bool(cached and cached.get("amenities_count", 0) > 0 and cached.get("description"))
+                if not is_enriched:
+                    item = dict(spec)
+                    item["listing_id"] = cid_str
+                    if "title" in item and "name" not in item:
+                        item["name"] = item["title"]
+                    all_comps.append(item)
+        else:
+            for tier_key in ("tier_a", "tier_b"):
+                for cid, comp in registry.get(tier_key, {}).items():
+                    all_comps.append(comp)
+
+        if not all_comps:
+            if unenriched_only:
+                print("🎉 All discovered listings in config/listing_specs.json are already fully enriched!")
+            else:
+                print("⚠️ No comps found to enrich.")
+            return registry
+
+        # If targeting registry by default and not forcing, check if all are already cached
+        if not force_refresh and not unenriched_only and not listing_ids:
+            cached_count = sum(
+                1 for c in all_comps
+                if (cached := self.get_cached_profile(str(c.get("listing_id"))))
+                and cached.get("amenities_count", 0) > 0
+            )
+            if cached_count == len(all_comps):
+                print(f"⚡ All {cached_count} active comps in comps_registry.json are already enriched and cached in data/enriched_comps/!")
+                print("💡 To enrich other listings or re-scrape:")
+                print("  • Enrich unenriched discovered comps:  python -m src.cli enrich-comps --unenriched --concurrency 2")
+                print("  • Enrich with limit:                   python -m src.cli enrich-comps --unenriched --limit 10")
+                print("  • Enrich specific comp(s):             python -m src.cli enrich-comps <listing_id>")
+                print("  • Force re-scrape active comps:        python -m src.cli enrich-comps --force --concurrency 2")
+                return registry
 
         if limit:
             all_comps = all_comps[:limit]
 
-        logger.info(f"Enriching {len(all_comps)} comps (concurrency={concurrency}, force_refresh={force_refresh})...")
-        print(f"🚀 Starting parallel enrichment for {len(all_comps)} comps (workers={concurrency})...")
+        target_desc = f"{len(all_comps)} unenriched comps" if unenriched_only else (f"{len(all_comps)} specific comps" if listing_ids else f"{len(all_comps)} comps")
+        logger.info(f"Enriching {target_desc} (concurrency={concurrency}, force_refresh={force_refresh})...")
+        print(f"🚀 Starting parallel enrichment for {target_desc} (workers={concurrency})...")
 
         async with async_playwright() as p:
             await self.init_browser(p)
@@ -496,40 +568,53 @@ class ListingEnricher:
                     # Check cache first before opening a page
                     if not force_refresh:
                         cached = self.get_cached_profile(cid)
-                        if cached and cached.get("amenities_count", 0) > 0:
-                            if cached.get("title") and (comp.get("name") in ("Home in Scottsdale", "Home in Tempe", "Home in Mesa", "Home in Chandler") or comp.get("name", "").startswith("503 Service")):
+                        if cached and cached.get("amenities_count", 0) > 0 and (not unenriched_only or cached.get("description")):
+                            cur_name = comp.get("name") or comp.get("title") or ""
+                            if cached.get("title") and (cur_name in ("Home in Scottsdale", "Home in Tempe", "Home in Mesa", "Home in Chandler") or cur_name.startswith("503 Service") or not cur_name):
                                 comp["name"] = cached["title"]
+                                comp["title"] = cached["title"]
                             if cached.get("photo_url") and not comp.get("photo_url"):
                                 comp["photo_url"] = cached["photo_url"]
-                            if cached.get("bedrooms"):
+                            if cached.get("bedrooms") is not None:
                                 comp["bedrooms"] = cached["bedrooms"]
-                            if cached.get("beds"):
+                            if cached.get("beds") is not None:
                                 comp["beds"] = cached["beds"]
-                            if cached.get("baths"):
+                            if cached.get("baths") is not None:
                                 comp["baths"] = cached["baths"]
+                            if cached.get("rating") is not None:
+                                comp["rating"] = cached["rating"]
+                            if cached.get("reviews") is not None:
+                                comp["reviews"] = cached["reviews"]
                             comp["amenities_count"] = cached.get("amenities_count", 0)
                             progress["completed"] += 1
-                            print(f"[{progress['completed']}/{progress['total']}] ⚡ [Cached] {cid}: {comp.get('name')[:35]} ({comp.get('beds')} beds, {comp.get('amenities_count')} amenities)")
+                            disp_title = (comp.get("title") or comp.get("name") or f"Listing {cid}")[:35]
+                            print(f"[{progress['completed']}/{progress['total']}] ⚡ [Cached] {cid}: {disp_title} ({comp.get('beds')} beds, {comp.get('amenities_count')} amenities)")
                             return
 
                     page = await self.context.new_page()
                     try:
                         enriched = await self.enrich_listing(page, cid, force_refresh=force_refresh)
                         if enriched.get("title"):
-                            cur_name = comp.get("name", "")
+                            cur_name = comp.get("name") or comp.get("title") or ""
                             if not cur_name or self.clean_profile_title(cur_name) is None or cur_name.startswith("503 Service"):
                                 comp["name"] = enriched["title"]
-                        if enriched.get("photo_url") and not comp.get("photo_url"):
+                                comp["title"] = enriched["title"]
+                        if enriched.get("photo_url"):
                             comp["photo_url"] = enriched["photo_url"]
-                        if enriched.get("bedrooms"):
+                        if enriched.get("bedrooms") is not None:
                             comp["bedrooms"] = enriched["bedrooms"]
-                        if enriched.get("beds"):
+                        if enriched.get("beds") is not None:
                             comp["beds"] = enriched["beds"]
-                        if enriched.get("baths"):
+                        if enriched.get("baths") is not None:
                             comp["baths"] = enriched["baths"]
+                        if enriched.get("rating") is not None:
+                            comp["rating"] = enriched["rating"]
+                        if enriched.get("reviews") is not None:
+                            comp["reviews"] = enriched["reviews"]
                         comp["amenities_count"] = enriched.get("amenities_count", 0)
                         progress["completed"] += 1
-                        print(f"[{progress['completed']}/{progress['total']}] ✅ {cid}: {enriched.get('title', comp.get('name'))[:35]} ({comp.get('beds')} beds, {enriched.get('amenities_count')} amenities)")
+                        disp_title = (enriched.get("title") or comp.get("title") or comp.get("name") or f"Listing {cid}")[:35]
+                        print(f"[{progress['completed']}/{progress['total']}] ✅ {cid}: {disp_title} ({comp.get('beds')} beds, {comp.get('amenities_count')} amenities)")
                     except Exception as e:
                         progress["completed"] += 1
                         print(f"[{progress['completed']}/{progress['total']}] ⚠️ Error {cid}: {e}")
@@ -540,40 +625,63 @@ class ListingEnricher:
             await asyncio.gather(*(process_comp(c) for c in all_comps))
             await self.close_browser()
 
-        # Save registry updates
-        self.REGISTRY_PATH.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
+        # Update registry if any updated comps are in it
+        registry_modified = False
+        for tier_key in ("tier_a", "tier_b"):
+            tier_dict = registry.get(tier_key, {})
+            for comp in all_comps:
+                cid_str = str(comp.get("listing_id"))
+                if cid_str in tier_dict:
+                    reg_comp = tier_dict[cid_str]
+                    if comp.get("name"):
+                        reg_comp["name"] = comp["name"]
+                    if comp.get("photo_url"):
+                        reg_comp["photo_url"] = comp["photo_url"]
+                    if comp.get("bedrooms") is not None:
+                        reg_comp["bedrooms"] = comp["bedrooms"]
+                    if comp.get("beds") is not None:
+                        reg_comp["beds"] = comp["beds"]
+                    if comp.get("baths") is not None:
+                        reg_comp["baths"] = comp["baths"]
+                    if comp.get("rating") is not None:
+                        reg_comp["rating"] = comp["rating"]
+                    if comp.get("reviews") is not None:
+                        reg_comp["reviews"] = comp["reviews"]
+                    if comp.get("amenities_count") is not None:
+                        reg_comp["amenities_count"] = comp["amenities_count"]
+                    registry_modified = True
+
+        if registry_modified and self.REGISTRY_PATH.exists():
+            self.REGISTRY_PATH.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
 
         # Also synchronize config/listing_specs.json
-        specs = {}
         if self.SPECS_PATH.exists():
-            try:
-                specs = json.loads(self.SPECS_PATH.read_text(encoding="utf-8"))
-            except Exception:
-                specs = {}
-        for comp in all_comps:
-            cid_str = str(comp.get("listing_id"))
-            if not cid_str:
-                continue
-            if cid_str not in specs:
-                specs[cid_str] = {"listing_id": cid_str}
-            if comp.get("name"):
-                specs[cid_str]["title"] = comp["name"]
-            if comp.get("location"):
-                specs[cid_str]["location"] = comp["location"]
-            if comp.get("bedrooms") is not None:
-                specs[cid_str]["bedrooms"] = comp["bedrooms"]
-            if comp.get("beds") is not None:
-                specs[cid_str]["beds"] = comp["beds"]
-            if comp.get("baths") is not None:
-                specs[cid_str]["baths"] = comp["baths"]
-            if comp.get("rating") is not None:
-                specs[cid_str]["rating"] = comp["rating"]
-            if comp.get("reviews") is not None:
-                specs[cid_str]["reviews"] = comp["reviews"]
-            if comp.get("photo_url"):
-                specs[cid_str]["photo_url"] = comp["photo_url"]
-        self.SPECS_PATH.write_text(json.dumps(specs, indent=2, ensure_ascii=False), encoding="utf-8")
-        print("✨ Comp registry and listing specs updated with enriched metadata!")
+            for comp in all_comps:
+                cid_str = str(comp.get("listing_id"))
+                if not cid_str:
+                    continue
+                if cid_str not in specs:
+                    specs[cid_str] = {"listing_id": cid_str}
+                title = comp.get("title") or comp.get("name")
+                if title:
+                    specs[cid_str]["title"] = title
+                if comp.get("location"):
+                    specs[cid_str]["location"] = comp["location"]
+                if comp.get("bedrooms") is not None:
+                    specs[cid_str]["bedrooms"] = comp["bedrooms"]
+                if comp.get("beds") is not None:
+                    specs[cid_str]["beds"] = comp["beds"]
+                if comp.get("baths") is not None:
+                    specs[cid_str]["baths"] = comp["baths"]
+                if comp.get("rating") is not None:
+                    specs[cid_str]["rating"] = comp["rating"]
+                if comp.get("reviews") is not None:
+                    specs[cid_str]["reviews"] = comp["reviews"]
+                if comp.get("photo_url"):
+                    specs[cid_str]["photo_url"] = comp["photo_url"]
+            self.SPECS_PATH.write_text(json.dumps(specs, indent=2, ensure_ascii=False), encoding="utf-8")
+
+        print("✨ Metadata and listing specs updated with enriched data!")
         return registry
 
     def sync_cached_to_registry(self) -> Dict[str, Any]:

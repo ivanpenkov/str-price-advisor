@@ -381,22 +381,26 @@
       display: inline-block;
     }
 
+    .badge-diff-urgent,
+    .badge-diff-over,
     .badge-diff-under {
-      background: rgba(59, 130, 246, 0.15);
-      color: #60a5fa;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-weight: 700;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-
-    .badge-diff-over {
       background: rgba(239, 68, 68, 0.15);
       color: #f87171;
       padding: 4px 8px;
       border-radius: 6px;
       font-weight: 700;
       border: 1px solid rgba(239, 68, 68, 0.3);
+      display: inline-block;
+    }
+
+    .badge-diff-review {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      display: inline-block;
     }
 
     .badge-diff-ok {
@@ -406,6 +410,7 @@
       border-radius: 6px;
       font-weight: 700;
       border: 1px solid rgba(16, 185, 129, 0.3);
+      display: inline-block;
     }
 
     /* Tooltip Hover Popup */
@@ -699,7 +704,7 @@
       </div>
       <div class="header-badges">
         <span class="badge badge-primary">Dynamic Luxury Model (45th–70th %ile)</span>
-        <span class="badge badge-dark">Updated: September 05, 2026 at 01:43 AM</span>
+        <span class="badge badge-dark">Updated: September 05, 2026 at 01:50 AM</span>
       </div>
     </header>
 
@@ -795,17 +800,17 @@
           <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 2px;">Filter Intervals:</span>
 
           <!-- Tier Status Checkboxes -->
-          <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierUrgent" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #ef4444; cursor: pointer; border-radius: 4px;">
             <span>Urgent Action (<span id="count-interval-urgent">5</span>)</span>
           </label>
 
-          <label title="Show intervals with 10%–35% market variance for monthly review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals with 10%–35% market variance for review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierModerate" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #f59e0b; cursor: pointer; border-radius: 4px;">
-            <span>Moderate Review (<span id="count-interval-mod">35</span>)</span>
+            <span>Review (<span id="count-interval-mod">35</span>)</span>
           </label>
 
-          <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierOk" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #10b981; cursor: pointer; border-radius: 4px;">
             <span>On Target (<span id="count-interval-ok">12</span>)</span>
           </label>
@@ -852,8 +857,8 @@
                   data-base-price="499"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">+23.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+23.3%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+23.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+23.3%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $499 → $378</strong>'
@@ -880,7 +885,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-0"><span style="color:#fbbf24; font-weight:700;">+23.9%</span></td>
+                <td id="diff-row-0"><span class="badge-diff-review">+23.9%</span></td>
                 <td id="action-row-0" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $499 → $378</strong></td>
                 <td id="n-row-0"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$499</td>
@@ -1987,8 +1992,8 @@
                   data-base-price="436"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">+30.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+30.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+30.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+30.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $436 → $306</strong>'
@@ -2015,7 +2020,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-1"><span style="color:#fbbf24; font-weight:700;">+30.4%</span></td>
+                <td id="diff-row-1"><span class="badge-diff-review">+30.4%</span></td>
                 <td id="action-row-1" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $436 → $306</strong></td>
                 <td id="n-row-1"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=38</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$436</td>
@@ -5722,8 +5727,8 @@
                   data-base-price="449"
                   data-adj-tier="urgent"
                   data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-over">+35.1%</span>'
-                  data-raw-diff-html='<span class="badge-diff-over">+35.8%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">+35.1%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+35.8%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $449 → $289</strong>'
@@ -5750,7 +5755,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-4"><span class="badge-diff-over">+35.1%</span></td>
+                <td id="diff-row-4"><span class="badge-diff-urgent">+35.1%</span></td>
                 <td id="action-row-4" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $449 → $289</strong></td>
                 <td id="n-row-4"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$449</td>
@@ -6977,8 +6982,8 @@
                   data-base-price="532"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">+26.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+25.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+26.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+25.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $532 → $384</strong>'
@@ -7005,7 +7010,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-5"><span style="color:#fbbf24; font-weight:700;">+26.9%</span></td>
+                <td id="diff-row-5"><span class="badge-diff-review">+26.9%</span></td>
                 <td id="action-row-5" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $532 → $384</strong></td>
                 <td id="n-row-5"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=31</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$532</td>
@@ -8202,8 +8207,8 @@
                   data-base-price="399"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-27.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-26.1%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-27.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-26.1%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $399 → $611</strong>'
@@ -8230,7 +8235,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-6"><span style="color:#fbbf24; font-weight:700;">-27.3%</span></td>
+                <td id="diff-row-6"><span class="badge-diff-review">-27.3%</span></td>
                 <td id="action-row-6" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $399 → $611</strong></td>
                 <td id="n-row-6"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
@@ -11727,8 +11732,8 @@
                   data-base-price="674"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">+34.6%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+33.9%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+34.6%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+33.9%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $674 → $469</strong>'
@@ -11755,7 +11760,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-9"><span style="color:#fbbf24; font-weight:700;">+34.6%</span></td>
+                <td id="diff-row-9"><span class="badge-diff-review">+34.6%</span></td>
                 <td id="action-row-9" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $674 → $469</strong></td>
                 <td id="n-row-9"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=29</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$674</td>
@@ -12832,8 +12837,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-17.8%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-19.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-17.8%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-19.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $765</strong>'
@@ -12860,7 +12865,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-10"><span style="color:#fbbf24; font-weight:700;">-17.8%</span></td>
+                <td id="diff-row-10"><span class="badge-diff-review">-17.8%</span></td>
                 <td id="action-row-10" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $765</strong></td>
                 <td id="n-row-10"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=27</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -14922,8 +14927,8 @@
                   data-base-price="466"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-23.0%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.2%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-23.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-28.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $466 → $655</strong>'
@@ -14950,7 +14955,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-12"><span style="color:#fbbf24; font-weight:700;">-23.0%</span></td>
+                <td id="diff-row-12"><span class="badge-diff-review">-23.0%</span></td>
                 <td id="action-row-12" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $466 → $655</strong></td>
                 <td id="n-row-12"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=29</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$466</td>
@@ -15967,8 +15972,8 @@
                   data-base-price="949"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.6%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.7%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-28.6%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-28.7%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $949 → $1379</strong>'
@@ -15995,7 +16000,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-13"><span style="color:#fbbf24; font-weight:700;">-28.6%</span></td>
+                <td id="diff-row-13"><span class="badge-diff-review">-28.6%</span></td>
                 <td id="action-row-13" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $949 → $1379</strong></td>
                 <td id="n-row-13"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=28</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$949</td>
@@ -16953,7 +16958,7 @@
                   data-adj-tier="ok"
                   data-raw-tier="moderate"
                   data-adj-diff-html='<span class="badge-diff-ok">-9.0%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-10.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-10.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong></strong>'
@@ -18417,8 +18422,8 @@
                   data-base-price="899"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-16.1%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-18.8%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-16.1%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-18.8%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $899 → $1104</strong>'
@@ -18445,7 +18450,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-15"><span style="color:#fbbf24; font-weight:700;">-16.1%</span></td>
+                <td id="diff-row-15"><span class="badge-diff-review">-16.1%</span></td>
                 <td id="action-row-15" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $899 → $1104</strong></td>
                 <td id="n-row-15"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$899</td>
@@ -19612,8 +19617,8 @@
                   data-base-price="712"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">+22.8%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+18.9%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+22.8%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+18.9%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $712 → $556</strong>'
@@ -19640,7 +19645,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-16"><span style="color:#fbbf24; font-weight:700;">+22.8%</span></td>
+                <td id="diff-row-16"><span class="badge-diff-review">+22.8%</span></td>
                 <td id="action-row-16" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $712 → $556</strong></td>
                 <td id="n-row-16"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=38</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$712</td>
@@ -20927,8 +20932,8 @@
                   data-base-price="649"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-23.2%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-17.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-23.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-17.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $649 → $921</strong>'
@@ -20955,7 +20960,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>2 nights</td>
-                <td id="diff-row-17"><span style="color:#fbbf24; font-weight:700;">-23.2%</span></td>
+                <td id="diff-row-17"><span class="badge-diff-review">-23.2%</span></td>
                 <td id="action-row-17" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $649 → $921</strong></td>
                 <td id="n-row-17"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$649</td>
@@ -22152,8 +22157,8 @@
                   data-base-price="899"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-15.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-19.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-15.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-19.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $899 → $1101</strong>'
@@ -22180,7 +22185,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-18"><span style="color:#fbbf24; font-weight:700;">-15.9%</span></td>
+                <td id="diff-row-18"><span class="badge-diff-review">-15.9%</span></td>
                 <td id="action-row-18" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $899 → $1101</strong></td>
                 <td id="n-row-18"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=28</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$899</td>
@@ -24422,8 +24427,8 @@
                   data-base-price="899"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-27.2%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-31.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-27.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-31.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $899 → $1298</strong>'
@@ -24450,7 +24455,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-20"><span style="color:#fbbf24; font-weight:700;">-27.2%</span></td>
+                <td id="diff-row-20"><span class="badge-diff-review">-27.2%</span></td>
                 <td id="action-row-20" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $899 → $1298</strong></td>
                 <td id="n-row-20"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$899</td>
@@ -25647,8 +25652,8 @@
                   data-base-price="786"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">+21.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+20.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+21.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+20.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $786 → $626</strong>'
@@ -25675,7 +25680,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-21"><span style="color:#fbbf24; font-weight:700;">+21.4%</span></td>
+                <td id="diff-row-21"><span class="badge-diff-review">+21.4%</span></td>
                 <td id="action-row-21" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $786 → $626</strong></td>
                 <td id="n-row-21"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=37</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$786</td>
@@ -26932,8 +26937,8 @@
                   data-base-price="1099"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-18.0%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-22.7%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-18.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-22.7%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1099 → $1376</strong>'
@@ -26960,7 +26965,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-22"><span style="color:#fbbf24; font-weight:700;">-18.0%</span></td>
+                <td id="diff-row-22"><span class="badge-diff-review">-18.0%</span></td>
                 <td id="action-row-22" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1099 → $1376</strong></td>
                 <td id="n-row-22"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=30</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
@@ -27977,8 +27982,8 @@
                   data-base-price="866"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-18.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-20.5%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-18.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-20.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $866 → $1099</strong>'
@@ -28005,7 +28010,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-23"><span style="color:#fbbf24; font-weight:700;">-18.4%</span></td>
+                <td id="diff-row-23"><span class="badge-diff-review">-18.4%</span></td>
                 <td id="action-row-23" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $866 → $1099</strong></td>
                 <td id="n-row-23"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=30</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$866</td>
@@ -30007,8 +30012,8 @@
                   data-base-price="1099"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-31.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-31.8%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-31.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-31.8%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1099 → $1679</strong>'
@@ -30035,7 +30040,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-25"><span style="color:#fbbf24; font-weight:700;">-31.4%</span></td>
+                <td id="diff-row-25"><span class="badge-diff-review">-31.4%</span></td>
                 <td id="action-row-25" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1099 → $1679</strong></td>
                 <td id="n-row-25"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=34</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
@@ -32307,8 +32312,8 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.0%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-28.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-28.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1199 → $1731</strong>'
@@ -32335,7 +32340,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-27"><span style="color:#fbbf24; font-weight:700;">-28.0%</span></td>
+                <td id="diff-row-27"><span class="badge-diff-review">-28.0%</span></td>
                 <td id="action-row-27" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1731</strong></td>
                 <td id="n-row-27"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=31</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
@@ -34577,8 +34582,8 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-31.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-32.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-31.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-32.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1199 → $1838</strong>'
@@ -34605,7 +34610,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-29"><span style="color:#fbbf24; font-weight:700;">-31.9%</span></td>
+                <td id="diff-row-29"><span class="badge-diff-review">-31.9%</span></td>
                 <td id="action-row-29" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1838</strong></td>
                 <td id="n-row-29"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
@@ -35682,8 +35687,8 @@
                   data-base-price="899"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-20.5%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-21.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-20.5%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-21.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $899 → $1174</strong>'
@@ -35710,7 +35715,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-30"><span style="color:#fbbf24; font-weight:700;">-20.5%</span></td>
+                <td id="diff-row-30"><span class="badge-diff-review">-20.5%</span></td>
                 <td id="action-row-30" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $899 → $1174</strong></td>
                 <td id="n-row-30"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$899</td>
@@ -36817,8 +36822,8 @@
                   data-base-price="1099"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">+12.2%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+10.3%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+12.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+10.3%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $1099 → $966</strong>'
@@ -36845,7 +36850,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-31"><span style="color:#fbbf24; font-weight:700;">+12.2%</span></td>
+                <td id="diff-row-31"><span class="badge-diff-review">+12.2%</span></td>
                 <td id="action-row-31" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1099 → $966</strong></td>
                 <td id="n-row-31"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=31</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
@@ -38012,8 +38017,8 @@
                   data-base-price="1099"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-33.5%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-33.2%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-33.5%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-33.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1099 → $1736</strong>'
@@ -38040,7 +38045,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-32"><span style="color:#fbbf24; font-weight:700;">-33.5%</span></td>
+                <td id="diff-row-32"><span class="badge-diff-review">-33.5%</span></td>
                 <td id="action-row-32" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1099 → $1736</strong></td>
                 <td id="n-row-32"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=31</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
@@ -39117,8 +39122,8 @@
                   data-base-price="836"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-16.7%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-16.2%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-16.7%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-16.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $836 → $1029</strong>'
@@ -39145,7 +39150,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-33"><span style="color:#fbbf24; font-weight:700;">-16.7%</span></td>
+                <td id="diff-row-33"><span class="badge-diff-review">-16.7%</span></td>
                 <td id="action-row-33" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $836 → $1029</strong></td>
                 <td id="n-row-33"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$836</td>
@@ -40312,8 +40317,8 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-20.2%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-22.3%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-20.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-22.3%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1199 → $1545</strong>'
@@ -40340,7 +40345,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-34"><span style="color:#fbbf24; font-weight:700;">-20.2%</span></td>
+                <td id="diff-row-34"><span class="badge-diff-review">-20.2%</span></td>
                 <td id="action-row-34" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1545</strong></td>
                 <td id="n-row-34"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=30</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
@@ -41417,8 +41422,8 @@
                   data-base-price="1049"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">+28.8%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+26.7%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+28.8%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+26.7%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $1049 → $786</strong>'
@@ -41445,7 +41450,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-35"><span style="color:#fbbf24; font-weight:700;">+28.8%</span></td>
+                <td id="diff-row-35"><span class="badge-diff-review">+28.8%</span></td>
                 <td id="action-row-35" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $786</strong></td>
                 <td id="n-row-35"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=41</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
@@ -42852,8 +42857,8 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-23.1%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-23.9%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-23.1%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-23.9%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1199 → $1609</strong>'
@@ -42880,7 +42885,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-36"><span style="color:#fbbf24; font-weight:700;">-23.1%</span></td>
+                <td id="diff-row-36"><span class="badge-diff-review">-23.1%</span></td>
                 <td id="action-row-36" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1609</strong></td>
                 <td id="n-row-36"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
@@ -44077,8 +44082,8 @@
                   data-base-price="1049"
                   data-adj-tier="urgent"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-over">+36.2%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">+29.2%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">+36.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+29.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↓ Reduce $1049 → $737</strong>'
@@ -44105,7 +44110,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-37"><span class="badge-diff-over">+36.2%</span></td>
+                <td id="diff-row-37"><span class="badge-diff-urgent">+36.2%</span></td>
                 <td id="action-row-37" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $737</strong></td>
                 <td id="n-row-37"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
@@ -45542,8 +45547,8 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-21.0%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-22.8%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-21.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-22.8%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1199 → $1562</strong>'
@@ -45570,7 +45575,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-38"><span style="color:#fbbf24; font-weight:700;">-21.0%</span></td>
+                <td id="diff-row-38"><span class="badge-diff-review">-21.0%</span></td>
                 <td id="action-row-38" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1562</strong></td>
                 <td id="n-row-38"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=38</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
@@ -46827,8 +46832,8 @@
                   data-base-price="1049"
                   data-adj-tier="urgent"
                   data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-over">+38.0%</span>'
-                  data-raw-diff-html='<span class="badge-diff-over">+35.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">+38.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+35.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $1049 → $726</strong>'
@@ -46855,7 +46860,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-39"><span class="badge-diff-over">+38.0%</span></td>
+                <td id="diff-row-39"><span class="badge-diff-urgent">+38.0%</span></td>
                 <td id="action-row-39" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $726</strong></td>
                 <td id="n-row-39"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=41</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
@@ -48202,8 +48207,8 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-17.6%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-20.1%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-17.6%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-20.1%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1199 → $1490</strong>'
@@ -48230,7 +48235,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-40"><span style="color:#fbbf24; font-weight:700;">-17.6%</span></td>
+                <td id="diff-row-40"><span class="badge-diff-review">-17.6%</span></td>
                 <td id="action-row-40" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1490</strong></td>
                 <td id="n-row-40"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
@@ -49637,8 +49642,8 @@
                   data-base-price="1049"
                   data-adj-tier="urgent"
                   data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-over">+45.6%</span>'
-                  data-raw-diff-html='<span class="badge-diff-over">+45.7%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">+45.6%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+45.7%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $1049 → $681</strong>'
@@ -49665,7 +49670,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-41"><span class="badge-diff-over">+45.6%</span></td>
+                <td id="diff-row-41"><span class="badge-diff-urgent">+45.6%</span></td>
                 <td id="action-row-41" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $681</strong></td>
                 <td id="n-row-41"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
@@ -51132,8 +51137,8 @@
                   data-base-price="1049"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-16.2%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-15.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-16.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-15.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $1049 → $1284</strong>'
@@ -51160,7 +51165,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-42"><span style="color:#fbbf24; font-weight:700;">-16.2%</span></td>
+                <td id="diff-row-42"><span class="badge-diff-review">-16.2%</span></td>
                 <td id="action-row-42" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1049 → $1284</strong></td>
                 <td id="n-row-42"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
@@ -54032,8 +54037,8 @@
                   data-base-price="749"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-32.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-32.0%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-32.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-32.0%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $749 → $1186</strong>'
@@ -54060,7 +54065,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-44"><span style="color:#fbbf24; font-weight:700;">-32.3%</span></td>
+                <td id="diff-row-44"><span class="badge-diff-review">-32.3%</span></td>
                 <td id="action-row-44" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $749 → $1186</strong></td>
                 <td id="n-row-44"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=42</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
@@ -55528,7 +55533,7 @@
                   data-adj-tier="ok"
                   data-raw-tier="moderate"
                   data-adj-diff-html='<span class="badge-diff-ok">-9.6%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-10.5%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-10.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong></strong>'
@@ -57142,8 +57147,8 @@
                   data-base-price="749"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-32.6%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-33.9%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-32.6%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-33.9%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $749 → $1192</strong>'
@@ -57170,7 +57175,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-46"><span style="color:#fbbf24; font-weight:700;">-32.6%</span></td>
+                <td id="diff-row-46"><span class="badge-diff-review">-32.6%</span></td>
                 <td id="action-row-46" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $749 → $1192</strong></td>
                 <td id="n-row-46"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=43</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
@@ -60312,8 +60317,8 @@
                   data-base-price="749"
                   data-adj-tier="urgent"
                   data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-under">-37.6%</span>'
-                  data-raw-diff-html='<span class="badge-diff-under">-38.3%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">-37.6%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-38.3%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $749 → $1301</strong>'
@@ -60340,7 +60345,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-48"><span class="badge-diff-under">-37.6%</span></td>
+                <td id="diff-row-48"><span class="badge-diff-urgent">-37.6%</span></td>
                 <td id="action-row-48" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $749 → $1301</strong></td>
                 <td id="n-row-48"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=43</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
@@ -63452,8 +63457,8 @@
                   data-base-price="649"
                   data-adj-tier="urgent"
                   data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-under">-49.4%</span>'
-                  data-raw-diff-html='<span class="badge-diff-under">-49.7%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">-49.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-49.7%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $649 → $1444</strong>'
@@ -63480,7 +63485,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-50"><span class="badge-diff-under">-49.4%</span></td>
+                <td id="diff-row-50"><span class="badge-diff-urgent">-49.4%</span></td>
                 <td id="action-row-50" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $649 → $1444</strong></td>
                 <td id="n-row-50"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=40</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$649</td>
@@ -64827,8 +64832,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-32.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-32.9%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-32.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-32.9%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $954</strong>'
@@ -64855,7 +64860,7 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-51"><span style="color:#fbbf24; font-weight:700;">-32.9%</span></td>
+                <td id="diff-row-51"><span class="badge-diff-review">-32.9%</span></td>
                 <td id="action-row-51" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $954</strong></td>
                 <td id="n-row-51"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=38</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -66112,8 +66117,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-27.5%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-28.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-27.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $902</strong>'
@@ -66140,7 +66145,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-52"><span style="color:#fbbf24; font-weight:700;">-28.3%</span></td>
+                <td id="diff-row-52"><span class="badge-diff-review">-28.3%</span></td>
                 <td id="action-row-52" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $902</strong></td>
                 <td id="n-row-52"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -69138,7 +69143,7 @@
                   data-adj-tier="ok"
                   data-raw-tier="moderate"
                   data-adj-diff-html='<span class="badge-diff-ok">-7.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-10.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-10.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong></strong>'
@@ -72162,8 +72167,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-27.5%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-28.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-27.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $902</strong>'
@@ -72190,7 +72195,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-54"><span style="color:#fbbf24; font-weight:700;">-28.3%</span></td>
+                <td id="diff-row-54"><span class="badge-diff-review">-28.3%</span></td>
                 <td id="action-row-54" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $902</strong></td>
                 <td id="n-row-54"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -75188,7 +75193,7 @@
                   data-adj-tier="ok"
                   data-raw-tier="moderate"
                   data-adj-diff-html='<span class="badge-diff-ok">-7.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-10.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-10.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong></strong>'
@@ -78212,8 +78217,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-27.5%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-28.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-27.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $902</strong>'
@@ -78240,7 +78245,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-56"><span style="color:#fbbf24; font-weight:700;">-28.3%</span></td>
+                <td id="diff-row-56"><span class="badge-diff-review">-28.3%</span></td>
                 <td id="action-row-56" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $902</strong></td>
                 <td id="n-row-56"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -81238,7 +81243,7 @@
                   data-adj-tier="ok"
                   data-raw-tier="moderate"
                   data-adj-diff-html='<span class="badge-diff-ok">-7.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-10.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-10.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong></strong>'
@@ -84262,8 +84267,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-28.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-27.5%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-28.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-27.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $902</strong>'
@@ -84290,7 +84295,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-58"><span style="color:#fbbf24; font-weight:700;">-28.3%</span></td>
+                <td id="diff-row-58"><span class="badge-diff-review">-28.3%</span></td>
                 <td id="action-row-58" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $902</strong></td>
                 <td id="n-row-58"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -87288,7 +87293,7 @@
                   data-adj-tier="ok"
                   data-raw-tier="moderate"
                   data-adj-diff-html='<span class="badge-diff-ok">-7.3%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-10.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-10.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong></strong>'
@@ -90312,8 +90317,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-22.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-21.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-22.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-21.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $820</strong>'
@@ -90340,7 +90345,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-60"><span style="color:#fbbf24; font-weight:700;">-22.4%</span></td>
+                <td id="diff-row-60"><span class="badge-diff-review">-22.4%</span></td>
                 <td id="action-row-60" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $820</strong></td>
                 <td id="n-row-60"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -96362,8 +96367,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-22.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-21.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-22.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-21.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $820</strong>'
@@ -96390,7 +96395,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-62"><span style="color:#fbbf24; font-weight:700;">-22.4%</span></td>
+                <td id="diff-row-62"><span class="badge-diff-review">-22.4%</span></td>
                 <td id="action-row-62" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $820</strong></td>
                 <td id="n-row-62"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -102412,8 +102417,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-22.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-21.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-22.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-21.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $820</strong>'
@@ -102440,7 +102445,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-64"><span style="color:#fbbf24; font-weight:700;">-22.4%</span></td>
+                <td id="diff-row-64"><span class="badge-diff-review">-22.4%</span></td>
                 <td id="action-row-64" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $820</strong></td>
                 <td id="n-row-64"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -108462,8 +108467,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-22.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-21.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-22.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-21.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $820</strong>'
@@ -108490,7 +108495,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-66"><span style="color:#fbbf24; font-weight:700;">-22.4%</span></td>
+                <td id="diff-row-66"><span class="badge-diff-review">-22.4%</span></td>
                 <td id="action-row-66" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $820</strong></td>
                 <td id="n-row-66"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -114512,8 +114517,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-22.4%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-21.4%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-22.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-21.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $820</strong>'
@@ -114540,7 +114545,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-68"><span style="color:#fbbf24; font-weight:700;">-22.4%</span></td>
+                <td id="diff-row-68"><span class="badge-diff-review">-22.4%</span></td>
                 <td id="action-row-68" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $820</strong></td>
                 <td id="n-row-68"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -120562,8 +120567,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-24.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-24.0%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-24.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-24.0%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $853</strong>'
@@ -120590,7 +120595,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-70"><span style="color:#fbbf24; font-weight:700;">-24.9%</span></td>
+                <td id="diff-row-70"><span class="badge-diff-review">-24.9%</span></td>
                 <td id="action-row-70" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $853</strong></td>
                 <td id="n-row-70"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -126612,8 +126617,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-24.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-24.0%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-24.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-24.0%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $853</strong>'
@@ -126640,7 +126645,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-72"><span style="color:#fbbf24; font-weight:700;">-24.9%</span></td>
+                <td id="diff-row-72"><span class="badge-diff-review">-24.9%</span></td>
                 <td id="action-row-72" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $853</strong></td>
                 <td id="n-row-72"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -132662,8 +132667,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-24.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-24.0%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-24.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-24.0%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $853</strong>'
@@ -132690,7 +132695,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-74"><span style="color:#fbbf24; font-weight:700;">-24.9%</span></td>
+                <td id="diff-row-74"><span class="badge-diff-review">-24.9%</span></td>
                 <td id="action-row-74" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $853</strong></td>
                 <td id="n-row-74"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -138712,8 +138717,8 @@
                   data-base-price="599"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span style="color:#fbbf24; font-weight:700;">-24.9%</span>'
-                  data-raw-diff-html='<span style="color:#fbbf24; font-weight:700;">-24.0%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-24.9%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-24.0%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $853</strong>'
@@ -138740,7 +138745,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-76"><span style="color:#fbbf24; font-weight:700;">-24.9%</span></td>
+                <td id="diff-row-76"><span class="badge-diff-review">-24.9%</span></td>
                 <td id="action-row-76" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $853</strong></td>
                 <td id="n-row-76"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -144762,8 +144767,8 @@
                   data-base-price="599"
                   data-adj-tier="urgent"
                   data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-under">-45.2%</span>'
-                  data-raw-diff-html='<span class="badge-diff-under">-44.5%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">-45.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-44.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $1231</strong>'
@@ -144790,7 +144795,7 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-78"><span class="badge-diff-under">-45.2%</span></td>
+                <td id="diff-row-78"><span class="badge-diff-urgent">-45.2%</span></td>
                 <td id="action-row-78" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $1231</strong></td>
                 <td id="n-row-78"><span class="badge" style="background:rgba(59,130,246,0.15); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);" title="Curated cohort baseline">📊 Cohort N=105</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -152574,7 +152579,7 @@
             <p>Priority tiers indicate how urgently rates should be adjusted in Kivoya's Streamline PMS rate manager:</p>
             <ul>
               <li><strong>🚨 Urgent Action (&gt; 35% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
-              <li><strong>⚠️ Moderate Review (10% – 35% Discrepancy):</strong> Review during monthly rate refreshes.</li>
+              <li><strong>⚠️ Review (10% – 35% Discrepancy):</strong> Review during monthly rate refreshes.</li>
               <li><strong>✅ On Target (0% – 10% Discrepancy):</strong> Normal competitive range &mdash; cell left empty (no rate change needed).</li>
               <li><strong>Action Indicators:</strong>
                 <ul style="margin-top: 4px;">
@@ -154681,7 +154686,7 @@
     <!-- Footer -->
     <footer>
       <p>STR Competitive Price Advisor for Villa del Sol • Automated Analysis Engine</p>
-      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 05, 2026 at 01:43 AM</p>
+      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 05, 2026 at 01:50 AM</p>
     </footer>
   </div>
 
@@ -155197,14 +155202,14 @@
 
           const diffEl = document.getElementById('diff-' + rowId);
           if (diffEl) {
-            if (diff <= -35.0) {
-              diffEl.innerHTML = '<span class="badge-diff-under">' + diff.toFixed(1) + '%</span>';
-            } else if (diff >= 35.0) {
-              diffEl.innerHTML = '<span class="badge-diff-over">+' + diff.toFixed(1) + '%</span>';
-            } else if (Math.abs(diff) >= 10.0) {
-              diffEl.innerHTML = '<span style="color:#fbbf24; font-weight:700;">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%</span>';
+            const absD = Math.abs(diff);
+            const signStr = (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%';
+            if (absD >= 35.0) {
+              diffEl.innerHTML = '<span class="badge-diff-urgent">' + signStr + '</span>';
+            } else if (absD >= 10.0) {
+              diffEl.innerHTML = '<span class="badge-diff-review">' + signStr + '</span>';
             } else {
-              diffEl.innerHTML = '<span class="badge-diff-ok">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%</span>';
+              diffEl.innerHTML = '<span class="badge-diff-ok">' + signStr + '</span>';
             }
           }
 

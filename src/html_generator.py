@@ -738,22 +738,26 @@ class HTMLDashboardGenerator:
       display: inline-block;
     }}
 
+    .badge-diff-urgent,
+    .badge-diff-over,
     .badge-diff-under {{
-      background: rgba(59, 130, 246, 0.15);
-      color: #60a5fa;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-weight: 700;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }}
-
-    .badge-diff-over {{
       background: rgba(239, 68, 68, 0.15);
       color: #f87171;
       padding: 4px 8px;
       border-radius: 6px;
       font-weight: 700;
       border: 1px solid rgba(239, 68, 68, 0.3);
+      display: inline-block;
+    }}
+
+    .badge-diff-review {{
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      display: inline-block;
     }}
 
     .badge-diff-ok {{
@@ -763,6 +767,7 @@ class HTMLDashboardGenerator:
       border-radius: 6px;
       font-weight: 700;
       border: 1px solid rgba(16, 185, 129, 0.3);
+      display: inline-block;
     }}
 
     /* Tooltip Hover Popup */
@@ -1152,17 +1157,17 @@ class HTMLDashboardGenerator:
           <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 2px;">Filter Intervals:</span>
 
           <!-- Tier Status Checkboxes -->
-          <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierUrgent" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #ef4444; cursor: pointer; border-radius: 4px;">
             <span>Urgent Action (<span id="count-interval-urgent">{len(open_urgent)}</span>)</span>
           </label>
 
-          <label title="Show intervals with 10%–35% market variance for monthly review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals with 10%–35% market variance for review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierModerate" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #f59e0b; cursor: pointer; border-radius: 4px;">
-            <span>Moderate Review (<span id="count-interval-mod">{len(open_moderate)}</span>)</span>
+            <span>Review (<span id="count-interval-mod">{len(open_moderate)}</span>)</span>
           </label>
 
-          <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierOk" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #10b981; cursor: pointer; border-radius: 4px;">
             <span>On Target (<span id="count-interval-ok">{len(open_ok)}</span>)</span>
           </label>
@@ -1292,7 +1297,7 @@ class HTMLDashboardGenerator:
             <p>Priority tiers indicate how urgently rates should be adjusted in Kivoya's Streamline PMS rate manager:</p>
             <ul>
               <li><strong>🚨 Urgent Action (&gt; 35% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
-              <li><strong>⚠️ Moderate Review (10% – 35% Discrepancy):</strong> Review during monthly rate refreshes.</li>
+              <li><strong>⚠️ Review (10% – 35% Discrepancy):</strong> Review during monthly rate refreshes.</li>
               <li><strong>✅ On Target (0% – 10% Discrepancy):</strong> Normal competitive range &mdash; cell left empty (no rate change needed).</li>
               <li><strong>Action Indicators:</strong>
                 <ul style="margin-top: 4px;">
@@ -1852,14 +1857,14 @@ class HTMLDashboardGenerator:
 
           const diffEl = document.getElementById('diff-' + rowId);
           if (diffEl) {{
-            if (diff <= -35.0) {{
-              diffEl.innerHTML = '<span class="badge-diff-under">' + diff.toFixed(1) + '%</span>';
-            }} else if (diff >= 35.0) {{
-              diffEl.innerHTML = '<span class="badge-diff-over">+' + diff.toFixed(1) + '%</span>';
-            }} else if (Math.abs(diff) >= 10.0) {{
-              diffEl.innerHTML = '<span style="color:#fbbf24; font-weight:700;">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%</span>';
+            const absD = Math.abs(diff);
+            const signStr = (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%';
+            if (absD >= 35.0) {{
+              diffEl.innerHTML = '<span class="badge-diff-urgent">' + signStr + '</span>';
+            }} else if (absD >= 10.0) {{
+              diffEl.innerHTML = '<span class="badge-diff-review">' + signStr + '</span>';
             }} else {{
-              diffEl.innerHTML = '<span class="badge-diff-ok">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%</span>';
+              diffEl.innerHTML = '<span class="badge-diff-ok">' + signStr + '</span>';
             }}
           }}
 
@@ -2304,14 +2309,14 @@ class HTMLDashboardGenerator:
             action_adj = s.get("action_summary_adj", action_raw).replace("Increase base", "Increase").replace("Reduce base", "Reduce")
 
             def get_diff_badge(val: float) -> str:
-                if val <= -35.0:
-                    return f'<span class="badge-diff-under">{val:.1f}%</span>'
-                elif val >= 35.0:
-                    return f'<span class="badge-diff-over">+{val:.1f}%</span>'
-                elif abs(val) >= 10.0:
-                    return f'<span style="color:#fbbf24; font-weight:700;">{val:+.1f}%</span>'
+                abs_val = abs(val)
+                sign_str = f"{val:+.1f}%"
+                if abs_val >= 35.0:
+                    return f'<span class="badge-diff-urgent">{sign_str}</span>'
+                elif abs_val >= 10.0:
+                    return f'<span class="badge-diff-review">{sign_str}</span>'
                 else:
-                    return f'<span class="badge-diff-ok">{val:+.1f}%</span>'
+                    return f'<span class="badge-diff-ok">{sign_str}</span>'
 
             diff_html_raw = get_diff_badge(diff_raw)
             diff_html_adj = get_diff_badge(diff_adj)

@@ -761,7 +761,7 @@
       "name": "Remarkable Resort Home - Minutes from Old Town",
       "location": "Apartment in Scottsdale",
       "bedrooms": 6,
-      "beds": 6,
+      "beds": 12,
       "baths": 3.0,
       "rating": 4.88,
       "reviews": 16,
@@ -815,7 +815,7 @@
       "name": "Casa Mesa • Private Paradise w Pool, Putt, & Games",
       "location": "Mesa",
       "bedrooms": 6,
-      "beds": 6,
+      "beds": 12,
       "baths": 3.0,
       "rating": 5.0,
       "reviews": 8,
@@ -869,7 +869,7 @@
       "name": "Backyard Basecamp | Pool, Hoops & Arcade",
       "location": "Paradise Valley Village",
       "bedrooms": 7,
-      "beds": 7,
+      "beds": 12,
       "baths": 3.5,
       "rating": 4.95,
       "reviews": 61,
@@ -6194,11 +6194,19 @@
     }
   },
   "metadata": {
-    "last_updated": "2026-09-05T03:49:01.745043",
+    "last_updated": "2026-09-05T04:12:31.655031",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
     "valid_comps_count": 110,
     "disqualified_comps_count": 3,
     "total_comps": 113
+  },
+  "excluded_comps": {
+    "809687707688713264": {
+      "listing_id": "809687707688713264",
+      "name": "Playhouse near Old Town: Hot Tub | Game Room",
+      "reason": "Disqualified / user-removed comp",
+      "excluded_at": "2026-09-05T04:12:31.655021"
+    }
   }
 }

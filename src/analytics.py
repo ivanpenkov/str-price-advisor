@@ -33,6 +33,17 @@ class PricingAnalyticsEngine:
         self.moderate_pct_diff = moderate_pct_diff
         self.registry_path = Path(registry_path)
         self.comp_registry: Dict[str, Dict[str, Any]] = self._load_registry()
+        self.excluded_comps: set = self._load_excluded_comps()
+
+    def _load_excluded_comps(self) -> set:
+        """Load set of excluded/blacklisted listing IDs."""
+        if self.registry_path.exists():
+            try:
+                data = json.loads(self.registry_path.read_text(encoding="utf-8"))
+                return {str(k) for k in data.get("excluded_comps", {}).keys()}
+            except Exception:
+                pass
+        return set()
 
     def _load_registry(self) -> Dict[str, Dict[str, Any]]:
         """Load and index comps from registry by listing_id."""
@@ -184,6 +195,8 @@ class PricingAnalyticsEngine:
         for c in (comp_metadata or []):
             comp_dict = dict(c)
             cid = str(comp_dict.get("listing_id") or "")
+            if cid and cid in self.excluded_comps:
+                continue
             reg_comp = self.comp_registry.get(cid, {})
             is_valid = reg_comp.get("is_valid_comp", comp_dict.get("is_valid_comp", True))
             ratio = float(reg_comp.get("desirability_ratio", comp_dict.get("desirability_ratio", 1.0)))

@@ -97,6 +97,7 @@ class HTMLDashboardGenerator:
         for tier in ("tier_a", "tier_b"):
             for cid, comp in self.comps_data.get(tier, {}).items():
                 self.comps_dict[str(cid)] = comp
+        self.excluded_comps: Set[str] = {str(k) for k in self.comps_data.get("excluded_comps", {}).keys()}
         self.specs_path = Path("config/listing_specs.json")
         self.listing_specs: Dict[str, Dict[str, Any]] = {}
         if self.specs_path.exists():
@@ -147,6 +148,8 @@ class HTMLDashboardGenerator:
                             continue
                         if cid and rate and rate > 0.0:
                             cid_str = str(cid)
+                            if cid_str in self.excluded_comps:
+                                continue
                             if cid_str in self.listing_specs:
                                 sp = self.listing_specs[cid_str]
                                 if sp.get("beds"):
@@ -175,9 +178,11 @@ class HTMLDashboardGenerator:
         c_in = seg.get("check_in")
         c_out = seg.get("check_out")
         for idx, c in enumerate(all_comps):
+            cid = str(c.get("listing_id", f"cohort_{idx}"))
+            if cid in self.excluded_comps:
+                continue
             base_p = base_rates[idx % len(base_rates)]
             eff_rate = round(base_p * mult, 2)
-            cid = c.get("listing_id", f"cohort_{idx}")
             if cid and c_in and c_out:
                 comp_url = f"https://www.airbnb.com/rooms/{cid}?check_in={c_in}&guests=10&adults=10&check_out={c_out}"
             elif cid:
@@ -2029,7 +2034,7 @@ class HTMLDashboardGenerator:
 
         for c in raw_comps:
             cid = str(c.get("listing_id") or "")
-            if cid and cid in comps_seen:
+            if cid and (cid in comps_seen or cid in self.excluded_comps):
                 continue
 
             raw_snippet = c.get("raw_snippet", "")

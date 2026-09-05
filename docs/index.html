@@ -704,7 +704,7 @@
       </div>
       <div class="header-badges">
         <span class="badge badge-primary">Dynamic Luxury Model (45th–70th %ile)</span>
-        <span class="badge badge-dark">Updated: September 05, 2026 at 04:05 AM</span>
+        <span class="badge badge-dark">Updated: September 05, 2026 at 04:12 AM</span>
       </div>
     </header>
 
@@ -802,12 +802,12 @@
           <!-- Tier Status Checkboxes -->
           <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierUrgent" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #ef4444; cursor: pointer; border-radius: 4px;">
-            <span>Urgent Action (<span id="count-interval-urgent">5</span>)</span>
+            <span>Urgent Action (<span id="count-interval-urgent">4</span>)</span>
           </label>
 
           <label title="Show intervals with 10%–35% market variance for review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierModerate" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #f59e0b; cursor: pointer; border-radius: 4px;">
-            <span>Review (<span id="count-interval-mod">35</span>)</span>
+            <span>Review (<span id="count-interval-mod">36</span>)</span>
           </label>
 
           <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
@@ -5726,26 +5726,26 @@
                   data-segment-type="Midweek"
                   data-base-price="449"
                   data-adj-tier="moderate"
-                  data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-review">+34.0%</span>'
-                  data-raw-diff-html='<span class="badge-diff-urgent">+35.8%</span>'
+                  data-raw-tier="moderate"
+                  data-adj-diff-html='<span class="badge-diff-review">+32.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+34.6%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
-                  data-adj-action-html='<strong>↓ Reduce $449 → $293</strong>'
-                  data-raw-action-html='<strong>↓ Reduce $449 → $287</strong>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-action-html='<strong>↓ Reduce $449 → $300</strong>'
+                  data-raw-action-html='<strong>↓ Reduce $449 → $291</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span>'
-                  data-adj-p50='672'
-                  data-raw-p50='576'
-                  data-adj-target='517'
-                  data-raw-target='510'
-                  data-adj-rec='293'
-                  data-raw-rec='287'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span>'
+                  data-adj-p50='677'
+                  data-raw-p50='578'
+                  data-adj-target='524'
+                  data-raw-target='514'
+                  data-adj-rec='300'
+                  data-raw-rec='291'
                   data-target-pct-str='31.5%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #f59e0b;'
                   onclick="toggleCompDetails('row-4', event)"
                   title="Click to view full competitor price breakdown"
                   style="border-left: 4px solid #f59e0b;">
@@ -5755,13 +5755,13 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-4"><span class="badge-diff-review">+34.0%</span></td>
-                <td id="action-row-4" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $449 → $293</strong></td>
-                <td id="n-row-4"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
+                <td id="diff-row-4"><span class="badge-diff-review">+32.0%</span></td>
+                <td id="action-row-4" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $449 → $300</strong></td>
+                <td id="n-row-4"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$449</td>
                 <td id="eff-row-4" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$692</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $692/night ($2076 total). Villa del Sol ranks #21 out of 37 competitors (57th percentile). Base Kivoya rate is $449.">(57%)</span></td>
-                <td id="target-row-4" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$517 <span style="font-size:0.75rem; color:#94a3b8;">(31.5%)</span></td>
-                <td id="rec-row-4"><span class="rec-price">$293</span></td>
+                <td id="target-row-4" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$524 <span style="font-size:0.75rem; color:#94a3b8;">(31.5%)</span></td>
+                <td id="rec-row-4"><span class="rec-price">$300</span></td>
               </tr>
               <tr id="row-4" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -6930,36 +6930,6 @@
                     </td>
                     <td class="comp-diff-cell" style="padding:9px 14px;">
                       <span style="color:#f87171; font-weight:700; font-size:0.8rem;">▲ +$1138/n higher</span>
-                    </td>
-                  </tr>
-                
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="394.67" data-raw-price="394.67" data-adj-price="394.67" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$395</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $395/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$1184 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2026-09-27&guests=10&adults=10&check_out=2026-09-30" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
                     </td>
                   </tr>
                 
@@ -8207,22 +8177,22 @@
                   data-base-price="399"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-25.1%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-26.1%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-31.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-31.1%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↑ Increase $399 → $589</strong>'
-                  data-raw-action-html='<strong>↑ Increase $399 → $599</strong>'
+                  data-adj-action-html='<strong>↑ Increase $399 → $657</strong>'
+                  data-raw-action-html='<strong>↑ Increase $399 → $655</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span>'
-                  data-adj-p50='922'
-                  data-raw-p50='919'
-                  data-adj-target='756'
-                  data-raw-target='766'
-                  data-adj-rec='589'
-                  data-raw-rec='599'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=34</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span>'
+                  data-adj-p50='928'
+                  data-raw-p50='922'
+                  data-adj-target='824'
+                  data-raw-target='821'
+                  data-adj-rec='657'
+                  data-raw-rec='655'
                   data-target-pct-str='38.5%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -8235,13 +8205,13 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-6"><span class="badge-diff-review">-25.1%</span></td>
-                <td id="action-row-6" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $399 → $589</strong></td>
-                <td id="n-row-6"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span></td>
+                <td id="diff-row-6"><span class="badge-diff-review">-31.4%</span></td>
+                <td id="action-row-6" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $399 → $657</strong></td>
+                <td id="n-row-6"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=34</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
                 <td id="eff-row-6" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$566</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Villa del Sol ranks #7 out of 36 competitors (19th percentile in effective total guest cost)">(19%)</span></td>
-                <td id="target-row-6" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$756 <span style="font-size:0.75rem; color:#94a3b8;">(38.5%)</span></td>
-                <td id="rec-row-6"><span class="rec-price">$589</span></td>
+                <td id="target-row-6" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$824 <span style="font-size:0.75rem; color:#94a3b8;">(38.5%)</span></td>
+                <td id="rec-row-6"><span class="rec-price">$657</span></td>
               </tr>
               <tr id="row-6" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -9380,36 +9350,6 @@
                     </td>
                     <td class="comp-diff-cell" style="padding:9px 14px;">
                       <span style="color:#f87171; font-weight:700; font-size:0.8rem;">▲ +$1875/n higher</span>
-                    </td>
-                  </tr>
-                
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="424.75" data-raw-price="424.75" data-adj-price="424.75" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$425</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $425/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$1274 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2026-10-26&guests=10&adults=10&check_out=2026-10-29" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
                     </td>
                   </tr>
                 
@@ -34582,22 +34522,22 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-32.6%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-32.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-32.8%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-32.8%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↑ Increase $1199 → $1860</strong>'
-                  data-raw-action-html='<strong>↑ Increase $1199 → $1860</strong>'
+                  data-adj-action-html='<strong>↑ Increase $1199 → $1865</strong>'
+                  data-raw-action-html='<strong>↑ Increase $1199 → $1865</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span>'
-                  data-adj-p50='2296'
-                  data-raw-p50='2264'
-                  data-adj-target='2478'
-                  data-raw-target='2478'
-                  data-adj-rec='1860'
-                  data-raw-rec='1860'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span>'
+                  data-adj-p50='2297'
+                  data-raw-p50='2280'
+                  data-adj-target='2483'
+                  data-raw-target='2483'
+                  data-adj-rec='1865'
+                  data-raw-rec='1865'
                   data-target-pct-str='70%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -34610,13 +34550,13 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-29"><span class="badge-diff-review">-32.6%</span></td>
-                <td id="action-row-29" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1860</strong></td>
-                <td id="n-row-29"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span></td>
+                <td id="diff-row-29"><span class="badge-diff-review">-32.8%</span></td>
+                <td id="action-row-29" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1865</strong></td>
+                <td id="n-row-29"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
                 <td id="eff-row-29" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1669</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1669/night ($5008 total). Villa del Sol ranks #7 out of 32 competitors (22th percentile). Base Kivoya rate is $1199.">(22%)</span></td>
-                <td id="target-row-29" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2478 <span style="font-size:0.75rem; color:#94a3b8;">(70%)</span></td>
-                <td id="rec-row-29"><span class="rec-price">$1860</span></td>
+                <td id="target-row-29" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2483 <span style="font-size:0.75rem; color:#94a3b8;">(70%)</span></td>
+                <td id="rec-row-29"><span class="rec-price">$1865</span></td>
               </tr>
               <tr id="row-29" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -35638,36 +35578,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="1429.33" data-raw-price="1429.33" data-adj-price="1429.33" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$1429</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $1429/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$4288 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-03-11&guests=10&adults=10&check_out=2027-03-14" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -35687,22 +35597,22 @@
                   data-base-price="899"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-24.3%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-21.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-24.7%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-23.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↑ Increase $899 → $1240</strong>'
-                  data-raw-action-html='<strong>↑ Increase $899 → $1193</strong>'
+                  data-adj-action-html='<strong>↑ Increase $899 → $1249</strong>'
+                  data-raw-action-html='<strong>↑ Increase $899 → $1220</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=34</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=34</span>'
-                  data-adj-p50='1720'
-                  data-raw-p50='1678'
-                  data-adj-target='1714'
-                  data-raw-target='1656'
-                  data-adj-rec='1240'
-                  data-raw-rec='1193'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span>'
+                  data-adj-p50='1730'
+                  data-raw-p50='1710'
+                  data-adj-target='1724'
+                  data-raw-target='1689'
+                  data-adj-rec='1249'
+                  data-raw-rec='1220'
                   data-target-pct-str='49%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -35715,13 +35625,13 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-30"><span class="badge-diff-review">-24.3%</span></td>
-                <td id="action-row-30" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $899 → $1240</strong></td>
-                <td id="n-row-30"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=34</span></td>
+                <td id="diff-row-30"><span class="badge-diff-review">-24.7%</span></td>
+                <td id="action-row-30" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $899 → $1249</strong></td>
+                <td id="n-row-30"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$899</td>
                 <td id="eff-row-30" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1298</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1298/night ($3894 total). Villa del Sol ranks #7 out of 33 competitors (21th percentile). Base Kivoya rate is $899.">(21%)</span></td>
-                <td id="target-row-30" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1714 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
-                <td id="rec-row-30"><span class="rec-price">$1240</span></td>
+                <td id="target-row-30" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1724 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
+                <td id="rec-row-30"><span class="rec-price">$1249</span></td>
               </tr>
               <tr id="row-30" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -36773,36 +36683,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="1095.00" data-raw-price="1095.00" data-adj-price="1095.00" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$1095</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $1095/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$3285 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-03-14&guests=10&adults=10&check_out=2027-03-17" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -36822,21 +36702,21 @@
                   data-base-price="1099"
                   data-adj-tier="ok"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-ok">+7.3%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">+10.3%</span>'
+                  data-adj-diff-html='<span class="badge-diff-ok">+5.1%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+10.2%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong></strong>'
                   data-raw-action-html='<strong>↓ Reduce $1099 → $985</strong>'
                   data-adj-action-style='font-size:0.85rem; '
                   data-raw-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span>'
-                  data-adj-p50='1415'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=31</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=31</span>'
+                  data-adj-p50='1444'
                   data-raw-p50='1360'
-                  data-adj-target='1398'
-                  data-raw-target='1359'
-                  data-adj-rec='1016'
+                  data-adj-target='1427'
+                  data-raw-target='1360'
+                  data-adj-rec='1040'
                   data-raw-rec='985'
                   data-target-pct-str='49%'
                   data-adj-border='border-left: 4px solid transparent;'
@@ -36850,13 +36730,13 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-31"><span class="badge-diff-ok">+7.3%</span></td>
+                <td id="diff-row-31"><span class="badge-diff-ok">+5.1%</span></td>
                 <td id="action-row-31" style="font-size:0.85rem; "><strong></strong></td>
-                <td id="n-row-31"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span></td>
+                <td id="n-row-31"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=31</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
                 <td id="eff-row-31" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1500</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1500/night ($5998 total). Villa del Sol ranks #20 out of 35 competitors (57th percentile). Base Kivoya rate is $1099.">(57%)</span></td>
-                <td id="target-row-31" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1398 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
-                <td id="rec-row-31"><span class="rec-price">$1016</span></td>
+                <td id="target-row-31" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1427 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
+                <td id="rec-row-31"><span class="rec-price">$1040</span></td>
               </tr>
               <tr id="row-31" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -37968,36 +37848,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="791.75" data-raw-price="791.75" data-adj-price="791.75" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$792</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $792/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$3167 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-03-21&guests=10&adults=10&check_out=2027-03-25" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -38017,22 +37867,22 @@
                   data-base-price="1099"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-33.6%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-33.2%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-33.7%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-33.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↑ Increase $1099 → $1739</strong>'
-                  data-raw-action-html='<strong>↑ Increase $1099 → $1728</strong>'
+                  data-adj-action-html='<strong>↑ Increase $1099 → $1742</strong>'
+                  data-raw-action-html='<strong>↑ Increase $1099 → $1736</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span>'
-                  data-adj-p50='1950'
-                  data-raw-p50='1950'
-                  data-adj-target='2327'
-                  data-raw-target='2313'
-                  data-adj-rec='1739'
-                  data-raw-rec='1728'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span>'
+                  data-adj-p50='2028'
+                  data-raw-p50='1971'
+                  data-adj-target='2330'
+                  data-raw-target='2323'
+                  data-adj-rec='1742'
+                  data-raw-rec='1736'
                   data-target-pct-str='70%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -38045,13 +37895,13 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-32"><span class="badge-diff-review">-33.6%</span></td>
-                <td id="action-row-32" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1099 → $1739</strong></td>
-                <td id="n-row-32"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span></td>
+                <td id="diff-row-32"><span class="badge-diff-review">-33.7%</span></td>
+                <td id="action-row-32" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1099 → $1742</strong></td>
+                <td id="n-row-32"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
                 <td id="eff-row-32" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1545</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1545/night ($4636 total). Villa del Sol ranks #6 out of 31 competitors (19th percentile). Base Kivoya rate is $1099.">(19%)</span></td>
-                <td id="target-row-32" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2327 <span style="font-size:0.75rem; color:#94a3b8;">(70%)</span></td>
-                <td id="rec-row-32"><span class="rec-price">$1739</span></td>
+                <td id="target-row-32" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2330 <span style="font-size:0.75rem; color:#94a3b8;">(70%)</span></td>
+                <td id="rec-row-32"><span class="rec-price">$1742</span></td>
               </tr>
               <tr id="row-32" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -39043,36 +38893,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="1186.00" data-raw-price="1186.00" data-adj-price="1186.00" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$1186</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $1186/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$3558 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-03-25&guests=10&adults=10&check_out=2027-03-28" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                   <tr class="comp-item-row" data-is-our="false" data-location="Tempe" data-price="1599.67" data-raw-price="1599.67" data-adj-price="1599.67" data-valid="false" data-rating="5.00" data-reviews="16" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
                     <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
                     <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
@@ -39122,22 +38942,22 @@
                   data-base-price="836"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-19.3%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-16.2%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-19.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-19.1%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↑ Increase $836 → $1067</strong>'
-                  data-raw-action-html='<strong>↑ Increase $836 → $1022</strong>'
+                  data-adj-action-html='<strong>↑ Increase $836 → $1068</strong>'
+                  data-raw-action-html='<strong>↑ Increase $836 → $1064</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span>'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span>'
                   data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span>'
-                  data-adj-p50='1457'
-                  data-raw-p50='1444'
+                  data-adj-p50='1458'
+                  data-raw-p50='1456'
                   data-adj-target='1457'
-                  data-raw-target='1402'
-                  data-adj-rec='1067'
-                  data-raw-rec='1022'
+                  data-raw-target='1452'
+                  data-adj-rec='1068'
+                  data-raw-rec='1064'
                   data-target-pct-str='49%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -39150,13 +38970,13 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-33"><span class="badge-diff-review">-19.3%</span></td>
-                <td id="action-row-33" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $836 → $1067</strong></td>
-                <td id="n-row-33"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
+                <td id="diff-row-33"><span class="badge-diff-review">-19.4%</span></td>
+                <td id="action-row-33" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $836 → $1068</strong></td>
+                <td id="n-row-33"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$836</td>
                 <td id="eff-row-33" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1175</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1175/night ($4699 total). Villa del Sol ranks #11 out of 35 competitors (31th percentile). Base Kivoya rate is $836.">(31%)</span></td>
                 <td id="target-row-33" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1457 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
-                <td id="rec-row-33"><span class="rec-price">$1067</span></td>
+                <td id="rec-row-33"><span class="rec-price">$1068</span></td>
               </tr>
               <tr id="row-33" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -40268,36 +40088,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="763.75" data-raw-price="763.75" data-adj-price="763.75" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$764</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $764/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$3055 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-03-28&guests=10&adults=10&check_out=2027-04-01" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -40317,22 +40107,22 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-22.3%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-22.3%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-22.5%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-22.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↑ Increase $1199 → $1592</strong>'
-                  data-raw-action-html='<strong>↑ Increase $1199 → $1592</strong>'
+                  data-adj-action-html='<strong>↑ Increase $1199 → $1595</strong>'
+                  data-raw-action-html='<strong>↑ Increase $1199 → $1595</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span>'
-                  data-adj-p50='1953'
-                  data-raw-p50='1953'
-                  data-adj-target='2149'
-                  data-raw-target='2149'
-                  data-adj-rec='1592'
-                  data-raw-rec='1592'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span>'
+                  data-adj-p50='1965'
+                  data-raw-p50='1965'
+                  data-adj-target='2154'
+                  data-raw-target='2154'
+                  data-adj-rec='1595'
+                  data-raw-rec='1595'
                   data-target-pct-str='70%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -40345,13 +40135,13 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-34"><span class="badge-diff-review">-22.3%</span></td>
-                <td id="action-row-34" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1592</strong></td>
-                <td id="n-row-34"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span></td>
+                <td id="diff-row-34"><span class="badge-diff-review">-22.5%</span></td>
+                <td id="action-row-34" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1595</strong></td>
+                <td id="n-row-34"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=32</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
                 <td id="eff-row-34" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1669</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1669/night ($5008 total). Villa del Sol ranks #14 out of 32 competitors (44th percentile). Base Kivoya rate is $1199.">(44%)</span></td>
-                <td id="target-row-34" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2149 <span style="font-size:0.75rem; color:#94a3b8;">(70%)</span></td>
-                <td id="rec-row-34"><span class="rec-price">$1592</span></td>
+                <td id="target-row-34" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2154 <span style="font-size:0.75rem; color:#94a3b8;">(70%)</span></td>
+                <td id="rec-row-34"><span class="rec-price">$1595</span></td>
               </tr>
               <tr id="row-34" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -41373,36 +41163,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="1454.33" data-raw-price="1454.33" data-adj-price="1454.33" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$1454</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $1454/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$4363 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-04-01&guests=10&adults=10&check_out=2027-04-04" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -41422,22 +41182,22 @@
                   data-base-price="1049"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">+13.6%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">+26.7%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+12.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+25.8%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↓ Reduce $1049 → $908</strong>'
-                  data-raw-action-html='<strong>↓ Reduce $1049 → $802</strong>'
+                  data-adj-action-html='<strong>↓ Reduce $1049 → $920</strong>'
+                  data-raw-action-html='<strong>↓ Reduce $1049 → $808</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=42</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=42</span>'
-                  data-adj-p50='1277'
-                  data-raw-p50='1141'
-                  data-adj-target='1265'
-                  data-raw-target='1134'
-                  data-adj-rec='908'
-                  data-raw-rec='802'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=41</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=41</span>'
+                  data-adj-p50='1292'
+                  data-raw-p50='1149'
+                  data-adj-target='1280'
+                  data-raw-target='1143'
+                  data-adj-rec='920'
+                  data-raw-rec='808'
                   data-target-pct-str='49%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -41450,13 +41210,13 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-35"><span class="badge-diff-review">+13.6%</span></td>
-                <td id="action-row-35" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $908</strong></td>
-                <td id="n-row-35"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=42</span></td>
+                <td id="diff-row-35"><span class="badge-diff-review">+12.3%</span></td>
+                <td id="action-row-35" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $920</strong></td>
+                <td id="n-row-35"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=41</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
                 <td id="eff-row-35" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1438</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1438/night ($5750 total). Villa del Sol ranks #26 out of 43 competitors (60th percentile). Base Kivoya rate is $1049.">(60%)</span></td>
-                <td id="target-row-35" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1265 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
-                <td id="rec-row-35"><span class="rec-price">$908</span></td>
+                <td id="target-row-35" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1280 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
+                <td id="rec-row-35"><span class="rec-price">$920</span></td>
               </tr>
               <tr id="row-35" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -42808,36 +42568,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="664.50" data-raw-price="664.50" data-adj-price="664.50" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$664</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $664/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$2658 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-04-04&guests=10&adults=10&check_out=2027-04-08" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -42857,22 +42587,22 @@
                   data-base-price="1199"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-24.1%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-23.9%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">-25.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">-24.8%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↑ Increase $1199 → $1633</strong>'
-                  data-raw-action-html='<strong>↑ Increase $1199 → $1627</strong>'
+                  data-adj-action-html='<strong>↑ Increase $1199 → $1663</strong>'
+                  data-raw-action-html='<strong>↑ Increase $1199 → $1649</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=37</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=37</span>'
-                  data-adj-p50='1800'
-                  data-raw-p50='1800'
-                  data-adj-target='2199'
-                  data-raw-target='2193'
-                  data-adj-rec='1633'
-                  data-raw-rec='1627'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span>'
+                  data-adj-p50='1816'
+                  data-raw-p50='1816'
+                  data-adj-target='2236'
+                  data-raw-target='2219'
+                  data-adj-rec='1663'
+                  data-raw-rec='1649'
                   data-target-pct-str='70%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -42885,13 +42615,13 @@
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-36"><span class="badge-diff-review">-24.1%</span></td>
-                <td id="action-row-36" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1633</strong></td>
-                <td id="n-row-36"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=37</span></td>
+                <td id="diff-row-36"><span class="badge-diff-review">-25.4%</span></td>
+                <td id="action-row-36" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1663</strong></td>
+                <td id="n-row-36"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=36</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
                 <td id="eff-row-36" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1669</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1669/night ($5008 total). Villa del Sol ranks #17 out of 36 competitors (47th percentile). Base Kivoya rate is $1199.">(47%)</span></td>
-                <td id="target-row-36" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2199 <span style="font-size:0.75rem; color:#94a3b8;">(70%)</span></td>
-                <td id="rec-row-36"><span class="rec-price">$1633</span></td>
+                <td id="target-row-36" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$2236 <span style="font-size:0.75rem; color:#94a3b8;">(70%)</span></td>
+                <td id="rec-row-36"><span class="rec-price">$1663</span></td>
               </tr>
               <tr id="row-36" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -44033,36 +43763,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="1162.67" data-raw-price="1162.67" data-adj-price="1162.67" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$1163</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $1163/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$3488 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-04-08&guests=10&adults=10&check_out=2027-04-11" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -44082,22 +43782,22 @@
                   data-base-price="1049"
                   data-adj-tier="moderate"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">+30.1%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">+29.2%</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+28.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-review">+23.7%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-adj-action-html='<strong>↓ Reduce $1049 → $777</strong>'
-                  data-raw-action-html='<strong>↓ Reduce $1049 → $784</strong>'
+                  data-adj-action-html='<strong>↓ Reduce $1049 → $789</strong>'
+                  data-raw-action-html='<strong>↓ Reduce $1049 → $824</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=45</span>'
-                  data-adj-p50='1117'
-                  data-raw-p50='1162'
-                  data-adj-target='1105'
-                  data-raw-target='1112'
-                  data-adj-rec='777'
-                  data-raw-rec='784'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=43</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span>'
+                  data-adj-p50='1131'
+                  data-raw-p50='1163'
+                  data-adj-target='1119'
+                  data-raw-target='1162'
+                  data-adj-rec='789'
+                  data-raw-rec='824'
                   data-target-pct-str='49%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
@@ -44110,13 +43810,13 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-37"><span class="badge-diff-review">+30.1%</span></td>
-                <td id="action-row-37" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $777</strong></td>
-                <td id="n-row-37"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span></td>
+                <td id="diff-row-37"><span class="badge-diff-review">+28.4%</span></td>
+                <td id="action-row-37" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $789</strong></td>
+                <td id="n-row-37"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=43</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
                 <td id="eff-row-37" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1438</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1438/night ($5750 total). Villa del Sol ranks #32 out of 44 competitors (73th percentile). Base Kivoya rate is $1049.">(73%)</span></td>
-                <td id="target-row-37" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1105 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
-                <td id="rec-row-37"><span class="rec-price">$777</span></td>
+                <td id="target-row-37" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1119 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
+                <td id="rec-row-37"><span class="rec-price">$789</span></td>
               </tr>
               <tr id="row-37" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -45495,36 +45195,6 @@
                     </td>
                     <td class="comp-diff-cell" style="padding:9px 14px;">
                       <span style="color:#f87171; font-weight:700; font-size:0.8rem;">▲ +$564/n higher</span>
-                    </td>
-                  </tr>
-                
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="558.75" data-raw-price="558.75" data-adj-price="558.75" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$559</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $559/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$2235 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-04-11&guests=10&adults=10&check_out=2027-04-15" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
                     </td>
                   </tr>
                 
@@ -49633,50 +49303,50 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-41"
-                  data-tier="urgent"
+                  data-tier="moderate"
                   data-calendar-open="true"
                   data-detail-id="row-41"
                   data-checkin="2027-04-25"
                   data-checkout="2027-04-29"
                   data-segment-type="Midweek"
                   data-base-price="1049"
-                  data-adj-tier="urgent"
+                  data-adj-tier="moderate"
                   data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-urgent">+35.5%</span>'
-                  data-raw-diff-html='<span class="badge-diff-urgent">+45.7%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-adj-diff-html='<span class="badge-diff-review">+33.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+43.4%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
-                  data-adj-action-html='<strong>↓ Reduce $1049 → $741</strong>'
-                  data-raw-action-html='<strong>↓ Reduce $1049 → $681</strong>'
+                  data-adj-action-html='<strong>↓ Reduce $1049 → $756</strong>'
+                  data-raw-action-html='<strong>↓ Reduce $1049 → $694</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
                   data-raw-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span>'
-                  data-adj-p50='1076'
-                  data-raw-p50='1000'
-                  data-adj-target='1061'
-                  data-raw-target='987'
-                  data-adj-rec='741'
-                  data-raw-rec='681'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=43</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=43</span>'
+                  data-adj-p50='1093'
+                  data-raw-p50='1016'
+                  data-adj-target='1078'
+                  data-raw-target='1003'
+                  data-adj-rec='756'
+                  data-raw-rec='694'
                   data-target-pct-str='49%'
-                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-adj-border='border-left: 4px solid #f59e0b;'
                   data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-41', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #ef4444;">
+                  style="border-left: 4px solid #f59e0b;">
                 <td>
                   <span class="caret-icon" id="icon-row-41">▶</span>
                   <span class="date-pill">2027-04-25 &rarr; 2027-04-29</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-41"><span class="badge-diff-urgent">+35.5%</span></td>
-                <td id="action-row-41" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $741</strong></td>
-                <td id="n-row-41"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=44</span></td>
+                <td id="diff-row-41"><span class="badge-diff-review">+33.3%</span></td>
+                <td id="action-row-41" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $756</strong></td>
+                <td id="n-row-41"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=43</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
                 <td id="eff-row-41" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$1438</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $1438/night ($5750 total). Villa del Sol ranks #34 out of 45 competitors (76th percentile). Base Kivoya rate is $1049.">(76%)</span></td>
-                <td id="target-row-41" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1061 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
-                <td id="rec-row-41"><span class="rec-price">$741</span></td>
+                <td id="target-row-41" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1078 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
+                <td id="rec-row-41"><span class="rec-price">$756</span></td>
               </tr>
               <tr id="row-41" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -51088,36 +50758,6 @@
                     </td>
                   </tr>
                 
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="443.75" data-raw-price="443.75" data-adj-price="443.75" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$444</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $444/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$1775 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-04-25&guests=10&adults=10&check_out=2027-04-29" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
-                    </td>
-                  </tr>
-                
                 </tbody>
               </table>
             </div>
@@ -52392,22 +52032,22 @@
                   data-base-price="682"
                   data-adj-tier="ok"
                   data-raw-tier="ok"
-                  data-adj-diff-html='<span class="badge-diff-ok">-5.0%</span>'
-                  data-raw-diff-html='<span class="badge-diff-ok">-7.7%</span>'
+                  data-adj-diff-html='<span class="badge-diff-ok">-7.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-ok">-8.5%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25);">✅ On Target</span>'
                   data-adj-action-html='<strong></strong>'
                   data-raw-action-html='<strong></strong>'
                   data-adj-action-style='font-size:0.85rem; '
                   data-raw-action-style='font-size:0.85rem; '
-                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=48</span>'
-                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=48</span>'
-                  data-adj-p50='1057'
-                  data-raw-p50='1073'
-                  data-adj-target='1034'
-                  data-raw-target='1065'
-                  data-adj-rec='724'
-                  data-raw-rec='749'
+                  data-adj-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=47</span>'
+                  data-raw-n-html='<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=47</span>'
+                  data-adj-p50='1081'
+                  data-raw-p50='1081'
+                  data-adj-target='1059'
+                  data-raw-target='1073'
+                  data-adj-rec='744'
+                  data-raw-rec='756'
                   data-target-pct-str='49%'
                   data-adj-border='border-left: 4px solid transparent;'
                   data-raw-border='border-left: 4px solid transparent;'
@@ -52420,13 +52060,13 @@
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-43"><span class="badge-diff-ok">-5.0%</span></td>
+                <td id="diff-row-43"><span class="badge-diff-ok">-7.2%</span></td>
                 <td id="action-row-43" style="font-size:0.85rem; "><strong></strong></td>
-                <td id="n-row-43"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=48</span></td>
+                <td id="n-row-43"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=47</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$682</td>
                 <td id="eff-row-43" style="font-family:'JetBrains Mono',monospace;"><strong style="color:#f1f5f9;">$982</strong><span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="Live Airbnb Rate: $982/night ($3930 total). Villa del Sol ranks #22 out of 49 competitors (45th percentile). Base Kivoya rate is $682.">(45%)</span></td>
-                <td id="target-row-43" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1034 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
-                <td id="rec-row-43"><span class="rec-price">$724</span></td>
+                <td id="target-row-43" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">$1059 <span style="font-size:0.75rem; color:#94a3b8;">(49%)</span></td>
+                <td id="rec-row-43"><span class="rec-price">$744</span></td>
               </tr>
               <tr id="row-43" class="comp-details-row" style="display: none;">
                 <td colspan="10">
@@ -53955,36 +53595,6 @@
                     </td>
                     <td class="comp-diff-cell" style="padding:9px 14px;">
                       <span style="color:#f87171; font-weight:700; font-size:0.8rem;">▲ +$1234/n higher</span>
-                    </td>
-                  </tr>
-                
-                  <tr class="comp-item-row" data-is-our="false" data-location="Scottsdale" data-price="454.25" data-raw-price="454.25" data-adj-price="454.25" data-valid="false" data-rating="4.99" data-reviews="74" style="border-bottom:1px solid rgba(255,255,255,0.05); opacity:0.6;">
-                    <td class="comp-rank-cell" style="padding:9px 14px; color:#64748b; font-family:'JetBrains Mono',monospace; text-align:center; font-size:0.8rem;">-</td>
-                    <td style="padding:9px 14px; font-family:'JetBrains Mono',monospace;">
-                      <div class="comp-price-display">
-                        <strong class="price-val" style="color:#f1f5f9;">$454</strong><span class="price-label" style="color:#a78bfa; font-size:0.75rem; margin-left:3px;">/n (adj)</span>
-                        <div class="raw-price-note" style="font-size:0.72rem; color:#64748b;">Raw: $454/night</div>
-                      </div>
-                      <div style="font-size:0.72rem; color:#64748b;">$1817 total stay</div>
-                    </td>
-                    <td style="padding:9px 14px;">
-                      <span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700; font-size:0.75rem;" title="Disqualified: Property lacks a private swimming pool.">⛔ Disqualified Comp</span>
-                      <div style="font-size:0.72rem; color:#f87171; margin-top:3px; line-height:1.25;">Disqualified: Property lacks a private swimming pool.</div>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center;">
-                      <span style="font-weight:700; color:#fbbf24;">★ 4.99</span> <span style="color:#94a3b8; font-size:0.75rem;">(74)</span>
-                    </td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">6 BR</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">7 beds</td>
-                    <td style="padding:9px 14px; text-align:center; color:#cbd5e1;">3.0 BA</td>
-                    <td style="padding:9px 14px;">
-                      <a href="https://www.airbnb.com/rooms/809687707688713264?check_in=2027-05-02&guests=10&adults=10&check_out=2027-05-06" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-                        Playhouse near Old Town: Hot Tub | Game Room ↗
-                      </a>
-                      <span style="font-size:0.75rem; color:#94a3b8; margin-left:6px;">(Scottsdale)</span>
-                    </td>
-                    <td class="comp-diff-cell" style="padding:9px 14px;">
-                      <span style="color:#64748b; font-size:0.75rem;">Excluded</span>
                     </td>
                   </tr>
                 
@@ -157291,7 +156901,7 @@
     <!-- Footer -->
     <footer>
       <p>STR Competitive Price Advisor for Villa del Sol • Automated Analysis Engine</p>
-      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 05, 2026 at 04:05 AM</p>
+      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 05, 2026 at 04:12 AM</p>
     </footer>
   </div>
 

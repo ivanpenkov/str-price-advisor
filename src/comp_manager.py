@@ -224,35 +224,68 @@ class CompManager:
 
         return comp_record
 
-    def remove_comp(self, identifier: str) -> bool:
+    def remove_comp(self, identifier: str, reason: Optional[str] = None) -> bool:
         """
-        Unregister a competitor listing, purge single-comp cache, and update dashboard.
+        Unregister and blacklist a competitor listing, purge all cache/pricing records, and update dashboard.
         """
         listing_id = extract_listing_id(identifier)
         print(f"\n🗑️ [CompManager] Initiating removal of comp ID: {listing_id}")
 
         registry = self._load_registry()
         found_tier = None
+        removed_meta = None
         for t in ("tier_a", "tier_b", "disqualified"):
             if listing_id in registry.get(t, {}):
                 found_tier = t
-                del registry[t][listing_id]
+                removed_meta = registry[t].pop(listing_id)
+                print(f"  ✓ Removed {listing_id} from {found_tier} in {self.REGISTRY_PATH}")
                 break
 
-        if not found_tier:
-            print(f"⚠️ Listing ID {listing_id} was not found in comps registry.")
+        specs = self._load_specs()
+        found_in_specs = listing_id in specs
+        if not removed_meta and found_in_specs:
+            removed_meta = specs.get(listing_id)
+
+        enriched_file = self.ENRICHED_DIR / f"{listing_id}.json"
+        found_in_enriched = enriched_file.exists()
+
+        has_single_cache = any(self.CACHE_DIR.glob(f"search_*_comp_{listing_id}.json"))
+
+        # Check if present in pricing data
+        found_in_pricing = False
+        pricing_files = list(Path("data").glob("pricing_data_*.json"))
+        for p_file in pricing_files:
+            try:
+                p_text = p_file.read_text(encoding="utf-8")
+                if listing_id in p_text:
+                    found_in_pricing = True
+                    break
+            except Exception:
+                pass
+
+        if not found_tier and not found_in_specs and not found_in_enriched and not has_single_cache and not found_in_pricing:
+            print(f"⚠️ Listing ID {listing_id} was not found in comps registry, specs, or pricing datasets.")
             return False
+
+        # Add to excluded_comps in registry so it is permanently excluded from subtables and future sweeps
+        excluded_dict = registry.setdefault("excluded_comps", {})
+        comp_name = (removed_meta or {}).get("name") or (removed_meta or {}).get("title") or f"Listing {listing_id}"
+        excluded_dict[listing_id] = {
+            "listing_id": listing_id,
+            "name": comp_name,
+            "reason": reason or (removed_meta or {}).get("validity_reason") or "Disqualified / user-removed comp",
+            "excluded_at": datetime.now().isoformat(),
+        }
+        print(f"  ✓ Added {listing_id} ({comp_name}) to excluded_comps blacklist")
 
         # Save registry
         registry.setdefault("metadata", {})
         registry["metadata"]["last_updated"] = datetime.now().isoformat()
         registry["metadata"]["total_comps"] = len(registry.get("tier_a", {})) + len(registry.get("tier_b", {}))
         self._save_registry(registry)
-        print(f"  ✓ Removed {listing_id} from {found_tier} in {self.REGISTRY_PATH}")
 
         # Remove from listing_specs.json
-        specs = self._load_specs()
-        if listing_id in specs:
+        if found_in_specs:
             del specs[listing_id]
             self._save_specs(specs)
             print(f"  ✓ Removed {listing_id} from {self.SPECS_PATH}")
@@ -268,18 +301,61 @@ class CompManager:
         if purged > 0:
             print(f"  ✓ Purged {purged} single-comp cached pricing files in {self.CACHE_DIR}")
 
+        # Purge from search_*.json in cache
+        scrubbed_cache_files = 0
+        for cache_file in self.CACHE_DIR.glob("search_*.json"):
+            try:
+                data = json.loads(cache_file.read_text(encoding="utf-8"))
+                if isinstance(data, list):
+                    filtered = [it for it in data if str(it.get("listing_id")) != listing_id]
+                    if len(filtered) != len(data):
+                        cache_file.write_text(json.dumps(filtered, indent=2), encoding="utf-8")
+                        scrubbed_cache_files += 1
+            except Exception:
+                pass
+        if scrubbed_cache_files > 0:
+            print(f"  ✓ Scrubbed {listing_id} from {scrubbed_cache_files} cached search sweeps in {self.CACHE_DIR}")
+
         # Purge enriched profile
-        enriched_file = self.ENRICHED_DIR / f"{listing_id}.json"
-        if enriched_file.exists():
+        if found_in_enriched:
             try:
                 enriched_file.unlink()
                 print(f"  ✓ Removed profile cache {enriched_file}")
             except Exception:
                 pass
 
+        # Scrub from data/pricing_data_*.json
+        scrubbed_pricing_files = 0
+        for p_file in pricing_files:
+            try:
+                p_data = json.loads(p_file.read_text(encoding="utf-8"))
+                modified = False
+                for section in ("urgent_intervals", "moderate_intervals", "informational_intervals"):
+                    for seg in p_data.get(section, []):
+                        raw_comps = seg.get("comps_list", [])
+                        filtered_raw = [c for c in raw_comps if str(c.get("listing_id")) != listing_id]
+                        if len(filtered_raw) != len(raw_comps):
+                            seg["comps_list"] = filtered_raw
+                            seg["comps_count"] = len(filtered_raw)
+                            seg["comps_raw_count"] = len(filtered_raw)
+                            seg["n_comps"] = len(filtered_raw)
+                            modified = True
+                        comps = seg.get("competitors", [])
+                        filtered_comps = [c for c in comps if str(c.get("listing_id")) != listing_id]
+                        if len(filtered_comps) != len(comps):
+                            seg["competitors"] = filtered_comps
+                            modified = True
+                if modified:
+                    p_file.write_text(json.dumps(p_data, indent=2, ensure_ascii=False), encoding="utf-8")
+                    scrubbed_pricing_files += 1
+            except Exception:
+                pass
+        if scrubbed_pricing_files > 0:
+            print(f"  ✓ Scrubbed {listing_id} from {scrubbed_pricing_files} historical pricing datasets in data/")
+
         # Regenerate dashboard
         self._regenerate_dashboard()
-        print(f"✨ Comp {listing_id} completely removed and dashboard refreshed.")
+        print(f"✨ Comp {listing_id} completely removed, blacklisted, and dashboard refreshed.")
         return True
 
     async def scrape_comp_interval_prices(

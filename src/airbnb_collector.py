@@ -56,6 +56,14 @@ class AirbnbCollector:
                 self.listing_specs = json.loads(self.specs_path.read_text(encoding="utf-8"))
             except Exception:
                 pass
+        self.excluded_comps: set = set()
+        comps_path = Path("config/comps_registry.json")
+        if comps_path.exists():
+            try:
+                reg = json.loads(comps_path.read_text(encoding="utf-8"))
+                self.excluded_comps = {str(k) for k in reg.get("excluded_comps", {}).keys()}
+            except Exception:
+                pass
 
     def _get_cache_key(self, check_in: str, check_out: str, location: str, tier: str) -> Path:
         raw = f"{check_in}_{check_out}_{location}_{tier}"
@@ -180,6 +188,9 @@ class AirbnbCollector:
             confidence_reason = f"Unlabeled price (${total_stay_price:.0f}): missing 'night' or 'total'/'before taxes' label"
 
         if total_stay_price <= 0.0 or effective_nightly <= 0.0:
+            return None
+
+        if card_id and str(card_id) in self.excluded_comps:
             return None
 
         spec = self.listing_specs.get(str(card_id), {})

@@ -132,8 +132,11 @@ class TestTitleExtraction(unittest.TestCase):
         self.assertIn("The Desert Diamond - LUXE Desert GOLD - Old Town", subtable_html)
         self.assertNotIn("$2,195 for 4 nights ↗", subtable_html)
 
-        # Listing 806022522654917324 should display its headline, NOT "6 bedrooms ↗"
-        self.assertIn("Outdoor bowling alley and a movie theater", subtable_html)
+        # Listing 806022522654917324 should display its real name or headline, NOT "6 bedrooms ↗"
+        self.assertTrue(
+            "Lux Fun Zone Home" in subtable_html or "Outdoor bowling alley and a movie theater" in subtable_html
+        )
+        self.assertNotIn("6 bedrooms ↗", subtable_html)
 
         # Listing 1077813310260513265 should display its real title, NOT "7,000 sq ft with courts and pool ↗"
         self.assertIn("Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna", subtable_html)

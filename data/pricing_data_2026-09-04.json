@@ -770,7 +770,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=40)",
+      "sample_label": "✅ Robust (N=40)",
       "sample_note": "40 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 20.0,
@@ -784,9 +784,9 @@
       "recommended_base_nightly": 1448.0,
       "base_diff": 799.0,
       "priority_tier": "URGENT_ACTION",
-      "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
+      "priority_label": "🚨 Urgent Update (This Week)",
       "status": "UNDERPRICED",
-      "action_summary": "\u2191 Increase base $649 \u2192 $1448"
+      "action_summary": "↑ Increase base $649 → $1448"
     },
     {
       "check_in": "2027-04-25",
@@ -805,9 +805,9 @@
       "our_airbnb_effective_nightly": 1437.5,
       "our_airbnb_total": 5750.0,
       "is_our_airbnb_live": true,
-      "n_comps": 43,
-      "comps_count": 43,
-      "comps_raw_count": 45,
+      "n_comps": 44,
+      "comps_count": 44,
+      "comps_raw_count": 44,
       "comps_list": [
         {
           "listing_id": "1599560226163525836",
@@ -950,7 +950,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2588 discounted from $2821, -8%)",
           "price_snippet": "$2,821 | $2,588",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -970,24 +970,6 @@
           "price_snippet": "$7,347 | $7,347 for 4 nights",
           "raw_snippet": "Luxe | Luxe | Villa in Scottsdale | The Wilshire | New Lux Villa Mins to Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-862891705248130792/original/ed0c4e52-5a8a-4a08-a3b7-1996e9d08c10.png?im_w=720"
-        },
-        {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 4,
-          "total_price": 1775.0,
-          "effective_nightly": 443.75,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$1,775 | $1,775 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "52956039",
@@ -1058,7 +1040,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$9,848 | $9,848 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool \u2022 Spa \u2022 Bunkroom | Slps 28",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool • Spa • Bunkroom | Slps 28",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -1076,7 +1058,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$2,930 | $2,930 for 4 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -1202,7 +1184,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$8,350 | $8,350 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Private Pool, Slide, Hot Tub & Pickleball",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Private Pool, Slide, Hot Tub & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-855089839805616449/original/331d1e2b-1644-4e0b-8f72-4db6164c8bdc.jpeg?im_w=720"
         },
         {
@@ -1310,7 +1292,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3847 discounted from $4691, -18%)",
           "price_snippet": "$4,691 | $3,847",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun\u2013Arcade Games\u2013Private Pool-Luxury Vacay",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun–Arcade Games–Private Pool-Luxury Vacay",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -1580,7 +1562,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$2,770 | $2,770 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -1621,7 +1603,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=43)",
+      "sample_label": "✅ Robust (N=43)",
       "sample_note": "43 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 81.4,
@@ -1635,9 +1617,9 @@
       "recommended_base_nightly": 678.0,
       "base_diff": -371.0,
       "priority_tier": "URGENT_ACTION",
-      "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
+      "priority_label": "🚨 Urgent Update (This Week)",
       "status": "OVERPRICED",
-      "action_summary": "\u2193 Reduce base $1049 \u2192 $678"
+      "action_summary": "↓ Reduce base $1049 → $678"
     },
     {
       "check_in": "2027-04-11",
@@ -1658,7 +1640,7 @@
       "is_our_airbnb_live": true,
       "n_comps": 43,
       "comps_count": 43,
-      "comps_raw_count": 44,
+      "comps_raw_count": 43,
       "comps_list": [
         {
           "listing_id": "1011635413453672886",
@@ -1801,7 +1783,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2768 discounted from $3021, -8%)",
           "price_snippet": "$3,021 | $2,768",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -1855,7 +1837,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$9,560 | $9,560 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3| Golf Course Views, Pool, Hot Tub & Golf Sim",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ| Golf Course Views, Pool, Hot Tub & Golf Sim",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-734144221994093791/original/76f640b8-324a-4695-b344-3d9dd8bd3e43.jpeg?im_w=720"
         },
         {
@@ -1875,24 +1857,6 @@
           "price_snippet": "$3,662 | $3,662 for 4 nights | $0 today",
           "raw_snippet": "Home in Mesa | Game Time - 6 Bedroom Elite Vacation Paradise | 6 bedrooms | 6 bedrooms",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1143202699620728397/original/5bb17579-1db8-44a9-b120-c5a6dd40f340.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 4,
-          "total_price": 2235.0,
-          "effective_nightly": 558.75,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$2,235 | $2,235 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "944305567506818495",
@@ -2035,7 +1999,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,779 | $3,779 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3 | Resort-Style Pool, Hot Tub & Billiards",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ | Resort-Style Pool, Hot Tub & Billiards",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -2143,7 +2107,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$8,737 | $8,737 for 4 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3|Lazy River Pool, Hot Tub, Slide & Pickleball",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ|Lazy River Pool, Hot Tub, Slide & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650901748780121272/original/ad51e8be-9a03-4cbc-a83b-ee725e63ee06.jpeg?im_w=720"
         },
         {
@@ -2341,7 +2305,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,272 | $3,272 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -2454,7 +2418,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=43)",
+      "sample_label": "✅ Robust (N=43)",
       "sample_note": "43 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 76.7,
@@ -2468,9 +2432,9 @@
       "recommended_base_nightly": 721.0,
       "base_diff": -328.0,
       "priority_tier": "URGENT_ACTION",
-      "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
+      "priority_label": "🚨 Urgent Update (This Week)",
       "status": "OVERPRICED",
-      "action_summary": "\u2193 Reduce base $1049 \u2192 $721"
+      "action_summary": "↓ Reduce base $1049 → $721"
     },
     {
       "check_in": "2027-04-18",
@@ -2598,7 +2562,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$7,398 | $7,398 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool Slide, Pickleball & Theatre",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Pool Slide, Pickleball & Theatre",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-985888281919368802/original/ad81ae3d-4dd5-4aea-9583-02fe6e374c85.jpeg?im_w=720"
         },
         {
@@ -2652,7 +2616,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2703 discounted from $2948, -8%)",
           "price_snippet": "$2,948 | $2,703",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -2670,7 +2634,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$7,785 | $7,785 for 4 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3|Lazy River Pool, Hot Tub, Slide & Pickleball",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ|Lazy River Pool, Hot Tub, Slide & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650901748780121272/original/ad51e8be-9a03-4cbc-a83b-ee725e63ee06.jpeg?im_w=720"
         },
         {
@@ -2742,7 +2706,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3813 discounted from $4649, -18%)",
           "price_snippet": "$4,649 | $3,813",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in South Scottsdale | Family Fun\u2013Arcade Games\u2013Private Pool-Luxury Vacay",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in South Scottsdale | Family Fun–Arcade Games–Private Pool-Luxury Vacay",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -2868,7 +2832,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,779 | $3,779 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3 | Resort-Style Pool, Hot Tub & Billiards",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ | Resort-Style Pool, Hot Tub & Billiards",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -2904,7 +2868,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$10,631 | $10,631 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Paradise Valley Village | H\u00d3ZH\u00d3| Golf Course Views, Pool, Hot Tub & Golf Sim",
+          "raw_snippet": "Luxe | Luxe | Home in Paradise Valley Village | HÓZHÓ| Golf Course Views, Pool, Hot Tub & Golf Sim",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-734144221994093791/original/76f640b8-324a-4695-b344-3d9dd8bd3e43.jpeg?im_w=720"
         },
         {
@@ -3012,7 +2976,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$8,945 | $8,945 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in North Scottsdale | H\u00d3ZH\u00d3 | Private Pool, Slide, Hot Tub & Pickleball",
+          "raw_snippet": "Luxe | Luxe | Home in North Scottsdale | HÓZHÓ | Private Pool, Slide, Hot Tub & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-855089839805616449/original/331d1e2b-1644-4e0b-8f72-4db6164c8bdc.jpeg?im_w=720"
         },
         {
@@ -3156,7 +3120,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$2,905 | $2,905 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -3233,7 +3197,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=41)",
+      "sample_label": "✅ Robust (N=41)",
       "sample_note": "41 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 70.7,
@@ -3247,9 +3211,9 @@
       "recommended_base_nightly": 723.0,
       "base_diff": -326.0,
       "priority_tier": "URGENT_ACTION",
-      "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
+      "priority_label": "🚨 Urgent Update (This Week)",
       "status": "OVERPRICED",
-      "action_summary": "\u2193 Reduce base $1049 \u2192 $723"
+      "action_summary": "↓ Reduce base $1049 → $723"
     },
     {
       "check_in": "2027-05-20",
@@ -4102,7 +4066,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=43)",
+      "sample_label": "✅ Robust (N=43)",
       "sample_note": "43 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 25.6,
@@ -4116,9 +4080,9 @@
       "recommended_base_nightly": 1283.0,
       "base_diff": 534.0,
       "priority_tier": "URGENT_ACTION",
-      "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
+      "priority_label": "🚨 Urgent Update (This Week)",
       "status": "UNDERPRICED",
-      "action_summary": "\u2191 Increase base $749 \u2192 $1283"
+      "action_summary": "↑ Increase base $749 → $1283"
     }
   ],
   "moderate_intervals": [
@@ -4245,7 +4209,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,377 | $5,377 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82\u00b0 Pool Waterfall 7BR 5BTH",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82° Pool Waterfall 7BR 5BTH",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1691596607123642256/original/1f1e25f0-beaa-4053-9754-279f7d515ff8.jpeg?im_w=720"
         },
         {
@@ -4389,7 +4353,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$9,288 | $9,288 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool \u2022 Spa \u2022 Bunkroom | Slps 28",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool • Spa • Bunkroom | Slps 28",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -4425,7 +4389,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$8,142 | $8,142 for 4 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3|Lazy River Pool, Hot Tub, Slide & Pickleball",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ|Lazy River Pool, Hot Tub, Slide & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650901748780121272/original/ad51e8be-9a03-4cbc-a83b-ee725e63ee06.jpeg?im_w=720"
         },
         {
@@ -4605,7 +4569,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$9,540 | $9,540 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool Slide, Pickleball & Theatre",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Pool Slide, Pickleball & Theatre",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-985888281919368802/original/ad81ae3d-4dd5-4aea-9583-02fe6e374c85.jpeg?im_w=720"
         },
         {
@@ -4844,7 +4808,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=38)",
+      "sample_label": "✅ Robust (N=38)",
       "sample_note": "38 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 26.3,
@@ -4858,9 +4822,9 @@
       "recommended_base_nightly": 954.0,
       "base_diff": 355.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $599 \u2192 $954"
+      "action_summary": "↑ Increase base $599 → $954"
     },
     {
       "check_in": "2027-03-11",
@@ -4879,9 +4843,9 @@
       "our_airbnb_effective_nightly": 1669.33,
       "our_airbnb_total": 5008.0,
       "is_our_airbnb_live": true,
-      "n_comps": 33,
-      "comps_count": 33,
-      "comps_raw_count": 33,
+      "n_comps": 32,
+      "comps_count": 32,
+      "comps_raw_count": 32,
       "comps_list": [
         {
           "listing_id": "1350253802489041827",
@@ -4956,24 +4920,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 3,
-          "total_price": 4288.0,
-          "effective_nightly": 1429.33,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$4,288 | $4,288 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
           "listing_id": "1437874139258015032",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -5006,7 +4952,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($4584 discounted from $5038, -9%)",
           "price_snippet": "$5,038 | $4,584",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -5060,7 +5006,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,744 | $5,744 for 3 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -5150,7 +5096,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,540 | $4,540 for 3 nights | $0 today",
-          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa \u2022 Private Paradise w Pool, Putt, & Games",
+          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa • Private Paradise w Pool, Putt, & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640779184675228639/original/4861591b-0292-4145-b899-f14500b68be1.jpeg?im_w=720"
         },
         {
@@ -5294,7 +5240,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($6728 discounted from $8293, -19%)",
           "price_snippet": "$8,293 | $6,728",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun\u2013Arcade Games\u2013Private Pool-Luxury Vacay",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun–Arcade Games–Private Pool-Luxury Vacay",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -5479,7 +5425,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=33)",
+      "sample_label": "✅ Robust (N=33)",
       "sample_note": "33 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 30.3,
@@ -5493,9 +5439,9 @@
       "recommended_base_nightly": 1860.0,
       "base_diff": 661.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1199 \u2192 $1860"
+      "action_summary": "↑ Increase base $1199 → $1860"
     },
     {
       "check_in": "2027-03-25",
@@ -5514,9 +5460,9 @@
       "our_airbnb_effective_nightly": 1545.33,
       "our_airbnb_total": 4636.0,
       "is_our_airbnb_live": true,
-      "n_comps": 32,
-      "comps_count": 32,
-      "comps_raw_count": 32,
+      "n_comps": 31,
+      "comps_count": 31,
+      "comps_raw_count": 31,
       "comps_list": [
         {
           "listing_id": "1350253802489041827",
@@ -5537,24 +5483,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1350253802489041827/original/1470dd30-84dc-4b0e-87f6-9bc8c75c8b5d.jpeg?im_w=720"
         },
         {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 3,
-          "total_price": 3558.0,
-          "effective_nightly": 1186.0,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,558 | $3,558 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
           "listing_id": "1511197723888721374",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -5569,7 +5497,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,985 | $4,985 for 3 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -5587,7 +5515,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3975 discounted from $4362, -9%)",
           "price_snippet": "$4,362 | $3,975",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -5605,7 +5533,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($5826 discounted from $7165, -19%)",
           "price_snippet": "$7,165 | $5,826",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun\u2013Arcade Games\u2013Private Pool-Luxury Vacay",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun–Arcade Games–Private Pool-Luxury Vacay",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -6019,7 +5947,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,459 | $4,459 for 3 nights | $0 today",
-          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa \u2022 Private Paradise w Pool, Putt, & Games",
+          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa • Private Paradise w Pool, Putt, & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640779184675228639/original/4861591b-0292-4145-b899-f14500b68be1.jpeg?im_w=720"
         },
         {
@@ -6096,7 +6024,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=32)",
+      "sample_label": "✅ Robust (N=32)",
       "sample_note": "32 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 28.1,
@@ -6110,9 +6038,9 @@
       "recommended_base_nightly": 1700.0,
       "base_diff": 601.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1099 \u2192 $1700"
+      "action_summary": "↑ Increase base $1099 → $1700"
     },
     {
       "check_in": "2027-02-25",
@@ -6240,7 +6168,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($4865 discounted from $5498, -12%)",
           "price_snippet": "$5,498 | $4,865 | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -6672,7 +6600,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,636 | $4,636 for 3 nights | $0 today",
-          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa \u2022 Private Paradise w Pool, Putt, & Games",
+          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa • Private Paradise w Pool, Putt, & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640779184675228639/original/4861591b-0292-4145-b899-f14500b68be1.jpeg?im_w=720"
         },
         {
@@ -6767,7 +6695,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=35)",
+      "sample_label": "✅ Robust (N=35)",
       "sample_note": "35 comps analyzed.",
       "target_percentile": 65.0,
       "our_percentile_rank": 27.1,
@@ -6781,9 +6709,9 @@
       "recommended_base_nightly": 1690.0,
       "base_diff": 591.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1099 \u2192 $1690"
+      "action_summary": "↑ Increase base $1099 → $1690"
     },
     {
       "check_in": "2027-03-04",
@@ -6875,7 +6803,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($4445 discounted from $4884, -9%)",
           "price_snippet": "$4,884 | $4,445",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -6983,7 +6911,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,905 | $5,905 for 3 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -7289,7 +7217,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,086 | $5,086 for 3 nights | $0 today",
-          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa \u2022 Private Paradise w Pool, Putt, & Games",
+          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa • Private Paradise w Pool, Putt, & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640779184675228639/original/4861591b-0292-4145-b899-f14500b68be1.jpeg?im_w=720"
         },
         {
@@ -7325,7 +7253,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,851 | $4,851 for 3 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Mesa | Sleeps 18 \u2022 8BR Home w/ Pool, Backyard & Smart TVs",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Mesa | Sleeps 18 • 8BR Home w/ Pool, Backyard & Smart TVs",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMxNTM2MjgzNjA0Nzk1NTc5Ng==/original/cf467957-d886-4c2e-a5a7-3d70ebd9778a.jpeg?im_w=720"
         },
         {
@@ -7384,7 +7312,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=32)",
+      "sample_label": "✅ Robust (N=32)",
       "sample_note": "32 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 31.2,
@@ -7398,9 +7326,9 @@
       "recommended_base_nightly": 1830.0,
       "base_diff": 631.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1199 \u2192 $1830"
+      "action_summary": "↑ Increase base $1199 → $1830"
     },
     {
       "check_in": "2027-05-06",
@@ -7942,7 +7870,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($4201 discounted from $5134, -18%)",
           "price_snippet": "$5,134 | $4,201",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Pool, arcade room, and chef\u2019s kitchen",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Pool, arcade room, and chef’s kitchen",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -8235,7 +8163,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=41)",
+      "sample_label": "✅ Robust (N=41)",
       "sample_note": "41 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 29.3,
@@ -8249,9 +8177,9 @@
       "recommended_base_nightly": 1172.0,
       "base_diff": 423.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $749 \u2192 $1172"
+      "action_summary": "↑ Increase base $749 → $1172"
     },
     {
       "check_in": "2027-01-28",
@@ -8379,7 +8307,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2270 discounted from $2467, -8%)",
           "price_snippet": "$2,467 | $2,270",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -8865,7 +8793,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,030 | $3,030 for 3 nights | $0 today",
-          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa \u2022 Private Paradise w Pool, Putt, & Games",
+          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa • Private Paradise w Pool, Putt, & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640779184675228639/original/4861591b-0292-4145-b899-f14500b68be1.jpeg?im_w=720"
         },
         {
@@ -8942,7 +8870,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=37)",
+      "sample_label": "✅ Robust (N=37)",
       "sample_note": "37 comps analyzed.",
       "target_percentile": 65.0,
       "our_percentile_rank": 37.8,
@@ -8956,9 +8884,9 @@
       "recommended_base_nightly": 1388.0,
       "base_diff": 489.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $899 \u2192 $1388"
+      "action_summary": "↑ Increase base $899 → $1388"
     },
     {
       "check_in": "2027-05-13",
@@ -9284,7 +9212,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($4112 discounted from $5023, -18%)",
           "price_snippet": "$5,023 | $4,112",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Pool, arcade room, and chef\u2019s kitchen",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Pool, arcade room, and chef’s kitchen",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -9793,7 +9721,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=43)",
+      "sample_label": "✅ Robust (N=43)",
       "sample_note": "43 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 32.6,
@@ -9807,9 +9735,9 @@
       "recommended_base_nightly": 1164.0,
       "base_diff": 415.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $749 \u2192 $1164"
+      "action_summary": "↑ Increase base $749 → $1164"
     },
     {
       "check_in": "2026-12-27",
@@ -9865,7 +9793,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3469 discounted from $3799, -9%)",
           "price_snippet": "$3,799 | $3,469",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -9883,7 +9811,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($5817 discounted from $6831, -15%)",
           "price_snippet": "$6,831 | $5,817 | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -10279,7 +10207,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($7354 discounted from $8059, -9%)",
           "price_snippet": "$8,059 | $7,354",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Gilbert | HUGE private mansion \u201cdesert cabin.\u201d Resort yard",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Gilbert | HUGE private mansion “desert cabin.” Resort yard",
           "photo_url": "https://a0.muscache.com/im/pictures/8ffbf0d3-91f7-46a9-9834-d0f55d14651a.jpg?im_w=720"
         },
         {
@@ -10356,7 +10284,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=29)",
+      "sample_label": "✅ Robust (N=29)",
       "sample_note": "29 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 24.1,
@@ -10370,9 +10298,9 @@
       "recommended_base_nightly": 1382.0,
       "base_diff": 433.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $949 \u2192 $1382"
+      "action_summary": "↑ Increase base $949 → $1382"
     },
     {
       "check_in": "2026-12-20",
@@ -10572,7 +10500,7 @@
           "effective_nightly": 730.67,
           "rating": 4.86,
           "reviews": 174,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -10721,7 +10649,7 @@
           "effective_nightly": 2877.33,
           "rating": 5.0,
           "reviews": 57,
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Lazy River Pool, Swim-Up Bar & Hot Tub",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Lazy River Pool, Swim-Up Bar & Hot Tub",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1029233033647552217/original/ca4875c1-e755-46e3-9420-09316b4662f7.jpeg?im_w=720"
         },
         {
@@ -10861,7 +10789,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=31)",
+      "sample_label": "✅ Robust (N=31)",
       "sample_note": "31 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 29.0,
@@ -10875,9 +10803,9 @@
       "recommended_base_nightly": 714.0,
       "base_diff": 248.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $466 \u2192 $714"
+      "action_summary": "↑ Increase base $466 → $714"
     },
     {
       "check_in": "2027-04-04",
@@ -10896,9 +10824,9 @@
       "our_airbnb_effective_nightly": 1437.5,
       "our_airbnb_total": 5750.0,
       "is_our_airbnb_live": true,
-      "n_comps": 42,
-      "comps_count": 42,
-      "comps_raw_count": 44,
+      "n_comps": 43,
+      "comps_count": 43,
+      "comps_raw_count": 43,
       "comps_list": [
         {
           "listing_id": "1011635413453672886",
@@ -11023,7 +10951,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2878 discounted from $3143, -8%)",
           "price_snippet": "$3,143 | $2,878",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -11115,24 +11043,6 @@
           "price_snippet": "$3,830 | $3,830 for 4 nights",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Golf, Grill & Chill Heated Pool, Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-715477450251712841/original/4db4e534-6cae-4a92-b940-4eeaf8e124e0.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 4,
-          "total_price": 2658.0,
-          "effective_nightly": 664.5,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$2,658 | $2,658 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "1711829874872100952",
@@ -11365,7 +11275,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$9,689 | $9,689 for 4 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3|Lazy River Pool, Hot Tub, Slide & Pickleball",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ|Lazy River Pool, Hot Tub, Slide & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650901748780121272/original/ad51e8be-9a03-4cbc-a83b-ee725e63ee06.jpeg?im_w=720"
         },
         {
@@ -11383,7 +11293,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$8,461 | $8,461 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool, Hot Tub, Theatre, Sauna & Fire Pit",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ | Pool, Hot Tub, Theatre, Sauna & Fire Pit",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650908308672835769/original/6dc34287-231f-4c5b-be1a-1b30c5b274c6.jpeg?im_w=720"
         },
         {
@@ -11437,7 +11347,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$14,915 | $14,915 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Golf Simulator & Resort Pool, Hot Tub",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Golf Simulator & Resort Pool, Hot Tub",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1375463518753338462/original/d50ce9ee-df9c-4c03-94b1-0c020e17337c.jpeg?im_w=720"
         },
         {
@@ -11653,7 +11563,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,731 | $3,731 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -11694,7 +11604,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=42)",
+      "sample_label": "✅ Robust (N=42)",
       "sample_note": "42 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 64.3,
@@ -11708,9 +11618,9 @@
       "recommended_base_nightly": 802.0,
       "base_diff": -247.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY HIGH",
-      "action_summary": "\u2193 Reduce base $1049 \u2192 $802"
+      "action_summary": "↓ Reduce base $1049 → $802"
     },
     {
       "check_in": "2027-04-08",
@@ -11729,9 +11639,9 @@
       "our_airbnb_effective_nightly": 1669.33,
       "our_airbnb_total": 5008.0,
       "is_our_airbnb_live": true,
-      "n_comps": 37,
-      "comps_count": 37,
-      "comps_raw_count": 37,
+      "n_comps": 36,
+      "comps_count": 36,
+      "comps_raw_count": 36,
       "comps_list": [
         {
           "listing_id": "715477450251712841",
@@ -11784,7 +11694,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3037 discounted from $3319, -8%)",
           "price_snippet": "$3,319 | $3,037",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -11878,24 +11788,6 @@
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 3,
-          "total_price": 3488.0,
-          "effective_nightly": 1162.67,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,488 | $3,488 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
-        },
-        {
           "listing_id": "720372504066063253",
           "title": "Home in Scottsdale",
           "location": "Scottsdale",
@@ -11964,7 +11856,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,087 | $5,087 for 3 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -11982,7 +11874,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($5749 discounted from $7069, -19%)",
           "price_snippet": "$7,069 | $5,749",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun\u2013Arcade Games\u2013Private Pool-Luxury Vacay",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun–Arcade Games–Private Pool-Luxury Vacay",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -12288,7 +12180,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,785 | $3,785 for 3 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -12401,7 +12293,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=37)",
+      "sample_label": "✅ Robust (N=37)",
       "sample_note": "37 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 40.5,
@@ -12415,9 +12307,9 @@
       "recommended_base_nightly": 1627.0,
       "base_diff": 428.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1199 \u2192 $1627"
+      "action_summary": "↑ Increase base $1199 → $1627"
     },
     {
       "check_in": "2027-02-04",
@@ -12617,7 +12509,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($4173 discounted from $4557, -8%)",
           "price_snippet": "$4,557 | $4,173 | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -12635,7 +12527,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3232 discounted from $3536, -9%)",
           "price_snippet": "$3,536 | $3,232",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -13000,7 +12892,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=31)",
+      "sample_label": "✅ Robust (N=31)",
       "sample_note": "31 comps analyzed.",
       "target_percentile": 65.0,
       "our_percentile_rank": 35.5,
@@ -13014,9 +12906,9 @@
       "recommended_base_nightly": 1471.0,
       "base_diff": 372.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1099 \u2192 $1471"
+      "action_summary": "↑ Increase base $1099 → $1471"
     },
     {
       "check_in": "2027-04-01",
@@ -13035,9 +12927,9 @@
       "our_airbnb_effective_nightly": 1669.33,
       "our_airbnb_total": 5008.0,
       "is_our_airbnb_live": true,
-      "n_comps": 33,
-      "comps_count": 33,
-      "comps_raw_count": 33,
+      "n_comps": 32,
+      "comps_count": 32,
+      "comps_raw_count": 32,
       "comps_list": [
         {
           "listing_id": "1143202699620728397",
@@ -13126,7 +13018,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3298 discounted from $3610, -9%)",
           "price_snippet": "$3,610 | $3,298",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -13290,24 +13182,6 @@
           "price_snippet": "$3M Lux | Movie Room, HtdPool, &more! | $7,290 | $7,290 for 3 nights",
           "raw_snippet": "Luxe | Luxe | Home in Phoenix | The Rowan | $3M Lux | Movie Room, HtdPool, &more!",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1592191797631601721/original/212a7c5f-2f5e-44f2-9e24-c6dc9598d110.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 3,
-          "total_price": 4363.0,
-          "effective_nightly": 1454.33,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$4,363 | $4,363 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "46641901",
@@ -13540,7 +13414,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,127 | $4,127 for 3 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -13635,7 +13509,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=33)",
+      "sample_label": "✅ Robust (N=33)",
       "sample_note": "33 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 48.5,
@@ -13649,9 +13523,9 @@
       "recommended_base_nightly": 1592.0,
       "base_diff": 393.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1199 \u2192 $1592"
+      "action_summary": "↑ Increase base $1199 → $1592"
     },
     {
       "check_in": "2027-03-14",
@@ -13670,9 +13544,9 @@
       "our_airbnb_effective_nightly": 1298.0,
       "our_airbnb_total": 3894.0,
       "is_our_airbnb_live": true,
-      "n_comps": 34,
-      "comps_count": 34,
-      "comps_raw_count": 34,
+      "n_comps": 33,
+      "comps_count": 33,
+      "comps_raw_count": 33,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -13761,7 +13635,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3235 discounted from $3540, -9%)",
           "price_snippet": "$3,540 | $3,235",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -13799,24 +13673,6 @@
           "price_snippet": "$4,825 | $4,825 for 3 nights",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | The Keim Villa | 8 Bedroom 4 Bathroom 15+ Beds",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-22583822/original/e765caa6-b66a-4fb9-812e-656da06a3e57.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 3,
-          "total_price": 3285.0,
-          "effective_nightly": 1095.0,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,285 | $3,285 for 3 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "28898989",
@@ -14193,7 +14049,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,224 | $4,224 for 3 nights | $0 today",
-          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa \u2022 Private Paradise w Pool, Putt, & Games",
+          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa • Private Paradise w Pool, Putt, & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640779184675228639/original/4861591b-0292-4145-b899-f14500b68be1.jpeg?im_w=720"
         },
         {
@@ -14288,7 +14144,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=34)",
+      "sample_label": "✅ Robust (N=34)",
       "sample_note": "34 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 20.6,
@@ -14302,9 +14158,9 @@
       "recommended_base_nightly": 1193.0,
       "base_diff": 294.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $899 \u2192 $1193"
+      "action_summary": "↑ Increase base $899 → $1193"
     },
     {
       "check_in": "2027-04-15",
@@ -14396,7 +14252,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2884 discounted from $3150, -8%)",
           "price_snippet": "$3,150 | $2,884",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -14900,7 +14756,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,155 | $3,155 for 3 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -15013,7 +14869,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=38)",
+      "sample_label": "✅ Robust (N=38)",
       "sample_note": "38 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 50.0,
@@ -15027,9 +14883,9 @@
       "recommended_base_nightly": 1562.0,
       "base_diff": 363.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1199 \u2192 $1562"
+      "action_summary": "↑ Increase base $1199 → $1562"
     },
     {
       "check_in": "2027-02-07",
@@ -15175,7 +15031,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2605 discounted from $2839, -8%)",
           "price_snippet": "$2,839 | $2,605",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -15571,7 +15427,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,907 | $3,907 for 3 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -15612,7 +15468,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=31)",
+      "sample_label": "✅ Robust (N=31)",
       "sample_note": "31 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 22.6,
@@ -15626,9 +15482,9 @@
       "recommended_base_nightly": 1132.0,
       "base_diff": 266.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $866 \u2192 $1132"
+      "action_summary": "↑ Increase base $866 → $1132"
     },
     {
       "check_in": "2027-01-31",
@@ -15792,7 +15648,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2623 discounted from $2859, -8%)",
           "price_snippet": "$2,859 | $2,623",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -16062,7 +15918,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$7,785 | $7,785 for 4 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3|Lazy River Pool, Hot Tub, Slide & Pickleball",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ|Lazy River Pool, Hot Tub, Slide & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650901748780121272/original/ad51e8be-9a03-4cbc-a83b-ee725e63ee06.jpeg?im_w=720"
         },
         {
@@ -16098,7 +15954,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$6,488 | $6,488 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82\u00b0 Pool Waterfall 7BR 5BTH",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82° Pool Waterfall 7BR 5BTH",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1691596607123642256/original/1f1e25f0-beaa-4053-9754-279f7d515ff8.jpeg?im_w=720"
         },
         {
@@ -16116,7 +15972,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($10840 discounted from $12733, -15%)",
           "price_snippet": "$12,733 | $10,840 | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool \u2022 Spa \u2022 Bunkroom | Slps 28",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool • Spa • Bunkroom | Slps 28",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -16314,7 +16170,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,164 | $3,164 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -16355,7 +16211,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=38)",
+      "sample_label": "✅ Robust (N=38)",
       "sample_note": "38 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 60.5,
@@ -16369,9 +16225,9 @@
       "recommended_base_nightly": 632.0,
       "base_diff": -154.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY HIGH",
-      "action_summary": "\u2193 Reduce base $786 \u2192 $632"
+      "action_summary": "↓ Reduce base $786 → $632"
     },
     {
       "check_in": "2026-12-03",
@@ -16511,7 +16367,7 @@
           "effective_nightly": 757.33,
           "rating": 4.86,
           "reviews": 174,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -16631,7 +16487,7 @@
           "effective_nightly": 4121.33,
           "rating": 5.0,
           "reviews": 12,
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Golf Simulator, Pool, Theatre & Pickleball",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Golf Simulator, Pool, Theatre & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1559652898884891337/original/a4188449-5e25-47ef-81cf-3e50ab312bf3.jpeg?im_w=720&width=720&quality=70&auto=webp"
         },
         {
@@ -16735,7 +16591,7 @@
           "effective_nightly": 3252.0,
           "rating": 5.0,
           "reviews": 24,
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool \u2022 Spa \u2022 Bunkroom | Slps 28",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool • Spa • Bunkroom | Slps 28",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -16855,12 +16711,12 @@
           "effective_nightly": 874.0,
           "rating": 5.0,
           "reviews": 8,
-          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa \u2022 Private Paradise w Pool, Putt, & Games",
+          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa • Private Paradise w Pool, Putt, & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640779184675228639/original/4861591b-0292-4145-b899-f14500b68be1.jpeg?im_w=720&width=720&quality=70&auto=webp"
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=29)",
+      "sample_label": "✅ Robust (N=29)",
       "sample_note": "29 comps analyzed.",
       "target_percentile": 65.0,
       "our_percentile_rank": 41.4,
@@ -16874,9 +16730,9 @@
       "recommended_base_nightly": 786.0,
       "base_diff": 187.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $599 \u2192 $786"
+      "action_summary": "↑ Increase base $599 → $786"
     },
     {
       "check_in": "2027-01-21",
@@ -16968,7 +16824,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2272 discounted from $2469, -8%)",
           "price_snippet": "$2,469 | $2,272",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -17477,7 +17333,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=31)",
+      "sample_label": "✅ Robust (N=31)",
       "sample_note": "31 comps analyzed.",
       "target_percentile": 65.0,
       "our_percentile_rank": 48.4,
@@ -17491,9 +17347,9 @@
       "recommended_base_nightly": 1159.0,
       "base_diff": 260.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $899 \u2192 $1159"
+      "action_summary": "↑ Increase base $899 → $1159"
     },
     {
       "check_in": "2027-01-07",
@@ -17801,7 +17657,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3320 discounted from $3644, -9%)",
           "price_snippet": "$3,644 | $3,320 | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -17855,7 +17711,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$6,052 | $6,052 for 3 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Paradise Valley | Serenissima \u2013 La Dolce Vita above Paradise Valley",
+          "raw_snippet": "Luxe | Luxe | Home in Paradise Valley | Serenissima – La Dolce Vita above Paradise Valley",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1473300546812850013/original/eb571fcd-ea31-42f3-89fb-87d2cab588bc.jpeg?im_w=720"
         },
         {
@@ -18166,7 +18022,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=36)",
+      "sample_label": "✅ Robust (N=36)",
       "sample_note": "36 comps analyzed.",
       "target_percentile": 65.0,
       "our_percentile_rank": 47.2,
@@ -18180,9 +18036,9 @@
       "recommended_base_nightly": 1145.0,
       "base_diff": 246.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $899 \u2192 $1145"
+      "action_summary": "↑ Increase base $899 → $1145"
     },
     {
       "check_in": "2026-11-29",
@@ -18232,7 +18088,7 @@
           "effective_nightly": 836.25,
           "rating": 5.0,
           "reviews": 10,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82\u00b0 Pool Waterfall 7BR 5BTH",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82° Pool Waterfall 7BR 5BTH",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1691596607123642256/original/1f1e25f0-beaa-4053-9754-279f7d515ff8.jpeg?im_w=720"
         },
         {
@@ -18277,7 +18133,7 @@
           "effective_nightly": 521.75,
           "rating": 4.94,
           "reviews": 16,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -18367,7 +18223,7 @@
           "effective_nightly": 596.5,
           "rating": 4.86,
           "reviews": 174,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -18397,7 +18253,7 @@
           "effective_nightly": 367.56,
           "rating": 5.0,
           "reviews": 10,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3|Lazy River Pool, Hot Tub, Slide & Pickleball",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ|Lazy River Pool, Hot Tub, Slide & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650901748780121272/original/ad51e8be-9a03-4cbc-a83b-ee725e63ee06.jpeg?im_w=720"
         },
         {
@@ -18427,7 +18283,7 @@
           "effective_nightly": 2087.5,
           "rating": 5.0,
           "reviews": 24,
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool \u2022 Spa \u2022 Bunkroom | Slps 28",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | 7bdrm near TPC | Pool • Spa • Bunkroom | Slps 28",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -18442,7 +18298,7 @@
           "effective_nightly": 2430.0,
           "rating": 4.95,
           "reviews": 37,
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Golf Simulator & Resort Pool, Hot Tub",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Golf Simulator & Resort Pool, Hot Tub",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1375463518753338462/original/d50ce9ee-df9c-4c03-94b1-0c020e17337c.jpeg?im_w=720"
         },
         {
@@ -18502,7 +18358,7 @@
           "effective_nightly": 2199.75,
           "rating": 5.0,
           "reviews": 58,
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3| Golf Course Views, Pool, Hot Tub & Golf Sim",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ| Golf Course Views, Pool, Hot Tub & Golf Sim",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-734144221994093791/original/76f640b8-324a-4695-b344-3d9dd8bd3e43.jpeg?im_w=720"
         },
         {
@@ -18517,7 +18373,7 @@
           "effective_nightly": 1354.25,
           "rating": 5.0,
           "reviews": 7,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool, Hot Tub, Theatre, Sauna & Fire Pit",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ | Pool, Hot Tub, Theatre, Sauna & Fire Pit",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650908308672835769/original/6dc34287-231f-4c5b-be1a-1b30c5b274c6.jpeg?im_w=720"
         },
         {
@@ -18532,7 +18388,7 @@
           "effective_nightly": 1849.5,
           "rating": 5.0,
           "reviews": 46,
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool Slide, Pickleball & Theatre",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Pool Slide, Pickleball & Theatre",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-985888281919368802/original/ad81ae3d-4dd5-4aea-9583-02fe6e374c85.jpeg?im_w=720"
         },
         {
@@ -18591,7 +18447,7 @@
           "effective_nightly": 1135.5,
           "rating": 5.0,
           "reviews": 66,
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 |Mountain View Home| Pool, Hot Tub & Theatre",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ |Mountain View Home| Pool, Hot Tub & Theatre",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-746927337513825183/original/a0e9d1d8-4c65-4ecf-b941-df41ad425cbb.jpeg?im_w=720&width=720&quality=70&auto=webp"
         },
         {
@@ -18756,7 +18612,7 @@
           "effective_nightly": 651.0,
           "rating": 5.0,
           "reviews": 17,
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -18806,7 +18662,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=39)",
+      "sample_label": "✅ Robust (N=39)",
       "sample_note": "39 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 61.5,
@@ -18820,9 +18676,9 @@
       "recommended_base_nightly": 549.0,
       "base_diff": -125.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY HIGH",
-      "action_summary": "\u2193 Reduce base $674 \u2192 $549"
+      "action_summary": "↓ Reduce base $674 → $549"
     },
     {
       "check_in": "2027-04-22",
@@ -18896,7 +18752,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2795 discounted from $3051, -8%)",
           "price_snippet": "$3,051 | $2,795",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -19256,7 +19112,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($5711 discounted from $7022, -19%)",
           "price_snippet": "$7,022 | $5,711",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun\u2013Arcade Games\u2013Private Pool-Luxury Vacay",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Family Fun–Arcade Games–Private Pool-Luxury Vacay",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -19472,7 +19328,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,139 | $3,139 for 3 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -19621,7 +19477,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=43)",
+      "sample_label": "✅ Robust (N=43)",
       "sample_note": "43 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 44.2,
@@ -19635,9 +19491,9 @@
       "recommended_base_nightly": 1506.0,
       "base_diff": 307.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1199 \u2192 $1506"
+      "action_summary": "↑ Increase base $1199 → $1506"
     },
     {
       "check_in": "2027-01-19",
@@ -19762,7 +19618,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($1399 discounted from $1500, -7%)",
           "price_snippet": "$1,500 | $1,399 | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -19834,7 +19690,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2979 discounted from $3236, -8%)",
           "price_snippet": "$3,236 | $2,979 | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82\u00b0 Pool Waterfall 7BR 5BTH",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82° Pool Waterfall 7BR 5BTH",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1691596607123642256/original/1f1e25f0-beaa-4053-9754-279f7d515ff8.jpeg?im_w=720"
         },
         {
@@ -19960,7 +19816,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($1592 discounted from $1716, -7%)",
           "price_snippet": "$1,716 | $1,592 | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Mesa | Sleeps 18 \u2022 8BR Home w/ Pool, Backyard & Smart TVs",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Mesa | Sleeps 18 • 8BR Home w/ Pool, Backyard & Smart TVs",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMxNTM2MjgzNjA0Nzk1NTc5Ng==/original/cf467957-d886-4c2e-a5a7-3d70ebd9778a.jpeg?im_w=720"
         },
         {
@@ -20325,7 +20181,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=36)",
+      "sample_label": "✅ Robust (N=36)",
       "sample_note": "36 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 27.8,
@@ -20339,9 +20195,9 @@
       "recommended_base_nightly": 841.0,
       "base_diff": 192.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $649 \u2192 $841"
+      "action_summary": "↑ Increase base $649 → $841"
     },
     {
       "check_in": "2027-01-10",
@@ -20559,7 +20415,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($4869 discounted from $5868, -17%)",
           "price_snippet": "$5,868 | $4,869",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82\u00b0 Pool Waterfall 7BR 5BTH",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82° Pool Waterfall 7BR 5BTH",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1691596607123642256/original/1f1e25f0-beaa-4053-9754-279f7d515ff8.jpeg?im_w=720"
         },
         {
@@ -20703,7 +20559,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2827 discounted from $4179, -32%)",
           "price_snippet": "$4,179 | $2,827",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3 | Resort-Style Pool, Hot Tub & Billiards",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ | Resort-Style Pool, Hot Tub & Billiards",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -20721,7 +20577,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$7,267 | $7,267 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Private Pool, Slide, Hot Tub & Pickleball",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Private Pool, Slide, Hot Tub & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-855089839805616449/original/331d1e2b-1644-4e0b-8f72-4db6164c8bdc.jpeg?im_w=720"
         },
         {
@@ -20775,7 +20631,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$8,350 | $8,350 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool Slide, Pickleball & Theatre",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Pool Slide, Pickleball & Theatre",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-985888281919368802/original/ad81ae3d-4dd5-4aea-9583-02fe6e374c85.jpeg?im_w=720"
         },
         {
@@ -21027,7 +20883,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$2,893 | $2,893 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -21068,7 +20924,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=39)",
+      "sample_label": "✅ Robust (N=39)",
       "sample_note": "39 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 59.0,
@@ -21082,9 +20938,9 @@
       "recommended_base_nightly": 589.0,
       "base_diff": -122.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY HIGH",
-      "action_summary": "\u2193 Reduce base $712 \u2192 $589"
+      "action_summary": "↓ Reduce base $712 → $589"
     },
     {
       "check_in": "2027-03-28",
@@ -21103,9 +20959,9 @@
       "our_airbnb_effective_nightly": 1174.75,
       "our_airbnb_total": 4699.0,
       "is_our_airbnb_live": true,
-      "n_comps": 35,
-      "comps_count": 35,
-      "comps_raw_count": 35,
+      "n_comps": 34,
+      "comps_count": 34,
+      "comps_raw_count": 34,
       "comps_list": [
         {
           "listing_id": "862891705248130792",
@@ -21176,26 +21032,8 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3296 discounted from $3607, -9%)",
           "price_snippet": "$3,607 | $3,296",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 4,
-          "total_price": 3055.0,
-          "effective_nightly": 763.75,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,055 | $3,055 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "715477450251712841",
@@ -21374,7 +21212,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,668 | $4,668 for 4 nights | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -21536,7 +21374,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$7,829 | $7,829 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82\u00b0 Pool Waterfall 7BR 5BTH",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82° Pool Waterfall 7BR 5BTH",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1691596607123642256/original/1f1e25f0-beaa-4053-9754-279f7d515ff8.jpeg?im_w=720"
         },
         {
@@ -21644,7 +21482,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,956 | $3,956 for 4 nights | $0 today",
-          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa \u2022 Private Paradise w Pool, Putt, & Games",
+          "raw_snippet": "Superhost | Superhost | Home in Mesa | Casa Mesa • Private Paradise w Pool, Putt, & Games",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1640779184675228639/original/4861591b-0292-4145-b899-f14500b68be1.jpeg?im_w=720"
         },
         {
@@ -21739,7 +21577,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=35)",
+      "sample_label": "✅ Robust (N=35)",
       "sample_note": "35 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 37.1,
@@ -21753,9 +21591,9 @@
       "recommended_base_nightly": 1022.0,
       "base_diff": 186.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $836 \u2192 $1022"
+      "action_summary": "↑ Increase base $836 → $1022"
     },
     {
       "check_in": "2027-04-29",
@@ -22171,7 +22009,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($4732 discounted from $5798, -18%)",
           "price_snippet": "$5,798 | $4,732",
-          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Pool, arcade room, and chef\u2019s kitchen",
+          "raw_snippet": "Top guest favorite | Guest favorite | Villa in Scottsdale | Pool, arcade room, and chef’s kitchen",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -22446,7 +22284,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=36)",
+      "sample_label": "✅ Robust (N=36)",
       "sample_note": "36 comps analyzed.",
       "target_percentile": 70.0,
       "our_percentile_rank": 47.2,
@@ -22460,9 +22298,9 @@
       "recommended_base_nightly": 1237.0,
       "base_diff": 188.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $1049 \u2192 $1237"
+      "action_summary": "↑ Increase base $1049 → $1237"
     },
     {
       "check_in": "2027-03-21",
@@ -22481,9 +22319,9 @@
       "our_airbnb_effective_nightly": 1499.5,
       "our_airbnb_total": 5998.0,
       "is_our_airbnb_live": true,
-      "n_comps": 32,
-      "comps_count": 32,
-      "comps_raw_count": 35,
+      "n_comps": 34,
+      "comps_count": 34,
+      "comps_raw_count": 34,
       "comps_list": [
         {
           "listing_id": "1011635413453672886",
@@ -22554,26 +22392,8 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3688 discounted from $4043, -9%)",
           "price_snippet": "$4,043 | $3,688",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 6,
-          "baths": 3.0,
-          "nights": 4,
-          "total_price": 3167.0,
-          "effective_nightly": 791.75,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$3,167 | $3,167 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Playhouse near Old Town: Hot Tub | Game Room",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "1143202699620728397",
@@ -22608,7 +22428,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$6,908 | $6,908 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82\u00b0 Pool Waterfall 7BR 5BTH",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Camelback Cascade Club 82° Pool Waterfall 7BR 5BTH",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1691596607123642256/original/1f1e25f0-beaa-4053-9754-279f7d515ff8.jpeg?im_w=720"
         },
         {
@@ -22860,7 +22680,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$9,413 | $9,413 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool, Hot Tub, Theatre, Sauna & Fire Pit",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ | Pool, Hot Tub, Theatre, Sauna & Fire Pit",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650908308672835769/original/6dc34287-231f-4c5b-be1a-1b30c5b274c6.jpeg?im_w=720"
         },
         {
@@ -22986,7 +22806,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,833 | $4,833 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -23022,7 +22842,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$3,800 | $3,800 for 4 nights",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Mesa | Sleeps 18 \u2022 8BR Home w/ Pool, Backyard & Smart TVs",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Mesa | Sleeps 18 • 8BR Home w/ Pool, Backyard & Smart TVs",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMxNTM2MjgzNjA0Nzk1NTc5Ng==/original/cf467957-d886-4c2e-a5a7-3d70ebd9778a.jpeg?im_w=720"
         },
         {
@@ -23117,7 +22937,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=32)",
+      "sample_label": "✅ Robust (N=32)",
       "sample_note": "32 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 59.4,
@@ -23131,9 +22951,9 @@
       "recommended_base_nightly": 985.0,
       "base_diff": -114.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY HIGH",
-      "action_summary": "\u2193 Reduce base $1099 \u2192 $985"
+      "action_summary": "↓ Reduce base $1099 → $985"
     },
     {
       "check_in": "2027-01-04",
@@ -23207,7 +23027,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,939 | $4,939 for 3 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3| Golf Course Views, Pool, Hot Tub & Golf Sim",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ| Golf Course Views, Pool, Hot Tub & Golf Sim",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-734144221994093791/original/76f640b8-324a-4695-b344-3d9dd8bd3e43.jpeg?im_w=720"
         },
         {
@@ -23369,7 +23189,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,038 | $5,038 for 3 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Private Pool, Slide, Hot Tub & Pickleball",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Private Pool, Slide, Hot Tub & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-855089839805616449/original/331d1e2b-1644-4e0b-8f72-4db6164c8bdc.jpeg?im_w=720"
         },
         {
@@ -23423,7 +23243,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$10,936 | $10,936 for 3 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Golf Simulator, Pool, Theatre & Pickleball",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Golf Simulator, Pool, Theatre & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1559652898884891337/original/a4188449-5e25-47ef-81cf-3e50ab312bf3.jpeg?im_w=720"
         },
         {
@@ -23513,7 +23333,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$6,466 | $6,466 for 3 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool Slide, Pickleball & Theatre",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Pool Slide, Pickleball & Theatre",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-985888281919368802/original/ad81ae3d-4dd5-4aea-9583-02fe6e374c85.jpeg?im_w=720"
         },
         {
@@ -23567,7 +23387,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,895 | $5,895 for 3 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Lazy River Pool, Swim-Up Bar & Hot Tub",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Lazy River Pool, Swim-Up Bar & Hot Tub",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1029233033647552217/original/ca4875c1-e755-46e3-9420-09316b4662f7.jpeg?im_w=720"
         },
         {
@@ -23621,7 +23441,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2252 discounted from $3266, -31%)",
           "price_snippet": "$3,266 | $2,252",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3 | Resort-Style Pool, Hot Tub & Billiards",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ | Resort-Style Pool, Hot Tub & Billiards",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -23657,7 +23477,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$8,741 | $8,741 for 3 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3|Pinnacle Peak View, Pool, Hot Tub & Golf Sim",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ|Pinnacle Peak View, Pool, Hot Tub & Golf Sim",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1474068845677132813/original/c6c2c3ba-b2bb-440c-a336-910e1e2f5681.jpeg?im_w=720"
         },
         {
@@ -23909,7 +23729,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$2,344 | $2,344 for 3 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -23968,7 +23788,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=42)",
+      "sample_label": "✅ Robust (N=42)",
       "sample_note": "42 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 35.7,
@@ -23982,9 +23802,9 @@
       "recommended_base_nightly": 742.0,
       "base_diff": 93.0,
       "priority_tier": "MODERATE_ADJUSTMENT",
-      "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
+      "priority_label": "⚠️ Moderate Adjustment (Monthly)",
       "status": "SLIGHTLY LOW",
-      "action_summary": "\u2191 Increase base $649 \u2192 $742"
+      "action_summary": "↑ Increase base $649 → $742"
     }
   ],
   "informational_intervals": [
@@ -24201,7 +24021,7 @@
           "effective_nightly": 352.69,
           "rating": 5.0,
           "reviews": 10,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3|Lazy River Pool, Hot Tub, Slide & Pickleball",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ|Lazy River Pool, Hot Tub, Slide & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1650901748780121272/original/ad51e8be-9a03-4cbc-a83b-ee725e63ee06.jpeg?im_w=720"
         },
         {
@@ -24261,7 +24081,7 @@
           "effective_nightly": 553.75,
           "rating": 4.86,
           "reviews": 174,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -24351,7 +24171,7 @@
           "effective_nightly": 1135.5,
           "rating": 4.93,
           "reviews": 54,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | H\u00d3ZH\u00d3 | Golf Simulator, Pool, Hot Tub & Fire Pit",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | HÓZHÓ | Golf Simulator, Pool, Hot Tub & Fire Pit",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1163963378107916642/original/9122e0bd-e167-4b91-8017-9ae7b369ae3a.jpeg?im_w=720&width=720&quality=70&auto=webp"
         },
         {
@@ -24476,7 +24296,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=31)",
+      "sample_label": "✅ Robust (N=31)",
       "sample_note": "31 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 45.2,
@@ -24490,7 +24310,7 @@
       "recommended_base_nightly": 449.0,
       "base_diff": 0.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     },
@@ -24638,7 +24458,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($2395 discounted from $2606, -8%)",
           "price_snippet": "$2,606 | $2,395",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -24710,7 +24530,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3184 discounted from $3538, -10%)",
           "price_snippet": "$3,538 | $3,184 | $0 today",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa \u00b7 Pool Table \u00b7 5 min Old Town",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | Heated Pool & Spa · Pool Table · 5 min Old Town",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTUxMTE5NzcyMzg4ODcyMTM3NA==/original/c3e25c57-796a-4f24-a7a6-fb3df700276c.jpeg?im_w=720"
         },
         {
@@ -24890,7 +24710,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$11,464 | $11,464 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3| Golf Course Views, Pool, Hot Tub & Golf Sim",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ| Golf Course Views, Pool, Hot Tub & Golf Sim",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-734144221994093791/original/76f640b8-324a-4695-b344-3d9dd8bd3e43.jpeg?im_w=720"
         },
         {
@@ -24908,7 +24728,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$16,152 | $16,152 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Golf Simulator, Pool, Theatre & Pickleball",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Golf Simulator, Pool, Theatre & Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1559652898884891337/original/a4188449-5e25-47ef-81cf-3e50ab312bf3.jpeg?im_w=720"
         },
         {
@@ -25165,7 +24985,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=33)",
+      "sample_label": "✅ Robust (N=33)",
       "sample_note": "33 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 54.5,
@@ -25179,7 +24999,7 @@
       "recommended_base_nightly": 656.0,
       "base_diff": -56.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     },
@@ -25309,7 +25129,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3149 discounted from $3444, -9%)",
           "price_snippet": "$3,444 | $3,149",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -25561,7 +25381,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$11,940 | $11,940 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3| Golf Course Views, Pool, Hot Tub & Golf Sim",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ| Golf Course Views, Pool, Hot Tub & Golf Sim",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-734144221994093791/original/76f640b8-324a-4695-b344-3d9dd8bd3e43.jpeg?im_w=720"
         },
         {
@@ -25723,12 +25543,12 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$5,514 | $5,514 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=29)",
+      "sample_label": "✅ Robust (N=29)",
       "sample_note": "29 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 48.3,
@@ -25742,7 +25562,7 @@
       "recommended_base_nightly": 783.0,
       "base_diff": -54.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     },
@@ -25926,7 +25746,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3694 discounted from $4050, -9%)",
           "price_snippet": "$4,050 | $3,694",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -26088,7 +25908,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$10,968 | $10,968 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 | Pool Slide, Pickleball & Theatre",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ | Pool Slide, Pickleball & Theatre",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-985888281919368802/original/ad81ae3d-4dd5-4aea-9583-02fe6e374c85.jpeg?im_w=720"
         },
         {
@@ -26124,7 +25944,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$9,064 | $9,064 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Paradise Valley | H\u00d3ZH\u00d3 |Resort Pool, Slide, Hot Tub & Movie Theater",
+          "raw_snippet": "Luxe | Luxe | Home in Paradise Valley | HÓZHÓ |Resort Pool, Slide, Hot Tub & Movie Theater",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-877807106888333801/original/d7fed607-b8da-4e0a-801f-01de19fdd630.jpeg?im_w=720"
         },
         {
@@ -26196,7 +26016,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$8,350 | $8,350 for 4 nights",
-          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | H\u00d3ZH\u00d3 |Mountain View Home| Pool, Hot Tub & Theatre",
+          "raw_snippet": "Luxe | Luxe | Home in Scottsdale | HÓZHÓ |Mountain View Home| Pool, Hot Tub & Theatre",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-746927337513825183/original/a0e9d1d8-4c65-4ecf-b941-df41ad425cbb.jpeg?im_w=720"
         },
         {
@@ -26304,7 +26124,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,599 | $4,599 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -26381,7 +26201,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=32)",
+      "sample_label": "✅ Robust (N=32)",
       "sample_note": "32 comps analyzed.",
       "target_percentile": 45.5,
       "our_percentile_rank": 46.9,
@@ -26395,7 +26215,7 @@
       "recommended_base_nightly": 828.0,
       "base_diff": -8.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     },
@@ -26579,7 +26399,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Promotional stay total ($3805 discounted from $4173, -9%)",
           "price_snippet": "$4,173 | $3,805",
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR\u2022Heated Pool \u2022 Hot Tub \u2022 Sleeps 16",
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Tempe | Shangri-La | 6BR•Heated Pool • Hot Tub • Sleeps 16",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-51303548/original/77e19c3c-0061-4bb4-a2c0-2927902b110c.jpeg?im_w=720"
         },
         {
@@ -26957,7 +26777,7 @@
           "confidence": "CONFIRMED",
           "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
           "price_snippet": "$4,836 | $4,836 for 4 nights | $0 today",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! \u2022 Heated Pool \u2022 Hot Tub \u2022 Pickleball",
+          "raw_snippet": "Top guest favorite | Guest favorite | Home in Mesa | Summer PROMO! • Heated Pool • Hot Tub • Pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
@@ -27052,7 +26872,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=33)",
+      "sample_label": "✅ Robust (N=33)",
       "sample_note": "33 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 51.5,
@@ -27066,7 +26886,7 @@
       "recommended_base_nightly": 850.0,
       "base_diff": -12.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     },
@@ -27087,9 +26907,9 @@
       "our_airbnb_effective_nightly": 982.5,
       "our_airbnb_total": 3930.0,
       "is_our_airbnb_live": true,
-      "n_comps": 47,
-      "comps_count": 47,
-      "comps_raw_count": 50,
+      "n_comps": 49,
+      "comps_count": 49,
+      "comps_raw_count": 49,
       "comps_list": [
         {
           "listing_id": "790605881020674983",
@@ -27360,24 +27180,6 @@
           "price_snippet": "$5,446 | $5,446 for 4 nights",
           "raw_snippet": "Guest favorite | Guest favorite | Home in Phoenix | California modern with a rooftop mountain deck",
           "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-858613170601453396/original/b0ee4f26-27e8-46d8-aa3e-8699d182c3d0.jpeg?im_w=720"
-        },
-        {
-          "listing_id": "809687707688713264",
-          "title": "Home in Scottsdale",
-          "location": "Scottsdale",
-          "bedrooms": 6,
-          "beds": 7,
-          "baths": 3.0,
-          "nights": 4,
-          "total_price": 1817.0,
-          "effective_nightly": 454.25,
-          "rating": 4.99,
-          "reviews": 74,
-          "confidence": "CONFIRMED",
-          "confidence_reason": "Total explicitly labeled ('before taxes'/'total')",
-          "price_snippet": "$1,817 | $1,817 for 4 nights",
-          "raw_snippet": "Top guest favorite | Guest favorite | Home in Scottsdale | Game room and hot tub near Old Town",
-          "photo_url": "https://a0.muscache.com/im/pictures/airbnb-platform-assets/AirbnbPlatformAssets-GuestFavorite/original/4d090f93-f9a5-4f06-95e4-ca737c0d0ab5.png?im_w=240"
         },
         {
           "listing_id": "1561864558173852118",
@@ -27993,7 +27795,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=47)",
+      "sample_label": "✅ Robust (N=47)",
       "sample_note": "47 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 46.8,
@@ -28007,7 +27809,7 @@
       "recommended_base_nightly": 736.0,
       "base_diff": 54.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     },
@@ -28916,7 +28718,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=46)",
+      "sample_label": "✅ Robust (N=46)",
       "sample_note": "46 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 43.5,
@@ -28930,7 +28732,7 @@
       "recommended_base_nightly": 769.0,
       "base_diff": 88.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     },
@@ -29875,7 +29677,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=50)",
+      "sample_label": "✅ Robust (N=50)",
       "sample_note": "50 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 44.0,
@@ -29889,7 +29691,7 @@
       "recommended_base_nightly": 725.0,
       "base_diff": 44.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     },
@@ -30798,7 +30600,7 @@
         }
       ],
       "sample_significance": "ROBUST",
-      "sample_label": "\u2705 Robust (N=45)",
+      "sample_label": "✅ Robust (N=45)",
       "sample_note": "45 comps analyzed.",
       "target_percentile": 49.0,
       "our_percentile_rank": 46.7,
@@ -30812,7 +30614,7 @@
       "recommended_base_nightly": 696.0,
       "base_diff": 14.0,
       "priority_tier": "INFORMATIONAL",
-      "priority_label": "\u2705 Competitive / Long Range",
+      "priority_label": "✅ Competitive / Long Range",
       "status": "ON TARGET",
       "action_summary": ""
     }

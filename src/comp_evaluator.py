@@ -99,9 +99,13 @@ class CompEvaluator:
 
         # 1. Has Pool Check
         has_pool = any("pool" in a and "table" not in a for a in amenities_lower) or any(
-            w in text_lower for w in ["swimming pool", "private pool", "heated pool", "resort pool", "lap pool", "plunge pool"]
+            w in text_lower for w in [
+                "swimming pool", "private pool", "heated pool", "resort pool", "lap pool",
+                "plunge pool", "swim-up bar", "swim up bar", "swimup bar", "swim-up",
+                "swim up", "swimming", "swim spa", "private swimming", "pool bar"
+            ]
         )
-        if not has_pool and "pool" in text_lower:
+        if not has_pool and ("pool" in text_lower or "swim-up" in text_lower or "swim up" in text_lower):
             if not any(neg in text_lower for neg in ["no pool", "without a pool", "does not have a pool", "no swimming pool"]):
                 has_pool = True
 

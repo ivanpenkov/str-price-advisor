@@ -77,6 +77,24 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertFalse(res["is_valid_comp"])
         self.assertIn("bedroom", res["validity_reason"].lower())
 
+    def test_comp_evaluator_swim_up_bar_has_pool(self):
+        """A property mentioning a swim-up bar in its title or text must be recognized as having a pool."""
+        comp = {
+            "listing_id": "53478007",
+            "name": "Arcades,Golf,Pickleball,Theater,Gym &Swim-up Bar!",
+            "bedrooms": 7,
+            "baths": 4.5,
+            "accommodates": 14,
+            "rating": 4.70,
+            "reviews": 60,
+            "location": "Scottsdale",
+            "amenities": [],
+            "description": "Luxury home with outdoor entertainment area, swim-up bar, and arcade.",
+        }
+        res = self.evaluator.evaluate_comp(comp)
+        self.assertTrue(res["is_valid_comp"])
+        self.assertTrue(res["pool_specs"]["has_pool"])
+
     def test_adjustment_ratio_math(self):
         """Verify adjusted rate formula: adjusted_price = raw_price / ratio."""
         # 10% less desirable comp (ratio = 0.90) asking $900 -> adjusted price $1000

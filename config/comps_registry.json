@@ -123,30 +123,30 @@
       "amenities_count": 79,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.03,
+      "desirability_ratio": 1.0,
       "category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 90,
         "interior": 90,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 89.3,
+      "composite_score": 88.1,
       "rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
-      "winter_ratio": 1.03,
+      "winter_ratio": 1.0,
       "summer_ratio": 1.02,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 89.3,
+      "winter_composite_score": 88.1,
       "summer_composite_score": 88.8,
       "winter_category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 90,
         "interior": 90,
         "location": 95,
@@ -997,14 +997,14 @@
         "reputation": 94
       },
       "composite_score": 97.9,
-      "rationale": "Premium comp (23% superior desirability, Winter). Features heated pool, resort-scale pool, dedicated sports court.",
+      "rationale": "Premium comp (23% superior desirability, Winter). Features resort-scale pool, dedicated sports court, heated spa.",
       "accommodates": 16,
       "winter_ratio": 1.23,
       "summer_ratio": 1.23,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "large",
         "size_source": "Large / resort-scale pool with water features",
         "gallons": null
@@ -1025,8 +1025,8 @@
         "location": 95,
         "reputation": 94
       },
-      "winter_rationale": "Premium comp (23% superior desirability, Winter). Features heated pool, resort-scale pool, dedicated sports court.",
-      "summer_rationale": "Premium comp (23% superior desirability, Summer). Features heated pool, resort-scale pool, dedicated sports court."
+      "winter_rationale": "Premium comp (23% superior desirability, Winter). Features resort-scale pool, dedicated sports court, heated spa.",
+      "summer_rationale": "Premium comp (23% superior desirability, Summer). Features resort-scale pool, dedicated sports court, heated spa."
     },
     "628256621164272951": {
       "listing_id": "628256621164272951",
@@ -1593,31 +1593,31 @@
       "amenities_count": 55,
       "is_valid_comp": true,
       "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.99,
+      "desirability_ratio": 0.96,
       "category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 100,
         "interior": 83,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 87.4,
+      "composite_score": 86.2,
       "rationale": "Direct peer comp (near-equal quality, Winter). 8BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16,
-      "winter_ratio": 0.99,
+      "winter_ratio": 0.96,
       "summer_ratio": 0.97,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 87.4,
+      "winter_composite_score": 86.2,
       "summer_composite_score": 86.8,
       "winter_category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 100,
         "interior": 83,
         "location": 78,
@@ -2089,30 +2089,30 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.95,
       "category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 90,
         "interior": 96,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 87.1,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "winter_ratio": 0.98,
+      "composite_score": 85.9,
+      "rationale": "Moderate comp (5% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths.",
+      "winter_ratio": 0.95,
       "summer_ratio": 0.97,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 87.1,
+      "winter_composite_score": 85.9,
       "summer_composite_score": 86.5,
       "winter_category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 90,
         "interior": 96,
         "location": 82,
@@ -2125,7 +2125,7 @@
         "location": 82,
         "reputation": 88
       },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "winter_rationale": "Moderate comp (5% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths.",
       "summer_rationale": "Direct peer comp (near-equal quality, Summer). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "1625632307698164475": {
@@ -2526,29 +2526,29 @@
       "amenities_count": 79,
       "is_valid_comp": true,
       "validity_reason": "Valid 7BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.18,
-      "winter_ratio": 1.18,
+      "desirability_ratio": 1.15,
+      "winter_ratio": 1.15,
       "summer_ratio": 1.16,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "composite_score": 95.8,
-      "winter_composite_score": 95.8,
+      "composite_score": 94.6,
+      "winter_composite_score": 94.6,
       "summer_composite_score": 95.2,
       "category_scores": {
-        "outdoor": 96,
+        "outdoor": 92,
         "capacity": 100,
         "interior": 100,
         "location": 95,
         "reputation": 78
       },
       "winter_category_scores": {
-        "outdoor": 96,
+        "outdoor": 92,
         "capacity": 100,
         "interior": 100,
         "location": 95,
@@ -2561,9 +2561,9 @@
         "location": 95,
         "reputation": 78
       },
-      "rationale": "Premium comp (18% superior desirability, Winter). Features heated pool, dedicated sports court, movie theater.",
-      "winter_rationale": "Premium comp (18% superior desirability, Winter). Features heated pool, dedicated sports court, movie theater.",
-      "summer_rationale": "Premium comp (16% superior desirability, Summer). Features heated pool, dedicated sports court, movie theater.",
+      "rationale": "Premium comp (15% superior desirability, Winter). Features dedicated sports court, movie theater, heated spa.",
+      "winter_rationale": "Premium comp (15% superior desirability, Winter). Features dedicated sports court, movie theater, heated spa.",
+      "summer_rationale": "Premium comp (16% superior desirability, Summer). Features dedicated sports court, movie theater, heated spa.",
       "discovered_at_sample": "2026-09-05 manual addition",
       "accommodates": 16
     }
@@ -2648,14 +2648,14 @@
         "reputation": 98
       },
       "composite_score": 90.2,
-      "rationale": "Premium comp (5% superior desirability, Winter). Features heated pool, private tennis court, heated spa.",
+      "rationale": "Premium comp (5% superior desirability, Winter). Features private tennis court, heated spa, pool table.",
       "accommodates": 12,
       "winter_ratio": 1.05,
       "summer_ratio": 1.05,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
@@ -2676,8 +2676,8 @@
         "location": 95,
         "reputation": 98
       },
-      "winter_rationale": "Premium comp (5% superior desirability, Winter). Features heated pool, private tennis court, heated spa.",
-      "summer_rationale": "Premium comp (5% superior desirability, Summer). Features heated pool, private tennis court, heated spa."
+      "winter_rationale": "Premium comp (5% superior desirability, Winter). Features private tennis court, heated spa, pool table.",
+      "summer_rationale": "Premium comp (5% superior desirability, Summer). Features private tennis court, heated spa, pool table."
     },
     "47868708": {
       "listing_id": "47868708",
@@ -2804,31 +2804,31 @@
       "amenities_count": 46,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Phoenix.",
-      "desirability_ratio": 0.83,
+      "desirability_ratio": 0.8,
       "category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 68,
         "interior": 85,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 80.4,
-      "rationale": "Moderate comp (17% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 79.2,
+      "rationale": "Moderate comp (20% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
       "accommodates": 12,
-      "winter_ratio": 0.83,
+      "winter_ratio": 0.8,
       "summer_ratio": 0.81,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 80.4,
+      "winter_composite_score": 79.2,
       "summer_composite_score": 79.8,
       "winter_category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 68,
         "interior": 85,
         "location": 82,
@@ -2841,8 +2841,8 @@
         "location": 82,
         "reputation": 98
       },
-      "winter_rationale": "Moderate comp (17% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
-      "summer_rationale": "Moderate comp (19% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
+      "winter_rationale": "Moderate comp (20% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
+      "summer_rationale": "Moderate comp (19% lower desirability, Summer). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
     },
     "42545559": {
       "listing_id": "42545559",
@@ -2914,45 +2914,45 @@
       "amenities_count": 80,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.87,
+      "desirability_ratio": 0.94,
       "category_scores": {
-        "outdoor": 82,
+        "outdoor": 92,
         "capacity": 68,
         "interior": 96,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 82.3,
-      "rationale": "Moderate comp (13% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
+      "composite_score": 85.3,
+      "rationale": "Moderate comp (6% lower desirability, Winter). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 12,
-      "winter_ratio": 0.87,
-      "summer_ratio": 0.88,
+      "winter_ratio": 0.94,
+      "summer_ratio": 0.9,
       "pool_specs": {
         "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
+        "heating": "free",
+        "heating_source": "Explicit free / complimentary pool heat mentioned in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 82.3,
-      "summer_composite_score": 82.9,
+      "winter_composite_score": 85.3,
+      "summer_composite_score": 83.5,
       "winter_category_scores": {
-        "outdoor": 82,
+        "outdoor": 92,
         "capacity": 68,
         "interior": 96,
         "location": 78,
         "reputation": 98
       },
       "summer_category_scores": {
-        "outdoor": 84,
+        "outdoor": 86,
         "capacity": 68,
         "interior": 96,
         "location": 78,
         "reputation": 98
       },
-      "winter_rationale": "Moderate comp (13% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
-      "summer_rationale": "Moderate comp (12% lower desirability, Summer). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
+      "winter_rationale": "Moderate comp (6% lower desirability, Winter). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "summer_rationale": "Moderate comp (10% lower desirability, Summer). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
     },
     "1322763359166708040": {
       "listing_id": "1322763359166708040",
@@ -3079,31 +3079,31 @@
       "amenities_count": 70,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.9,
+      "desirability_ratio": 0.88,
       "category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 80,
         "interior": 82,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 83.8,
-      "rationale": "Moderate comp (10% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths.",
+      "composite_score": 82.5,
+      "rationale": "Moderate comp (12% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths.",
       "accommodates": 12,
-      "winter_ratio": 0.9,
+      "winter_ratio": 0.88,
       "summer_ratio": 0.89,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 83.8,
+      "winter_composite_score": 82.5,
       "summer_composite_score": 83.2,
       "winter_category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 80,
         "interior": 82,
         "location": 95,
@@ -3116,8 +3116,8 @@
         "location": 95,
         "reputation": 88
       },
-      "winter_rationale": "Moderate comp (10% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths.",
-      "summer_rationale": "Moderate comp (11% lower desirability, Summer). Features heated pool, but noted gaps: 4.0 baths."
+      "winter_rationale": "Moderate comp (12% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths.",
+      "summer_rationale": "Moderate comp (11% lower desirability, Summer). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths."
     },
     "931203617899460144": {
       "listing_id": "931203617899460144",
@@ -3189,31 +3189,31 @@
       "amenities_count": 79,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.01,
+      "desirability_ratio": 0.98,
       "category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 78,
         "interior": 96,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 88.5,
+      "composite_score": 87.3,
       "rationale": "Direct peer comp (near-equal quality, Winter). 5BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16,
-      "winter_ratio": 1.01,
+      "winter_ratio": 0.98,
       "summer_ratio": 1.0,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 88.5,
+      "winter_composite_score": 87.3,
       "summer_composite_score": 88.0,
       "winter_category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 78,
         "interior": 96,
         "location": 95,
@@ -3683,31 +3683,31 @@
       "amenities_count": 64,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Arcadia.",
-      "desirability_ratio": 1.02,
+      "desirability_ratio": 1.0,
       "category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 91,
         "interior": 82,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 89.0,
+      "composite_score": 87.8,
       "rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 5.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 15,
-      "winter_ratio": 1.02,
+      "winter_ratio": 1.0,
       "summer_ratio": 1.01,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 89.0,
+      "winter_composite_score": 87.8,
       "summer_composite_score": 88.4,
       "winter_category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 91,
         "interior": 82,
         "location": 95,
@@ -3738,31 +3738,31 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 0.92,
+      "desirability_ratio": 0.89,
       "category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 68,
         "interior": 96,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 84.5,
-      "rationale": "Moderate comp (8% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 83.3,
+      "rationale": "Moderate comp (11% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
       "accommodates": 12,
-      "winter_ratio": 0.92,
+      "winter_ratio": 0.89,
       "summer_ratio": 0.91,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 84.5,
+      "winter_composite_score": 83.3,
       "summer_composite_score": 84.0,
       "winter_category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 68,
         "interior": 96,
         "location": 95,
@@ -3775,8 +3775,8 @@
         "location": 95,
         "reputation": 98
       },
-      "winter_rationale": "Moderate comp (8% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
-      "summer_rationale": "Moderate comp (9% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
+      "winter_rationale": "Moderate comp (11% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
+      "summer_rationale": "Moderate comp (9% lower desirability, Summer). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
     },
     "746195521284356998": {
       "listing_id": "746195521284356998",
@@ -4120,31 +4120,31 @@
       "amenities_count": 60,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.08,
+      "desirability_ratio": 1.05,
       "category_scores": {
-        "outdoor": 91,
+        "outdoor": 87,
         "capacity": 84,
         "interior": 96,
         "location": 95,
         "reputation": 98
       },
-      "composite_score": 91.5,
-      "rationale": "Premium comp (8% superior desirability, Winter). Features heated pool, heated spa, pool table.",
+      "composite_score": 90.3,
+      "rationale": "Premium comp (5% superior desirability, Winter). Features heated spa, pool table, Scottsdale location premium.",
       "accommodates": 14,
-      "winter_ratio": 1.08,
+      "winter_ratio": 1.05,
       "summer_ratio": 1.07,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 91.5,
+      "winter_composite_score": 90.3,
       "summer_composite_score": 91.0,
       "winter_category_scores": {
-        "outdoor": 91,
+        "outdoor": 87,
         "capacity": 84,
         "interior": 96,
         "location": 95,
@@ -4157,8 +4157,8 @@
         "location": 95,
         "reputation": 98
       },
-      "winter_rationale": "Premium comp (8% superior desirability, Winter). Features heated pool, heated spa, pool table.",
-      "summer_rationale": "Premium comp (7% superior desirability, Summer). Features heated pool, heated spa, pool table."
+      "winter_rationale": "Premium comp (5% superior desirability, Winter). Features heated spa, pool table, Scottsdale location premium.",
+      "summer_rationale": "Premium comp (7% superior desirability, Summer). Features heated spa, pool table, Scottsdale location premium."
     },
     "755820874037012535": {
       "listing_id": "755820874037012535",
@@ -4184,14 +4184,14 @@
         "reputation": 98
       },
       "composite_score": 97.8,
-      "rationale": "Premium comp (22% superior desirability, Winter). Features heated pool, resort-scale pool, dedicated sports court.",
+      "rationale": "Premium comp (22% superior desirability, Winter). Features resort-scale pool, dedicated sports court, heated spa.",
       "accommodates": 16,
       "winter_ratio": 1.22,
       "summer_ratio": 1.22,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "large",
         "size_source": "Large / resort-scale pool with water features",
         "gallons": null
@@ -4212,8 +4212,8 @@
         "location": 95,
         "reputation": 98
       },
-      "winter_rationale": "Premium comp (22% superior desirability, Winter). Features heated pool, resort-scale pool, dedicated sports court.",
-      "summer_rationale": "Premium comp (22% superior desirability, Summer). Features heated pool, resort-scale pool, dedicated sports court."
+      "winter_rationale": "Premium comp (22% superior desirability, Winter). Features resort-scale pool, dedicated sports court, heated spa.",
+      "summer_rationale": "Premium comp (22% superior desirability, Summer). Features resort-scale pool, dedicated sports court, heated spa."
     },
     "739707480178231807": {
       "listing_id": "739707480178231807",
@@ -4394,31 +4394,31 @@
       "amenities_count": 60,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 1.09,
+      "desirability_ratio": 1.08,
       "category_scores": {
-        "outdoor": 100,
+        "outdoor": 98,
         "capacity": 96,
         "interior": 75,
         "location": 95,
         "reputation": 88
       },
-      "composite_score": 92.0,
-      "rationale": "Premium comp (9% superior desirability, Winter). Features heated pool, private tennis court, heated spa.",
+      "composite_score": 91.5,
+      "rationale": "Premium comp (8% superior desirability, Winter). Features private tennis court, heated spa, Scottsdale location premium.",
       "accommodates": 14,
-      "winter_ratio": 1.09,
+      "winter_ratio": 1.08,
       "summer_ratio": 1.09,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 92.0,
+      "winter_composite_score": 91.5,
       "summer_composite_score": 92.0,
       "winter_category_scores": {
-        "outdoor": 100,
+        "outdoor": 98,
         "capacity": 96,
         "interior": 75,
         "location": 95,
@@ -4431,8 +4431,8 @@
         "location": 95,
         "reputation": 88
       },
-      "winter_rationale": "Premium comp (9% superior desirability, Winter). Features heated pool, private tennis court, heated spa.",
-      "summer_rationale": "Premium comp (9% superior desirability, Summer). Features heated pool, private tennis court, heated spa."
+      "winter_rationale": "Premium comp (8% superior desirability, Winter). Features private tennis court, heated spa, Scottsdale location premium.",
+      "summer_rationale": "Premium comp (9% superior desirability, Summer). Features private tennis court, heated spa, Scottsdale location premium."
     },
     "16363441": {
       "listing_id": "16363441",
@@ -4450,30 +4450,30 @@
       "amenities_count": 75,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.98,
+      "desirability_ratio": 0.95,
       "category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 90,
         "interior": 96,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 87.1,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "winter_ratio": 0.98,
+      "composite_score": 85.9,
+      "rationale": "Moderate comp (5% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths.",
+      "winter_ratio": 0.95,
       "summer_ratio": 0.97,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 87.1,
+      "winter_composite_score": 85.9,
       "summer_composite_score": 86.5,
       "winter_category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 90,
         "interior": 96,
         "location": 82,
@@ -4486,7 +4486,7 @@
         "location": 82,
         "reputation": 88
       },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
+      "winter_rationale": "Moderate comp (5% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths.",
       "summer_rationale": "Direct peer comp (near-equal quality, Summer). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "1371960459560609432": {
@@ -4779,45 +4779,45 @@
       "amenities_count": 59,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.93,
+      "desirability_ratio": 1.05,
       "category_scores": {
-        "outdoor": 75,
+        "outdoor": 93,
         "capacity": 100,
         "interior": 77,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 85.0,
-      "rationale": "Moderate comp (7% lower desirability, Winter). Features resort-scale pool, but noted gaps: unheated pool in winter.",
+      "composite_score": 90.4,
+      "rationale": "Premium comp (5% superior desirability, Winter). Features resort-scale pool, dedicated sports court, heated spa.",
       "accommodates": 14,
-      "winter_ratio": 0.93,
-      "summer_ratio": 1.04,
+      "winter_ratio": 1.05,
+      "summer_ratio": 1.07,
       "pool_specs": {
         "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "large",
         "size_source": "Large / resort-scale pool with water features",
         "gallons": null
       },
-      "winter_composite_score": 85.0,
-      "summer_composite_score": 89.8,
+      "winter_composite_score": 90.4,
+      "summer_composite_score": 91.0,
       "winter_category_scores": {
-        "outdoor": 75,
+        "outdoor": 93,
         "capacity": 100,
         "interior": 77,
         "location": 82,
         "reputation": 98
       },
       "summer_category_scores": {
-        "outdoor": 91,
+        "outdoor": 95,
         "capacity": 100,
         "interior": 77,
         "location": 82,
         "reputation": 98
       },
-      "winter_rationale": "Moderate comp (7% lower desirability, Winter). Features resort-scale pool, but noted gaps: unheated pool in winter.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). 6BR / 5.5BA estate matching Villa del Sol's capacity and luxury tier."
+      "winter_rationale": "Premium comp (5% superior desirability, Winter). Features resort-scale pool, dedicated sports court, heated spa.",
+      "summer_rationale": "Premium comp (7% superior desirability, Summer). Features resort-scale pool, dedicated sports court, heated spa."
     },
     "1254737517099224843": {
       "listing_id": "1254737517099224843",
@@ -5109,31 +5109,31 @@
       "amenities_count": 88,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 1.0,
+      "desirability_ratio": 0.98,
       "category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 88,
         "interior": 96,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 88.1,
+      "composite_score": 86.9,
       "rationale": "Direct peer comp (near-equal quality, Winter). 5BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16,
-      "winter_ratio": 1.0,
+      "winter_ratio": 0.98,
       "summer_ratio": 0.99,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 88.1,
+      "winter_composite_score": 86.9,
       "summer_composite_score": 87.5,
       "winter_category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 88,
         "interior": 96,
         "location": 82,
@@ -5384,31 +5384,31 @@
       "amenities_count": 58,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.86,
+      "desirability_ratio": 0.84,
       "category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 74,
         "interior": 83,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 82.0,
-      "rationale": "Moderate comp (14% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 2.5 baths.",
+      "composite_score": 80.8,
+      "rationale": "Moderate comp (16% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
       "accommodates": 14,
-      "winter_ratio": 0.86,
+      "winter_ratio": 0.84,
       "summer_ratio": 0.85,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 82.0,
+      "winter_composite_score": 80.8,
       "summer_composite_score": 81.4,
       "winter_category_scores": {
-        "outdoor": 86,
+        "outdoor": 82,
         "capacity": 74,
         "interior": 83,
         "location": 82,
@@ -5421,8 +5421,8 @@
         "location": 82,
         "reputation": 88
       },
-      "winter_rationale": "Moderate comp (14% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 2.5 baths.",
-      "summer_rationale": "Moderate comp (15% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 2.5 baths."
+      "winter_rationale": "Moderate comp (16% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
+      "summer_rationale": "Moderate comp (15% lower desirability, Summer). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
     },
     "52867134": {
       "listing_id": "52867134",
@@ -5439,45 +5439,45 @@
       "amenities_count": 60,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.85,
+      "desirability_ratio": 0.89,
       "category_scores": {
-        "outdoor": 86,
+        "outdoor": 92,
         "capacity": 68,
         "interior": 85,
         "location": 82,
         "reputation": 94
       },
-      "composite_score": 81.5,
-      "rationale": "Moderate comp (15% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "composite_score": 83.3,
+      "rationale": "Moderate comp (11% lower desirability, Winter). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
       "accommodates": 13,
-      "winter_ratio": 0.85,
-      "summer_ratio": 0.84,
+      "winter_ratio": 0.89,
+      "summer_ratio": 0.85,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "free",
+        "heating_source": "Explicit free / complimentary pool heat mentioned in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 81.5,
-      "summer_composite_score": 80.9,
+      "winter_composite_score": 83.3,
+      "summer_composite_score": 81.5,
       "winter_category_scores": {
-        "outdoor": 86,
+        "outdoor": 92,
         "capacity": 68,
         "interior": 85,
         "location": 82,
         "reputation": 94
       },
       "summer_category_scores": {
-        "outdoor": 84,
+        "outdoor": 86,
         "capacity": 68,
         "interior": 85,
         "location": 82,
         "reputation": 94
       },
-      "winter_rationale": "Moderate comp (15% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
-      "summer_rationale": "Moderate comp (16% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
+      "winter_rationale": "Moderate comp (11% lower desirability, Winter). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "summer_rationale": "Moderate comp (15% lower desirability, Summer). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
     },
     "740490197885439898": {
       "listing_id": "740490197885439898",
@@ -5494,31 +5494,31 @@
       "amenities_count": 57,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.88,
+      "desirability_ratio": 0.85,
       "category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 79,
         "interior": 83,
         "location": 82,
         "reputation": 98
       },
-      "composite_score": 82.8,
-      "rationale": "Moderate comp (12% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 4.0 baths.",
+      "composite_score": 81.5,
+      "rationale": "Moderate comp (15% lower desirability, Winter). Features movie theater, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
       "accommodates": 14,
-      "winter_ratio": 0.88,
+      "winter_ratio": 0.85,
       "summer_ratio": 0.87,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 82.8,
+      "winter_composite_score": 81.5,
       "summer_composite_score": 82.2,
       "winter_category_scores": {
-        "outdoor": 81,
+        "outdoor": 77,
         "capacity": 79,
         "interior": 83,
         "location": 82,
@@ -5531,8 +5531,8 @@
         "location": 82,
         "reputation": 98
       },
-      "winter_rationale": "Moderate comp (12% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 4.0 baths.",
-      "summer_rationale": "Moderate comp (13% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 4.0 baths."
+      "winter_rationale": "Moderate comp (15% lower desirability, Winter). Features movie theater, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
+      "summer_rationale": "Moderate comp (13% lower desirability, Summer). Features movie theater, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
     },
     "1734227719495774011": {
       "listing_id": "1734227719495774011",
@@ -5549,31 +5549,31 @@
       "amenities_count": 71,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.03,
+      "desirability_ratio": 1.0,
       "category_scores": {
-        "outdoor": 96,
+        "outdoor": 92,
         "capacity": 83,
         "interior": 96,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 89.2,
+      "composite_score": 88.0,
       "rationale": "Direct peer comp (near-equal quality, Winter). 5BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 20,
-      "winter_ratio": 1.03,
+      "winter_ratio": 1.0,
       "summer_ratio": 1.02,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 89.2,
+      "winter_composite_score": 88.0,
       "summer_composite_score": 88.7,
       "winter_category_scores": {
-        "outdoor": 96,
+        "outdoor": 92,
         "capacity": 83,
         "interior": 96,
         "location": 78,
@@ -5822,31 +5822,31 @@
       "amenities_count": 23,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.94,
       "category_scores": {
-        "outdoor": 100,
+        "outdoor": 97,
         "capacity": 78,
         "interior": 81,
         "location": 78,
         "reputation": 88
       },
-      "composite_score": 86.2,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 5BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 85.3,
+      "rationale": "Moderate comp (6% lower desirability, Winter). Features dedicated sports court, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
       "accommodates": 12,
-      "winter_ratio": 0.96,
+      "winter_ratio": 0.94,
       "summer_ratio": 0.95,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 86.2,
+      "winter_composite_score": 85.3,
       "summer_composite_score": 85.9,
       "winter_category_scores": {
-        "outdoor": 100,
+        "outdoor": 97,
         "capacity": 78,
         "interior": 81,
         "location": 78,
@@ -5859,8 +5859,8 @@
         "location": 78,
         "reputation": 88
       },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 5BR / 4.5BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Moderate comp (5% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, Mesa location discount."
+      "winter_rationale": "Moderate comp (6% lower desirability, Winter). Features dedicated sports court, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
+      "summer_rationale": "Moderate comp (5% lower desirability, Summer). Features dedicated sports court, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
     },
     "1494470117199033651": {
       "listing_id": "1494470117199033651",

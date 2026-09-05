@@ -151,22 +151,41 @@ class CompEvaluator:
         free_patterns = [
             "free pool heat", "free heated pool", "free pool heating", "complimentary pool heat",
             "complimentary heated pool", "pool heat included", "pool heat is included",
-            "pool heat is always included", "no pool heat fee", "|free pool heat|",
-            "free heated", "heated pool included", "heated pool is free"
+            "pool heat is always included", "no pool heat fee", "no pool heating fee",
+            "no extra charge for pool", "no extra charge for pool heat", "no extra fee for pool",
+            "no additional cost for pool", "no additional fee for pool", "no extra charge for pool heat",
+            "|free pool heat|", "free heated", "heated pool included", "heated pool is free",
+            "heated pool at no extra charge", "heated pool, no fees", "pool is heated at no extra charge",
         ]
         fee_patterns = [
-            "pool heat fee", "pool heating fee", "fee to heat", "heat is available for $",
-            "pool heat is $", "pool heat is available upon request", "additional fee for pool heat",
-            "pool heating upon request", "pool heating available upon request", "optional pool heat",
-            "optional pool heating", "pool heat (optional)", "pool heat optional", "pool heating (optional)",
-            "pool heating optional", "offer pool heating at $", "pool heating at $", "pool heat at $",
-            "charge for pool heating", "charge for pool heat", "fee for pool heat", "fee for pool heating",
-            "pool heat avail", "pool heating available for a fee",
+            "pool heat fee", "pool heating fee", "fee to heat", "fees apply heating pool",
+            "fee applies heating pool", "heat is available for $", "heating is available for $",
+            "heating available for $", "heating available for an additional", "heat available for an additional",
+            "heating is available for an additional", "pool heat is $", "pool heating is $",
+            "pool heat is available upon request", "pool heating is available upon request",
+            "pool heat available upon request", "pool heating available upon request",
+            "pool heat upon request", "pool heating upon request", "additional fee for pool heat",
+            "additional fee for pool heating", "optional pool heat", "optional pool heating",
+            "pool heat (optional)", "pool heat optional", "pool heating (optional)", "pool heating optional",
+            "pool heating is optional", "pool heat is optional", "offer pool heating at $",
+            "pool heating at $", "pool heat at $", "charge for pool heating", "charge for pool heat",
+            "fee for pool heat", "fee for pool heating", "pool heat avail", "pool heating available for a fee",
+            "pool heating charges", "pool heat charges", "daily fee for heat", "daily fee for pool heat",
+            "daily fee for heating", "heat cost extra", "heat costs extra", "heating costs extra",
+            "paid heating fee", "paid pool heating fee", "can be heated (fee applies)",
+            "can be heated (extra fee", "can be heated for a fee", "pool heating may require an additional fee",
         ]
         fee_regex = re.compile(
-            r"(?:heated\s+pool|pool\s+heat(?:ing)?|heat(?:ing)?\s+(?:the\s+)?pool)[^$\.\n]*\$\d+"
-            r"|\$\d+[^.\n]*(?:pool\s+heat|to\s+heat\s+the\s+pool|for\s+pool\s+heat)"
-            r"|pool\s+heat[^\.\$]*\$\d+",
+            r"(?:"
+              r"(?:pool(?:\s*(?:and|&|/|\+)\s*(?:spa|hot\s*tub))?|spa)\s*(?:[a-z\s]{0,25})?heat(?:ed|ing)?[^\$!;]{0,100}(?:\$\d+|additional\s+(?:fee|cost|charge|rate)|extra\s+(?:fee|cost|charge|daily)|fee\s+applies|fees\s+apply|paid\s+heating|not\s+included|fees?:)"
+              r"|(?:heated\s+pool|heat(?:ing)?\s+(?:of\s+)?(?:the\s+)?pool)[^\$!;]{0,100}(?:\$\d+|additional\s+(?:fee|cost|charge|rate)|extra\s+(?:fee|cost|charge)|fee\s+applies|fees\s+apply|paid\s+heating|fee\b|charge\b|cost\s+extra)"
+              r"|pool\s*[^(.\n]{0,30}\([^)]*(?:fee|\$\d+|extra\s+cost|additional\s+cost|additional\s+fee|heat\s+cost\s+extra)[^)]*\)"
+              r"|pool\s*(?:and\s+spa\s+)?heat(?:ing)?\s*(?:\([^)]*\))?\s*:\s*\$\d+"
+              r"|\$\d+[^!;]{0,80}(?:pool\s+heat|to\s+heat\s+(?:up\s+)?(?:the\s+)?(?:swimming\s+)?pool|for\s+pool\s+heat|heat(?:ing)?\s+the\s+pool)"
+              r"|additional\s+fee\s+of\s+\$\d+[^!;]{0,80}(?:heat|pool)"
+              r"|heating\s+pool\s+requires[^!;]{0,40}additional\s+charge"
+              r"|pool\s+heating\s*(?:\([^)]*\))?\s*fees?:"
+            r")",
             re.IGNORECASE,
         )
 

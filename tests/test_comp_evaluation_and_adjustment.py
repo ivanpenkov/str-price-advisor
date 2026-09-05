@@ -176,6 +176,29 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertEqual(res["pool_specs"]["heating"], "fee")
         self.assertIn("fee disclosed", res["pool_specs"]["heating_source"].lower())
 
+    def test_comp_evaluator_pool_and_spa_heating_fee(self):
+        """Property 16363441 disclosing 'Pool and spa heating are available for an additional $60/day' must be classified as fee."""
+        comp = {
+            "listing_id": "16363441",
+            "name": "Family, Golf, Friends 6BR/4BA, heated pool/spa.",
+            "bedrooms": 6,
+            "baths": 4.0,
+            "accommodates": 19,
+            "rating": 4.95,
+            "reviews": 100,
+            "location": "Chandler, AZ",
+            "amenities": ["Private outdoor pool - available all year, heated, pool toys", "Private hot tub"],
+            "description": (
+                "Step outside into your own private Arizona oasis featuring:\n"
+                "Fenced heated pool & spa\n"
+                "Pool and spa heating are available for an additional $60/day.\n"
+            ),
+        }
+        res = self.evaluator.evaluate_comp(comp)
+        self.assertTrue(res["is_valid_comp"])
+        self.assertEqual(res["pool_specs"]["heating"], "fee")
+        self.assertIn("fee disclosed", res["pool_specs"]["heating_source"].lower())
+
 
 
     def test_adjustment_ratio_math(self):

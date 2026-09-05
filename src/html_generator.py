@@ -1982,11 +1982,15 @@ class HTMLDashboardGenerator:
             if raw_snippet:
                 parts = [p.strip() for p in raw_snippet.split("|") if p.strip()]
                 for p in reversed(parts):
-                    if not any(w in p.lower() for w in ["guest favorite", "superhost", "rare find", "home in", "entire home", "villa in"]):
+                    p_lower = p.lower()
+                    if "$" in p or "nights" in p_lower or "single comp sweep" in p_lower:
+                        continue
+                    if not any(w in p_lower for w in ["guest favorite", "superhost", "rare find", "home in", "entire home", "villa in"]):
                         name = p
                         break
-            if not name or name.lower() in ["home", "villa", "entire home"]:
-                name = c.get("name") or "Luxury Estate"
+            if not name or name.lower() in ["home", "villa", "entire home"] or "$" in name:
+                cid_str = str(cid)
+                name = self.comps_dict.get(cid_str, {}).get("name") or c.get("title") or c.get("name") or "Luxury Estate"
 
             loc = c.get("location", "Phoenix Valley")
             cid_str = str(cid)

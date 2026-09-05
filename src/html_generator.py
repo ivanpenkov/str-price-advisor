@@ -1136,7 +1136,6 @@ class HTMLDashboardGenerator:
                 <th>Comps (N)</th>
                 <th>Kivoya</th>
                 <th>Effective Total</th>
-                <th>Comp Median</th>
                 <th>Comp Target</th>
                 <th>Recommended Base Rate</th>
               </tr>
@@ -1753,7 +1752,6 @@ class HTMLDashboardGenerator:
 
         if (visibleRates.length > 0) {{
           visibleRates.sort((a, b) => a - b);
-          const p50 = getPercentile(visibleRates, 50);
           const pTarget = getPercentile(visibleRates, targetPct);
 
           const diff = pTarget > 0 ? (((ourEff - pTarget) / pTarget) * 100) : 0;
@@ -1790,9 +1788,6 @@ class HTMLDashboardGenerator:
               parentRow.style.borderLeft = '4px solid transparent';
             }}
           }}
-
-          const p50El = document.getElementById('p50-' + rowId);
-          if (p50El) p50El.textContent = '$' + Math.round(p50);
 
           const targetPctLabel = (targetPct % 1 === 0) ? targetPct.toFixed(0) : targetPct.toFixed(1);
           const targetEl = document.getElementById('target-' + rowId);
@@ -1845,8 +1840,6 @@ class HTMLDashboardGenerator:
             parentRow.dataset.tier = 'none';
             parentRow.style.borderLeft = '4px solid transparent';
           }}
-          const p50El = document.getElementById('p50-' + rowId);
-          if (p50El) p50El.textContent = 'N/A';
           const targetEl = document.getElementById('target-' + rowId);
           if (targetEl) targetEl.textContent = 'N/A';
           const diffEl = document.getElementById('diff-' + rowId);
@@ -2374,12 +2367,11 @@ class HTMLDashboardGenerator:
                 <td id="n-{row_id}">{n_html_adj}</td>
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
                 <td id="eff-{row_id}" style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
-                <td id="p50-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#94a3b8;">${p50_adj:.0f}</td>
                 <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${target_adj:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({target_pct_str})</span></td>
                 <td id="rec-{row_id}"><span class="rec-price">${rec_adj:.0f}</span></td>
               </tr>
               <tr id="{row_id}" class="comp-details-row" style="display: none;">
-                <td colspan="11">
+                <td colspan="10">
                   {subtable_html}
                 </td>
               </tr>

@@ -415,6 +415,40 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertNotIn("unheated pool in winter", res["winter_rationale"])
         self.assertGreaterEqual(res["winter_ratio"], 0.80)
 
+    def test_showstopper_escape_1269286452215821303_evaluation(self):
+        """Comp 1269286452215821303 (The Showstopper Escape) must be evaluated as a valid 6BR luxury comp with heated pool."""
+        comp_meta = {
+            "listing_id": "1269286452215821303",
+            "name": "The Showstopper Escape",
+            "location": "Scottsdale",
+            "bedrooms": None,  # Test fallback when deferred state returned None
+            "beds": None,
+            "baths": None,
+            "rating": 5.0,
+            "reviews": 25,
+        }
+        enriched = {
+            "listing_id": "1269286452215821303",
+            "title": "The Showstopper Escape",
+            "description": "Luxury Scottsdale villa with heated pool, winter sun & resort vibes. 6BR for up to 22, minutes from Old Town, Kierland & Scottsdale Quarter. Perfect for February Waste Management Open, family, or group getaway. Heated pool & spa, fire pit, pickleball, putting green, arcade, movie lounge, golf simulator, half-court basketball, indoor/outdoor dining. Keyless entry • Fast response • Professionally cleaned.\n\nSHORT TERM RENTAL LICENSE: 2037435",
+            "bedrooms": None,
+            "beds": None,
+            "baths": 5.5,
+            "guests": None,
+            "overview": ["22 guests", "6 bedrooms", "6 beds", "5.5 baths"],
+            "amenities": ["Heated pool", "Hot tub", "Pickleball court", "Basketball court", "Putting green", "Arcade"],
+            "rating": 5.0,
+            "reviews": 25,
+        }
+        res = self.evaluator.evaluate_comp(comp_meta, enriched_data=enriched)
+        self.assertTrue(res["is_valid_comp"])
+        self.assertTrue(res["pool_specs"]["has_pool"])
+        self.assertEqual(res["pool_specs"]["heating"], "standard_heated")
+        self.assertEqual(res["category_scores"]["outdoor"], 100)
+        self.assertEqual(res["category_scores"]["capacity"], 100)
+        self.assertGreaterEqual(res["winter_ratio"], 1.15)
+        self.assertIn("heated pool", res["winter_rationale"].lower())
+
 
 if __name__ == "__main__":
     unittest.main()

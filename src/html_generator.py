@@ -32,6 +32,8 @@ def _is_spec_or_generic_title(s: str) -> bool:
         return True
     if any(b in s_lower for b in ["guest favorite", "superhost", "rare find", "top guest favorite"]):
         return True
+    if s_lower.startswith("airbnb") or s_lower == "airbnb" or "vacation rentals, cabins" in s_lower or "vacation homes & condo rentals" in s_lower:
+        return True
     if any(s_lower.startswith(pref) for pref in ["home in", "entire home in", "villa in", "room in", "cabin in", "chalet in", "place to stay in"]):
         return True
     if re.search(r"^\d+\s*bedrooms?$", s_lower):

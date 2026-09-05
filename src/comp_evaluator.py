@@ -533,26 +533,38 @@ class CompEvaluator:
             except Exception:
                 sqft = None
 
-        br = comp_meta.get("bedrooms") or enriched.get("bedrooms", 5)
-        try:
-            br = int(br)
-        except Exception:
-            br = 5
+        br = comp_meta.get("bedrooms") or enriched.get("bedrooms")
+        if not br:
+            m_br = re.search(r"(\d+)\s*(?:br|bd|bedrooms?)\b", all_text, re.IGNORECASE)
+            br = int(m_br.group(1)) if m_br else 5
+        else:
+            try:
+                br = int(br)
+            except Exception:
+                br = 5
 
-        ba = comp_meta.get("baths") or enriched.get("baths", 4.0)
-        try:
-            ba = float(ba)
-        except Exception:
-            ba = 4.0
+        ba = comp_meta.get("baths") or enriched.get("baths")
+        if not ba:
+            m_ba = re.search(r"(\d+(?:\.\d+)?)\s*(?:ba|baths?|bathrooms?)\b", all_text, re.IGNORECASE)
+            ba = float(m_ba.group(1)) if m_ba else 4.0
+        else:
+            try:
+                ba = float(ba)
+            except Exception:
+                ba = 4.0
 
-        beds = comp_meta.get("beds") or enriched.get("beds", br)
-        try:
-            beds = int(beds)
-        except Exception:
-            beds = br
+        beds = comp_meta.get("beds") or enriched.get("beds")
+        if not beds:
+            m_beds = re.search(r"(\d+)\s*beds?\b(?!room)", all_text, re.IGNORECASE)
+            beds = int(m_beds.group(1)) if m_beds else br
+        else:
+            try:
+                beds = int(beds)
+            except Exception:
+                beds = br
 
         # Determine guest capacity
-        guests = comp_meta.get("guests") or comp_meta.get("max_guests") or comp_meta.get("accommodates")
+        guests = comp_meta.get("guests") or comp_meta.get("max_guests") or comp_meta.get("accommodates") or enriched.get("guests")
         if not guests:
             for item in enriched.get("overview", []):
                 if "guest" in item.lower():
@@ -561,10 +573,14 @@ class CompEvaluator:
                         guests = int(digits)
                         break
         if not guests:
+            m_g = re.search(r"(?:up to|sleeps|accommodates)\s*(\d+)", all_text, re.IGNORECASE)
+            if m_g:
+                guests = int(m_g.group(1))
+        if not guests:
             guests = max(12, beds * 2) if br >= 5 else (beds * 2)
         else:
             try:
-                guests = int(guests)
+                guests = int(str(guests).replace("+", ""))
             except Exception:
                 guests = 14
 

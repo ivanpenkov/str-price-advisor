@@ -162,6 +162,20 @@ class TestTitleExtraction(unittest.TestCase):
         cleaned_suffix = enricher.clean_profile_title(with_suffix)
         self.assertEqual(cleaned_suffix, title)
 
+    def test_generic_airbnb_page_title_rejected_in_favor_of_snippet(self):
+        """clean_profile_title and extract_clean_listing_title must reject generic Airbnb page titles."""
+        from src.listing_enricher import ListingEnricher
+        generic_airbnb = "Airbnb: Vacation Rentals, Cabins, Beach Houses, Unique Homes & Experiences"
+        self.assertIsNone(ListingEnricher.clean_profile_title(generic_airbnb))
+
+        snippet = "Guest favorite | Guest favorite | Home in Scottsdale | The Showstopper Escape"
+        res = extract_clean_listing_title(
+            raw_snippet=snippet,
+            default_title=generic_airbnb,
+            registered_name=generic_airbnb,
+        )
+        self.assertEqual(res, "The Showstopper Escape")
+
 
 if __name__ == "__main__":
     unittest.main()

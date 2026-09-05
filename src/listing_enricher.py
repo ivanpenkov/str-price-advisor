@@ -180,6 +180,8 @@ class ListingEnricher:
             return None
 
         t_lower = t.lower()
+        if t_lower.startswith("airbnb") or t_lower == "airbnb" or "vacation rentals, cabins" in t_lower or "vacation homes & condo rentals" in t_lower:
+            return None
         if any(t_lower.startswith(pref) for pref in [
             "home in ", "entire home in ", "villa in ", "room in ",
             "cabin in ", "place to stay in ", "guesthouse in ", "townhouse in "
@@ -275,6 +277,38 @@ class ListingEnricher:
         guests = deferred_parsed.get("guests")
 
         overview = dom_overview or []
+        for item in overview:
+            if bedrooms is None:
+                m = re.search(r"(\d+)\s*bedrooms?\b", item, re.IGNORECASE)
+                if m:
+                    bedrooms = int(m.group(1))
+            if beds is None:
+                m = re.search(r"(\d+)\s*beds?\b(?!room)", item, re.IGNORECASE)
+                if m:
+                    beds = int(m.group(1))
+            if baths is None:
+                m = re.search(r"(\d+(?:\.\d+)?)\s*baths?\b", item, re.IGNORECASE)
+                if m:
+                    baths = float(m.group(1))
+            if guests is None:
+                m = re.search(r"(\d+\+?)\s*guests?\b", item, re.IGNORECASE)
+                if m:
+                    guests = m.group(1)
+
+        if description:
+            if bedrooms is None:
+                m = re.search(r"(\d+)\s*(?:br|bd|bedrooms?)\b", description, re.IGNORECASE)
+                if m:
+                    bedrooms = int(m.group(1))
+            if baths is None:
+                m = re.search(r"(\d+(?:\.\d+)?)\s*(?:ba|baths?|bathrooms?)\b", description, re.IGNORECASE)
+                if m:
+                    baths = float(m.group(1))
+            if guests is None:
+                m = re.search(r"(?:up to|sleeps|accommodates)\s*(\d+)", description, re.IGNORECASE)
+                if m:
+                    guests = m.group(1)
+
         if not overview:
             overview = []
             if guests:

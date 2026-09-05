@@ -128,22 +128,35 @@ class CompManager:
 
         # 2. Evaluate comp against Villa del Sol
         print("🎯 Evaluating comp with 5-factor luxury rubric against Villa del Sol...")
+        specs_lookup = self._load_specs().get(listing_id, {})
+        title = enriched.get("title") or specs_lookup.get("title") or f"Luxury Estate {listing_id}"
+        bedrooms = enriched.get("bedrooms") or specs_lookup.get("bedrooms") or 6
+        beds = enriched.get("beds") or specs_lookup.get("beds") or 10
+        baths = enriched.get("baths") or specs_lookup.get("baths") or 4.0
+        loc = enriched.get("address", {}).get("addressLocality") or specs_lookup.get("location") or "Scottsdale"
+        rating = enriched.get("rating") or specs_lookup.get("rating") or 4.9
+        reviews = enriched.get("reviews") or specs_lookup.get("reviews") or 10
+
         raw_meta = {
             "listing_id": listing_id,
-            "name": enriched.get("title", f"Luxury Estate {listing_id}"),
-            "location": enriched.get("address", {}).get("addressLocality", "Scottsdale"),
-            "bedrooms": enriched.get("bedrooms", 6),
-            "beds": enriched.get("beds", 10),
-            "baths": enriched.get("baths", 4.0),
-            "rating": enriched.get("rating", 4.9),
-            "reviews": enriched.get("reviews", 10),
+            "name": title,
+            "location": loc,
+            "bedrooms": bedrooms,
+            "beds": beds,
+            "baths": baths,
+            "rating": rating,
+            "reviews": reviews,
             "url": f"https://www.airbnb.com/rooms/{listing_id}",
-            "photo_url": enriched.get("photo_url"),
+            "photo_url": enriched.get("photo_url") or specs_lookup.get("photo_url"),
             "amenities_count": enriched.get("amenities_count", 0),
         }
 
         evaluation = self.evaluator.evaluate_comp(raw_meta, enriched_data=enriched)
         comp_record = {**raw_meta, **evaluation}
+        comp_record["name"] = title
+        comp_record["bedrooms"] = bedrooms
+        comp_record["beds"] = beds
+        comp_record["baths"] = baths
         comp_record["discovered_at_sample"] = f"{date.today().isoformat()} manual addition"
 
         # Determine target tier
@@ -162,7 +175,8 @@ class CompManager:
         elif tier:
             target_tier = tier.lower()
         else:
-            if br >= 6 and guests >= 14:
+            c_score = comp_record.get("composite_score", 0)
+            if c_score >= 90.0 or (br >= 6 and guests >= 14):
                 target_tier = "tier_a"
             else:
                 target_tier = "tier_b"

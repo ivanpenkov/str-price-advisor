@@ -2493,6 +2493,60 @@
       "summer_rationale": "Moderate comp (18% lower desirability, Summer). Features heated pool, but noted gaps: 3.0 baths, Phoenix location discount.",
       "discovered_at_sample": "2026-09-05 manual addition",
       "accommodates": 18
+    },
+    "1269286452215821303": {
+      "listing_id": "1269286452215821303",
+      "name": "The Showstopper Escape",
+      "location": "Scottsdale",
+      "bedrooms": 6,
+      "beds": 6,
+      "baths": 5.5,
+      "rating": 5.0,
+      "reviews": 25,
+      "url": "https://www.airbnb.com/rooms/1269286452215821303",
+      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI2OTI4NjQ1MjIxNTgyMTMwMw==/original/eaf1ea2b-c627-45d8-a6ac-b64682c2cada.jpeg",
+      "amenities_count": 20,
+      "discovered_at_sample": "2026-09-05 evaluation",
+      "is_valid_comp": true,
+      "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
+      "desirability_ratio": 1.2,
+      "winter_ratio": 1.2,
+      "summer_ratio": 1.2,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "standard_heated",
+        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "composite_score": 96.8,
+      "winter_composite_score": 96.8,
+      "summer_composite_score": 96.8,
+      "category_scores": {
+        "outdoor": 100,
+        "capacity": 100,
+        "interior": 89,
+        "location": 95,
+        "reputation": 98
+      },
+      "winter_category_scores": {
+        "outdoor": 100,
+        "capacity": 100,
+        "interior": 89,
+        "location": 95,
+        "reputation": 98
+      },
+      "summer_category_scores": {
+        "outdoor": 100,
+        "capacity": 100,
+        "interior": 89,
+        "location": 95,
+        "reputation": 98
+      },
+      "rationale": "Premium comp (20% superior desirability, Winter). Features heated pool, dedicated sports court, heated spa.",
+      "winter_rationale": "Premium comp (20% superior desirability, Winter). Features heated pool, dedicated sports court, heated spa.",
+      "summer_rationale": "Premium comp (20% superior desirability, Summer). Features heated pool, dedicated sports court, heated spa."
     }
   },
   "tier_b": {
@@ -6139,11 +6193,11 @@
     }
   },
   "metadata": {
-    "last_updated": "2026-09-05T03:06:01.717036",
+    "last_updated": "2026-09-05T03:20:44.039690",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
     "valid_comps_count": 110,
     "disqualified_comps_count": 3,
-    "total_comps": 113
+    "total_comps": 114
   }
 }

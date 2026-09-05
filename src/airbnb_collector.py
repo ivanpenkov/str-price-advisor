@@ -20,6 +20,9 @@ from typing import List, Dict, Any, Optional
 from playwright.async_api import async_playwright, Browser, BrowserContext, Page
 
 
+from src.proxy_manager import ProxyManager
+
+
 class AirbnbCollector:
     """Collects comp listing data and pricing from Airbnb."""
 
@@ -44,6 +47,7 @@ class AirbnbCollector:
         self.max_delay = max_delay
         self.browser: Optional[Browser] = None
         self.context: Optional[BrowserContext] = None
+        self.proxy_mgr = ProxyManager(required=True)
         self.specs_path = Path("config/listing_specs.json")
         self.listing_specs: Dict[str, Dict[str, Any]] = {}
         if self.specs_path.exists():
@@ -58,26 +62,32 @@ class AirbnbCollector:
         return self.cache_dir / f"search_{check_in}_{check_out}_{location}_{tier}_{h}.json"
 
     async def init_browser(self, p):
-        """Launch browser with anti-detection flags."""
-        self.browser = await p.chromium.launch(
-            headless=self.headless,
-            args=[
+        """Launch browser with anti-detection flags and proxy support."""
+        proxy_cfg = await self.proxy_mgr.start()
+        launch_kwargs = {
+            "headless": self.headless,
+            "args": [
                 "--disable-blink-features=AutomationControlled",
                 "--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
                 "--no-sandbox",
             ],
-        )
+        }
+        if proxy_cfg:
+            launch_kwargs["proxy"] = proxy_cfg
+
+        self.browser = await p.chromium.launch(**launch_kwargs)
         self.context = await self.browser.new_context(
             viewport={"width": 1366, "height": 850},
             user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
         )
 
     async def close_browser(self):
-        """Close browser resources."""
+        """Close browser resources and terminate proxy bridge."""
         if self.context:
             await self.context.close()
         if self.browser:
             await self.browser.close()
+        await self.proxy_mgr.stop()
 
     def _parse_card_text(self, card_id: str, text: str, nights: int) -> Optional[Dict[str, Any]]:
         """Parse card innerText to extract listing attributes and price deterministically without hardcoded thresholds."""

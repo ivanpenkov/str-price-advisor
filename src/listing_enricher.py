@@ -29,16 +29,23 @@ class ListingEnricher:
         self.ENRICHED_DIR.mkdir(parents=True, exist_ok=True)
         self.browser: Optional[Browser] = None
         self.context: Optional[BrowserContext] = None
+        from src.proxy_manager import ProxyManager
+        self.proxy_mgr = ProxyManager(required=True)
 
     async def init_browser(self, p):
-        """Launch headless browser with anti-detection args."""
-        self.browser = await p.chromium.launch(
-            headless=self.headless,
-            args=[
+        """Launch headless browser with anti-detection args and proxy support."""
+        proxy_cfg = await self.proxy_mgr.start()
+        launch_kwargs = {
+            "headless": self.headless,
+            "args": [
                 "--disable-blink-features=AutomationControlled",
                 "--no-sandbox",
             ],
-        )
+        }
+        if proxy_cfg:
+            launch_kwargs["proxy"] = proxy_cfg
+
+        self.browser = await p.chromium.launch(**launch_kwargs)
         self.context = await self.browser.new_context(
             viewport={"width": 1366, "height": 850},
             user_agent=(
@@ -48,11 +55,12 @@ class ListingEnricher:
         )
 
     async def close_browser(self):
-        """Close browser resources."""
+        """Close browser resources and terminate proxy bridge."""
         if self.context:
             await self.context.close()
         if self.browser:
             await self.browser.close()
+        await self.proxy_mgr.stop()
 
     def get_cached_profile(self, listing_id: str) -> Optional[Dict[str, Any]]:
         """Return cached enriched listing if present."""

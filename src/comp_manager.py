@@ -342,6 +342,8 @@ class CompManager:
                 intercepted_label: Optional[str] = None
                 is_unavailable: bool = False
 
+                done_event = asyncio.Event()
+
                 async def on_response(resp):
                     nonlocal intercepted_price, intercepted_label, is_unavailable
                     if "StaysPdpSections" in resp.url:
@@ -373,6 +375,7 @@ class CompManager:
                                 log_event = sec.get("tripDetailsLoggingEventData", {})
                                 if log_event and "selectUnavailable" in str(log_event):
                                     is_unavailable = True
+                            done_event.set()
                         except Exception:
                             pass
 
@@ -381,9 +384,11 @@ class CompManager:
                 url = f"https://www.airbnb.com/rooms/{listing_id}?check_in={c_in}&check_out={c_out}&adults={accommodates}"
                 try:
                     await page.goto(url, wait_until="domcontentloaded", timeout=25000)
-                    await page.wait_for_timeout(2500)
                     await page.evaluate("() => window.scrollTo(0, 1500)")
-                    await page.wait_for_timeout(2500)
+                    try:
+                        await asyncio.wait_for(done_event.wait(), timeout=6.0)
+                    except asyncio.TimeoutError:
+                        pass
                 except Exception as e:
                     logger.warning(f"Timeout/error loading {url}: {e}")
                 finally:
@@ -440,12 +445,25 @@ class CompManager:
         return results
 
     def _regenerate_dashboard(self):
-        """Regenerate docs/index.html with updated comp and pricing data."""
+        """Regenerate docs/index.html with updated comp and pricing data, updating all reports."""
         try:
+            import shutil
             from src.html_generator import HTMLDashboardGenerator
+            from src.reporter import PriceReportGenerator
+
             html_gen = HTMLDashboardGenerator(output_path="docs/index.html")
-            html_gen.generate()
-            print("🎨 Regenerated interactive dashboard in docs/index.html")
+            evaluated_segments = html_gen.generate_full_12_month_evaluation()
+            html_gen.generate(evaluated_segments)
+
+            reporter = PriceReportGenerator(output_dir="data")
+            reporter.generate_all(evaluated_segments=evaluated_segments, property_name="Villa del Sol")
+
+            if Path("data/latest_sheet.csv").exists():
+                shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
+            if Path("data/latest_report.md").exists():
+                shutil.copy("data/latest_report.md", "docs/latest_report.md")
+
+            print("🎨 Regenerated interactive dashboard (docs/index.html) and advisory reports (data/ & docs/)")
         except Exception as e:
             logger.warning(f"Could not regenerate HTML dashboard: {e}")
 

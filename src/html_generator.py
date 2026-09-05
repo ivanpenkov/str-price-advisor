@@ -209,6 +209,16 @@ class HTMLDashboardGenerator:
                 if seg["segment_type"] == "weekend":
                     mult *= 1.12  # Weekend premium
                 comps_list = self._get_cohort_comps_for_segment(seg, mult)
+                if cache_key in cached_comps:
+                    for cid_str, real_item in cached_comps[cache_key].items():
+                        found = False
+                        for idx_c, c_item in enumerate(comps_list):
+                            if str(c_item.get("listing_id")) == cid_str:
+                                comps_list[idx_c] = {**c_item, **real_item}
+                                found = True
+                                break
+                        if not found:
+                            comps_list.append(real_item)
                 rates = [c["effective_nightly"] for c in comps_list]
                 is_live = False
 
@@ -255,6 +265,16 @@ class HTMLDashboardGenerator:
                         if s["segment_type"] == "weekend":
                             mult *= 1.12
                         s["comps_list"] = self._get_cohort_comps_for_segment(s, mult)
+                        if cache_key in cached_comps:
+                            for cid_str, real_item in cached_comps[cache_key].items():
+                                found = False
+                                for idx_c, c_item in enumerate(s["comps_list"]):
+                                    if str(c_item.get("listing_id")) == cid_str:
+                                        s["comps_list"][idx_c] = {**c_item, **real_item}
+                                        found = True
+                                        break
+                                if not found:
+                                    s["comps_list"].append(real_item)
                         s["is_live_scan"] = False
 
         comps_data = self.load_comps()

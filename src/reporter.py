@@ -204,7 +204,7 @@ class PriceReportGenerator:
                 diff_str = f"🟡 {diff_str}"
 
             rec_base = f"**${s['recommended_base_nightly']:.0f}**"
-            action = s.get("action_summary", "") or "-"
+            action = (s.get("action_summary", "") or "-").replace("Increase base", "Increase").replace("Reduce base", "Reduce")
 
             row = [
                 dates,

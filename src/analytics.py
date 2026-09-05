@@ -306,9 +306,9 @@ class PricingAnalyticsEngine:
             action_summary = ""
         else:
             if rec_diff < 0:
-                action_summary = f"↓ Reduce base ${our_base:.0f} → ${rec_base:.0f}"
+                action_summary = f"↓ Reduce ${our_base:.0f} → ${rec_base:.0f}"
             else:
-                action_summary = f"↑ Increase base ${our_base:.0f} → ${rec_base:.0f}"
+                action_summary = f"↑ Increase ${our_base:.0f} → ${rec_base:.0f}"
 
         if action_summary and sample_significance in ["SOLD_OUT", "VERY_LOW"]:
             action_summary += " • High compression"
@@ -317,9 +317,9 @@ class PricingAnalyticsEngine:
             adj_action_summary = ""
         else:
             if adj_rec_diff < 0:
-                adj_action_summary = f"↓ Reduce base ${our_base:.0f} → ${adj_rec_base:.0f}"
+                adj_action_summary = f"↓ Reduce ${our_base:.0f} → ${adj_rec_base:.0f}"
             else:
-                adj_action_summary = f"↑ Increase base ${our_base:.0f} → ${adj_rec_base:.0f}"
+                adj_action_summary = f"↑ Increase ${our_base:.0f} → ${adj_rec_base:.0f}"
 
         if adj_action_summary and len(clean_adj_comps) <= 4 and len(clean_adj_comps) > 0:
             adj_action_summary += " • High compression"

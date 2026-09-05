@@ -1239,8 +1239,8 @@ class HTMLDashboardGenerator:
               <li><strong>✅ On Target (0% – 10% Discrepancy):</strong> Normal competitive range &mdash; cell left empty (no rate change needed).</li>
               <li><strong>Action Indicators:</strong>
                 <ul style="margin-top: 4px;">
-                  <li><strong style="color: #f87171;">↓ Reduce base $X &rarr; $Y</strong> (Full Red Text): Price is above target effective cost; lower Kivoya base rate.</li>
-                  <li><strong style="color: #34d399;">↑ Increase base $X &rarr; $Y</strong> (Full Green Text): Price is below target effective cost; raise Kivoya base rate to capture revenue.</li>
+                  <li><strong style="color: #f87171;">↓ Reduce $X &rarr; $Y</strong> (Full Red Text): Price is above target effective cost; lower Kivoya base rate.</li>
+                  <li><strong style="color: #34d399;">↑ Increase $X &rarr; $Y</strong> (Full Green Text): Price is below target effective cost; raise Kivoya base rate to capture revenue.</li>
                 </ul>
               </li>
             </ul>
@@ -1815,14 +1815,14 @@ class HTMLDashboardGenerator:
               actionEl.innerHTML = '';
               actionEl.style.color = '';
             }} else if (baseDiff < 0) {{
-              let actionText = '↓ Reduce base $' + Math.round(ourBase) + ' → $' + recBase;
+              let actionText = '↓ Reduce $' + Math.round(ourBase) + ' → $' + recBase;
               if (totalComps <= 4 && totalComps > 0) {{
                 actionText += ' • High compression';
               }}
               actionEl.style.color = '#f87171';
               actionEl.innerHTML = '<strong>' + actionText + '</strong>';
             }} else {{
-              let actionText = '↑ Increase base $' + Math.round(ourBase) + ' → $' + recBase;
+              let actionText = '↑ Increase $' + Math.round(ourBase) + ' → $' + recBase;
               if (totalComps <= 4 && totalComps > 0) {{
                 actionText += ' • High compression';
               }}
@@ -2244,8 +2244,8 @@ class HTMLDashboardGenerator:
             n_raw = s.get("n_comps", s.get("comps_count", 0))
             n_adj = s.get("n_comps_adj", n_raw)
 
-            action_raw = s.get("action_summary", "")
-            action_adj = s.get("action_summary_adj", action_raw)
+            action_raw = s.get("action_summary", "").replace("Increase base", "Increase").replace("Reduce base", "Reduce")
+            action_adj = s.get("action_summary_adj", action_raw).replace("Increase base", "Increase").replace("Reduce base", "Reduce")
 
             def get_diff_badge(val: float) -> str:
                 if val <= -35.0:

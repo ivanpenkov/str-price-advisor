@@ -65,7 +65,7 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.assertEqual(eval_urgent["priority_tier"], "URGENT_ACTION")
         self.assertEqual(eval_urgent["status"], "UNDERPRICED")
         self.assertTrue(eval_urgent["recommended_base_nightly"] > 399.0)
-        self.assertIn("↑ Increase base", eval_urgent["action_summary"])
+        self.assertIn("↑ Increase", eval_urgent["action_summary"])
 
         # Case 2: Moderate / Review (10-35% overpriced)
         segment_review = {
@@ -82,7 +82,7 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         comp_rates_review = [850.0, 900.0, 950.0, 970.0, 1000.0]
         eval_review = self.engine.evaluate_segment(segment_review, comp_rates_review)
         self.assertEqual(eval_review["priority_tier"], "MODERATE_ADJUSTMENT")
-        self.assertIn("↓ Reduce base", eval_review["action_summary"])
+        self.assertIn("↓ Reduce", eval_review["action_summary"])
 
         # Case 3: On Target (<10% difference)
         segment_ontarget = {

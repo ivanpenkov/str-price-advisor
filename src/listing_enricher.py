@@ -8,6 +8,8 @@ Caches enriched listing profiles under data/enriched_comps/.
 import asyncio
 import json
 import logging
+import os
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -23,6 +25,7 @@ class ListingEnricher:
     ENRICHED_DIR = Path("data/enriched_comps")
     OUR_PROFILE_PATH = Path("data/our_property_profile.json")
     REGISTRY_PATH = Path("config/comps_registry.json")
+    SPECS_PATH = Path("config/listing_specs.json")
 
     def __init__(self, headless: bool = True):
         self.headless = headless
@@ -77,6 +80,176 @@ class ListingEnricher:
         path = self.ENRICHED_DIR / f"{listing_id}.json"
         path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
+    @staticmethod
+    def parse_deferred_state(deferred_text: str) -> Dict[str, Any]:
+        """
+        Parse Airbnb Apollo / Niobe deferred client state string.
+        Extracts bedrooms, beds, baths, guest capacity, and all available amenities.
+        """
+        amenity_titles: List[str] = []
+        if deferred_text:
+            try:
+                data = json.loads(deferred_text)
+
+                def search_amenities(obj):
+                    if isinstance(obj, dict):
+                        if obj.get("__typename") == "AmenityItem" and obj.get("available") is True:
+                            t = obj.get("title")
+                            if t and t not in amenity_titles:
+                                amenity_titles.append(t)
+                        for v in obj.values():
+                            search_amenities(v)
+                    elif isinstance(obj, list):
+                        for item in obj:
+                            search_amenities(item)
+
+                search_amenities(data)
+            except Exception as e:
+                logger.warning(f"Error parsing deferred state JSON: {e}")
+
+        extracted_bedrooms = None
+        extracted_beds = None
+        extracted_baths = None
+        extracted_guests = None
+
+        if deferred_text:
+            # 1. Composite subtitle banner: "6 bedrooms · 14 beds · 4 baths" (handles literal middle dots, unicode \u00b7, bullets, pipes)
+            sep = r"(?:\s*·\s*|\\u00b7|\s*•\s*|\\u2022|\s*\|\s*|,|\s+)"
+            pattern = rf"(\d+)\s*bedrooms?{sep}+(\d+)\s*beds?\b(?!room){sep}+(\d+(?:\.\d+)?)\s*baths?"
+            m_summary = re.search(pattern, deferred_text, re.IGNORECASE)
+            if m_summary:
+                extracted_bedrooms = int(m_summary.group(1))
+                extracted_beds = int(m_summary.group(2))
+                extracted_baths = float(m_summary.group(3))
+
+            # 2. Individual fallback tokens with negative lookahead
+            if not extracted_bedrooms:
+                m_br = re.search(r"(\d+)\s*bedrooms?\b", deferred_text, re.IGNORECASE)
+                if m_br:
+                    extracted_bedrooms = int(m_br.group(1))
+            if not extracted_beds:
+                m_bed = re.search(r"(\d+)\s*beds?\b(?!room)", deferred_text, re.IGNORECASE)
+                if m_bed:
+                    extracted_beds = int(m_bed.group(1))
+            if not extracted_baths:
+                m_ba = re.search(r"(\d+(?:\.\d+)?)\s*baths?\b", deferred_text, re.IGNORECASE)
+                if m_ba:
+                    extracted_baths = float(m_ba.group(1))
+
+            m_guests = re.search(r"(\d+\+?)\s*guests?\b", deferred_text, re.IGNORECASE)
+            if m_guests:
+                extracted_guests = m_guests.group(1)
+
+        return {
+            "bedrooms": extracted_bedrooms,
+            "beds": extracted_beds,
+            "baths": extracted_baths,
+            "guests": extracted_guests,
+            "amenities": sorted(list(set(amenity_titles))),
+            "amenities_count": len(amenity_titles),
+        }
+
+    @staticmethod
+    def parse_json_ld(ld_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Extract name, description, rating, reviews, image, and address from schema.org JSON-LD."""
+        title = ld_data.get("name")
+        if title and title.startswith("503 Service"):
+            title = None
+
+        description = ld_data.get("description", "")
+        rating_obj = ld_data.get("aggregateRating", {})
+        rating = None
+        reviews = None
+        if rating_obj:
+            try:
+                r_val = rating_obj.get("ratingValue")
+                if r_val is not None:
+                    rating = float(r_val)
+                rev_val = rating_obj.get("ratingCount")
+                if rev_val is not None:
+                    reviews = int(rev_val)
+            except Exception:
+                pass
+
+        photo_url = ld_data.get("image")
+        if isinstance(photo_url, list) and photo_url:
+            photo_url = photo_url[0]
+
+        address = ld_data.get("address")
+        return {
+            "title": title,
+            "description": description,
+            "rating": rating,
+            "reviews": reviews,
+            "photo_url": photo_url,
+            "address": address,
+        }
+
+    @classmethod
+    def parse_page_content(
+        cls,
+        deferred_text: str = "",
+        ld_data: Optional[Dict[str, Any]] = None,
+        page_title: Optional[str] = None,
+        dom_overview: Optional[List[str]] = None,
+        dom_description: Optional[str] = None,
+        dom_photo: Optional[str] = None,
+        listing_id: str = "",
+    ) -> Dict[str, Any]:
+        """Combine all page sources into a normalized listing profile dictionary."""
+        deferred_parsed = cls.parse_deferred_state(deferred_text)
+        ld_parsed = cls.parse_json_ld(ld_data or {})
+
+        # Title resolution
+        title = ld_parsed.get("title")
+        if not title and page_title:
+            t = page_title
+            if " - Airbnb" in t:
+                t = t.split(" - Airbnb")[0].strip()
+            if not t.startswith("503 Service"):
+                title = t
+
+        description = ld_parsed.get("description") or dom_description or ""
+        photo_url = ld_parsed.get("photo_url") or dom_photo
+
+        bedrooms = deferred_parsed.get("bedrooms")
+        beds = deferred_parsed.get("beds")
+        baths = deferred_parsed.get("baths")
+        guests = deferred_parsed.get("guests")
+
+        overview = dom_overview or []
+        if not overview:
+            overview = []
+            if guests:
+                overview.append(f"{guests} guests")
+            if bedrooms:
+                overview.append(f"{bedrooms} bedrooms")
+            if beds:
+                overview.append(f"{beds} beds")
+            if baths:
+                overview.append(f"{baths:.1f} baths" if baths % 1 != 0 else f"{int(baths)} baths")
+
+        url = f"https://www.airbnb.com/rooms/{listing_id}" if listing_id else ""
+
+        return {
+            "listing_id": listing_id,
+            "title": title,
+            "description": description,
+            "bedrooms": bedrooms,
+            "beds": beds,
+            "baths": baths,
+            "guests": guests,
+            "amenities": deferred_parsed.get("amenities", []),
+            "amenities_count": deferred_parsed.get("amenities_count", 0),
+            "overview": overview[:8],
+            "rating": ld_parsed.get("rating"),
+            "reviews": ld_parsed.get("reviews"),
+            "address": ld_parsed.get("address"),
+            "photo_url": photo_url,
+            "url": url,
+            "enriched_at": datetime.now().isoformat(),
+        }
+
     async def extract_listing_data(self, page: Page, listing_id: str) -> Dict[str, Any]:
         """Navigate to listing page and extract all available metadata, description, and amenities."""
         url = f"https://www.airbnb.com/rooms/{listing_id}"
@@ -99,89 +272,31 @@ class ListingEnricher:
         deferred_text = await page.evaluate(
             "() => { const el = document.getElementById('data-deferred-state-0'); return el ? el.innerText : ''; }"
         )
-        amenity_titles = []
-        if deferred_text:
-            try:
-                data = json.loads(deferred_text)
 
-                def search_amenities(obj):
-                    if isinstance(obj, dict):
-                        if obj.get("__typename") == "AmenityItem" and obj.get("available") is True:
-                            t = obj.get("title")
-                            if t and t not in amenity_titles:
-                                amenity_titles.append(t)
-                        for v in obj.values():
-                            search_amenities(v)
-                    elif isinstance(obj, list):
-                        for item in obj:
-                            search_amenities(item)
-
-                search_amenities(data)
-            except Exception as e:
-                logger.warning(f"Error parsing deferred state for {listing_id}: {e}")
-
-        # 3. Extract overview badges (e.g. 16+ guests, 6 bedrooms, 11 beds, 5.5 baths)
-        overview = await page.evaluate("""() => {
+        # 3. DOM Overviews, Title, Description, Meta photo
+        dom_overview = await page.evaluate("""() => {
             const items = Array.from(document.querySelectorAll("ol li, div[data-section-id='OVERVIEW_DEFAULT'] li, [data-testid='overview'] li"));
             return items.map(e => e.innerText.trim()).filter(t => t.length > 0 && t.length < 50 && !t.includes('\\n'));
         }""")
+        page_title = await page.title()
+        dom_desc = await page.evaluate("""() => {
+            const el = document.querySelector("[data-section-id='DESCRIPTION_DEFAULT']");
+            return el ? el.innerText.trim() : '';
+        }""")
+        dom_photo = await page.evaluate("""() => {
+            const img = document.querySelector("meta[property='og:image']");
+            return img ? img.getAttribute("content") : null;
+        }""")
 
-        # 4. Fallback description & title
-        title = ld_data.get("name")
-        if not title:
-            title = await page.title()
-
-        description = ld_data.get("description", "")
-        if not description:
-            desc_text = await page.evaluate("""() => {
-                const el = document.querySelector("[data-section-id='DESCRIPTION_DEFAULT']");
-                return el ? el.innerText.trim() : '';
-            }""")
-            description = desc_text
-
-        # 5. Rating & Reviews
-        rating_obj = ld_data.get("aggregateRating", {})
-        rating = None
-        reviews = None
-        if rating_obj:
-            rating = rating_obj.get("ratingValue")
-            reviews = rating_obj.get("ratingCount")
-            try:
-                if rating is not None:
-                    rating = float(rating)
-                if reviews is not None:
-                    reviews = int(reviews)
-            except Exception:
-                pass
-
-        # 6. Address / Location
-        address = ld_data.get("address")
-
-        # 7. Image / Cover photo
-        photo_url = ld_data.get("image")
-        if isinstance(photo_url, list) and photo_url:
-            photo_url = photo_url[0]
-        elif not photo_url:
-            photo_url = await page.evaluate("""() => {
-                const img = document.querySelector("meta[property='og:image']");
-                return img ? img.getAttribute("content") : null;
-            }""")
-
-        result = {
-            "listing_id": listing_id,
-            "title": title,
-            "description": description,
-            "amenities": sorted(list(set(amenity_titles))),
-            "amenities_count": len(amenity_titles),
-            "overview": overview[:8],
-            "rating": rating,
-            "reviews": reviews,
-            "address": address,
-            "photo_url": photo_url,
-            "url": url,
-            "enriched_at": datetime.now().isoformat(),
-        }
-        return result
+        return self.parse_page_content(
+            deferred_text=deferred_text or "",
+            ld_data=ld_data,
+            page_title=page_title,
+            dom_overview=dom_overview,
+            dom_description=dom_desc,
+            dom_photo=dom_photo,
+            listing_id=listing_id,
+        )
 
     async def enrich_listing(self, page: Page, listing_id: str, force_refresh: bool = False) -> Dict[str, Any]:
         """Fetch and cache listing profile."""
@@ -269,25 +384,37 @@ class ListingEnricher:
                     if not force_refresh:
                         cached = self.get_cached_profile(cid)
                         if cached and cached.get("amenities_count", 0) > 0:
-                            if cached.get("title") and comp.get("name") in ("Home in Scottsdale", "Home in Tempe", "Home in Mesa", "Home in Chandler"):
+                            if cached.get("title") and (comp.get("name") in ("Home in Scottsdale", "Home in Tempe", "Home in Mesa", "Home in Chandler") or comp.get("name", "").startswith("503 Service")):
                                 comp["name"] = cached["title"]
                             if cached.get("photo_url") and not comp.get("photo_url"):
                                 comp["photo_url"] = cached["photo_url"]
+                            if cached.get("bedrooms"):
+                                comp["bedrooms"] = cached["bedrooms"]
+                            if cached.get("beds"):
+                                comp["beds"] = cached["beds"]
+                            if cached.get("baths"):
+                                comp["baths"] = cached["baths"]
                             comp["amenities_count"] = cached.get("amenities_count", 0)
                             progress["completed"] += 1
-                            print(f"[{progress['completed']}/{progress['total']}] ⚡ [Cached] {cid}: {comp.get('name')[:35]} ({comp.get('amenities_count')} amenities)")
+                            print(f"[{progress['completed']}/{progress['total']}] ⚡ [Cached] {cid}: {comp.get('name')[:35]} ({comp.get('beds')} beds, {comp.get('amenities_count')} amenities)")
                             return
 
                     page = await self.context.new_page()
                     try:
                         enriched = await self.enrich_listing(page, cid, force_refresh=force_refresh)
-                        if enriched.get("title") and comp.get("name") in ("Home in Scottsdale", "Home in Tempe", "Home in Mesa", "Home in Chandler"):
+                        if enriched.get("title") and (comp.get("name") in ("Home in Scottsdale", "Home in Tempe", "Home in Mesa", "Home in Chandler") or comp.get("name", "").startswith("503 Service")):
                             comp["name"] = enriched["title"]
                         if enriched.get("photo_url") and not comp.get("photo_url"):
                             comp["photo_url"] = enriched["photo_url"]
+                        if enriched.get("bedrooms"):
+                            comp["bedrooms"] = enriched["bedrooms"]
+                        if enriched.get("beds"):
+                            comp["beds"] = enriched["beds"]
+                        if enriched.get("baths"):
+                            comp["baths"] = enriched["baths"]
                         comp["amenities_count"] = enriched.get("amenities_count", 0)
                         progress["completed"] += 1
-                        print(f"[{progress['completed']}/{progress['total']}] ✅ {cid}: {enriched.get('title', comp.get('name'))[:35]} ({enriched.get('amenities_count')} amenities)")
+                        print(f"[{progress['completed']}/{progress['total']}] ✅ {cid}: {enriched.get('title', comp.get('name'))[:35]} ({comp.get('beds')} beds, {enriched.get('amenities_count')} amenities)")
                     except Exception as e:
                         progress["completed"] += 1
                         print(f"[{progress['completed']}/{progress['total']}] ⚠️ Error {cid}: {e}")
@@ -300,7 +427,99 @@ class ListingEnricher:
 
         # Save registry updates
         self.REGISTRY_PATH.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
-        print("✨ Comp registry updated with enriched metadata!")
+
+        # Also synchronize config/listing_specs.json
+        specs = {}
+        if self.SPECS_PATH.exists():
+            try:
+                specs = json.loads(self.SPECS_PATH.read_text(encoding="utf-8"))
+            except Exception:
+                specs = {}
+        for comp in all_comps:
+            cid_str = str(comp.get("listing_id"))
+            if not cid_str:
+                continue
+            if cid_str not in specs:
+                specs[cid_str] = {"listing_id": cid_str}
+            if comp.get("name"):
+                specs[cid_str]["title"] = comp["name"]
+            if comp.get("location"):
+                specs[cid_str]["location"] = comp["location"]
+            if comp.get("bedrooms") is not None:
+                specs[cid_str]["bedrooms"] = comp["bedrooms"]
+            if comp.get("beds") is not None:
+                specs[cid_str]["beds"] = comp["beds"]
+            if comp.get("baths") is not None:
+                specs[cid_str]["baths"] = comp["baths"]
+            if comp.get("rating") is not None:
+                specs[cid_str]["rating"] = comp["rating"]
+            if comp.get("reviews") is not None:
+                specs[cid_str]["reviews"] = comp["reviews"]
+            if comp.get("photo_url"):
+                specs[cid_str]["photo_url"] = comp["photo_url"]
+        self.SPECS_PATH.write_text(json.dumps(specs, indent=2, ensure_ascii=False), encoding="utf-8")
+        print("✨ Comp registry and listing specs updated with enriched metadata!")
+        return registry
+
+    def sync_cached_to_registry(self) -> Dict[str, Any]:
+        """
+        Synchronize all cached listing profiles in data/enriched_comps/
+        to config/comps_registry.json and config/listing_specs.json without scraping.
+        """
+        if not self.REGISTRY_PATH.exists():
+            raise FileNotFoundError(f"Registry not found at {self.REGISTRY_PATH}")
+
+        registry = json.loads(self.REGISTRY_PATH.read_text(encoding="utf-8"))
+        specs = {}
+        if self.SPECS_PATH.exists():
+            try:
+                specs = json.loads(self.SPECS_PATH.read_text(encoding="utf-8"))
+            except Exception:
+                specs = {}
+
+        updated_count = 0
+        for tier_key in ("tier_a", "tier_b"):
+            for cid, comp in registry.get(tier_key, {}).items():
+                cached = self.get_cached_profile(str(cid))
+                if not cached:
+                    continue
+
+                if cached.get("title") and not cached.get("title", "").startswith("503 Service"):
+                    comp["name"] = cached["title"]
+                if cached.get("photo_url"):
+                    comp["photo_url"] = cached["photo_url"]
+                if cached.get("bedrooms") is not None:
+                    comp["bedrooms"] = cached["bedrooms"]
+                if cached.get("beds") is not None:
+                    comp["beds"] = cached["beds"]
+                if cached.get("baths") is not None:
+                    comp["baths"] = cached["baths"]
+                if cached.get("guests") is not None:
+                    try:
+                        comp["accommodates"] = int(str(cached["guests"]).replace("+", ""))
+                    except Exception:
+                        pass
+                if cached.get("amenities_count") is not None:
+                    comp["amenities_count"] = cached["amenities_count"]
+
+                # Sync to specs
+                cid_str = str(cid)
+                if cid_str not in specs:
+                    specs[cid_str] = {"listing_id": cid_str}
+                specs[cid_str]["title"] = comp.get("name")
+                specs[cid_str]["location"] = comp.get("location")
+                specs[cid_str]["bedrooms"] = comp.get("bedrooms")
+                specs[cid_str]["beds"] = comp.get("beds")
+                specs[cid_str]["baths"] = comp.get("baths")
+                specs[cid_str]["rating"] = comp.get("rating")
+                specs[cid_str]["reviews"] = comp.get("reviews")
+                if comp.get("photo_url"):
+                    specs[cid_str]["photo_url"] = comp.get("photo_url")
+                updated_count += 1
+
+        self.REGISTRY_PATH.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
+        self.SPECS_PATH.write_text(json.dumps(specs, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"✨ Synchronized {updated_count} comps from cached profiles to registry and listing_specs.json!")
         return registry
 
 

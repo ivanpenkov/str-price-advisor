@@ -83,15 +83,38 @@ class ProxyManager:
             )
             await asyncio.sleep(0.8)
             print(f"  🛡️ NordVPN Proxy Enforced: Routing web traffic through {remote_host} (port {self.port})")
-            return {"server": f"http://127.0.0.1:{self.port}"}
+
+            # Propagate to standard environment variables for requests/urllib/aiohttp
+            self._old_env = {
+                k: os.environ.get(k)
+                for k in ("HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy", "NO_PROXY", "no_proxy")
+            }
+            proxy_url = f"http://127.0.0.1:{self.port}"
+            for k in ("HTTP_PROXY", "HTTPS_PROXY", "http_proxy", "https_proxy"):
+                os.environ[k] = proxy_url
+            for k in ("NO_PROXY", "no_proxy"):
+                os.environ[k] = "localhost,127.0.0.1"
+
+            return {"server": proxy_url}
         except Exception as e:
             if self.required:
                 raise RuntimeError(f"Failed to start mandatory NordVPN proxy bridge: {e}")
             logger.error(f"Failed to start proxy forwarder: {e}")
             return None
 
+    def _restore_env(self):
+        """Restore environment variables to pre-proxy state."""
+        if hasattr(self, "_old_env") and self._old_env:
+            for k, v in self._old_env.items():
+                if v is None:
+                    os.environ.pop(k, None)
+                else:
+                    os.environ[k] = v
+            self._old_env = {}
+
     async def stop(self):
         """Terminate local forwarder process asynchronously."""
+        self._restore_env()
         if self.proc:
             try:
                 self.proc.terminate()
@@ -102,6 +125,7 @@ class ProxyManager:
 
     def _cleanup_sync(self):
         """Synchronous fallback cleanup on process exit."""
+        self._restore_env()
         if self.proc:
             try:
                 self.proc.kill()

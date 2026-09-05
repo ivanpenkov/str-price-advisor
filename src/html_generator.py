@@ -988,30 +988,6 @@ class HTMLDashboardGenerator:
       </div>
     </header>
 
-    <!-- KPI Summary Grid -->
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <span class="kpi-label">Open 12-Mo Intervals</span>
-        <div class="kpi-val">{len(evaluated_segments)}</div>
-        <span class="kpi-desc">Weekends & Midweeks over next 365 days</span>
-      </div>
-      <div class="kpi-card" style="border-color: var(--urgent-border);">
-        <span class="kpi-label" style="color: var(--urgent-red);">🚨 Urgent Rate Alerts</span>
-        <div class="kpi-val" style="color: var(--urgent-red);">{len(urgent)}</div>
-        <span class="kpi-desc">>35% market discrepancy</span>
-      </div>
-      <div class="kpi-card" style="border-color: var(--warning-border);">
-        <span class="kpi-label" style="color: var(--warning-amber);">⚠️ Moderate Adjustments</span>
-        <div class="kpi-val" style="color: var(--warning-amber);">{len(moderate)}</div>
-        <span class="kpi-desc">10%–35% variance (monthly review)</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-label">Curated Comps Registry</span>
-        <div class="kpi-val">{len(tier_a_comps) + len(tier_b_comps)}</div>
-        <span class="kpi-desc">{len(tier_a_comps)} Direct (Tier A) • {len(tier_b_comps)} Secondary (Tier B)</span>
-      </div>
-    </div>
-
     <!-- Navigation Tabs -->
     <nav class="tabs-nav" role="tablist">
       <button class="tab-btn active" onclick="switchTab('pricing')" role="tab" aria-selected="true">📊 Pricing Recommendations</button>
@@ -1022,19 +998,6 @@ class HTMLDashboardGenerator:
 
     <!-- TAB 1: PRICING RECOMMENDATIONS -->
     <div id="tab-pricing" class="tab-content active">
-      <!-- Interactive Tip Banner -->
-      <div style="background: rgba(37,99,235,0.12); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 14px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <span style="font-size: 1.4rem;">💡</span>
-          <div style="font-size: 0.9rem; color: #cbd5e1;">
-            <strong style="color: #f8fafc;">Interactive Comp Breakdown:</strong> Click on <strong style="color: #60a5fa;">any row</strong> in the tables below to expand the full list of competitors for that stay, sorted by price with <strong style="color: #fbbf24;">Villa del Sol highlighted</strong>. Click any comp's name to view its live Airbnb listing.
-          </div>
-        </div>
-        <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); font-size: 0.8rem;">
-          ▶ Click Any Row to Expand
-        </span>
-      </div>
-
       <!-- Competitor Quality Filter Bar -->
       <div class="filter-card">
         <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
@@ -1101,25 +1064,43 @@ class HTMLDashboardGenerator:
               All unbooked weekend and midweek intervals over the next 12 months. Click any row to expand competitor pricing details.
             </p>
           </div>
+          <button id="btnCopySchedule" onclick="copyPricingSchedule()" title="Copy visible schedule in plain text format (date range, type, price action)" style="display: inline-flex; align-items: center; gap: 7px; background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.35); padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.25)';" onmouseout="this.style.background='rgba(59,130,246,0.15)';">
+            <span id="copyIcon">📋</span> <span id="copyBtnText">Copy Schedule</span>
+          </button>
         </div>
 
-        <!-- Quick View Filter Pills & Open Calendar Filter & Adjusted Rates Filter -->
+        <!-- Schedule Filter Controls (All Checkboxes) -->
         <div class="interval-filter-pills" style="display: flex; gap: 10px; margin-bottom: 18px; margin-top: 14px; flex-wrap: wrap; align-items: center;">
-          <div style="display: flex; align-items: center; gap: 8px; margin-right: 6px; flex-wrap: wrap;">
-            <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600;">Show Intervals:</span>
-            <label title="Kivoya booking calendar is open through May 31, 2027 (closed from June 2027 onwards). Uncheck to show all 12 months." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #38bdf8; font-weight: 600; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
-              <input type="checkbox" id="filterOpenCalendar" checked onchange="onOpenCalendarToggle()" style="width: 15px; height: 15px; accent-color: #38bdf8; cursor: pointer; border-radius: 4px;">
-              <span>Open Calendar Only</span>
-            </label>
-            <label title="When checked, competitor rates are adjusted based on property quality/desirability relative to Villa del Sol, and invalid comps are excluded. Uncheck to view raw unadjusted market rates." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #a78bfa; font-weight: 600; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
-              <input type="checkbox" id="filterAdjustedComps" checked onchange="toggleAdjustedComps()" style="width: 15px; height: 15px; accent-color: #a78bfa; cursor: pointer; border-radius: 4px;">
-              <span>🎯 Adjusted Comp Rates</span>
-            </label>
-          </div>
-          <button class="filter-pill-btn active" id="btn-interval-all" onclick="filterIntervalTier('all', this)">All Intervals (<span id="count-interval-all">{len(open_segments)}</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-urgent" onclick="filterIntervalTier('urgent', this)" style="border-color: rgba(239,68,68,0.4); color: #f87171;">🚨 Urgent Action Only (<span id="count-interval-urgent">{len(open_urgent)}</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-mod" onclick="filterIntervalTier('moderate', this)" style="border-color: rgba(245,158,11,0.4); color: #fbbf24;">⚠️ Moderate Review (<span id="count-interval-mod">{len(open_moderate)}</span>)</button>
-          <button class="filter-pill-btn" id="btn-interval-ok" onclick="filterIntervalTier('ok', this)" style="border-color: rgba(16,185,129,0.4); color: #34d399;">✅ On Target (<span id="count-interval-ok">{len(open_ok)}</span>)</button>
+          <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 2px;">Filter Intervals:</span>
+
+          <!-- Tier Status Checkboxes -->
+          <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+            <input type="checkbox" id="filterTierUrgent" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #ef4444; cursor: pointer; border-radius: 4px;">
+            <span>🚨 Urgent Action (<span id="count-interval-urgent">{len(open_urgent)}</span>)</span>
+          </label>
+
+          <label title="Show intervals with 10%–35% market variance for monthly review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+            <input type="checkbox" id="filterTierModerate" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #f59e0b; cursor: pointer; border-radius: 4px;">
+            <span>⚠️ Moderate Review (<span id="count-interval-mod">{len(open_moderate)}</span>)</span>
+          </label>
+
+          <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+            <input type="checkbox" id="filterTierOk" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #10b981; cursor: pointer; border-radius: 4px;">
+            <span>✅ On Target (<span id="count-interval-ok">{len(open_ok)}</span>)</span>
+          </label>
+
+          <span style="height: 18px; width: 1px; background: rgba(255,255,255,0.15); margin: 0 4px;"></span>
+
+          <!-- Scope & Model Checkboxes -->
+          <label title="Kivoya booking calendar is open through May 31, 2027 (closed from June 2027 onwards). Uncheck to show all 12 months." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #38bdf8; font-weight: 600; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+            <input type="checkbox" id="filterOpenCalendar" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #38bdf8; cursor: pointer; border-radius: 4px;">
+            <span>Open Calendar Only</span>
+          </label>
+
+          <label title="When checked, competitor rates are adjusted based on property quality/desirability relative to Villa del Sol, and invalid comps are excluded. Uncheck to view raw unadjusted market rates." style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #a78bfa; font-weight: 600; background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+            <input type="checkbox" id="filterAdjustedComps" checked onchange="toggleAdjustedComps()" style="width: 15px; height: 15px; accent-color: #a78bfa; cursor: pointer; border-radius: 4px;">
+            <span>🎯 Adjusted Comp Rates</span>
+          </label>
         </div>
 
         <div class="table-responsive">
@@ -1359,24 +1340,94 @@ class HTMLDashboardGenerator:
         icon.textContent = isHidden ? '▼' : '▶';
         icon.style.color = isHidden ? '#fbbf24' : '#60a5fa';
       }}
-    }}
+    function copyPricingSchedule() {{
+      const rows = document.querySelectorAll('.interval-parent-row');
+      const lines = [];
+      const isAdj = document.getElementById('filterAdjustedComps') ? document.getElementById('filterAdjustedComps').checked : true;
 
-    let currentIntervalTier = 'all';
+      rows.forEach(row => {{
+        // Only include rows currently visible under active filters
+        if (row.style.display === 'none') return;
 
-    function onOpenCalendarToggle() {{
-      applyGlobalFilters();
-    }}
+        const checkin = row.dataset.checkin || '';
+        const checkout = row.dataset.checkout || '';
+        const dateRange = (checkin && checkout) ? `${{checkin}} to ${{checkout}}` : (row.querySelector('.date-pill') ? row.querySelector('.date-pill').innerText.trim().replace(/\\s*→\\s*|\\s*&rarr;\\s*/g, ' to ') : '');
+        const type = row.dataset.segmentType || 'Weekend';
+        const basePrice = row.dataset.basePrice || '0';
 
-    function filterIntervalTier(tier, btn) {{
-      currentIntervalTier = tier || currentIntervalTier || 'all';
-      document.querySelectorAll('.interval-filter-pills .filter-pill-btn').forEach(b => b.classList.remove('active'));
-      let activeBtn = btn;
-      if (!activeBtn) {{
-        let btnId = 'btn-interval-' + (currentIntervalTier === 'moderate' ? 'mod' : currentIntervalTier);
-        activeBtn = document.getElementById(btnId);
+        const recPrice = isAdj ? (row.dataset.adjRec || basePrice) : (row.dataset.rawRec || basePrice);
+        const actionHtml = isAdj ? (row.dataset.adjActionHtml || '') : (row.dataset.rawActionHtml || '');
+
+        let actionText = '';
+        if (actionHtml.includes('Increase') || (parseInt(recPrice) > parseInt(basePrice) && !actionHtml.includes('Reduce'))) {{
+          actionText = `Increase price from $${{basePrice}} to $${{recPrice}}`;
+        }} else if (actionHtml.includes('Reduce') || (parseInt(recPrice) < parseInt(basePrice) && !actionHtml.includes('Increase'))) {{
+          actionText = `Reduce price from $${{basePrice}} to $${{recPrice}}`;
+        }} else {{
+          actionText = `Keep price at $${{basePrice}}`;
+        }}
+
+        lines.push(`${{dateRange}}\\t${{type}}\\t${{actionText}}`);
+      }});
+
+      if (lines.length === 0) {{
+        alert('No visible rows to copy.');
+        return;
       }}
-      if (activeBtn) activeBtn.classList.add('active');
 
+      const text = lines.join('\\n');
+      const copyBtn = document.getElementById('btnCopySchedule');
+      const btnText = document.getElementById('copyBtnText');
+      const originalText = btnText ? btnText.innerText : 'Copy Schedule';
+
+      function onSuccess() {{
+        if (btnText) btnText.innerText = `✓ Copied (${{lines.length}} rows)!`;
+        if (copyBtn) {{
+          copyBtn.style.borderColor = '#10b981';
+          copyBtn.style.color = '#34d399';
+          copyBtn.style.background = 'rgba(16, 185, 129, 0.2)';
+        }}
+        setTimeout(() => {{
+          if (btnText) btnText.innerText = originalText;
+          if (copyBtn) {{
+            copyBtn.style.borderColor = 'rgba(59,130,246,0.35)';
+            copyBtn.style.color = '#60a5fa';
+            copyBtn.style.background = 'rgba(59,130,246,0.15)';
+          }}
+        }}, 2500);
+      }}
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {{
+        navigator.clipboard.writeText(text).then(onSuccess).catch(() => {{
+          fallbackCopyText(text);
+          onSuccess();
+        }});
+      }} else {{
+        fallbackCopyText(text);
+        onSuccess();
+      }}
+    }}
+
+    function fallbackCopyText(text) {{
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {{
+        document.execCommand('copy');
+      }} catch (e) {{
+        console.error('Fallback copy failed', e);
+      }}
+      document.body.removeChild(ta);
+    }}
+
+    function filterIntervalTiers() {{
+      const showUrgent = document.getElementById('filterTierUrgent') ? document.getElementById('filterTierUrgent').checked : true;
+      const showModerate = document.getElementById('filterTierModerate') ? document.getElementById('filterTierModerate').checked : true;
+      const showOk = document.getElementById('filterTierOk') ? document.getElementById('filterTierOk').checked : true;
       const openCalendarCheckbox = document.getElementById('filterOpenCalendar');
       const openOnly = openCalendarCheckbox ? openCalendarCheckbox.checked : true;
 
@@ -1387,7 +1438,12 @@ class HTMLDashboardGenerator:
         const detailRow = detailRowId ? document.getElementById(detailRowId) : null;
 
         const calendarMatch = (!openOnly || rowIsOpen);
-        const tierMatch = (currentIntervalTier === 'all' || rowTier === currentIntervalTier);
+        const tierMatch = (
+          (rowTier === 'urgent' && showUrgent) ||
+          (rowTier === 'moderate' && showModerate) ||
+          (rowTier === 'ok' && showOk) ||
+          (rowTier === 'none' && showUrgent && showModerate && showOk)
+        );
 
         if (calendarMatch && tierMatch) {{
           row.style.display = '';
@@ -1442,6 +1498,16 @@ class HTMLDashboardGenerator:
       document.getElementById('filterMinReviews').value = '25';
       const premCheckbox = document.getElementById('filterPremiumLocation');
       if (premCheckbox) premCheckbox.checked = false;
+      const urg = document.getElementById('filterTierUrgent');
+      if (urg) urg.checked = true;
+      const mod = document.getElementById('filterTierModerate');
+      if (mod) mod.checked = true;
+      const ok = document.getElementById('filterTierOk');
+      if (ok) ok.checked = true;
+      const cal = document.getElementById('filterOpenCalendar');
+      if (cal) cal.checked = true;
+      const adj = document.getElementById('filterAdjustedComps');
+      if (adj) adj.checked = true;
       onFilterChange();
     }}
 
@@ -1759,11 +1825,9 @@ class HTMLDashboardGenerator:
       let totalUrgent = 0;
       let totalMod = 0;
       let totalOk = 0;
-      let totalAll = 0;
       document.querySelectorAll('.interval-parent-row').forEach(row => {{
         const rowIsOpen = row.dataset.calendarOpen === 'true';
         if (!openOnly || rowIsOpen) {{
-          totalAll++;
           const tier = row.dataset.tier;
           if (tier === 'urgent') totalUrgent++;
           else if (tier === 'moderate') totalMod++;
@@ -1771,8 +1835,6 @@ class HTMLDashboardGenerator:
         }}
       }});
 
-      const countAll = document.getElementById('count-interval-all');
-      if (countAll) countAll.textContent = totalAll;
       const countUrgent = document.getElementById('count-interval-urgent');
       if (countUrgent) countUrgent.textContent = totalUrgent;
       const countMod = document.getElementById('count-interval-mod');
@@ -1780,8 +1842,8 @@ class HTMLDashboardGenerator:
       const countOk = document.getElementById('count-interval-ok');
       if (countOk) countOk.textContent = totalOk;
 
-      // Re-apply interval filter to match current tier selection
-      filterIntervalTier(currentIntervalTier);
+      // Re-apply interval filter to match current tier selections
+      filterIntervalTiers();
     }}
 
     document.addEventListener('DOMContentLoaded', () => {{
@@ -2233,6 +2295,10 @@ class HTMLDashboardGenerator:
                   data-tier="{tier_adj}"
                   data-calendar-open="{cal_open_str}"
                   data-detail-id="{row_id}"
+                  data-checkin="{s['check_in']}"
+                  data-checkout="{s['check_out']}"
+                  data-segment-type="{s['segment_type'].capitalize()}"
+                  data-base-price="{s['our_base_nightly']:.0f}"
                   data-adj-tier="{tier_adj}"
                   data-raw-tier="{tier_raw}"
                   data-adj-diff-html='{diff_html_adj}'

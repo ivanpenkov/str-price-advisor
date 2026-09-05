@@ -242,6 +242,7 @@ def main():
     enrich_parser.add_argument("--limit", type=int, default=None, help="Limit number of comps to enrich")
     enrich_parser.add_argument("--force", action="store_true", help="Force re-scraping cached comps")
     enrich_parser.add_argument("--our-property", action="store_true", help="Enrich Villa del Sol property profile specifically")
+    enrich_parser.add_argument("--sync-cached", action="store_true", help="Sync existing cached profiles under data/enriched_comps/ to registry and listing specs without scraping")
 
     args = parser.parse_args()
 
@@ -284,7 +285,9 @@ def main():
     elif args.command == "enrich-comps":
         from src.listing_enricher import ListingEnricher
         enricher = ListingEnricher(headless=True)
-        if args.our_property:
+        if args.sync_cached:
+            enricher.sync_cached_to_registry()
+        elif args.our_property:
             asyncio.run(enricher.enrich_our_property(force_refresh=args.force))
         else:
             asyncio.run(enricher.enrich_all_comps(

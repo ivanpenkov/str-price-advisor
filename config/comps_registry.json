@@ -2547,6 +2547,61 @@
       "rationale": "Premium comp (20% superior desirability, Winter). Features heated pool, dedicated sports court, heated spa.",
       "winter_rationale": "Premium comp (20% superior desirability, Winter). Features heated pool, dedicated sports court, heated spa.",
       "summer_rationale": "Premium comp (20% superior desirability, Summer). Features heated pool, dedicated sports court, heated spa."
+    },
+    "918812982062542680": {
+      "listing_id": "918812982062542680",
+      "name": "Serene Home, Heated Pool & Games",
+      "location": "Phoenix",
+      "bedrooms": 7,
+      "beds": 7,
+      "baths": 4.0,
+      "rating": 4.91,
+      "reviews": 133,
+      "url": "https://www.airbnb.com/rooms/918812982062542680",
+      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-918812982062542680/original/dfc1df47-74d9-4161-bdcd-533558cb57d0.jpeg",
+      "amenities_count": 0,
+      "is_valid_comp": true,
+      "validity_reason": "Valid 7BR luxury estate comp in Phoenix.",
+      "desirability_ratio": 0.85,
+      "winter_ratio": 0.85,
+      "summer_ratio": 0.83,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "standard_heated",
+        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "composite_score": 81.2,
+      "winter_composite_score": 81.2,
+      "summer_composite_score": 80.6,
+      "category_scores": {
+        "outdoor": 76,
+        "capacity": 95,
+        "interior": 70,
+        "location": 75,
+        "reputation": 94
+      },
+      "winter_category_scores": {
+        "outdoor": 76,
+        "capacity": 95,
+        "interior": 70,
+        "location": 75,
+        "reputation": 94
+      },
+      "summer_category_scores": {
+        "outdoor": 74,
+        "capacity": 95,
+        "interior": 70,
+        "location": 75,
+        "reputation": 94
+      },
+      "rationale": "Moderate comp (15% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
+      "winter_rationale": "Moderate comp (15% lower desirability, Winter). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
+      "summer_rationale": "Moderate comp (17% lower desirability, Summer). Features heated pool, but noted gaps: 4.0 baths, Phoenix location discount.",
+      "discovered_at_sample": "2026-09-05 manual addition",
+      "accommodates": 22
     }
   },
   "tier_b": {
@@ -6193,11 +6248,11 @@
     }
   },
   "metadata": {
-    "last_updated": "2026-09-05T03:20:44.039690",
+    "last_updated": "2026-09-05T03:30:12.556304",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
     "valid_comps_count": 110,
     "disqualified_comps_count": 3,
-    "total_comps": 114
+    "total_comps": 115
   }
 }

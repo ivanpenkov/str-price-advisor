@@ -228,6 +228,132 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertTrue(eval_res["is_valid_comp"])
         self.assertGreaterEqual(eval_res["desirability_ratio"], 1.15)
 
+    def test_pool_specs_extraction_free_vs_fee_vs_unheated(self):
+        """Test extraction of pool heating type and pool size tiers."""
+        # 1. Free pool heating
+        specs_free = CompEvaluator.extract_pool_specs(
+            "HUGE Golf course home-FREE Heated Pool/Theatre/Gym",
+            ["Pool", "Free heated pool", "Wifi"],
+        )
+        self.assertTrue(specs_free["has_pool"])
+        self.assertEqual(specs_free["heating"], "free")
+
+        # 2. Fee-based pool heating
+        specs_fee = CompEvaluator.extract_pool_specs(
+            "Luxury villa in Scottsdale. Pool heat is available for $100/night upon request.",
+            ["Pool", "Private pool", "Air conditioning"],
+        )
+        self.assertTrue(specs_fee["has_pool"])
+        self.assertEqual(specs_fee["heating"], "fee")
+
+        # 3. Unheated pool
+        specs_unheated = CompEvaluator.extract_pool_specs(
+            "Backyard with swimming pool and patio table.",
+            ["Pool", "Wifi"],
+        )
+        self.assertTrue(specs_unheated["has_pool"])
+        self.assertEqual(specs_unheated["heating"], "unheated")
+
+        # 4. Plunge pool
+        specs_plunge = CompEvaluator.extract_pool_specs(
+            "Cozy patio with cocktail plunge pool.",
+            ["Plunge pool", "Wifi"],
+        )
+        self.assertEqual(specs_plunge["pool_size"], "plunge")
+
+        # 5. Large resort pool with gallon count
+        specs_large = CompEvaluator.extract_pool_specs(
+            "Spectacular backyard featuring 30,000 gallon resort pool with rock waterfall grotto.",
+            ["Pool", "Private pool"],
+        )
+        self.assertEqual(specs_large["pool_size"], "large")
+        self.assertEqual(specs_large["gallons"], 30000)
+
+        # 6. Villa del Sol ground truth
+        vds_specs = CompEvaluator.extract_pool_specs("", [], listing_id="573857947793833342")
+        self.assertEqual(vds_specs["heating"], "free")
+        self.assertEqual(vds_specs["pool_size"], "large")
+        self.assertEqual(vds_specs["gallons"], 30000)
+
+    def test_seasonal_ratios_winter_vs_summer(self):
+        """Unheated pool has lower winter ratio than summer ratio due to cold weather penalty."""
+        comp_unheated = {
+            "listing_id": "777777",
+            "name": "Standard Scottsdale Home",
+            "bedrooms": 6,
+            "baths": 4.5,
+            "rating": 4.85,
+            "reviews": 25,
+            "location": "Scottsdale",
+            "description": "6BR home with standard private swimming pool and BBQ.",
+            "amenities": ["Pool", "Wifi", "Kitchen"],
+        }
+        res = self.evaluator.evaluate_comp(comp_unheated)
+        self.assertTrue(res["is_valid_comp"])
+        # Winter ratio should be lower than summer ratio for unheated comp
+        self.assertLess(res["winter_ratio"], res["summer_ratio"])
+        self.assertIn("unheated pool in winter", res["winter_rationale"])
+        self.assertNotIn("unheated pool in winter", res["summer_rationale"])
+
+        # Free heated pool comp should maintain high score in winter
+        comp_free_heated = {
+            "listing_id": "888888",
+            "name": "Golf Course Luxury Estate - FREE Heated Pool",
+            "bedrooms": 6,
+            "baths": 5.0,
+            "rating": 4.90,
+            "reviews": 30,
+            "location": "Scottsdale",
+            "description": "Includes free heated pool and spa year-round.",
+            "amenities": ["Pool", "Hot tub", "Wifi"],
+        }
+        res_free = self.evaluator.evaluate_comp(comp_free_heated)
+        self.assertGreaterEqual(res_free["winter_category_scores"]["outdoor"], 80)
+        self.assertIn("free heated pool", res_free["winter_rationale"])
+
+    def test_html_generator_seasonal_ratio_selection(self):
+        """HTMLDashboardGenerator should pick winter_ratio for Oct-Apr and summer_ratio for May-Sep."""
+        from src.html_generator import HTMLDashboardGenerator
+        gen = HTMLDashboardGenerator()
+
+        comp_data = {
+            "listing_id": "777777",
+            "effective_nightly": 1000.0,
+            "total_price": 3000.0,
+            "winter_ratio": 0.85,
+            "summer_ratio": 0.95,
+            "desirability_ratio": 0.85,
+            "winter_rationale": "Winter rationale text",
+            "summer_rationale": "Summer rationale text",
+            "is_valid_comp": True,
+        }
+
+        # Winter segment (October 2026)
+        winter_segment = {
+            "check_in": "2026-10-15",
+            "check_out": "2026-10-18",
+            "nights": 3,
+            "our_base_nightly": 800.0,
+            "comps_list": [comp_data],
+        }
+        gen.comps_dict["777777"] = comp_data
+        subtable_winter, _, _, _, _, _ = gen._render_comp_subtable(winter_segment, "row-winter")
+        self.assertIn("Winter", subtable_winter)
+        self.assertIn("0.85x", subtable_winter)
+
+        # Summer segment (June 2026)
+        summer_segment = {
+            "check_in": "2026-06-15",
+            "check_out": "2026-06-18",
+            "nights": 3,
+            "our_base_nightly": 600.0,
+            "comps_list": [comp_data],
+        }
+        subtable_summer, _, _, _, _, _ = gen._render_comp_subtable(summer_segment, "row-summer")
+        self.assertIn("Summer", subtable_summer)
+        self.assertIn("0.95x", subtable_summer)
+
 
 if __name__ == "__main__":
     unittest.main()
+

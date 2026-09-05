@@ -64,10 +64,386 @@ class CompEvaluator:
             "reviews": 76,
         }
 
-    def evaluate_comp(self, comp_meta: Dict[str, Any], enriched_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    @classmethod
+    def extract_pool_specs(cls, all_text: str, amenities: List[str], listing_id: str = "") -> Dict[str, Any]:
+        """
+        Extract pool heating status and pool size from amenities and textual highlights.
+        Returns:
+            {
+                "has_pool": bool,
+                "heating": "free" | "standard_heated" | "fee" | "unheated",
+                "heating_source": str,
+                "pool_size": "large" | "standard" | "plunge",
+                "size_source": str,
+                "gallons": Optional[int],
+            }
+        """
+        if str(listing_id) == "573857947793833342":
+            return {
+                "has_pool": True,
+                "heating": "free",
+                "heating_source": "Villa del Sol verified specs: year-round free heated saltwater pool",
+                "pool_size": "large",
+                "size_source": "30,000-gallon saltwater pool with rock waterfall grotto",
+                "gallons": 30000,
+            }
+
+        text_lower = all_text.lower()
+        amenities_lower = [a.lower() for a in amenities]
+
+        # 1. Has Pool Check
+        has_pool = any("pool" in a and "table" not in a for a in amenities_lower) or any(
+            w in text_lower for w in ["swimming pool", "private pool", "heated pool", "resort pool", "lap pool", "plunge pool"]
+        )
+        if not has_pool and "pool" in text_lower:
+            if not any(neg in text_lower for neg in ["no pool", "without a pool", "does not have a pool", "no swimming pool"]):
+                has_pool = True
+
+        if not has_pool:
+            return {
+                "has_pool": False,
+                "heating": "none",
+                "heating_source": "No swimming pool found",
+                "pool_size": "none",
+                "size_source": "No swimming pool found",
+                "gallons": None,
+            }
+
+        # 2. Pool Heating Status
+        free_patterns = [
+            "free pool heat", "free heated pool", "free pool heating", "complimentary pool heat",
+            "complimentary heated pool", "pool heat included", "pool heat is included",
+            "pool heat is always included", "no pool heat fee", "|free pool heat|",
+            "free heated", "heated pool included", "heated pool is free"
+        ]
+        fee_patterns = [
+            "pool heat fee", "pool heating fee", "fee to heat", "heat is available for $",
+            "pool heat is $", "pool heat is available upon request", "additional fee for pool heat",
+            "pool heating upon request", "pool heating available upon request", "optional pool heat",
+            "pool heat avail", "pool heating available for a fee", "fee for pool heating"
+        ]
+
+        heating = "unheated"
+        heating_source = "Unheated (no pool heating mentioned)"
+
+        if any(p in text_lower for p in free_patterns):
+            heating = "free"
+            heating_source = "Explicit free / complimentary pool heat mentioned in listing text"
+        elif any(p in text_lower for p in fee_patterns) or re.search(r"pool heat[^\.\n\$\d]*\$\d+", text_lower):
+            heating = "fee"
+            heating_source = "Explicit pool heating fee disclosed in listing text"
+        elif any("heated" in a and "pool" in a for a in amenities_lower) or any(
+            w in text_lower for w in ["htd pool", "heated pool", "heated private pool", "pool is heated", "pool heating"]
+        ):
+            heating = "standard_heated"
+            heating_source = "Heated pool declared in amenities/title (standard/unspecified fee)"
+
+        # 3. Pool Size & Volume
+        gallons = None
+        m_gal = re.search(r"(\d+[\d,]*)\s*(?:gallon|gal)\s*(?:pool)?", text_lower)
+        if m_gal:
+            try:
+                gallons = int(m_gal.group(1).replace(",", ""))
+            except Exception:
+                gallons = None
+
+        m_dim = re.search(r"(\d+)\s*(?:ft|')?\s*[xX]\s*(\d+)\s*(?:ft|')?\s*(?:pool)?", text_lower)
+
+        plunge_patterns = ["plunge pool", "cocktail pool", "spool", "small pool", "dip pool"]
+        large_patterns = [
+            "resort-style pool", "resort style pool", "resort pool", "oversized pool",
+            "massive pool", "huge pool", "olympic pool", "lap pool", "waterfall grotto",
+            "water slide", "lazy river", "grotto"
+        ]
+
+        if any(p in text_lower for p in plunge_patterns) or any("plunge pool" in a for a in amenities_lower) or (gallons and gallons < 10000):
+            pool_size = "plunge"
+            size_source = "Small / cocktail / plunge pool"
+        elif (gallons and gallons >= 25000) or any(p in text_lower for p in large_patterns) or (m_dim and (int(m_dim.group(1)) >= 35 or int(m_dim.group(2)) >= 35)):
+            pool_size = "large"
+            size_source = f"Large / resort-scale pool ({gallons:,} gal)" if gallons else "Large / resort-scale pool with water features"
+        else:
+            pool_size = "standard"
+            size_source = "Standard residential backyard pool"
+
+        return {
+            "has_pool": True,
+            "heating": heating,
+            "heating_source": heating_source,
+            "pool_size": pool_size,
+            "size_source": size_source,
+            "gallons": gallons,
+        }
+
+    def _evaluate_single_season(
+        self,
+        comp_meta: Dict[str, Any],
+        enriched: Dict[str, Any],
+        all_text: str,
+        sqft: Optional[int],
+        br: int,
+        ba: float,
+        beds: int,
+        guests: int,
+        location: str,
+        rating: float,
+        reviews: int,
+        pool_specs: Dict[str, Any],
+        is_winter: bool,
+    ) -> Dict[str, Any]:
+        """Evaluate a comp for a specific season (Winter Oct-Apr vs Summer May-Sep)."""
+        # A. Outdoor Yard (30%)
+        has_spa = any(w in all_text for w in ["spa", "hot tub", "jacuzzi", "whirlpool"])
+        has_tennis = any(w in all_text for w in ["tennis court", "tennis"])
+        has_court = any(w in all_text for w in ["basketball", "pickleball", "sports court", "sport court", "half court"]) or has_tennis
+        has_multiple_courts = (has_tennis and any(w in all_text for w in ["pickleball", "basketball"])) or (
+            "pickleball" in all_text and "basketball" in all_text
+        )
+        has_sauna = any(w in all_text for w in ["sauna", "steam room", "cold plunge", "ice bath"])
+        has_green = any(w in all_text for w in ["putting green", "mini golf", "turf"])
+        has_bbq_fire = any(w in all_text for w in ["bbq", "grill", "fire pit", "outdoor kitchen", "cabana", "gazebo"])
+        has_grotto = any(w in all_text for w in ["grotto", "waterfall", "slide", "lazy river"])
+
+        heating = pool_specs.get("heating", "unheated")
+        pool_size = pool_specs.get("pool_size", "standard")
+
+        if is_winter:
+            # Winter (Oct 1 - Apr 30): Pool heating is paramount
+            outdoor_score = 55  # Base for having a pool in winter
+            if heating == "free":
+                outdoor_score += 18  # 2x hot tub boost
+            elif heating == "standard_heated":
+                outdoor_score += 12
+            elif heating == "fee":
+                outdoor_score += 8
+            else:  # unheated
+                outdoor_score -= 10  # Winter unheated penalty
+
+            if has_spa:
+                outdoor_score += 9  # Hot tub (half of free pool heat)
+        else:
+            # Summer (May 1 - Sep 30): Water is naturally 85-92F
+            outdoor_score = 65  # High summer base
+            if heating == "free":
+                outdoor_score += 6
+            elif heating in ("standard_heated", "fee"):
+                outdoor_score += 4
+            # Unheated has no penalty in summer
+
+            if has_spa:
+                outdoor_score += 5
+
+        # Pool size adjustment
+        if pool_size == "large":
+            outdoor_score += 6
+        elif pool_size == "plunge":
+            outdoor_score -= 8
+
+        # Sports courts
+        if has_multiple_courts:
+            outdoor_score += 16
+        elif has_tennis:
+            outdoor_score += 14
+        elif has_court:
+            outdoor_score += 10
+
+        # Other outdoor features
+        if has_sauna:
+            outdoor_score += 6
+        if has_green:
+            outdoor_score += 5
+        if has_bbq_fire:
+            outdoor_score += 5
+        if has_grotto:
+            outdoor_score += 5
+
+        outdoor_score = min(100, max(25, outdoor_score))
+
+        # B. Bedrooms & Bathrooms (25%)
+        capacity_score = 60
+        if br >= 7:
+            capacity_score += 20
+        elif br == 6:
+            capacity_score += 15
+        elif br == 5:
+            capacity_score += 8
+
+        if ba >= 5.5:
+            capacity_score += 15
+        elif ba >= 4.5:
+            capacity_score += 10
+        elif ba >= 3.5:
+            capacity_score += 5
+
+        if guests >= 16:
+            capacity_score += 10
+        elif guests >= 14:
+            capacity_score += 6
+
+        has_casita = any(w in all_text for w in ["casita", "guest house", "guesthouse", "guest suite", "detached"])
+        if has_casita:
+            capacity_score += 5
+
+        if sqft:
+            if sqft >= 6500:
+                capacity_score += 8
+            elif sqft >= 5000:
+                capacity_score += 4
+            elif sqft < 4000:
+                capacity_score -= 5
+
+        capacity_score = min(100, max(40, capacity_score))
+
+        # C. Interior Luxury & Entertainment (20%)
+        has_billiards = any(w in all_text for w in ["pool table", "billiards", "billiard"])
+        has_theater = any(w in all_text for w in ["theatre", "theater", "cinema", "movie room"])
+        has_game_room = any(w in all_text for w in ["game room", "arcade", "ping pong", "foosball", "shuffleboard"])
+        has_chef_kitchen = any(w in all_text for w in ["chef", "stainless", "sub-zero", "subzero", "viking", "miele", "wolf", "wine cooler", "granite", "quartz"])
+        has_luxury_vibe = any(w in all_text for w in ["luxury", "estate", "remodeled", "designer", "mansion", "resort"])
+
+        interior_score = 70
+        if has_billiards:
+            interior_score += 8
+        if has_theater:
+            interior_score += 8
+        if has_game_room:
+            interior_score += 6
+        if has_chef_kitchen:
+            interior_score += 7
+        if has_luxury_vibe:
+            interior_score += 5
+        interior_score = min(100, interior_score)
+
+        # D. Location Corridor (15%)
+        if any(w in location or w in all_text[:200] for w in ["paradise valley", "pv", "old town", "scottsdale"]):
+            location_score = 95
+        elif any(w in location or w in all_text[:200] for w in ["tempe", "south tempe", "arcadia"]):
+            location_score = 88
+        elif any(w in location or w in all_text[:200] for w in ["chandler", "gilbert", "ahwatukee"]):
+            location_score = 82
+        elif "mesa" in location or "mesa" in all_text[:200]:
+            location_score = 78
+        else:
+            location_score = 75
+
+        # E. Reputation & Reviews (10%)
+        reputation_score = 75
+        if rating >= 4.95 and reviews >= 20:
+            reputation_score = 98
+        elif rating >= 4.90 and reviews >= 15:
+            reputation_score = 94
+        elif rating >= 4.80:
+            reputation_score = 88
+        elif rating >= 4.70:
+            reputation_score = 78
+        elif rating > 0:
+            reputation_score = 70
+        else:
+            reputation_score = 75
+
+        # Composite & Ratio
+        composite = (
+            self.CATEGORY_WEIGHTS["outdoor"] * outdoor_score
+            + self.CATEGORY_WEIGHTS["capacity"] * capacity_score
+            + self.CATEGORY_WEIGHTS["interior"] * interior_score
+            + self.CATEGORY_WEIGHTS["location"] * location_score
+            + self.CATEGORY_WEIGHTS["reputation"] * reputation_score
+        )
+        composite = round(composite, 1)
+
+        SENSITIVITY = 2.0
+        delta = (composite - self.OUR_BASELINE_SCORE) / self.OUR_BASELINE_SCORE
+        raw_ratio = 1.0 + (SENSITIVITY * delta)
+        ratio = round(max(0.65, min(1.35, raw_ratio)), 2)
+
+        # Rationale
+        highlights = []
+        shortcomings = []
+
+        if heating == "free":
+            highlights.append("free heated pool")
+        elif heating == "standard_heated":
+            highlights.append("heated pool")
+        elif heating == "fee":
+            shortcomings.append("pool heat fee required")
+        elif is_winter:
+            shortcomings.append("unheated pool in winter")
+
+        if pool_size == "large":
+            highlights.append("resort-scale pool")
+        elif pool_size == "plunge":
+            shortcomings.append("small plunge pool")
+
+        if has_tennis:
+            highlights.append("private tennis court")
+        elif has_court:
+            highlights.append("dedicated sports court")
+
+        if has_sauna:
+            highlights.append("private sauna")
+        if has_theater:
+            highlights.append("movie theater")
+        if has_spa:
+            highlights.append("heated spa")
+        if has_billiards:
+            highlights.append("pool table")
+
+        if sqft and sqft >= 6500:
+            highlights.append(f"{sqft:,} sq ft estate")
+        elif br >= 7:
+            highlights.append(f"{br} bedrooms")
+        elif br < 6:
+            shortcomings.append(f"{br} BR vs our 6 BR")
+
+        if ba < 4.5:
+            shortcomings.append(f"{ba} baths")
+
+        if location_score > 90:
+            highlights.append("Scottsdale location premium")
+        elif location_score < 80:
+            shortcomings.append(f"{location.title()} location discount")
+
+        season_label = "Winter" if is_winter else "Summer"
+        if ratio >= 1.05:
+            pct = round((ratio - 1.0) * 100)
+            summary = f"Premium comp ({pct}% superior desirability, {season_label}). Features " + ", ".join(highlights[:3]) + "."
+        elif ratio <= 0.95:
+            pct = round((1.0 - ratio) * 100)
+            summary = f"Moderate comp ({pct}% lower desirability, {season_label}). "
+            if highlights and shortcomings:
+                summary += f"Features {highlights[0]}, but noted gaps: " + ", ".join(shortcomings[:2]) + "."
+            elif highlights:
+                summary += "Features " + ", ".join(highlights[:2]) + "."
+            elif shortcomings:
+                summary += "Noted gaps: " + ", ".join(shortcomings[:3]) + "."
+            else:
+                summary += f"{br}BR estate in {location.title()} with standard luxury amenities."
+        else:
+            summary = f"Direct peer comp (near-equal quality, {season_label}). {br}BR / {ba}BA estate matching Villa del Sol's capacity and luxury tier."
+
+        return {
+            "desirability_ratio": ratio,
+            "composite_score": composite,
+            "category_scores": {
+                "outdoor": outdoor_score,
+                "capacity": capacity_score,
+                "interior": interior_score,
+                "location": location_score,
+                "reputation": reputation_score,
+            },
+            "rationale": summary,
+        }
+
+    def evaluate_comp(
+        self,
+        comp_meta: Dict[str, Any],
+        enriched_data: Optional[Dict[str, Any]] = None,
+        season: Optional[str] = None,
+    ) -> Dict[str, Any]:
         """
         Evaluate a single competitor listing against Villa del Sol.
-        Returns a dict containing is_valid_comp, desirability_ratio, scores, and rationale.
+        If season is 'winter' or 'summer', returns that season's evaluation.
+        If season is None, returns a merged dict with both winter_ratio and summer_ratio.
         """
         cid = str(comp_meta.get("listing_id", ""))
         enriched = enriched_data or {}
@@ -85,6 +461,9 @@ class CompEvaluator:
         amenities = [a.lower() for a in (enriched.get("amenities") or comp_meta.get("amenities") or [])]
         raw_snippet = (comp_meta.get("raw_snippet") or enriched.get("raw_snippet") or "").lower()
         all_text = (title + " " + desc + " " + raw_snippet + " " + " ".join(amenities)).lower()
+
+        # Extract pool specs
+        pool_specs = self.extract_pool_specs(all_text, amenities, listing_id=cid)
 
         # Extract square footage if mentioned in all_text
         sqft = None
@@ -150,27 +529,15 @@ class CompEvaluator:
         # -------------------------------------------------------------
         # 1. VALIDITY CHECK
         # -------------------------------------------------------------
-        has_deep_data = (
-            enriched.get("amenities_count", 0) > 0
-            or comp_meta.get("amenities_count", 0) > 0
-            or len(amenities) > 0
-            or len(desc) > 100
-        )
-        if len(amenities) > 0:
-            has_pool = any("pool" in a and "table" not in a for a in amenities)
-        elif has_deep_data:
-            has_negative_pool = any(neg in all_text for neg in ["no pool", "without a pool", "does not have a pool", "doesn't have a pool", "no swimming pool"])
-            has_positive_pool = any(w in all_text for w in ["swimming pool", "private outdoor pool", "heated pool", "saltwater pool", "resort pool", "private pool", "lap pool"]) or ("pool" in title.lower() and not has_negative_pool)
-            has_pool = has_positive_pool and not has_negative_pool
-        else:
-            # Fallback for listings awaiting deep amenities enrichment
-            has_pool = True
-
+        has_pool = pool_specs["has_pool"]
         if not has_pool:
             return {
                 "is_valid_comp": False,
                 "validity_reason": "Disqualified: Property lacks a private swimming pool.",
                 "desirability_ratio": 0.50,
+                "winter_ratio": 0.50,
+                "summer_ratio": 0.50,
+                "pool_specs": pool_specs,
                 "category_scores": {"outdoor": 30, "capacity": 60, "interior": 60, "location": 70, "reputation": 70},
                 "composite_score": 52.0,
                 "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
@@ -181,232 +548,76 @@ class CompEvaluator:
                 "is_valid_comp": False,
                 "validity_reason": f"Disqualified: Only {br} bedrooms (capacity {guests} guests), below the 5 BR / 12 guest threshold.",
                 "desirability_ratio": 0.55,
+                "winter_ratio": 0.55,
+                "summer_ratio": 0.55,
+                "pool_specs": pool_specs,
                 "category_scores": {"outdoor": 65, "capacity": 40, "interior": 65, "location": 75, "reputation": 75},
                 "composite_score": 60.0,
                 "rationale": f"Disqualified: Under-sized listing ({br} BR / {guests} guests) cannot benchmark 16-guest luxury estates.",
             }
 
-        # Check for far outliers (>30 miles)
         outlier_cities = ["surprise", "buckeye", "casa grande", "maricopa", "goodyear", "sun city"]
         if any(city in location for city in outlier_cities) or any(city in all_text[:200] for city in outlier_cities):
             return {
                 "is_valid_comp": False,
                 "validity_reason": f"Disqualified: Located in peripheral suburb ({location.title()}), outside competitive drive corridor.",
                 "desirability_ratio": 0.60,
+                "winter_ratio": 0.60,
+                "summer_ratio": 0.60,
+                "pool_specs": pool_specs,
                 "category_scores": {"outdoor": 70, "capacity": 75, "interior": 70, "location": 40, "reputation": 75},
                 "composite_score": 66.0,
                 "rationale": f"Disqualified: Located too far from the Scottsdale/Tempe corridor in {location.title()}.",
             }
 
         # -------------------------------------------------------------
-        # 2. CATEGORY SCORING (0 to 100)
+        # 2. EVALUATE SEASONS
         # -------------------------------------------------------------
-        # A. Outdoor Yard (30%)
-        # Features: pool, spa/hot tub, sports courts (tennis, pickleball, basketball), sauna/wellness, putting green, BBQ, acreage
-        has_spa = any(w in all_text for w in ["spa", "hot tub", "jacuzzi", "whirlpool"])
-        has_tennis = any(w in all_text for w in ["tennis court", "tennis"])
-        has_court = any(w in all_text for w in ["basketball", "pickleball", "sports court", "sport court", "half court"]) or has_tennis
-        has_multiple_courts = (has_tennis and any(w in all_text for w in ["pickleball", "basketball"])) or (
-            "pickleball" in all_text and "basketball" in all_text
+        if season == "summer":
+            res = self._evaluate_single_season(
+                comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, is_winter=False
+            )
+            res.update({
+                "is_valid_comp": True,
+                "validity_reason": f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
+                "pool_specs": pool_specs,
+            })
+            return res
+        elif season == "winter":
+            res = self._evaluate_single_season(
+                comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, is_winter=True
+            )
+            res.update({
+                "is_valid_comp": True,
+                "validity_reason": f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
+                "pool_specs": pool_specs,
+            })
+            return res
+
+        # Default: evaluate both Winter and Summer
+        winter_res = self._evaluate_single_season(
+            comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, is_winter=True
         )
-        has_sauna = any(w in all_text for w in ["sauna", "steam room", "cold plunge", "ice bath"])
-        has_green = any(w in all_text for w in ["putting green", "mini golf", "turf"])
-        has_bbq_fire = any(w in all_text for w in ["bbq", "grill", "fire pit", "outdoor kitchen", "cabana", "gazebo"])
-        has_grotto = any(w in all_text for w in ["grotto", "waterfall", "slide", "lazy river"])
-
-        outdoor_score = 65  # Base for having a pool
-        if has_spa:
-            outdoor_score += 10
-        if has_multiple_courts:
-            outdoor_score += 16
-        elif has_tennis:
-            outdoor_score += 14
-        elif has_court:
-            outdoor_score += 10
-        if has_sauna:
-            outdoor_score += 6
-        if has_green:
-            outdoor_score += 5
-        if has_bbq_fire:
-            outdoor_score += 5
-        if has_grotto:
-            outdoor_score += 5
-        outdoor_score = min(100, outdoor_score)
-
-        # B. Bedrooms & Bathrooms (25%)
-        # Villa del Sol: 6 BR, 6 BA, 16 guests, detached casita, 5,400 sq ft
-        capacity_score = 60
-        if br >= 7:
-            capacity_score += 20
-        elif br == 6:
-            capacity_score += 15
-        elif br == 5:
-            capacity_score += 8
-
-        if ba >= 5.5:
-            capacity_score += 15
-        elif ba >= 4.5:
-            capacity_score += 10
-        elif ba >= 3.5:
-            capacity_score += 5
-
-        if guests >= 16:
-            capacity_score += 10
-        elif guests >= 14:
-            capacity_score += 6
-
-        has_casita = any(w in all_text for w in ["casita", "guest house", "guesthouse", "guest suite", "detached"])
-        if has_casita:
-            capacity_score += 5
-
-        if sqft:
-            if sqft >= 6500:
-                capacity_score += 8
-            elif sqft >= 5000:
-                capacity_score += 4
-            elif sqft < 4000:
-                capacity_score -= 5
-
-        capacity_score = min(100, max(40, capacity_score))
-
-        # C. Interior Luxury & Entertainment (20%)
-        # Features: pool table / billiards, theater, arcade / game room, chef kitchen, luxury remodel
-        has_billiards = any(w in all_text for w in ["pool table", "billiards", "billiard"])
-        has_theater = any(w in all_text for w in ["theatre", "theater", "cinema", "movie room"])
-        has_game_room = any(w in all_text for w in ["game room", "arcade", "ping pong", "foosball", "shuffleboard"])
-        has_chef_kitchen = any(w in all_text for w in ["chef", "stainless", "sub-zero", "subzero", "viking", "miele", "wolf", "wine cooler", "granite", "quartz"])
-        has_luxury_vibe = any(w in all_text for w in ["luxury", "estate", "remodeled", "designer", "mansion", "resort"])
-
-        interior_score = 70
-        if has_billiards:
-            interior_score += 8
-        if has_theater:
-            interior_score += 8
-        if has_game_room:
-            interior_score += 6
-        if has_chef_kitchen:
-            interior_score += 7
-        if has_luxury_vibe:
-            interior_score += 5
-        interior_score = min(100, interior_score)
-
-        # D. Location Corridor (15%)
-        # Scottsdale / PV (+5-15% peak demand): 95
-        # South Tempe (Villa del Sol): 88
-        # Chandler / Gilbert: 82
-        # Mesa: 78
-        if any(w in location or w in all_text[:200] for w in ["paradise valley", "pv", "old town", "scottsdale"]):
-            location_score = 95
-        elif any(w in location or w in all_text[:200] for w in ["tempe", "south tempe", "arcadia"]):
-            location_score = 88
-        elif any(w in location or w in all_text[:200] for w in ["chandler", "gilbert", "ahwatukee"]):
-            location_score = 82
-        elif "mesa" in location or "mesa" in all_text[:200]:
-            location_score = 78
-        else:
-            location_score = 75
-
-        # E. Reputation & Reviews (10%)
-        reputation_score = 75
-        if rating >= 4.95 and reviews >= 20:
-            reputation_score = 98
-        elif rating >= 4.90 and reviews >= 15:
-            reputation_score = 94
-        elif rating >= 4.80:
-            reputation_score = 88
-        elif rating >= 4.70:
-            reputation_score = 78
-        elif rating > 0:
-            reputation_score = 70
-        else:
-            reputation_score = 75  # New listing
-
-        # -------------------------------------------------------------
-        # 3. COMPOSITE SCORE & DESIRABILITY RATIO
-        # -------------------------------------------------------------
-        composite = (
-            self.CATEGORY_WEIGHTS["outdoor"] * outdoor_score
-            + self.CATEGORY_WEIGHTS["capacity"] * capacity_score
-            + self.CATEGORY_WEIGHTS["interior"] * interior_score
-            + self.CATEGORY_WEIGHTS["location"] * location_score
-            + self.CATEGORY_WEIGHTS["reputation"] * reputation_score
+        summer_res = self._evaluate_single_season(
+            comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, is_winter=False
         )
-        composite = round(composite, 1)
-
-        # Sensitivity-scaled expansion (sensitivity = 2.0 centered at 88.0)
-        # Unlocks the full 0.65x - 1.35x realistic luxury range, preventing linear compression.
-        SENSITIVITY = 2.0
-        delta = (composite - self.OUR_BASELINE_SCORE) / self.OUR_BASELINE_SCORE
-        raw_ratio = 1.0 + (SENSITIVITY * delta)
-        ratio = round(max(0.65, min(1.35, raw_ratio)), 2)
-
-        # -------------------------------------------------------------
-        # 4. RATIONALE GENERATION
-        # -------------------------------------------------------------
-        highlights = []
-        shortcomings = []
-
-        if has_tennis:
-            highlights.append("private tennis court")
-        elif has_court:
-            highlights.append("dedicated sports court")
-        elif "basketball" in self.our_profile.get("description", "").lower():
-            shortcomings.append("lacks basketball court")
-
-        if has_sauna:
-            highlights.append("private sauna")
-        if has_theater:
-            highlights.append("movie theater")
-        if has_spa:
-            highlights.append("heated spa")
-        if has_billiards:
-            highlights.append("pool table")
-
-        if sqft and sqft >= 6500:
-            highlights.append(f"{sqft:,} sq ft estate")
-        elif br >= 7:
-            highlights.append(f"{br} bedrooms")
-        elif br < 6:
-            shortcomings.append(f"{br} BR vs our 6 BR")
-
-        if ba < 4.5:
-            shortcomings.append(f"{ba} baths")
-
-        if location_score > 90:
-            highlights.append("Scottsdale location premium")
-        elif location_score < 80:
-            shortcomings.append(f"{location.title()} location discount")
-
-        if ratio >= 1.05:
-            delta = round((ratio - 1.0) * 100)
-            summary = f"Premium comp ({delta}% superior desirability). Features " + ", ".join(highlights[:3]) + "."
-        elif ratio <= 0.95:
-            delta = round((1.0 - ratio) * 100)
-            summary = f"Moderate comp ({delta}% lower desirability). "
-            if highlights and shortcomings:
-                summary += f"Features {highlights[0]}, but noted gaps: " + ", ".join(shortcomings[:2]) + "."
-            elif highlights:
-                summary += "Features " + ", ".join(highlights[:2]) + "."
-            elif shortcomings:
-                summary += "Noted gaps: " + ", ".join(shortcomings[:3]) + "."
-            else:
-                summary += f"{br}BR estate in {location.title()} with standard luxury amenities."
-        else:
-            summary = f"Direct peer comp (near-equal quality). {br}BR / {ba}BA estate matching Villa del Sol's capacity and luxury tier."
 
         return {
             "is_valid_comp": True,
             "validity_reason": f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
-            "desirability_ratio": ratio,
-            "category_scores": {
-                "outdoor": outdoor_score,
-                "capacity": capacity_score,
-                "interior": interior_score,
-                "location": location_score,
-                "reputation": reputation_score,
-            },
-            "composite_score": composite,
-            "rationale": summary,
+            "desirability_ratio": winter_res["desirability_ratio"],  # Peak Winter baseline
+            "winter_ratio": winter_res["desirability_ratio"],
+            "summer_ratio": summer_res["desirability_ratio"],
+            "pool_specs": pool_specs,
+            "composite_score": winter_res["composite_score"],
+            "winter_composite_score": winter_res["composite_score"],
+            "summer_composite_score": summer_res["composite_score"],
+            "category_scores": winter_res["category_scores"],
+            "winter_category_scores": winter_res["category_scores"],
+            "summer_category_scores": summer_res["category_scores"],
+            "rationale": winter_res["rationale"],
+            "winter_rationale": winter_res["rationale"],
+            "summer_rationale": summer_res["rationale"],
         }
 
     def evaluate_all_in_registry(self, save: bool = True) -> Dict[str, Any]:

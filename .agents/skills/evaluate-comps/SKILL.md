@@ -43,10 +43,34 @@ Always compare competitor listings against Villa del Sol's verified specs from `
 Evaluate each comp across five distinct dimensions on a scale of **0 to 100**:
 
 ### A. Outdoor Resort Yard & Amenities (Weight: 30%)
-- **100**: Outstanding private resort compound: large heated pool with grotto/slide, spa, **full regulation tennis court** or multi-sport complex (tennis + pickleball + basketball), **private sauna / cold plunge / wellness**, putting green, outdoor kitchen pavilion, high privacy.
-- **85–95**: Great heated pool & spa, dedicated basketball half-court or pickleball court, putting green, BBQ pavilion, fire pit, turf yard.
-- **70–84**: Standard backyard pool and patio, basic furniture, no sports courts or spa.
-- **< 60**: Small or unheated plunge pool, cramped yard, close neighbors with zero privacy, or no pool (Disqualify).
+Outdoor scoring distinguishes between **Winter (Oct 1 – Apr 30)** and **Summer (May 1 – Sep 30)** due to Phoenix water temperature dynamics (unheated pools drop to ~55°F in winter, making heating essential, while summer water reaches 85°F–92°F naturally):
+
+#### 1. Pool Heating Status (Villa del Sol = Free Heated Year-Round):
+- **Winter (Oct 1 – Apr 30)**:
+  - **Free / Included Pool Heat**: **+18 pts** (Double the boost of a hot tub)
+  - **Standard Heated (no fee disclosed)**: **+12 pts**
+  - **Fee-Based Pool Heat (\$50–\$150/night)**: **+8 pts** (Guest incurs extra cost/friction)
+  - **Unheated Pool**: **0 pts** + **-10 pts Winter Penalty** (Pool is essentially unusable)
+  - **Heated Spa / Hot Tub**: **+9 pts**
+- **Summer (May 1 – Sep 30)**:
+  - **Free Heated**: **+6 pts**
+  - **Standard / Fee Heated**: **+4 pts**
+  - **Unheated**: **0 pts** (No winter penalty)
+  - **Heated Spa / Hot Tub**: **+5 pts**
+
+#### 2. Pool Size & Volume (Villa del Sol = 30,000-gal Saltwater Resort Pool with Rock Grotto):
+- **Large / Resort-Scale ($\ge 25,000$ gal or $\ge 35'$ length or waterfall/grotto/slide)**: **+6 pts**
+- **Standard Residential Pool**: **0 pts** (Neutral)
+- **Small / Cocktail / Plunge Pool (< 10,000 gal or labeled plunge)**: **-8 pts** (Severe capacity constraint for 16 guests)
+
+#### 3. Sports Courts & Other Yard Features:
+- **Full Tennis Court**: **+14 pts**
+- **Dedicated Sports Court (Basketball / Pickleball)**: **+10 pts**
+- **Multi-Sport Complex (Tennis + Pickleball / Basketball)**: **+16 pts**
+- **Private Sauna / Cold Plunge / Wellness**: **+6 pts**
+- **Putting Green**: **+5 pts**
+- **Covered BBQ Pavilion / Gas Fire Pit**: **+5 pts**
+- **Custom Waterfall Grotto / Slide**: **+5 pts**
 
 ### B. Bedrooms, Bathrooms & Capacity (Weight: 25%)
 - **100**: 7+ large bedrooms, 6+ bathrooms (nearly all ensuites), sleeps 16+ comfortably in real beds (kings/queens), **$\ge 6,500$ sq ft expansive estate footprint**, detached casita for multi-family privacy.
@@ -129,17 +153,33 @@ For each listing in `config/comps_registry.json`, generate or update:
 ```json
 {
   "is_valid_comp": true,
-  "validity_reason": "Valid luxury estate comp in Scottsdale corridor.",
-  "desirability_ratio": 0.94,
+  "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
+  "desirability_ratio": 1.05,
+  "winter_ratio": 1.05,
+  "summer_ratio": 1.01,
+  "pool_specs": {
+    "has_pool": true,
+    "heating": "free",
+    "heating_source": "Explicit free / complimentary pool heat mentioned in listing text",
+    "pool_size": "large",
+    "size_source": "Resort-scale pool with waterfall grotto",
+    "gallons": 28000
+  },
+  "composite_score": 90.2,
+  "winter_composite_score": 90.2,
+  "summer_composite_score": 88.4,
   "category_scores": {
-    "outdoor": 85,
+    "outdoor": 91,
     "capacity": 90,
-    "interior": 85,
+    "interior": 87,
     "location": 95,
     "reputation": 92
   },
-  "composite_score": 88.2,
-  "rationale": "High-end Scottsdale remodel with pool/spa and 6 bedrooms, but lacks Villa del Sol's full basketball court and ¾-acre gated lot."
+  "winter_category_scores": { ... },
+  "summer_category_scores": { ... },
+  "rationale": "Premium comp (5% superior desirability, Winter). Features free heated pool, resort-scale pool, private tennis court.",
+  "winter_rationale": "...",
+  "summer_rationale": "..."
 }
 ```
 

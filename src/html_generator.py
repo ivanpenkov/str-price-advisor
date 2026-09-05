@@ -2075,13 +2075,50 @@ class HTMLDashboardGenerator:
                     comp_eval = self.evaluator.evaluate_comp(eval_input)
                 except Exception:
                     comp_eval = {}
+            # Determine season based on check-in month (Winter: Oct-Apr, Summer: May-Sep)
+            is_winter = True
+            if c_in and "-" in c_in:
+                try:
+                    month = int(c_in.split("-")[1])
+                    is_winter = month in (10, 11, 12, 1, 2, 3, 4)
+                except Exception:
+                    is_winter = True
+
+            ratio_key = "winter_ratio" if is_winter else "summer_ratio"
+            rationale_key = "winter_rationale" if is_winter else "summer_rationale"
+            score_key = "winter_composite_score" if is_winter else "summer_composite_score"
+            cat_key = "winter_category_scores" if is_winter else "summer_category_scores"
+
             is_valid = c.get("is_valid_comp") if "is_valid_comp" in c else comp_eval.get("is_valid_comp", True)
-            ratio = float(c.get("desirability_ratio") or comp_eval.get("desirability_ratio") or 1.0)
+            ratio = float(
+                c.get(ratio_key)
+                or comp_eval.get(ratio_key)
+                or c.get("desirability_ratio")
+                or comp_eval.get("desirability_ratio")
+                or 1.0
+            )
             adj_rate = round(eff_rate / ratio, 2) if is_valid and ratio > 0 else eff_rate
-            rationale = c.get("rationale") or comp_eval.get("rationale", "")
+            rationale = (
+                c.get(rationale_key)
+                or comp_eval.get(rationale_key)
+                or c.get("rationale")
+                or comp_eval.get("rationale", "")
+            )
             validity_reason = c.get("validity_reason") or comp_eval.get("validity_reason", "")
-            cat_scores = c.get("category_scores") or comp_eval.get("category_scores", {})
-            score = float(c.get("composite_score") or comp_eval.get("composite_score") or 88.0)
+            cat_scores = (
+                c.get(cat_key)
+                or comp_eval.get(cat_key)
+                or c.get("category_scores")
+                or comp_eval.get("category_scores", {})
+            )
+            score = float(
+                c.get(score_key)
+                or comp_eval.get(score_key)
+                or c.get("composite_score")
+                or comp_eval.get("composite_score")
+                or 88.0
+            )
+            pool_specs = c.get("pool_specs") or comp_eval.get("pool_specs", {})
 
             clean_comps.append({
                 "is_our_property": False,
@@ -2106,6 +2143,8 @@ class HTMLDashboardGenerator:
                 "confidence": c.get("confidence", "CONFIRMED"),
                 "confidence_reason": c.get("confidence_reason", ""),
                 "price_snippet": c.get("price_snippet", ""),
+                "is_winter": is_winter,
+                "pool_specs": pool_specs,
             })
 
         # Sort entries: valid comps sorted by adjusted_effective_nightly, followed by our property in proper place
@@ -2200,12 +2239,18 @@ class HTMLDashboardGenerator:
                 loc_escaped = html.escape(str(item.get('location', '')), quote=True)
 
                 if is_valid:
+                    season_label = "Winter" if item.get("is_winter", True) else "Summer"
+                    pool_sp = item.get("pool_specs", {})
+                    heat_val = pool_sp.get("heating", "")
+                    heat_str = f" • {heat_val.replace('_', ' ').title()} Pool" if heat_val and heat_val != "none" else ""
+                    tt = f"{rationale} ({season_label}{heat_str})"
+
                     if ratio >= 1.05:
-                        ratio_badge = f'<span class="badge" style="background:rgba(96,165,250,0.2); color:#60a5fa; border:1px solid rgba(96,165,250,0.35); font-weight:700; font-size:0.75rem;" title="{rationale}">💎 {ratio:.2f}x (Superior)</span>'
+                        ratio_badge = f'<span class="badge" style="background:rgba(96,165,250,0.2); color:#60a5fa; border:1px solid rgba(96,165,250,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">💎 {ratio:.2f}x ({season_label} Superior)</span>'
                     elif ratio <= 0.95:
-                        ratio_badge = f'<span class="badge" style="background:rgba(251,191,36,0.2); color:#fbbf24; border:1px solid rgba(251,191,36,0.35); font-weight:700; font-size:0.75rem;" title="{rationale}">📉 {ratio:.2f}x (Discount)</span>'
+                        ratio_badge = f'<span class="badge" style="background:rgba(251,191,36,0.2); color:#fbbf24; border:1px solid rgba(251,191,36,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">📉 {ratio:.2f}x ({season_label} Discount)</span>'
                     else:
-                        ratio_badge = f'<span class="badge" style="background:rgba(52,211,153,0.2); color:#34d399; border:1px solid rgba(52,211,153,0.35); font-weight:700; font-size:0.75rem;" title="{rationale}">🎯 {ratio:.2f}x (Peer)</span>'
+                        ratio_badge = f'<span class="badge" style="background:rgba(52,211,153,0.2); color:#34d399; border:1px solid rgba(52,211,153,0.35); font-weight:700; font-size:0.75rem;" title="{tt}">🎯 {ratio:.2f}x ({season_label} Peer)</span>'
                     ratio_td = f"""<td style="padding:9px 14px;">
                       {ratio_badge}
                       <div style="font-size:0.72rem; color:#94a3b8; margin-top:3px; line-height:1.25;">{rationale}</div>
@@ -2469,20 +2514,28 @@ class HTMLDashboardGenerator:
             )
 
             is_valid = c.get("is_valid_comp", True)
-            ratio = float(c.get("desirability_ratio") or 1.0)
+            w_ratio = float(c.get("winter_ratio") or c.get("desirability_ratio") or 1.0)
+            s_ratio = float(c.get("summer_ratio") or c.get("desirability_ratio") or 1.0)
+            ratio = w_ratio
             score = float(c.get("composite_score") or 88.0)
             cat_scores = c.get("category_scores", {})
             rationale = c.get("rationale", "")
             validity_reason = c.get("validity_reason", "")
+            pool_sp = c.get("pool_specs", {})
+            heat_val = pool_sp.get("heating", "unheated")
+            heat_label = heat_val.replace("_", " ").title()
+            pool_badge = f'<span class="badge" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3); font-size:0.72rem;" title="{pool_sp.get("heating_source", "")}">🏊 {heat_label} Pool</span>' if pool_sp.get("has_pool", True) else '<span class="badge" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); font-size:0.72rem;">🚫 No Pool</span>'
 
             if is_valid:
                 valid_pill = '<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3); font-size:0.75rem;">✅ Valid Comp</span>'
-                if ratio >= 1.05:
-                    ratio_pill = f'<span class="badge" style="background:rgba(96,165,250,0.2); color:#60a5fa; border:1px solid rgba(96,165,250,0.35); font-weight:700; font-size:0.78rem;">💎 Ratio: {ratio:.2f}x (Superior)</span>'
-                elif ratio <= 0.95:
-                    ratio_pill = f'<span class="badge" style="background:rgba(251,191,36,0.2); color:#fbbf24; border:1px solid rgba(251,191,36,0.35); font-weight:700; font-size:0.78rem;">📉 Ratio: {ratio:.2f}x (Discount)</span>'
-                else:
-                    ratio_pill = f'<span class="badge" style="background:rgba(52,211,153,0.2); color:#34d399; border:1px solid rgba(52,211,153,0.35); font-weight:700; font-size:0.78rem;">🎯 Ratio: {ratio:.2f}x (Peer)</span>'
+                w_color = "#60a5fa" if w_ratio >= 1.05 else ("#fbbf24" if w_ratio <= 0.95 else "#34d399")
+                s_color = "#60a5fa" if s_ratio >= 1.05 else ("#fbbf24" if s_ratio <= 0.95 else "#34d399")
+                w_bg = "rgba(96,165,250,0.2)" if w_ratio >= 1.05 else ("rgba(251,191,36,0.2)" if w_ratio <= 0.95 else "rgba(52,211,153,0.2)")
+                s_bg = "rgba(96,165,250,0.2)" if s_ratio >= 1.05 else ("rgba(251,191,36,0.2)" if s_ratio <= 0.95 else "rgba(52,211,153,0.2)")
+
+                w_pill = f'<span class="badge" style="background:{w_bg}; color:{w_color}; border:1px solid {w_color}44; font-weight:700; font-size:0.75rem;" title="Winter Ratio (Oct-Apr)">❄️ Win: {w_ratio:.2f}x</span>'
+                s_pill = f'<span class="badge" style="background:{s_bg}; color:{s_color}; border:1px solid {s_color}44; font-weight:700; font-size:0.75rem;" title="Summer Ratio (May-Sep)">☀️ Sum: {s_ratio:.2f}x</span>'
+                ratio_pill = f'<div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">{w_pill}{s_pill}{pool_badge}</div>'
 
                 scores_row = ""
                 if cat_scores:

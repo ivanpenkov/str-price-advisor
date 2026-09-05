@@ -21,6 +21,7 @@ from playwright.async_api import async_playwright, Browser, BrowserContext, Page
 
 
 from src.proxy_manager import ProxyManager
+from src.html_generator import extract_clean_listing_title
 
 
 class AirbnbCollector:
@@ -206,7 +207,13 @@ class AirbnbCollector:
 
         # Extract title / location
         lines = [line.strip() for line in text.split("\n") if line.strip()]
-        title = lines[2] if len(lines) > 2 else lines[0]
+        reg_title = spec.get("title") or spec.get("name") or ""
+        fallback_title = lines[2] if len(lines) > 2 else (lines[0] if lines else "")
+        title = extract_clean_listing_title(
+            raw_snippet=text,
+            default_title=fallback_title,
+            registered_name=reg_title,
+        )
         location = "Phoenix Valley"
         for line in lines:
             if "in " in line.lower():

@@ -20,6 +20,60 @@ from src.segmentation import CalendarSegmenter
 from src.analytics import PricingAnalyticsEngine
 
 
+def _is_spec_or_generic_title(s: str) -> bool:
+    """Check if a string is a price, spec, badge, location line, or generic placeholder."""
+    if not s or not s.strip():
+        return True
+    s_clean = s.strip()
+    s_lower = s_clean.lower()
+    if "$" in s_clean or "before taxes" in s_lower or re.search(r"for\s+\d+\s+nights?", s_lower) or r"/\s*night" in s_lower:
+        return True
+    if "single comp sweep" in s_lower:
+        return True
+    if any(b in s_lower for b in ["guest favorite", "superhost", "rare find", "top guest favorite"]):
+        return True
+    if any(s_lower.startswith(pref) for pref in ["home in", "entire home in", "villa in", "room in", "cabin in", "chalet in", "place to stay in"]):
+        return True
+    if re.search(r"^\d+\s*bedrooms?$", s_lower):
+        return True
+    if re.search(r"^\d+\s*beds?$", s_lower):
+        return True
+    if re.search(r"^\d+\s*bedrooms?\b", s_lower) or re.search(r"\b\d+\s*bedrooms?\b.*(?:\b\d+\s*beds?|\bbaths?)", s_lower):
+        return True
+    if re.search(r"^\d(?:\.\d+)?\s*\(\d+\)$", s_clean) or "out of 5" in s_lower:
+        return True
+    if s_lower in ["home", "villa", "entire home", "luxury estate", "house"]:
+        return True
+    return False
+
+
+def extract_clean_listing_title(
+    raw_snippet: str = "",
+    default_title: str = "",
+    registered_name: str = "",
+) -> str:
+    """
+    Extract a clean, descriptive property title from registry profiles, marketing headlines,
+    or card snippets, strictly rejecting price tags, bed/bath specs, badge strings, and location prefixes.
+    """
+    # 1. Highest precedence: curated profile name from comps registry or enriched specs
+    if registered_name and not _is_spec_or_generic_title(registered_name):
+        return registered_name.strip()
+
+    # 2. Extract best descriptive title from raw_snippet
+    if raw_snippet:
+        parts = [p.strip() for p in re.split(r"[|\n]", raw_snippet) if p.strip()]
+        for p in reversed(parts):
+            if not _is_spec_or_generic_title(p):
+                return p
+
+    # 3. Fallback to default_title if not generic/spec
+    if default_title and not _is_spec_or_generic_title(default_title):
+        return default_title.strip()
+
+    return registered_name.strip() if registered_name and registered_name.strip() else "Luxury Estate"
+
+
 class HTMLDashboardGenerator:
     """Generates the static interactive HTML dashboard for GitHub Pages."""
 
@@ -92,6 +146,9 @@ class HTMLDashboardGenerator:
                                     item["bedrooms"] = sp["bedrooms"]
                                 if sp.get("baths"):
                                     item["baths"] = sp["baths"]
+                                if sp.get("title") and not re.search(r"^\d+\s*bedrooms?$", str(sp["title"]), re.IGNORECASE):
+                                    item["title"] = sp["title"]
+                                    item["name"] = sp["title"]
                                 if sp.get("photo_url") and not item.get("photo_url"):
                                     item["photo_url"] = sp["photo_url"]
                             cached[key][cid_str] = item
@@ -1976,25 +2033,20 @@ class HTMLDashboardGenerator:
                 continue
             tot_price = float(c.get("total_price") or (eff_rate * nights))
 
+            cid_str = str(cid)
+            comp_eval = self.comps_dict.get(cid_str, {})
+            sp = self.listing_specs.get(cid_str, {})
+
             raw_snippet = c.get("raw_snippet", "")
             title = c.get("title") or c.get("name") or "Luxury Estate"
-            name = title
-            if raw_snippet:
-                parts = [p.strip() for p in raw_snippet.split("|") if p.strip()]
-                for p in reversed(parts):
-                    p_lower = p.lower()
-                    if "$" in p or "nights" in p_lower or "single comp sweep" in p_lower:
-                        continue
-                    if not any(w in p_lower for w in ["guest favorite", "superhost", "rare find", "home in", "entire home", "villa in"]):
-                        name = p
-                        break
-            if not name or name.lower() in ["home", "villa", "entire home"] or "$" in name:
-                cid_str = str(cid)
-                name = self.comps_dict.get(cid_str, {}).get("name") or c.get("title") or c.get("name") or "Luxury Estate"
+            reg_name = comp_eval.get("name") or sp.get("title") or c.get("name") or ""
+            name = extract_clean_listing_title(
+                raw_snippet=raw_snippet,
+                default_title=title,
+                registered_name=reg_name,
+            )
 
             loc = c.get("location", "Phoenix Valley")
-            cid_str = str(cid)
-            sp = self.listing_specs.get(cid_str, {})
             br = sp.get("bedrooms") or c.get("bedrooms", 6)
             beds = sp.get("beds") or c.get("beds", br)
             ba = sp.get("baths") or c.get("baths", 4.0)

@@ -60,10 +60,15 @@ Executes the 5-step pricing advisory pipeline:
 
 ### `generate-html`: Static Dashboard Generator
 
-Re-renders the interactive HTML dashboard (`docs/index.html`) using the latest pricing data, comp registry, and listing specifications.
+Re-renders the interactive HTML dashboard (`docs/index.html`) using the latest pricing data, comp registry, listing specifications, and reservation intelligence engine (`src.reservation_intelligence`). Automatically compiles:
+- 12-month schedule with historical track record benchmarks ($\pm 15$ days, realized median & range).
+- Annual Weekend vs. Midweek strategy shift table (2022–2027) & narrative.
+- Seasonal advance booking windows & booking pace indicators.
+- 2D empirical strategy matrix and recent competitor sales ledger.
 
 #### When to use:
 - After updating comp evaluation scores (`evaluate-comps`).
+- After syncing fresh reservations (`sync-reservations`).
 - After modifying UI layout, styles, or JavaScript in `src/html_generator.py`.
 - To refresh the dashboard without re-running an expensive web scrape.
 

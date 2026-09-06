@@ -530,6 +530,96 @@ def get_calendar_revenue_css() -> str:
       margin-top: 4px;
     }
 
+    /* Annual Weekend vs. Midweek Performance Card */
+    .res-shift-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+    }
+    .res-shift-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .res-shift-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .res-shift-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .res-shift-narrative {
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      background: rgba(15, 23, 42, 0.6);
+      border-left: 3px solid #38bdf8;
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .res-shift-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    .res-shift-table th {
+      padding: 8px 12px;
+      background: #0f172a;
+      color: #94a3b8;
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #334155;
+      text-align: right;
+    }
+    .res-shift-table th:first-child {
+      text-align: left;
+    }
+    .res-shift-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+      color: #cbd5e1;
+      text-align: right;
+    }
+    .res-shift-table td:first-child {
+      text-align: left;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .res-shift-bar-bg {
+      background: #334155;
+      border-radius: 4px;
+      height: 6px;
+      overflow: hidden;
+      display: flex;
+      margin-top: 4px;
+    }
+    .res-shift-bar-mid {
+      background: #38bdf8;
+      height: 100%;
+    }
+    .res-shift-bar-wknd {
+      background: #818cf8;
+      height: 100%;
+    }
+
     .res-filter-toolbar {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -1168,6 +1258,59 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
 
     table_body = "\n".join(rows_html)
 
+    # Calculate historical shifts & lead times
+    try:
+        from src.reservation_intelligence import ReservationIntelligence
+        res_intel = ReservationIntelligence()
+        shift_data = res_intel.compute_weekend_midweek_annual_shift()
+        lead_analytics = res_intel.compute_lead_time_windows()
+    except Exception:
+        shift_data = {"years": [], "strategic_narrative": ""}
+        lead_analytics = {"overall": {}, "seasons": {}, "total_analyzed": 0}
+
+    overall_lead = lead_analytics.get("overall", {})
+    seasons_lead = lead_analytics.get("seasons", {})
+    winter_lead = seasons_lead.get("Peak Winter / Spring (Feb–Apr)", {})
+    summer_lead = seasons_lead.get("Summer Value Season (Jun–Aug)", {})
+    fall_lead = seasons_lead.get("Fall / Shoulder Season (Sep–Jan, May)", {})
+
+    shift_rows_html = []
+    for yr_item in shift_data.get("years", []):
+        yr = yr_item["year"]
+        tot_n = yr_item["total_nights"]
+        wknd_n = yr_item["weekend_nights"]
+        mid_n = yr_item["midweek_nights"]
+        wknd_pct = yr_item["weekend_pct"]
+        mid_pct = yr_item["midweek_pct"]
+        wknd_adr = yr_item["weekend_adr"]
+        mid_adr = yr_item["midweek_adr"]
+        spread = wknd_adr - mid_adr
+        spread_sign = "+" if spread > 0 else ""
+        spread_str = f"{spread_sign}${spread:,.0f}" if (wknd_adr > 0 and mid_adr > 0) else "—"
+
+        shift_rows_html.append(f"""
+          <tr>
+            <td><strong>{yr}</strong></td>
+            <td><strong>{tot_n:,}</strong> nts</td>
+            <td>{wknd_n} nts <span style="color:#94a3b8; font-size:0.75rem;">({wknd_pct:.1f}%)</span></td>
+            <td>{mid_n} nts <span style="color:#38bdf8; font-weight:600; font-size:0.75rem;">({mid_pct:.1f}%)</span></td>
+            <td style="min-width:140px;">
+              <div style="font-size:0.75rem; display:flex; justify-content:space-between; margin-bottom:2px;">
+                <span style="color:#818cf8;">Wknd {wknd_pct:.0f}%</span>
+                <span style="color:#38bdf8;">Mid {mid_pct:.0f}%</span>
+              </div>
+              <div class="res-shift-bar-bg">
+                <div class="res-shift-bar-wknd" style="width:{wknd_pct}%;"></div>
+                <div class="res-shift-bar-mid" style="width:{mid_pct}%;"></div>
+              </div>
+            </td>
+            <td style="font-family:'JetBrains Mono',monospace; color:#818cf8; font-weight:700;">${wknd_adr:,.0f}</td>
+            <td style="font-family:'JetBrains Mono',monospace; color:#38bdf8; font-weight:700;">${mid_adr:,.0f}</td>
+            <td style="font-family:'JetBrains Mono',monospace; color:#cbd5e1;">{spread_str}</td>
+          </tr>
+        """)
+    shift_table_body = "\n".join(shift_rows_html)
+
     return f"""
       <div class="res-tab-wrapper">
         <!-- KPI Summary Cards -->
@@ -1200,6 +1343,51 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
             <div class="res-kpi-card-label">Overall Gross ADR</div>
             <div class="res-kpi-card-val" style="color:#fbbf24;">${avg_adr:,.2f}</div>
             <div class="res-kpi-card-sub">Average gross rate per booked night</div>
+          </div>
+        </div>
+
+        <!-- Annual Shift & Advance Booking Windows Intelligence Section -->
+        <div class="res-shift-card">
+          <div class="res-shift-header">
+            <div class="res-shift-title">
+              <span>📈 Annual Weekend vs. Midweek Performance & Strategy Shift</span>
+              <span class="res-shift-badge">2022–2027 Realized Analytics</span>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <span class="badge" style="background:rgba(52,211,153,0.15); color:#34d399; border:1px solid rgba(52,211,153,0.3); font-size:0.75rem; font-weight:600;">
+                Overall Advance Booking Window: {overall_lead.get('p25', 10)}–{overall_lead.get('p75', 131)}d (Median {overall_lead.get('median', 50)}d)
+              </span>
+            </div>
+          </div>
+
+          <div class="res-shift-narrative">
+            <div style="margin-bottom:6px;"><strong>💡 Strategic Finding:</strong> {shift_data.get('strategic_narrative', '')}</div>
+            <div style="font-size:0.8rem; color:#94a3b8; border-top:1px solid rgba(255,255,255,0.08); padding-top:6px; margin-top:6px;">
+              <strong style="color:#cbd5e1;">Advance Booking Windows by Season:</strong> 
+              Winter/Spring (Feb–Apr): <span style="color:#38bdf8; font-weight:600;">{winter_lead.get('window_str', '20–147 days out')} (med {winter_lead.get('median', 79)}d)</span> &bull; 
+              Summer (Jun–Aug): <span style="color:#f87171; font-weight:600;">{summer_lead.get('window_str', '6–28 days out')} (med {summer_lead.get('median', 20)}d)</span> &bull; 
+              Fall/Shoulder (Sep–Jan, May): <span style="color:#fbbf24; font-weight:600;">{fall_lead.get('window_str', '12–134 days out')} (med {fall_lead.get('median', 50)}d)</span>
+            </div>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="res-shift-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Total Nights</th>
+                  <th>Weekend Nights (Thu–Sat)</th>
+                  <th>Midweek Nights (Sun–Wed)</th>
+                  <th style="text-align:center;">Demand Distribution</th>
+                  <th>Realized Weekend ADR</th>
+                  <th>Realized Midweek ADR</th>
+                  <th>ADR Premium</th>
+                </tr>
+              </thead>
+              <tbody>
+                {shift_table_body}
+              </tbody>
+            </table>
           </div>
         </div>
 

@@ -33,6 +33,7 @@ class PricingAnalyticsEngine:
         urgent_lead_days: int = URGENT_LEAD_DAYS,
         moderate_pct_diff: float = MODERATE_PCT_DIFF,
         registry_path: str = "config/comps_registry.json",
+        res_intel: Optional[Any] = None,
     ):
         self.base_percentile = base_percentile
         self.cleaning_fee = cleaning_fee
@@ -42,6 +43,14 @@ class PricingAnalyticsEngine:
         self.registry_path = Path(registry_path)
         self.comp_registry: Dict[str, Dict[str, Any]] = self._load_registry()
         self.excluded_comps: set = self._load_excluded_comps()
+        if res_intel is not None:
+            self.res_intel = res_intel
+        else:
+            try:
+                from src.reservation_intelligence import ReservationIntelligence
+                self.res_intel = ReservationIntelligence()
+            except Exception:
+                self.res_intel = None
 
     def _load_excluded_comps(self) -> set:
         """Load set of excluded/blacklisted listing IDs."""
@@ -345,6 +354,33 @@ class PricingAnalyticsEngine:
         if adj_action_summary and len(clean_adj_comps) <= 4 and len(clean_adj_comps) > 0:
             adj_action_summary += " • High compression"
 
+        cin = segment.get("check_in", "")
+        stype = segment.get("segment_type", "weekend")
+        proposed_rate_to_check = adj_rec_base if adj_rec_base > 0 else rec_base
+
+        if self.res_intel and cin:
+            try:
+                hist_benchmark = self.res_intel.get_historical_benchmarks_for_interval(
+                    check_in_str=cin,
+                    segment_type=stype,
+                    proposed_rate=proposed_rate_to_check,
+                )
+                lead_status = self.res_intel.get_lead_time_status(cin)
+            except Exception:
+                hist_benchmark = {
+                    "sample_count": 0, "min_rate": 0.0, "max_rate": 0.0, "median_rate": 0.0, "avg_rate": 0.0,
+                    "range_str": "No prior sales", "variance_pct": None, "flag": "NO_HISTORICAL_DATA",
+                    "flag_label": "No Prior Sales", "flag_color": "#94a3b8", "matched_stays": []
+                }
+                lead_status = {"lead_days": 0, "status": "UNKNOWN", "label": "Unknown", "season": "Unknown"}
+        else:
+            hist_benchmark = {
+                "sample_count": 0, "min_rate": 0.0, "max_rate": 0.0, "median_rate": 0.0, "avg_rate": 0.0,
+                "range_str": "No prior sales", "variance_pct": None, "flag": "NO_HISTORICAL_DATA",
+                "flag_label": "No Prior Sales", "flag_color": "#94a3b8", "matched_stays": []
+            }
+            lead_status = {"lead_days": 0, "status": "UNKNOWN", "label": "Unknown", "season": "Unknown"}
+
         return {
             **segment,
             "n_comps": n_comps,
@@ -381,4 +417,7 @@ class PricingAnalyticsEngine:
             "status_adj": adj_status,
             "action_summary_adj": adj_action_summary,
             "our_percentile_rank_adj": adj_rank,
+            # Historical intelligence & booking pace
+            "historical_benchmark": hist_benchmark,
+            "lead_time_status": lead_status,
         }

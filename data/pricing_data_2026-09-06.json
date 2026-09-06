@@ -1,7 +1,7 @@
 {
   "property": "Villa del Sol",
   "report_date": "2026-09-06",
-  "generated_at": "2026-09-06T15:36:03.037920",
+  "generated_at": "2026-09-06T15:54:08.995572",
   "summary": {
     "total_open_intervals": 80,
     "urgent_count": 31,
@@ -152,6 +152,72 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1423",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 5,
+        "min_rate": 417.83,
+        "max_rate": 759.27,
+        "median_rate": 564.85,
+        "avg_rate": 585.18,
+        "range_str": "$418\u2013$759 (Med $565)",
+        "variance_pct": 151.9,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+152% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-08-10",
+            "end_date": "2023-08-11",
+            "nights": 1,
+            "gross_nightly": 417.83,
+            "payout_nightly": 342.62,
+            "confirmation_id": 10535
+          },
+          {
+            "start_date": "2023-08-11",
+            "end_date": "2023-08-13",
+            "nights": 2,
+            "gross_nightly": 651.6,
+            "payout_nightly": 534.31,
+            "confirmation_id": 10671
+          },
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 532.33,
+            "payout_nightly": 436.51,
+            "confirmation_id": 13546
+          },
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 759.27,
+            "payout_nightly": 622.6,
+            "confirmation_id": 12316
+          },
+          {
+            "start_date": "2024-08-30",
+            "end_date": "2024-09-01",
+            "nights": 2,
+            "gross_nightly": 564.85,
+            "payout_nightly": 463.18,
+            "confirmation_id": 13679
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 347,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (347d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -297,6 +363,80 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1399",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 6,
+        "min_rate": 564.65,
+        "max_rate": 1241.9,
+        "median_rate": 619.82,
+        "avg_rate": 715.36,
+        "range_str": "$565\u2013$1,242 (Med $620)",
+        "variance_pct": 125.7,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+126% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-06-23",
+            "end_date": "2022-06-26",
+            "nights": 3,
+            "gross_nightly": 1241.9,
+            "payout_nightly": 1018.36,
+            "confirmation_id": 6876
+          },
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 650.69,
+            "payout_nightly": 533.56,
+            "confirmation_id": 8014
+          },
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 643.08,
+            "payout_nightly": 527.33,
+            "confirmation_id": 10243
+          },
+          {
+            "start_date": "2024-06-21",
+            "end_date": "2024-06-23",
+            "nights": 2,
+            "gross_nightly": 595.26,
+            "payout_nightly": 488.12,
+            "confirmation_id": 12934
+          },
+          {
+            "start_date": "2024-06-28",
+            "end_date": "2024-06-30",
+            "nights": 2,
+            "gross_nightly": 564.65,
+            "payout_nightly": 463.01,
+            "confirmation_id": 13194
+          },
+          {
+            "start_date": "2024-07-05",
+            "end_date": "2024-07-07",
+            "nights": 2,
+            "gross_nightly": 596.55,
+            "payout_nightly": 489.17,
+            "confirmation_id": 13296
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 298,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (298d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -442,6 +582,72 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1374",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 5,
+        "min_rate": 417.83,
+        "max_rate": 729.0,
+        "median_rate": 595.26,
+        "avg_rate": 585.2,
+        "range_str": "$418\u2013$729 (Med $595)",
+        "variance_pct": 130.8,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+131% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-07-29",
+            "end_date": "2022-07-31",
+            "nights": 2,
+            "gross_nightly": 729.0,
+            "payout_nightly": 597.78,
+            "confirmation_id": 7787
+          },
+          {
+            "start_date": "2023-08-10",
+            "end_date": "2023-08-11",
+            "nights": 1,
+            "gross_nightly": 417.83,
+            "payout_nightly": 342.62,
+            "confirmation_id": 10535
+          },
+          {
+            "start_date": "2023-08-11",
+            "end_date": "2023-08-13",
+            "nights": 2,
+            "gross_nightly": 651.6,
+            "payout_nightly": 534.31,
+            "confirmation_id": 10671
+          },
+          {
+            "start_date": "2024-07-26",
+            "end_date": "2024-07-28",
+            "nights": 2,
+            "gross_nightly": 595.26,
+            "payout_nightly": 488.12,
+            "confirmation_id": 13044
+          },
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 532.33,
+            "payout_nightly": 436.51,
+            "confirmation_id": 13546
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 333,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (333d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -587,6 +793,72 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1363",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 5,
+        "min_rate": 417.83,
+        "max_rate": 759.27,
+        "median_rate": 651.6,
+        "avg_rate": 618.01,
+        "range_str": "$418\u2013$759 (Med $652)",
+        "variance_pct": 109.2,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+109% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-07-29",
+            "end_date": "2022-07-31",
+            "nights": 2,
+            "gross_nightly": 729.0,
+            "payout_nightly": 597.78,
+            "confirmation_id": 7787
+          },
+          {
+            "start_date": "2023-08-10",
+            "end_date": "2023-08-11",
+            "nights": 1,
+            "gross_nightly": 417.83,
+            "payout_nightly": 342.62,
+            "confirmation_id": 10535
+          },
+          {
+            "start_date": "2023-08-11",
+            "end_date": "2023-08-13",
+            "nights": 2,
+            "gross_nightly": 651.6,
+            "payout_nightly": 534.31,
+            "confirmation_id": 10671
+          },
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 532.33,
+            "payout_nightly": 436.51,
+            "confirmation_id": 13546
+          },
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 759.27,
+            "payout_nightly": 622.6,
+            "confirmation_id": 12316
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 340,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (340d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -732,6 +1004,80 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1351",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 6,
+        "min_rate": 532.33,
+        "max_rate": 759.27,
+        "median_rate": 580.6,
+        "avg_rate": 608.9,
+        "range_str": "$532\u2013$759 (Med $581)",
+        "variance_pct": 132.7,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+133% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-08-11",
+            "end_date": "2023-08-13",
+            "nights": 2,
+            "gross_nightly": 651.6,
+            "payout_nightly": 534.31,
+            "confirmation_id": 10671
+          },
+          {
+            "start_date": "2023-09-07",
+            "end_date": "2023-09-10",
+            "nights": 3,
+            "gross_nightly": 596.35,
+            "payout_nightly": 489.01,
+            "confirmation_id": 10168
+          },
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 532.33,
+            "payout_nightly": 436.51,
+            "confirmation_id": 13546
+          },
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 759.27,
+            "payout_nightly": 622.6,
+            "confirmation_id": 12316
+          },
+          {
+            "start_date": "2024-08-30",
+            "end_date": "2024-09-01",
+            "nights": 2,
+            "gross_nightly": 564.85,
+            "payout_nightly": 463.18,
+            "confirmation_id": 13679
+          },
+          {
+            "start_date": "2026-09-10",
+            "end_date": "2026-09-13",
+            "nights": 3,
+            "gross_nightly": 549.0,
+            "payout_nightly": 450.18,
+            "confirmation_id": 17927
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 354,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (354d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -1658,6 +2004,80 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $649 \u2192 $1305",
       "our_percentile_rank_adj": 20.5,
+      "historical_benchmark": {
+        "sample_count": 6,
+        "min_rate": 466.81,
+        "max_rate": 1311.45,
+        "median_rate": 791.42,
+        "avg_rate": 887.39,
+        "range_str": "$467\u2013$1,311 (Med $791)",
+        "variance_pct": 64.9,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+65% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-19",
+            "end_date": "2022-05-22",
+            "nights": 3,
+            "gross_nightly": 1311.45,
+            "payout_nightly": 1075.39,
+            "confirmation_id": 6854
+          },
+          {
+            "start_date": "2023-05-18",
+            "end_date": "2023-05-21",
+            "nights": 3,
+            "gross_nightly": 1249.0,
+            "payout_nightly": 1024.18,
+            "confirmation_id": 9081
+          },
+          {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 714.25,
+            "payout_nightly": 585.68,
+            "confirmation_id": 12368
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 779.8,
+            "payout_nightly": 639.44,
+            "confirmation_id": 12846
+          },
+          {
+            "start_date": "2024-05-31",
+            "end_date": "2024-06-02",
+            "nights": 2,
+            "gross_nightly": 466.81,
+            "payout_nightly": 382.79,
+            "confirmation_id": 12931
+          },
+          {
+            "start_date": "2025-05-15",
+            "end_date": "2025-05-18",
+            "nights": 3,
+            "gross_nightly": 803.05,
+            "payout_nightly": 658.5,
+            "confirmation_id": 14618
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 263,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (263d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -1803,6 +2223,80 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1304",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 6,
+        "min_rate": 417.83,
+        "max_rate": 729.0,
+        "median_rate": 624.85,
+        "avg_rate": 607.23,
+        "range_str": "$418\u2013$729 (Med $625)",
+        "variance_pct": 108.7,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+109% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 650.69,
+            "payout_nightly": 533.56,
+            "confirmation_id": 8014
+          },
+          {
+            "start_date": "2022-07-29",
+            "end_date": "2022-07-31",
+            "nights": 2,
+            "gross_nightly": 729.0,
+            "payout_nightly": 597.78,
+            "confirmation_id": 7787
+          },
+          {
+            "start_date": "2023-08-10",
+            "end_date": "2023-08-11",
+            "nights": 1,
+            "gross_nightly": 417.83,
+            "payout_nightly": 342.62,
+            "confirmation_id": 10535
+          },
+          {
+            "start_date": "2023-08-11",
+            "end_date": "2023-08-13",
+            "nights": 2,
+            "gross_nightly": 651.6,
+            "payout_nightly": 534.31,
+            "confirmation_id": 10671
+          },
+          {
+            "start_date": "2024-07-19",
+            "end_date": "2024-07-21",
+            "nights": 2,
+            "gross_nightly": 599.0,
+            "payout_nightly": 491.18,
+            "confirmation_id": 13199
+          },
+          {
+            "start_date": "2024-07-26",
+            "end_date": "2024-07-28",
+            "nights": 2,
+            "gross_nightly": 595.26,
+            "payout_nightly": 488.12,
+            "confirmation_id": 13044
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 326,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (326d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -1948,6 +2442,64 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1298",
       "our_percentile_rank_adj": 0.0,
+      "historical_benchmark": {
+        "sample_count": 4,
+        "min_rate": 466.81,
+        "max_rate": 1241.9,
+        "median_rate": 619.17,
+        "avg_rate": 736.76,
+        "range_str": "$467\u2013$1,242 (Med $619)",
+        "variance_pct": 109.6,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+110% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-06-23",
+            "end_date": "2022-06-26",
+            "nights": 3,
+            "gross_nightly": 1241.9,
+            "payout_nightly": 1018.36,
+            "confirmation_id": 6876
+          },
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 643.08,
+            "payout_nightly": 527.33,
+            "confirmation_id": 10243
+          },
+          {
+            "start_date": "2024-05-31",
+            "end_date": "2024-06-02",
+            "nights": 2,
+            "gross_nightly": 466.81,
+            "payout_nightly": 382.79,
+            "confirmation_id": 12931
+          },
+          {
+            "start_date": "2024-06-21",
+            "end_date": "2024-06-23",
+            "nights": 2,
+            "gross_nightly": 595.26,
+            "payout_nightly": 488.12,
+            "confirmation_id": 12934
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 277,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (277d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -2112,6 +2664,64 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1314",
       "our_percentile_rank_adj": 16.7,
+      "historical_benchmark": {
+        "sample_count": 4,
+        "min_rate": 564.65,
+        "max_rate": 1241.9,
+        "median_rate": 619.17,
+        "avg_rate": 761.22,
+        "range_str": "$565\u2013$1,242 (Med $619)",
+        "variance_pct": 112.2,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+112% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-06-23",
+            "end_date": "2022-06-26",
+            "nights": 3,
+            "gross_nightly": 1241.9,
+            "payout_nightly": 1018.36,
+            "confirmation_id": 6876
+          },
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 643.08,
+            "payout_nightly": 527.33,
+            "confirmation_id": 10243
+          },
+          {
+            "start_date": "2024-06-21",
+            "end_date": "2024-06-23",
+            "nights": 2,
+            "gross_nightly": 595.26,
+            "payout_nightly": 488.12,
+            "confirmation_id": 12934
+          },
+          {
+            "start_date": "2024-06-28",
+            "end_date": "2024-06-30",
+            "nights": 2,
+            "gross_nightly": 564.65,
+            "payout_nightly": 463.01,
+            "confirmation_id": 13194
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 284,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (284d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -3115,6 +3725,48 @@
       "status_adj": "OVERPRICED",
       "action_summary_adj": "\u2193 Reduce $1049 \u2192 $680",
       "our_percentile_rank_adj": 83.3,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 658.51,
+        "max_rate": 679.15,
+        "median_rate": 668.83,
+        "avg_rate": 668.83,
+        "range_str": "$659\u2013$679 (Med $669)",
+        "variance_pct": 1.7,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-04-21",
+            "end_date": "2024-04-22",
+            "nights": 1,
+            "gross_nightly": 679.15,
+            "payout_nightly": 556.9,
+            "confirmation_id": 12486
+          },
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 658.51,
+            "payout_nightly": 539.98,
+            "confirmation_id": 14988
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 231,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (231d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -4532,6 +5184,64 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1281",
       "our_percentile_rank_adj": 9.8,
+      "historical_benchmark": {
+        "sample_count": 4,
+        "min_rate": 549.0,
+        "max_rate": 759.27,
+        "median_rate": 580.6,
+        "avg_rate": 617.37,
+        "range_str": "$549\u2013$759 (Med $581)",
+        "variance_pct": 120.6,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+121% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-09-07",
+            "end_date": "2023-09-10",
+            "nights": 3,
+            "gross_nightly": 596.35,
+            "payout_nightly": 489.01,
+            "confirmation_id": 10168
+          },
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 759.27,
+            "payout_nightly": 622.6,
+            "confirmation_id": 12316
+          },
+          {
+            "start_date": "2024-08-30",
+            "end_date": "2024-09-01",
+            "nights": 2,
+            "gross_nightly": 564.85,
+            "payout_nightly": 463.18,
+            "confirmation_id": 13679
+          },
+          {
+            "start_date": "2026-09-10",
+            "end_date": "2026-09-13",
+            "nights": 3,
+            "gross_nightly": 549.0,
+            "payout_nightly": 450.18,
+            "confirmation_id": 17927
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 361,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (361d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": false
     },
     {
@@ -4677,6 +5387,64 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1228",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 4,
+        "min_rate": 595.26,
+        "max_rate": 729.0,
+        "median_rate": 624.85,
+        "avg_rate": 643.49,
+        "range_str": "$595\u2013$729 (Med $625)",
+        "variance_pct": 96.5,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+96% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 650.69,
+            "payout_nightly": 533.56,
+            "confirmation_id": 8014
+          },
+          {
+            "start_date": "2022-07-29",
+            "end_date": "2022-07-31",
+            "nights": 2,
+            "gross_nightly": 729.0,
+            "payout_nightly": 597.78,
+            "confirmation_id": 7787
+          },
+          {
+            "start_date": "2024-07-19",
+            "end_date": "2024-07-21",
+            "nights": 2,
+            "gross_nightly": 599.0,
+            "payout_nightly": 491.18,
+            "confirmation_id": 13199
+          },
+          {
+            "start_date": "2024-07-26",
+            "end_date": "2024-07-28",
+            "nights": 2,
+            "gross_nightly": 595.26,
+            "payout_nightly": 488.12,
+            "confirmation_id": 13044
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 319,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (319d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -5623,6 +6391,48 @@
       "status_adj": "OVERPRICED",
       "action_summary_adj": "\u2193 Reduce $1049 \u2192 $707",
       "our_percentile_rank_adj": 76.1,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 679.15,
+        "max_rate": 1121.84,
+        "median_rate": 900.49,
+        "avg_rate": 900.49,
+        "range_str": "$679\u2013$1,122 (Med $900)",
+        "variance_pct": -21.5,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-04-21",
+            "end_date": "2024-04-22",
+            "nights": 1,
+            "gross_nightly": 679.15,
+            "payout_nightly": 556.9,
+            "confirmation_id": 12486
+          },
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1121.84,
+            "payout_nightly": 919.91,
+            "confirmation_id": 14616
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 224,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (224d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -6267,6 +7077,40 @@
       "status_adj": "OVERPRICED",
       "action_summary_adj": "\u2193 Reduce $674 \u2192 $475",
       "our_percentile_rank_adj": 75.8,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 428.69,
+        "max_rate": 428.69,
+        "median_rate": 428.69,
+        "avg_rate": 428.69,
+        "range_str": "$429\u2013$429 (Med $429)",
+        "variance_pct": 10.8,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2026-12-12",
+            "end_date": "2026-12-19",
+            "nights": 7,
+            "gross_nightly": 428.69,
+            "payout_nightly": 351.52,
+            "confirmation_id": 18555
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 84,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (84d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -7287,6 +8131,80 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $749 \u2192 $1273",
       "our_percentile_rank_adj": 27.1,
+      "historical_benchmark": {
+        "sample_count": 6,
+        "min_rate": 466.81,
+        "max_rate": 1311.45,
+        "median_rate": 791.42,
+        "avg_rate": 887.39,
+        "range_str": "$467\u2013$1,311 (Med $791)",
+        "variance_pct": 60.9,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+61% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-19",
+            "end_date": "2022-05-22",
+            "nights": 3,
+            "gross_nightly": 1311.45,
+            "payout_nightly": 1075.39,
+            "confirmation_id": 6854
+          },
+          {
+            "start_date": "2023-05-18",
+            "end_date": "2023-05-21",
+            "nights": 3,
+            "gross_nightly": 1249.0,
+            "payout_nightly": 1024.18,
+            "confirmation_id": 9081
+          },
+          {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 714.25,
+            "payout_nightly": 585.68,
+            "confirmation_id": 12368
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 779.8,
+            "payout_nightly": 639.44,
+            "confirmation_id": 12846
+          },
+          {
+            "start_date": "2024-05-31",
+            "end_date": "2024-06-02",
+            "nights": 2,
+            "gross_nightly": 466.81,
+            "payout_nightly": 382.79,
+            "confirmation_id": 12931
+          },
+          {
+            "start_date": "2025-05-15",
+            "end_date": "2025-05-18",
+            "nights": 3,
+            "gross_nightly": 803.05,
+            "payout_nightly": 658.5,
+            "confirmation_id": 14618
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 256,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (256d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -8252,6 +9170,48 @@
       "status_adj": "OVERPRICED",
       "action_summary_adj": "\u2193 Reduce $1049 \u2192 $733",
       "our_percentile_rank_adj": 80.4,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 679.15,
+        "max_rate": 1121.84,
+        "median_rate": 900.49,
+        "avg_rate": 900.49,
+        "range_str": "$679\u2013$1,122 (Med $900)",
+        "variance_pct": -18.6,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-04-21",
+            "end_date": "2024-04-22",
+            "nights": 1,
+            "gross_nightly": 679.15,
+            "payout_nightly": 556.9,
+            "confirmation_id": 12486
+          },
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1121.84,
+            "payout_nightly": 919.91,
+            "confirmation_id": 14616
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 217,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (217d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -8916,6 +9876,40 @@
       "status_adj": "OVERPRICED",
       "action_summary_adj": "\u2193 Reduce $449 \u2192 $287",
       "our_percentile_rank_adj": 58.3,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 428.69,
+        "max_rate": 428.69,
+        "median_rate": 428.69,
+        "avg_rate": 428.69,
+        "range_str": "$429\u2013$429 (Med $429)",
+        "variance_pct": -33.1,
+        "flag": "DEEP_DISCOUNT",
+        "flag_label": "-33% vs Track Record",
+        "flag_color": "#f87171",
+        "matched_stays": [
+          {
+            "start_date": "2026-10-04",
+            "end_date": "2026-10-11",
+            "nights": 7,
+            "gross_nightly": 428.69,
+            "payout_nightly": 351.52,
+            "confirmation_id": 18653
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 21,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (21d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -9919,6 +10913,88 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $749 \u2192 $1159",
       "our_percentile_rank_adj": 29.2,
+      "historical_benchmark": {
+        "sample_count": 7,
+        "min_rate": 714.25,
+        "max_rate": 1311.45,
+        "median_rate": 803.05,
+        "avg_rate": 972.79,
+        "range_str": "$714\u2013$1,311 (Med $803)",
+        "variance_pct": 44.3,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+44% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-19",
+            "end_date": "2022-05-22",
+            "nights": 3,
+            "gross_nightly": 1311.45,
+            "payout_nightly": 1075.39,
+            "confirmation_id": 6854
+          },
+          {
+            "start_date": "2023-05-04",
+            "end_date": "2023-05-07",
+            "nights": 3,
+            "gross_nightly": 1148.92,
+            "payout_nightly": 942.11,
+            "confirmation_id": 9097
+          },
+          {
+            "start_date": "2023-05-18",
+            "end_date": "2023-05-21",
+            "nights": 3,
+            "gross_nightly": 1249.0,
+            "payout_nightly": 1024.18,
+            "confirmation_id": 9081
+          },
+          {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 714.25,
+            "payout_nightly": 585.68,
+            "confirmation_id": 12368
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 779.8,
+            "payout_nightly": 639.44,
+            "confirmation_id": 12846
+          },
+          {
+            "start_date": "2025-05-01",
+            "end_date": "2025-05-04",
+            "nights": 3,
+            "gross_nightly": 803.05,
+            "payout_nightly": 658.5,
+            "confirmation_id": 14474
+          },
+          {
+            "start_date": "2025-05-15",
+            "end_date": "2025-05-18",
+            "nights": 3,
+            "gross_nightly": 803.05,
+            "payout_nightly": 658.5,
+            "confirmation_id": 14618
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 249,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (249d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -10599,6 +11675,112 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $1099 \u2192 $1682",
       "our_percentile_rank_adj": 24.2,
+      "historical_benchmark": {
+        "sample_count": 10,
+        "min_rate": 971.47,
+        "max_rate": 1441.65,
+        "median_rate": 1262.77,
+        "avg_rate": 1215.37,
+        "range_str": "$971\u2013$1,442 (Med $1,263)",
+        "variance_pct": 33.2,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+33% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-03-10",
+            "end_date": "2022-03-22",
+            "nights": 12,
+            "gross_nightly": 1297.48,
+            "payout_nightly": 1063.93,
+            "confirmation_id": 6776
+          },
+          {
+            "start_date": "2022-03-30",
+            "end_date": "2022-04-05",
+            "nights": 6,
+            "gross_nightly": 1441.65,
+            "payout_nightly": 1182.15,
+            "confirmation_id": 6819
+          },
+          {
+            "start_date": "2022-04-06",
+            "end_date": "2022-04-10",
+            "nights": 4,
+            "gross_nightly": 1043.0,
+            "payout_nightly": 855.26,
+            "confirmation_id": 7025
+          },
+          {
+            "start_date": "2023-03-16",
+            "end_date": "2023-03-19",
+            "nights": 3,
+            "gross_nightly": 1368.0,
+            "payout_nightly": 1121.76,
+            "confirmation_id": 8356
+          },
+          {
+            "start_date": "2023-03-23",
+            "end_date": "2023-03-26",
+            "nights": 3,
+            "gross_nightly": 1036.96,
+            "payout_nightly": 850.3,
+            "confirmation_id": 9420
+          },
+          {
+            "start_date": "2023-03-30",
+            "end_date": "2023-04-04",
+            "nights": 5,
+            "gross_nightly": 1339.11,
+            "payout_nightly": 1098.07,
+            "confirmation_id": 9343
+          },
+          {
+            "start_date": "2024-03-14",
+            "end_date": "2024-03-17",
+            "nights": 3,
+            "gross_nightly": 1130.51,
+            "payout_nightly": 927.02,
+            "confirmation_id": 10885
+          },
+          {
+            "start_date": "2024-03-21",
+            "end_date": "2024-03-24",
+            "nights": 3,
+            "gross_nightly": 1257.46,
+            "payout_nightly": 1031.11,
+            "confirmation_id": 11822
+          },
+          {
+            "start_date": "2025-03-21",
+            "end_date": "2025-03-24",
+            "nights": 3,
+            "gross_nightly": 1268.08,
+            "payout_nightly": 1039.83,
+            "confirmation_id": 14286
+          },
+          {
+            "start_date": "2027-03-17",
+            "end_date": "2027-03-21",
+            "nights": 4,
+            "gross_nightly": 971.47,
+            "payout_nightly": 796.6,
+            "confirmation_id": 19416
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 200,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (200d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -11988,6 +13170,31 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $937",
       "our_percentile_rank_adj": 11.7,
+      "historical_benchmark": {
+        "sample_count": 0,
+        "min_rate": 0.0,
+        "max_rate": 0.0,
+        "median_rate": 0.0,
+        "avg_rate": 0.0,
+        "range_str": "No prior sales",
+        "variance_pct": null,
+        "flag": "NO_HISTORICAL_DATA",
+        "flag_label": "No Prior Sales",
+        "flag_color": "#94a3b8",
+        "matched_stays": []
+      },
+      "lead_time_status": {
+        "lead_days": 364,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (364d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": false
     },
     {
@@ -12763,6 +13970,96 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $1099 \u2192 $1668",
       "our_percentile_rank_adj": 28.9,
+      "historical_benchmark": {
+        "sample_count": 8,
+        "min_rate": 626.07,
+        "max_rate": 1485.98,
+        "median_rate": 1006.32,
+        "avg_rate": 1044.28,
+        "range_str": "$626\u2013$1,486 (Med $1,006)",
+        "variance_pct": 65.8,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+66% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-03-10",
+            "end_date": "2022-03-22",
+            "nights": 12,
+            "gross_nightly": 1297.48,
+            "payout_nightly": 1063.93,
+            "confirmation_id": 6776
+          },
+          {
+            "start_date": "2023-03-02",
+            "end_date": "2023-03-05",
+            "nights": 3,
+            "gross_nightly": 1485.98,
+            "payout_nightly": 1218.51,
+            "confirmation_id": 8949
+          },
+          {
+            "start_date": "2024-02-16",
+            "end_date": "2024-02-19",
+            "nights": 3,
+            "gross_nightly": 752.64,
+            "payout_nightly": 617.17,
+            "confirmation_id": 11778
+          },
+          {
+            "start_date": "2024-02-19",
+            "end_date": "2024-02-25",
+            "nights": 6,
+            "gross_nightly": 626.07,
+            "payout_nightly": 513.38,
+            "confirmation_id": 11896
+          },
+          {
+            "start_date": "2025-02-13",
+            "end_date": "2025-02-16",
+            "nights": 3,
+            "gross_nightly": 1011.99,
+            "payout_nightly": 829.83,
+            "confirmation_id": 14242
+          },
+          {
+            "start_date": "2025-02-27",
+            "end_date": "2025-03-01",
+            "nights": 2,
+            "gross_nightly": 1000.64,
+            "payout_nightly": 820.52,
+            "confirmation_id": 14784
+          },
+          {
+            "start_date": "2025-03-06",
+            "end_date": "2025-03-09",
+            "nights": 3,
+            "gross_nightly": 1268.08,
+            "payout_nightly": 1039.83,
+            "confirmation_id": 14124
+          },
+          {
+            "start_date": "2027-02-10",
+            "end_date": "2027-02-13",
+            "nights": 3,
+            "gross_nightly": 911.35,
+            "payout_nightly": 747.31,
+            "confirmation_id": 19523
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 172,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (172d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -13747,6 +15044,96 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $749 \u2192 $1167",
       "our_percentile_rank_adj": 28.3,
+      "historical_benchmark": {
+        "sample_count": 8,
+        "min_rate": 714.25,
+        "max_rate": 1311.45,
+        "median_rate": 954.91,
+        "avg_rate": 992.44,
+        "range_str": "$714\u2013$1,311 (Med $955)",
+        "variance_pct": 22.2,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-19",
+            "end_date": "2022-05-22",
+            "nights": 3,
+            "gross_nightly": 1311.45,
+            "payout_nightly": 1075.39,
+            "confirmation_id": 6854
+          },
+          {
+            "start_date": "2023-05-04",
+            "end_date": "2023-05-07",
+            "nights": 3,
+            "gross_nightly": 1148.92,
+            "payout_nightly": 942.11,
+            "confirmation_id": 9097
+          },
+          {
+            "start_date": "2023-05-18",
+            "end_date": "2023-05-21",
+            "nights": 3,
+            "gross_nightly": 1249.0,
+            "payout_nightly": 1024.18,
+            "confirmation_id": 9081
+          },
+          {
+            "start_date": "2024-04-25",
+            "end_date": "2024-04-28",
+            "nights": 3,
+            "gross_nightly": 903.36,
+            "payout_nightly": 740.76,
+            "confirmation_id": 12155
+          },
+          {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 714.25,
+            "payout_nightly": 585.68,
+            "confirmation_id": 12368
+          },
+          {
+            "start_date": "2025-04-24",
+            "end_date": "2025-04-27",
+            "nights": 3,
+            "gross_nightly": 1006.47,
+            "payout_nightly": 825.3,
+            "confirmation_id": 14585
+          },
+          {
+            "start_date": "2025-05-01",
+            "end_date": "2025-05-04",
+            "nights": 3,
+            "gross_nightly": 803.05,
+            "payout_nightly": 658.5,
+            "confirmation_id": 14474
+          },
+          {
+            "start_date": "2025-05-15",
+            "end_date": "2025-05-18",
+            "nights": 3,
+            "gross_nightly": 803.05,
+            "payout_nightly": 658.5,
+            "confirmation_id": 14618
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 242,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (242d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -14614,6 +16001,40 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $924",
       "our_percentile_rank_adj": 24.4,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 532.65,
+        "max_rate": 532.65,
+        "median_rate": 532.65,
+        "avg_rate": 532.65,
+        "range_str": "$533\u2013$533 (Med $533)",
+        "variance_pct": 73.5,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+74% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-25",
+            "end_date": "2022-06-01",
+            "nights": 7,
+            "gross_nightly": 532.65,
+            "payout_nightly": 436.77,
+            "confirmation_id": 7488
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 266,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (266d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -15367,6 +16788,31 @@
       "status_adj": "OVERPRICED",
       "action_summary_adj": "\u2193 Reduce $436 \u2192 $300",
       "our_percentile_rank_adj": 63.4,
+      "historical_benchmark": {
+        "sample_count": 0,
+        "min_rate": 0.0,
+        "max_rate": 0.0,
+        "median_rate": 0.0,
+        "avg_rate": 0.0,
+        "range_str": "No prior sales",
+        "variance_pct": null,
+        "flag": "NO_HISTORICAL_DATA",
+        "flag_label": "No Prior Sales",
+        "flag_color": "#94a3b8",
+        "matched_stays": []
+      },
+      "lead_time_status": {
+        "lead_days": 7,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "LAST_MINUTE",
+        "label": "Last-Minute Distress (7d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#f87171",
+        "badge_bg": "rgba(248,113,113,0.15)",
+        "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
+      },
       "is_live_scan": true
     },
     {
@@ -16085,6 +17531,112 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1796",
       "our_percentile_rank_adj": 28.6,
+      "historical_benchmark": {
+        "sample_count": 10,
+        "min_rate": 971.47,
+        "max_rate": 1485.98,
+        "median_rate": 1262.77,
+        "avg_rate": 1208.47,
+        "range_str": "$971\u2013$1,486 (Med $1,263)",
+        "variance_pct": 42.2,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+42% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-03-10",
+            "end_date": "2022-03-22",
+            "nights": 12,
+            "gross_nightly": 1297.48,
+            "payout_nightly": 1063.93,
+            "confirmation_id": 6776
+          },
+          {
+            "start_date": "2023-03-02",
+            "end_date": "2023-03-05",
+            "nights": 3,
+            "gross_nightly": 1485.98,
+            "payout_nightly": 1218.51,
+            "confirmation_id": 8949
+          },
+          {
+            "start_date": "2023-03-16",
+            "end_date": "2023-03-19",
+            "nights": 3,
+            "gross_nightly": 1368.0,
+            "payout_nightly": 1121.76,
+            "confirmation_id": 8356
+          },
+          {
+            "start_date": "2023-03-23",
+            "end_date": "2023-03-26",
+            "nights": 3,
+            "gross_nightly": 1036.96,
+            "payout_nightly": 850.3,
+            "confirmation_id": 9420
+          },
+          {
+            "start_date": "2024-03-14",
+            "end_date": "2024-03-17",
+            "nights": 3,
+            "gross_nightly": 1130.51,
+            "payout_nightly": 927.02,
+            "confirmation_id": 10885
+          },
+          {
+            "start_date": "2024-03-21",
+            "end_date": "2024-03-24",
+            "nights": 3,
+            "gross_nightly": 1257.46,
+            "payout_nightly": 1031.11,
+            "confirmation_id": 11822
+          },
+          {
+            "start_date": "2025-02-27",
+            "end_date": "2025-03-01",
+            "nights": 2,
+            "gross_nightly": 1000.64,
+            "payout_nightly": 820.52,
+            "confirmation_id": 14784
+          },
+          {
+            "start_date": "2025-03-06",
+            "end_date": "2025-03-09",
+            "nights": 3,
+            "gross_nightly": 1268.08,
+            "payout_nightly": 1039.83,
+            "confirmation_id": 14124
+          },
+          {
+            "start_date": "2025-03-21",
+            "end_date": "2025-03-24",
+            "nights": 3,
+            "gross_nightly": 1268.08,
+            "payout_nightly": 1039.83,
+            "confirmation_id": 14286
+          },
+          {
+            "start_date": "2027-03-17",
+            "end_date": "2027-03-21",
+            "nights": 4,
+            "gross_nightly": 971.47,
+            "payout_nightly": 796.6,
+            "confirmation_id": 19416
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 186,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (186d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -17031,6 +18583,40 @@
       "status_adj": "SLIGHTLY HIGH",
       "action_summary_adj": "\u2193 Reduce $1049 \u2192 $817",
       "our_percentile_rank_adj": 64.4,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 1121.84,
+        "max_rate": 1121.84,
+        "median_rate": 1121.84,
+        "avg_rate": 1121.84,
+        "range_str": "$1,122\u2013$1,122 (Med $1,122)",
+        "variance_pct": -27.2,
+        "flag": "DEEP_DISCOUNT",
+        "flag_label": "-27% vs Track Record",
+        "flag_color": "#f87171",
+        "matched_stays": [
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1121.84,
+            "payout_nightly": 919.91,
+            "confirmation_id": 14616
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 210,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (210d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -17844,6 +19430,72 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $899 \u2192 $1277",
       "our_percentile_rank_adj": 42.5,
+      "historical_benchmark": {
+        "sample_count": 5,
+        "min_rate": 641.62,
+        "max_rate": 1953.55,
+        "median_rate": 859.08,
+        "avg_rate": 1044.14,
+        "range_str": "$642\u2013$1,954 (Med $859)",
+        "variance_pct": 48.6,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+49% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-02-08",
+            "end_date": "2023-02-12",
+            "nights": 4,
+            "gross_nightly": 1953.55,
+            "payout_nightly": 1601.91,
+            "confirmation_id": 9017
+          },
+          {
+            "start_date": "2024-02-08",
+            "end_date": "2024-02-11",
+            "nights": 3,
+            "gross_nightly": 855.09,
+            "payout_nightly": 701.17,
+            "confirmation_id": 10432
+          },
+          {
+            "start_date": "2025-02-07",
+            "end_date": "2025-02-10",
+            "nights": 3,
+            "gross_nightly": 859.08,
+            "payout_nightly": 704.45,
+            "confirmation_id": 13549
+          },
+          {
+            "start_date": "2027-01-15",
+            "end_date": "2027-01-19",
+            "nights": 4,
+            "gross_nightly": 641.62,
+            "payout_nightly": 526.13,
+            "confirmation_id": 18395
+          },
+          {
+            "start_date": "2027-02-10",
+            "end_date": "2027-02-13",
+            "nights": 3,
+            "gross_nightly": 911.35,
+            "payout_nightly": 747.31,
+            "confirmation_id": 19523
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 144,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (144d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -18429,6 +20081,56 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $949 \u2192 $1379",
       "our_percentile_rank_adj": 28.6,
+      "historical_benchmark": {
+        "sample_count": 3,
+        "min_rate": 313.3,
+        "max_rate": 1911.26,
+        "median_rate": 428.69,
+        "avg_rate": 884.42,
+        "range_str": "$313\u2013$1,911 (Med $429)",
+        "variance_pct": 221.7,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+222% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-12-25",
+            "end_date": "2023-01-01",
+            "nights": 7,
+            "gross_nightly": 1911.26,
+            "payout_nightly": 1567.23,
+            "confirmation_id": 8684
+          },
+          {
+            "start_date": "2025-01-06",
+            "end_date": "2025-01-08",
+            "nights": 2,
+            "gross_nightly": 313.3,
+            "payout_nightly": 256.9,
+            "confirmation_id": 14208
+          },
+          {
+            "start_date": "2026-12-12",
+            "end_date": "2026-12-19",
+            "nights": 7,
+            "gross_nightly": 428.69,
+            "payout_nightly": 351.52,
+            "confirmation_id": 18555
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 112,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (112d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -19128,6 +20830,96 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1721",
       "our_percentile_rank_adj": 26.5,
+      "historical_benchmark": {
+        "sample_count": 8,
+        "min_rate": 626.07,
+        "max_rate": 1485.98,
+        "median_rate": 1199.3,
+        "avg_rate": 1143.53,
+        "range_str": "$626\u2013$1,486 (Med $1,199)",
+        "variance_pct": 43.5,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+44% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-03-10",
+            "end_date": "2022-03-22",
+            "nights": 12,
+            "gross_nightly": 1297.48,
+            "payout_nightly": 1063.93,
+            "confirmation_id": 6776
+          },
+          {
+            "start_date": "2023-03-02",
+            "end_date": "2023-03-05",
+            "nights": 3,
+            "gross_nightly": 1485.98,
+            "payout_nightly": 1218.51,
+            "confirmation_id": 8949
+          },
+          {
+            "start_date": "2023-03-16",
+            "end_date": "2023-03-19",
+            "nights": 3,
+            "gross_nightly": 1368.0,
+            "payout_nightly": 1121.76,
+            "confirmation_id": 8356
+          },
+          {
+            "start_date": "2024-02-19",
+            "end_date": "2024-02-25",
+            "nights": 6,
+            "gross_nightly": 626.07,
+            "payout_nightly": 513.38,
+            "confirmation_id": 11896
+          },
+          {
+            "start_date": "2024-03-14",
+            "end_date": "2024-03-17",
+            "nights": 3,
+            "gross_nightly": 1130.51,
+            "payout_nightly": 927.02,
+            "confirmation_id": 10885
+          },
+          {
+            "start_date": "2025-02-27",
+            "end_date": "2025-03-01",
+            "nights": 2,
+            "gross_nightly": 1000.64,
+            "payout_nightly": 820.52,
+            "confirmation_id": 14784
+          },
+          {
+            "start_date": "2025-03-06",
+            "end_date": "2025-03-09",
+            "nights": 3,
+            "gross_nightly": 1268.08,
+            "payout_nightly": 1039.83,
+            "confirmation_id": 14124
+          },
+          {
+            "start_date": "2027-03-17",
+            "end_date": "2027-03-21",
+            "nights": 4,
+            "gross_nightly": 971.47,
+            "payout_nightly": 796.6,
+            "confirmation_id": 19416
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 179,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (179d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -19998,6 +21790,40 @@
       "status_adj": "SLIGHTLY HIGH",
       "action_summary_adj": "\u2193 Reduce $712 \u2192 $558",
       "our_percentile_rank_adj": 64.3,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 313.3,
+        "max_rate": 313.3,
+        "median_rate": 313.3,
+        "avg_rate": 313.3,
+        "range_str": "$313\u2013$313 (Med $313)",
+        "variance_pct": 78.1,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+78% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2025-01-06",
+            "end_date": "2025-01-08",
+            "nights": 2,
+            "gross_nightly": 313.3,
+            "payout_nightly": 256.9,
+            "confirmation_id": 14208
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 126,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (126d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -20681,6 +22507,48 @@
       "status_adj": "OVERPRICED",
       "action_summary_adj": "\u2193 Reduce $532 \u2192 $389",
       "our_percentile_rank_adj": 58.8,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 332.91,
+        "max_rate": 428.69,
+        "median_rate": 380.8,
+        "avg_rate": 380.8,
+        "range_str": "$333\u2013$429 (Med $381)",
+        "variance_pct": 2.2,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2026-10-04",
+            "end_date": "2026-10-11",
+            "nights": 7,
+            "gross_nightly": 428.69,
+            "payout_nightly": 351.52,
+            "confirmation_id": 18653
+          },
+          {
+            "start_date": "2026-10-19",
+            "end_date": "2026-10-21",
+            "nights": 2,
+            "gross_nightly": 332.91,
+            "payout_nightly": 272.99,
+            "confirmation_id": 19210
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 35,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (35d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     }
   ],
@@ -21366,6 +23234,56 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $399 \u2192 $548",
       "our_percentile_rank_adj": 21.6,
+      "historical_benchmark": {
+        "sample_count": 3,
+        "min_rate": 332.91,
+        "max_rate": 611.31,
+        "median_rate": 405.6,
+        "avg_rate": 449.94,
+        "range_str": "$333\u2013$611 (Med $406)",
+        "variance_pct": 35.1,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+35% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-10-28",
+            "end_date": "2023-10-31",
+            "nights": 3,
+            "gross_nightly": 611.31,
+            "payout_nightly": 501.27,
+            "confirmation_id": 11320
+          },
+          {
+            "start_date": "2026-10-19",
+            "end_date": "2026-10-21",
+            "nights": 2,
+            "gross_nightly": 332.91,
+            "payout_nightly": 272.99,
+            "confirmation_id": 19210
+          },
+          {
+            "start_date": "2026-11-01",
+            "end_date": "2026-11-05",
+            "nights": 4,
+            "gross_nightly": 405.6,
+            "payout_nightly": 332.59,
+            "confirmation_id": 18912
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 50,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (50d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -21966,6 +23884,31 @@
       "status_adj": "SLIGHTLY HIGH",
       "action_summary_adj": "\u2193 Reduce $499 \u2192 $383",
       "our_percentile_rank_adj": 45.5,
+      "historical_benchmark": {
+        "sample_count": 0,
+        "min_rate": 0.0,
+        "max_rate": 0.0,
+        "median_rate": 0.0,
+        "avg_rate": 0.0,
+        "range_str": "No prior sales",
+        "variance_pct": null,
+        "flag": "NO_HISTORICAL_DATA",
+        "flag_label": "No Prior Sales",
+        "flag_color": "#94a3b8",
+        "matched_stays": []
+      },
+      "lead_time_status": {
+        "lead_days": 0,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "LAST_MINUTE",
+        "label": "Last-Minute Distress (0d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#f87171",
+        "badge_bg": "rgba(248,113,113,0.15)",
+        "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
+      },
       "is_live_scan": true
     },
     {
@@ -22760,6 +24703,64 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1610",
       "our_percentile_rank_adj": 43.6,
+      "historical_benchmark": {
+        "sample_count": 4,
+        "min_rate": 711.75,
+        "max_rate": 1441.65,
+        "median_rate": 1191.05,
+        "avg_rate": 1133.88,
+        "range_str": "$712\u2013$1,442 (Med $1,191)",
+        "variance_pct": 35.2,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+35% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-03-30",
+            "end_date": "2022-04-05",
+            "nights": 6,
+            "gross_nightly": 1441.65,
+            "payout_nightly": 1182.15,
+            "confirmation_id": 6819
+          },
+          {
+            "start_date": "2022-04-06",
+            "end_date": "2022-04-10",
+            "nights": 4,
+            "gross_nightly": 1043.0,
+            "payout_nightly": 855.26,
+            "confirmation_id": 7025
+          },
+          {
+            "start_date": "2023-03-30",
+            "end_date": "2023-04-04",
+            "nights": 5,
+            "gross_nightly": 1339.11,
+            "payout_nightly": 1098.07,
+            "confirmation_id": 9343
+          },
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 711.75,
+            "payout_nightly": 583.63,
+            "confirmation_id": 12351
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 214,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (214d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -23532,6 +25533,40 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $649 \u2192 $841",
       "our_percentile_rank_adj": 32.4,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 313.3,
+        "max_rate": 313.3,
+        "median_rate": 313.3,
+        "avg_rate": 313.3,
+        "range_str": "$313\u2013$313 (Med $313)",
+        "variance_pct": 168.4,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+168% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2025-01-06",
+            "end_date": "2025-01-08",
+            "nights": 2,
+            "gross_nightly": 313.3,
+            "payout_nightly": 256.9,
+            "confirmation_id": 14208
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 135,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (135d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -24402,6 +26437,64 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1589",
       "our_percentile_rank_adj": 53.5,
+      "historical_benchmark": {
+        "sample_count": 4,
+        "min_rate": 711.75,
+        "max_rate": 1043.0,
+        "median_rate": 954.91,
+        "avg_rate": 916.14,
+        "range_str": "$712\u2013$1,043 (Med $955)",
+        "variance_pct": 66.4,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+66% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-04-06",
+            "end_date": "2022-04-10",
+            "nights": 4,
+            "gross_nightly": 1043.0,
+            "payout_nightly": 855.26,
+            "confirmation_id": 7025
+          },
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 711.75,
+            "payout_nightly": 583.63,
+            "confirmation_id": 12351
+          },
+          {
+            "start_date": "2024-04-25",
+            "end_date": "2024-04-28",
+            "nights": 3,
+            "gross_nightly": 903.36,
+            "payout_nightly": 740.76,
+            "confirmation_id": 12155
+          },
+          {
+            "start_date": "2025-04-24",
+            "end_date": "2025-04-27",
+            "nights": 3,
+            "gross_nightly": 1006.47,
+            "payout_nightly": 825.3,
+            "confirmation_id": 14585
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 221,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (221d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -25139,6 +27232,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $899 \u2192 $1191",
       "our_percentile_rank_adj": 16.7,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 1119.0,
+        "max_rate": 1140.99,
+        "median_rate": 1129.99,
+        "avg_rate": 1129.99,
+        "range_str": "$1,119\u2013$1,141 (Med $1,130)",
+        "variance_pct": 5.4,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-03-09",
+            "end_date": "2024-03-14",
+            "nights": 5,
+            "gross_nightly": 1140.99,
+            "payout_nightly": 935.62,
+            "confirmation_id": 11609
+          },
+          {
+            "start_date": "2025-03-16",
+            "end_date": "2025-03-21",
+            "nights": 5,
+            "gross_nightly": 1119.0,
+            "payout_nightly": 917.58,
+            "confirmation_id": 14233
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 189,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (189d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -25694,6 +27829,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $466 \u2192 $638",
       "our_percentile_rank_adj": 30.0,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 428.69,
+        "max_rate": 1911.26,
+        "median_rate": 1169.97,
+        "avg_rate": 1169.97,
+        "range_str": "$429\u2013$1,911 (Med $1,170)",
+        "variance_pct": -45.5,
+        "flag": "DEEP_DISCOUNT",
+        "flag_label": "-46% vs Track Record",
+        "flag_color": "#f87171",
+        "matched_stays": [
+          {
+            "start_date": "2022-12-25",
+            "end_date": "2023-01-01",
+            "nights": 7,
+            "gross_nightly": 1911.26,
+            "payout_nightly": 1567.23,
+            "confirmation_id": 8684
+          },
+          {
+            "start_date": "2026-12-12",
+            "end_date": "2026-12-19",
+            "nights": 7,
+            "gross_nightly": 428.69,
+            "payout_nightly": 351.52,
+            "confirmation_id": 18555
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 105,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (105d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -25858,6 +28035,72 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1123",
       "our_percentile_rank_adj": 16.7,
+      "historical_benchmark": {
+        "sample_count": 5,
+        "min_rate": 564.65,
+        "max_rate": 1241.9,
+        "median_rate": 596.55,
+        "avg_rate": 728.29,
+        "range_str": "$565\u2013$1,242 (Med $597)",
+        "variance_pct": 88.2,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+88% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-06-23",
+            "end_date": "2022-06-26",
+            "nights": 3,
+            "gross_nightly": 1241.9,
+            "payout_nightly": 1018.36,
+            "confirmation_id": 6876
+          },
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 643.08,
+            "payout_nightly": 527.33,
+            "confirmation_id": 10243
+          },
+          {
+            "start_date": "2024-06-21",
+            "end_date": "2024-06-23",
+            "nights": 2,
+            "gross_nightly": 595.26,
+            "payout_nightly": 488.12,
+            "confirmation_id": 12934
+          },
+          {
+            "start_date": "2024-06-28",
+            "end_date": "2024-06-30",
+            "nights": 2,
+            "gross_nightly": 564.65,
+            "payout_nightly": 463.01,
+            "confirmation_id": 13194
+          },
+          {
+            "start_date": "2024-07-05",
+            "end_date": "2024-07-07",
+            "nights": 2,
+            "gross_nightly": 596.55,
+            "payout_nightly": 489.17,
+            "confirmation_id": 13296
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 291,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (291d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -26413,6 +28656,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $745",
       "our_percentile_rank_adj": 37.9,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 631.22,
+        "max_rate": 860.32,
+        "median_rate": 745.77,
+        "avg_rate": 745.77,
+        "range_str": "$631\u2013$860 (Med $746)",
+        "variance_pct": -0.1,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2022-11-23",
+            "end_date": "2022-11-27",
+            "nights": 4,
+            "gross_nightly": 860.32,
+            "payout_nightly": 705.46,
+            "confirmation_id": 8709
+          },
+          {
+            "start_date": "2023-12-01",
+            "end_date": "2023-12-03",
+            "nights": 2,
+            "gross_nightly": 631.22,
+            "payout_nightly": 517.6,
+            "confirmation_id": 10847
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 88,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (88d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -27321,6 +29606,40 @@
       "status_adj": "SLIGHTLY HIGH",
       "action_summary_adj": "\u2193 Reduce $786 \u2192 $660",
       "our_percentile_rank_adj": 61.4,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 712.53,
+        "max_rate": 712.53,
+        "median_rate": 712.53,
+        "avg_rate": 712.53,
+        "range_str": "$713\u2013$713 (Med $713)",
+        "variance_pct": -7.4,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2027-02-13",
+            "end_date": "2027-02-20",
+            "nights": 7,
+            "gross_nightly": 712.53,
+            "payout_nightly": 584.27,
+            "confirmation_id": 19294
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 147,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (147d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -28020,6 +30339,88 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $1099 \u2192 $1321",
       "our_percentile_rank_adj": 38.2,
+      "historical_benchmark": {
+        "sample_count": 7,
+        "min_rate": 626.07,
+        "max_rate": 1953.55,
+        "median_rate": 859.08,
+        "avg_rate": 995.68,
+        "range_str": "$626\u2013$1,954 (Med $859)",
+        "variance_pct": 53.8,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+54% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-02-08",
+            "end_date": "2023-02-12",
+            "nights": 4,
+            "gross_nightly": 1953.55,
+            "payout_nightly": 1601.91,
+            "confirmation_id": 9017
+          },
+          {
+            "start_date": "2024-02-08",
+            "end_date": "2024-02-11",
+            "nights": 3,
+            "gross_nightly": 855.09,
+            "payout_nightly": 701.17,
+            "confirmation_id": 10432
+          },
+          {
+            "start_date": "2024-02-16",
+            "end_date": "2024-02-19",
+            "nights": 3,
+            "gross_nightly": 752.64,
+            "payout_nightly": 617.17,
+            "confirmation_id": 11778
+          },
+          {
+            "start_date": "2024-02-19",
+            "end_date": "2024-02-25",
+            "nights": 6,
+            "gross_nightly": 626.07,
+            "payout_nightly": 513.38,
+            "confirmation_id": 11896
+          },
+          {
+            "start_date": "2025-02-07",
+            "end_date": "2025-02-10",
+            "nights": 3,
+            "gross_nightly": 859.08,
+            "payout_nightly": 704.45,
+            "confirmation_id": 13549
+          },
+          {
+            "start_date": "2025-02-13",
+            "end_date": "2025-02-16",
+            "nights": 3,
+            "gross_nightly": 1011.99,
+            "payout_nightly": 829.83,
+            "confirmation_id": 14242
+          },
+          {
+            "start_date": "2027-02-10",
+            "end_date": "2027-02-13",
+            "nights": 3,
+            "gross_nightly": 911.35,
+            "payout_nightly": 747.31,
+            "confirmation_id": 19523
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 151,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (151d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -28719,6 +31120,88 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1548",
       "our_percentile_rank_adj": 48.5,
+      "historical_benchmark": {
+        "sample_count": 7,
+        "min_rate": 971.47,
+        "max_rate": 1441.65,
+        "median_rate": 1257.46,
+        "avg_rate": 1193.96,
+        "range_str": "$971\u2013$1,442 (Med $1,257)",
+        "variance_pct": 23.1,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2022-03-30",
+            "end_date": "2022-04-05",
+            "nights": 6,
+            "gross_nightly": 1441.65,
+            "payout_nightly": 1182.15,
+            "confirmation_id": 6819
+          },
+          {
+            "start_date": "2022-04-06",
+            "end_date": "2022-04-10",
+            "nights": 4,
+            "gross_nightly": 1043.0,
+            "payout_nightly": 855.26,
+            "confirmation_id": 7025
+          },
+          {
+            "start_date": "2023-03-23",
+            "end_date": "2023-03-26",
+            "nights": 3,
+            "gross_nightly": 1036.96,
+            "payout_nightly": 850.3,
+            "confirmation_id": 9420
+          },
+          {
+            "start_date": "2023-03-30",
+            "end_date": "2023-04-04",
+            "nights": 5,
+            "gross_nightly": 1339.11,
+            "payout_nightly": 1098.07,
+            "confirmation_id": 9343
+          },
+          {
+            "start_date": "2024-03-21",
+            "end_date": "2024-03-24",
+            "nights": 3,
+            "gross_nightly": 1257.46,
+            "payout_nightly": 1031.11,
+            "confirmation_id": 11822
+          },
+          {
+            "start_date": "2025-03-21",
+            "end_date": "2025-03-24",
+            "nights": 3,
+            "gross_nightly": 1268.08,
+            "payout_nightly": 1039.83,
+            "confirmation_id": 14286
+          },
+          {
+            "start_date": "2027-03-17",
+            "end_date": "2027-03-21",
+            "nights": 4,
+            "gross_nightly": 971.47,
+            "payout_nightly": 796.6,
+            "confirmation_id": 19416
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 207,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (207d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -29703,6 +32186,72 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1486",
       "our_percentile_rank_adj": 46.9,
+      "historical_benchmark": {
+        "sample_count": 5,
+        "min_rate": 711.75,
+        "max_rate": 1148.92,
+        "median_rate": 903.36,
+        "avg_rate": 914.71,
+        "range_str": "$712\u2013$1,149 (Med $903)",
+        "variance_pct": 64.5,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+64% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-05-04",
+            "end_date": "2023-05-07",
+            "nights": 3,
+            "gross_nightly": 1148.92,
+            "payout_nightly": 942.11,
+            "confirmation_id": 9097
+          },
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 711.75,
+            "payout_nightly": 583.63,
+            "confirmation_id": 12351
+          },
+          {
+            "start_date": "2024-04-25",
+            "end_date": "2024-04-28",
+            "nights": 3,
+            "gross_nightly": 903.36,
+            "payout_nightly": 740.76,
+            "confirmation_id": 12155
+          },
+          {
+            "start_date": "2025-04-24",
+            "end_date": "2025-04-27",
+            "nights": 3,
+            "gross_nightly": 1006.47,
+            "payout_nightly": 825.3,
+            "confirmation_id": 14585
+          },
+          {
+            "start_date": "2025-05-01",
+            "end_date": "2025-05-04",
+            "nights": 3,
+            "gross_nightly": 803.05,
+            "payout_nightly": 658.5,
+            "confirmation_id": 14474
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 228,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (228d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -29848,6 +32397,40 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.0,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 417.83,
+        "max_rate": 417.83,
+        "median_rate": 417.83,
+        "avg_rate": 417.83,
+        "range_str": "$418\u2013$418 (Med $418)",
+        "variance_pct": 59.6,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+60% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-08-06",
+            "end_date": "2023-08-10",
+            "nights": 4,
+            "gross_nightly": 417.83,
+            "payout_nightly": 342.62,
+            "confirmation_id": 10477
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 322,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (322d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -29993,6 +32576,31 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.0,
+      "historical_benchmark": {
+        "sample_count": 0,
+        "min_rate": 0.0,
+        "max_rate": 0.0,
+        "median_rate": 0.0,
+        "avg_rate": 0.0,
+        "range_str": "No prior sales",
+        "variance_pct": null,
+        "flag": "NO_HISTORICAL_DATA",
+        "flag_label": "No Prior Sales",
+        "flag_color": "#94a3b8",
+        "matched_stays": []
+      },
+      "lead_time_status": {
+        "lead_days": 315,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (315d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -30787,6 +33395,64 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $899 \u2192 $1065",
       "our_percentile_rank_adj": 51.3,
+      "historical_benchmark": {
+        "sample_count": 4,
+        "min_rate": 641.62,
+        "max_rate": 961.74,
+        "median_rate": 794.44,
+        "avg_rate": 798.06,
+        "range_str": "$642\u2013$962 (Med $794)",
+        "variance_pct": 34.1,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+34% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-01-12",
+            "end_date": "2023-01-16",
+            "nights": 4,
+            "gross_nightly": 794.47,
+            "payout_nightly": 651.46,
+            "confirmation_id": 8857
+          },
+          {
+            "start_date": "2026-12-23",
+            "end_date": "2026-12-27",
+            "nights": 4,
+            "gross_nightly": 794.42,
+            "payout_nightly": 651.42,
+            "confirmation_id": 17618
+          },
+          {
+            "start_date": "2026-12-31",
+            "end_date": "2027-01-04",
+            "nights": 4,
+            "gross_nightly": 961.74,
+            "payout_nightly": 788.63,
+            "confirmation_id": 19141
+          },
+          {
+            "start_date": "2027-01-15",
+            "end_date": "2027-01-19",
+            "nights": 4,
+            "gross_nightly": 641.62,
+            "payout_nightly": 526.13,
+            "confirmation_id": 18395
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 123,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (123d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -31486,6 +34152,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $866 \u2192 $1126",
       "our_percentile_rank_adj": 24.2,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 712.53,
+        "max_rate": 836.47,
+        "median_rate": 774.5,
+        "avg_rate": 774.5,
+        "range_str": "$713\u2013$836 (Med $774)",
+        "variance_pct": 45.4,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+45% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2025-02-18",
+            "end_date": "2025-02-25",
+            "nights": 7,
+            "gross_nightly": 836.47,
+            "payout_nightly": 685.9,
+            "confirmation_id": 14261
+          },
+          {
+            "start_date": "2027-02-13",
+            "end_date": "2027-02-20",
+            "nights": 7,
+            "gross_nightly": 712.53,
+            "payout_nightly": 584.27,
+            "confirmation_id": 19294
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 154,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (154d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -32185,6 +34893,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $899 \u2192 $1076",
       "our_percentile_rank_adj": 53.1,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 641.62,
+        "max_rate": 794.47,
+        "median_rate": 718.05,
+        "avg_rate": 718.05,
+        "range_str": "$642\u2013$794 (Med $718)",
+        "variance_pct": 49.9,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+50% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-01-12",
+            "end_date": "2023-01-16",
+            "nights": 4,
+            "gross_nightly": 794.47,
+            "payout_nightly": 651.46,
+            "confirmation_id": 8857
+          },
+          {
+            "start_date": "2027-01-15",
+            "end_date": "2027-01-19",
+            "nights": 4,
+            "gross_nightly": 641.62,
+            "payout_nightly": 526.13,
+            "confirmation_id": 18395
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 137,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (137d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -33016,6 +35766,72 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $1049 \u2192 $1197",
       "our_percentile_rank_adj": 47.5,
+      "historical_benchmark": {
+        "sample_count": 5,
+        "min_rate": 711.75,
+        "max_rate": 1148.92,
+        "median_rate": 903.36,
+        "avg_rate": 914.71,
+        "range_str": "$712\u2013$1,149 (Med $903)",
+        "variance_pct": 32.5,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+32% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-05-04",
+            "end_date": "2023-05-07",
+            "nights": 3,
+            "gross_nightly": 1148.92,
+            "payout_nightly": 942.11,
+            "confirmation_id": 9097
+          },
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 711.75,
+            "payout_nightly": 583.63,
+            "confirmation_id": 12351
+          },
+          {
+            "start_date": "2024-04-25",
+            "end_date": "2024-04-28",
+            "nights": 3,
+            "gross_nightly": 903.36,
+            "payout_nightly": 740.76,
+            "confirmation_id": 12155
+          },
+          {
+            "start_date": "2025-04-24",
+            "end_date": "2025-04-27",
+            "nights": 3,
+            "gross_nightly": 1006.47,
+            "payout_nightly": 825.3,
+            "confirmation_id": 14585
+          },
+          {
+            "start_date": "2025-05-01",
+            "end_date": "2025-05-04",
+            "nights": 3,
+            "gross_nightly": 803.05,
+            "payout_nightly": 658.5,
+            "confirmation_id": 14474
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 235,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (235d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -33180,6 +35996,80 @@
       "status_adj": "UNDERPRICED",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1114",
       "our_percentile_rank_adj": 16.7,
+      "historical_benchmark": {
+        "sample_count": 6,
+        "min_rate": 564.65,
+        "max_rate": 1241.9,
+        "median_rate": 621.04,
+        "avg_rate": 715.98,
+        "range_str": "$565\u2013$1,242 (Med $621)",
+        "variance_pct": 79.4,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+79% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-06-23",
+            "end_date": "2022-06-26",
+            "nights": 3,
+            "gross_nightly": 1241.9,
+            "payout_nightly": 1018.36,
+            "confirmation_id": 6876
+          },
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 650.69,
+            "payout_nightly": 533.56,
+            "confirmation_id": 8014
+          },
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 643.08,
+            "payout_nightly": 527.33,
+            "confirmation_id": 10243
+          },
+          {
+            "start_date": "2024-06-28",
+            "end_date": "2024-06-30",
+            "nights": 2,
+            "gross_nightly": 564.65,
+            "payout_nightly": 463.01,
+            "confirmation_id": 13194
+          },
+          {
+            "start_date": "2024-07-05",
+            "end_date": "2024-07-07",
+            "nights": 2,
+            "gross_nightly": 596.55,
+            "payout_nightly": 489.17,
+            "confirmation_id": 13296
+          },
+          {
+            "start_date": "2024-07-19",
+            "end_date": "2024-07-21",
+            "nights": 2,
+            "gross_nightly": 599.0,
+            "payout_nightly": 491.18,
+            "confirmation_id": 13199
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 305,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (305d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -33344,6 +36234,72 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $809",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 5,
+        "min_rate": 595.26,
+        "max_rate": 729.0,
+        "median_rate": 599.0,
+        "avg_rate": 634.1,
+        "range_str": "$595\u2013$729 (Med $599)",
+        "variance_pct": 35.1,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+35% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 650.69,
+            "payout_nightly": 533.56,
+            "confirmation_id": 8014
+          },
+          {
+            "start_date": "2022-07-29",
+            "end_date": "2022-07-31",
+            "nights": 2,
+            "gross_nightly": 729.0,
+            "payout_nightly": 597.78,
+            "confirmation_id": 7787
+          },
+          {
+            "start_date": "2024-07-05",
+            "end_date": "2024-07-07",
+            "nights": 2,
+            "gross_nightly": 596.55,
+            "payout_nightly": 489.17,
+            "confirmation_id": 13296
+          },
+          {
+            "start_date": "2024-07-19",
+            "end_date": "2024-07-21",
+            "nights": 2,
+            "gross_nightly": 599.0,
+            "payout_nightly": 491.18,
+            "confirmation_id": 13199
+          },
+          {
+            "start_date": "2024-07-26",
+            "end_date": "2024-07-28",
+            "nights": 2,
+            "gross_nightly": 595.26,
+            "payout_nightly": 488.12,
+            "confirmation_id": 13044
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 312,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (312d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -34081,6 +37037,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $836 \u2192 $975",
       "our_percentile_rank_adj": 38.9,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 1119.0,
+        "max_rate": 1121.84,
+        "median_rate": 1120.42,
+        "avg_rate": 1120.42,
+        "range_str": "$1,119\u2013$1,122 (Med $1,120)",
+        "variance_pct": -13.0,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2025-03-16",
+            "end_date": "2025-03-21",
+            "nights": 5,
+            "gross_nightly": 1119.0,
+            "payout_nightly": 917.58,
+            "confirmation_id": 14233
+          },
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1121.84,
+            "payout_nightly": 919.91,
+            "confirmation_id": 14616
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 203,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (203d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -34245,6 +37243,56 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $799",
       "our_percentile_rank_adj": 20.0,
+      "historical_benchmark": {
+        "sample_count": 3,
+        "min_rate": 466.81,
+        "max_rate": 1311.45,
+        "median_rate": 779.8,
+        "avg_rate": 852.69,
+        "range_str": "$467\u2013$1,311 (Med $780)",
+        "variance_pct": 2.5,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-19",
+            "end_date": "2022-05-22",
+            "nights": 3,
+            "gross_nightly": 1311.45,
+            "payout_nightly": 1075.39,
+            "confirmation_id": 6854
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 779.8,
+            "payout_nightly": 639.44,
+            "confirmation_id": 12846
+          },
+          {
+            "start_date": "2024-05-31",
+            "end_date": "2024-06-02",
+            "nights": 2,
+            "gross_nightly": 466.81,
+            "payout_nightly": 382.79,
+            "confirmation_id": 12931
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 270,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (270d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -35020,6 +38068,56 @@
       "status_adj": "SLIGHTLY HIGH",
       "action_summary_adj": "\u2193 Reduce $1099 \u2192 $934",
       "our_percentile_rank_adj": 63.6,
+      "historical_benchmark": {
+        "sample_count": 3,
+        "min_rate": 1119.0,
+        "max_rate": 1140.99,
+        "median_rate": 1121.84,
+        "avg_rate": 1127.28,
+        "range_str": "$1,119\u2013$1,141 (Med $1,122)",
+        "variance_pct": -16.7,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-03-09",
+            "end_date": "2024-03-14",
+            "nights": 5,
+            "gross_nightly": 1140.99,
+            "payout_nightly": 935.62,
+            "confirmation_id": 11609
+          },
+          {
+            "start_date": "2025-03-16",
+            "end_date": "2025-03-21",
+            "nights": 5,
+            "gross_nightly": 1119.0,
+            "payout_nightly": 917.58,
+            "confirmation_id": 14233
+          },
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1121.84,
+            "payout_nightly": 919.91,
+            "confirmation_id": 14616
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 196,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (196d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     }
   ],
@@ -35890,6 +38988,40 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 36.6,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 428.69,
+        "max_rate": 428.69,
+        "median_rate": 428.69,
+        "avg_rate": 428.69,
+        "range_str": "$429\u2013$429 (Med $429)",
+        "variance_pct": -14.9,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2026-10-04",
+            "end_date": "2026-10-11",
+            "nights": 7,
+            "gross_nightly": 428.69,
+            "payout_nightly": 351.52,
+            "confirmation_id": 18653
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 15,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (15d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -36493,6 +39625,64 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 44.8,
+      "historical_benchmark": {
+        "sample_count": 4,
+        "min_rate": 476.68,
+        "max_rate": 715.0,
+        "median_rate": 521.38,
+        "avg_rate": 558.61,
+        "range_str": "$477\u2013$715 (Med $521)",
+        "variance_pct": 4.9,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2023-09-22",
+            "end_date": "2023-09-25",
+            "nights": 3,
+            "gross_nightly": 715.0,
+            "payout_nightly": 586.3,
+            "confirmation_id": 10965
+          },
+          {
+            "start_date": "2026-09-10",
+            "end_date": "2026-09-13",
+            "nights": 3,
+            "gross_nightly": 549.0,
+            "payout_nightly": 450.18,
+            "confirmation_id": 17927
+          },
+          {
+            "start_date": "2026-09-18",
+            "end_date": "2026-09-21",
+            "nights": 3,
+            "gross_nightly": 493.76,
+            "payout_nightly": 404.88,
+            "confirmation_id": 17963
+          },
+          {
+            "start_date": "2026-09-30",
+            "end_date": "2026-10-04",
+            "nights": 4,
+            "gross_nightly": 476.68,
+            "payout_nightly": 390.87,
+            "confirmation_id": 19509
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 18,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (18d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -37029,6 +40219,48 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 41.4,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 405.6,
+        "max_rate": 611.31,
+        "median_rate": 508.45,
+        "avg_rate": 508.45,
+        "range_str": "$406\u2013$611 (Med $508)",
+        "variance_pct": -4.2,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2023-10-28",
+            "end_date": "2023-10-31",
+            "nights": 3,
+            "gross_nightly": 611.31,
+            "payout_nightly": 501.27,
+            "confirmation_id": 11320
+          },
+          {
+            "start_date": "2026-11-01",
+            "end_date": "2026-11-05",
+            "nights": 4,
+            "gross_nightly": 405.6,
+            "payout_nightly": 332.59,
+            "confirmation_id": 18912
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 63,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (63d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -37801,6 +41033,40 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.5,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 405.6,
+        "max_rate": 405.6,
+        "median_rate": 405.6,
+        "avg_rate": 405.6,
+        "range_str": "$406\u2013$406 (Med $406)",
+        "variance_pct": 20.6,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2026-11-01",
+            "end_date": "2026-11-05",
+            "nights": 4,
+            "gross_nightly": 405.6,
+            "payout_nightly": 332.59,
+            "confirmation_id": 18912
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 70,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (70d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -38416,6 +41682,40 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 48.5,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 428.69,
+        "max_rate": 428.69,
+        "median_rate": 428.69,
+        "avg_rate": 428.69,
+        "range_str": "$429\u2013$429 (Med $429)",
+        "variance_pct": -2.3,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2026-12-12",
+            "end_date": "2026-12-19",
+            "nights": 7,
+            "gross_nightly": 428.69,
+            "payout_nightly": 351.52,
+            "confirmation_id": 18555
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 91,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (91d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -39380,6 +42680,48 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 37.8,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 313.3,
+        "max_rate": 1911.26,
+        "median_rate": 1112.28,
+        "avg_rate": 1112.28,
+        "range_str": "$313\u2013$1,911 (Med $1,112)",
+        "variance_pct": -37.9,
+        "flag": "DEEP_DISCOUNT",
+        "flag_label": "-38% vs Track Record",
+        "flag_color": "#f87171",
+        "matched_stays": [
+          {
+            "start_date": "2022-12-25",
+            "end_date": "2023-01-01",
+            "nights": 7,
+            "gross_nightly": 1911.26,
+            "payout_nightly": 1567.23,
+            "confirmation_id": 8684
+          },
+          {
+            "start_date": "2025-01-06",
+            "end_date": "2025-01-08",
+            "nights": 2,
+            "gross_nightly": 313.3,
+            "payout_nightly": 256.9,
+            "confirmation_id": 14208
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 120,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "NORMAL_WINDOW",
+        "label": "Active Booking Window (120d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#34d399",
+        "badge_bg": "rgba(52,211,153,0.15)",
+        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+      },
       "is_live_scan": true
     },
     {
@@ -40174,6 +43516,31 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 55.6,
+      "historical_benchmark": {
+        "sample_count": 0,
+        "min_rate": 0.0,
+        "max_rate": 0.0,
+        "median_rate": 0.0,
+        "avg_rate": 0.0,
+        "range_str": "No prior sales",
+        "variance_pct": null,
+        "flag": "NO_HISTORICAL_DATA",
+        "flag_label": "No Prior Sales",
+        "flag_color": "#94a3b8",
+        "matched_stays": []
+      },
+      "lead_time_status": {
+        "lead_days": 140,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (140d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -40835,6 +44202,48 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 45.2,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 712.53,
+        "max_rate": 836.47,
+        "median_rate": 774.5,
+        "avg_rate": 774.5,
+        "range_str": "$713\u2013$836 (Med $774)",
+        "variance_pct": 12.8,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2025-02-18",
+            "end_date": "2025-02-25",
+            "nights": 7,
+            "gross_nightly": 836.47,
+            "payout_nightly": 685.9,
+            "confirmation_id": 14261
+          },
+          {
+            "start_date": "2027-02-13",
+            "end_date": "2027-02-20",
+            "nights": 7,
+            "gross_nightly": 712.53,
+            "payout_nightly": 584.27,
+            "confirmation_id": 19294
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 168,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (168d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -41648,6 +45057,56 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 44.7,
+      "historical_benchmark": {
+        "sample_count": 3,
+        "min_rate": 712.53,
+        "max_rate": 1140.99,
+        "median_rate": 836.47,
+        "avg_rate": 896.66,
+        "range_str": "$713\u2013$1,141 (Med $836)",
+        "variance_pct": -0.1,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-03-09",
+            "end_date": "2024-03-14",
+            "nights": 5,
+            "gross_nightly": 1140.99,
+            "payout_nightly": 935.62,
+            "confirmation_id": 11609
+          },
+          {
+            "start_date": "2025-02-18",
+            "end_date": "2025-02-25",
+            "nights": 7,
+            "gross_nightly": 836.47,
+            "payout_nightly": 685.9,
+            "confirmation_id": 14261
+          },
+          {
+            "start_date": "2027-02-13",
+            "end_date": "2027-02-20",
+            "nights": 7,
+            "gross_nightly": 712.53,
+            "payout_nightly": 584.27,
+            "confirmation_id": 19294
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 175,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (175d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -42442,6 +45901,48 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 45.9,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 1119.0,
+        "max_rate": 1140.99,
+        "median_rate": 1129.99,
+        "avg_rate": 1129.99,
+        "range_str": "$1,119\u2013$1,141 (Med $1,130)",
+        "variance_pct": -23.1,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-03-09",
+            "end_date": "2024-03-14",
+            "nights": 5,
+            "gross_nightly": 1140.99,
+            "payout_nightly": 935.62,
+            "confirmation_id": 11609
+          },
+          {
+            "start_date": "2025-03-16",
+            "end_date": "2025-03-21",
+            "nights": 5,
+            "gross_nightly": 1119.0,
+            "payout_nightly": 917.58,
+            "confirmation_id": 14233
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 182,
+        "season": "Peak Winter / Spring (Feb\u2013Apr)",
+        "normal_window_str": "20\u2013147 days",
+        "p25": 20,
+        "p75": 147,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (182d out \u2022 Normal: 20\u2013147d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -43521,6 +47022,48 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 44.2,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 658.51,
+        "max_rate": 679.15,
+        "median_rate": 668.83,
+        "avg_rate": 668.83,
+        "range_str": "$659\u2013$679 (Med $669)",
+        "variance_pct": 13.2,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-04-21",
+            "end_date": "2024-04-22",
+            "nights": 1,
+            "gross_nightly": 679.15,
+            "payout_nightly": 556.9,
+            "confirmation_id": 12486
+          },
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 658.51,
+            "payout_nightly": 539.98,
+            "confirmation_id": 14988
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 238,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (238d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -44618,6 +48161,40 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 39.6,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 658.51,
+        "max_rate": 658.51,
+        "median_rate": 658.51,
+        "avg_rate": 658.51,
+        "range_str": "$659\u2013$659 (Med $659)",
+        "variance_pct": 15.7,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 658.51,
+            "payout_nightly": 539.98,
+            "confirmation_id": 14988
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 245,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (245d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -45754,6 +49331,48 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 46.4,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 532.65,
+        "max_rate": 658.51,
+        "median_rate": 595.58,
+        "avg_rate": 595.58,
+        "range_str": "$533\u2013$659 (Med $596)",
+        "variance_pct": 27.8,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+28% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-25",
+            "end_date": "2022-06-01",
+            "nights": 7,
+            "gross_nightly": 532.65,
+            "payout_nightly": 436.77,
+            "confirmation_id": 7488
+          },
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 658.51,
+            "payout_nightly": 539.98,
+            "confirmation_id": 14988
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 252,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (252d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -46849,6 +50468,48 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 45.1,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 532.65,
+        "max_rate": 658.51,
+        "median_rate": 595.58,
+        "avg_rate": 595.58,
+        "range_str": "$533\u2013$659 (Med $596)",
+        "variance_pct": 19.0,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-25",
+            "end_date": "2022-06-01",
+            "nights": 7,
+            "gross_nightly": 532.65,
+            "payout_nightly": 436.77,
+            "confirmation_id": 7488
+          },
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 658.51,
+            "payout_nightly": 539.98,
+            "confirmation_id": 14988
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 259,
+        "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
+        "normal_window_str": "12\u2013134 days",
+        "p25": 12,
+        "p75": 134,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (259d out \u2022 Normal: 12\u2013134d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -46994,6 +50655,40 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $691 \u2022 High compression",
       "our_percentile_rank_adj": 25.0,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 532.65,
+        "max_rate": 532.65,
+        "median_rate": 532.65,
+        "avg_rate": 532.65,
+        "range_str": "$533\u2013$533 (Med $533)",
+        "variance_pct": 29.7,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+30% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2022-05-25",
+            "end_date": "2022-06-01",
+            "nights": 7,
+            "gross_nightly": 532.65,
+            "payout_nightly": 436.77,
+            "confirmation_id": 7488
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 273,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (273d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -47139,6 +50834,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $683 \u2022 High compression",
       "our_percentile_rank_adj": 25.0,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 390.39,
+        "max_rate": 509.15,
+        "median_rate": 449.77,
+        "avg_rate": 449.77,
+        "range_str": "$390\u2013$509 (Med $450)",
+        "variance_pct": 51.9,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+52% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2024-06-23",
+            "end_date": "2024-06-24",
+            "nights": 1,
+            "gross_nightly": 509.15,
+            "payout_nightly": 417.5,
+            "confirmation_id": 13211
+          },
+          {
+            "start_date": "2025-06-23",
+            "end_date": "2025-06-25",
+            "nights": 2,
+            "gross_nightly": 390.39,
+            "payout_nightly": 320.12,
+            "confirmation_id": 16051
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 280,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (280d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -47303,6 +51040,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $746",
       "our_percentile_rank_adj": 33.3,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 390.39,
+        "max_rate": 509.15,
+        "median_rate": 449.77,
+        "avg_rate": 449.77,
+        "range_str": "$390\u2013$509 (Med $450)",
+        "variance_pct": 65.9,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+66% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2024-06-23",
+            "end_date": "2024-06-24",
+            "nights": 1,
+            "gross_nightly": 509.15,
+            "payout_nightly": 417.5,
+            "confirmation_id": 13211
+          },
+          {
+            "start_date": "2025-06-23",
+            "end_date": "2025-06-25",
+            "nights": 2,
+            "gross_nightly": 390.39,
+            "payout_nightly": 320.12,
+            "confirmation_id": 16051
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 287,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (287d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -47467,6 +51246,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $683",
       "our_percentile_rank_adj": 40.0,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 390.39,
+        "max_rate": 509.15,
+        "median_rate": 449.77,
+        "avg_rate": 449.77,
+        "range_str": "$390\u2013$509 (Med $450)",
+        "variance_pct": 51.9,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+52% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2024-06-23",
+            "end_date": "2024-06-24",
+            "nights": 1,
+            "gross_nightly": 509.15,
+            "payout_nightly": 417.5,
+            "confirmation_id": 13211
+          },
+          {
+            "start_date": "2025-06-23",
+            "end_date": "2025-06-25",
+            "nights": 2,
+            "gross_nightly": 390.39,
+            "payout_nightly": 320.12,
+            "confirmation_id": 16051
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 294,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (294d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -47631,6 +51452,48 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $776",
       "our_percentile_rank_adj": 16.7,
+      "historical_benchmark": {
+        "sample_count": 2,
+        "min_rate": 390.39,
+        "max_rate": 509.15,
+        "median_rate": 449.77,
+        "avg_rate": 449.77,
+        "range_str": "$390\u2013$509 (Med $450)",
+        "variance_pct": 72.5,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+72% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2024-06-23",
+            "end_date": "2024-06-24",
+            "nights": 1,
+            "gross_nightly": 509.15,
+            "payout_nightly": 417.5,
+            "confirmation_id": 13211
+          },
+          {
+            "start_date": "2025-06-23",
+            "end_date": "2025-06-25",
+            "nights": 2,
+            "gross_nightly": 390.39,
+            "payout_nightly": 320.12,
+            "confirmation_id": 16051
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 301,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (301d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -47795,6 +51658,31 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $683",
       "our_percentile_rank_adj": 40.0,
+      "historical_benchmark": {
+        "sample_count": 0,
+        "min_rate": 0.0,
+        "max_rate": 0.0,
+        "median_rate": 0.0,
+        "avg_rate": 0.0,
+        "range_str": "No prior sales",
+        "variance_pct": null,
+        "flag": "NO_HISTORICAL_DATA",
+        "flag_label": "No Prior Sales",
+        "flag_color": "#94a3b8",
+        "matched_stays": []
+      },
+      "lead_time_status": {
+        "lead_days": 308,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (308d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -47940,6 +51828,40 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $731",
       "our_percentile_rank_adj": 40.0,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 417.83,
+        "max_rate": 417.83,
+        "median_rate": 417.83,
+        "avg_rate": 417.83,
+        "range_str": "$418\u2013$418 (Med $418)",
+        "variance_pct": 75.0,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+75% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-08-06",
+            "end_date": "2023-08-10",
+            "nights": 4,
+            "gross_nightly": 417.83,
+            "payout_nightly": 342.62,
+            "confirmation_id": 10477
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 329,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (329d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -48085,6 +52007,40 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.0,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 417.83,
+        "max_rate": 417.83,
+        "median_rate": 417.83,
+        "avg_rate": 417.83,
+        "range_str": "$418\u2013$418 (Med $418)",
+        "variance_pct": 55.6,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+56% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-08-06",
+            "end_date": "2023-08-10",
+            "nights": 4,
+            "gross_nightly": 417.83,
+            "payout_nightly": 342.62,
+            "confirmation_id": 10477
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 336,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (336d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -48230,6 +52186,40 @@
       "status_adj": "SLIGHTLY LOW",
       "action_summary_adj": "\u2191 Increase $599 \u2192 $702",
       "our_percentile_rank_adj": 40.0,
+      "historical_benchmark": {
+        "sample_count": 1,
+        "min_rate": 417.83,
+        "max_rate": 417.83,
+        "median_rate": 417.83,
+        "avg_rate": 417.83,
+        "range_str": "$418\u2013$418 (Med $418)",
+        "variance_pct": 68.0,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+68% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2023-08-06",
+            "end_date": "2023-08-10",
+            "nights": 4,
+            "gross_nightly": 417.83,
+            "payout_nightly": 342.62,
+            "confirmation_id": 10477
+          }
+        ]
+      },
+      "lead_time_status": {
+        "lead_days": 343,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (343d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -48375,6 +52365,31 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.0,
+      "historical_benchmark": {
+        "sample_count": 0,
+        "min_rate": 0.0,
+        "max_rate": 0.0,
+        "median_rate": 0.0,
+        "avg_rate": 0.0,
+        "range_str": "No prior sales",
+        "variance_pct": null,
+        "flag": "NO_HISTORICAL_DATA",
+        "flag_label": "No Prior Sales",
+        "flag_color": "#94a3b8",
+        "matched_stays": []
+      },
+      "lead_time_status": {
+        "lead_days": 350,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (350d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": true
     },
     {
@@ -49792,6 +53807,31 @@
       "status_adj": "ON TARGET",
       "action_summary_adj": "",
       "our_percentile_rank_adj": 42.6,
+      "historical_benchmark": {
+        "sample_count": 0,
+        "min_rate": 0.0,
+        "max_rate": 0.0,
+        "median_rate": 0.0,
+        "avg_rate": 0.0,
+        "range_str": "No prior sales",
+        "variance_pct": null,
+        "flag": "NO_HISTORICAL_DATA",
+        "flag_label": "No Prior Sales",
+        "flag_color": "#94a3b8",
+        "matched_stays": []
+      },
+      "lead_time_status": {
+        "lead_days": 357,
+        "season": "Summer Value Season (Jun\u2013Aug)",
+        "normal_window_str": "6\u201328 days",
+        "p25": 6,
+        "p75": 28,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (357d out \u2022 Normal: 6\u201328d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
+      },
       "is_live_scan": false
     }
   ]

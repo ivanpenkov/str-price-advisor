@@ -221,6 +221,23 @@ Below is the complete inventory of all features supported by the system. For eac
 
 ---
 
+### Feature 9: Reservation Intelligence, Advance Booking Windows & Historical Rate Benchmarking
+- **Description**: Extracts operational intelligence from 88+ confirmed reservations (2022–present) in `data/reservations.db`:
+  - *Seasonal Booking Windows*: Computes interquartile range (IQR, 25th–75th percentiles) of booking lead times (Peak Feb–Apr: 20–147 days, Summer Jun–Aug: 6–28 days, Fall: 12–134 days) to categorize upcoming dates into `Pre-Window`, `Active Booking Window`, or `Last-Minute Distress`.
+  - *Weekend vs. Midweek Strategy Shift*: Breaks down year-by-year booked nights, % share, and realized ADR for Weekends (Thu–Sat) vs. Midweeks (Sun–Wed), proving that lowering midweek rates surged midweek capture from 27.9% in 2024 to 43.1% in 2025 and 42.0% in 2026.
+  - *Historical Rate Benchmarking*: Computes rolling $\pm 15$ days historical rate ranges and median ADR matching stay type (weekend to weekend, midweek to midweek) to anchor recommended prices and flag deviations ($>+25\%$ Aggressive Premium or $<-25\%$ Deep Discount).
+- **Automated CLI Command**:
+  ```bash
+  # Automatically executed during dashboard and advisory generation:
+  .venv/bin/python -m src.cli generate-html
+  ```
+- **Operator AI Workflow (Antigravity + `cli-operations`)**:
+  - *Skill*: [`.agents/skills/cli-operations/SKILL.md`](file:///Users/ivanpe/str-price-advisor/.agents/skills/cli-operations/SKILL.md)
+  - *Prompt Template*:
+    > "Analyze our historical booking lead times and weekend vs. midweek demand shift across all seasons, benchmark upcoming intervals against realized prior sales, and update the dashboard."
+
+---
+
 ## 4. Antigravity AI Interactive Prompt Matrix
 
 When interacting with Antigravity, use this quick reference table to trigger specialized skills:
@@ -230,6 +247,7 @@ When interacting with Antigravity, use this quick reference table to trigger spe
 | **Add New Comp** | `manage-comps` + `evaluate-comps` | `"Add comp https://www.airbnb.com/rooms/1077813310260513265 to Tier A. Extract house sq ft, lot acreage, score with the 6-factor rubric, and scrape its prices across open intervals."` |
 | **Audit Listing Specs** | `evaluate-comps` | `"Audit listing 628534576871518102. Check if pool heating is free or fee-based from guest reviews, verify living area, and update winter ratio."` |
 | **Track Comp Sales** | `cli-operations` | `"Diff latest pricing snapshots, calculate competitor absorption velocity across lead horizons, update empirical percentile recommendations, and push to dashboard."` |
+| **Reservation Intelligence** | `cli-operations` | `"Analyze our historical booking lead times and weekend vs. midweek demand shift, benchmark upcoming intervals against past realized sales, and refresh the dashboard."` |
 | **Special Event Scan** | `cli-operations` | `"Run a targeted pricing scan for Super Bowl / WM Open (Feb 8–16, 2027), compare our rates against top Scottsdale comps, and push updates."` |
 | **Proxy Diagnostics** | `proxy-scraping` | `"We are encountering HTTP 429 rate limits on Airbnb. Inspect proxy credentials in .env, verify proxy rotation, and test connectivity."` |
 | **PMS Ingestion Audit** | `cli-operations` | `"Sync our latest OwnerX reservations, check if any recent bookings changed dates, and update the revenue ledger."` |

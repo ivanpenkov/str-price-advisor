@@ -154,6 +154,23 @@ class TestHTMLDashboardUI(unittest.TestCase):
             f"JavaScript/Browser errors detected during UI dashboard interaction:\n" + "\n".join(errors),
         )
 
+    def test_reservation_intelligence_ui_elements(self):
+        """Verify that newly integrated reservation intelligence elements render properly in HTML."""
+        # 1. Main table historical track record header
+        self.assertIn("<th>Historical Track Record</th>", self.html_content)
+
+        # 2. Reservations tab: Annual weekend vs midweek shift card and table
+        self.assertIn("Annual Weekend vs. Midweek Performance &amp; Strategy Shift", self.html_content.replace("&", "&amp;").replace("&amp;amp;", "&amp;"))
+        self.assertIn("res-shift-card", self.html_content)
+        self.assertIn("res-shift-table", self.html_content)
+
+        # 3. Market demand tab: Seasonal Advance Booking Windows
+        self.assertIn("Seasonal Advance Booking Windows (Villa del Sol vs. Market Horizons)", self.html_content)
+
+        # 4. Comp row subtable booking pace & track record banner
+        self.assertIn("subtable-intel-banner", self.html_content)
+        self.assertIn("Booking Window &amp; Pace", self.html_content.replace("&", "&amp;").replace("&amp;amp;", "&amp;"))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -175,6 +175,7 @@ class PriceReportGenerator:
             "Comp Target",
             "Market Diff",
             "Rec. Base Rate",
+            "Track Record (±15d)",
         ]
         rows = [
             "| " + " | ".join(headers) + " |",
@@ -215,6 +216,17 @@ class PriceReportGenerator:
             rec_base = f"**${s['recommended_base_nightly']:.0f}**"
             action = (s.get("action_summary", "") or "-").replace("Increase base", "Increase").replace("Reduce base", "Reduce")
 
+            hist = s.get("historical_benchmark", {})
+            h_count = hist.get("sample_count", 0)
+            if h_count > 0:
+                h_min = hist.get("min_rate", 0.0)
+                h_max = hist.get("max_rate", 0.0)
+                h_med = hist.get("median_rate", 0.0)
+                h_flag_label = hist.get("flag_label", "Aligned")
+                track_str = f"${h_min:.0f}–${h_max:.0f} (med ${h_med:.0f}, {h_flag_label})"
+            else:
+                track_str = "—"
+
             row = [
                 dates,
                 seg_type,
@@ -227,6 +239,7 @@ class PriceReportGenerator:
                 target_pct,
                 diff_str,
                 rec_base,
+                track_str,
             ]
             rows.append("| " + " | ".join(row) + " |")
 
@@ -242,6 +255,7 @@ class PriceReportGenerator:
             "segment_type",
             "nights",
             "lead_time_days",
+            "lead_time_status",
             "our_base_nightly",
             "our_cleaning_fee",
             "our_total_price",
@@ -256,9 +270,23 @@ class PriceReportGenerator:
             "recommended_base_nightly",
             "base_diff",
             "action_summary",
+            "hist_sample_count",
+            "hist_min_rate",
+            "hist_max_rate",
+            "hist_median_rate",
+            "hist_flag",
         ]
         with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
             writer.writeheader()
             for s in sorted(segments, key=lambda x: x["check_in_dt"]):
-                writer.writerow(s)
+                row_copy = dict(s)
+                hb = s.get("historical_benchmark") or {}
+                lt = s.get("lead_time_status") or {}
+                row_copy["lead_time_status"] = lt.get("status", "")
+                row_copy["hist_sample_count"] = hb.get("sample_count", 0)
+                row_copy["hist_min_rate"] = hb.get("min_rate", "")
+                row_copy["hist_max_rate"] = hb.get("max_rate", "")
+                row_copy["hist_median_rate"] = hb.get("median_rate", "")
+                row_copy["hist_flag"] = hb.get("flag_label", "")
+                writer.writerow(row_copy)

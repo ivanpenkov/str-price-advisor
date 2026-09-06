@@ -112,7 +112,15 @@ class HTMLDashboardGenerator:
         """Load curated comps from registry."""
         if self.comps_path.exists():
             try:
-                return json.loads(self.comps_path.read_text(encoding="utf-8"))
+                data = json.loads(self.comps_path.read_text(encoding="utf-8"))
+                # Sanitize any duplicates across tiers (favoring tier_a)
+                tier_a = data.get("tier_a", {})
+                tier_b = data.get("tier_b", {})
+                overlap = set(tier_a.keys()) & set(tier_b.keys())
+                if overlap:
+                    for cid in overlap:
+                        tier_b.pop(cid, None)
+                return data
             except Exception:
                 pass
         return {"tier_a": {}, "tier_b": {}, "metadata": {"total_count": 0}}
@@ -171,7 +179,15 @@ class HTMLDashboardGenerator:
     def _get_cohort_comps_for_segment(self, seg: Dict[str, Any], mult: float) -> List[Dict[str, Any]]:
         """Construct cohort comp items for dates without a live sweep."""
         comps_data = self.load_comps()
-        all_comps = list(comps_data.get("tier_a", {}).values()) + list(comps_data.get("tier_b", {}).values())
+        seen_cohort_ids = set()
+        all_comps = []
+        for c in list(comps_data.get("tier_a", {}).values()) + list(comps_data.get("tier_b", {}).values()):
+            cid_key = str(c.get("listing_id")) if c.get("listing_id") else None
+            if cid_key:
+                if cid_key in seen_cohort_ids:
+                    continue
+                seen_cohort_ids.add(cid_key)
+            all_comps.append(c)
         base_rates = [750, 850, 920, 980, 1050, 1150, 1250, 1350, 1450, 1600, 1750, 1900, 2100]
         results = []
         nights = seg.get("nights", 3)

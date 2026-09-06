@@ -61,11 +61,68 @@ class CompManager:
         self.ENRICHED_DIR.mkdir(parents=True, exist_ok=True)
         self.evaluator = CompEvaluator()
 
+    def enforce_registry_integrity(self, registry: Dict[str, Any]) -> Tuple[Dict[str, Any], bool]:
+        """
+        Enforce strict catalog uniqueness across tiers.
+        - Listings must never exist simultaneously in tier_a and tier_b.
+        - If a duplicate exists:
+          - If bedrooms >= 6: retain in tier_a, purge from tier_b.
+          - If bedrooms < 6: retain in tier_b, purge from tier_a.
+        - If present in excluded_comps, purge from all active tiers.
+        - Ensure metadata.total_comps accurately reflects unique active comps.
+        """
+        modified = False
+        excluded_ids = set(str(k) for k in registry.get("excluded_comps", {}).keys())
+        tier_a = registry.get("tier_a", {})
+        tier_b = registry.get("tier_b", {})
+        disqualified = registry.get("disqualified", {})
+
+        # 1. Purge any excluded comps from active tiers
+        for cid in excluded_ids:
+            for t in (tier_a, tier_b, disqualified):
+                if cid in t:
+                    t.pop(cid, None)
+                    modified = True
+
+        # 2. Detect and heal cross-tier duplicates between tier_a and tier_b
+        overlap = set(tier_a.keys()) & set(tier_b.keys())
+        if overlap:
+            modified = True
+            for cid in overlap:
+                comp_a = tier_a.get(cid, {})
+                comp_b = tier_b.get(cid, {})
+                br = comp_a.get("bedrooms") or comp_b.get("bedrooms") or 6
+                if br >= 6:
+                    tier_b.pop(cid, None)
+                    logger.warning(f"Purged cross-tier duplicate {cid} from tier_b (kept in tier_a with {br}BR)")
+                else:
+                    tier_a.pop(cid, None)
+                    logger.warning(f"Purged cross-tier duplicate {cid} from tier_a (kept in tier_b with {br}BR)")
+
+        # 3. Clean any disqualified comps that are also active
+        disq_overlap = (set(tier_a.keys()) | set(tier_b.keys())) & set(disqualified.keys())
+        if disq_overlap:
+            modified = True
+            for cid in disq_overlap:
+                disqualified.pop(cid, None)
+
+        unique_comps = len(set(tier_a.keys()) | set(tier_b.keys()))
+        registry.setdefault("metadata", {})
+        if registry["metadata"].get("total_comps") != unique_comps:
+            registry["metadata"]["total_comps"] = unique_comps
+            modified = True
+
+        return registry, modified
+
     def _load_registry(self) -> Dict[str, Any]:
         if not self.REGISTRY_PATH.exists():
             return {"metadata": {}, "tier_a": {}, "tier_b": {}, "disqualified": {}}
         try:
-            return json.loads(self.REGISTRY_PATH.read_text(encoding="utf-8"))
+            reg = json.loads(self.REGISTRY_PATH.read_text(encoding="utf-8"))
+            reg, modified = self.enforce_registry_integrity(reg)
+            if modified:
+                self._save_registry(reg)
+            return reg
         except Exception as e:
             logger.error(f"Error reading {self.REGISTRY_PATH}: {e}")
             return {"metadata": {}, "tier_a": {}, "tier_b": {}, "disqualified": {}}
@@ -194,7 +251,7 @@ class CompManager:
         # Update metadata counts
         registry.setdefault("metadata", {})
         registry["metadata"]["last_updated"] = datetime.now().isoformat()
-        registry["metadata"]["total_comps"] = len(registry.get("tier_a", {})) + len(registry.get("tier_b", {}))
+        registry["metadata"]["total_comps"] = len(set(registry.get("tier_a", {}).keys()) | set(registry.get("tier_b", {}).keys()))
         self._save_registry(registry)
         print(f"✅ Added {listing_id} to {target_tier} in {self.REGISTRY_PATH} (Desirability: {comp_record.get('desirability_ratio')}x)")
 
@@ -237,9 +294,10 @@ class CompManager:
         for t in ("tier_a", "tier_b", "disqualified"):
             if listing_id in registry.get(t, {}):
                 found_tier = t
-                removed_meta = registry[t].pop(listing_id)
+                meta = registry[t].pop(listing_id)
+                if not removed_meta:
+                    removed_meta = meta
                 print(f"  ✓ Removed {listing_id} from {found_tier} in {self.REGISTRY_PATH}")
-                break
 
         specs = self._load_specs()
         found_in_specs = listing_id in specs
@@ -281,7 +339,7 @@ class CompManager:
         # Save registry
         registry.setdefault("metadata", {})
         registry["metadata"]["last_updated"] = datetime.now().isoformat()
-        registry["metadata"]["total_comps"] = len(registry.get("tier_a", {})) + len(registry.get("tier_b", {}))
+        registry["metadata"]["total_comps"] = len(set(registry.get("tier_a", {}).keys()) | set(registry.get("tier_b", {}).keys()))
         self._save_registry(registry)
 
         # Remove from listing_specs.json

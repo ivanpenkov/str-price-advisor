@@ -50,8 +50,11 @@ class CompCurator:
 
     def save_registry(self, data: Dict[str, Any]):
         """Write registry to JSON."""
-        data["metadata"]["total_count"] = len(data["tier_a"]) + len(data["tier_b"])
-        self.registry_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        data.setdefault("metadata", {})
+        unique_active = len(set(data.get("tier_a", {}).keys()) | set(data.get("tier_b", {}).keys()))
+        data["metadata"]["total_count"] = unique_active
+        data["metadata"]["total_comps"] = unique_active
+        self.registry_path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
     async def bootstrap_market(self, limit_per_tier: int = 40) -> Dict[str, Any]:
         """Discover and compile luxury comps across target corridors."""
@@ -84,24 +87,32 @@ class CompCurator:
                     )
 
                     for c in comps:
-                        cid = c["listing_id"]
+                        cid = str(c["listing_id"])
                         if cid == "573857947793833342":
                             continue
 
-                        if cid not in tier_dict:
-                            tier_dict[cid] = {
-                                "listing_id": cid,
-                                "name": c["title"],
-                                "location": c["location"],
-                                "bedrooms": c["bedrooms"],
-                                "beds": c["beds"],
-                                "baths": c["baths"],
-                                "rating": c["rating"],
-                                "reviews": c["reviews"],
-                                "url": f"https://www.airbnb.com/rooms/{cid}",
-                                "discovered_at_sample": f"{s_in} to {s_out}",
-                                "photo_url": c.get("photo_url"),
-                            }
+                        # Ensure comp does not exist in any tier or excluded list
+                        if (
+                            cid in registry.get("tier_a", {})
+                            or cid in registry.get("tier_b", {})
+                            or cid in registry.get("disqualified", {})
+                            or cid in registry.get("excluded_comps", {})
+                        ):
+                            continue
+
+                        tier_dict[cid] = {
+                            "listing_id": cid,
+                            "name": c["title"],
+                            "location": c["location"],
+                            "bedrooms": c["bedrooms"],
+                            "beds": c["beds"],
+                            "baths": c["baths"],
+                            "rating": c["rating"],
+                            "reviews": c["reviews"],
+                            "url": f"https://www.airbnb.com/rooms/{cid}",
+                            "discovered_at_sample": f"{s_in} to {s_out}",
+                            "photo_url": c.get("photo_url"),
+                        }
 
                     print(f"    Total {tier_code} unique comps registered so far: {len(tier_dict)}")
 

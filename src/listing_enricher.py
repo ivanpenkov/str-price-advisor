@@ -555,8 +555,13 @@ class ListingEnricher:
                         item["name"] = item["title"]
                     all_comps.append(item)
         else:
+            seen_cids = set()
             for tier_key in ("tier_a", "tier_b"):
                 for cid, comp in registry.get(tier_key, {}).items():
+                    cid_str = str(cid)
+                    if cid_str in seen_cids:
+                        continue
+                    seen_cids.add(cid_str)
                     all_comps.append(comp)
 
         # Prioritize comps with truncated or missing descriptions (<600 chars)

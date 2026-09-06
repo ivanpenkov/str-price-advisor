@@ -3669,60 +3669,6 @@
       "winter_rationale": "Moderate comp (6% lower desirability, Winter). Features dedicated sports court, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
       "summer_rationale": "Moderate comp (5% lower desirability, Summer). Features dedicated sports court, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
     },
-    "628534576871518102": {
-      "listing_id": "628534576871518102",
-      "name": "The Mulberry | Lux Pool/Hot Tub Mins to Old Town",
-      "location": "Scottsdale",
-      "bedrooms": 6,
-      "beds": 10,
-      "baths": 3.0,
-      "rating": 4.99,
-      "reviews": 158,
-      "url": "https://www.airbnb.com/rooms/628534576871518102",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-628534576871518102/original/df332935-db19-4df2-b850-3f0368883117.png",
-      "amenities_count": 80,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 0.96,
-      "category_scores": {
-        "outdoor": 77,
-        "capacity": 85,
-        "interior": 90,
-        "location": 95,
-        "reputation": 98
-      },
-      "composite_score": 86.4,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "winter_ratio": 0.96,
-      "summer_ratio": 0.98,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 86.4,
-      "summer_composite_score": 87.0,
-      "winter_category_scores": {
-        "outdoor": 77,
-        "capacity": 85,
-        "interior": 90,
-        "location": 95,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 79,
-        "capacity": 85,
-        "interior": 90,
-        "location": 95,
-        "reputation": 98
-      },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier."
-    },
     "1526873844395559455": {
       "listing_id": "1526873844395559455",
       "name": "The Retro: Pool | Hot Tub | Basketball | Games",
@@ -4218,114 +4164,6 @@
       "winter_rationale": "Premium comp (17% superior desirability, Winter). Features dedicated sports court, movie theater, heated spa.",
       "summer_rationale": "Premium comp (19% superior desirability, Summer). Features dedicated sports court, movie theater, heated spa."
     },
-    "1329097682770073862": {
-      "listing_id": "1329097682770073862",
-      "name": "Resort-Style Escape: Pool, Courts, and Endless Fun",
-      "location": "Paradise Valley Village",
-      "bedrooms": 6,
-      "beds": 10,
-      "baths": 4.0,
-      "rating": 4.87,
-      "reviews": 39,
-      "url": "https://www.airbnb.com/rooms/1329097682770073862",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMyOTA5NzY4Mjc3MDA3Mzg2Mg%3D%3D/original/f61d926c-0b9b-4bf7-af34-9b695ef54c8b.jpeg",
-      "amenities_count": 65,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 1.11,
-      "category_scores": {
-        "outdoor": 98,
-        "capacity": 90,
-        "interior": 89,
-        "location": 95,
-        "reputation": 88
-      },
-      "composite_score": 92.8,
-      "rationale": "Premium comp (11% superior desirability, Winter). Features dedicated sports court, heated spa, pool table.",
-      "winter_ratio": 1.11,
-      "summer_ratio": 1.12,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 92.8,
-      "summer_composite_score": 93.3,
-      "winter_category_scores": {
-        "outdoor": 98,
-        "capacity": 90,
-        "interior": 89,
-        "location": 95,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 100,
-        "capacity": 90,
-        "interior": 89,
-        "location": 95,
-        "reputation": 88
-      },
-      "winter_rationale": "Premium comp (11% superior desirability, Winter). Features dedicated sports court, heated spa, pool table.",
-      "summer_rationale": "Premium comp (12% superior desirability, Summer). Features dedicated sports court, heated spa, pool table."
-    },
-    "1442997693061036066": {
-      "listing_id": "1442997693061036066",
-      "name": "Scottsdale Jetsetter - Modern Desert Luxury",
-      "location": "Scottsdale",
-      "bedrooms": 7,
-      "beds": 10,
-      "baths": 6.0,
-      "rating": 5.0,
-      "reviews": 34,
-      "url": "https://www.airbnb.com/rooms/1442997693061036066",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ0Mjk5NzY5MzA2MTAzNjA2Ng==/original/176619ea-e9f8-4443-b906-ef029d768e8c.jpeg",
-      "amenities_count": 51,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 7BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.04,
-      "category_scores": {
-        "outdoor": 82,
-        "capacity": 100,
-        "interior": 81,
-        "location": 95,
-        "reputation": 98
-      },
-      "composite_score": 89.8,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 7BR / 6.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "winter_ratio": 1.04,
-      "summer_ratio": 1.06,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 89.8,
-      "summer_composite_score": 90.5,
-      "winter_category_scores": {
-        "outdoor": 82,
-        "capacity": 100,
-        "interior": 81,
-        "location": 95,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 84,
-        "capacity": 100,
-        "interior": 81,
-        "location": 95,
-        "reputation": 98
-      },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 7BR / 6.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Premium comp (6% superior desirability, Summer). Features heated spa, 7 bedrooms, Scottsdale location premium."
-    },
     "1293774182776540730": {
       "listing_id": "1293774182776540730",
       "name": "Huge Backyard + Detached Casita + Game room",
@@ -4380,60 +4218,6 @@
       },
       "winter_rationale": "Moderate comp (12% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
       "summer_rationale": "Moderate comp (10% lower desirability, Summer). Features heated spa, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
-    },
-    "1628548270397523375": {
-      "listing_id": "1628548270397523375",
-      "name": "Fun-Filled Oasis • Pool, Pickleball, Games Galore",
-      "location": "Scottsdale",
-      "bedrooms": 6,
-      "beds": 9,
-      "baths": 3.0,
-      "rating": 4.92,
-      "reviews": 12,
-      "url": "https://www.airbnb.com/rooms/1628548270397523375",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1628548270397523375/original/ad8e466f-d256-42b9-ae0f-0879789ef3d1.jpeg",
-      "amenities_count": 72,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.14,
-      "category_scores": {
-        "outdoor": 100,
-        "capacity": 85,
-        "interior": 100,
-        "location": 95,
-        "reputation": 88
-      },
-      "composite_score": 94.3,
-      "rationale": "Premium comp (14% superior desirability, Winter). Features dedicated sports court, private sauna, movie theater.",
-      "winter_ratio": 1.14,
-      "summer_ratio": 1.14,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 94.3,
-      "summer_composite_score": 94.3,
-      "winter_category_scores": {
-        "outdoor": 100,
-        "capacity": 85,
-        "interior": 100,
-        "location": 95,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 100,
-        "capacity": 85,
-        "interior": 100,
-        "location": 95,
-        "reputation": 88
-      },
-      "winter_rationale": "Premium comp (14% superior desirability, Winter). Features dedicated sports court, private sauna, movie theater.",
-      "summer_rationale": "Premium comp (14% superior desirability, Summer). Features dedicated sports court, private sauna, movie theater."
     },
     "891168360613545464": {
       "listing_id": "891168360613545464",
@@ -4600,60 +4384,6 @@
       "winter_rationale": "Premium comp (9% superior desirability, Winter). Features dedicated sports court, heated spa, pool table.",
       "summer_rationale": "Premium comp (10% superior desirability, Summer). Features dedicated sports court, heated spa, pool table."
     },
-    "48680831": {
-      "listing_id": "48680831",
-      "name": "Magnificent Mountainside Estate with Ultimate Priv",
-      "location": "Scottsdale",
-      "bedrooms": 8,
-      "beds": 9,
-      "baths": 8.0,
-      "rating": 4.99,
-      "reviews": 78,
-      "url": "https://www.airbnb.com/rooms/48680831",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-48680831/original/83c63c9a-8d20-41e7-acc9-4230b297bb3d.jpeg",
-      "amenities_count": 73,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 8BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.18,
-      "category_scores": {
-        "outdoor": 98,
-        "capacity": 100,
-        "interior": 88,
-        "location": 95,
-        "reputation": 98
-      },
-      "composite_score": 96.0,
-      "rationale": "Premium comp (18% superior desirability, Winter). Features dedicated sports court, private sauna, heated spa.",
-      "winter_ratio": 1.18,
-      "summer_ratio": 1.2,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 96.0,
-      "summer_composite_score": 96.6,
-      "winter_category_scores": {
-        "outdoor": 98,
-        "capacity": 100,
-        "interior": 88,
-        "location": 95,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 100,
-        "capacity": 100,
-        "interior": 88,
-        "location": 95,
-        "reputation": 98
-      },
-      "winter_rationale": "Premium comp (18% superior desirability, Winter). Features dedicated sports court, private sauna, heated spa.",
-      "summer_rationale": "Premium comp (20% superior desirability, Summer). Features dedicated sports court, private sauna, heated spa."
-    },
     "661489175613477267": {
       "listing_id": "661489175613477267",
       "name": "Putting Green! Desert Group Getaway in Chandler",
@@ -4763,61 +4493,6 @@
       },
       "winter_rationale": "Premium comp (8% superior desirability, Winter). Features private tennis court, heated spa, Scottsdale location premium.",
       "summer_rationale": "Premium comp (9% superior desirability, Summer). Features private tennis court, heated spa, Scottsdale location premium."
-    },
-    "16363441": {
-      "listing_id": "16363441",
-      "name": "Family, Golf, Friends 6BR/4BA, heated pool/spa.",
-      "location": "Chandler",
-      "bedrooms": 6,
-      "beds": 14,
-      "baths": 4.0,
-      "accommodates": 16,
-      "rating": 4.89,
-      "reviews": 101,
-      "url": "https://www.airbnb.com/rooms/16363441",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/a5ae0899-1930-401a-b638-c9e1c3efb4e4.jpg",
-      "amenities_count": 75,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.95,
-      "category_scores": {
-        "outdoor": 77,
-        "capacity": 90,
-        "interior": 96,
-        "location": 82,
-        "reputation": 88
-      },
-      "composite_score": 85.9,
-      "rationale": "Moderate comp (5% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths.",
-      "winter_ratio": 0.95,
-      "summer_ratio": 0.97,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 85.9,
-      "summer_composite_score": 86.5,
-      "winter_category_scores": {
-        "outdoor": 77,
-        "capacity": 90,
-        "interior": 96,
-        "location": 82,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 79,
-        "capacity": 90,
-        "interior": 96,
-        "location": 82,
-        "reputation": 88
-      },
-      "winter_rationale": "Moderate comp (5% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 4.0 baths.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "1371960459560609432": {
       "listing_id": "1371960459560609432",
@@ -5039,61 +4714,6 @@
       "winter_rationale": "Moderate comp (21% lower desirability, Winter). Features dedicated sports court, but noted gaps: unheated pool in winter, 3.0 baths.",
       "summer_rationale": "Moderate comp (10% lower desirability, Summer). Features dedicated sports court, but noted gaps: 3.0 baths."
     },
-    "1547101536396069219": {
-      "listing_id": "1547101536396069219",
-      "name": "Lux 20 Guest w/ Pickle, Pool, & More",
-      "location": "Chandler",
-      "bedrooms": 7,
-      "beds": 10,
-      "baths": 7.0,
-      "rating": 5.0,
-      "reviews": 39,
-      "url": "https://www.airbnb.com/rooms/1547101536396069219",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1547101536396069219/original/5f214319-0cfa-467f-8f95-e2234b62a59f.jpeg",
-      "amenities_count": 63,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 7BR luxury estate comp in Chandler.",
-      "desirability_ratio": 1.02,
-      "category_scores": {
-        "outdoor": 80,
-        "capacity": 100,
-        "interior": 89,
-        "location": 82,
-        "reputation": 98
-      },
-      "composite_score": 88.9,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 7BR / 7.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "accommodates": 20,
-      "winter_ratio": 1.02,
-      "summer_ratio": 1.13,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 88.9,
-      "summer_composite_score": 93.7,
-      "winter_category_scores": {
-        "outdoor": 80,
-        "capacity": 100,
-        "interior": 89,
-        "location": 82,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 96,
-        "capacity": 100,
-        "interior": 89,
-        "location": 82,
-        "reputation": 98
-      },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 7BR / 7.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Premium comp (13% superior desirability, Summer). Features dedicated sports court, heated spa, pool table."
-    },
     "620502220252141438": {
       "listing_id": "620502220252141438",
       "name": "17th Fairway Spanish Retreat",
@@ -5148,61 +4768,6 @@
       },
       "winter_rationale": "Premium comp (5% superior desirability, Winter). Features resort-scale pool, dedicated sports court, heated spa.",
       "summer_rationale": "Premium comp (7% superior desirability, Summer). Features resort-scale pool, dedicated sports court, heated spa."
-    },
-    "1254737517099224843": {
-      "listing_id": "1254737517099224843",
-      "name": "Resort Style 6BR Heated Pool + Mini Golf Sleeps 18",
-      "location": "Chandler",
-      "bedrooms": 6,
-      "beds": 12,
-      "baths": 3.0,
-      "rating": 5.0,
-      "reviews": 23,
-      "url": "https://www.airbnb.com/rooms/1254737517099224843",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI1NDczNzUxNzA5OTIyNDg0Mw%3D%3D/original/cf0c8554-95d7-43a7-afa6-aeea5feed05d.jpeg",
-      "amenities_count": 76,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.96,
-      "category_scores": {
-        "outdoor": 88,
-        "capacity": 85,
-        "interior": 82,
-        "location": 82,
-        "reputation": 98
-      },
-      "composite_score": 86.1,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "accommodates": 16,
-      "winter_ratio": 0.96,
-      "summer_ratio": 0.97,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "large",
-        "size_source": "Large / resort-scale pool with water features",
-        "gallons": null
-      },
-      "winter_composite_score": 86.1,
-      "summer_composite_score": 86.8,
-      "winter_category_scores": {
-        "outdoor": 88,
-        "capacity": 85,
-        "interior": 82,
-        "location": 82,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 90,
-        "capacity": 85,
-        "interior": 82,
-        "location": 82,
-        "reputation": 98
-      },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). 6BR / 3.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
     "52455358": {
       "listing_id": "52455358",
@@ -5589,61 +5154,6 @@
       "winter_rationale": "Moderate comp (11% lower desirability, Winter). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
       "summer_rationale": "Moderate comp (15% lower desirability, Summer). Features free heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths."
     },
-    "646572770933564861": {
-      "listing_id": "646572770933564861",
-      "name": "The Grand Saguaro, Heated Pool-Hot Tub-Pickleball",
-      "location": "Gilbert",
-      "bedrooms": 6,
-      "beds": 32,
-      "baths": 3.0,
-      "rating": 5.0,
-      "reviews": 66,
-      "url": "https://www.airbnb.com/rooms/646572770933564861",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-646572770933564861/original/b7252c01-ce54-49c8-8a97-27115bfdc0b3.jpeg",
-      "amenities_count": 55,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 1.1,
-      "category_scores": {
-        "outdoor": 100,
-        "capacity": 85,
-        "interior": 96,
-        "location": 82,
-        "reputation": 98
-      },
-      "composite_score": 92.5,
-      "rationale": "Premium comp (10% superior desirability, Winter). Features dedicated sports court, heated spa, pool table.",
-      "accommodates": 16,
-      "winter_ratio": 1.1,
-      "summer_ratio": 1.1,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 92.5,
-      "summer_composite_score": 92.5,
-      "winter_category_scores": {
-        "outdoor": 100,
-        "capacity": 85,
-        "interior": 96,
-        "location": 82,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 100,
-        "capacity": 85,
-        "interior": 96,
-        "location": 82,
-        "reputation": 98
-      },
-      "winter_rationale": "Premium comp (10% superior desirability, Winter). Features dedicated sports court, heated spa, pool table.",
-      "summer_rationale": "Premium comp (10% superior desirability, Summer). Features dedicated sports court, heated spa, pool table."
-    },
     "1485481343360527002": {
       "listing_id": "1485481343360527002",
       "name": "Gilbert Resort w/ Pool, Theater & MiniGolf•Sleep16",
@@ -6029,114 +5539,6 @@
       "winter_rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
       "summer_rationale": "Direct peer comp (near-equal quality, Summer). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier."
     },
-    "1558065119520691944": {
-      "listing_id": "1558065119520691944",
-      "name": "Mega Mesa Retreat: Heated Pool, Spa & Pickle Ball",
-      "location": "Mesa",
-      "bedrooms": 8,
-      "beds": 10,
-      "baths": 4.0,
-      "rating": 4.82,
-      "reviews": 22,
-      "url": "https://www.airbnb.com/rooms/1558065119520691944",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1558065119520691944/original/2cdac939-8462-4f0c-b1d9-5b310b5a6b6d.jpeg",
-      "amenities_count": 58,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.06,
-      "category_scores": {
-        "outdoor": 87,
-        "capacity": 99,
-        "interior": 96,
-        "location": 78,
-        "reputation": 88
-      },
-      "composite_score": 90.5,
-      "rationale": "Premium comp (6% superior desirability, Winter). Features dedicated sports court, heated spa, pool table.",
-      "winter_ratio": 1.06,
-      "summer_ratio": 1.07,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 90.5,
-      "summer_composite_score": 91.2,
-      "winter_category_scores": {
-        "outdoor": 87,
-        "capacity": 99,
-        "interior": 96,
-        "location": 78,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 89,
-        "capacity": 99,
-        "interior": 96,
-        "location": 78,
-        "reputation": 88
-      },
-      "winter_rationale": "Premium comp (6% superior desirability, Winter). Features dedicated sports court, heated spa, pool table.",
-      "summer_rationale": "Premium comp (7% superior desirability, Summer). Features dedicated sports court, heated spa, pool table."
-    },
-    "1143202699620728397": {
-      "listing_id": "1143202699620728397",
-      "name": "Game Time - 6 Bedroom Elite Vacation Paradise",
-      "location": "Mesa",
-      "bedrooms": 6,
-      "beds": 17,
-      "baths": 3.0,
-      "rating": 4.8,
-      "reviews": 44,
-      "url": "https://www.airbnb.com/rooms/1143202699620728397",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1143202699620728397/original/5bb17579-1db8-44a9-b120-c5a6dd40f340.jpeg",
-      "amenities_count": 87,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.85,
-      "category_scores": {
-        "outdoor": 64,
-        "capacity": 80,
-        "interior": 100,
-        "location": 88,
-        "reputation": 88
-      },
-      "composite_score": 81.2,
-      "rationale": "Moderate comp (15% lower desirability, Winter). Features movie theater, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "winter_ratio": 0.85,
-      "summer_ratio": 0.95,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 81.2,
-      "summer_composite_score": 86.0,
-      "winter_category_scores": {
-        "outdoor": 64,
-        "capacity": 80,
-        "interior": 100,
-        "location": 88,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 80,
-        "capacity": 80,
-        "interior": 100,
-        "location": 88,
-        "reputation": 88
-      },
-      "winter_rationale": "Moderate comp (15% lower desirability, Winter). Features movie theater, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "summer_rationale": "Moderate comp (5% lower desirability, Summer). Features movie theater, but noted gaps: 3.0 baths."
-    },
     "816204349600160886": {
       "listing_id": "816204349600160886",
       "name": "5BR with Pool, Hot Tub, Putting Green & Trampoline",
@@ -6191,116 +5593,6 @@
       },
       "winter_rationale": "Moderate comp (6% lower desirability, Winter). Features dedicated sports court, but noted gaps: pool heat fee required, 5 BR vs our 6 BR.",
       "summer_rationale": "Moderate comp (5% lower desirability, Summer). Features dedicated sports court, but noted gaps: pool heat fee required, 5 BR vs our 6 BR."
-    },
-    "1494470117199033651": {
-      "listing_id": "1494470117199033651",
-      "name": "6BR Mesa Oasis | Pool + Mini Golf | Fall Escape",
-      "location": "Mesa",
-      "bedrooms": 6,
-      "beds": 8,
-      "baths": 3.5,
-      "rating": 5.0,
-      "reviews": 24,
-      "url": "https://www.airbnb.com/rooms/1494470117199033651",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1494470117199033651/original/5291f438-9e18-4f62-885d-be47b46e88a4.jpeg",
-      "amenities_count": 73,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 1.02,
-      "category_scores": {
-        "outdoor": 86,
-        "capacity": 90,
-        "interior": 96,
-        "location": 78,
-        "reputation": 98
-      },
-      "composite_score": 89.0,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
-      "accommodates": 16,
-      "winter_ratio": 1.02,
-      "summer_ratio": 1.01,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 89.0,
-      "summer_composite_score": 88.4,
-      "winter_category_scores": {
-        "outdoor": 86,
-        "capacity": 90,
-        "interior": 96,
-        "location": 78,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 84,
-        "capacity": 90,
-        "interior": 96,
-        "location": 78,
-        "reputation": 98
-      },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). 6BR / 3.5BA estate matching Villa del Sol's capacity and luxury tier."
-    },
-    "711609909194570058": {
-      "listing_id": "711609909194570058",
-      "name": "Resort-Style Tropical Escape w/ Pool, Spa & Cabana",
-      "location": "Villa in Mesa",
-      "bedrooms": 6,
-      "beds": 6,
-      "baths": 4.0,
-      "rating": 4.97,
-      "reviews": 102,
-      "url": "https://www.airbnb.com/rooms/711609909194570058",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-711609909194570058/original/65197a11-fa3d-42f6-b469-6d4f6986ae67.jpeg",
-      "amenities_count": 75,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Villa In Mesa.",
-      "desirability_ratio": 0.96,
-      "category_scores": {
-        "outdoor": 86,
-        "capacity": 90,
-        "interior": 82,
-        "location": 78,
-        "reputation": 98
-      },
-      "composite_score": 86.2,
-      "rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "accommodates": 16,
-      "winter_ratio": 0.96,
-      "summer_ratio": 0.95,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 86.2,
-      "summer_composite_score": 85.6,
-      "winter_category_scores": {
-        "outdoor": 86,
-        "capacity": 90,
-        "interior": 82,
-        "location": 78,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 84,
-        "capacity": 90,
-        "interior": 82,
-        "location": 78,
-        "reputation": 98
-      },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). 6BR / 4.0BA estate matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Moderate comp (5% lower desirability, Summer). Features heated pool, but noted gaps: 4.0 baths, Villa In Mesa location discount."
     },
     "699608423581201252": {
       "listing_id": "699608423581201252",
@@ -6362,9 +5654,9 @@
     "last_updated": "2026-09-05T19:55:00.061619",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
-    "valid_comps_count": 109,
+    "valid_comps_count": 103,
     "disqualified_comps_count": 0,
-    "total_comps": 116
+    "total_comps": 103
   },
   "excluded_comps": {
     "809687707688713264": {

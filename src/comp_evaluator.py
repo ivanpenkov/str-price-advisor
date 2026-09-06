@@ -762,6 +762,12 @@ class CompEvaluator:
         valid_count = 0
         disqualified_count = 0
 
+        # Clean any cross-tier duplicates before evaluation
+        for cid in list(registry.get("tier_b", {}).keys()):
+            if cid in registry.get("tier_a", {}):
+                logger.warning(f"Removing cross-tier duplicate {cid} from tier_b during evaluation")
+                del registry["tier_b"][cid]
+
         for tier_key in ("tier_a", "tier_b"):
             for cid, comp in registry.get(tier_key, {}).items():
                 ev = self.evaluate_comp(comp)
@@ -776,6 +782,7 @@ class CompEvaluator:
             registry["metadata"]["evaluated_at"] = Path(__file__).name
             registry["metadata"]["valid_comps_count"] = valid_count
             registry["metadata"]["disqualified_comps_count"] = disqualified_count
+            registry["metadata"]["total_comps"] = len(set(registry.get("tier_a", {}).keys()) | set(registry.get("tier_b", {}).keys()))
             self.REGISTRY_PATH.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
             logger.info(f"Evaluated and saved {evaluated_count} comps to {self.REGISTRY_PATH}")
 

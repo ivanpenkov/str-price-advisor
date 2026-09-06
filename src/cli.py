@@ -168,6 +168,17 @@ async def run_weekly_advisory(
             end_date=end_date,
         )
 
+    # 4c. Competitor Sales Tracking & Absorption Velocity
+    print("\n[Step 4c] Detecting competitor sales and updating absorption velocity ledger...")
+    from src.competitor_sales_tracker import CompetitorSalesTracker
+    sales_tracker = CompetitorSalesTracker()
+    try:
+        new_sales = sales_tracker.process_latest_snapshot(Path(outputs["json"]))
+        confirmed_new = sum(1 for s in new_sales if s.get("verification_status") == "CONFIRMED_BLOCKED")
+        print(f"  ✓ Competitor Sales Engine: Detected {len(new_sales)} disappearance events ({confirmed_new} confirmed registered comp sales).")
+    except Exception as e:
+        print(f"  ⚠️ Warning: Sales tracking diff failed: {e}")
+
     # 5. HTML Dashboard Generation (docs/index.html)
     print("\n[Step 5/5] Generating interactive static HTML dashboard in docs/...")
     from src.html_generator import HTMLDashboardGenerator
@@ -299,6 +310,12 @@ def main():
     scrape_prices_parser.add_argument("--start-date", type=str, default=None, help="Filter intervals starting on or after YYYY-MM-DD")
     scrape_prices_parser.add_argument("--end-date", type=str, default=None, help="Filter intervals ending on or before YYYY-MM-DD")
     scrape_prices_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
+
+    track_sales_parser = subparsers.add_parser("track-competitor-sales", help="Track competitor sales & absorption velocity from daily snapshots")
+    track_sales_parser.add_argument("--backfill", action="store_true", help="Backfill historical competitor sales across all snapshots in data/")
+    track_sales_parser.add_argument("--verify", action="store_true", help="Diff latest two snapshots and verify status")
+    track_sales_parser.add_argument("--dashboard", action="store_true", help="Re-generate HTML dashboard with updated sales velocity metrics")
+    track_sales_parser.add_argument("--push", action="store_true", help="Automatically commit and push updated data/docs to GitHub")
 
     args = parser.parse_args()
 
@@ -499,6 +516,66 @@ def main():
 
         if args.push:
             push_to_github(commit_msg="Sync Streamline OwnerX reservations and update dashboard")
+    elif args.command == "track-competitor-sales":
+        from src.competitor_sales_tracker import CompetitorSalesTracker
+        from src.html_generator import HTMLDashboardGenerator
+        from src.reporter import PriceReportGenerator
+        import shutil
+
+        tracker = CompetitorSalesTracker()
+        print("=" * 70)
+        print("🎯 Competitor Sales Tracking & Absorption Velocity Engine")
+        print("=" * 70)
+
+        if args.backfill:
+            print("📦 Backfilling historical sales across all pricing_data_*.json snapshots...")
+            sales = tracker.backfill_all_snapshots()
+            confirmed = [s for s in sales if s.get("verification_status") == "CONFIRMED_BLOCKED"]
+            print(f"  ✓ Total sales events recorded: {len(sales)} ({len(confirmed)} confirmed registered comp bookings).")
+        else:
+            print("🔍 Diffing latest two snapshots...")
+            snapshots = sorted(Path("data").glob("pricing_data_*.json"))
+            if len(snapshots) >= 2:
+                sales = tracker.diff_snapshots(snapshots[-2], snapshots[-1], verify_calendar=args.verify)
+                confirmed = [s for s in sales if s.get("verification_status") == "CONFIRMED_BLOCKED"]
+                print(f"  ✓ Processed diff between {snapshots[-2].name} and {snapshots[-1].name}.")
+                print(f"  ✓ Detected {len(sales)} sales events ({len(confirmed)} confirmed registered comp bookings).")
+            else:
+                print("  ⚠️ Need at least 2 daily snapshots in data/ to perform diff.")
+
+        grid = tracker.compute_strategy_grid()
+        print(f"\n📊 Current Empirical Absorption Metrics:")
+        print(f"  - Total Confirmed Sales:        {grid['total_sales']}")
+        print(f"  - Overall Median Percentile:    {grid['overall_median_percentile']:.1f}%")
+        print(f"  - Average Lead Time at Sale:    {grid['avg_lead_time_days']:.1f} days")
+        print(f"  - Average Realized Nightly:     ${grid['avg_rate']:,.2f}")
+
+        if args.dashboard:
+            print("\n🎨 Re-generating dashboard with updated sales velocity metrics...")
+            config = load_config()
+            urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)
+            mod_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("moderate_percent_diff", MODERATE_PCT_DIFF)
+            html_gen = HTMLDashboardGenerator(
+                output_path="docs/index.html",
+                urgent_pct_diff=urgent_pct,
+                moderate_pct_diff=mod_pct,
+            )
+            evaluated_segments = html_gen.generate_full_12_month_evaluation()
+            out = html_gen.generate(evaluated_segments)
+            reporter = PriceReportGenerator(
+                output_dir="data",
+                urgent_pct_diff=urgent_pct,
+                moderate_pct_diff=mod_pct,
+            )
+            reporter.generate_all(evaluated_segments=evaluated_segments, property_name=config.get("property", {}).get("name", "Villa del Sol"))
+            if Path("data/latest_sheet.csv").exists():
+                shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
+            if Path("data/latest_report.md").exists():
+                shutil.copy("data/latest_report.md", "docs/latest_report.md")
+            print(f"✅ Dashboard generated successfully at: {out}")
+
+        if args.push:
+            push_to_github(commit_msg="Update competitor sales tracking and absorption velocity metrics")
     else:
         parser.print_help()
 

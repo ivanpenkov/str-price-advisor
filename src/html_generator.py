@@ -402,6 +402,12 @@ class HTMLDashboardGenerator:
         calendar_revenue_css = crv.get_calendar_revenue_css()
         calendar_revenue_js = crv.get_calendar_revenue_js(reservations_list, rev_data)
 
+        from src.competitor_sales_tracker import CompetitorSalesTracker
+        sales_tracker = CompetitorSalesTracker()
+        sales_data = sales_tracker.compute_strategy_grid()
+        recent_sales_list = sales_tracker.get_all_sales()
+        market_sales_tab_html = self._render_market_sales_tab(sales_data, recent_sales_list)
+
         html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1212,6 +1218,7 @@ class HTMLDashboardGenerator:
       <button class="tab-btn active" onclick="switchTab('pricing')" role="tab" aria-selected="true">📊 Pricing</button>
       <button class="tab-btn" onclick="switchTab('comparison')" role="tab" aria-selected="false">🌐 Channels</button>
       <button class="tab-btn" onclick="switchTab('comps')" role="tab" aria-selected="false">🏡 Comps ({len(tier_a_comps) + len(tier_b_comps)})</button>
+      <button class="tab-btn" onclick="switchTab('market-sales')" role="tab" aria-selected="false">🎯 Market Demand & Sales</button>
       <button class="tab-btn" onclick="switchTab('calendar')" role="tab" aria-selected="false">📅 Calendar</button>
       <button class="tab-btn" onclick="switchTab('reservations')" role="tab" aria-selected="false">📑 Reservations ({len(reservations_list)})</button>
       <button class="tab-btn" onclick="switchTab('revenue')" role="tab" aria-selected="false">📈 Revenue</button>
@@ -1393,6 +1400,11 @@ class HTMLDashboardGenerator:
       </div>
     </div>
 
+    <!-- TAB 3: MARKET DEMAND & SALES -->
+    <div id="tab-market-sales" class="tab-content">
+      {market_sales_tab_html}
+    </div>
+
     <!-- TAB 4: AVAILABILITY CALENDAR -->
     <div id="tab-calendar" class="tab-content">
       {calendar_tab_html}
@@ -1533,6 +1545,32 @@ class HTMLDashboardGenerator:
       if (tabId === 'reservations' && typeof initReservationsTable === 'function') {{
         setTimeout(initReservationsTable, 50);
       }}
+    function filterSalesFeed(statusFilter, btn) {{
+      if (btn) {{
+        document.querySelectorAll('.sales-filter-pills .pill-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }}
+      const query = (document.getElementById('salesSearch')?.value || '').toLowerCase();
+      const rows = document.querySelectorAll('.sales-feed-row');
+      rows.forEach(r => {{
+        const rowStatus = r.getAttribute('data-status') || '';
+        const rowType = r.getAttribute('data-type') || '';
+        const text = r.innerText.toLowerCase();
+        
+        let matchStatus = true;
+        if (statusFilter === 'confirmed') matchStatus = (rowStatus === 'CONFIRMED_BLOCKED');
+        else if (statusFilter === 'weekend') matchStatus = (rowType === 'weekend');
+        else if (statusFilter === 'midweek') matchStatus = (rowType === 'midweek');
+        
+        const matchSearch = !query || text.includes(query);
+        r.style.display = (matchStatus && matchSearch) ? '' : 'none';
+      }});
+    }}
+
+    function searchSalesFeed() {{
+      const activeBtn = document.querySelector('.sales-filter-pills .pill-btn.active');
+      const filterType = activeBtn?.getAttribute('data-filter') || 'all';
+      filterSalesFeed(filterType, activeBtn);
     }}
 
     function filterComps() {{
@@ -3516,5 +3554,284 @@ class HTMLDashboardGenerator:
           </table>
         </div>
         """
+
+    def _render_market_sales_tab(self, sales_data: Dict[str, Any], recent_sales: List[Dict[str, Any]]) -> str:
+        grid = sales_data.get("grid", {})
+        horizons = sales_data.get("horizons", [">90d", "31–90d", "15–30d", "≤14d"])
+        
+        horizon_meta = {
+            ">90d": {
+                "title": "Far-Out Horizon (> 90 Days)",
+                "desc": "Early booking window with high willingness-to-pay. Anchor at premium percentiles.",
+                "badge_color": "#38bdf8",
+                "badge_bg": "rgba(56,189,248,0.15)",
+                "action": "Hold firm at 65%–70% (Weekend) / 45%–50% (Midweek). Do not discount far-out inventory.",
+            },
+            "31–90d": {
+                "title": "Peak Booking Window (31–90 Days)",
+                "desc": "Prime conversion period for family vacations and luxury group travel.",
+                "badge_color": "#818cf8",
+                "badge_bg": "rgba(129,140,248,0.15)",
+                "action": "Target 60%–65% (Weekend) / 45%–50% (Midweek). Maintain competitive positioning.",
+            },
+            "15–30d": {
+                "title": "Near-Term Compression (15–30 Days)",
+                "desc": "Demand curve compresses and price elasticity rises rapidly.",
+                "badge_color": "#fbbf24",
+                "badge_bg": "rgba(251,191,36,0.15)",
+                "action": "Trim to 50%–55% (Weekend) / 38%–42% (Midweek) if unbooked to accelerate conversion.",
+            },
+            "≤14d": {
+                "title": "Last-Minute Distress (≤ 14 Days)",
+                "desc": "Distress inventory liquidation window where unbooked nights risk total perishable loss.",
+                "badge_color": "#f87171",
+                "badge_bg": "rgba(248,113,113,0.15)",
+                "action": "Aggressive liquidation: 40%–45% (Weekend) / 30%–35% (Midweek) to secure occupancy.",
+            },
+        }
+
+        # Build Grid Rows
+        grid_rows_html = ""
+        for h in horizons:
+            meta = horizon_meta.get(h, {"title": h, "desc": "", "badge_color": "#94a3b8", "badge_bg": "rgba(148,163,184,0.15)", "action": ""})
+            w_cell = grid.get(h, {}).get("weekend", {})
+            m_cell = grid.get(h, {}).get("midweek", {})
+
+            w_n = w_cell.get("count", 0)
+            m_n = m_cell.get("count", 0)
+
+            w_p50 = f"{w_cell.get('empirical_p50', 65.0):.1f}%" if w_n > 0 else "—"
+            w_p75 = f"{w_cell.get('empirical_p75', 75.0):.1f}%" if w_n > 0 else "—"
+            w_rec = f"{w_cell.get('recommended_target', 65.0):.1f}%"
+            w_is_emp = w_cell.get("is_empirical", False)
+            w_badge_style = "background:rgba(52,211,153,0.15); color:#34d399; border:1px solid rgba(52,211,153,0.3);" if w_is_emp else "background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3);"
+
+            m_p50 = f"{m_cell.get('empirical_p50', 45.5):.1f}%" if m_n > 0 else "—"
+            m_p75 = f"{m_cell.get('empirical_p75', 55.0):.1f}%" if m_n > 0 else "—"
+            m_rec = f"{m_cell.get('recommended_target', 45.5):.1f}%"
+            m_is_emp = m_cell.get("is_empirical", False)
+            m_badge_style = "background:rgba(52,211,153,0.15); color:#34d399; border:1px solid rgba(52,211,153,0.3);" if m_is_emp else "background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);"
+
+            grid_rows_html += f"""
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 14px 16px;">
+                <span class="badge" style="background:{meta['badge_bg']}; color:{meta['badge_color']}; font-weight:700; margin-bottom:4px; display:inline-block;">{meta['title']}</span>
+                <div style="font-size:0.8rem; color:#94a3b8; margin-top:2px;">{meta['desc']}</div>
+              </td>
+              <td style="padding: 14px 16px; text-align:center; font-weight:600; color:{'#34d399' if w_n > 0 else '#64748b'};">
+                {w_n}
+              </td>
+              <td style="padding: 14px 16px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.88rem; color:#cbd5e1;">
+                {w_p50} <span style="color:#64748b; font-size:0.75rem;">/</span> {w_p75}
+              </td>
+              <td style="padding: 14px 16px; text-align:center;">
+                <span class="badge" style="{w_badge_style} font-weight:700; font-size:0.88rem;">{w_rec}</span>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:3px;">{'Empirical' if w_is_emp else 'Blended (k=3)'}</div>
+              </td>
+              <td style="padding: 14px 16px; text-align:center; font-weight:600; color:{'#34d399' if m_n > 0 else '#64748b'};">
+                {m_n}
+              </td>
+              <td style="padding: 14px 16px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.88rem; color:#cbd5e1;">
+                {m_p50} <span style="color:#64748b; font-size:0.75rem;">/</span> {m_p75}
+              </td>
+              <td style="padding: 14px 16px; text-align:center;">
+                <span class="badge" style="{m_badge_style} font-weight:700; font-size:0.88rem;">{m_rec}</span>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:3px;">{'Empirical' if m_is_emp else 'Blended (k=3)'}</div>
+              </td>
+              <td style="padding: 14px 16px; font-size:0.82rem; color:#cbd5e1; max-width:240px; line-height:1.4;">
+                {meta['action']}
+              </td>
+            </tr>
+            """
+
+        # Build Recent Sales Rows
+        sales_rows_html = ""
+        confirmed_count = sum(1 for s in recent_sales if s.get("verification_status") == "CONFIRMED_BLOCKED")
+        weekend_count = sum(1 for s in recent_sales if "weekend" in str(s.get("segment_type", "")).lower() or "mix" in str(s.get("segment_type", "")).lower())
+        midweek_count = len(recent_sales) - weekend_count
+
+        for s in recent_sales:
+            lid = s.get("listing_id") or ""
+            name = s.get("listing_name") or f"Comp #{lid}"
+            clean_name = html.escape(name[:42])
+            city = html.escape(s.get("location") or "Scottsdale")
+            tier_label = "Tier A (16+)" if s.get("tier") == "tier_a" else "Tier B (12-15)"
+            cin = s.get("check_in") or ""
+            cout = s.get("check_out") or ""
+            nights = s.get("nights") or 3
+            seg = str(s.get("segment_type") or "midweek").lower()
+            is_weekend = "weekend" in seg or "mix" in seg
+            seg_label = "Weekend" if is_weekend else "Midweek"
+            seg_badge = "background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3);" if is_weekend else "background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);"
+            lead = s.get("lead_time_days") or 0
+            rate = s.get("last_observed_rate") or 0.0
+            adj_rate = s.get("last_observed_adj_rate") or rate
+            pct = s.get("last_observed_percentile") or 50.0
+            ratio = s.get("desirability_ratio") or 1.0
+            v_status = s.get("verification_status") or "CONFIRMED_BLOCKED"
+            is_confirmed = (v_status == "CONFIRMED_BLOCKED")
+            status_badge = '<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);">✅ Confirmed</span>' if is_confirmed else '<span class="badge" style="background:rgba(148,163,184,0.12); color:#94a3b8; border:1px solid rgba(148,163,184,0.25);">ℹ️ Search Absent</span>'
+
+            if pct >= 70:
+                pct_style = "background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);"
+            elif pct >= 45:
+                pct_style = "background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3);"
+            else:
+                pct_style = "background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.3);"
+
+            url = f"https://www.airbnb.com/rooms/{lid}" if lid else "#"
+
+            sales_rows_html += f"""
+            <tr class="sales-feed-row" data-status="{v_status}" data-type="{'weekend' if is_weekend else 'midweek'}" style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 12px 14px; font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:#94a3b8; white-space:nowrap;">
+                {s.get('detected_date', '')}
+              </td>
+              <td style="padding: 12px 14px;">
+                <a href="{url}" target="_blank" rel="noopener noreferrer" style="color:#60a5fa; text-decoration:none; font-weight:600; font-size:0.9rem;" title="View listing on Airbnb">
+                  {clean_name} ↗
+                </a>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">ID: {lid} &bull; {city}</div>
+              </td>
+              <td style="padding: 12px 14px; font-size:0.82rem; color:#cbd5e1; white-space:nowrap;">
+                <span class="badge" style="background:rgba(255,255,255,0.06); color:#cbd5e1; border:1px solid var(--border-color);">{tier_label}</span>
+              </td>
+              <td style="padding: 12px 14px; font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:#f8fafc; white-space:nowrap;">
+                {cin} → {cout}
+                <div style="font-size:0.75rem; color:#94a3b8;">{nights} nights</div>
+              </td>
+              <td style="padding: 12px 14px; text-align:center; white-space:nowrap;">
+                <span class="badge" style="{seg_badge}">{seg_label}</span>
+              </td>
+              <td style="padding: 12px 14px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:#38bdf8; font-weight:600; white-space:nowrap;">
+                {lead}d
+              </td>
+              <td style="padding: 12px 14px; text-align:right; font-family:'JetBrains Mono',monospace; font-size:0.88rem; color:#f8fafc; font-weight:600; white-space:nowrap;">
+                ${rate:,.0f}
+              </td>
+              <td style="padding: 12px 14px; text-align:right; font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:#a78bfa; white-space:nowrap;">
+                ${adj_rate:,.0f}
+                <div style="font-size:0.7rem; color:#94a3b8;">DR: {ratio:.2f}x</div>
+              </td>
+              <td style="padding: 12px 14px; text-align:center; white-space:nowrap;">
+                <span class="badge" style="{pct_style} font-weight:700; font-family:'JetBrains Mono',monospace;">{pct:.1f}%</span>
+              </td>
+              <td style="padding: 12px 14px; text-align:center; white-space:nowrap;">
+                {status_badge}
+              </td>
+            </tr>
+            """
+
+        empty_feed_html = '<tr><td colspan="10" style="text-align:center; padding:30px; color:#94a3b8;">No competitor sales recorded yet. Run backfill or daily scan.</td></tr>'
+        feed_body = sales_rows_html if recent_sales else empty_feed_html
+
+        return f"""
+        <!-- Top KPI Cards -->
+        <div class="kpi-grid" style="margin-bottom: 24px;">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Competitor Sales</div>
+            <div class="kpi-val" style="color:#34d399;">{sales_data.get('total_sales', 0)}</div>
+            <div class="kpi-desc">Confirmed bookings detected via delta diffing</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Median Realized Percentile</div>
+            <div class="kpi-val" style="color:#60a5fa;">{sales_data.get('overall_median_percentile', 55.0):.1f}%</div>
+            <div class="kpi-desc">Overall market percentile rank at time of sale</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Average Booking Lead Time</div>
+            <div class="kpi-val" style="color:#38bdf8;">{sales_data.get('avg_lead_time_days', 0.0):.1f}d</div>
+            <div class="kpi-desc">Days in advance competitors secure reservations</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Average Realized Nightly</div>
+            <div class="kpi-val" style="color:#a78bfa;">${sales_data.get('avg_rate', 0.0):,.0f}</div>
+            <div class="kpi-desc">Mean effective nightly rate across booked stays</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Sales Volume Split</div>
+            <div class="kpi-val" style="color:#fbbf24; font-size:1.4rem;">{sales_data.get('weekend_sales_count', 0)} Wkd / {sales_data.get('midweek_sales_count', 0)} Mid</div>
+            <div class="kpi-desc">Weekend premium vs midweek volume</div>
+          </div>
+        </div>
+
+        <!-- Section 1: 2D Strategy Matrix -->
+        <div class="section-box">
+          <div class="section-header" style="margin-bottom: 12px;">
+            <div>
+              <div class="section-title" style="font-size: 1.3rem;">
+                🎯 2D Empirical Strategy Matrix (Lead Horizon × Stay Type)
+              </div>
+              <p class="section-desc" style="margin-top: 4px; margin-bottom: 0;">
+                Calculates empirical median absorption percentiles (P₅₀) and aggressive clearing rates (P₇₅) across 4 strategic lead-time horizons. When historical observations are scarce (n &lt; 3), recommendations smoothly blend with our baseline strategy via Bayesian shrinkage (k = 3).
+              </p>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr style="background: rgba(255,255,255,0.03);">
+                  <th style="width: 22%;">Lead Time Horizon</th>
+                  <th style="text-align:center; width: 8%;">Wkd (n)</th>
+                  <th style="text-align:center; width: 12%;">Wkd P₅₀ / P₇₅</th>
+                  <th style="text-align:center; width: 14%;">Wkd Target Rec.</th>
+                  <th style="text-align:center; width: 8%;">Mid (n)</th>
+                  <th style="text-align:center; width: 12%;">Mid P₅₀ / P₇₅</th>
+                  <th style="text-align:center; width: 14%;">Mid Target Rec.</th>
+                  <th style="width: 22%;">Strategic Guidance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {grid_rows_html}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 2: Recent Bookings Feed -->
+        <div class="section-box">
+          <div class="section-header" style="margin-bottom: 12px;">
+            <div>
+              <div class="section-title" style="font-size: 1.3rem;">
+                📑 Competitor Sales Transaction Feed
+              </div>
+              <p class="section-desc" style="margin-top: 4px; margin-bottom: 0;">
+                Empirical ledger of competitor listing dates that ceased being available between consecutive daily scrapes.
+              </p>
+            </div>
+            <input type="text" id="salesSearch" class="search-input" placeholder="Search by property, city, or date..." oninput="searchSalesFeed()" style="max-width: 300px;" />
+          </div>
+
+          <div class="filter-pills sales-filter-pills" style="margin-bottom: 18px;">
+            <button class="pill-btn active" data-filter="all" onclick="filterSalesFeed('all', this)">All Events ({len(recent_sales)})</button>
+            <button class="pill-btn" data-filter="confirmed" onclick="filterSalesFeed('confirmed', this)" style="border-color: rgba(52,211,153,0.4); color:#34d399;">✅ Confirmed Comps ({confirmed_count})</button>
+            <button class="pill-btn" data-filter="weekend" onclick="filterSalesFeed('weekend', this)">Weekend Stays ({weekend_count})</button>
+            <button class="pill-btn" data-filter="midweek" onclick="filterSalesFeed('midweek', this)">Midweek Stays ({midweek_count})</button>
+          </div>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr style="background: rgba(255,255,255,0.03);">
+                  <th>Detected</th>
+                  <th>Listing / Property</th>
+                  <th>Tier</th>
+                  <th>Stay Dates</th>
+                  <th style="text-align:center;">Type</th>
+                  <th style="text-align:center;">Lead Time</th>
+                  <th style="text-align:right;">Last Rate</th>
+                  <th style="text-align:right;">Adj. Rate</th>
+                  <th style="text-align:center;">Percentile</th>
+                  <th style="text-align:center;">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {feed_body}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        """
+
 
 

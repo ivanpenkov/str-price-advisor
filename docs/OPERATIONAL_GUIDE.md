@@ -204,6 +204,23 @@ Below is the complete inventory of all features supported by the system. For eac
 
 ---
 
+### Feature 8: Competitor Sales Tracking & Market Absorption Velocity Engine
+- **Description**: Tracks empirical transaction velocity across competitor listings. By diffing consecutive daily pricing snapshots (`pricing_data_YYYY-MM-DD.json`), it detects when competitor listings cease being available, calculates the exact lead time ($N$ days) and market percentile rank ($Y^{\text{th}}$ percentile), and aggregates historical sales into a **2D Strategy Grid** (4 Lead Horizons $\times$ Weekend/Midweek) using Bayesian shrinkage ($k=3$) to determine empirical target percentiles. Full technical specification is available at [`docs/COMPETITOR_SALES_TRACKER_DESIGN.md`](file:///Users/ivanpe/str-price-advisor/docs/COMPETITOR_SALES_TRACKER_DESIGN.md).
+- **Automated CLI Command**:
+  ```bash
+  # Diff latest two snapshots and update absorption velocity metrics:
+  .venv/bin/python -m src.cli track-competitor-sales --dashboard --push
+
+  # Backfill all historical pricing snapshots:
+  .venv/bin/python -m src.cli track-competitor-sales --backfill --dashboard --push
+  ```
+- **Operator AI Workflow (Antigravity + `cli-operations`)**:
+  - *Skill*: [`.agents/skills/cli-operations/SKILL.md`](file:///Users/ivanpe/str-price-advisor/.agents/skills/cli-operations/SKILL.md)
+  - *Prompt Template*:
+    > "Diff our latest pricing snapshots, analyze recent competitor booking velocity, check what percentiles competitors are clearing at for 30–90 day lead times, and update the absorption strategy grid."
+
+---
+
 ## 4. Antigravity AI Interactive Prompt Matrix
 
 When interacting with Antigravity, use this quick reference table to trigger specialized skills:
@@ -212,6 +229,7 @@ When interacting with Antigravity, use this quick reference table to trigger spe
 | :--- | :--- | :--- |
 | **Add New Comp** | `manage-comps` + `evaluate-comps` | `"Add comp https://www.airbnb.com/rooms/1077813310260513265 to Tier A. Extract house sq ft, lot acreage, score with the 6-factor rubric, and scrape its prices across open intervals."` |
 | **Audit Listing Specs** | `evaluate-comps` | `"Audit listing 628534576871518102. Check if pool heating is free or fee-based from guest reviews, verify living area, and update winter ratio."` |
+| **Track Comp Sales** | `cli-operations` | `"Diff latest pricing snapshots, calculate competitor absorption velocity across lead horizons, update empirical percentile recommendations, and push to dashboard."` |
 | **Special Event Scan** | `cli-operations` | `"Run a targeted pricing scan for Super Bowl / WM Open (Feb 8–16, 2027), compare our rates against top Scottsdale comps, and push updates."` |
 | **Proxy Diagnostics** | `proxy-scraping` | `"We are encountering HTTP 429 rate limits on Airbnb. Inspect proxy credentials in .env, verify proxy rotation, and test connectivity."` |
 | **PMS Ingestion Audit** | `cli-operations` | `"Sync our latest OwnerX reservations, check if any recent bookings changed dates, and update the revenue ledger."` |

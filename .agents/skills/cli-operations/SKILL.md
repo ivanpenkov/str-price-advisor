@@ -18,6 +18,7 @@ This skill provides a complete reference for all command-line operations in `src
 | :--- | :--- | :--- | :--- |
 | `run` | Full weekly or quick pricing advisory audit | **Yes** (Kivoya + Airbnb proxy) | `--weekly`, `--quick`, `--limit`, `--start-date`, `--end-date`, `--push` |
 | `sync-reservations` | Ingest Streamline OwnerX reservations to SQLite & JSON | **Yes** (Direct OwnerX API) | `--full`, `--days-back`, `--dashboard`, `--push` |
+| `track-competitor-sales` | Detect comp bookings via snapshot diffing & compute 2D strategy grid | **No** (Local snapshots) | `--backfill`, `--verify`, `--dashboard`, `--push` |
 | `generate-html` | Re-render static HTML dashboard from data | **No** (Local only) | `--push` |
 | `evaluate-comps`| Compute 5-factor quality scores & desirability ratios | **No** (Local evaluation) | `--no-save` |
 | `enrich-comps` | Deep scrape / sync listing features (beds, baths, amenities) | **Yes** for live (`--sync-cached` is offline) | `--concurrency`, `--limit`, `--force`, `--sync-cached`, `--our-property` |
@@ -198,6 +199,41 @@ Tests live connection to Kivoya's Streamline VRS WordPress AJAX API:
 
 ---
 
+### `sync-reservations`: Streamline OwnerX PMS Synchronization
+
+Synchronizes reservations and owner payout financials from Streamline OwnerX directly into SQLite (`data/reservations.db: reservations`) and JSON export (`data/reservations.json`).
+- Auto-calculates accrual daily revenue across calendar years.
+- Updates interactive availability calendar and cumulative revenue pace curves.
+
+#### Usage:
+```bash
+# Incremental sync (past 60 days + future) and dashboard update
+.venv/bin/python -m src.cli sync-reservations --days-back 60 --dashboard
+
+# Full historical sync (2022 to present) with GitHub Pages push
+.venv/bin/python -m src.cli sync-reservations --full --dashboard --push
+```
+
+---
+
+### `track-competitor-sales`: Competitor Sales & Absorption Velocity Engine
+
+Diffs consecutive daily pricing snapshots (`pricing_data_YYYY-MM-DD.json`) to detect when competitor listings stop being available for open intervals. Records verified sales in SQLite (`data/reservations.db: competitor_sales`), calculates booking lead-time days and market percentile rank at time of sale, and aggregates into the **2D Strategy Grid** (4 Lead Horizons $\times$ Weekend/Midweek) with Bayesian shrinkage ($k=3$).
+
+#### Usage:
+```bash
+# Diff latest two snapshots and update dashboard:
+.venv/bin/python -m src.cli track-competitor-sales --dashboard
+
+# Backfill historical sales across all existing daily snapshots:
+.venv/bin/python -m src.cli track-competitor-sales --backfill --dashboard
+
+# Backfill and automatically commit & push to GitHub Pages:
+.venv/bin/python -m src.cli track-competitor-sales --backfill --dashboard --push
+```
+
+---
+
 ## 3. Standard Operational Workflows (Recipes)
 
 ### Workflow 1: Complete Comp Feature Update & Scoring Pipeline
@@ -245,6 +281,16 @@ When a user requests adding a new listing by URL or ID:
 .venv/bin/python -m src.cli add-comp <airbnb_url_or_id> --scrape-prices --limit 10
 ```
 
+### Workflow 6: Tracking Competitor Sales & Updating Absorption Strategy
+Run this whenever historical snapshots have accumulated or after daily market scans:
+```bash
+# Step 1: Detect sales from consecutive daily snapshots
+.venv/bin/python -m src.cli track-competitor-sales --backfill
+
+# Step 2: Refresh static HTML dashboard with updated 2D strategy matrix & bookings feed
+.venv/bin/python -m src.cli generate-html --push
+```
+
 ---
 
 ## 4. Mandatory Rules & Best Practices
@@ -253,4 +299,5 @@ When a user requests adding a new listing by URL or ID:
 2. **Never Bypass the Proxy on Live Scrapes**: `run`, `enrich-comps` (without `--sync-cached`), and `bootstrap-comps` query Airbnb. Ensure `.env` has valid `NORDVPN_USER` and `NORDVPN_PASS` before starting.
 3. **Safe Concurrency**: Keep `--concurrency` between `2` and `3`. Do not exceed 4 to prevent triggering anti-bot heuristics.
 4. **Git Operations Safeguard**: Do not pass `--push` unless the user has explicitly requested automated git commits and pushes.
+
 

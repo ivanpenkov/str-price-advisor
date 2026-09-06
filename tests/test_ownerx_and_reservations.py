@@ -255,9 +255,10 @@ class TestOwnerXAndReservations(unittest.TestCase):
         }
 
         cal_html = crv.render_calendar_tab(reservations, current_date=date(2026, 9, 6))
-        self.assertIn("Availability Calendar", cal_html)
+        self.assertIn("Calendar", cal_html)
         self.assertIn("calMonthsGrid", cal_html)
         self.assertIn("calTooltip", cal_html)
+        self.assertIn("resModalOverlay", cal_html)
 
         rev_html = crv.render_revenue_tab(rev_data)
         self.assertIn("Cumulative Annual Owner Net Revenue", rev_html)
@@ -269,6 +270,8 @@ class TestOwnerXAndReservations(unittest.TestCase):
         self.assertIn("REVENUE_DATA", js)
         self.assertIn("renderCalendar", js)
         self.assertIn("initRevenueChart", js)
+        self.assertIn("openResModalFromDate", js)
+        self.assertIn("buildReservationHtmlSnippet", js)
 
 
 if __name__ == "__main__":

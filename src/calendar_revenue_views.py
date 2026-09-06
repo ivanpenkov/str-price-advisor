@@ -1,7 +1,7 @@
 """
 Calendar and Cumulative Revenue Views for STR Price Advisor Dashboard.
 Renders:
-1. Streamline OwnerX Availability Calendar (6-month grid, half-day diagonal splits, tooltips)
+1. Streamline OwnerX Availability Calendar (6-month grid, half-day diagonal splits, clickable reservation modal)
 2. Cumulative Annual Owner Revenue Pace Curves (2022-2027, Chart.js, KPI cards, summary table)
 """
 
@@ -11,7 +11,7 @@ from typing import Dict, List, Optional, Any
 
 
 def get_calendar_revenue_css() -> str:
-    """CSS styles for Availability Calendar and Revenue tabs."""
+    """CSS styles for Availability Calendar, Reservation Modal, and Revenue tabs."""
     return """
     /* ==========================================================================
        CALENDAR TAB STYLES (Streamline OwnerX Availability View)
@@ -207,6 +207,152 @@ def get_calendar_revenue_css() -> str:
     }
 
     /* ==========================================================================
+       RESERVATION DETAILS MODAL DIALOG
+       ========================================================================== */
+    .res-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      padding: 16px;
+    }
+    .res-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .res-modal-card {
+      background: #1e293b;
+      border: 1px solid #475569;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      transform: scale(0.95);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .res-modal-overlay.active .res-modal-card {
+      transform: scale(1);
+    }
+    .res-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid #334155;
+      background: #0f172a;
+    }
+    .res-modal-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .res-modal-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #f8fafc;
+      margin: 0;
+    }
+    .res-modal-close {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+    .res-modal-close:hover {
+      color: #f8fafc;
+      background: #334155;
+    }
+    .res-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .res-fin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+    }
+    .res-fin-card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+    .res-fin-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .res-fin-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .res-details-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .res-details-table tr {
+      border-bottom: 1px solid #334155;
+    }
+    .res-details-table tr:last-child {
+      border-bottom: none;
+    }
+    .res-details-table td {
+      padding: 8px 10px;
+    }
+    .res-details-table td:first-child {
+      color: #94a3b8;
+      font-weight: 600;
+      width: 38%;
+    }
+    .res-details-table td:last-child {
+      color: #f8fafc;
+      font-weight: 500;
+    }
+    .res-tab-pill-btn {
+      background: #334155;
+      color: #cbd5e1;
+      border: 1px solid #475569;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .res-tab-pill-btn.active {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
        REVENUE TAB STYLES
        ========================================================================== */
     .rev-wrapper {
@@ -316,7 +462,7 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
       <div class="cal-wrapper">
         <div class="cal-controls-card">
           <div class="cal-nav-group">
-            <h2 style="font-size: 1.3rem; font-weight: 800; color: #f8fafc; margin-right: 8px;">Availability Calendar</h2>
+            <h2 style="font-size: 1.3rem; font-weight: 800; color: #f8fafc; margin-right: 8px;">Calendar</h2>
             <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 12px;">Villa del Sol (Unit #503802)</span>
             <button class="cal-btn" onclick="calNavigate(-6)">◀ Prev 6 Months</button>
             <select id="calMonthSelect" class="cal-select" onchange="calJumpToMonth(this.value)">
@@ -351,6 +497,22 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
         </div>
 
         <div id="calTooltip" class="cal-tooltip"></div>
+
+        <!-- Interactive Reservation Details Modal Dialog -->
+        <div id="resModalOverlay" class="res-modal-overlay" onclick="closeResModal(event)">
+          <div class="res-modal-card" onclick="event.stopPropagation()">
+            <div class="res-modal-header">
+              <div class="res-modal-title-group" id="resModalHeaderInfo">
+                <span id="resModalBadge" class="badge">Booked</span>
+                <h3 id="resModalTitle" class="res-modal-title">Reservation Details</h3>
+              </div>
+              <button class="res-modal-close" onclick="closeResModal()" title="Close">&times;</button>
+            </div>
+            <div class="res-modal-body" id="resModalBody">
+              <!-- Dynamically populated on reservation click -->
+            </div>
+          </div>
+        </div>
       </div>
     """
 
@@ -363,7 +525,6 @@ def render_revenue_tab(rev_data: Dict[str, Any]) -> str:
 
     by_year = kpis.get("by_year", {})
     cy_stats = by_year.get(cy, {})
-    py_stats = by_year.get(py, {})
 
     ytd_rev = kpis.get("ytd_revenue", 0.0)
     prior_ytd_rev = kpis.get("prior_ytd_revenue", 0.0)
@@ -388,7 +549,6 @@ def render_revenue_tab(rev_data: Dict[str, Any]) -> str:
         t_rev = y_info.get("total_revenue", 0.0)
         t_nts = y_info.get("total_nights", 0)
         t_adr = y_info.get("adr", 0.0)
-        ytd_val = y_info.get("ytd_revenue", 0.0)
         
         # Completed vs Future for current year
         if y == cy:
@@ -515,7 +675,7 @@ def render_revenue_tab(rev_data: Dict[str, Any]) -> str:
 
 
 def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[str, Any], today: Optional[date] = None) -> str:
-    """Generate JavaScript for interactive calendar grid navigation and Chart.js cumulative curve."""
+    """Generate JavaScript for interactive calendar grid, reservation modal dialog, and Chart.js cumulative curve."""
     if today is None:
         today = date.today()
 
@@ -524,19 +684,40 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     for r in reservations:
         if str(r.get("status_name", "")).lower() == "cancelled":
             continue
-        clean_res.append({
+
+        raw_streamline = {}
+        if r.get("raw_json"):
+            try:
+                raw_streamline = json.loads(r["raw_json"])
+            except Exception:
+                pass
+
+        item = {
             "id": r.get("id"),
             "confirmation_id": r.get("confirmation_id"),
+            "reservation_hash": raw_streamline.get("reservation_hash", ""),
+            "creation_date": r.get("creation_date") or raw_streamline.get("creation_date", ""),
             "start_date": r.get("start_date"),
             "end_date": r.get("end_date"),
             "days_number": r.get("days_number"),
+            "type_id": r.get("type_id"),
             "type_name": r.get("type_name", "STA"),
             "type_description": r.get("type_description", "Standard"),
             "status_name": r.get("status_name", "Booked"),
-            "owner_payout": r.get("owner_payout", 0.0),
+            "madetype_name": raw_streamline.get("madetype_name", ""),
             "occupants": r.get("occupants", 0),
+            "occupants_small": r.get("occupants_small", 0),
+            "pets": r.get("pets", 0),
+            "unit_id": r.get("unit_id"),
+            "unit_name": r.get("unit_name", "Villa del Sol"),
+            "owner_payout": r.get("owner_payout", 0.0),
+            "management_fee": r.get("management_fee", 0.0),
+            "gross_rent": r.get("gross_rent", 0.0),
             "is_future": r.get("is_future", 0),
-        })
+            "commission_information": raw_streamline.get("commission_information", {}),
+            "raw_streamline": raw_streamline,
+        }
+        clean_res.append(item)
 
     res_json = json.dumps(clean_res)
     rev_json = json.dumps(rev_data)
@@ -550,7 +731,6 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     const CURRENT_TODAY_STR = '{today_str}';
 
     // Map date strings 'YYYY-MM-DD' to reservation events
-    // dateMap[dateStr] = {{ checkin: [res], checkout: [res], staying: [res] }}
     const CAL_DATE_MAP = {{}};
     (function buildDateMap() {{
       CAL_RESERVATIONS.forEach(r => {{
@@ -723,8 +903,15 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
                 td.dataset.info = JSON.stringify({{ date: dateStr, vacant: true }});
               }}
 
+              // Hover tooltip handlers
               td.onmouseenter = showCalTooltip;
               td.onmouseleave = hideCalTooltip;
+
+              // Click handler to open detailed modal dialog
+              td.onclick = function() {{
+                openResModalFromDate(dateStr);
+              }};
+
               dayCounter++;
             }} else {{
               // Next month leading days
@@ -765,7 +952,6 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         newMonth -= 12;
         newYear += 1;
       }}
-      // Clamp bounds between 2022 and 2027
       if (newYear < 2022) {{ newYear = 2022; newMonth = 1; }}
       if (newYear > 2027) {{ newYear = 2027; newMonth = 7; }}
       renderCalendar(newYear, newMonth);
@@ -792,7 +978,7 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
       const tip = document.getElementById('calTooltip');
       if (!tip) return;
 
-      let html = `<div style="font-weight:700; color:#f8fafc; margin-bottom:6px; border-bottom:1px solid #334155; padding-bottom:4px;">📅 ${{info.date}}</div>`;
+      let html = `<div style="font-weight:700; color:#f8fafc; margin-bottom:6px; border-bottom:1px solid #334155; padding-bottom:4px;">📅 ${{info.date}} <span style="font-size:0.75rem; color:#38bdf8; float:right;">(Click to view)</span></div>`;
 
       if (info.vacant) {{
         html += `<div style="color:#94a3b8;">Status: <strong style="color:#38bdf8;">Vacant</strong> (Open for booking)</div>`;
@@ -844,6 +1030,240 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     }}
 
     // =========================================================================
+    // RESERVATION DETAILS MODAL (All Streamline Fields)
+    // =========================================================================
+    function openResModalFromDate(dateStr) {{
+      const events = CAL_DATE_MAP[dateStr] || {{ checkin: [], checkout: [], staying: [] }};
+      const allActive = [...events.checkout, ...events.checkin, ...events.staying];
+      const uniqueResMap = new Map();
+      allActive.forEach(r => uniqueResMap.set(r.id, r));
+      const uniqueResList = Array.from(uniqueResMap.values());
+
+      const modal = document.getElementById('resModalOverlay');
+      if (!modal) return;
+
+      if (uniqueResList.length === 0) {{
+        // Vacant date
+        renderVacantModal(dateStr);
+        modal.classList.add('active');
+        return;
+      }}
+
+      if (uniqueResList.length === 1) {{
+        renderResModalContent(uniqueResList[0], dateStr);
+      }} else {{
+        // Turnover day with 2 reservations: render tabbed switcher
+        renderMultiResModalContent(uniqueResList, dateStr, events);
+      }}
+
+      modal.classList.add('active');
+    }}
+
+    function renderVacantModal(dateStr) {{
+      const header = document.getElementById('resModalHeaderInfo');
+      const body = document.getElementById('resModalBody');
+      if (header) {{
+        header.innerHTML = `
+          <span class="badge badge-dark">Open Date</span>
+          <h3 class="res-modal-title">📅 ${{dateStr}}</h3>
+        `;
+      }}
+      if (body) {{
+        body.innerHTML = `
+          <div style="text-align: center; padding: 30px 20px;">
+            <div style="font-size: 2.5rem; margin-bottom: 12px;">🏖️</div>
+            <h4 style="font-size: 1.15rem; color: #f8fafc; margin-bottom: 8px;">Vacant & Available</h4>
+            <p style="color: #94a3b8; font-size: 0.9rem; max-width: 400px; margin: 0 auto;">
+              No guest reservation, owner block, or maintenance block is active on ${{dateStr}}.
+              Villa del Sol is open for distribution across Airbnb, VRBO, Booking.com, and Kivoya Direct.
+            </p>
+          </div>
+        `;
+      }}
+    }}
+
+    function renderMultiResModalContent(resList, dateStr, events) {{
+      const header = document.getElementById('resModalHeaderInfo');
+      const body = document.getElementById('resModalBody');
+
+      if (header) {{
+        header.innerHTML = `
+          <span class="badge" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid rgba(56,189,248,0.4);">Turnover Day</span>
+          <h3 class="res-modal-title">📅 ${{dateStr}} • 2 Bookings</h3>
+        `;
+      }}
+
+      if (body) {{
+        let tabsHtml = `<div style="display:flex; gap:10px; margin-bottom:16px; border-bottom:1px solid #334155; padding-bottom:12px;">`;
+        resList.forEach((r, idx) => {{
+          const isOut = events.checkout.some(o => o.id === r.id);
+          const prefix = isOut ? "Departure ↗" : "Arrival ↘";
+          const activeClass = idx === 0 ? "active" : "";
+          tabsHtml += `<button class="res-tab-pill-btn ${{activeClass}}" onclick="switchResModalSubTab(${{idx}}, this)">${{prefix}}: #${{r.confirmation_id || r.id}}</button>`;
+        }});
+        tabsHtml += `</div>`;
+
+        let panelsHtml = `<div id="resModalPanelsContainer">`;
+        resList.forEach((r, idx) => {{
+          const displayStyle = idx === 0 ? "block" : "none";
+          panelsHtml += `<div id="resPanel-${{idx}}" class="res-panel" style="display:${{displayStyle}};">${{buildReservationHtmlSnippet(r)}}</div>`;
+        }});
+        panelsHtml += `</div>`;
+
+        body.innerHTML = tabsHtml + panelsHtml;
+      }}
+    }}
+
+    function switchResModalSubTab(idx, btn) {{
+      document.querySelectorAll('.res-tab-pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.res-panel').forEach(p => p.style.display = 'none');
+      const target = document.getElementById('resPanel-' + idx);
+      if (target) target.style.display = 'block';
+    }}
+
+    function renderResModalContent(res, dateStr) {{
+      const header = document.getElementById('resModalHeaderInfo');
+      const body = document.getElementById('resModalBody');
+
+      const isFuture = res.is_future === 1;
+      const statusClass = res.status_name.toLowerCase() === 'booked' ? 'badge-primary' : 'badge-dark';
+      const futureBadge = isFuture 
+        ? `<span class="badge" style="background:rgba(251,140,0,0.2); color:#fb8c00; border:1px solid rgba(251,140,0,0.4);">Future Reservation</span>`
+        : `<span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8;">Completed Stay</span>`;
+
+      if (header) {{
+        header.innerHTML = `
+          <span class="badge ${{statusClass}}">${{res.status_name}}</span>
+          ${{futureBadge}}
+          <h3 class="res-modal-title">Reservation #${{res.confirmation_id || res.id}}</h3>
+          <span style="font-size:0.85rem; color:#94a3b8; font-weight:600;">${{res.type_description}} (${{res.type_name}})</span>
+        `;
+      }}
+
+      if (body) {{
+        body.innerHTML = buildReservationHtmlSnippet(res);
+      }}
+    }}
+
+    function buildReservationHtmlSnippet(r) {{
+      const raw = r.raw_streamline || {{}};
+      const comm = r.commission_information || {{}};
+
+      const ownerPayout = parseFloat(r.owner_payout || comm.owner_commission_amount || 0);
+      const mgmtFee = parseFloat(r.management_fee || comm.management_commission_amount || 0);
+      const grossRent = parseFloat(r.gross_rent || (ownerPayout + mgmtFee));
+      const nights = parseInt(r.days_number || 1, 10);
+      const adr = nights > 0 ? (ownerPayout / nights) : 0;
+
+      const fUSD = (v) => '$' + parseFloat(v || 0).toLocaleString('en-US', {{ minimumFractionDigits: 2, maximumFractionDigits: 2 }});
+
+      return `
+        <!-- Financial Summary Grid -->
+        <div class="res-fin-grid">
+          <div class="res-fin-card">
+            <div class="res-fin-label">Owner Net (82%)</div>
+            <div class="res-fin-value" style="color: #34d399;">${{fUSD(ownerPayout)}}</div>
+          </div>
+          <div class="res-fin-card">
+            <div class="res-fin-label">Kivoya Fee (18%)</div>
+            <div class="res-fin-value" style="color: #fb8c00;">${{fUSD(mgmtFee)}}</div>
+          </div>
+          <div class="res-fin-card">
+            <div class="res-fin-label">Gross Distributable</div>
+            <div class="res-fin-value" style="color: #f8fafc;">${{fUSD(grossRent)}}</div>
+          </div>
+          <div class="res-fin-card">
+            <div class="res-fin-label">Net / Night</div>
+            <div class="res-fin-value" style="color: #fbbf24;">${{fUSD(adr)}}</div>
+          </div>
+        </div>
+
+        <!-- Structured Streamline Fields Table -->
+        <div style="background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 14px 18px;">
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: #f8fafc; margin-bottom: 10px; border-bottom: 1px solid #1e293b; padding-bottom: 6px;">
+            Streamline VRS Booking Details
+          </h4>
+          <table class="res-details-table">
+            <tbody>
+              <tr>
+                <td>Confirmation ID</td>
+                <td><strong style="color:#38bdf8;">#${{r.confirmation_id || r.id}}</strong></td>
+              </tr>
+              <tr>
+                <td>Stay Interval</td>
+                <td><strong>${{r.start_date}}</strong> &rarr; <strong>${{r.end_date}}</strong> (${{nights}} nights)</td>
+              </tr>
+              <tr>
+                <td>Booking Created</td>
+                <td>${{r.creation_date || 'N/A'}}</td>
+              </tr>
+              <tr>
+                <td>Reservation Type</td>
+                <td>${{r.type_description}} (Code: <code style="color:#cbd5e1;">${{r.type_name}}</code>, ID: ${{r.type_id}})</td>
+              </tr>
+              <tr>
+                <td>Status / Made Type</td>
+                <td><span class="badge badge-primary">${{r.status_name}}</span> • Source: <strong>${{r.madetype_name || 'Streamline VRS'}}</strong></td>
+              </tr>
+              <tr>
+                <td>Occupancy</td>
+                <td>${{r.occupants || 0}} adults, ${{r.occupants_small || 0}} children, ${{r.pets || 0}} pets</td>
+              </tr>
+              <tr>
+                <td>Property / Unit</td>
+                <td>${{r.unit_name || 'Villa del Sol'}} (Streamline Unit ID: <code>${{r.unit_id || 503802}}</code>)</td>
+              </tr>
+              <tr>
+                <td>Streamline Internal ID</td>
+                <td><code>${{r.id}}</code></td>
+              </tr>
+              <tr>
+                <td>Reservation Hash</td>
+                <td><code style="font-size:0.75rem; word-break:break-all;">${{r.reservation_hash || 'N/A'}}</code></td>
+              </tr>
+              <tr>
+                <td>Timeline Classification</td>
+                <td>${{r.is_future === 1 ? '<strong style="color:#fb8c00;">Future Booking</strong> (Subject to guest changes)' : '<strong style="color:#94a3b8;">Past Booking</strong> (Completed stay)'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Raw Streamline API Response Viewer -->
+        <details style="background: #0b1120; border: 1px solid #334155; border-radius: 10px; padding: 12px 16px;">
+          <summary style="cursor: pointer; font-weight: 700; color: #38bdf8; font-size: 0.85rem; user-select: none;">
+            🔍 View Complete Raw Streamline JSON Payload
+          </summary>
+          <pre style="margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #93c5fd; overflow-x: auto; max-height: 280px; background: #070c16; padding: 12px; border-radius: 8px;">${{escapeHtml(JSON.stringify(raw, null, 2))}}</pre>
+        </details>
+      `;
+    }}
+
+    function escapeHtml(str) {{
+      return (str || '')
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }}
+
+    function closeResModal(e) {{
+      if (e && e.target && e.target.closest('.res-modal-card') && !e.target.closest('.res-modal-close')) {{
+        return;
+      }}
+      const modal = document.getElementById('resModalOverlay');
+      if (modal) modal.classList.remove('active');
+    }}
+
+    window.addEventListener('keydown', (e) => {{
+      if (e.key === 'Escape') {{
+        closeResModal();
+      }}
+    }});
+
+    // =========================================================================
     // CUMULATIVE REVENUE CHART ENGINE (Chart.js)
     // =========================================================================
     let revenueChartInstance = null;
@@ -867,7 +1287,6 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
       // Common 365 daily labels (Jan 01 .. Dec 31)
       const dayLabels = [];
       const refYear = 2025; // Non-leap year for uniform 365 day axis
-      const refStart = new Date(refYear, 0, 1);
       for (let d = 0; d < 365; d++) {{
         const cur = new Date(refYear, 0, 1 + d);
         dayLabels.push(cur.toLocaleDateString('en-US', {{ month: 'short', day: 'numeric' }}));
@@ -906,7 +1325,6 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         let pointRadius = 0;
         let pointHoverRadius = 5;
 
-        // Current year: highlight actuals vs future
         if (year === {today.year}) {{
           pointRadius = 1.5;
         }}
@@ -922,11 +1340,9 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
           pointBackgroundColor: borderColor,
           tension: 0.15,
           fill: false,
-          // Segment dash for current year past vs future
           segment: year === {today.year} ? {{
             borderDash: ctx => {{
               const pIdx = ctx.p0DataIndex;
-              // Day index of today in 365 days
               const todayIdx = Math.floor((new Date('{today_str}').getTime() - new Date('{today.year}-01-01').getTime()) / (1000 * 60 * 60 * 24));
               return pIdx >= todayIdx ? [6, 6] : undefined;
             }}
@@ -966,7 +1382,7 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
           }},
           plugins: {{
             legend: {{
-              display: false // We use our own customized interactive pills above
+              display: false
             }},
             tooltip: {{
               backgroundColor: '#0f172a',
@@ -992,7 +1408,6 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
                 color: '#94a3b8',
                 maxTicksLimit: 12,
                 callback: function(val, index) {{
-                  // Display 1st of each month
                   const label = dayLabels[index] || '';
                   return label.includes(' 1') ? label.replace(' 1', '') : '';
                 }}

@@ -1200,11 +1200,11 @@ class HTMLDashboardGenerator:
 
     <!-- Navigation Tabs -->
     <nav class="tabs-nav" role="tablist">
-      <button class="tab-btn active" onclick="switchTab('pricing')" role="tab" aria-selected="true">📊 Pricing Recommendations</button>
-      <button class="tab-btn" onclick="switchTab('comparison')" role="tab" aria-selected="false">🌐 Channel Price Comparison</button>
-      <button class="tab-btn" onclick="switchTab('comps')" role="tab" aria-selected="false">🏡 Competitor Comps ({len(tier_a_comps) + len(tier_b_comps)})</button>
-      <button class="tab-btn" onclick="switchTab('calendar')" role="tab" aria-selected="false">📅 Availability Calendar</button>
-      <button class="tab-btn" onclick="switchTab('revenue')" role="tab" aria-selected="false">📈 Cumulative Revenue</button>
+      <button class="tab-btn active" onclick="switchTab('pricing')" role="tab" aria-selected="true">📊 Pricing</button>
+      <button class="tab-btn" onclick="switchTab('comparison')" role="tab" aria-selected="false">🌐 Channels</button>
+      <button class="tab-btn" onclick="switchTab('comps')" role="tab" aria-selected="false">🏡 Comps ({len(tier_a_comps) + len(tier_b_comps)})</button>
+      <button class="tab-btn" onclick="switchTab('calendar')" role="tab" aria-selected="false">📅 Calendar</button>
+      <button class="tab-btn" onclick="switchTab('revenue')" role="tab" aria-selected="false">📈 Revenue</button>
       <button class="tab-btn" onclick="switchTab('methodology')" role="tab" aria-selected="false">📐 Methodology & PMS Guide</button>
       <button class="tab-btn" onclick="switchTab('debug')" role="tab" aria-selected="false">🛠️ Live Data & Debug</button>
     </nav>

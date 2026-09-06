@@ -171,6 +171,10 @@ class TestHTMLDashboardUI(unittest.TestCase):
         self.assertIn("subtable-intel-banner", self.html_content)
         self.assertIn("Booking Window &amp; Pace", self.html_content.replace("&", "&amp;").replace("&amp;amp;", "&amp;"))
 
+        # 5. Parent row data-hist-med and copy schedule script logic
+        self.assertIn("data-hist-med=", self.html_content)
+        self.assertIn(". Based on history: ", self.html_content)
+
 
 if __name__ == "__main__":
     unittest.main()

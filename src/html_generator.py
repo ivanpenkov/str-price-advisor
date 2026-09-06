@@ -1688,6 +1688,22 @@ class HTMLDashboardGenerator:
           actionText = `Keep price at $${{basePrice}}`;
         }}
 
+        const histCount = parseInt(row.dataset.histCount || '0', 10);
+        const histMed = parseInt(row.dataset.histMed || '0', 10);
+        const baseVal = parseInt(basePrice, 10);
+
+        if (histCount > 0 && histMed > 0) {{
+          let histAction = '';
+          if (histMed > baseVal) {{
+            histAction = `Increase from $${{basePrice}} to $${{histMed}}`;
+          }} else if (histMed < baseVal) {{
+            histAction = `Decrease from $${{basePrice}} to $${{histMed}}`;
+          }} else {{
+            histAction = `Keep at $${{basePrice}}`;
+          }}
+          actionText += `. Based on history: ${{histAction}}`;
+        }}
+
         lines.push(`${{dateRange}}\\t${{type}}\\t${{actionText}}`);
       }});
 
@@ -2884,6 +2900,8 @@ class HTMLDashboardGenerator:
                   data-checkout="{s['check_out']}"
                   data-segment-type="{s['segment_type'].capitalize()}"
                   data-base-price="{s['our_base_nightly']:.0f}"
+                  data-hist-count="{h_count}"
+                  data-hist-med="{h_med:.0f}"
                   data-adj-tier="{tier_adj}"
                   data-raw-tier="{tier_raw}"
                   data-adj-diff-html='{diff_html_adj}'

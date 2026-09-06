@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "exported_at": "2026-09-06T02:11:50.290824",
+    "exported_at": "2026-09-06T15:30:07.440126",
     "total_reservations": 206,
     "future_reservations": 19,
     "past_reservations": 187,
@@ -28,7 +28,7 @@
       "management_fee": 699.45,
       "gross_rent": 3885.86,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49963004,
@@ -50,7 +50,7 @@
       "management_fee": 897.79,
       "gross_rent": 4987.7,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 50465005,
@@ -72,7 +72,7 @@
       "management_fee": 492.13,
       "gross_rent": 2734.05,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 48170447,
@@ -94,7 +94,7 @@
       "management_fee": 461.97,
       "gross_rent": 2566.48,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49635232,
@@ -116,7 +116,7 @@
       "management_fee": 692.45,
       "gross_rent": 3846.96,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 46318277,
@@ -138,7 +138,7 @@
       "management_fee": 571.98,
       "gross_rent": 3177.68,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 48389991,
@@ -160,7 +160,7 @@
       "management_fee": 540.15,
       "gross_rent": 3000.81,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 47024343,
@@ -182,7 +182,7 @@
       "management_fee": 701.13,
       "gross_rent": 3895.17,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 47357574,
@@ -204,7 +204,7 @@
       "management_fee": 361.14,
       "gross_rent": 2006.33,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 47546724,
@@ -226,7 +226,7 @@
       "management_fee": 323.86,
       "gross_rent": 1799.22,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49223400,
@@ -248,7 +248,7 @@
       "management_fee": 292.03,
       "gross_rent": 1622.39,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 47763007,
@@ -270,7 +270,7 @@
       "management_fee": 292.33,
       "gross_rent": 1624.03,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49035392,
@@ -292,7 +292,7 @@
       "management_fee": 292.33,
       "gross_rent": 1624.03,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49788309,
@@ -314,7 +314,7 @@
       "management_fee": 119.85,
       "gross_rent": 665.82,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 46534636,
@@ -336,7 +336,7 @@
       "management_fee": 464.51,
       "gross_rent": 2580.6,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 48784782,
@@ -358,7 +358,7 @@
       "management_fee": 540.15,
       "gross_rent": 3000.81,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 50438435,
@@ -380,7 +380,7 @@
       "management_fee": 343.21,
       "gross_rent": 1906.7,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 47366783,
@@ -402,7 +402,7 @@
       "management_fee": 266.63,
       "gross_rent": 1481.28,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 47286335,
@@ -424,7 +424,7 @@
       "management_fee": 296.46,
       "gross_rent": 1647.0,
       "is_future": 1,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49620996,
@@ -446,7 +446,7 @@
       "management_fee": 276.82,
       "gross_rent": 1537.88,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 46270371,
@@ -468,7 +468,7 @@
       "management_fee": 145.79,
       "gross_rent": 809.96,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49636788,
@@ -490,7 +490,7 @@
       "management_fee": 155.61,
       "gross_rent": 864.51,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 48389223,
@@ -512,7 +512,7 @@
       "management_fee": 309.45,
       "gross_rent": 1719.19,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 47554341,
@@ -534,7 +534,7 @@
       "management_fee": 164.74,
       "gross_rent": 915.21,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49097030,
@@ -556,7 +556,7 @@
       "management_fee": 245.66,
       "gross_rent": 1364.79,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 47763874,
@@ -578,7 +578,7 @@
       "management_fee": 154.4,
       "gross_rent": 857.79,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 44387768,
@@ -600,7 +600,7 @@
       "management_fee": 189.23,
       "gross_rent": 1051.27,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 46873579,
@@ -622,7 +622,7 @@
       "management_fee": 297.2,
       "gross_rent": 1651.1,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T01:29:36.230223"
+      "last_scraped_at": "2026-09-06T15:30:07.431274"
     },
     {
       "id": 49052347,

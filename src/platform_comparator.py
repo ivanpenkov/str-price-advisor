@@ -748,8 +748,11 @@ class PlatformComparator:
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
         force: bool = False,
+        force_refresh: Optional[bool] = None,
     ) -> List[IntervalComparison]:
         """Scan all open intervals and generate comparisons across 4 channels."""
+        if force_refresh is not None:
+            force = force_refresh
         segmenter = CalendarSegmenter(kivoya_client=self.kivoya_client)
         segments = segmenter.generate_unbooked_segments()
 

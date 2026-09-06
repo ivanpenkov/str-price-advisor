@@ -1,7 +1,7 @@
 {
   "property": "Villa del Sol",
   "report_date": "2026-09-06",
-  "generated_at": "2026-09-06T15:15:32.061088",
+  "generated_at": "2026-09-06T15:36:03.037920",
   "summary": {
     "total_open_intervals": 80,
     "urgent_count": 31,
@@ -14983,6 +14983,22 @@
           "name": "Sleeps 18 \u2022 8BR Home w/ Pool, Backyard & Smart TVs"
         },
         {
+          "listing_id": "1077813310260513265",
+          "title": "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna",
+          "location": "Scottsdale",
+          "bedrooms": 7,
+          "beds": 11,
+          "baths": 6.5,
+          "nights": 4,
+          "total_price": 4608.0,
+          "effective_nightly": 1152.0,
+          "rating": 4.97,
+          "reviews": 30,
+          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | 7,000 sq ft with courts and pool",
+          "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1077813310260513265/original/123122b6-3b05-41bc-abb0-db4ae36dad8b.jpeg?im_w=720",
+          "name": "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna"
+        },
+        {
           "listing_id": "1547101536396069219",
           "title": "Lux 20 Guest w/ Pickle, Pool, & More",
           "location": "Chandler",
@@ -15256,22 +15272,6 @@
           "raw_snippet": "Superhost | Superhost | Home in Scottsdale | Private resort with pool, sauna, and pickleball",
           "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1729894920712555430/original/1c9cc479-0424-4d0e-aed2-33dea1beae77.jpeg?im_w=720",
           "name": "Heated Pool, Spa, Sauna, Mini Golf, Pickleball"
-        },
-        {
-          "listing_id": "1077813310260513265",
-          "title": "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna",
-          "location": "Scottsdale",
-          "bedrooms": 7,
-          "beds": 11,
-          "baths": 6.5,
-          "nights": 4,
-          "total_price": 4608.0,
-          "effective_nightly": 1152.0,
-          "rating": 4.97,
-          "reviews": 30,
-          "raw_snippet": "Guest favorite | Guest favorite | Home in Scottsdale | 7,000 sq ft with courts and pool",
-          "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1077813310260513265/original/123122b6-3b05-41bc-abb0-db4ae36dad8b.jpeg?im_w=720",
-          "name": "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna"
         },
         {
           "listing_id": "1342436588176503315",

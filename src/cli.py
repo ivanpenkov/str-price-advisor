@@ -348,7 +348,7 @@ def main():
             limit=args.limit,
             start_date=args.start_date,
             end_date=args.end_date,
-            force_refresh=args.force,
+            force=args.force,
         ))
         print(f"\n📊 Successfully processed {len(results)} intervals across platforms.")
         urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)

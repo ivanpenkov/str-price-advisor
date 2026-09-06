@@ -258,7 +258,20 @@ class TestOwnerXAndReservations(unittest.TestCase):
         self.assertIn("Calendar", cal_html)
         self.assertIn("calMonthsGrid", cal_html)
         self.assertIn("calTooltip", cal_html)
-        self.assertIn("resModalOverlay", cal_html)
+        self.assertIn("calColorStatusBtn", cal_html)
+        self.assertIn("calColorChannelBtn", cal_html)
+        self.assertIn("calLegendStatus", cal_html)
+        self.assertIn("calLegendChannel", cal_html)
+
+        modal_html = crv.render_reservation_modal()
+        self.assertIn("resModalOverlay", modal_html)
+
+        res_tab_html = crv.render_reservations_tab(reservations, today=date(2026, 9, 6))
+        self.assertIn("resTable", res_tab_html)
+        self.assertIn("res-filter-toolbar", res_tab_html)
+        self.assertIn("Total on Channel (Est.)", res_tab_html)
+        self.assertIn("Guest Checkout Price (Est.)", res_tab_html)
+        self.assertIn("Weekend", res_tab_html)
 
         rev_html = crv.render_revenue_tab(rev_data)
         self.assertIn("Cumulative Annual Owner Net Revenue", rev_html)
@@ -269,9 +282,82 @@ class TestOwnerXAndReservations(unittest.TestCase):
         self.assertIn("CAL_RESERVATIONS", js)
         self.assertIn("REVENUE_DATA", js)
         self.assertIn("renderCalendar", js)
+        self.assertIn("setCalColorMode", js)
+        self.assertIn("getEventColor", js)
         self.assertIn("initRevenueChart", js)
         self.assertIn("openResModalFromDate", js)
+        self.assertIn("openResModalById", js)
+        self.assertIn("applyReservationFilters", js)
+        self.assertIn("sortResTable", js)
         self.assertIn("buildReservationHtmlSnippet", js)
+
+    def test_classify_stay_type(self):
+        """Verify Thu-Sat nights = Weekend, Sun-Wed nights = Midweek, Mix = both."""
+        # Weekend stays (Thu night, Fri night, Sat night)
+        self.assertEqual(crv.classify_stay_type("2026-09-03", "2026-09-06"), "Weekend")  # Thu-Sun
+        self.assertEqual(crv.classify_stay_type("2026-09-04", "2026-09-06"), "Weekend")  # Fri-Sun
+        self.assertEqual(crv.classify_stay_type("2026-09-03", "2026-09-05"), "Weekend")  # Thu-Sat
+
+        # Midweek stays (Sun night, Mon night, Tue night, Wed night)
+        self.assertEqual(crv.classify_stay_type("2026-09-06", "2026-09-10"), "Midweek")  # Sun-Thu
+        self.assertEqual(crv.classify_stay_type("2026-09-07", "2026-09-09"), "Midweek")  # Mon-Wed
+
+        # Mix stays (crosses both weekend and midweek nights)
+        self.assertEqual(crv.classify_stay_type("2026-09-02", "2026-09-06"), "Mix")  # Wed-Sun
+        self.assertEqual(crv.classify_stay_type("2026-09-04", "2026-09-07"), "Mix")  # Fri-Mon
+        self.assertEqual(crv.classify_stay_type("2026-09-06", "2026-09-12"), "Mix")  # Sun-Sat
+
+    def test_estimate_reservation_channel_pricing(self):
+        """Verify formula estimates for Airbnb, VRBO, Direct, Admin, and Owner."""
+        # Airbnb booking ($2000 gross rent)
+        abnb_res = {
+            "gross_rent": 2000.0,
+            "madetype_name": "WSR",
+            "type_description": "Standard",
+            "raw_json": json.dumps({"hear_about_name": "Airbnb"}),
+        }
+        abnb_est = crv.estimate_reservation_channel_pricing(abnb_res)
+        self.assertEqual(abnb_est["channel_name"], "Airbnb")
+        self.assertEqual(abnb_est["total_on_channel"], 2550.0)  # 2000 + 550
+        self.assertEqual(abnb_est["guest_checkout_price"], round(2550.0 * 1.2827, 2))
+
+        # VRBO booking ($2000 gross rent)
+        vrbo_res = {
+            "gross_rent": 2000.0,
+            "madetype_name": "PDWTA",
+            "type_description": "Standard",
+            "raw_json": json.dumps({"hear_about_name": "HA-OLB", "travelagent_name": "Vrbo"}),
+        }
+        vrbo_est = crv.estimate_reservation_channel_pricing(vrbo_res)
+        self.assertEqual(vrbo_est["channel_name"], "Vrbo")
+        expected_vrbo_base = round(2000.0 * 1.1448, 2)
+        expected_vrbo_tot = expected_vrbo_base + 550.0
+        self.assertEqual(vrbo_est["total_on_channel"], expected_vrbo_tot)
+        self.assertEqual(vrbo_est["guest_checkout_price"], round(expected_vrbo_tot * 1.2557, 2))
+
+        # Direct Website booking ($2000 gross rent)
+        direct_res = {
+            "gross_rent": 2000.0,
+            "madetype_name": "NET",
+            "type_description": "Standard",
+            "raw_json": json.dumps({"hear_about_name": "Website - kivoya.com"}),
+        }
+        direct_est = crv.estimate_reservation_channel_pricing(direct_res)
+        self.assertEqual(direct_est["channel_name"], "Direct Website")
+        self.assertEqual(direct_est["total_on_channel"], 2500.0)  # 2000 + 500 clean
+        self.assertEqual(direct_est["guest_checkout_price"], round(2500.0 * 1.144, 2))
+
+        # Owner block
+        owner_res = {
+            "gross_rent": 0.0,
+            "madetype_name": "OWN",
+            "type_description": "Owner Block",
+            "raw_json": json.dumps({}),
+        }
+        owner_est = crv.estimate_reservation_channel_pricing(owner_res)
+        self.assertEqual(owner_est["channel_name"], "Owner Block")
+        self.assertEqual(owner_est["total_on_channel"], 0.0)
+        self.assertEqual(owner_est["guest_checkout_price"], 0.0)
 
 
 if __name__ == "__main__":

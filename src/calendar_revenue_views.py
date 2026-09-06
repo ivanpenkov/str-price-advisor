@@ -98,6 +98,57 @@ def get_calendar_revenue_css() -> str:
     .swatch-maintenance {
       background: #D3761B;
     }
+    .swatch-airbnb { background: #FF5A5F; }
+    .swatch-vrbo { background: #2563EB; }
+    .swatch-direct { background: #10B981; }
+    .swatch-booking { background: #4F46E5; }
+    .swatch-expedia { background: #D97706; }
+    .swatch-admin { background: #F59E0B; }
+
+    /* Calendar Color Toggle Switch */
+    .cal-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 3px 6px;
+    }
+    .cal-toggle-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 6px;
+    }
+    .cal-toggle-pill {
+      display: inline-flex;
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .cal-toggle-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      border-radius: 14px;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .cal-toggle-btn.active {
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+    }
+    .cal-toggle-btn:hover:not(.active) {
+      color: #f8fafc;
+    }
 
     .cal-months-grid {
       display: grid;
@@ -450,6 +501,376 @@ def get_calendar_revenue_css() -> str:
       padding: 20px;
       margin-top: 24px;
     }
+
+    /* ==========================================================================
+       RESERVATIONS TAB STYLES
+       ========================================================================== */
+    .res-tab-wrapper {
+      padding: 4px 0 20px 0;
+    }
+    .res-kpi-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .res-kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .res-kpi-card-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .res-kpi-card-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #f8fafc;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .res-kpi-card-sub {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    .res-filter-toolbar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .res-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .res-pill-btn {
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .res-pill-btn:hover {
+      color: #f8fafc;
+      border-color: #475569;
+    }
+    .res-pill-btn.active {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+    }
+    .res-select {
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+    .res-search-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      color: #f8fafc;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      outline: none;
+      min-width: 240px;
+    }
+    .res-search-box:focus {
+      border-color: #38bdf8;
+    }
+
+    .res-table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .res-table-wrapper {
+      overflow-x: auto;
+      max-height: 720px;
+    }
+    .res-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      text-align: left;
+    }
+    .res-table thead {
+      position: sticky;
+      top: 0;
+      background: #0f172a;
+      z-index: 10;
+    }
+    .res-table th {
+      padding: 12px 14px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid #334155;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .res-table th:hover {
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .res-table th .sort-arrow {
+      font-size: 0.75rem;
+      margin-left: 4px;
+      opacity: 0.5;
+    }
+    .res-table th.sorted .sort-arrow {
+      opacity: 1;
+      color: #38bdf8;
+    }
+    .res-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      color: #cbd5e1;
+      vertical-align: middle;
+    }
+    .res-row {
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .res-row:hover {
+      background: rgba(56, 189, 248, 0.08) !important;
+    }
+    .res-row:nth-child(even) {
+      background: rgba(15, 23, 42, 0.35);
+    }
+
+    /* Badges */
+    .badge-stay-weekend {
+      background: rgba(99, 102, 241, 0.18);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+    .badge-stay-midweek {
+      background: rgba(20, 184, 166, 0.18);
+      color: #2dd4bf;
+      border: 1px solid rgba(20, 184, 166, 0.35);
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+    .badge-stay-mix {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+    .tooltip-help {
+      border-bottom: 1px dotted #94a3b8;
+      cursor: help;
+    }
+    """
+
+
+def classify_stay_type(start_date_str: Optional[str], end_date_str: Optional[str]) -> str:
+    """
+    Classify stay into:
+    - 'Weekend': Thu, Fri, Sat nights (weekday 3, 4, 5)
+    - 'Midweek': Sun, Mon, Tue, Wed nights (weekday 6, 0, 1, 2)
+    - 'Mix': Any stay spanning both weekend and midweek nights
+    """
+    if not start_date_str or not end_date_str:
+        return "Midweek"
+    try:
+        start_dt = datetime.strptime(start_date_str, "%Y-%m-%d").date()
+        end_dt = datetime.strptime(end_date_str, "%Y-%m-%d").date()
+    except ValueError:
+        return "Midweek"
+
+    has_weekend = False
+    has_midweek = False
+
+    cur = start_dt
+    while cur < end_dt:
+        wd = cur.weekday()  # Mon=0, Tue=1, Wed=2, Thu=3, Fri=4, Sat=5, Sun=6
+        if wd in (3, 4, 5):  # Thu, Fri, Sat
+            has_weekend = True
+        else:  # Sun (6), Mon (0), Tue (1), Wed (2)
+            has_midweek = True
+        cur += timedelta(days=1)
+
+    if has_weekend and has_midweek:
+        return "Mix"
+    elif has_weekend:
+        return "Weekend"
+    else:
+        return "Midweek"
+
+
+def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Estimate 'Total on Channel' (pre-tax search total) and 'Guest Checkout Price' (all-in guest total).
+    - Airbnb: Gross Rent + $550 Clean; + 14.2% Airbnb guest fee + 14.07% taxes
+    - VRBO: Gross Rent * 1.1448 (14.48% markup) + $550 Clean; + 11.5% Vrbo fee + 14.07% taxes
+    - Booking.com: Gross Rent * 1.15 + $550 Clean; + 14.07% taxes
+    - Expedia: Gross Rent * 1.15 + $550 Clean; + 14.07% taxes
+    - Direct: Gross Rent + $500 Clean; 0% service fee + 14.4% Tempe STR tax
+    - Admin: Gross Rent (internal rate)
+    - Owner: $0 (maintenance/owner stay)
+    """
+    gross_rent = float(res.get("gross_rent") or 0.0)
+    madetype = (res.get("madetype_name") or "").upper()
+
+    raw_str = res.get("raw_json") or "{}"
+    if isinstance(raw_str, str):
+        try:
+            raw = json.loads(raw_str)
+        except Exception:
+            raw = {}
+    elif isinstance(raw_str, dict):
+        raw = raw_str
+    else:
+        raw = {}
+
+    hear_about = (raw.get("hear_about_name") or "").lower()
+    travel_agent = (raw.get("travelagent_name") or "").lower()
+    type_desc = (res.get("type_description") or "").lower()
+
+    if "owner" in type_desc or madetype == "OWN":
+        channel_name = "Owner Block"
+        channel_badge = "OWN"
+        channel_color = "#8E24AA"
+        total_on_channel = 0.0
+        guest_checkout_price = 0.0
+        formula_notes = "Owner stay / block ($0 guest charges)"
+    elif "maintenance" in type_desc:
+        channel_name = "Maintenance Block"
+        channel_badge = "MAINT"
+        channel_color = "#D3761B"
+        total_on_channel = 0.0
+        guest_checkout_price = 0.0
+        formula_notes = "Maintenance block ($0 guest charges)"
+    elif "booking" in hear_about or "booking" in travel_agent:
+        channel_name = "Booking.com"
+        channel_badge = "Booking.com"
+        channel_color = "#4F46E5"
+        clean_fee = 550.0
+        channel_base = round(gross_rent * 1.15, 2)
+        total_on_channel = round(channel_base + clean_fee, 2)
+        guest_checkout_price = round(total_on_channel * 1.1407, 2)
+        formula_notes = f"Gross Rent + 15% markup + $550 Clean; + 14.07% tax"
+    elif "expedia" in hear_about or "expedia" in travel_agent:
+        channel_name = "Expedia"
+        channel_badge = "Expedia"
+        channel_color = "#D97706"
+        clean_fee = 550.0
+        channel_base = round(gross_rent * 1.15, 2)
+        total_on_channel = round(channel_base + clean_fee, 2)
+        guest_checkout_price = round(total_on_channel * 1.1407, 2)
+        formula_notes = f"Gross Rent + 15% markup + $550 Clean; + 14.07% tax"
+    elif "airbnb" in hear_about or "airbnb" in travel_agent or madetype == "WSR":
+        channel_name = "Airbnb"
+        channel_badge = "Airbnb"
+        channel_color = "#FF5A5F"
+        clean_fee = 550.0
+        total_on_channel = round(gross_rent + clean_fee, 2)
+        guest_checkout_price = round(total_on_channel * 1.2827, 2)
+        formula_notes = f"Gross Rent (${gross_rent:,.2f}) + $550 Clean; + 14.2% Airbnb fee + 14.07% tax"
+    elif "vrbo" in hear_about or "ha-olb" in hear_about or "vrbo" in travel_agent or "homeaway" in travel_agent or madetype == "PDWTA":
+        channel_name = "Vrbo"
+        channel_badge = "VRBO"
+        channel_color = "#2563EB"
+        clean_fee = 550.0
+        vrbo_base = round(gross_rent * 1.1448, 2)
+        total_on_channel = round(vrbo_base + clean_fee, 2)
+        guest_checkout_price = round(total_on_channel * 1.2557, 2)
+        formula_notes = f"Gross Rent + 14.48% markup + $550 Clean; + 11.5% Vrbo fee + 14.07% tax"
+    elif madetype == "NET" or "kivoya.com" in hear_about:
+        channel_name = "Direct Website"
+        channel_badge = "Direct"
+        channel_color = "#10B981"
+        clean_fee = 500.0
+        total_on_channel = round(gross_rent + clean_fee, 2)
+        guest_checkout_price = round(total_on_channel * 1.144, 2)
+        formula_notes = f"Gross Rent + $500 Clean; 0% service fee + 14.4% Tempe STR tax"
+    elif madetype == "ADM":
+        channel_name = "Kivoya Admin"
+        channel_badge = "Admin"
+        channel_color = "#F59E0B"
+        total_on_channel = gross_rent
+        guest_checkout_price = gross_rent
+        formula_notes = "Internal admin entry / custom rate"
+    else:
+        channel_name = res.get("madetype_name") or "Direct"
+        channel_badge = channel_name
+        channel_color = "#10B981"
+        clean_fee = 500.0
+        total_on_channel = round(gross_rent + clean_fee, 2)
+        guest_checkout_price = round(total_on_channel * 1.144, 2)
+        formula_notes = "Standard direct pricing estimate"
+
+    return {
+        "channel_name": channel_name,
+        "channel_badge": channel_badge,
+        "channel_color": channel_color,
+        "total_on_channel": total_on_channel,
+        "guest_checkout_price": guest_checkout_price,
+        "formula_notes": formula_notes,
+    }
+
+
+def render_reservation_modal() -> str:
+    """Render master interactive Reservation Details Modal Dialog at page level."""
+    return """
+    <!-- Master Interactive Reservation Details Modal Dialog -->
+    <div id="resModalOverlay" class="res-modal-overlay" onclick="closeResModal(event)">
+      <div class="res-modal-card" onclick="event.stopPropagation()">
+        <div class="res-modal-header">
+          <div class="res-modal-title-group" id="resModalHeaderInfo">
+            <span id="resModalBadge" class="badge">Booked</span>
+            <h3 id="resModalTitle" class="res-modal-title">Reservation Details</h3>
+          </div>
+          <button class="res-modal-close" onclick="closeResModal()" title="Close">&times;</button>
+        </div>
+        <div class="res-modal-body" id="resModalBody">
+          <!-- Dynamically populated on reservation click -->
+        </div>
+      </div>
+    </div>
     """
 
 
@@ -472,7 +893,17 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
             <button class="cal-btn" onclick="calJumpToToday()">Today</button>
           </div>
 
-          <div class="cal-legend">
+          <!-- Color Mode Dual Toggle Switch -->
+          <div class="cal-toggle-group">
+            <span class="cal-toggle-label">Color By:</span>
+            <div class="cal-toggle-pill">
+              <button id="calColorStatusBtn" class="cal-toggle-btn active" onclick="setCalColorMode('status')">Status</button>
+              <button id="calColorChannelBtn" class="cal-toggle-btn" onclick="setCalColorMode('channel')">Channel</button>
+            </div>
+          </div>
+
+          <!-- Legend: Status Mode -->
+          <div id="calLegendStatus" class="cal-legend">
             <div class="cal-legend-item">
               <span class="cal-legend-swatch swatch-vacant"></span>
               <span>Vacant</span>
@@ -490,6 +921,42 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
               <span>Maintenance Block</span>
             </div>
           </div>
+
+          <!-- Legend: Channel Mode -->
+          <div id="calLegendChannel" class="cal-legend" style="display: none;">
+            <div class="cal-legend-item">
+              <span class="cal-legend-swatch swatch-vacant"></span>
+              <span>Vacant</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-swatch swatch-airbnb"></span>
+              <span>Airbnb</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-swatch swatch-vrbo"></span>
+              <span>Vrbo / HomeAway</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-swatch swatch-direct"></span>
+              <span>Direct Website</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-swatch swatch-booking"></span>
+              <span>Booking.com</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-swatch swatch-expedia"></span>
+              <span>Expedia</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-swatch swatch-admin"></span>
+              <span>Kivoya Admin</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-swatch swatch-owner"></span>
+              <span>Owner Block</span>
+            </div>
+          </div>
         </div>
 
         <div id="calMonthsGrid" class="cal-months-grid">
@@ -497,20 +964,221 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
         </div>
 
         <div id="calTooltip" class="cal-tooltip"></div>
+      </div>
+    """
 
-        <!-- Interactive Reservation Details Modal Dialog -->
-        <div id="resModalOverlay" class="res-modal-overlay" onclick="closeResModal(event)">
-          <div class="res-modal-card" onclick="event.stopPropagation()">
-            <div class="res-modal-header">
-              <div class="res-modal-title-group" id="resModalHeaderInfo">
-                <span id="resModalBadge" class="badge">Booked</span>
-                <h3 id="resModalTitle" class="res-modal-title">Reservation Details</h3>
+
+def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[date] = None) -> str:
+    """Render Reservations tab with KPI summary bar and interactive sortable/filterable table."""
+    if today is None:
+        today = date.today()
+
+    valid_res = [r for r in reservations if str(r.get("status_name", "")).lower() != "cancelled"]
+    valid_res.sort(key=lambda x: str(x.get("start_date") or ""), reverse=True)
+
+    total_count = len(valid_res)
+    future_count = sum(1 for r in valid_res if r.get("is_future") == 1)
+    past_count = total_count - future_count
+
+    total_gross = sum(float(r.get("gross_rent") or 0.0) for r in valid_res)
+    total_owner = sum(float(r.get("owner_payout") or 0.0) for r in valid_res)
+    total_mgmt = sum(float(r.get("management_fee") or 0.0) for r in valid_res)
+    total_nights = sum(int(r.get("days_number") or 0) for r in valid_res)
+    avg_adr = total_gross / max(1, total_nights)
+
+    future_gross = sum(float(r.get("gross_rent") or 0.0) for r in valid_res if r.get("is_future") == 1)
+    future_nights = sum(int(r.get("days_number") or 0) for r in valid_res if r.get("is_future") == 1)
+
+    rows_html = []
+    for r in valid_res:
+        res_id = r.get("id")
+        cid = r.get("confirmation_id") or res_id
+        start_str = r.get("start_date") or ""
+        end_str = r.get("end_date") or ""
+        nights = int(r.get("days_number") or 0)
+        gross_rent = float(r.get("gross_rent") or 0.0)
+        owner_payout = float(r.get("owner_payout") or 0.0)
+        is_future = int(r.get("is_future") or 0)
+
+        raw = {}
+        if r.get("raw_json"):
+            try:
+                raw = json.loads(r["raw_json"]) if isinstance(r["raw_json"], str) else r["raw_json"]
+            except Exception:
+                pass
+
+        stay_type = classify_stay_type(start_str, end_str)
+        pricing = estimate_reservation_channel_pricing(r)
+        ch_name = pricing["channel_name"]
+        ch_color = pricing["channel_color"]
+        tot_channel = pricing["total_on_channel"]
+        gst_price = pricing["guest_checkout_price"]
+        notes = pricing["formula_notes"]
+
+        cross_code = raw.get("cross_reference_code") or ""
+        guest_name = raw.get("guest_name") or f"{raw.get('first_name', '')} {raw.get('last_name', '')}".strip()
+
+        try:
+            s_dt = datetime.strptime(start_str, "%Y-%m-%d").date()
+            e_dt = datetime.strptime(end_str, "%Y-%m-%d").date()
+            if s_dt.year == e_dt.year:
+                date_fmt = f"{s_dt.strftime('%b %d')} – {e_dt.strftime('%b %d, %Y')}"
+            else:
+                date_fmt = f"{s_dt.strftime('%b %d, %Y')} – {e_dt.strftime('%b %d, %Y')}"
+        except Exception:
+            date_fmt = f"{start_str} to {end_str}"
+
+        status_badge = '<span class="badge" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-size:0.7rem; padding:1px 6px;">Future</span>' if is_future else '<span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.7rem; padding:1px 6px;">Past</span>'
+
+        cross_html = f'<div style="font-size:0.75rem; color:#38bdf8; font-family:\'JetBrains Mono\', monospace; margin-top:2px;">#{cross_code}</div>' if cross_code else ''
+        guest_html = f' • <span style="color:#cbd5e1;">{guest_name}</span>' if guest_name else ''
+
+        search_str = f"{cid} {cross_code} {guest_name} {start_str} {end_str} {ch_name} {stay_type} {r.get('type_description', '')}".lower()
+
+        rows_html.append(f"""
+          <tr class="res-row" onclick="openResModalById({res_id})" 
+              data-id="{res_id}" 
+              data-cid="{cid}" 
+              data-future="{is_future}" 
+              data-channel="{ch_name}" 
+              data-type="{stay_type}" 
+              data-start="{start_str}"
+              data-nights="{nights}"
+              data-gross="{gross_rent:.2f}"
+              data-totchannel="{tot_channel:.2f}"
+              data-guestprice="{gst_price:.2f}"
+              data-search="{search_str}">
+            <td>
+              <div style="font-weight:700; color:#f8fafc; font-size:0.9rem;">{date_fmt}</div>
+              <div style="font-size:0.75rem; color:#94a3b8; margin-top:3px;">
+                {status_badge} • Conf <strong>#{cid}</strong>{guest_html}
               </div>
-              <button class="res-modal-close" onclick="closeResModal()" title="Close">&times;</button>
-            </div>
-            <div class="res-modal-body" id="resModalBody">
-              <!-- Dynamically populated on reservation click -->
-            </div>
+            </td>
+            <td>
+              <span class="badge-stay-{stay_type.lower()}">{stay_type}</span>
+            </td>
+            <td>
+              <strong style="color:#f8fafc; font-family:'JetBrains Mono'; font-size:0.92rem;">{nights}</strong>
+              <span style="color:#94a3b8; font-size:0.75rem;"> nts</span>
+            </td>
+            <td>
+              <div style="font-weight:800; color:#34d399; font-family:'JetBrains Mono'; font-size:0.95rem;">${gross_rent:,.2f}</div>
+              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">
+                Owner: <span style="color:#cbd5e1; font-weight:600;">${owner_payout:,.2f}</span> (82%)
+              </div>
+            </td>
+            <td>
+              <span class="badge" style="background:{ch_color}22; color:{ch_color}; border:1px solid {ch_color}55; font-weight:700;">● {ch_name}</span>
+              {cross_html}
+            </td>
+            <td>
+              <div style="font-weight:700; color:#f8fafc; font-family:'JetBrains Mono'; font-size:0.92rem;">${tot_channel:,.2f}</div>
+              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;" class="tooltip-help" title="{notes}">
+                Pre-tax est. ⓘ
+              </div>
+            </td>
+            <td>
+              <div style="font-weight:800; color:#38bdf8; font-family:'JetBrains Mono'; font-size:0.95rem;">${gst_price:,.2f}</div>
+              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;" class="tooltip-help" title="{notes}">
+                All-in guest est. ⓘ
+              </div>
+            </td>
+          </tr>
+        """)
+
+    table_body = "\n".join(rows_html)
+
+    return f"""
+      <div class="res-tab-wrapper">
+        <!-- KPI Summary Cards -->
+        <div class="res-kpi-bar">
+          <div class="res-kpi-card">
+            <div class="res-kpi-card-label">Total Reservations</div>
+            <div class="res-kpi-card-val">{total_count}</div>
+            <div class="res-kpi-card-sub">{past_count} Completed • {future_count} Upcoming</div>
+          </div>
+
+          <div class="res-kpi-card">
+            <div class="res-kpi-card-label">Future Pipeline (OTB)</div>
+            <div class="res-kpi-card-val" style="color:#38bdf8;">${future_gross:,.2f}</div>
+            <div class="res-kpi-card-sub">{future_count} bookings • {future_nights} upcoming nights</div>
+          </div>
+
+          <div class="res-kpi-card">
+            <div class="res-kpi-card-label">Total Gross Revenue</div>
+            <div class="res-kpi-card-val" style="color:#34d399;">${total_gross:,.2f}</div>
+            <div class="res-kpi-card-sub">Owner (82%): ${total_owner:,.2f} • Kivoya: ${total_mgmt:,.2f}</div>
+          </div>
+
+          <div class="res-kpi-card">
+            <div class="res-kpi-card-label">Total Nights Booked</div>
+            <div class="res-kpi-card-val">{total_nights:,}</div>
+            <div class="res-kpi-card-sub">Across 2022–2027 calendar nights</div>
+          </div>
+
+          <div class="res-kpi-card">
+            <div class="res-kpi-card-label">Overall Gross ADR</div>
+            <div class="res-kpi-card-val" style="color:#fbbf24;">${avg_adr:,.2f}</div>
+            <div class="res-kpi-card-sub">Average gross rate per booked night</div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="res-filter-toolbar">
+          <div class="res-filter-group">
+            <button id="resFilterAll" class="res-pill-btn active" onclick="setResFilterStatus('all')">All ({total_count})</button>
+            <button id="resFilterFuture" class="res-pill-btn" onclick="setResFilterStatus('future')">Future / In-House ({future_count})</button>
+            <button id="resFilterPast" class="res-pill-btn" onclick="setResFilterStatus('past')">Past ({past_count})</button>
+          </div>
+
+          <div class="res-filter-group">
+            <select id="resFilterChannel" class="res-select" onchange="applyReservationFilters()">
+              <option value="all">All Channels</option>
+              <option value="Airbnb">Airbnb</option>
+              <option value="Vrbo">Vrbo / HomeAway</option>
+              <option value="Direct Website">Direct Website (kivoya.com)</option>
+              <option value="Booking.com">Booking.com</option>
+              <option value="Expedia">Expedia</option>
+              <option value="Kivoya Admin">Kivoya Admin</option>
+              <option value="Owner Block">Owner Block</option>
+            </select>
+
+            <select id="resFilterType" class="res-select" onchange="applyReservationFilters()">
+              <option value="all">All Stay Types</option>
+              <option value="Weekend">Weekend (Thu–Sat)</option>
+              <option value="Midweek">Midweek (Sun–Wed)</option>
+              <option value="Mix">Mix (Weekday + Weekend)</option>
+            </select>
+
+            <input type="text" id="resSearchInput" class="res-search-box" placeholder="🔍 Search conf #, code, guest, dates..." oninput="applyReservationFilters()">
+
+            <button class="res-pill-btn" onclick="resetReservationFilters()" title="Reset all filters">Clear</button>
+          </div>
+
+          <div id="resFilterCount" style="font-size:0.82rem; color:#94a3b8; font-weight:600;">
+            Showing {total_count} of {total_count} reservations
+          </div>
+        </div>
+
+        <!-- Interactive Reservations Table -->
+        <div class="res-table-card">
+          <div class="res-table-wrapper">
+            <table class="res-table" id="resTable">
+              <thead>
+                <tr>
+                  <th onclick="sortResTable(0, 'date')" id="resTh0" class="sorted">Dates <span class="sort-arrow">▼</span></th>
+                  <th onclick="sortResTable(1, 'str')" id="resTh1">Type <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(2, 'num')" id="resTh2">Nights <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(3, 'num')" id="resTh3">Gross Rent <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(4, 'str')" id="resTh4">Channel <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(5, 'num')" id="resTh5">Total on Channel (Est.) <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(6, 'num')" id="resTh6">Guest Checkout Price (Est.) <span class="sort-arrow">↕</span></th>
+                </tr>
+              </thead>
+              <tbody id="resTableBody">
+                {table_body}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -692,6 +1360,9 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
             except Exception:
                 pass
 
+        stay_type = classify_stay_type(r.get("start_date"), r.get("end_date"))
+        pricing = estimate_reservation_channel_pricing(r)
+
         item = {
             "id": r.get("id"),
             "confirmation_id": r.get("confirmation_id"),
@@ -714,6 +1385,13 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
             "management_fee": r.get("management_fee", 0.0),
             "gross_rent": r.get("gross_rent", 0.0),
             "is_future": r.get("is_future", 0),
+            "stay_type": stay_type,
+            "channel_name": pricing["channel_name"],
+            "channel_badge": pricing["channel_badge"],
+            "channel_color": pricing["channel_color"],
+            "total_on_channel": pricing["total_on_channel"],
+            "guest_checkout_price": pricing["guest_checkout_price"],
+            "formula_notes": pricing["formula_notes"],
             "commission_information": raw_streamline.get("commission_information", {}),
             "raw_streamline": raw_streamline,
         }
@@ -766,11 +1444,43 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+    let calColorMode = 'status'; // 'status' or 'channel'
+
+    function setCalColorMode(mode) {{
+      calColorMode = mode;
+      const statusBtn = document.getElementById('calColorStatusBtn');
+      const channelBtn = document.getElementById('calColorChannelBtn');
+      const legendStatus = document.getElementById('calLegendStatus');
+      const legendChannel = document.getElementById('calLegendChannel');
+      if (statusBtn && channelBtn) {{
+        if (mode === 'channel') {{
+          statusBtn.classList.remove('active');
+          channelBtn.classList.add('active');
+          if (legendStatus) legendStatus.style.display = 'none';
+          if (legendChannel) legendChannel.style.display = 'flex';
+        }} else {{
+          channelBtn.classList.remove('active');
+          statusBtn.classList.add('active');
+          if (legendStatus) legendStatus.style.display = 'flex';
+          if (legendChannel) legendChannel.style.display = 'none';
+        }}
+      }}
+      renderCalendar(calCurrentYear, calCurrentMonth);
+    }}
+
     function getTypeColor(typeDesc) {{
       const t = (typeDesc || '').toLowerCase();
       if (t.includes('owner')) return '#8E24AA'; // Purple
       if (t.includes('maintenance')) return '#D3761B'; // Amber
       return '#8CB811'; // Lime Green Standard
+    }}
+
+    function getEventColor(res) {{
+      if (!res) return '#8CB811';
+      if (calColorMode === 'channel') {{
+        return res.channel_color || '#FF5A5F';
+      }}
+      return getTypeColor(res.type_description);
     }}
 
     function initCalendarDropdown() {{
@@ -874,26 +1584,26 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
 
               if (hasOut && hasIn) {{
                 // Turnover day: morning guest leaves, afternoon guest arrives!
-                const colorOut = getTypeColor(events.checkout[0].type_description);
-                const colorIn = getTypeColor(events.checkin[0].type_description);
+                const colorOut = getEventColor(events.checkout[0]);
+                const colorIn = getEventColor(events.checkin[0]);
                 td.style.background = `linear-gradient(135deg, ${{colorOut}} calc(50% - 1px), #ffffff calc(50% - 1px), #ffffff calc(50% + 1px), ${{colorIn}} calc(50% + 1px))`;
                 td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, out: events.checkout[0], in: events.checkin[0] }});
               }} else if (hasIn) {{
                 // Arrival day: vacant morning, guest afternoon
-                const colorIn = getTypeColor(events.checkin[0].type_description);
+                const colorIn = getEventColor(events.checkin[0]);
                 td.style.background = `linear-gradient(135deg, #1e293b 50%, ${{colorIn}} 50%)`;
                 td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, in: events.checkin[0] }});
               }} else if (hasOut) {{
                 // Departure day: guest morning, vacant afternoon
-                const colorOut = getTypeColor(events.checkout[0].type_description);
+                const colorOut = getEventColor(events.checkout[0]);
                 td.style.background = `linear-gradient(135deg, ${{colorOut}} 50%, #1e293b 50%)`;
                 td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, out: events.checkout[0] }});
               }} else if (hasMid) {{
                 // Full stayed night
-                const colorMid = getTypeColor(events.staying[0].type_description);
+                const colorMid = getEventColor(events.staying[0]);
                 td.style.backgroundColor = colorMid;
                 td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, stay: events.staying[0] }});
@@ -984,25 +1694,28 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         html += `<div style="color:#94a3b8;">Status: <strong style="color:#38bdf8;">Vacant</strong> (Open for booking)</div>`;
       }} else {{
         if (info.out) {{
+          const ch = info.out.channel_name ? `<span style="color:${{info.out.channel_color || '#38bdf8'}}; font-weight:700;">● ${{info.out.channel_name}}</span> • ` : '';
           html += `<div style="margin-bottom:6px;">
             <span style="color:#f87171; font-weight:700;">Departure ↗</span>: 
             <strong>#${{info.out.confirmation_id || info.out.id}}</strong> (${{info.out.type_description}})<br>
-            <span style="color:#94a3b8; font-size:0.75rem;">Check-in: ${{info.out.start_date}} • ${{info.out.days_number}} nts</span>
+            <span style="color:#94a3b8; font-size:0.75rem;">${{ch}}Check-in: ${{info.out.start_date}} • ${{info.out.days_number}} nts</span>
           </div>`;
         }}
         if (info.in) {{
+          const ch = info.in.channel_name ? `<span style="color:${{info.in.channel_color || '#38bdf8'}}; font-weight:700;">● ${{info.in.channel_name}}</span> • ` : '';
           html += `<div style="margin-bottom:6px;">
             <span style="color:#34d399; font-weight:700;">Arrival ↘</span>: 
             <strong>#${{info.in.confirmation_id || info.in.id}}</strong> (${{info.in.type_description}})<br>
-            <span style="color:#94a3b8; font-size:0.75rem;">Nights: ${{info.in.days_number}} • Check-out: ${{info.in.end_date}}</span><br>
+            <span style="color:#94a3b8; font-size:0.75rem;">${{ch}}${{info.in.days_number}} nts • Out: ${{info.in.end_date}}</span><br>
             <span style="color:#fbbf24; font-weight:600; font-size:0.8rem;">Net Payout: $${{parseFloat(info.in.owner_payout || 0).toLocaleString('en-US', {{minimumFractionDigits: 2}})}}</span>
           </div>`;
         }}
         if (info.stay) {{
+          const ch = info.stay.channel_name ? `<span style="color:${{info.stay.channel_color || '#38bdf8'}}; font-weight:700;">● ${{info.stay.channel_name}}</span> • ` : '';
           html += `<div>
             <span style="color:#38bdf8; font-weight:700;">In-House</span>: 
             <strong>#${{info.stay.confirmation_id || info.stay.id}}</strong> (${{info.stay.type_description}})<br>
-            <span style="color:#94a3b8; font-size:0.75rem;">${{info.stay.start_date}} to ${{info.stay.end_date}} (${{info.stay.days_number}} nts)</span><br>
+            <span style="color:#94a3b8; font-size:0.75rem;">${{ch}}${{info.stay.start_date}} to ${{info.stay.end_date}} (${{info.stay.days_number}} nts)</span><br>
             <span style="color:#fbbf24; font-weight:600; font-size:0.8rem;">Net Payout: $${{parseFloat(info.stay.owner_payout || 0).toLocaleString('en-US', {{minimumFractionDigits: 2}})}}</span>
           </div>`;
         }}
@@ -1056,6 +1769,15 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         renderMultiResModalContent(uniqueResList, dateStr, events);
       }}
 
+      modal.classList.add('active');
+    }}
+
+    function openResModalById(resId) {{
+      const r = CAL_RESERVATIONS.find(x => x.id == resId || x.confirmation_id == resId);
+      if (!r) return;
+      const modal = document.getElementById('resModalOverlay');
+      if (!modal) return;
+      renderResModalContent(r, r.start_date || '');
       modal.classList.add('active');
     }}
 
@@ -1177,6 +1899,14 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
             <div class="res-fin-label">Net / Night</div>
             <div class="res-fin-value" style="color: #fbbf24;">${{fUSD(adr)}}</div>
           </div>
+          <div class="res-fin-card">
+            <div class="res-fin-label">Total on Channel (Est.)</div>
+            <div class="res-fin-value" style="color: #f8fafc;">${{fUSD(r.total_on_channel || 0)}}</div>
+          </div>
+          <div class="res-fin-card">
+            <div class="res-fin-label">Guest Checkout (Est.)</div>
+            <div class="res-fin-value" style="color: #38bdf8;">${{fUSD(r.guest_checkout_price || 0)}}</div>
+          </div>
         </div>
 
         <!-- Structured Streamline Fields Table -->
@@ -1260,6 +1990,15 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
                 <td><code style="font-size:0.75rem; word-break:break-all;">${{r.reservation_hash || 'N/A'}}</code></td>
               </tr>
               <tr>
+                <td>Stay Classification</td>
+                <td><span class="badge-stay-${{(r.stay_type || 'midweek').toLowerCase()}}">${{r.stay_type || 'Midweek'}}</span> (Weekend = Thu–Sat nights)</td>
+              </tr>
+              ${{r.formula_notes ? `
+              <tr>
+                <td>Channel Price Formula</td>
+                <td><span style="color:#94a3b8; font-size:0.8rem;">${{r.formula_notes}}</span></td>
+              </tr>` : ''}}
+              <tr>
                 <td>Timeline Classification</td>
                 <td>${{r.is_future === 1 ? '<strong style="color:#fb8c00;">Future Booking</strong> (Subject to guest changes)' : '<strong style="color:#94a3b8;">Past Booking</strong> (Completed stay)'}}</td>
               </tr>
@@ -1299,6 +2038,135 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         closeResModal();
       }}
     }});
+
+    // =========================================================================
+    // RESERVATIONS TABLE LOGIC (Filtering & Multi-column Sorting)
+    // =========================================================================
+    let currentResStatusFilter = 'all'; // 'all', 'future', 'past'
+    let resSortCol = 0;
+    let resSortAsc = false; // default newest check-in first
+
+    function setResFilterStatus(status) {{
+      currentResStatusFilter = status;
+      ['All', 'Future', 'Past'].forEach(s => {{
+        const btn = document.getElementById('resFilter' + s);
+        if (btn) btn.classList.toggle('active', s.toLowerCase() === status);
+      }});
+      applyReservationFilters();
+    }}
+
+    function applyReservationFilters() {{
+      const channelFilter = document.getElementById('resFilterChannel')?.value || 'all';
+      const typeFilter = document.getElementById('resFilterType')?.value || 'all';
+      const query = (document.getElementById('resSearchInput')?.value || '').toLowerCase().trim();
+
+      const rows = document.querySelectorAll('#resTableBody .res-row');
+      let visibleCount = 0;
+
+      rows.forEach(row => {{
+        const isFuture = row.dataset.future === '1';
+        const channel = row.dataset.channel || '';
+        const stayType = row.dataset.type || '';
+        const searchText = row.dataset.search || '';
+
+        let matchStatus = true;
+        if (currentResStatusFilter === 'future') matchStatus = isFuture;
+        else if (currentResStatusFilter === 'past') matchStatus = !isFuture;
+
+        let matchChannel = (channelFilter === 'all') || (channel === channelFilter);
+        let matchType = (typeFilter === 'all') || (stayType === typeFilter);
+        let matchQuery = !query || searchText.includes(query);
+
+        if (matchStatus && matchChannel && matchType && matchQuery) {{
+          row.style.display = '';
+          visibleCount++;
+        }} else {{
+          row.style.display = 'none';
+        }}
+      }});
+
+      const countEl = document.getElementById('resFilterCount');
+      if (countEl) {{
+        countEl.textContent = `Showing ${{visibleCount}} of ${{rows.length}} reservations`;
+      }}
+    }}
+
+    function resetReservationFilters() {{
+      currentResStatusFilter = 'all';
+      ['All', 'Future', 'Past'].forEach(s => {{
+        const btn = document.getElementById('resFilter' + s);
+        if (btn) btn.classList.toggle('active', s === 'All');
+      }});
+      const chSel = document.getElementById('resFilterChannel');
+      if (chSel) chSel.value = 'all';
+      const tySel = document.getElementById('resFilterType');
+      if (tySel) tySel.value = 'all';
+      const sInput = document.getElementById('resSearchInput');
+      if (sInput) sInput.value = '';
+      applyReservationFilters();
+    }}
+
+    function sortResTable(colIdx, sortType) {{
+      if (resSortCol === colIdx) {{
+        resSortAsc = !resSortAsc;
+      }} else {{
+        resSortCol = colIdx;
+        resSortAsc = (sortType === 'str');
+      }}
+
+      for (let i = 0; i <= 6; i++) {{
+        const th = document.getElementById('resTh' + i);
+        if (th) {{
+          th.classList.toggle('sorted', i === colIdx);
+          const arrow = th.querySelector('.sort-arrow');
+          if (arrow) {{
+            arrow.textContent = (i === colIdx) ? (resSortAsc ? '▲' : '▼') : '↕';
+          }}
+        }}
+      }}
+
+      const tbody = document.getElementById('resTableBody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('.res-row'));
+
+      rows.sort((a, b) => {{
+        let valA, valB;
+        if (colIdx === 0) {{
+          valA = a.dataset.start || '';
+          valB = b.dataset.start || '';
+        }} else if (colIdx === 1) {{
+          valA = a.dataset.type || '';
+          valB = b.dataset.type || '';
+        }} else if (colIdx === 2) {{
+          valA = parseFloat(a.dataset.nights || 0);
+          valB = parseFloat(b.dataset.nights || 0);
+        }} else if (colIdx === 3) {{
+          valA = parseFloat(a.dataset.gross || 0);
+          valB = parseFloat(b.dataset.gross || 0);
+        }} else if (colIdx === 4) {{
+          valA = a.dataset.channel || '';
+          valB = b.dataset.channel || '';
+        }} else if (colIdx === 5) {{
+          valA = parseFloat(a.dataset.totchannel || 0);
+          valB = parseFloat(b.dataset.totchannel || 0);
+        }} else if (colIdx === 6) {{
+          valA = parseFloat(a.dataset.guestprice || 0);
+          valB = parseFloat(b.dataset.guestprice || 0);
+        }}
+
+        if (typeof valA === 'number') {{
+          return resSortAsc ? (valA - valB) : (valB - valA);
+        }} else {{
+          return resSortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        }}
+      }});
+
+      rows.forEach(r => tbody.appendChild(r));
+    }}
+
+    function initReservationsTable() {{
+      applyReservationFilters();
+    }}
 
     // =========================================================================
     // CUMULATIVE REVENUE CHART ENGINE (Chart.js)

@@ -396,7 +396,9 @@ class HTMLDashboardGenerator:
         reservations_list = res_store.get_all_reservations(include_cancelled=False)
         rev_data = res_store.calculate_cumulative_annual_revenue()
         calendar_tab_html = crv.render_calendar_tab(reservations_list)
+        reservations_tab_html = crv.render_reservations_tab(reservations_list)
         revenue_tab_html = crv.render_revenue_tab(rev_data)
+        reservation_modal_html = crv.render_reservation_modal()
         calendar_revenue_css = crv.get_calendar_revenue_css()
         calendar_revenue_js = crv.get_calendar_revenue_js(reservations_list, rev_data)
 
@@ -1204,6 +1206,7 @@ class HTMLDashboardGenerator:
       <button class="tab-btn" onclick="switchTab('comparison')" role="tab" aria-selected="false">🌐 Channels</button>
       <button class="tab-btn" onclick="switchTab('comps')" role="tab" aria-selected="false">🏡 Comps ({len(tier_a_comps) + len(tier_b_comps)})</button>
       <button class="tab-btn" onclick="switchTab('calendar')" role="tab" aria-selected="false">📅 Calendar</button>
+      <button class="tab-btn" onclick="switchTab('reservations')" role="tab" aria-selected="false">📑 Reservations ({len(reservations_list)})</button>
       <button class="tab-btn" onclick="switchTab('revenue')" role="tab" aria-selected="false">📈 Revenue</button>
       <button class="tab-btn" onclick="switchTab('methodology')" role="tab" aria-selected="false">📐 Methodology & PMS Guide</button>
       <button class="tab-btn" onclick="switchTab('debug')" role="tab" aria-selected="false">🛠️ Live Data & Debug</button>
@@ -1388,7 +1391,12 @@ class HTMLDashboardGenerator:
       {calendar_tab_html}
     </div>
 
-    <!-- TAB 5: CUMULATIVE REVENUE -->
+    <!-- TAB 5: RESERVATIONS TABLE -->
+    <div id="tab-reservations" class="tab-content">
+      {reservations_tab_html}
+    </div>
+
+    <!-- TAB 6: CUMULATIVE REVENUE -->
     <div id="tab-revenue" class="tab-content">
       {revenue_tab_html}
     </div>
@@ -1496,6 +1504,8 @@ class HTMLDashboardGenerator:
     </footer>
   </div>
 
+  {reservation_modal_html}
+
   <script>
     function switchTab(tabId) {{
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -1512,6 +1522,9 @@ class HTMLDashboardGenerator:
       }}
       if (tabId === 'calendar' && typeof renderCalendar === 'function') {{
         setTimeout(() => renderCalendar(calCurrentYear, calCurrentMonth), 50);
+      }}
+      if (tabId === 'reservations' && typeof initReservationsTable === 'function') {{
+        setTimeout(initReservationsTable, 50);
       }}
     }}
 

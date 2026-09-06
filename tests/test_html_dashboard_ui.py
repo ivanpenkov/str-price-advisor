@@ -144,6 +144,20 @@ class TestHTMLDashboardUI(unittest.TestCase):
                         await sales_search.fill("7BR")
                         await page.wait_for_timeout(30)
 
+                # Test Proposed Prices toggle buttons on pricing tab
+                btn_pricing = await page.query_selector("button[onclick*=\"'pricing'\"]")
+                if btn_pricing:
+                    await btn_pricing.click()
+                    await page.wait_for_timeout(30)
+                    btn_med = await page.query_selector("#btnSuggestMed")
+                    if btn_med:
+                        await btn_med.click()
+                        await page.wait_for_timeout(30)
+                    btn_avg = await page.query_selector("#btnSuggestAvg")
+                    if btn_avg:
+                        await btn_avg.click()
+                        await page.wait_for_timeout(30)
+
                 await browser.close()
                 return captured_errors
 
@@ -174,6 +188,13 @@ class TestHTMLDashboardUI(unittest.TestCase):
         # 5. Parent row data-hist-med and copy schedule script logic
         self.assertIn("data-hist-med=", self.html_content)
         self.assertIn(". Based on history: ", self.html_content)
+
+        # 6. Proposed Prices table, mode buttons, and copy button
+        self.assertIn('id="proposed-prices-table"', self.html_content)
+        self.assertIn('id="btnSuggestAvg"', self.html_content)
+        self.assertIn('id="btnSuggestMed"', self.html_content)
+        self.assertIn('id="btnCopyProposed"', self.html_content)
+        self.assertIn("copyProposedPrices", self.html_content)
 
 
 if __name__ == "__main__":

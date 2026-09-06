@@ -19,6 +19,7 @@ from src.kivoya_client import KivoyaClient
 from src.segmentation import CalendarSegmenter
 from src.analytics import PricingAnalyticsEngine
 from src.config import URGENT_PCT_DIFF, MODERATE_PCT_DIFF
+from src.proposed_prices import generate_proposed_prices
 
 
 def _is_spec_or_generic_title(s: str) -> bool:
@@ -425,6 +426,11 @@ class HTMLDashboardGenerator:
         sales_data = sales_tracker.compute_strategy_grid()
         recent_sales_list = sales_tracker.get_all_sales()
         market_sales_tab_html = self._render_market_sales_tab(sales_data, recent_sales_list, lead_analytics=lead_analytics)
+
+        kivoya_client = KivoyaClient()
+        seasonal_rates = kivoya_client.get_seasonal_rates()
+        proposed_prices_data = generate_proposed_prices(seasonal_rates, all_sorted)
+        proposed_prices_html = self._render_proposed_prices_section(proposed_prices_data)
 
         html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1380,6 +1386,9 @@ class HTMLDashboardGenerator:
           </table>
         </div>
       </div>
+
+      <!-- PROPOSED PRICES TABLE (PMS CONSENSUS SCHEDULE) -->
+      {proposed_prices_html}
     </div>
 
     <!-- TAB 1.5: CHANNEL PRICE COMPARISON -->
@@ -1768,6 +1777,134 @@ class HTMLDashboardGenerator:
         console.error('Fallback copy failed', e);
       }}
       document.body.removeChild(ta);
+    }}
+
+    let currentProposedRateMode = 'avg';
+
+    function setProposedRateMode(mode) {{
+      currentProposedRateMode = mode;
+      const btnAvg = document.getElementById('btnSuggestAvg');
+      const btnMed = document.getElementById('btnSuggestMed');
+      if (btnAvg && btnMed) {{
+        if (mode === 'avg') {{
+          btnAvg.classList.add('active');
+          btnMed.classList.remove('active');
+        }} else {{
+          btnMed.classList.add('active');
+          btnAvg.classList.remove('active');
+        }}
+      }}
+
+      document.querySelectorAll('.proposed-price-row').forEach(row => {{
+        const isHol = row.dataset.isHoliday === 'true';
+
+        function formatCell(valStr, baseStr) {{
+          if (!valStr) return '<span style="color:#475569;">—</span>';
+          const val = parseInt(valStr, 10);
+          const base = baseStr ? parseInt(baseStr, 10) : val;
+          const diff = val - base;
+          let color = '#cbd5e1';
+          let icon = '';
+          let title = `Unchanged base rate ($${{base}})`;
+          if (diff > 0) {{
+            color = '#34d399';
+            icon = '↑ ';
+            title = `Agreed consensus increase from $${{base}} (+$${{diff}})`;
+          }} else if (diff < 0) {{
+            color = '#f87171';
+            icon = '↓ ';
+            title = `Agreed consensus decrease from $${{base}} (-$${{Math.abs(diff)}})`;
+          }}
+          return `<strong style="color:${{color}}; font-family:'JetBrains Mono',monospace;" title="${{title}}">${{icon}}$${{val.toLocaleString()}}</strong>`;
+        }}
+
+        const midCell = row.querySelector('.proposed-cell-mid');
+        const wkdCell = row.querySelector('.proposed-cell-wkd');
+        const specCell = row.querySelector('.proposed-cell-spec');
+
+        if (isHol) {{
+          if (midCell) midCell.innerHTML = '<span style="color:#475569;">—</span>';
+          if (wkdCell) wkdCell.innerHTML = '<span style="color:#475569;">—</span>';
+          if (specCell) {{
+            const specVal = mode === 'avg' ? row.dataset.specAvg : row.dataset.specMed;
+            specCell.innerHTML = formatCell(specVal, row.dataset.specBase);
+          }}
+        }} else {{
+          if (specCell) specCell.innerHTML = '<span style="color:#475569;">—</span>';
+          if (midCell) {{
+            const midVal = mode === 'avg' ? row.dataset.midAvg : row.dataset.midMed;
+            midCell.innerHTML = formatCell(midVal, row.dataset.midBase);
+          }}
+          if (wkdCell) {{
+            const wkdVal = mode === 'avg' ? row.dataset.wkdAvg : row.dataset.wkdMed;
+            wkdCell.innerHTML = formatCell(wkdVal, row.dataset.wkdBase);
+          }}
+        }}
+      }});
+    }}
+
+    function copyProposedPrices() {{
+      const rows = document.querySelectorAll('.proposed-price-row');
+      const lines = [];
+      lines.push(['From', 'To', 'Midweek', 'Weekend', 'Special', 'Min nights', 'Holiday'].join('\\t'));
+
+      rows.forEach(row => {{
+        const fromDt = row.dataset.from || '';
+        const toDt = row.dataset.to || '';
+        const minNights = row.dataset.minNights || '2';
+        const isHol = row.dataset.isHoliday === 'true';
+        const holiday = row.dataset.holidayName || '';
+
+        let midStr = '';
+        let wkdStr = '';
+        let specStr = '';
+
+        if (isHol) {{
+          const specVal = currentProposedRateMode === 'avg' ? row.dataset.specAvg : row.dataset.specMed;
+          specStr = specVal ? `$${{parseInt(specVal, 10)}}` : '';
+        }} else {{
+          const midVal = currentProposedRateMode === 'avg' ? row.dataset.midAvg : row.dataset.midMed;
+          const wkdVal = currentProposedRateMode === 'avg' ? row.dataset.wkdAvg : row.dataset.wkdMed;
+          midStr = midVal ? `$${{parseInt(midVal, 10)}}` : '';
+          wkdStr = wkdVal ? `$${{parseInt(wkdVal, 10)}}` : '';
+        }}
+
+        lines.push([fromDt, toDt, midStr, wkdStr, specStr, minNights, holiday].join('\\t'));
+      }});
+
+      const text = lines.join('\\n');
+      const copyBtn = document.getElementById('btnCopyProposed');
+      const btnText = document.getElementById('copyProposedText');
+      const copyIcon = document.getElementById('copyProposedIconContainer');
+
+      function onSuccess() {{
+        if (btnText) btnText.innerText = `✓ Copied (${{rows.length}} periods)`;
+        if (copyIcon) copyIcon.innerHTML = '✓';
+        if (copyBtn) {{
+          copyBtn.style.borderColor = '#10b981';
+          copyBtn.style.color = '#34d399';
+          copyBtn.style.background = 'rgba(16, 185, 129, 0.2)';
+        }}
+        setTimeout(() => {{
+          if (btnText) btnText.innerText = 'Copy Proposed Prices';
+          if (copyIcon) copyIcon.innerHTML = '📋';
+          if (copyBtn) {{
+            copyBtn.style.borderColor = 'rgba(56, 189, 248, 0.35)';
+            copyBtn.style.color = '#38bdf8';
+            copyBtn.style.background = 'rgba(56, 189, 248, 0.15)';
+          }}
+        }}, 2200);
+      }}
+
+      if (navigator.clipboard && window.isSecureContext) {{
+        navigator.clipboard.writeText(text).then(onSuccess).catch(err => {{
+          fallbackCopyText(text);
+          onSuccess();
+        }});
+      }} else {{
+        fallbackCopyText(text);
+        onSuccess();
+      }}
     }}
 
     function copyPlatformComparison() {{
@@ -2948,6 +3085,136 @@ class HTMLDashboardGenerator:
               </tr>
             """)
         return "\n".join(rows)
+
+    def _render_proposed_prices_section(self, proposed_periods: List[Dict[str, Any]]) -> str:
+        if not proposed_periods:
+            return ""
+
+        rows_html = []
+        for idx, p in enumerate(proposed_periods):
+            is_hol = p["is_holiday"]
+            f_dt = p["from_date"]
+            t_dt = p["to_date"]
+            min_n = p["min_nights"]
+            hol_name = p["holiday_name"]
+
+            mid_base = p["midweek_base"]
+            mid_avg = p["midweek_avg"]
+            mid_med = p["midweek_med"]
+
+            wkd_base = p["weekend_base"]
+            wkd_avg = p["weekend_avg"]
+            wkd_med = p["weekend_med"]
+
+            spec_base = p["special_base"]
+            spec_avg = p["special_avg"]
+            spec_med = p["special_med"]
+
+            def format_rate_cell(val: Optional[int], base: Optional[int]) -> str:
+                if val is None:
+                    return '<span style="color:#475569;">—</span>'
+                diff = (val - base) if base is not None else 0
+                if diff > 0:
+                    color = "#34d399"
+                    title = f"Agreed consensus increase from ${base} (+${diff})"
+                    icon = "↑ "
+                elif diff < 0:
+                    color = "#f87171"
+                    title = f"Agreed consensus decrease from ${base} (-${abs(diff)})"
+                    icon = "↓ "
+                else:
+                    color = "#cbd5e1"
+                    title = f"Unchanged base rate (${base})"
+                    icon = ""
+                return f'<strong style="color:{color}; font-family:\'JetBrains Mono\',monospace;" title="{title}">{icon}${val:,}</strong>'
+
+            mid_html = format_rate_cell(mid_avg, mid_base) if not is_hol else '<span style="color:#475569;">—</span>'
+            wkd_html = format_rate_cell(wkd_avg, wkd_base) if not is_hol else '<span style="color:#475569;">—</span>'
+            spec_html = format_rate_cell(spec_avg, spec_base) if is_hol else '<span style="color:#475569;">—</span>'
+            hol_html = f'<span style="color:#fbbf24; font-weight:700;">{hol_name}</span>' if is_hol else '<span style="color:#475569;">—</span>'
+
+            row_bg = "background: rgba(251, 191, 36, 0.04);" if is_hol else ""
+
+            rows_html.append(f"""
+              <tr class="proposed-price-row" id="prop-row-{idx}"
+                  style="{row_bg}"
+                  data-is-holiday="{str(is_hol).lower()}"
+                  data-from="{f_dt}"
+                  data-to="{t_dt}"
+                  data-min-nights="{min_n}"
+                  data-holiday-name="{hol_name}"
+                  data-mid-base="{mid_base if mid_base is not None else ''}"
+                  data-mid-avg="{mid_avg if mid_avg is not None else ''}"
+                  data-mid-med="{mid_med if mid_med is not None else ''}"
+                  data-wkd-base="{wkd_base if wkd_base is not None else ''}"
+                  data-wkd-avg="{wkd_avg if wkd_avg is not None else ''}"
+                  data-wkd-med="{wkd_med if wkd_med is not None else ''}"
+                  data-spec-base="{spec_base if spec_base is not None else ''}"
+                  data-spec-avg="{spec_avg if spec_avg is not None else ''}"
+                  data-spec-med="{spec_med if spec_med is not None else ''}">
+                <td style="font-family:'JetBrains Mono',monospace; white-space:nowrap; font-weight:600;">{f_dt}</td>
+                <td style="font-family:'JetBrains Mono',monospace; white-space:nowrap; font-weight:600;">{t_dt}</td>
+                <td class="proposed-cell-mid">{mid_html}</td>
+                <td class="proposed-cell-wkd">{wkd_html}</td>
+                <td class="proposed-cell-spec">{spec_html}</td>
+                <td style="text-align:center; font-family:'JetBrains Mono',monospace; font-weight:600;">{min_n}</td>
+                <td>{hol_html}</td>
+              </tr>
+            """)
+
+        tbody_html = "\n".join(rows_html)
+
+        return f"""
+      <div class="section-box" style="margin-top: 32px; border: 1px solid rgba(56, 189, 248, 0.25); background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:18px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <h3 style="font-size:1.35rem; font-weight:800; margin:0; color:#f8fafc; display:flex; align-items:center; gap:8px;">
+                <span style="color:#38bdf8;">🏷️</span> Proposed Prices
+              </h3>
+              <span class="badge" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3); font-size:0.75rem; font-weight:700;">PMS Consensus Schedule</span>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.88rem; margin:6px 0 0 0; max-width:850px; line-height:1.4;">
+              Synthesizes competitive market recommendations with historical track record benchmarks across Kivoya seasonal rate periods. Rates only adjust when market data and historical sales agree on direction; conflicting intervals hold current base rates firm.
+            </p>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <!-- Selector: Median / Average -->
+            <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.06); padding:4px 8px; border-radius:8px; border:1px solid rgba(255,255,255,0.12);">
+              <span style="font-size:0.78rem; color:#94a3b8; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-right:2px;">Suggest:</span>
+              <button id="btnSuggestAvg" class="res-pill-btn active" onclick="setProposedRateMode('avg')" style="padding:3px 10px; font-size:0.8rem;">Average</button>
+              <button id="btnSuggestMed" class="res-pill-btn" onclick="setProposedRateMode('med')" style="padding:3px 10px; font-size:0.8rem;">Median</button>
+            </div>
+
+            <!-- Copy Proposed Prices Button -->
+            <button id="btnCopyProposed" class="action-btn" onclick="copyProposedPrices()" style="display:inline-flex; align-items:center; gap:6px; background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.35); padding:6px 14px; border-radius:6px; font-weight:700; font-size:0.85rem; cursor:pointer;">
+              <span id="copyProposedIconContainer">📋</span>
+              <span id="copyProposedText">Copy Proposed Prices</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table id="proposed-prices-table" style="width:100%;">
+            <thead>
+              <tr>
+                <th style="width:115px;">From</th>
+                <th style="width:115px;">To</th>
+                <th><span style="color:#fb923c; font-size:0.9rem;">●</span> Midweek</th>
+                <th><span style="color:#818cf8; font-size:0.9rem;">●</span> Weekend</th>
+                <th><span style="color:#fbbf24; font-size:0.9rem;">●</span> Special</th>
+                <th style="width:105px; text-align:center;">Min nights</th>
+                <th>Holiday</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tbody_html}
+            </tbody>
+          </table>
+        </div>
+      </div>
+        """
 
     def _render_comp_cards(self, comps: List[Dict[str, Any]], tier_label: str) -> str:
         cards = []

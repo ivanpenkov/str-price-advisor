@@ -238,13 +238,35 @@ class KivoyaClient:
             ...
         ]
         """
-        raw_data = self._call_api(
-            "GetPropertyRatesRawData",
-            {"unit_id": self.unit_id}
-        )
-        rates = raw_data.get("rates", [])
-        if isinstance(rates, dict):
-            rates = [rates]
+        cache_path = Path("data/cache/kivoya_seasonal_rates.json")
+        rates = []
+        try:
+            raw_data = self._call_api(
+                "GetPropertyRatesRawData",
+                {"unit_id": self.unit_id}
+            )
+            rates = raw_data.get("rates", [])
+            if isinstance(rates, dict):
+                rates = [rates]
+        except Exception:
+            rates = []
+
+        # If API call returned no rates or failed, try loading from local cache
+        if not rates and cache_path.exists():
+            try:
+                cached_items = json.loads(cache_path.read_text(encoding="utf-8"))
+                reconstituted = []
+                for item in cached_items:
+                    r = dict(item)
+                    r["begin_dt"] = datetime.strptime(r["begin_dt"], "%Y-%m-%d").date()
+                    r["end_dt"] = datetime.strptime(r["end_dt"], "%Y-%m-%d").date()
+                    r["first_days"] = set(r.get("first_days") or [])
+                    r["second_days"] = set(r.get("second_days") or [])
+                    reconstituted.append(r)
+                if reconstituted:
+                    return sorted(reconstituted, key=lambda x: x["begin_dt"])
+            except Exception:
+                pass
 
         parsed = []
         for rate in rates:
@@ -285,7 +307,24 @@ class KivoyaClient:
                     })
                 except ValueError:
                     continue
-        return sorted(parsed, key=lambda x: x["begin_dt"])
+
+        sorted_rates = sorted(parsed, key=lambda x: x["begin_dt"])
+        if sorted_rates:
+            try:
+                cache_path.parent.mkdir(parents=True, exist_ok=True)
+                serializable = []
+                for r in sorted_rates:
+                    item = dict(r)
+                    item["begin_dt"] = item["begin_dt"].isoformat()
+                    item["end_dt"] = item["end_dt"].isoformat()
+                    item["first_days"] = list(item["first_days"]) if item["first_days"] else []
+                    item["second_days"] = list(item["second_days"]) if item["second_days"] else []
+                    serializable.append(item)
+                cache_path.write_text(json.dumps(serializable, indent=2), encoding="utf-8")
+            except Exception:
+                pass
+
+        return sorted_rates
 
     def get_rate_for_date(self, target_date: date, rates: Optional[List[Dict[str, Any]]] = None) -> float:
         """Find our base nightly rate for a given date from the seasonal schedule, honoring day-of-week intervals."""

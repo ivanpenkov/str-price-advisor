@@ -181,10 +181,11 @@ class TestCompManagement(unittest.TestCase):
             }
         }
 
-        price, label, is_unavailable = CompManager.parse_stays_pdp_sections(mock_payload)
+        price, label, is_unavailable, unavail_reason = CompManager.parse_stays_pdp_sections(mock_payload)
         self.assertEqual(price, 2496.0)
         self.assertIn("2,496", label)
         self.assertFalse(is_unavailable)
+        self.assertIsNone(unavail_reason)
 
     def test_parse_stays_pdp_sections_basic_price(self):
         """Standard undiscounted prices (BasicDisplayPriceLine) must be parsed correctly."""
@@ -216,9 +217,10 @@ class TestCompManagement(unittest.TestCase):
             }
         }
 
-        price, label, is_unavailable = CompManager.parse_stays_pdp_sections(mock_payload)
+        price, label, is_unavailable, unavail_reason = CompManager.parse_stays_pdp_sections(mock_payload)
         self.assertEqual(price, 1820.0)
         self.assertFalse(is_unavailable)
+        self.assertIsNone(unavail_reason)
 
     def test_parse_stays_pdp_sections_unavailable(self):
         """True unavailabilities indicated by localizedUnavailabilityMessage or available: False must be flagged."""
@@ -232,7 +234,7 @@ class TestCompManagement(unittest.TestCase):
                                     "sectionId": "BOOK_IT_SIDEBAR",
                                     "section": {
                                         "available": False,
-                                        "localizedUnavailabilityMessage": "Those dates are not available",
+                                        "localizedUnavailabilityMessage": "Minimum stay is 5 nights",
                                         "structuredDisplayPrice": None,
                                     },
                                 }
@@ -243,9 +245,10 @@ class TestCompManagement(unittest.TestCase):
             }
         }
 
-        price, label, is_unavailable = CompManager.parse_stays_pdp_sections(mock_payload)
+        price, label, is_unavailable, unavail_reason = CompManager.parse_stays_pdp_sections(mock_payload)
         self.assertIsNone(price)
         self.assertTrue(is_unavailable)
+        self.assertEqual(unavail_reason, "Minimum stay is 5 nights")
 
     def test_adults_capacity_capped_at_16(self):
         """Comp with 17 beds and no explicit accommodates must cap requested adults to 16."""

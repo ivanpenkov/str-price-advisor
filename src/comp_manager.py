@@ -417,16 +417,17 @@ class CompManager:
         return True
 
     @staticmethod
-    def parse_stays_pdp_sections(data: Dict[str, Any]) -> Tuple[Optional[float], Optional[str], bool]:
+    def parse_stays_pdp_sections(data: Dict[str, Any]) -> Tuple[Optional[float], Optional[str], bool, Optional[str]]:
         """
-        Extract total stay price, label, and true unavailability from StaysPdpSections payload.
+        Extract total stay price, label, true unavailability, and localized message from StaysPdpSections payload.
         Handles both BasicDisplayPriceLine and DiscountedDisplayPriceLine (promotions/discounts),
         falling back to accessibilityLabel.
-        Returns: (intercepted_price, intercepted_label, is_unavailable)
+        Returns: (intercepted_price, intercepted_label, is_unavailable, unavailability_reason)
         """
         intercepted_price: Optional[float] = None
         intercepted_label: Optional[str] = None
         is_unavailable: bool = False
+        unavailability_reason: Optional[str] = None
 
         sections = (
             data.get("data", {})
@@ -465,8 +466,11 @@ class CompManager:
             # Check true unavailability flags
             if sec.get("available") is False or sec.get("localizedUnavailabilityMessage"):
                 is_unavailable = True
+                msg = sec.get("localizedUnavailabilityMessage")
+                if msg and not unavailability_reason:
+                    unavailability_reason = msg
 
-        return intercepted_price, intercepted_label, is_unavailable
+        return intercepted_price, intercepted_label, is_unavailable, unavailability_reason
 
     async def scrape_comp_interval_prices(
         self,
@@ -542,21 +546,24 @@ class CompManager:
                 intercepted_price: Optional[float] = None
                 intercepted_label: Optional[str] = None
                 is_unavailable: bool = False
+                intercepted_reason: Optional[str] = None
 
                 done_event = asyncio.Event()
 
                 async def on_response(resp):
-                    nonlocal intercepted_price, intercepted_label, is_unavailable
+                    nonlocal intercepted_price, intercepted_label, is_unavailable, intercepted_reason
                     if "StaysPdpSections" in resp.url:
                         try:
                             body = await resp.text()
                             data = json.loads(body)
-                            price, label, unavail = CompManager.parse_stays_pdp_sections(data)
+                            price, label, unavail, reason = CompManager.parse_stays_pdp_sections(data)
                             if price and not intercepted_price:
                                 intercepted_price = price
                                 intercepted_label = label
                             if unavail:
                                 is_unavailable = True
+                            if reason and not intercepted_reason:
+                                intercepted_reason = reason
                             done_event.set()
                         except Exception:
                             pass
@@ -603,10 +610,13 @@ class CompManager:
                     print(f" ✅ ${eff_nightly:,.0f}/night (Total ${intercepted_price:,.0f})")
                     results.append({"interval": f"{c_in}_{c_out}", "status": status, "rate": eff_nightly, "total": intercepted_price})
                 else:
-                    status = "BOOKED / BLOCKED"
-                    print(" ⛔ BOOKED / UNAVAILABLE")
-                    # If previously had cached available rate for this date, keep it or remove it?
-                    # Removing stale available rate if it is now confirmed booked
+                    if intercepted_reason:
+                        status = f"UNAVAILABLE ({intercepted_reason})"
+                        print(f" ⛔ UNAVAILABLE ({intercepted_reason})")
+                    else:
+                        status = "BOOKED / UNAVAILABLE"
+                        print(" ⛔ BOOKED / UNAVAILABLE")
+                    # If previously had cached available rate for this date, remove stale rate
                     if cache_file.exists():
                         try:
                             cache_file.unlink()

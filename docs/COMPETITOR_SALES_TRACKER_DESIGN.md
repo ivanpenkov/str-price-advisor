@@ -152,3 +152,4 @@ The dashboard introduces a new primary tab: **"Market Demand & Sales"** (`#tab-m
    - Compares the empirical absorption rate with our current baseline strategy, highlighting opportunities to raise rates far out or trim rates last minute.
 3. **Recent Competitor Bookings Feed**:
    - Chronological table showing properties that booked, stay dates, days in advance, last rate, and market percentile when sold.
+

@@ -474,3 +474,4 @@ class CompetitorSalesTracker:
             "grid": grid,
             "horizons": horizons,
         }
+

@@ -1545,6 +1545,8 @@ class HTMLDashboardGenerator:
       if (tabId === 'reservations' && typeof initReservationsTable === 'function') {{
         setTimeout(initReservationsTable, 50);
       }}
+    }}
+
     function filterSalesFeed(statusFilter, btn) {{
       if (btn) {{
         document.querySelectorAll('.sales-filter-pills .pill-btn').forEach(b => b.classList.remove('active'));

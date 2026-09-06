@@ -2854,19 +2854,23 @@ class HTMLDashboardGenerator:
                 h_min = hist.get("min_rate", 0.0)
                 h_max = hist.get("max_rate", 0.0)
                 h_med = hist.get("median_rate", 0.0)
-                h_flag = hist.get("flag", "ON_TRACK")
                 h_flag_label = hist.get("flag_label", "Aligned")
-                h_flag_color = hist.get("flag_color", "#34d399")
-                if h_flag == "ON_TRACK":
-                    h_badge_bg = "rgba(52,211,153,0.15)"
-                elif h_flag == "AGGRESSIVE_PREMIUM":
-                    h_badge_bg = "rgba(251,191,36,0.15)"
-                elif h_flag == "DEEP_DISCOUNT":
-                    h_badge_bg = "rgba(248,113,113,0.15)"
-                else:
-                    h_badge_bg = "rgba(148,163,184,0.15)"
 
-                hist_cell_html = f"""<div style="font-family:'JetBrains Mono',monospace; font-size:0.84rem; white-space:nowrap;"><strong style="color:#f8fafc;">${h_min:.0f}–${h_max:.0f}</strong> <span style="color:#94a3b8; font-size:0.75rem;">(med ${h_med:.0f})</span></div><div style="margin-top:2px;"><span class="badge" style="background:{h_badge_bg}; color:{h_flag_color}; font-size:0.7rem; padding:1px 5px; font-weight:600;" title="{h_count} confirmed prior bookings within ±15 days in 2022–2026">{h_flag_label}</span></div>"""
+                our_base = float(s.get("our_base_nightly", 0.0))
+                base_round = round(our_base)
+                med_round = round(h_med)
+
+                if med_round > base_round:
+                    h_action_text = f"↑ Increase ${base_round} → ${med_round}"
+                    h_action_style = "color:#34d399; font-weight:700;"
+                elif med_round < base_round:
+                    h_action_text = f"↓ Reduce ${base_round} → ${med_round}"
+                    h_action_style = "color:#f87171; font-weight:700;"
+                else:
+                    h_action_text = f"Keep ${base_round}"
+                    h_action_style = "color:#94a3b8; font-weight:600;"
+
+                hist_cell_html = f"""<div style="font-family:'JetBrains Mono',monospace; font-size:0.84rem; white-space:nowrap;"><strong style="color:#f8fafc;">${h_min:.0f}–${h_max:.0f}</strong> <span style="color:#94a3b8; font-size:0.75rem;">(med ${h_med:.0f})</span></div><div style="font-size:0.85rem; {h_action_style} margin-top:2px; white-space:nowrap;" title="{h_count} confirmed prior bookings within ±15 days in 2022–2026 ({h_flag_label})"><strong>{h_action_text}</strong></div>"""
             else:
                 hist_cell_html = '<span style="color:#64748b; font-size:0.78rem;" title="No confirmed prior bookings within ±15 days">—</span>'
 

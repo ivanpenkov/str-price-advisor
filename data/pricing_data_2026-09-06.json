@@ -1,7 +1,7 @@
 {
   "property": "Villa del Sol",
   "report_date": "2026-09-06",
-  "generated_at": "2026-09-06T16:01:38.914713",
+  "generated_at": "2026-09-06T16:06:07.591643",
   "summary": {
     "total_open_intervals": 80,
     "urgent_count": 31,
@@ -155,13 +155,13 @@
       "historical_benchmark": {
         "sample_count": 5,
         "min_rate": 417.83,
-        "max_rate": 759.27,
-        "median_rate": 564.85,
-        "avg_rate": 585.18,
-        "range_str": "$418\u2013$759 (Med $565)",
-        "variance_pct": 151.9,
+        "max_rate": 822.55,
+        "median_rate": 601.77,
+        "avg_rate": 611.72,
+        "range_str": "$418\u2013$823 (Med $602)",
+        "variance_pct": 136.5,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+152% vs Track Record",
+        "flag_label": "+136% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -184,16 +184,16 @@
             "start_date": "2024-08-14",
             "end_date": "2024-08-20",
             "nights": 6,
-            "gross_nightly": 532.33,
-            "payout_nightly": 436.51,
+            "gross_nightly": 601.77,
+            "payout_nightly": 493.45,
             "confirmation_id": 13546
           },
           {
             "start_date": "2024-08-23",
             "end_date": "2024-08-26",
             "nights": 3,
-            "gross_nightly": 759.27,
-            "payout_nightly": 622.6,
+            "gross_nightly": 822.55,
+            "payout_nightly": 674.49,
             "confirmation_id": 12316
           },
           {
@@ -367,12 +367,12 @@
         "sample_count": 6,
         "min_rate": 564.65,
         "max_rate": 1241.9,
-        "median_rate": 619.82,
-        "avg_rate": 715.36,
-        "range_str": "$565\u2013$1,242 (Med $620)",
-        "variance_pct": 125.7,
+        "median_rate": 656.7,
+        "avg_rate": 740.36,
+        "range_str": "$565\u2013$1,242 (Med $657)",
+        "variance_pct": 113.0,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+126% vs Track Record",
+        "flag_label": "+113% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -387,16 +387,16 @@
             "start_date": "2022-07-14",
             "end_date": "2022-07-24",
             "nights": 10,
-            "gross_nightly": 650.69,
-            "payout_nightly": 533.56,
+            "gross_nightly": 716.86,
+            "payout_nightly": 587.82,
             "confirmation_id": 8014
           },
           {
             "start_date": "2023-06-24",
             "end_date": "2023-06-26",
             "nights": 2,
-            "gross_nightly": 643.08,
-            "payout_nightly": 527.33,
+            "gross_nightly": 726.96,
+            "payout_nightly": 596.11,
             "confirmation_id": 10243
           },
           {
@@ -586,12 +586,12 @@
         "sample_count": 5,
         "min_rate": 417.83,
         "max_rate": 729.0,
-        "median_rate": 595.26,
-        "avg_rate": 585.2,
-        "range_str": "$418\u2013$729 (Med $595)",
-        "variance_pct": 130.8,
+        "median_rate": 601.77,
+        "avg_rate": 599.09,
+        "range_str": "$418\u2013$729 (Med $602)",
+        "variance_pct": 128.3,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+131% vs Track Record",
+        "flag_label": "+128% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -630,8 +630,8 @@
             "start_date": "2024-08-14",
             "end_date": "2024-08-20",
             "nights": 6,
-            "gross_nightly": 532.33,
-            "payout_nightly": 436.51,
+            "gross_nightly": 601.77,
+            "payout_nightly": 493.45,
             "confirmation_id": 13546
           }
         ]
@@ -796,10 +796,10 @@
       "historical_benchmark": {
         "sample_count": 5,
         "min_rate": 417.83,
-        "max_rate": 759.27,
+        "max_rate": 822.55,
         "median_rate": 651.6,
-        "avg_rate": 618.01,
-        "range_str": "$418\u2013$759 (Med $652)",
+        "avg_rate": 644.55,
+        "range_str": "$418\u2013$823 (Med $652)",
         "variance_pct": 109.2,
         "flag": "AGGRESSIVE_PREMIUM",
         "flag_label": "+109% vs Track Record",
@@ -833,16 +833,16 @@
             "start_date": "2024-08-14",
             "end_date": "2024-08-20",
             "nights": 6,
-            "gross_nightly": 532.33,
-            "payout_nightly": 436.51,
+            "gross_nightly": 601.77,
+            "payout_nightly": 493.45,
             "confirmation_id": 13546
           },
           {
             "start_date": "2024-08-23",
             "end_date": "2024-08-26",
             "nights": 3,
-            "gross_nightly": 759.27,
-            "payout_nightly": 622.6,
+            "gross_nightly": 822.55,
+            "payout_nightly": 674.49,
             "confirmation_id": 12316
           }
         ]
@@ -1006,14 +1006,14 @@
       "our_percentile_rank_adj": 20.0,
       "historical_benchmark": {
         "sample_count": 6,
-        "min_rate": 532.33,
-        "max_rate": 759.27,
-        "median_rate": 580.6,
-        "avg_rate": 608.9,
-        "range_str": "$532\u2013$759 (Med $581)",
-        "variance_pct": 132.7,
+        "min_rate": 549.0,
+        "max_rate": 822.55,
+        "median_rate": 599.06,
+        "avg_rate": 631.02,
+        "range_str": "$549\u2013$823 (Med $599)",
+        "variance_pct": 125.5,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+133% vs Track Record",
+        "flag_label": "+126% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -1036,16 +1036,16 @@
             "start_date": "2024-08-14",
             "end_date": "2024-08-20",
             "nights": 6,
-            "gross_nightly": 532.33,
-            "payout_nightly": 436.51,
+            "gross_nightly": 601.77,
+            "payout_nightly": 493.45,
             "confirmation_id": 13546
           },
           {
             "start_date": "2024-08-23",
             "end_date": "2024-08-26",
             "nights": 3,
-            "gross_nightly": 759.27,
-            "payout_nightly": 622.6,
+            "gross_nightly": 822.55,
+            "payout_nightly": 674.49,
             "confirmation_id": 12316
           },
           {
@@ -2005,15 +2005,15 @@
       "action_summary_adj": "\u2191 Increase $649 \u2192 $1305",
       "our_percentile_rank_adj": 20.5,
       "historical_benchmark": {
-        "sample_count": 6,
+        "sample_count": 7,
         "min_rate": 466.81,
         "max_rate": 1311.45,
-        "median_rate": 791.42,
-        "avg_rate": 887.39,
-        "range_str": "$467\u2013$1,311 (Med $791)",
-        "variance_pct": 64.9,
+        "median_rate": 803.05,
+        "avg_rate": 861.34,
+        "range_str": "$467\u2013$1,311 (Med $803)",
+        "variance_pct": 62.5,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+65% vs Track Record",
+        "flag_label": "+62% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -2023,6 +2023,14 @@
             "gross_nightly": 1311.45,
             "payout_nightly": 1075.39,
             "confirmation_id": 6854
+          },
+          {
+            "start_date": "2022-05-25",
+            "end_date": "2022-06-01",
+            "nights": 7,
+            "gross_nightly": 613.56,
+            "payout_nightly": 503.11,
+            "confirmation_id": 7488
           },
           {
             "start_date": "2023-05-18",
@@ -2036,16 +2044,16 @@
             "start_date": "2024-05-15",
             "end_date": "2024-05-19",
             "nights": 4,
-            "gross_nightly": 714.25,
-            "payout_nightly": 585.68,
+            "gross_nightly": 757.98,
+            "payout_nightly": 621.54,
             "confirmation_id": 12368
           },
           {
             "start_date": "2024-05-23",
             "end_date": "2024-05-27",
             "nights": 4,
-            "gross_nightly": 779.8,
-            "payout_nightly": 639.44,
+            "gross_nightly": 827.55,
+            "payout_nightly": 678.59,
             "confirmation_id": 12846
           },
           {
@@ -2227,20 +2235,20 @@
         "sample_count": 6,
         "min_rate": 417.83,
         "max_rate": 729.0,
-        "median_rate": 624.85,
-        "avg_rate": 607.23,
+        "median_rate": 625.3,
+        "avg_rate": 618.26,
         "range_str": "$418\u2013$729 (Med $625)",
-        "variance_pct": 108.7,
+        "variance_pct": 108.5,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+109% vs Track Record",
+        "flag_label": "+108% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-07-14",
             "end_date": "2022-07-24",
             "nights": 10,
-            "gross_nightly": 650.69,
-            "payout_nightly": 533.56,
+            "gross_nightly": 716.86,
+            "payout_nightly": 587.82,
             "confirmation_id": 8014
           },
           {
@@ -2446,12 +2454,12 @@
         "sample_count": 4,
         "min_rate": 466.81,
         "max_rate": 1241.9,
-        "median_rate": 619.17,
-        "avg_rate": 736.76,
-        "range_str": "$467\u2013$1,242 (Med $619)",
-        "variance_pct": 109.6,
+        "median_rate": 661.11,
+        "avg_rate": 757.73,
+        "range_str": "$467\u2013$1,242 (Med $661)",
+        "variance_pct": 96.3,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+110% vs Track Record",
+        "flag_label": "+96% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -2466,8 +2474,8 @@
             "start_date": "2023-06-24",
             "end_date": "2023-06-26",
             "nights": 2,
-            "gross_nightly": 643.08,
-            "payout_nightly": 527.33,
+            "gross_nightly": 726.96,
+            "payout_nightly": 596.11,
             "confirmation_id": 10243
           },
           {
@@ -2668,12 +2676,12 @@
         "sample_count": 4,
         "min_rate": 564.65,
         "max_rate": 1241.9,
-        "median_rate": 619.17,
-        "avg_rate": 761.22,
-        "range_str": "$565\u2013$1,242 (Med $619)",
-        "variance_pct": 112.2,
+        "median_rate": 661.11,
+        "avg_rate": 782.19,
+        "range_str": "$565\u2013$1,242 (Med $661)",
+        "variance_pct": 98.8,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+112% vs Track Record",
+        "flag_label": "+99% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -2688,8 +2696,8 @@
             "start_date": "2023-06-24",
             "end_date": "2023-06-26",
             "nights": 2,
-            "gross_nightly": 643.08,
-            "payout_nightly": 527.33,
+            "gross_nightly": 726.96,
+            "payout_nightly": 596.11,
             "confirmation_id": 10243
           },
           {
@@ -3726,17 +3734,25 @@
       "action_summary_adj": "\u2193 Reduce $1049 \u2192 $680",
       "our_percentile_rank_adj": 83.3,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 658.51,
+        "sample_count": 3,
+        "min_rate": 581.02,
         "max_rate": 679.15,
-        "median_rate": 668.83,
-        "avg_rate": 668.83,
-        "range_str": "$659\u2013$679 (Med $669)",
-        "variance_pct": 1.7,
+        "median_rate": 598.64,
+        "avg_rate": 619.6,
+        "range_str": "$581\u2013$679 (Med $599)",
+        "variance_pct": 13.6,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 581.02,
+            "payout_nightly": 476.44,
+            "confirmation_id": 12351
+          },
           {
             "start_date": "2024-04-21",
             "end_date": "2024-04-22",
@@ -3749,8 +3765,8 @@
             "start_date": "2025-05-09",
             "end_date": "2025-05-15",
             "nights": 6,
-            "gross_nightly": 658.51,
-            "payout_nightly": 539.98,
+            "gross_nightly": 598.64,
+            "payout_nightly": 490.89,
             "confirmation_id": 14988
           }
         ]
@@ -5187,10 +5203,10 @@
       "historical_benchmark": {
         "sample_count": 4,
         "min_rate": 549.0,
-        "max_rate": 759.27,
+        "max_rate": 822.55,
         "median_rate": 580.6,
-        "avg_rate": 617.37,
-        "range_str": "$549\u2013$759 (Med $581)",
+        "avg_rate": 633.19,
+        "range_str": "$549\u2013$823 (Med $581)",
         "variance_pct": 120.6,
         "flag": "AGGRESSIVE_PREMIUM",
         "flag_label": "+121% vs Track Record",
@@ -5208,8 +5224,8 @@
             "start_date": "2024-08-23",
             "end_date": "2024-08-26",
             "nights": 3,
-            "gross_nightly": 759.27,
-            "payout_nightly": 622.6,
+            "gross_nightly": 822.55,
+            "payout_nightly": 674.49,
             "confirmation_id": 12316
           },
           {
@@ -5391,20 +5407,20 @@
         "sample_count": 4,
         "min_rate": 595.26,
         "max_rate": 729.0,
-        "median_rate": 624.85,
-        "avg_rate": 643.49,
-        "range_str": "$595\u2013$729 (Med $625)",
-        "variance_pct": 96.5,
+        "median_rate": 657.93,
+        "avg_rate": 660.03,
+        "range_str": "$595\u2013$729 (Med $658)",
+        "variance_pct": 86.6,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+96% vs Track Record",
+        "flag_label": "+87% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-07-14",
             "end_date": "2022-07-24",
             "nights": 10,
-            "gross_nightly": 650.69,
-            "payout_nightly": 533.56,
+            "gross_nightly": 716.86,
+            "payout_nightly": 587.82,
             "confirmation_id": 8014
           },
           {
@@ -6392,17 +6408,33 @@
       "action_summary_adj": "\u2193 Reduce $1049 \u2192 $707",
       "our_percentile_rank_adj": 76.1,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 679.15,
-        "max_rate": 1121.84,
-        "median_rate": 900.49,
-        "avg_rate": 900.49,
-        "range_str": "$679\u2013$1,122 (Med $900)",
-        "variance_pct": -21.5,
+        "sample_count": 4,
+        "min_rate": 581.02,
+        "max_rate": 1001.64,
+        "median_rate": 765.29,
+        "avg_rate": 778.31,
+        "range_str": "$581\u2013$1,002 (Med $765)",
+        "variance_pct": -7.6,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
+          {
+            "start_date": "2022-04-06",
+            "end_date": "2022-04-10",
+            "nights": 4,
+            "gross_nightly": 851.43,
+            "payout_nightly": 698.17,
+            "confirmation_id": 7025
+          },
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 581.02,
+            "payout_nightly": 476.44,
+            "confirmation_id": 12351
+          },
           {
             "start_date": "2024-04-21",
             "end_date": "2024-04-22",
@@ -6415,8 +6447,8 @@
             "start_date": "2025-04-04",
             "end_date": "2025-04-09",
             "nights": 5,
-            "gross_nightly": 1121.84,
-            "payout_nightly": 919.91,
+            "gross_nightly": 1001.64,
+            "payout_nightly": 821.35,
             "confirmation_id": 14616
           }
         ]
@@ -7078,23 +7110,31 @@
       "action_summary_adj": "\u2193 Reduce $674 \u2192 $475",
       "our_percentile_rank_adj": 75.8,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 428.69,
-        "max_rate": 428.69,
-        "median_rate": 428.69,
-        "avg_rate": 428.69,
-        "range_str": "$429\u2013$429 (Med $429)",
-        "variance_pct": 10.8,
+        "sample_count": 2,
+        "min_rate": 379.85,
+        "max_rate": 702.3,
+        "median_rate": 541.08,
+        "avg_rate": 541.08,
+        "range_str": "$380\u2013$702 (Med $541)",
+        "variance_pct": -12.2,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2022-11-23",
+            "end_date": "2022-11-27",
+            "nights": 4,
+            "gross_nightly": 702.3,
+            "payout_nightly": 575.89,
+            "confirmation_id": 8709
+          },
+          {
             "start_date": "2026-12-12",
             "end_date": "2026-12-19",
             "nights": 7,
-            "gross_nightly": 428.69,
-            "payout_nightly": 351.52,
+            "gross_nightly": 379.85,
+            "payout_nightly": 311.48,
             "confirmation_id": 18555
           }
         ]
@@ -8132,13 +8172,13 @@
       "action_summary_adj": "\u2191 Increase $749 \u2192 $1273",
       "our_percentile_rank_adj": 27.1,
       "historical_benchmark": {
-        "sample_count": 6,
+        "sample_count": 8,
         "min_rate": 466.81,
         "max_rate": 1311.45,
-        "median_rate": 791.42,
-        "avg_rate": 887.39,
+        "median_rate": 790.64,
+        "avg_rate": 850.96,
         "range_str": "$467\u2013$1,311 (Med $791)",
-        "variance_pct": 60.9,
+        "variance_pct": 61.0,
         "flag": "AGGRESSIVE_PREMIUM",
         "flag_label": "+61% vs Track Record",
         "flag_color": "#fbbf24",
@@ -8152,6 +8192,14 @@
             "confirmation_id": 6854
           },
           {
+            "start_date": "2022-05-25",
+            "end_date": "2022-06-01",
+            "nights": 7,
+            "gross_nightly": 613.56,
+            "payout_nightly": 503.11,
+            "confirmation_id": 7488
+          },
+          {
             "start_date": "2023-05-18",
             "end_date": "2023-05-21",
             "nights": 3,
@@ -8163,16 +8211,16 @@
             "start_date": "2024-05-15",
             "end_date": "2024-05-19",
             "nights": 4,
-            "gross_nightly": 714.25,
-            "payout_nightly": 585.68,
+            "gross_nightly": 757.98,
+            "payout_nightly": 621.54,
             "confirmation_id": 12368
           },
           {
             "start_date": "2024-05-23",
             "end_date": "2024-05-27",
             "nights": 4,
-            "gross_nightly": 779.8,
-            "payout_nightly": 639.44,
+            "gross_nightly": 827.55,
+            "payout_nightly": 678.59,
             "confirmation_id": 12846
           },
           {
@@ -8182,6 +8230,14 @@
             "gross_nightly": 466.81,
             "payout_nightly": 382.79,
             "confirmation_id": 12931
+          },
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 778.24,
+            "payout_nightly": 638.15,
+            "confirmation_id": 14988
           },
           {
             "start_date": "2025-05-15",
@@ -9171,17 +9227,49 @@
       "action_summary_adj": "\u2193 Reduce $1049 \u2192 $733",
       "our_percentile_rank_adj": 80.4,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 679.15,
-        "max_rate": 1121.84,
-        "median_rate": 900.49,
-        "avg_rate": 900.49,
-        "range_str": "$679\u2013$1,122 (Med $900)",
-        "variance_pct": -18.6,
+        "sample_count": 6,
+        "min_rate": 581.02,
+        "max_rate": 1253.61,
+        "median_rate": 926.53,
+        "avg_rate": 916.95,
+        "range_str": "$581\u2013$1,254 (Med $927)",
+        "variance_pct": -20.9,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
+          {
+            "start_date": "2022-03-30",
+            "end_date": "2022-04-05",
+            "nights": 6,
+            "gross_nightly": 1253.61,
+            "payout_nightly": 1027.96,
+            "confirmation_id": 6819
+          },
+          {
+            "start_date": "2022-04-06",
+            "end_date": "2022-04-10",
+            "nights": 4,
+            "gross_nightly": 851.43,
+            "payout_nightly": 698.17,
+            "confirmation_id": 7025
+          },
+          {
+            "start_date": "2023-03-30",
+            "end_date": "2023-04-04",
+            "nights": 5,
+            "gross_nightly": 1134.84,
+            "payout_nightly": 930.57,
+            "confirmation_id": 9343
+          },
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 581.02,
+            "payout_nightly": 476.44,
+            "confirmation_id": 12351
+          },
           {
             "start_date": "2024-04-21",
             "end_date": "2024-04-22",
@@ -9194,8 +9282,8 @@
             "start_date": "2025-04-04",
             "end_date": "2025-04-09",
             "nights": 5,
-            "gross_nightly": 1121.84,
-            "payout_nightly": 919.91,
+            "gross_nightly": 1001.64,
+            "payout_nightly": 821.35,
             "confirmation_id": 14616
           }
         ]
@@ -9877,23 +9965,47 @@
       "action_summary_adj": "\u2193 Reduce $449 \u2192 $287",
       "our_percentile_rank_adj": 58.3,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 428.69,
-        "max_rate": 428.69,
-        "median_rate": 428.69,
-        "avg_rate": 428.69,
-        "range_str": "$429\u2013$429 (Med $429)",
-        "variance_pct": -33.1,
+        "sample_count": 4,
+        "min_rate": 379.85,
+        "max_rate": 595.83,
+        "median_rate": 400.3,
+        "avg_rate": 444.07,
+        "range_str": "$380\u2013$596 (Med $400)",
+        "variance_pct": -28.3,
         "flag": "DEEP_DISCOUNT",
-        "flag_label": "-33% vs Track Record",
+        "flag_label": "-28% vs Track Record",
         "flag_color": "#f87171",
         "matched_stays": [
+          {
+            "start_date": "2023-09-22",
+            "end_date": "2023-09-25",
+            "nights": 3,
+            "gross_nightly": 595.83,
+            "payout_nightly": 488.58,
+            "confirmation_id": 10965
+          },
+          {
+            "start_date": "2026-09-18",
+            "end_date": "2026-09-21",
+            "nights": 3,
+            "gross_nightly": 411.47,
+            "payout_nightly": 337.4,
+            "confirmation_id": 17963
+          },
+          {
+            "start_date": "2026-09-30",
+            "end_date": "2026-10-04",
+            "nights": 4,
+            "gross_nightly": 389.12,
+            "payout_nightly": 319.08,
+            "confirmation_id": 19509
+          },
           {
             "start_date": "2026-10-04",
             "end_date": "2026-10-11",
             "nights": 7,
-            "gross_nightly": 428.69,
-            "payout_nightly": 351.52,
+            "gross_nightly": 379.85,
+            "payout_nightly": 311.48,
             "confirmation_id": 18653
           }
         ]
@@ -10914,12 +11026,12 @@
       "action_summary_adj": "\u2191 Increase $749 \u2192 $1159",
       "our_percentile_rank_adj": 29.2,
       "historical_benchmark": {
-        "sample_count": 7,
-        "min_rate": 714.25,
+        "sample_count": 9,
+        "min_rate": 613.56,
         "max_rate": 1311.45,
         "median_rate": 803.05,
-        "avg_rate": 972.79,
-        "range_str": "$714\u2013$1,311 (Med $803)",
+        "avg_rate": 921.42,
+        "range_str": "$614\u2013$1,311 (Med $803)",
         "variance_pct": 44.3,
         "flag": "AGGRESSIVE_PREMIUM",
         "flag_label": "+44% vs Track Record",
@@ -10932,6 +11044,14 @@
             "gross_nightly": 1311.45,
             "payout_nightly": 1075.39,
             "confirmation_id": 6854
+          },
+          {
+            "start_date": "2022-05-25",
+            "end_date": "2022-06-01",
+            "nights": 7,
+            "gross_nightly": 613.56,
+            "payout_nightly": 503.11,
+            "confirmation_id": 7488
           },
           {
             "start_date": "2023-05-04",
@@ -10953,16 +11073,16 @@
             "start_date": "2024-05-15",
             "end_date": "2024-05-19",
             "nights": 4,
-            "gross_nightly": 714.25,
-            "payout_nightly": 585.68,
+            "gross_nightly": 757.98,
+            "payout_nightly": 621.54,
             "confirmation_id": 12368
           },
           {
             "start_date": "2024-05-23",
             "end_date": "2024-05-27",
             "nights": 4,
-            "gross_nightly": 779.8,
-            "payout_nightly": 639.44,
+            "gross_nightly": 827.55,
+            "payout_nightly": 678.59,
             "confirmation_id": 12846
           },
           {
@@ -10972,6 +11092,14 @@
             "gross_nightly": 803.05,
             "payout_nightly": 658.5,
             "confirmation_id": 14474
+          },
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 778.24,
+            "payout_nightly": 638.15,
+            "confirmation_id": 14988
           },
           {
             "start_date": "2025-05-15",
@@ -11676,39 +11804,39 @@
       "action_summary_adj": "\u2191 Increase $1099 \u2192 $1682",
       "our_percentile_rank_adj": 24.2,
       "historical_benchmark": {
-        "sample_count": 10,
-        "min_rate": 971.47,
-        "max_rate": 1441.65,
-        "median_rate": 1262.77,
-        "avg_rate": 1215.37,
-        "range_str": "$971\u2013$1,442 (Med $1,263)",
-        "variance_pct": 33.2,
+        "sample_count": 12,
+        "min_rate": 1030.94,
+        "max_rate": 1629.69,
+        "median_rate": 1335.07,
+        "avg_rate": 1295.89,
+        "range_str": "$1,031\u2013$1,630 (Med $1,335)",
+        "variance_pct": 26.0,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+33% vs Track Record",
+        "flag_label": "+26% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-03-10",
             "end_date": "2022-03-22",
             "nights": 12,
-            "gross_nightly": 1297.48,
-            "payout_nightly": 1063.93,
+            "gross_nightly": 1466.72,
+            "payout_nightly": 1202.71,
             "confirmation_id": 6776
           },
           {
             "start_date": "2022-03-30",
             "end_date": "2022-04-05",
             "nights": 6,
-            "gross_nightly": 1441.65,
-            "payout_nightly": 1182.15,
+            "gross_nightly": 1629.69,
+            "payout_nightly": 1336.35,
             "confirmation_id": 6819
           },
           {
             "start_date": "2022-04-06",
             "end_date": "2022-04-10",
             "nights": 4,
-            "gross_nightly": 1043.0,
-            "payout_nightly": 855.26,
+            "gross_nightly": 1106.86,
+            "payout_nightly": 907.62,
             "confirmation_id": 7025
           },
           {
@@ -11731,8 +11859,8 @@
             "start_date": "2023-03-30",
             "end_date": "2023-04-04",
             "nights": 5,
-            "gross_nightly": 1339.11,
-            "payout_nightly": 1098.07,
+            "gross_nightly": 1475.29,
+            "payout_nightly": 1209.74,
             "confirmation_id": 9343
           },
           {
@@ -11752,19 +11880,35 @@
             "confirmation_id": 11822
           },
           {
+            "start_date": "2025-03-16",
+            "end_date": "2025-03-21",
+            "nights": 5,
+            "gross_nightly": 1372.36,
+            "payout_nightly": 1125.33,
+            "confirmation_id": 14233
+          },
+          {
             "start_date": "2025-03-21",
             "end_date": "2025-03-24",
             "nights": 3,
-            "gross_nightly": 1268.08,
-            "payout_nightly": 1039.83,
+            "gross_nightly": 1373.76,
+            "payout_nightly": 1126.48,
             "confirmation_id": 14286
+          },
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1302.14,
+            "payout_nightly": 1067.75,
+            "confirmation_id": 14616
           },
           {
             "start_date": "2027-03-17",
             "end_date": "2027-03-21",
             "nights": 4,
-            "gross_nightly": 971.47,
-            "payout_nightly": 796.6,
+            "gross_nightly": 1030.94,
+            "payout_nightly": 845.37,
             "confirmation_id": 19416
           }
         ]
@@ -13171,17 +13315,34 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $937",
       "our_percentile_rank_adj": 11.7,
       "historical_benchmark": {
-        "sample_count": 0,
-        "min_rate": 0.0,
-        "max_rate": 0.0,
-        "median_rate": 0.0,
-        "avg_rate": 0.0,
-        "range_str": "No prior sales",
-        "variance_pct": null,
-        "flag": "NO_HISTORICAL_DATA",
-        "flag_label": "No Prior Sales",
-        "flag_color": "#94a3b8",
-        "matched_stays": []
+        "sample_count": 2,
+        "min_rate": 411.47,
+        "max_rate": 632.73,
+        "median_rate": 522.1,
+        "avg_rate": 522.1,
+        "range_str": "$411\u2013$633 (Med $522)",
+        "variance_pct": 79.5,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+80% vs Track Record",
+        "flag_color": "#fbbf24",
+        "matched_stays": [
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 632.73,
+            "payout_nightly": 518.84,
+            "confirmation_id": 12316
+          },
+          {
+            "start_date": "2026-09-18",
+            "end_date": "2026-09-21",
+            "nights": 3,
+            "gross_nightly": 411.47,
+            "payout_nightly": 337.4,
+            "confirmation_id": 17963
+          }
+        ]
       },
       "lead_time_status": {
         "lead_days": 364,
@@ -13971,23 +14132,23 @@
       "action_summary_adj": "\u2191 Increase $1099 \u2192 $1668",
       "our_percentile_rank_adj": 28.9,
       "historical_benchmark": {
-        "sample_count": 8,
-        "min_rate": 626.07,
+        "sample_count": 11,
+        "min_rate": 707.73,
         "max_rate": 1485.98,
-        "median_rate": 1006.32,
-        "avg_rate": 1044.28,
-        "range_str": "$626\u2013$1,486 (Med $1,006)",
-        "variance_pct": 65.8,
+        "median_rate": 1000.64,
+        "avg_rate": 1084.31,
+        "range_str": "$708\u2013$1,486 (Med $1,001)",
+        "variance_pct": 66.7,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+66% vs Track Record",
+        "flag_label": "+67% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-03-10",
             "end_date": "2022-03-22",
             "nights": 12,
-            "gross_nightly": 1297.48,
-            "payout_nightly": 1063.93,
+            "gross_nightly": 1466.72,
+            "payout_nightly": 1202.71,
             "confirmation_id": 6776
           },
           {
@@ -14002,17 +14163,25 @@
             "start_date": "2024-02-16",
             "end_date": "2024-02-19",
             "nights": 3,
-            "gross_nightly": 752.64,
-            "payout_nightly": 617.17,
+            "gross_nightly": 815.36,
+            "payout_nightly": 668.6,
             "confirmation_id": 11778
           },
           {
             "start_date": "2024-02-19",
             "end_date": "2024-02-25",
             "nights": 6,
-            "gross_nightly": 626.07,
-            "payout_nightly": 513.38,
+            "gross_nightly": 707.73,
+            "payout_nightly": 580.34,
             "confirmation_id": 11896
+          },
+          {
+            "start_date": "2024-03-09",
+            "end_date": "2024-03-14",
+            "nights": 5,
+            "gross_nightly": 1399.33,
+            "payout_nightly": 1147.45,
+            "confirmation_id": 11609
           },
           {
             "start_date": "2025-02-13",
@@ -14021,6 +14190,14 @@
             "gross_nightly": 1011.99,
             "payout_nightly": 829.83,
             "confirmation_id": 14242
+          },
+          {
+            "start_date": "2025-02-18",
+            "end_date": "2025-02-25",
+            "nights": 7,
+            "gross_nightly": 963.53,
+            "payout_nightly": 790.09,
+            "confirmation_id": 14261
           },
           {
             "start_date": "2025-02-27",
@@ -14042,9 +14219,17 @@
             "start_date": "2027-02-10",
             "end_date": "2027-02-13",
             "nights": 3,
-            "gross_nightly": 911.35,
-            "payout_nightly": 747.31,
+            "gross_nightly": 987.3,
+            "payout_nightly": 809.58,
             "confirmation_id": 19523
+          },
+          {
+            "start_date": "2027-02-13",
+            "end_date": "2027-02-20",
+            "nights": 7,
+            "gross_nightly": 820.76,
+            "payout_nightly": 673.02,
+            "confirmation_id": 19294
           }
         ]
       },
@@ -15045,16 +15230,16 @@
       "action_summary_adj": "\u2191 Increase $749 \u2192 $1167",
       "our_percentile_rank_adj": 28.3,
       "historical_benchmark": {
-        "sample_count": 8,
-        "min_rate": 714.25,
+        "sample_count": 9,
+        "min_rate": 757.98,
         "max_rate": 1311.45,
-        "median_rate": 954.91,
-        "avg_rate": 992.44,
-        "range_str": "$714\u2013$1,311 (Med $955)",
-        "variance_pct": 22.2,
-        "flag": "ON_TRACK",
-        "flag_label": "Aligned With Track Record",
-        "flag_color": "#34d399",
+        "median_rate": 903.36,
+        "avg_rate": 973.5,
+        "range_str": "$758\u2013$1,311 (Med $903)",
+        "variance_pct": 29.2,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+29% vs Track Record",
+        "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-05-19",
@@ -15092,8 +15277,8 @@
             "start_date": "2024-05-15",
             "end_date": "2024-05-19",
             "nights": 4,
-            "gross_nightly": 714.25,
-            "payout_nightly": 585.68,
+            "gross_nightly": 757.98,
+            "payout_nightly": 621.54,
             "confirmation_id": 12368
           },
           {
@@ -15111,6 +15296,14 @@
             "gross_nightly": 803.05,
             "payout_nightly": 658.5,
             "confirmation_id": 14474
+          },
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 778.24,
+            "payout_nightly": 638.15,
+            "confirmation_id": 14988
           },
           {
             "start_date": "2025-05-15",
@@ -16002,24 +16195,40 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $924",
       "our_percentile_rank_adj": 24.4,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 532.65,
-        "max_rate": 532.65,
-        "median_rate": 532.65,
-        "avg_rate": 532.65,
-        "range_str": "$533\u2013$533 (Med $533)",
-        "variance_pct": 73.5,
+        "sample_count": 3,
+        "min_rate": 471.97,
+        "max_rate": 636.58,
+        "median_rate": 583.06,
+        "avg_rate": 563.87,
+        "range_str": "$472\u2013$637 (Med $583)",
+        "variance_pct": 58.5,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+74% vs Track Record",
+        "flag_label": "+58% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-05-25",
             "end_date": "2022-06-01",
             "nights": 7,
-            "gross_nightly": 532.65,
-            "payout_nightly": 436.77,
+            "gross_nightly": 471.97,
+            "payout_nightly": 387.01,
             "confirmation_id": 7488
+          },
+          {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 583.06,
+            "payout_nightly": 478.11,
+            "confirmation_id": 12368
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 636.58,
+            "payout_nightly": 521.99,
+            "confirmation_id": 12846
           }
         ]
       },
@@ -16789,17 +16998,34 @@
       "action_summary_adj": "\u2193 Reduce $436 \u2192 $300",
       "our_percentile_rank_adj": 63.4,
       "historical_benchmark": {
-        "sample_count": 0,
-        "min_rate": 0.0,
-        "max_rate": 0.0,
-        "median_rate": 0.0,
-        "avg_rate": 0.0,
-        "range_str": "No prior sales",
-        "variance_pct": null,
-        "flag": "NO_HISTORICAL_DATA",
-        "flag_label": "No Prior Sales",
-        "flag_color": "#94a3b8",
-        "matched_stays": []
+        "sample_count": 2,
+        "min_rate": 411.47,
+        "max_rate": 595.83,
+        "median_rate": 503.65,
+        "avg_rate": 503.65,
+        "range_str": "$411\u2013$596 (Med $504)",
+        "variance_pct": -40.4,
+        "flag": "DEEP_DISCOUNT",
+        "flag_label": "-40% vs Track Record",
+        "flag_color": "#f87171",
+        "matched_stays": [
+          {
+            "start_date": "2023-09-22",
+            "end_date": "2023-09-25",
+            "nights": 3,
+            "gross_nightly": 595.83,
+            "payout_nightly": 488.58,
+            "confirmation_id": 10965
+          },
+          {
+            "start_date": "2026-09-18",
+            "end_date": "2026-09-21",
+            "nights": 3,
+            "gross_nightly": 411.47,
+            "payout_nightly": 337.4,
+            "confirmation_id": 17963
+          }
+        ]
       },
       "lead_time_status": {
         "lead_days": 7,
@@ -17532,23 +17758,23 @@
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1796",
       "our_percentile_rank_adj": 28.6,
       "historical_benchmark": {
-        "sample_count": 10,
-        "min_rate": 971.47,
+        "sample_count": 12,
+        "min_rate": 1000.64,
         "max_rate": 1485.98,
-        "median_rate": 1262.77,
-        "avg_rate": 1208.47,
-        "range_str": "$971\u2013$1,486 (Med $1,263)",
-        "variance_pct": 42.2,
+        "median_rate": 1318.04,
+        "avg_rate": 1265.89,
+        "range_str": "$1,001\u2013$1,486 (Med $1,318)",
+        "variance_pct": 36.3,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+42% vs Track Record",
+        "flag_label": "+36% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-03-10",
             "end_date": "2022-03-22",
             "nights": 12,
-            "gross_nightly": 1297.48,
-            "payout_nightly": 1063.93,
+            "gross_nightly": 1466.72,
+            "payout_nightly": 1202.71,
             "confirmation_id": 6776
           },
           {
@@ -17574,6 +17800,14 @@
             "gross_nightly": 1036.96,
             "payout_nightly": 850.3,
             "confirmation_id": 9420
+          },
+          {
+            "start_date": "2024-03-09",
+            "end_date": "2024-03-14",
+            "nights": 5,
+            "gross_nightly": 1399.33,
+            "payout_nightly": 1147.45,
+            "confirmation_id": 11609
           },
           {
             "start_date": "2024-03-14",
@@ -17608,19 +17842,27 @@
             "confirmation_id": 14124
           },
           {
+            "start_date": "2025-03-16",
+            "end_date": "2025-03-21",
+            "nights": 5,
+            "gross_nightly": 1372.36,
+            "payout_nightly": 1125.33,
+            "confirmation_id": 14233
+          },
+          {
             "start_date": "2025-03-21",
             "end_date": "2025-03-24",
             "nights": 3,
-            "gross_nightly": 1268.08,
-            "payout_nightly": 1039.83,
+            "gross_nightly": 1373.76,
+            "payout_nightly": 1126.48,
             "confirmation_id": 14286
           },
           {
             "start_date": "2027-03-17",
             "end_date": "2027-03-21",
             "nights": 4,
-            "gross_nightly": 971.47,
-            "payout_nightly": 796.6,
+            "gross_nightly": 1030.94,
+            "payout_nightly": 845.37,
             "confirmation_id": 19416
           }
         ]
@@ -18584,23 +18826,63 @@
       "action_summary_adj": "\u2193 Reduce $1049 \u2192 $817",
       "our_percentile_rank_adj": 64.4,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 1121.84,
-        "max_rate": 1121.84,
-        "median_rate": 1121.84,
-        "avg_rate": 1121.84,
-        "range_str": "$1,122\u2013$1,122 (Med $1,122)",
-        "variance_pct": -27.2,
-        "flag": "DEEP_DISCOUNT",
-        "flag_label": "-27% vs Track Record",
-        "flag_color": "#f87171",
+        "sample_count": 6,
+        "min_rate": 581.02,
+        "max_rate": 1253.61,
+        "median_rate": 1029.19,
+        "avg_rate": 979.88,
+        "range_str": "$581\u2013$1,254 (Med $1,029)",
+        "variance_pct": -20.6,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
         "matched_stays": [
+          {
+            "start_date": "2022-03-30",
+            "end_date": "2022-04-05",
+            "nights": 6,
+            "gross_nightly": 1253.61,
+            "payout_nightly": 1027.96,
+            "confirmation_id": 6819
+          },
+          {
+            "start_date": "2022-04-06",
+            "end_date": "2022-04-10",
+            "nights": 4,
+            "gross_nightly": 851.43,
+            "payout_nightly": 698.17,
+            "confirmation_id": 7025
+          },
+          {
+            "start_date": "2023-03-30",
+            "end_date": "2023-04-04",
+            "nights": 5,
+            "gross_nightly": 1134.84,
+            "payout_nightly": 930.57,
+            "confirmation_id": 9343
+          },
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 581.02,
+            "payout_nightly": 476.44,
+            "confirmation_id": 12351
+          },
+          {
+            "start_date": "2025-03-21",
+            "end_date": "2025-03-24",
+            "nights": 3,
+            "gross_nightly": 1056.74,
+            "payout_nightly": 866.52,
+            "confirmation_id": 14286
+          },
           {
             "start_date": "2025-04-04",
             "end_date": "2025-04-09",
             "nights": 5,
-            "gross_nightly": 1121.84,
-            "payout_nightly": 919.91,
+            "gross_nightly": 1001.64,
+            "payout_nightly": 821.35,
             "confirmation_id": 14616
           }
         ]
@@ -19432,22 +19714,22 @@
       "our_percentile_rank_adj": 42.5,
       "historical_benchmark": {
         "sample_count": 5,
-        "min_rate": 641.62,
-        "max_rate": 1953.55,
-        "median_rate": 859.08,
-        "avg_rate": 1044.14,
-        "range_str": "$642\u2013$1,954 (Med $859)",
-        "variance_pct": 48.6,
+        "min_rate": 725.31,
+        "max_rate": 2073.15,
+        "median_rate": 930.67,
+        "avg_rate": 1114.3,
+        "range_str": "$725\u2013$2,073 (Med $931)",
+        "variance_pct": 37.2,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+49% vs Track Record",
+        "flag_label": "+37% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2023-02-08",
             "end_date": "2023-02-12",
             "nights": 4,
-            "gross_nightly": 1953.55,
-            "payout_nightly": 1601.91,
+            "gross_nightly": 2073.15,
+            "payout_nightly": 1699.98,
             "confirmation_id": 9017
           },
           {
@@ -19462,24 +19744,24 @@
             "start_date": "2025-02-07",
             "end_date": "2025-02-10",
             "nights": 3,
-            "gross_nightly": 859.08,
-            "payout_nightly": 704.45,
+            "gross_nightly": 930.67,
+            "payout_nightly": 763.15,
             "confirmation_id": 13549
           },
           {
             "start_date": "2027-01-15",
             "end_date": "2027-01-19",
             "nights": 4,
-            "gross_nightly": 641.62,
-            "payout_nightly": 526.13,
+            "gross_nightly": 725.31,
+            "payout_nightly": 594.75,
             "confirmation_id": 18395
           },
           {
             "start_date": "2027-02-10",
             "end_date": "2027-02-13",
             "nights": 3,
-            "gross_nightly": 911.35,
-            "payout_nightly": 747.31,
+            "gross_nightly": 987.3,
+            "payout_nightly": 809.58,
             "confirmation_id": 19523
           }
         ]
@@ -20082,24 +20364,32 @@
       "action_summary_adj": "\u2191 Increase $949 \u2192 $1379",
       "our_percentile_rank_adj": 28.6,
       "historical_benchmark": {
-        "sample_count": 3,
+        "sample_count": 6,
         "min_rate": 313.3,
-        "max_rate": 1911.26,
-        "median_rate": 428.69,
-        "avg_rate": 884.42,
-        "range_str": "$313\u2013$1,911 (Med $429)",
-        "variance_pct": 221.7,
+        "max_rate": 1693.52,
+        "median_rate": 653.28,
+        "avg_rate": 746.39,
+        "range_str": "$313\u2013$1,694 (Med $653)",
+        "variance_pct": 111.1,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+222% vs Track Record",
+        "flag_label": "+111% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-12-25",
             "end_date": "2023-01-01",
             "nights": 7,
-            "gross_nightly": 1911.26,
-            "payout_nightly": 1567.23,
+            "gross_nightly": 1693.52,
+            "payout_nightly": 1388.68,
             "confirmation_id": 8684
+          },
+          {
+            "start_date": "2023-12-19",
+            "end_date": "2023-12-23",
+            "nights": 4,
+            "gross_nightly": 658.06,
+            "payout_nightly": 539.61,
+            "confirmation_id": 10735
           },
           {
             "start_date": "2025-01-06",
@@ -20113,9 +20403,25 @@
             "start_date": "2026-12-12",
             "end_date": "2026-12-19",
             "nights": 7,
-            "gross_nightly": 428.69,
-            "payout_nightly": 351.52,
+            "gross_nightly": 379.85,
+            "payout_nightly": 311.48,
             "confirmation_id": 18555
+          },
+          {
+            "start_date": "2026-12-23",
+            "end_date": "2026-12-27",
+            "nights": 4,
+            "gross_nightly": 648.51,
+            "payout_nightly": 531.78,
+            "confirmation_id": 17618
+          },
+          {
+            "start_date": "2026-12-31",
+            "end_date": "2027-01-04",
+            "nights": 4,
+            "gross_nightly": 785.09,
+            "payout_nightly": 643.78,
+            "confirmation_id": 19141
           }
         ]
       },
@@ -20831,23 +21137,23 @@
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1721",
       "our_percentile_rank_adj": 26.5,
       "historical_benchmark": {
-        "sample_count": 8,
-        "min_rate": 626.07,
+        "sample_count": 11,
+        "min_rate": 707.73,
         "max_rate": 1485.98,
-        "median_rate": 1199.3,
-        "avg_rate": 1143.53,
-        "range_str": "$626\u2013$1,486 (Med $1,199)",
-        "variance_pct": 43.5,
+        "median_rate": 1268.08,
+        "avg_rate": 1199.44,
+        "range_str": "$708\u2013$1,486 (Med $1,268)",
+        "variance_pct": 35.7,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+44% vs Track Record",
+        "flag_label": "+36% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-03-10",
             "end_date": "2022-03-22",
             "nights": 12,
-            "gross_nightly": 1297.48,
-            "payout_nightly": 1063.93,
+            "gross_nightly": 1466.72,
+            "payout_nightly": 1202.71,
             "confirmation_id": 6776
           },
           {
@@ -20870,9 +21176,17 @@
             "start_date": "2024-02-19",
             "end_date": "2024-02-25",
             "nights": 6,
-            "gross_nightly": 626.07,
-            "payout_nightly": 513.38,
+            "gross_nightly": 707.73,
+            "payout_nightly": 580.34,
             "confirmation_id": 11896
+          },
+          {
+            "start_date": "2024-03-09",
+            "end_date": "2024-03-14",
+            "nights": 5,
+            "gross_nightly": 1399.33,
+            "payout_nightly": 1147.45,
+            "confirmation_id": 11609
           },
           {
             "start_date": "2024-03-14",
@@ -20881,6 +21195,14 @@
             "gross_nightly": 1130.51,
             "payout_nightly": 927.02,
             "confirmation_id": 10885
+          },
+          {
+            "start_date": "2025-02-18",
+            "end_date": "2025-02-25",
+            "nights": 7,
+            "gross_nightly": 963.53,
+            "payout_nightly": 790.09,
+            "confirmation_id": 14261
           },
           {
             "start_date": "2025-02-27",
@@ -20899,11 +21221,19 @@
             "confirmation_id": 14124
           },
           {
+            "start_date": "2025-03-16",
+            "end_date": "2025-03-21",
+            "nights": 5,
+            "gross_nightly": 1372.36,
+            "payout_nightly": 1125.33,
+            "confirmation_id": 14233
+          },
+          {
             "start_date": "2027-03-17",
             "end_date": "2027-03-21",
             "nights": 4,
-            "gross_nightly": 971.47,
-            "payout_nightly": 796.6,
+            "gross_nightly": 1030.94,
+            "payout_nightly": 845.37,
             "confirmation_id": 19416
           }
         ]
@@ -21791,17 +22121,25 @@
       "action_summary_adj": "\u2193 Reduce $712 \u2192 $558",
       "our_percentile_rank_adj": 64.3,
       "historical_benchmark": {
-        "sample_count": 1,
+        "sample_count": 4,
         "min_rate": 313.3,
-        "max_rate": 313.3,
-        "median_rate": 313.3,
-        "avg_rate": 313.3,
-        "range_str": "$313\u2013$313 (Med $313)",
-        "variance_pct": 78.1,
-        "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+78% vs Track Record",
-        "flag_color": "#fbbf24",
+        "max_rate": 785.09,
+        "median_rate": 603.23,
+        "avg_rate": 576.22,
+        "range_str": "$313\u2013$785 (Med $603)",
+        "variance_pct": -7.5,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
         "matched_stays": [
+          {
+            "start_date": "2023-01-12",
+            "end_date": "2023-01-16",
+            "nights": 4,
+            "gross_nightly": 648.54,
+            "payout_nightly": 531.81,
+            "confirmation_id": 8857
+          },
           {
             "start_date": "2025-01-06",
             "end_date": "2025-01-08",
@@ -21809,6 +22147,22 @@
             "gross_nightly": 313.3,
             "payout_nightly": 256.9,
             "confirmation_id": 14208
+          },
+          {
+            "start_date": "2026-12-31",
+            "end_date": "2027-01-04",
+            "nights": 4,
+            "gross_nightly": 785.09,
+            "payout_nightly": 643.78,
+            "confirmation_id": 19141
+          },
+          {
+            "start_date": "2027-01-15",
+            "end_date": "2027-01-19",
+            "nights": 4,
+            "gross_nightly": 557.93,
+            "payout_nightly": 457.5,
+            "confirmation_id": 18395
           }
         ]
       },
@@ -22508,24 +22862,40 @@
       "action_summary_adj": "\u2193 Reduce $532 \u2192 $389",
       "our_percentile_rank_adj": 58.8,
       "historical_benchmark": {
-        "sample_count": 2,
+        "sample_count": 5,
         "min_rate": 332.91,
-        "max_rate": 428.69,
-        "median_rate": 380.8,
-        "avg_rate": 380.8,
-        "range_str": "$333\u2013$429 (Med $381)",
-        "variance_pct": 2.2,
+        "max_rate": 451.12,
+        "median_rate": 389.12,
+        "avg_rate": 398.08,
+        "range_str": "$333\u2013$451 (Med $389)",
+        "variance_pct": -0.0,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2026-09-30",
+            "end_date": "2026-10-04",
+            "nights": 4,
+            "gross_nightly": 389.12,
+            "payout_nightly": 319.08,
+            "confirmation_id": 19509
+          },
+          {
             "start_date": "2026-10-04",
             "end_date": "2026-10-11",
             "nights": 7,
-            "gross_nightly": 428.69,
-            "payout_nightly": 351.52,
+            "gross_nightly": 379.85,
+            "payout_nightly": 311.48,
             "confirmation_id": 18653
+          },
+          {
+            "start_date": "2026-10-14",
+            "end_date": "2026-10-19",
+            "nights": 5,
+            "gross_nightly": 437.39,
+            "payout_nightly": 358.66,
+            "confirmation_id": 17722
           },
           {
             "start_date": "2026-10-19",
@@ -22534,6 +22904,14 @@
             "gross_nightly": 332.91,
             "payout_nightly": 272.99,
             "confirmation_id": 19210
+          },
+          {
+            "start_date": "2026-10-23",
+            "end_date": "2026-10-26",
+            "nights": 3,
+            "gross_nightly": 451.12,
+            "payout_nightly": 369.92,
+            "confirmation_id": 18793
           }
         ]
       },
@@ -23235,24 +23613,56 @@
       "action_summary_adj": "\u2191 Increase $399 \u2192 $548",
       "our_percentile_rank_adj": 21.6,
       "historical_benchmark": {
-        "sample_count": 3,
+        "sample_count": 8,
         "min_rate": 332.91,
-        "max_rate": 611.31,
-        "median_rate": 405.6,
-        "avg_rate": 449.94,
-        "range_str": "$333\u2013$611 (Med $406)",
-        "variance_pct": 35.1,
-        "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+35% vs Track Record",
-        "flag_color": "#fbbf24",
+        "max_rate": 617.6,
+        "median_rate": 447.46,
+        "avg_rate": 478.89,
+        "range_str": "$333\u2013$618 (Med $447)",
+        "variance_pct": 22.5,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
         "matched_stays": [
+          {
+            "start_date": "2022-11-07",
+            "end_date": "2022-11-13",
+            "nights": 6,
+            "gross_nightly": 443.79,
+            "payout_nightly": 363.91,
+            "confirmation_id": 8750
+          },
           {
             "start_date": "2023-10-28",
             "end_date": "2023-10-31",
             "nights": 3,
-            "gross_nightly": 611.31,
-            "payout_nightly": 501.27,
+            "gross_nightly": 555.73,
+            "payout_nightly": 455.7,
             "confirmation_id": 11320
+          },
+          {
+            "start_date": "2023-11-08",
+            "end_date": "2023-11-12",
+            "nights": 4,
+            "gross_nightly": 617.6,
+            "payout_nightly": 506.43,
+            "confirmation_id": 10383
+          },
+          {
+            "start_date": "2024-11-06",
+            "end_date": "2024-11-10",
+            "nights": 4,
+            "gross_nightly": 587.02,
+            "payout_nightly": 481.36,
+            "confirmation_id": 13839
+          },
+          {
+            "start_date": "2026-10-14",
+            "end_date": "2026-10-19",
+            "nights": 5,
+            "gross_nightly": 437.39,
+            "payout_nightly": 358.66,
+            "confirmation_id": 17722
           },
           {
             "start_date": "2026-10-19",
@@ -23261,6 +23671,14 @@
             "gross_nightly": 332.91,
             "payout_nightly": 272.99,
             "confirmation_id": 19210
+          },
+          {
+            "start_date": "2026-10-23",
+            "end_date": "2026-10-26",
+            "nights": 3,
+            "gross_nightly": 451.12,
+            "payout_nightly": 369.92,
+            "confirmation_id": 18793
           },
           {
             "start_date": "2026-11-01",
@@ -23885,17 +24303,34 @@
       "action_summary_adj": "\u2193 Reduce $499 \u2192 $383",
       "our_percentile_rank_adj": 45.5,
       "historical_benchmark": {
-        "sample_count": 0,
-        "min_rate": 0.0,
-        "max_rate": 0.0,
-        "median_rate": 0.0,
-        "avg_rate": 0.0,
-        "range_str": "No prior sales",
-        "variance_pct": null,
-        "flag": "NO_HISTORICAL_DATA",
-        "flag_label": "No Prior Sales",
-        "flag_color": "#94a3b8",
-        "matched_stays": []
+        "sample_count": 2,
+        "min_rate": 411.47,
+        "max_rate": 632.73,
+        "median_rate": 522.1,
+        "avg_rate": 522.1,
+        "range_str": "$411\u2013$633 (Med $522)",
+        "variance_pct": -26.6,
+        "flag": "DEEP_DISCOUNT",
+        "flag_label": "-27% vs Track Record",
+        "flag_color": "#f87171",
+        "matched_stays": [
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 632.73,
+            "payout_nightly": 518.84,
+            "confirmation_id": 12316
+          },
+          {
+            "start_date": "2026-09-18",
+            "end_date": "2026-09-21",
+            "nights": 3,
+            "gross_nightly": 411.47,
+            "payout_nightly": 337.4,
+            "confirmation_id": 17963
+          }
+        ]
       },
       "lead_time_status": {
         "lead_days": 0,
@@ -24704,48 +25139,56 @@
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1610",
       "our_percentile_rank_adj": 43.6,
       "historical_benchmark": {
-        "sample_count": 4,
-        "min_rate": 711.75,
-        "max_rate": 1441.65,
-        "median_rate": 1191.05,
-        "avg_rate": 1133.88,
-        "range_str": "$712\u2013$1,442 (Med $1,191)",
-        "variance_pct": 35.2,
-        "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+35% vs Track Record",
-        "flag_color": "#fbbf24",
+        "sample_count": 5,
+        "min_rate": 755.33,
+        "max_rate": 1629.69,
+        "median_rate": 1302.14,
+        "avg_rate": 1253.86,
+        "range_str": "$755\u2013$1,630 (Med $1,302)",
+        "variance_pct": 23.6,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
         "matched_stays": [
           {
             "start_date": "2022-03-30",
             "end_date": "2022-04-05",
             "nights": 6,
-            "gross_nightly": 1441.65,
-            "payout_nightly": 1182.15,
+            "gross_nightly": 1629.69,
+            "payout_nightly": 1336.35,
             "confirmation_id": 6819
           },
           {
             "start_date": "2022-04-06",
             "end_date": "2022-04-10",
             "nights": 4,
-            "gross_nightly": 1043.0,
-            "payout_nightly": 855.26,
+            "gross_nightly": 1106.86,
+            "payout_nightly": 907.62,
             "confirmation_id": 7025
           },
           {
             "start_date": "2023-03-30",
             "end_date": "2023-04-04",
             "nights": 5,
-            "gross_nightly": 1339.11,
-            "payout_nightly": 1098.07,
+            "gross_nightly": 1475.29,
+            "payout_nightly": 1209.74,
             "confirmation_id": 9343
           },
           {
             "start_date": "2024-04-17",
             "end_date": "2024-04-21",
             "nights": 4,
-            "gross_nightly": 711.75,
-            "payout_nightly": 583.63,
+            "gross_nightly": 755.33,
+            "payout_nightly": 619.37,
             "confirmation_id": 12351
+          },
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1302.14,
+            "payout_nightly": 1067.75,
+            "confirmation_id": 14616
           }
         ]
       },
@@ -25534,17 +25977,25 @@
       "action_summary_adj": "\u2191 Increase $649 \u2192 $841",
       "our_percentile_rank_adj": 32.4,
       "historical_benchmark": {
-        "sample_count": 1,
+        "sample_count": 3,
         "min_rate": 313.3,
-        "max_rate": 313.3,
-        "median_rate": 313.3,
-        "avg_rate": 313.3,
-        "range_str": "$313\u2013$313 (Med $313)",
-        "variance_pct": 168.4,
+        "max_rate": 648.54,
+        "median_rate": 557.93,
+        "avg_rate": 506.59,
+        "range_str": "$313\u2013$649 (Med $558)",
+        "variance_pct": 50.7,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+168% vs Track Record",
+        "flag_label": "+51% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2023-01-12",
+            "end_date": "2023-01-16",
+            "nights": 4,
+            "gross_nightly": 648.54,
+            "payout_nightly": 531.81,
+            "confirmation_id": 8857
+          },
           {
             "start_date": "2025-01-06",
             "end_date": "2025-01-08",
@@ -25552,6 +26003,14 @@
             "gross_nightly": 313.3,
             "payout_nightly": 256.9,
             "confirmation_id": 14208
+          },
+          {
+            "start_date": "2027-01-15",
+            "end_date": "2027-01-19",
+            "nights": 4,
+            "gross_nightly": 557.93,
+            "payout_nightly": 457.5,
+            "confirmation_id": 18395
           }
         ]
       },
@@ -26438,31 +26897,31 @@
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1589",
       "our_percentile_rank_adj": 53.5,
       "historical_benchmark": {
-        "sample_count": 4,
-        "min_rate": 711.75,
-        "max_rate": 1043.0,
-        "median_rate": 954.91,
-        "avg_rate": 916.14,
-        "range_str": "$712\u2013$1,043 (Med $955)",
-        "variance_pct": 66.4,
+        "sample_count": 5,
+        "min_rate": 755.33,
+        "max_rate": 1302.14,
+        "median_rate": 1006.47,
+        "avg_rate": 1014.83,
+        "range_str": "$755\u2013$1,302 (Med $1,006)",
+        "variance_pct": 57.9,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+66% vs Track Record",
+        "flag_label": "+58% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-04-06",
             "end_date": "2022-04-10",
             "nights": 4,
-            "gross_nightly": 1043.0,
-            "payout_nightly": 855.26,
+            "gross_nightly": 1106.86,
+            "payout_nightly": 907.62,
             "confirmation_id": 7025
           },
           {
             "start_date": "2024-04-17",
             "end_date": "2024-04-21",
             "nights": 4,
-            "gross_nightly": 711.75,
-            "payout_nightly": 583.63,
+            "gross_nightly": 755.33,
+            "payout_nightly": 619.37,
             "confirmation_id": 12351
           },
           {
@@ -26472,6 +26931,14 @@
             "gross_nightly": 903.36,
             "payout_nightly": 740.76,
             "confirmation_id": 12155
+          },
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1302.14,
+            "payout_nightly": 1067.75,
+            "confirmation_id": 14616
           },
           {
             "start_date": "2025-04-24",
@@ -27233,32 +27700,56 @@
       "action_summary_adj": "\u2191 Increase $899 \u2192 $1191",
       "our_percentile_rank_adj": 16.7,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 1119.0,
-        "max_rate": 1140.99,
-        "median_rate": 1129.99,
-        "avg_rate": 1129.99,
-        "range_str": "$1,119\u2013$1,141 (Med $1,130)",
-        "variance_pct": 5.4,
+        "sample_count": 5,
+        "min_rate": 793.03,
+        "max_rate": 1128.24,
+        "median_rate": 1056.74,
+        "avg_rate": 1022.02,
+        "range_str": "$793\u2013$1,128 (Med $1,057)",
+        "variance_pct": 12.7,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2022-03-10",
+            "end_date": "2022-03-22",
+            "nights": 12,
+            "gross_nightly": 1128.24,
+            "payout_nightly": 925.16,
+            "confirmation_id": 6776
+          },
+          {
             "start_date": "2024-03-09",
             "end_date": "2024-03-14",
             "nights": 5,
-            "gross_nightly": 1140.99,
-            "payout_nightly": 935.62,
+            "gross_nightly": 1076.41,
+            "payout_nightly": 882.66,
             "confirmation_id": 11609
           },
           {
             "start_date": "2025-03-16",
             "end_date": "2025-03-21",
             "nights": 5,
-            "gross_nightly": 1119.0,
-            "payout_nightly": 917.58,
+            "gross_nightly": 1055.66,
+            "payout_nightly": 865.64,
             "confirmation_id": 14233
+          },
+          {
+            "start_date": "2025-03-21",
+            "end_date": "2025-03-24",
+            "nights": 3,
+            "gross_nightly": 1056.74,
+            "payout_nightly": 866.52,
+            "confirmation_id": 14286
+          },
+          {
+            "start_date": "2027-03-17",
+            "end_date": "2027-03-21",
+            "nights": 4,
+            "gross_nightly": 793.03,
+            "payout_nightly": 650.29,
+            "confirmation_id": 19416
           }
         ]
       },
@@ -27830,32 +28321,56 @@
       "action_summary_adj": "\u2191 Increase $466 \u2192 $638",
       "our_percentile_rank_adj": 30.0,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 428.69,
-        "max_rate": 1911.26,
-        "median_rate": 1169.97,
-        "avg_rate": 1169.97,
-        "range_str": "$429\u2013$1,911 (Med $1,170)",
-        "variance_pct": -45.5,
-        "flag": "DEEP_DISCOUNT",
-        "flag_label": "-46% vs Track Record",
-        "flag_color": "#f87171",
+        "sample_count": 5,
+        "min_rate": 379.85,
+        "max_rate": 1693.52,
+        "median_rate": 658.06,
+        "avg_rate": 833.01,
+        "range_str": "$380\u2013$1,694 (Med $658)",
+        "variance_pct": -3.0,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
         "matched_stays": [
           {
             "start_date": "2022-12-25",
             "end_date": "2023-01-01",
             "nights": 7,
-            "gross_nightly": 1911.26,
-            "payout_nightly": 1567.23,
+            "gross_nightly": 1693.52,
+            "payout_nightly": 1388.68,
             "confirmation_id": 8684
+          },
+          {
+            "start_date": "2023-12-19",
+            "end_date": "2023-12-23",
+            "nights": 4,
+            "gross_nightly": 658.06,
+            "payout_nightly": 539.61,
+            "confirmation_id": 10735
           },
           {
             "start_date": "2026-12-12",
             "end_date": "2026-12-19",
             "nights": 7,
-            "gross_nightly": 428.69,
-            "payout_nightly": 351.52,
+            "gross_nightly": 379.85,
+            "payout_nightly": 311.48,
             "confirmation_id": 18555
+          },
+          {
+            "start_date": "2026-12-23",
+            "end_date": "2026-12-27",
+            "nights": 4,
+            "gross_nightly": 648.51,
+            "payout_nightly": 531.78,
+            "confirmation_id": 17618
+          },
+          {
+            "start_date": "2026-12-31",
+            "end_date": "2027-01-04",
+            "nights": 4,
+            "gross_nightly": 785.09,
+            "payout_nightly": 643.78,
+            "confirmation_id": 19141
           }
         ]
       },
@@ -28040,7 +28555,7 @@
         "min_rate": 564.65,
         "max_rate": 1241.9,
         "median_rate": 596.55,
-        "avg_rate": 728.29,
+        "avg_rate": 745.06,
         "range_str": "$565\u2013$1,242 (Med $597)",
         "variance_pct": 88.2,
         "flag": "AGGRESSIVE_PREMIUM",
@@ -28059,8 +28574,8 @@
             "start_date": "2023-06-24",
             "end_date": "2023-06-26",
             "nights": 2,
-            "gross_nightly": 643.08,
-            "payout_nightly": 527.33,
+            "gross_nightly": 726.96,
+            "payout_nightly": 596.11,
             "confirmation_id": 10243
           },
           {
@@ -28657,13 +29172,13 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $745",
       "our_percentile_rank_adj": 37.9,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 631.22,
-        "max_rate": 860.32,
-        "median_rate": 745.77,
-        "avg_rate": 745.77,
-        "range_str": "$631\u2013$860 (Med $746)",
-        "variance_pct": -0.1,
+        "sample_count": 3,
+        "min_rate": 493.8,
+        "max_rate": 912.99,
+        "median_rate": 631.22,
+        "avg_rate": 679.34,
+        "range_str": "$494\u2013$913 (Med $631)",
+        "variance_pct": 18.0,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
@@ -28672,8 +29187,8 @@
             "start_date": "2022-11-23",
             "end_date": "2022-11-27",
             "nights": 4,
-            "gross_nightly": 860.32,
-            "payout_nightly": 705.46,
+            "gross_nightly": 912.99,
+            "payout_nightly": 748.65,
             "confirmation_id": 8709
           },
           {
@@ -28683,6 +29198,14 @@
             "gross_nightly": 631.22,
             "payout_nightly": 517.6,
             "confirmation_id": 10847
+          },
+          {
+            "start_date": "2026-12-12",
+            "end_date": "2026-12-19",
+            "nights": 7,
+            "gross_nightly": 493.8,
+            "payout_nightly": 404.92,
+            "confirmation_id": 18555
           }
         ]
       },
@@ -29607,23 +30130,47 @@
       "action_summary_adj": "\u2193 Reduce $786 \u2192 $660",
       "our_percentile_rank_adj": 61.4,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 712.53,
-        "max_rate": 712.53,
-        "median_rate": 712.53,
-        "avg_rate": 712.53,
-        "range_str": "$713\u2013$713 (Med $713)",
-        "variance_pct": -7.4,
+        "sample_count": 4,
+        "min_rate": 631.35,
+        "max_rate": 1594.73,
+        "median_rate": 737.68,
+        "avg_rate": 925.36,
+        "range_str": "$631\u2013$1,595 (Med $738)",
+        "variance_pct": -10.5,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2023-02-08",
+            "end_date": "2023-02-12",
+            "nights": 4,
+            "gross_nightly": 1594.73,
+            "payout_nightly": 1307.68,
+            "confirmation_id": 9017
+          },
+          {
+            "start_date": "2025-02-07",
+            "end_date": "2025-02-10",
+            "nights": 3,
+            "gross_nightly": 715.9,
+            "payout_nightly": 587.04,
+            "confirmation_id": 13549
+          },
+          {
+            "start_date": "2027-02-10",
+            "end_date": "2027-02-13",
+            "nights": 3,
+            "gross_nightly": 759.46,
+            "payout_nightly": 622.76,
+            "confirmation_id": 19523
+          },
+          {
             "start_date": "2027-02-13",
             "end_date": "2027-02-20",
             "nights": 7,
-            "gross_nightly": 712.53,
-            "payout_nightly": 584.27,
+            "gross_nightly": 631.35,
+            "payout_nightly": 517.71,
             "confirmation_id": 19294
           }
         ]
@@ -30340,23 +30887,23 @@
       "action_summary_adj": "\u2191 Increase $1099 \u2192 $1321",
       "our_percentile_rank_adj": 38.2,
       "historical_benchmark": {
-        "sample_count": 7,
-        "min_rate": 626.07,
-        "max_rate": 1953.55,
-        "median_rate": 859.08,
-        "avg_rate": 995.68,
-        "range_str": "$626\u2013$1,954 (Med $859)",
-        "variance_pct": 53.8,
+        "sample_count": 9,
+        "min_rate": 707.73,
+        "max_rate": 2073.15,
+        "median_rate": 930.67,
+        "avg_rate": 1018.4,
+        "range_str": "$708\u2013$2,073 (Med $931)",
+        "variance_pct": 41.9,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+54% vs Track Record",
+        "flag_label": "+42% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2023-02-08",
             "end_date": "2023-02-12",
             "nights": 4,
-            "gross_nightly": 1953.55,
-            "payout_nightly": 1601.91,
+            "gross_nightly": 2073.15,
+            "payout_nightly": 1699.98,
             "confirmation_id": 9017
           },
           {
@@ -30371,24 +30918,24 @@
             "start_date": "2024-02-16",
             "end_date": "2024-02-19",
             "nights": 3,
-            "gross_nightly": 752.64,
-            "payout_nightly": 617.17,
+            "gross_nightly": 815.36,
+            "payout_nightly": 668.6,
             "confirmation_id": 11778
           },
           {
             "start_date": "2024-02-19",
             "end_date": "2024-02-25",
             "nights": 6,
-            "gross_nightly": 626.07,
-            "payout_nightly": 513.38,
+            "gross_nightly": 707.73,
+            "payout_nightly": 580.34,
             "confirmation_id": 11896
           },
           {
             "start_date": "2025-02-07",
             "end_date": "2025-02-10",
             "nights": 3,
-            "gross_nightly": 859.08,
-            "payout_nightly": 704.45,
+            "gross_nightly": 930.67,
+            "payout_nightly": 763.15,
             "confirmation_id": 13549
           },
           {
@@ -30400,12 +30947,28 @@
             "confirmation_id": 14242
           },
           {
+            "start_date": "2025-02-18",
+            "end_date": "2025-02-25",
+            "nights": 7,
+            "gross_nightly": 963.53,
+            "payout_nightly": 790.09,
+            "confirmation_id": 14261
+          },
+          {
             "start_date": "2027-02-10",
             "end_date": "2027-02-13",
             "nights": 3,
-            "gross_nightly": 911.35,
-            "payout_nightly": 747.31,
+            "gross_nightly": 987.3,
+            "payout_nightly": 809.58,
             "confirmation_id": 19523
+          },
+          {
+            "start_date": "2027-02-13",
+            "end_date": "2027-02-20",
+            "nights": 7,
+            "gross_nightly": 820.76,
+            "payout_nightly": 673.02,
+            "confirmation_id": 19294
           }
         ]
       },
@@ -31121,13 +31684,13 @@
       "action_summary_adj": "\u2191 Increase $1199 \u2192 $1548",
       "our_percentile_rank_adj": 48.5,
       "historical_benchmark": {
-        "sample_count": 7,
-        "min_rate": 971.47,
-        "max_rate": 1441.65,
-        "median_rate": 1257.46,
-        "avg_rate": 1193.96,
-        "range_str": "$971\u2013$1,442 (Med $1,257)",
-        "variance_pct": 23.1,
+        "sample_count": 8,
+        "min_rate": 1030.94,
+        "max_rate": 1629.69,
+        "median_rate": 1279.8,
+        "avg_rate": 1276.64,
+        "range_str": "$1,031\u2013$1,630 (Med $1,280)",
+        "variance_pct": 21.0,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
@@ -31136,16 +31699,16 @@
             "start_date": "2022-03-30",
             "end_date": "2022-04-05",
             "nights": 6,
-            "gross_nightly": 1441.65,
-            "payout_nightly": 1182.15,
+            "gross_nightly": 1629.69,
+            "payout_nightly": 1336.35,
             "confirmation_id": 6819
           },
           {
             "start_date": "2022-04-06",
             "end_date": "2022-04-10",
             "nights": 4,
-            "gross_nightly": 1043.0,
-            "payout_nightly": 855.26,
+            "gross_nightly": 1106.86,
+            "payout_nightly": 907.62,
             "confirmation_id": 7025
           },
           {
@@ -31160,8 +31723,8 @@
             "start_date": "2023-03-30",
             "end_date": "2023-04-04",
             "nights": 5,
-            "gross_nightly": 1339.11,
-            "payout_nightly": 1098.07,
+            "gross_nightly": 1475.29,
+            "payout_nightly": 1209.74,
             "confirmation_id": 9343
           },
           {
@@ -31176,16 +31739,24 @@
             "start_date": "2025-03-21",
             "end_date": "2025-03-24",
             "nights": 3,
-            "gross_nightly": 1268.08,
-            "payout_nightly": 1039.83,
+            "gross_nightly": 1373.76,
+            "payout_nightly": 1126.48,
             "confirmation_id": 14286
+          },
+          {
+            "start_date": "2025-04-04",
+            "end_date": "2025-04-09",
+            "nights": 5,
+            "gross_nightly": 1302.14,
+            "payout_nightly": 1067.75,
+            "confirmation_id": 14616
           },
           {
             "start_date": "2027-03-17",
             "end_date": "2027-03-21",
             "nights": 4,
-            "gross_nightly": 971.47,
-            "payout_nightly": 796.6,
+            "gross_nightly": 1030.94,
+            "payout_nightly": 845.37,
             "confirmation_id": 19416
           }
         ]
@@ -32188,11 +32759,11 @@
       "our_percentile_rank_adj": 46.9,
       "historical_benchmark": {
         "sample_count": 5,
-        "min_rate": 711.75,
+        "min_rate": 755.33,
         "max_rate": 1148.92,
         "median_rate": 903.36,
-        "avg_rate": 914.71,
-        "range_str": "$712\u2013$1,149 (Med $903)",
+        "avg_rate": 923.43,
+        "range_str": "$755\u2013$1,149 (Med $903)",
         "variance_pct": 64.5,
         "flag": "AGGRESSIVE_PREMIUM",
         "flag_label": "+64% vs Track Record",
@@ -32210,8 +32781,8 @@
             "start_date": "2024-04-17",
             "end_date": "2024-04-21",
             "nights": 4,
-            "gross_nightly": 711.75,
-            "payout_nightly": 583.63,
+            "gross_nightly": 755.33,
+            "payout_nightly": 619.37,
             "confirmation_id": 12351
           },
           {
@@ -32398,17 +32969,25 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.0,
       "historical_benchmark": {
-        "sample_count": 1,
+        "sample_count": 2,
         "min_rate": 417.83,
-        "max_rate": 417.83,
-        "median_rate": 417.83,
-        "avg_rate": 417.83,
-        "range_str": "$418\u2013$418 (Med $418)",
-        "variance_pct": 59.6,
+        "max_rate": 551.43,
+        "median_rate": 484.63,
+        "avg_rate": 484.63,
+        "range_str": "$418\u2013$551 (Med $485)",
+        "variance_pct": 37.6,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+60% vs Track Record",
+        "flag_label": "+38% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 551.43,
+            "payout_nightly": 452.17,
+            "confirmation_id": 8014
+          },
           {
             "start_date": "2023-08-06",
             "end_date": "2023-08-10",
@@ -32577,17 +33156,26 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.0,
       "historical_benchmark": {
-        "sample_count": 0,
-        "min_rate": 0.0,
-        "max_rate": 0.0,
-        "median_rate": 0.0,
-        "avg_rate": 0.0,
-        "range_str": "No prior sales",
-        "variance_pct": null,
-        "flag": "NO_HISTORICAL_DATA",
-        "flag_label": "No Prior Sales",
-        "flag_color": "#94a3b8",
-        "matched_stays": []
+        "sample_count": 1,
+        "min_rate": 551.43,
+        "max_rate": 551.43,
+        "median_rate": 551.43,
+        "avg_rate": 551.43,
+        "range_str": "$551\u2013$551 (Med $551)",
+        "variance_pct": 21.3,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 551.43,
+            "payout_nightly": 452.17,
+            "confirmation_id": 8014
+          }
+        ]
       },
       "lead_time_status": {
         "lead_days": 315,
@@ -33396,47 +33984,55 @@
       "action_summary_adj": "\u2191 Increase $899 \u2192 $1065",
       "our_percentile_rank_adj": 51.3,
       "historical_benchmark": {
-        "sample_count": 4,
-        "min_rate": 641.62,
-        "max_rate": 961.74,
-        "median_rate": 794.44,
-        "avg_rate": 798.06,
-        "range_str": "$642\u2013$962 (Med $794)",
-        "variance_pct": 34.1,
+        "sample_count": 5,
+        "min_rate": 725.31,
+        "max_rate": 2201.57,
+        "median_rate": 843.11,
+        "avg_rate": 1126.73,
+        "range_str": "$725\u2013$2,202 (Med $843)",
+        "variance_pct": 26.3,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+34% vs Track Record",
+        "flag_label": "+26% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2022-12-25",
+            "end_date": "2023-01-01",
+            "nights": 7,
+            "gross_nightly": 2201.57,
+            "payout_nightly": 1805.29,
+            "confirmation_id": 8684
+          },
           {
             "start_date": "2023-01-12",
             "end_date": "2023-01-16",
             "nights": 4,
-            "gross_nightly": 794.47,
-            "payout_nightly": 651.46,
+            "gross_nightly": 843.11,
+            "payout_nightly": 691.35,
             "confirmation_id": 8857
           },
           {
             "start_date": "2026-12-23",
             "end_date": "2026-12-27",
             "nights": 4,
-            "gross_nightly": 794.42,
-            "payout_nightly": 651.42,
+            "gross_nightly": 843.06,
+            "payout_nightly": 691.31,
             "confirmation_id": 17618
           },
           {
             "start_date": "2026-12-31",
             "end_date": "2027-01-04",
             "nights": 4,
-            "gross_nightly": 961.74,
-            "payout_nightly": 788.63,
+            "gross_nightly": 1020.62,
+            "payout_nightly": 836.91,
             "confirmation_id": 19141
           },
           {
             "start_date": "2027-01-15",
             "end_date": "2027-01-19",
             "nights": 4,
-            "gross_nightly": 641.62,
-            "payout_nightly": 526.13,
+            "gross_nightly": 725.31,
+            "payout_nightly": 594.75,
             "confirmation_id": 18395
           }
         ]
@@ -34153,31 +34749,71 @@
       "action_summary_adj": "\u2191 Increase $866 \u2192 $1126",
       "our_percentile_rank_adj": 24.2,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 712.53,
-        "max_rate": 836.47,
-        "median_rate": 774.5,
-        "avg_rate": 774.5,
-        "range_str": "$713\u2013$836 (Med $774)",
-        "variance_pct": 45.4,
+        "sample_count": 7,
+        "min_rate": 544.41,
+        "max_rate": 1594.73,
+        "median_rate": 715.9,
+        "avg_rate": 802.03,
+        "range_str": "$544\u2013$1,595 (Med $716)",
+        "variance_pct": 57.3,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+45% vs Track Record",
+        "flag_label": "+57% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2023-02-08",
+            "end_date": "2023-02-12",
+            "nights": 4,
+            "gross_nightly": 1594.73,
+            "payout_nightly": 1307.68,
+            "confirmation_id": 9017
+          },
+          {
+            "start_date": "2024-02-16",
+            "end_date": "2024-02-19",
+            "nights": 3,
+            "gross_nightly": 627.2,
+            "payout_nightly": 514.31,
+            "confirmation_id": 11778
+          },
+          {
+            "start_date": "2024-02-19",
+            "end_date": "2024-02-25",
+            "nights": 6,
+            "gross_nightly": 544.41,
+            "payout_nightly": 446.41,
+            "confirmation_id": 11896
+          },
+          {
+            "start_date": "2025-02-07",
+            "end_date": "2025-02-10",
+            "nights": 3,
+            "gross_nightly": 715.9,
+            "payout_nightly": 587.04,
+            "confirmation_id": 13549
+          },
           {
             "start_date": "2025-02-18",
             "end_date": "2025-02-25",
             "nights": 7,
-            "gross_nightly": 836.47,
-            "payout_nightly": 685.9,
+            "gross_nightly": 741.17,
+            "payout_nightly": 607.76,
             "confirmation_id": 14261
+          },
+          {
+            "start_date": "2027-02-10",
+            "end_date": "2027-02-13",
+            "nights": 3,
+            "gross_nightly": 759.46,
+            "payout_nightly": 622.76,
+            "confirmation_id": 19523
           },
           {
             "start_date": "2027-02-13",
             "end_date": "2027-02-20",
             "nights": 7,
-            "gross_nightly": 712.53,
-            "payout_nightly": 584.27,
+            "gross_nightly": 631.35,
+            "payout_nightly": 517.71,
             "confirmation_id": 19294
           }
         ]
@@ -34895,30 +35531,30 @@
       "our_percentile_rank_adj": 53.1,
       "historical_benchmark": {
         "sample_count": 2,
-        "min_rate": 641.62,
-        "max_rate": 794.47,
-        "median_rate": 718.05,
-        "avg_rate": 718.05,
-        "range_str": "$642\u2013$794 (Med $718)",
-        "variance_pct": 49.9,
+        "min_rate": 725.31,
+        "max_rate": 843.11,
+        "median_rate": 784.21,
+        "avg_rate": 784.21,
+        "range_str": "$725\u2013$843 (Med $784)",
+        "variance_pct": 37.2,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+50% vs Track Record",
+        "flag_label": "+37% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2023-01-12",
             "end_date": "2023-01-16",
             "nights": 4,
-            "gross_nightly": 794.47,
-            "payout_nightly": 651.46,
+            "gross_nightly": 843.11,
+            "payout_nightly": 691.35,
             "confirmation_id": 8857
           },
           {
             "start_date": "2027-01-15",
             "end_date": "2027-01-19",
             "nights": 4,
-            "gross_nightly": 641.62,
-            "payout_nightly": 526.13,
+            "gross_nightly": 725.31,
+            "payout_nightly": 594.75,
             "confirmation_id": 18395
           }
         ]
@@ -35767,15 +36403,15 @@
       "action_summary_adj": "\u2191 Increase $1049 \u2192 $1197",
       "our_percentile_rank_adj": 47.5,
       "historical_benchmark": {
-        "sample_count": 5,
-        "min_rate": 711.75,
+        "sample_count": 6,
+        "min_rate": 755.33,
         "max_rate": 1148.92,
-        "median_rate": 903.36,
-        "avg_rate": 914.71,
-        "range_str": "$712\u2013$1,149 (Med $903)",
-        "variance_pct": 32.5,
+        "median_rate": 853.2,
+        "avg_rate": 899.23,
+        "range_str": "$755\u2013$1,149 (Med $853)",
+        "variance_pct": 40.3,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+32% vs Track Record",
+        "flag_label": "+40% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -35790,8 +36426,8 @@
             "start_date": "2024-04-17",
             "end_date": "2024-04-21",
             "nights": 4,
-            "gross_nightly": 711.75,
-            "payout_nightly": 583.63,
+            "gross_nightly": 755.33,
+            "payout_nightly": 619.37,
             "confirmation_id": 12351
           },
           {
@@ -35817,6 +36453,14 @@
             "gross_nightly": 803.05,
             "payout_nightly": 658.5,
             "confirmation_id": 14474
+          },
+          {
+            "start_date": "2025-05-09",
+            "end_date": "2025-05-15",
+            "nights": 6,
+            "gross_nightly": 778.24,
+            "payout_nightly": 638.15,
+            "confirmation_id": 14988
           }
         ]
       },
@@ -36000,12 +36644,12 @@
         "sample_count": 6,
         "min_rate": 564.65,
         "max_rate": 1241.9,
-        "median_rate": 621.04,
-        "avg_rate": 715.98,
-        "range_str": "$565\u2013$1,242 (Med $621)",
-        "variance_pct": 79.4,
+        "median_rate": 657.93,
+        "avg_rate": 740.99,
+        "range_str": "$565\u2013$1,242 (Med $658)",
+        "variance_pct": 69.3,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+79% vs Track Record",
+        "flag_label": "+69% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -36020,16 +36664,16 @@
             "start_date": "2022-07-14",
             "end_date": "2022-07-24",
             "nights": 10,
-            "gross_nightly": 650.69,
-            "payout_nightly": 533.56,
+            "gross_nightly": 716.86,
+            "payout_nightly": 587.82,
             "confirmation_id": 8014
           },
           {
             "start_date": "2023-06-24",
             "end_date": "2023-06-26",
             "nights": 2,
-            "gross_nightly": 643.08,
-            "payout_nightly": 527.33,
+            "gross_nightly": 726.96,
+            "payout_nightly": 596.11,
             "confirmation_id": 10243
           },
           {
@@ -36239,7 +36883,7 @@
         "min_rate": 595.26,
         "max_rate": 729.0,
         "median_rate": 599.0,
-        "avg_rate": 634.1,
+        "avg_rate": 647.33,
         "range_str": "$595\u2013$729 (Med $599)",
         "variance_pct": 35.1,
         "flag": "AGGRESSIVE_PREMIUM",
@@ -36250,8 +36894,8 @@
             "start_date": "2022-07-14",
             "end_date": "2022-07-24",
             "nights": 10,
-            "gross_nightly": 650.69,
-            "payout_nightly": 533.56,
+            "gross_nightly": 716.86,
+            "payout_nightly": 587.82,
             "confirmation_id": 8014
           },
           {
@@ -37038,32 +37682,72 @@
       "action_summary_adj": "\u2191 Increase $836 \u2192 $975",
       "our_percentile_rank_adj": 38.9,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 1119.0,
-        "max_rate": 1121.84,
-        "median_rate": 1120.42,
-        "avg_rate": 1120.42,
-        "range_str": "$1,119\u2013$1,122 (Med $1,120)",
-        "variance_pct": -13.0,
+        "sample_count": 7,
+        "min_rate": 793.03,
+        "max_rate": 1253.61,
+        "median_rate": 1055.66,
+        "avg_rate": 1020.99,
+        "range_str": "$793\u2013$1,254 (Med $1,056)",
+        "variance_pct": -7.6,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2022-03-30",
+            "end_date": "2022-04-05",
+            "nights": 6,
+            "gross_nightly": 1253.61,
+            "payout_nightly": 1027.96,
+            "confirmation_id": 6819
+          },
+          {
+            "start_date": "2022-04-06",
+            "end_date": "2022-04-10",
+            "nights": 4,
+            "gross_nightly": 851.43,
+            "payout_nightly": 698.17,
+            "confirmation_id": 7025
+          },
+          {
+            "start_date": "2023-03-30",
+            "end_date": "2023-04-04",
+            "nights": 5,
+            "gross_nightly": 1134.84,
+            "payout_nightly": 930.57,
+            "confirmation_id": 9343
+          },
+          {
             "start_date": "2025-03-16",
             "end_date": "2025-03-21",
             "nights": 5,
-            "gross_nightly": 1119.0,
-            "payout_nightly": 917.58,
+            "gross_nightly": 1055.66,
+            "payout_nightly": 865.64,
             "confirmation_id": 14233
+          },
+          {
+            "start_date": "2025-03-21",
+            "end_date": "2025-03-24",
+            "nights": 3,
+            "gross_nightly": 1056.74,
+            "payout_nightly": 866.52,
+            "confirmation_id": 14286
           },
           {
             "start_date": "2025-04-04",
             "end_date": "2025-04-09",
             "nights": 5,
-            "gross_nightly": 1121.84,
-            "payout_nightly": 919.91,
+            "gross_nightly": 1001.64,
+            "payout_nightly": 821.35,
             "confirmation_id": 14616
+          },
+          {
+            "start_date": "2027-03-17",
+            "end_date": "2027-03-21",
+            "nights": 4,
+            "gross_nightly": 793.03,
+            "payout_nightly": 650.29,
+            "confirmation_id": 19416
           }
         ]
       },
@@ -37244,13 +37928,13 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $799",
       "our_percentile_rank_adj": 20.0,
       "historical_benchmark": {
-        "sample_count": 3,
+        "sample_count": 4,
         "min_rate": 466.81,
         "max_rate": 1311.45,
-        "median_rate": 779.8,
-        "avg_rate": 852.69,
-        "range_str": "$467\u2013$1,311 (Med $780)",
-        "variance_pct": 2.5,
+        "median_rate": 720.55,
+        "avg_rate": 804.84,
+        "range_str": "$467\u2013$1,311 (Med $721)",
+        "variance_pct": 10.9,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
@@ -37264,11 +37948,19 @@
             "confirmation_id": 6854
           },
           {
+            "start_date": "2022-05-25",
+            "end_date": "2022-06-01",
+            "nights": 7,
+            "gross_nightly": 613.56,
+            "payout_nightly": 503.11,
+            "confirmation_id": 7488
+          },
+          {
             "start_date": "2024-05-23",
             "end_date": "2024-05-27",
             "nights": 4,
-            "gross_nightly": 779.8,
-            "payout_nightly": 639.44,
+            "gross_nightly": 827.55,
+            "payout_nightly": 678.59,
             "confirmation_id": 12846
           },
           {
@@ -38069,40 +38761,80 @@
       "action_summary_adj": "\u2193 Reduce $1099 \u2192 $934",
       "our_percentile_rank_adj": 63.6,
       "historical_benchmark": {
-        "sample_count": 3,
-        "min_rate": 1119.0,
-        "max_rate": 1140.99,
-        "median_rate": 1121.84,
-        "avg_rate": 1127.28,
-        "range_str": "$1,119\u2013$1,141 (Med $1,122)",
-        "variance_pct": -16.7,
+        "sample_count": 8,
+        "min_rate": 793.03,
+        "max_rate": 1253.61,
+        "median_rate": 1066.58,
+        "avg_rate": 1062.52,
+        "range_str": "$793\u2013$1,254 (Med $1,067)",
+        "variance_pct": -12.4,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2022-03-10",
+            "end_date": "2022-03-22",
+            "nights": 12,
+            "gross_nightly": 1128.24,
+            "payout_nightly": 925.16,
+            "confirmation_id": 6776
+          },
+          {
+            "start_date": "2022-03-30",
+            "end_date": "2022-04-05",
+            "nights": 6,
+            "gross_nightly": 1253.61,
+            "payout_nightly": 1027.96,
+            "confirmation_id": 6819
+          },
+          {
+            "start_date": "2023-03-30",
+            "end_date": "2023-04-04",
+            "nights": 5,
+            "gross_nightly": 1134.84,
+            "payout_nightly": 930.57,
+            "confirmation_id": 9343
+          },
+          {
             "start_date": "2024-03-09",
             "end_date": "2024-03-14",
             "nights": 5,
-            "gross_nightly": 1140.99,
-            "payout_nightly": 935.62,
+            "gross_nightly": 1076.41,
+            "payout_nightly": 882.66,
             "confirmation_id": 11609
           },
           {
             "start_date": "2025-03-16",
             "end_date": "2025-03-21",
             "nights": 5,
-            "gross_nightly": 1119.0,
-            "payout_nightly": 917.58,
+            "gross_nightly": 1055.66,
+            "payout_nightly": 865.64,
             "confirmation_id": 14233
+          },
+          {
+            "start_date": "2025-03-21",
+            "end_date": "2025-03-24",
+            "nights": 3,
+            "gross_nightly": 1056.74,
+            "payout_nightly": 866.52,
+            "confirmation_id": 14286
           },
           {
             "start_date": "2025-04-04",
             "end_date": "2025-04-09",
             "nights": 5,
-            "gross_nightly": 1121.84,
-            "payout_nightly": 919.91,
+            "gross_nightly": 1001.64,
+            "payout_nightly": 821.35,
             "confirmation_id": 14616
+          },
+          {
+            "start_date": "2027-03-17",
+            "end_date": "2027-03-21",
+            "nights": 4,
+            "gross_nightly": 793.03,
+            "payout_nightly": 650.29,
+            "confirmation_id": 19416
           }
         ]
       },
@@ -38989,23 +39721,47 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 36.6,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 428.69,
-        "max_rate": 428.69,
-        "median_rate": 428.69,
-        "avg_rate": 428.69,
-        "range_str": "$429\u2013$429 (Med $429)",
-        "variance_pct": -14.9,
+        "sample_count": 4,
+        "min_rate": 379.85,
+        "max_rate": 595.83,
+        "median_rate": 400.3,
+        "avg_rate": 444.07,
+        "range_str": "$380\u2013$596 (Med $400)",
+        "variance_pct": -8.8,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2023-09-22",
+            "end_date": "2023-09-25",
+            "nights": 3,
+            "gross_nightly": 595.83,
+            "payout_nightly": 488.58,
+            "confirmation_id": 10965
+          },
+          {
+            "start_date": "2026-09-18",
+            "end_date": "2026-09-21",
+            "nights": 3,
+            "gross_nightly": 411.47,
+            "payout_nightly": 337.4,
+            "confirmation_id": 17963
+          },
+          {
+            "start_date": "2026-09-30",
+            "end_date": "2026-10-04",
+            "nights": 4,
+            "gross_nightly": 389.12,
+            "payout_nightly": 319.08,
+            "confirmation_id": 19509
+          },
+          {
             "start_date": "2026-10-04",
             "end_date": "2026-10-11",
             "nights": 7,
-            "gross_nightly": 428.69,
-            "payout_nightly": 351.52,
+            "gross_nightly": 379.85,
+            "payout_nightly": 311.48,
             "confirmation_id": 18653
           }
         ]
@@ -39626,13 +40382,13 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 44.8,
       "historical_benchmark": {
-        "sample_count": 4,
-        "min_rate": 476.68,
-        "max_rate": 715.0,
-        "median_rate": 521.38,
-        "avg_rate": 558.61,
-        "range_str": "$477\u2013$715 (Med $521)",
-        "variance_pct": 4.9,
+        "sample_count": 5,
+        "min_rate": 493.8,
+        "max_rate": 774.58,
+        "median_rate": 534.91,
+        "avg_rate": 571.63,
+        "range_str": "$494\u2013$775 (Med $535)",
+        "variance_pct": 2.3,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
@@ -39641,8 +40397,8 @@
             "start_date": "2023-09-22",
             "end_date": "2023-09-25",
             "nights": 3,
-            "gross_nightly": 715.0,
-            "payout_nightly": 586.3,
+            "gross_nightly": 774.58,
+            "payout_nightly": 635.16,
             "confirmation_id": 10965
           },
           {
@@ -39657,17 +40413,25 @@
             "start_date": "2026-09-18",
             "end_date": "2026-09-21",
             "nights": 3,
-            "gross_nightly": 493.76,
-            "payout_nightly": 404.88,
+            "gross_nightly": 534.91,
+            "payout_nightly": 438.62,
             "confirmation_id": 17963
           },
           {
             "start_date": "2026-09-30",
             "end_date": "2026-10-04",
             "nights": 4,
-            "gross_nightly": 476.68,
-            "payout_nightly": 390.87,
+            "gross_nightly": 505.86,
+            "payout_nightly": 414.8,
             "confirmation_id": 19509
+          },
+          {
+            "start_date": "2026-10-04",
+            "end_date": "2026-10-11",
+            "nights": 7,
+            "gross_nightly": 493.8,
+            "payout_nightly": 404.92,
+            "confirmation_id": 18653
           }
         ]
       },
@@ -40220,24 +40984,56 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 41.4,
       "historical_benchmark": {
-        "sample_count": 2,
+        "sample_count": 7,
         "min_rate": 405.6,
-        "max_rate": 611.31,
-        "median_rate": 508.45,
-        "avg_rate": 508.45,
-        "range_str": "$406\u2013$611 (Med $508)",
-        "variance_pct": -4.2,
+        "max_rate": 702.3,
+        "median_rate": 555.73,
+        "avg_rate": 531.64,
+        "range_str": "$406\u2013$702 (Med $556)",
+        "variance_pct": -12.4,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2022-11-07",
+            "end_date": "2022-11-13",
+            "nights": 6,
+            "gross_nightly": 443.79,
+            "payout_nightly": 363.91,
+            "confirmation_id": 8750
+          },
+          {
+            "start_date": "2022-11-23",
+            "end_date": "2022-11-27",
+            "nights": 4,
+            "gross_nightly": 702.3,
+            "payout_nightly": 575.89,
+            "confirmation_id": 8709
+          },
+          {
             "start_date": "2023-10-28",
             "end_date": "2023-10-31",
             "nights": 3,
-            "gross_nightly": 611.31,
-            "payout_nightly": 501.27,
+            "gross_nightly": 555.73,
+            "payout_nightly": 455.7,
             "confirmation_id": 11320
+          },
+          {
+            "start_date": "2023-11-08",
+            "end_date": "2023-11-12",
+            "nights": 4,
+            "gross_nightly": 617.6,
+            "payout_nightly": 506.43,
+            "confirmation_id": 10383
+          },
+          {
+            "start_date": "2024-11-06",
+            "end_date": "2024-11-10",
+            "nights": 4,
+            "gross_nightly": 587.02,
+            "payout_nightly": 481.36,
+            "confirmation_id": 13839
           },
           {
             "start_date": "2026-11-01",
@@ -40246,6 +41042,14 @@
             "gross_nightly": 405.6,
             "payout_nightly": 332.59,
             "confirmation_id": 18912
+          },
+          {
+            "start_date": "2026-11-11",
+            "end_date": "2026-11-15",
+            "nights": 4,
+            "gross_nightly": 409.46,
+            "payout_nightly": 335.75,
+            "confirmation_id": 17952
           }
         ]
       },
@@ -41034,17 +41838,49 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.5,
       "historical_benchmark": {
-        "sample_count": 1,
+        "sample_count": 6,
         "min_rate": 405.6,
-        "max_rate": 405.6,
-        "median_rate": 405.6,
-        "avg_rate": 405.6,
-        "range_str": "$406\u2013$406 (Med $406)",
-        "variance_pct": 20.6,
+        "max_rate": 702.3,
+        "median_rate": 515.4,
+        "avg_rate": 527.63,
+        "range_str": "$406\u2013$702 (Med $515)",
+        "variance_pct": -5.1,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
+          {
+            "start_date": "2022-11-07",
+            "end_date": "2022-11-13",
+            "nights": 6,
+            "gross_nightly": 443.79,
+            "payout_nightly": 363.91,
+            "confirmation_id": 8750
+          },
+          {
+            "start_date": "2022-11-23",
+            "end_date": "2022-11-27",
+            "nights": 4,
+            "gross_nightly": 702.3,
+            "payout_nightly": 575.89,
+            "confirmation_id": 8709
+          },
+          {
+            "start_date": "2023-11-08",
+            "end_date": "2023-11-12",
+            "nights": 4,
+            "gross_nightly": 617.6,
+            "payout_nightly": 506.43,
+            "confirmation_id": 10383
+          },
+          {
+            "start_date": "2024-11-06",
+            "end_date": "2024-11-10",
+            "nights": 4,
+            "gross_nightly": 587.02,
+            "payout_nightly": 481.36,
+            "confirmation_id": 13839
+          },
           {
             "start_date": "2026-11-01",
             "end_date": "2026-11-05",
@@ -41052,6 +41888,14 @@
             "gross_nightly": 405.6,
             "payout_nightly": 332.59,
             "confirmation_id": 18912
+          },
+          {
+            "start_date": "2026-11-11",
+            "end_date": "2026-11-15",
+            "nights": 4,
+            "gross_nightly": 409.46,
+            "payout_nightly": 335.75,
+            "confirmation_id": 17952
           }
         ]
       },
@@ -41683,23 +42527,39 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 48.5,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 428.69,
-        "max_rate": 428.69,
-        "median_rate": 428.69,
-        "avg_rate": 428.69,
-        "range_str": "$429\u2013$429 (Med $429)",
-        "variance_pct": -2.3,
-        "flag": "ON_TRACK",
-        "flag_label": "Aligned With Track Record",
-        "flag_color": "#34d399",
+        "sample_count": 3,
+        "min_rate": 379.85,
+        "max_rate": 702.3,
+        "median_rate": 658.06,
+        "avg_rate": 580.07,
+        "range_str": "$380\u2013$702 (Med $658)",
+        "variance_pct": -36.3,
+        "flag": "DEEP_DISCOUNT",
+        "flag_label": "-36% vs Track Record",
+        "flag_color": "#f87171",
         "matched_stays": [
+          {
+            "start_date": "2022-11-23",
+            "end_date": "2022-11-27",
+            "nights": 4,
+            "gross_nightly": 702.3,
+            "payout_nightly": 575.89,
+            "confirmation_id": 8709
+          },
+          {
+            "start_date": "2023-12-19",
+            "end_date": "2023-12-23",
+            "nights": 4,
+            "gross_nightly": 658.06,
+            "payout_nightly": 539.61,
+            "confirmation_id": 10735
+          },
           {
             "start_date": "2026-12-12",
             "end_date": "2026-12-19",
             "nights": 7,
-            "gross_nightly": 428.69,
-            "payout_nightly": 351.52,
+            "gross_nightly": 379.85,
+            "payout_nightly": 311.48,
             "confirmation_id": 18555
           }
         ]
@@ -42681,24 +43541,32 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 37.8,
       "historical_benchmark": {
-        "sample_count": 2,
+        "sample_count": 6,
         "min_rate": 313.3,
-        "max_rate": 1911.26,
-        "median_rate": 1112.28,
-        "avg_rate": 1112.28,
-        "range_str": "$313\u2013$1,911 (Med $1,112)",
-        "variance_pct": -37.9,
-        "flag": "DEEP_DISCOUNT",
-        "flag_label": "-38% vs Track Record",
-        "flag_color": "#f87171",
+        "max_rate": 1693.52,
+        "median_rate": 648.52,
+        "avg_rate": 774.48,
+        "range_str": "$313\u2013$1,694 (Med $649)",
+        "variance_pct": 6.6,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
         "matched_stays": [
           {
             "start_date": "2022-12-25",
             "end_date": "2023-01-01",
             "nights": 7,
-            "gross_nightly": 1911.26,
-            "payout_nightly": 1567.23,
+            "gross_nightly": 1693.52,
+            "payout_nightly": 1388.68,
             "confirmation_id": 8684
+          },
+          {
+            "start_date": "2023-01-12",
+            "end_date": "2023-01-16",
+            "nights": 4,
+            "gross_nightly": 648.54,
+            "payout_nightly": 531.81,
+            "confirmation_id": 8857
           },
           {
             "start_date": "2025-01-06",
@@ -42707,6 +43575,30 @@
             "gross_nightly": 313.3,
             "payout_nightly": 256.9,
             "confirmation_id": 14208
+          },
+          {
+            "start_date": "2026-12-23",
+            "end_date": "2026-12-27",
+            "nights": 4,
+            "gross_nightly": 648.51,
+            "payout_nightly": 531.78,
+            "confirmation_id": 17618
+          },
+          {
+            "start_date": "2026-12-31",
+            "end_date": "2027-01-04",
+            "nights": 4,
+            "gross_nightly": 785.09,
+            "payout_nightly": 643.78,
+            "confirmation_id": 19141
+          },
+          {
+            "start_date": "2027-01-15",
+            "end_date": "2027-01-19",
+            "nights": 4,
+            "gross_nightly": 557.93,
+            "payout_nightly": 457.5,
+            "confirmation_id": 18395
           }
         ]
       },
@@ -43517,17 +44409,50 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 55.6,
       "historical_benchmark": {
-        "sample_count": 0,
-        "min_rate": 0.0,
-        "max_rate": 0.0,
-        "median_rate": 0.0,
-        "avg_rate": 0.0,
-        "range_str": "No prior sales",
-        "variance_pct": null,
-        "flag": "NO_HISTORICAL_DATA",
-        "flag_label": "No Prior Sales",
-        "flag_color": "#94a3b8",
-        "matched_stays": []
+        "sample_count": 4,
+        "min_rate": 557.93,
+        "max_rate": 1594.73,
+        "median_rate": 682.22,
+        "avg_rate": 879.27,
+        "range_str": "$558\u2013$1,595 (Med $682)",
+        "variance_pct": -2.2,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2023-01-12",
+            "end_date": "2023-01-16",
+            "nights": 4,
+            "gross_nightly": 648.54,
+            "payout_nightly": 531.81,
+            "confirmation_id": 8857
+          },
+          {
+            "start_date": "2023-02-08",
+            "end_date": "2023-02-12",
+            "nights": 4,
+            "gross_nightly": 1594.73,
+            "payout_nightly": 1307.68,
+            "confirmation_id": 9017
+          },
+          {
+            "start_date": "2025-02-07",
+            "end_date": "2025-02-10",
+            "nights": 3,
+            "gross_nightly": 715.9,
+            "payout_nightly": 587.04,
+            "confirmation_id": 13549
+          },
+          {
+            "start_date": "2027-01-15",
+            "end_date": "2027-01-19",
+            "nights": 4,
+            "gross_nightly": 557.93,
+            "payout_nightly": 457.5,
+            "confirmation_id": 18395
+          }
+        ]
       },
       "lead_time_status": {
         "lead_days": 140,
@@ -44203,31 +45128,71 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 45.2,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 712.53,
-        "max_rate": 836.47,
-        "median_rate": 774.5,
-        "avg_rate": 774.5,
-        "range_str": "$713\u2013$836 (Med $774)",
-        "variance_pct": 12.8,
+        "sample_count": 7,
+        "min_rate": 544.41,
+        "max_rate": 1594.73,
+        "median_rate": 715.9,
+        "avg_rate": 802.03,
+        "range_str": "$544\u2013$1,595 (Med $716)",
+        "variance_pct": 22.1,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2023-02-08",
+            "end_date": "2023-02-12",
+            "nights": 4,
+            "gross_nightly": 1594.73,
+            "payout_nightly": 1307.68,
+            "confirmation_id": 9017
+          },
+          {
+            "start_date": "2024-02-16",
+            "end_date": "2024-02-19",
+            "nights": 3,
+            "gross_nightly": 627.2,
+            "payout_nightly": 514.31,
+            "confirmation_id": 11778
+          },
+          {
+            "start_date": "2024-02-19",
+            "end_date": "2024-02-25",
+            "nights": 6,
+            "gross_nightly": 544.41,
+            "payout_nightly": 446.41,
+            "confirmation_id": 11896
+          },
+          {
+            "start_date": "2025-02-07",
+            "end_date": "2025-02-10",
+            "nights": 3,
+            "gross_nightly": 715.9,
+            "payout_nightly": 587.04,
+            "confirmation_id": 13549
+          },
+          {
             "start_date": "2025-02-18",
             "end_date": "2025-02-25",
             "nights": 7,
-            "gross_nightly": 836.47,
-            "payout_nightly": 685.9,
+            "gross_nightly": 741.17,
+            "payout_nightly": 607.76,
             "confirmation_id": 14261
+          },
+          {
+            "start_date": "2027-02-10",
+            "end_date": "2027-02-13",
+            "nights": 3,
+            "gross_nightly": 759.46,
+            "payout_nightly": 622.76,
+            "confirmation_id": 19523
           },
           {
             "start_date": "2027-02-13",
             "end_date": "2027-02-20",
             "nights": 7,
-            "gross_nightly": 712.53,
-            "payout_nightly": 584.27,
+            "gross_nightly": 631.35,
+            "payout_nightly": 517.71,
             "confirmation_id": 19294
           }
         ]
@@ -45058,39 +46023,63 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 44.7,
       "historical_benchmark": {
-        "sample_count": 3,
-        "min_rate": 712.53,
-        "max_rate": 1140.99,
-        "median_rate": 836.47,
-        "avg_rate": 896.66,
-        "range_str": "$713\u2013$1,141 (Med $836)",
-        "variance_pct": -0.1,
+        "sample_count": 6,
+        "min_rate": 544.41,
+        "max_rate": 1128.24,
+        "median_rate": 686.26,
+        "avg_rate": 791.46,
+        "range_str": "$544\u2013$1,128 (Med $686)",
+        "variance_pct": 21.8,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2022-03-10",
+            "end_date": "2022-03-22",
+            "nights": 12,
+            "gross_nightly": 1128.24,
+            "payout_nightly": 925.16,
+            "confirmation_id": 6776
+          },
+          {
+            "start_date": "2024-02-16",
+            "end_date": "2024-02-19",
+            "nights": 3,
+            "gross_nightly": 627.2,
+            "payout_nightly": 514.31,
+            "confirmation_id": 11778
+          },
+          {
+            "start_date": "2024-02-19",
+            "end_date": "2024-02-25",
+            "nights": 6,
+            "gross_nightly": 544.41,
+            "payout_nightly": 446.41,
+            "confirmation_id": 11896
+          },
+          {
             "start_date": "2024-03-09",
             "end_date": "2024-03-14",
             "nights": 5,
-            "gross_nightly": 1140.99,
-            "payout_nightly": 935.62,
+            "gross_nightly": 1076.41,
+            "payout_nightly": 882.66,
             "confirmation_id": 11609
           },
           {
             "start_date": "2025-02-18",
             "end_date": "2025-02-25",
             "nights": 7,
-            "gross_nightly": 836.47,
-            "payout_nightly": 685.9,
+            "gross_nightly": 741.17,
+            "payout_nightly": 607.76,
             "confirmation_id": 14261
           },
           {
             "start_date": "2027-02-13",
             "end_date": "2027-02-20",
             "nights": 7,
-            "gross_nightly": 712.53,
-            "payout_nightly": 584.27,
+            "gross_nightly": 631.35,
+            "payout_nightly": 517.71,
             "confirmation_id": 19294
           }
         ]
@@ -45902,32 +46891,56 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 45.9,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 1119.0,
-        "max_rate": 1140.99,
-        "median_rate": 1129.99,
-        "avg_rate": 1129.99,
-        "range_str": "$1,119\u2013$1,141 (Med $1,130)",
-        "variance_pct": -23.1,
+        "sample_count": 5,
+        "min_rate": 793.03,
+        "max_rate": 1128.24,
+        "median_rate": 1056.74,
+        "avg_rate": 1022.02,
+        "range_str": "$793\u2013$1,128 (Med $1,057)",
+        "variance_pct": -17.8,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
         "matched_stays": [
           {
+            "start_date": "2022-03-10",
+            "end_date": "2022-03-22",
+            "nights": 12,
+            "gross_nightly": 1128.24,
+            "payout_nightly": 925.16,
+            "confirmation_id": 6776
+          },
+          {
             "start_date": "2024-03-09",
             "end_date": "2024-03-14",
             "nights": 5,
-            "gross_nightly": 1140.99,
-            "payout_nightly": 935.62,
+            "gross_nightly": 1076.41,
+            "payout_nightly": 882.66,
             "confirmation_id": 11609
           },
           {
             "start_date": "2025-03-16",
             "end_date": "2025-03-21",
             "nights": 5,
-            "gross_nightly": 1119.0,
-            "payout_nightly": 917.58,
+            "gross_nightly": 1055.66,
+            "payout_nightly": 865.64,
             "confirmation_id": 14233
+          },
+          {
+            "start_date": "2025-03-21",
+            "end_date": "2025-03-24",
+            "nights": 3,
+            "gross_nightly": 1056.74,
+            "payout_nightly": 866.52,
+            "confirmation_id": 14286
+          },
+          {
+            "start_date": "2027-03-17",
+            "end_date": "2027-03-21",
+            "nights": 4,
+            "gross_nightly": 793.03,
+            "payout_nightly": 650.29,
+            "confirmation_id": 19416
           }
         ]
       },
@@ -47023,17 +48036,25 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 44.2,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 658.51,
+        "sample_count": 4,
+        "min_rate": 581.02,
         "max_rate": 679.15,
-        "median_rate": 668.83,
-        "avg_rate": 668.83,
-        "range_str": "$659\u2013$679 (Med $669)",
-        "variance_pct": 13.2,
-        "flag": "ON_TRACK",
-        "flag_label": "Aligned With Track Record",
-        "flag_color": "#34d399",
+        "median_rate": 590.85,
+        "avg_rate": 610.47,
+        "range_str": "$581\u2013$679 (Med $591)",
+        "variance_pct": 28.1,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+28% vs Track Record",
+        "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2024-04-17",
+            "end_date": "2024-04-21",
+            "nights": 4,
+            "gross_nightly": 581.02,
+            "payout_nightly": 476.44,
+            "confirmation_id": 12351
+          },
           {
             "start_date": "2024-04-21",
             "end_date": "2024-04-22",
@@ -47043,11 +48064,19 @@
             "confirmation_id": 12486
           },
           {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 583.06,
+            "payout_nightly": 478.11,
+            "confirmation_id": 12368
+          },
+          {
             "start_date": "2025-05-09",
             "end_date": "2025-05-15",
             "nights": 6,
-            "gross_nightly": 658.51,
-            "payout_nightly": 539.98,
+            "gross_nightly": 598.64,
+            "payout_nightly": 490.89,
             "confirmation_id": 14988
           }
         ]
@@ -48162,23 +49191,39 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 39.6,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 658.51,
-        "max_rate": 658.51,
-        "median_rate": 658.51,
-        "avg_rate": 658.51,
-        "range_str": "$659\u2013$659 (Med $659)",
-        "variance_pct": 15.7,
-        "flag": "ON_TRACK",
-        "flag_label": "Aligned With Track Record",
-        "flag_color": "#34d399",
+        "sample_count": 3,
+        "min_rate": 583.06,
+        "max_rate": 636.58,
+        "median_rate": 598.64,
+        "avg_rate": 606.09,
+        "range_str": "$583\u2013$637 (Med $599)",
+        "variance_pct": 27.3,
+        "flag": "AGGRESSIVE_PREMIUM",
+        "flag_label": "+27% vs Track Record",
+        "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 583.06,
+            "payout_nightly": 478.11,
+            "confirmation_id": 12368
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 636.58,
+            "payout_nightly": 521.99,
+            "confirmation_id": 12846
+          },
           {
             "start_date": "2025-05-09",
             "end_date": "2025-05-15",
             "nights": 6,
-            "gross_nightly": 658.51,
-            "payout_nightly": 539.98,
+            "gross_nightly": 598.64,
+            "payout_nightly": 490.89,
             "confirmation_id": 14988
           }
         ]
@@ -49332,31 +50377,47 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 46.4,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 532.65,
-        "max_rate": 658.51,
-        "median_rate": 595.58,
-        "avg_rate": 595.58,
-        "range_str": "$533\u2013$659 (Med $596)",
-        "variance_pct": 27.8,
+        "sample_count": 4,
+        "min_rate": 471.97,
+        "max_rate": 636.58,
+        "median_rate": 590.85,
+        "avg_rate": 572.56,
+        "range_str": "$472\u2013$637 (Med $591)",
+        "variance_pct": 28.8,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+28% vs Track Record",
+        "flag_label": "+29% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
             "start_date": "2022-05-25",
             "end_date": "2022-06-01",
             "nights": 7,
-            "gross_nightly": 532.65,
-            "payout_nightly": 436.77,
+            "gross_nightly": 471.97,
+            "payout_nightly": 387.01,
             "confirmation_id": 7488
+          },
+          {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 583.06,
+            "payout_nightly": 478.11,
+            "confirmation_id": 12368
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 636.58,
+            "payout_nightly": 521.99,
+            "confirmation_id": 12846
           },
           {
             "start_date": "2025-05-09",
             "end_date": "2025-05-15",
             "nights": 6,
-            "gross_nightly": 658.51,
-            "payout_nightly": 539.98,
+            "gross_nightly": 598.64,
+            "payout_nightly": 490.89,
             "confirmation_id": 14988
           }
         ]
@@ -50469,13 +51530,13 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 45.1,
       "historical_benchmark": {
-        "sample_count": 2,
-        "min_rate": 532.65,
-        "max_rate": 658.51,
-        "median_rate": 595.58,
-        "avg_rate": 595.58,
-        "range_str": "$533\u2013$659 (Med $596)",
-        "variance_pct": 19.0,
+        "sample_count": 4,
+        "min_rate": 471.97,
+        "max_rate": 636.58,
+        "median_rate": 590.85,
+        "avg_rate": 572.56,
+        "range_str": "$472\u2013$637 (Med $591)",
+        "variance_pct": 20.0,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
@@ -50484,16 +51545,32 @@
             "start_date": "2022-05-25",
             "end_date": "2022-06-01",
             "nights": 7,
-            "gross_nightly": 532.65,
-            "payout_nightly": 436.77,
+            "gross_nightly": 471.97,
+            "payout_nightly": 387.01,
             "confirmation_id": 7488
+          },
+          {
+            "start_date": "2024-05-15",
+            "end_date": "2024-05-19",
+            "nights": 4,
+            "gross_nightly": 583.06,
+            "payout_nightly": 478.11,
+            "confirmation_id": 12368
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 636.58,
+            "payout_nightly": 521.99,
+            "confirmation_id": 12846
           },
           {
             "start_date": "2025-05-09",
             "end_date": "2025-05-15",
             "nights": 6,
-            "gross_nightly": 658.51,
-            "payout_nightly": 539.98,
+            "gross_nightly": 598.64,
+            "payout_nightly": 490.89,
             "confirmation_id": 14988
           }
         ]
@@ -50656,24 +51733,32 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $691 \u2022 High compression",
       "our_percentile_rank_adj": 25.0,
       "historical_benchmark": {
-        "sample_count": 1,
-        "min_rate": 532.65,
-        "max_rate": 532.65,
-        "median_rate": 532.65,
-        "avg_rate": 532.65,
-        "range_str": "$533\u2013$533 (Med $533)",
-        "variance_pct": 29.7,
-        "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+30% vs Track Record",
-        "flag_color": "#fbbf24",
+        "sample_count": 2,
+        "min_rate": 471.97,
+        "max_rate": 636.58,
+        "median_rate": 554.28,
+        "avg_rate": 554.28,
+        "range_str": "$472\u2013$637 (Med $554)",
+        "variance_pct": 24.7,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
         "matched_stays": [
           {
             "start_date": "2022-05-25",
             "end_date": "2022-06-01",
             "nights": 7,
-            "gross_nightly": 532.65,
-            "payout_nightly": 436.77,
+            "gross_nightly": 471.97,
+            "payout_nightly": 387.01,
             "confirmation_id": 7488
+          },
+          {
+            "start_date": "2024-05-23",
+            "end_date": "2024-05-27",
+            "nights": 4,
+            "gross_nightly": 636.58,
+            "payout_nightly": 521.99,
+            "confirmation_id": 12846
           }
         ]
       },
@@ -50835,17 +51920,25 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $683 \u2022 High compression",
       "our_percentile_rank_adj": 25.0,
       "historical_benchmark": {
-        "sample_count": 2,
+        "sample_count": 3,
         "min_rate": 390.39,
-        "max_rate": 509.15,
-        "median_rate": 449.77,
-        "avg_rate": 449.77,
-        "range_str": "$390\u2013$509 (Med $450)",
-        "variance_pct": 51.9,
+        "max_rate": 559.2,
+        "median_rate": 509.15,
+        "avg_rate": 486.25,
+        "range_str": "$390\u2013$559 (Med $509)",
+        "variance_pct": 34.1,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+52% vs Track Record",
+        "flag_label": "+34% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 559.2,
+            "payout_nightly": 458.54,
+            "confirmation_id": 10243
+          },
           {
             "start_date": "2024-06-23",
             "end_date": "2024-06-24",
@@ -51041,17 +52134,25 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $746",
       "our_percentile_rank_adj": 33.3,
       "historical_benchmark": {
-        "sample_count": 2,
+        "sample_count": 3,
         "min_rate": 390.39,
-        "max_rate": 509.15,
-        "median_rate": 449.77,
-        "avg_rate": 449.77,
-        "range_str": "$390\u2013$509 (Med $450)",
-        "variance_pct": 65.9,
+        "max_rate": 559.2,
+        "median_rate": 509.15,
+        "avg_rate": 486.25,
+        "range_str": "$390\u2013$559 (Med $509)",
+        "variance_pct": 46.5,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+66% vs Track Record",
+        "flag_label": "+46% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 559.2,
+            "payout_nightly": 458.54,
+            "confirmation_id": 10243
+          },
           {
             "start_date": "2024-06-23",
             "end_date": "2024-06-24",
@@ -51247,17 +52348,25 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $683",
       "our_percentile_rank_adj": 40.0,
       "historical_benchmark": {
-        "sample_count": 2,
+        "sample_count": 3,
         "min_rate": 390.39,
-        "max_rate": 509.15,
-        "median_rate": 449.77,
-        "avg_rate": 449.77,
-        "range_str": "$390\u2013$509 (Med $450)",
-        "variance_pct": 51.9,
+        "max_rate": 559.2,
+        "median_rate": 509.15,
+        "avg_rate": 486.25,
+        "range_str": "$390\u2013$559 (Med $509)",
+        "variance_pct": 34.1,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+52% vs Track Record",
+        "flag_label": "+34% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 559.2,
+            "payout_nightly": 458.54,
+            "confirmation_id": 10243
+          },
           {
             "start_date": "2024-06-23",
             "end_date": "2024-06-24",
@@ -51453,17 +52562,33 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $776",
       "our_percentile_rank_adj": 16.7,
       "historical_benchmark": {
-        "sample_count": 2,
+        "sample_count": 4,
         "min_rate": 390.39,
-        "max_rate": 509.15,
-        "median_rate": 449.77,
-        "avg_rate": 449.77,
-        "range_str": "$390\u2013$509 (Med $450)",
-        "variance_pct": 72.5,
+        "max_rate": 559.2,
+        "median_rate": 530.29,
+        "avg_rate": 502.54,
+        "range_str": "$390\u2013$559 (Med $530)",
+        "variance_pct": 46.3,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+72% vs Track Record",
+        "flag_label": "+46% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 551.43,
+            "payout_nightly": 452.17,
+            "confirmation_id": 8014
+          },
+          {
+            "start_date": "2023-06-24",
+            "end_date": "2023-06-26",
+            "nights": 2,
+            "gross_nightly": 559.2,
+            "payout_nightly": 458.54,
+            "confirmation_id": 10243
+          },
           {
             "start_date": "2024-06-23",
             "end_date": "2024-06-24",
@@ -51659,17 +52784,26 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $683",
       "our_percentile_rank_adj": 40.0,
       "historical_benchmark": {
-        "sample_count": 0,
-        "min_rate": 0.0,
-        "max_rate": 0.0,
-        "median_rate": 0.0,
-        "avg_rate": 0.0,
-        "range_str": "No prior sales",
-        "variance_pct": null,
-        "flag": "NO_HISTORICAL_DATA",
-        "flag_label": "No Prior Sales",
-        "flag_color": "#94a3b8",
-        "matched_stays": []
+        "sample_count": 1,
+        "min_rate": 551.43,
+        "max_rate": 551.43,
+        "median_rate": 551.43,
+        "avg_rate": 551.43,
+        "range_str": "$551\u2013$551 (Med $551)",
+        "variance_pct": 23.9,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2022-07-14",
+            "end_date": "2022-07-24",
+            "nights": 10,
+            "gross_nightly": 551.43,
+            "payout_nightly": 452.17,
+            "confirmation_id": 8014
+          }
+        ]
       },
       "lead_time_status": {
         "lead_days": 308,
@@ -51829,15 +52963,15 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $731",
       "our_percentile_rank_adj": 40.0,
       "historical_benchmark": {
-        "sample_count": 1,
+        "sample_count": 2,
         "min_rate": 417.83,
-        "max_rate": 417.83,
-        "median_rate": 417.83,
-        "avg_rate": 417.83,
-        "range_str": "$418\u2013$418 (Med $418)",
-        "variance_pct": 75.0,
+        "max_rate": 462.9,
+        "median_rate": 440.37,
+        "avg_rate": 440.37,
+        "range_str": "$418\u2013$463 (Med $440)",
+        "variance_pct": 66.0,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+75% vs Track Record",
+        "flag_label": "+66% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -51847,6 +52981,14 @@
             "gross_nightly": 417.83,
             "payout_nightly": 342.62,
             "confirmation_id": 10477
+          },
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 462.9,
+            "payout_nightly": 379.58,
+            "confirmation_id": 13546
           }
         ]
       },
@@ -52008,15 +53150,15 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.0,
       "historical_benchmark": {
-        "sample_count": 1,
+        "sample_count": 3,
         "min_rate": 417.83,
-        "max_rate": 417.83,
-        "median_rate": 417.83,
-        "avg_rate": 417.83,
-        "range_str": "$418\u2013$418 (Med $418)",
-        "variance_pct": 55.6,
+        "max_rate": 632.73,
+        "median_rate": 462.9,
+        "avg_rate": 504.49,
+        "range_str": "$418\u2013$633 (Med $463)",
+        "variance_pct": 40.4,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+56% vs Track Record",
+        "flag_label": "+40% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -52026,6 +53168,22 @@
             "gross_nightly": 417.83,
             "payout_nightly": 342.62,
             "confirmation_id": 10477
+          },
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 462.9,
+            "payout_nightly": 379.58,
+            "confirmation_id": 13546
+          },
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 632.73,
+            "payout_nightly": 518.84,
+            "confirmation_id": 12316
           }
         ]
       },
@@ -52187,15 +53345,15 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $702",
       "our_percentile_rank_adj": 40.0,
       "historical_benchmark": {
-        "sample_count": 1,
+        "sample_count": 3,
         "min_rate": 417.83,
-        "max_rate": 417.83,
-        "median_rate": 417.83,
-        "avg_rate": 417.83,
-        "range_str": "$418\u2013$418 (Med $418)",
-        "variance_pct": 68.0,
+        "max_rate": 632.73,
+        "median_rate": 462.9,
+        "avg_rate": 504.49,
+        "range_str": "$418\u2013$633 (Med $463)",
+        "variance_pct": 51.7,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+68% vs Track Record",
+        "flag_label": "+52% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -52205,6 +53363,22 @@
             "gross_nightly": 417.83,
             "payout_nightly": 342.62,
             "confirmation_id": 10477
+          },
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 462.9,
+            "payout_nightly": 379.58,
+            "confirmation_id": 13546
+          },
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 632.73,
+            "payout_nightly": 518.84,
+            "confirmation_id": 12316
           }
         ]
       },
@@ -52366,17 +53540,34 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 40.0,
       "historical_benchmark": {
-        "sample_count": 0,
-        "min_rate": 0.0,
-        "max_rate": 0.0,
-        "median_rate": 0.0,
-        "avg_rate": 0.0,
-        "range_str": "No prior sales",
-        "variance_pct": null,
-        "flag": "NO_HISTORICAL_DATA",
-        "flag_label": "No Prior Sales",
-        "flag_color": "#94a3b8",
-        "matched_stays": []
+        "sample_count": 2,
+        "min_rate": 462.9,
+        "max_rate": 632.73,
+        "median_rate": 547.82,
+        "avg_rate": 547.82,
+        "range_str": "$463\u2013$633 (Med $548)",
+        "variance_pct": 15.5,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 462.9,
+            "payout_nightly": 379.58,
+            "confirmation_id": 13546
+          },
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 632.73,
+            "payout_nightly": 518.84,
+            "confirmation_id": 12316
+          }
+        ]
       },
       "lead_time_status": {
         "lead_days": 350,
@@ -53808,17 +54999,34 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 42.6,
       "historical_benchmark": {
-        "sample_count": 0,
-        "min_rate": 0.0,
-        "max_rate": 0.0,
-        "median_rate": 0.0,
-        "avg_rate": 0.0,
-        "range_str": "No prior sales",
-        "variance_pct": null,
-        "flag": "NO_HISTORICAL_DATA",
-        "flag_label": "No Prior Sales",
-        "flag_color": "#94a3b8",
-        "matched_stays": []
+        "sample_count": 2,
+        "min_rate": 462.9,
+        "max_rate": 632.73,
+        "median_rate": 547.82,
+        "avg_rate": 547.82,
+        "range_str": "$463\u2013$633 (Med $548)",
+        "variance_pct": 15.9,
+        "flag": "ON_TRACK",
+        "flag_label": "Aligned With Track Record",
+        "flag_color": "#34d399",
+        "matched_stays": [
+          {
+            "start_date": "2024-08-14",
+            "end_date": "2024-08-20",
+            "nights": 6,
+            "gross_nightly": 462.9,
+            "payout_nightly": 379.58,
+            "confirmation_id": 13546
+          },
+          {
+            "start_date": "2024-08-23",
+            "end_date": "2024-08-26",
+            "nights": 3,
+            "gross_nightly": 632.73,
+            "payout_nightly": 518.84,
+            "confirmation_id": 12316
+          }
+        ]
       },
       "lead_time_status": {
         "lead_days": 357,

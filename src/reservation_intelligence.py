@@ -187,11 +187,19 @@ class ReservationIntelligence:
             "action": action,
         }
 
-    def compute_weekend_midweek_annual_shift(self) -> Dict[str, Any]:
+    def compute_weekend_midweek_annual_shift(
+        self,
+        weekend_premium_factor: float = 1.30,
+    ) -> Dict[str, Any]:
         """
         Analyze year-by-year booked nights, % share, and realized ADR for Weekend vs. Midweek.
         Weekend = Thu, Fri, Sat nights (standard 3-4 night weekend check-ins).
         Midweek = Sun, Mon, Tue, Wed nights.
+
+        For mixed stays spanning both weekend and midweek nights, revenue is allocated
+        assuming weekend nights are valued with a 30% premium (weekend_premium_factor=1.30):
+          Midweek Nightly = Total Gross / (1.30 * Weekend Nights + Midweek Nights)
+          Weekend Nightly = Midweek Nightly * 1.30
         """
         reservations = self.get_confirmed_reservations()
         years_dict: Dict[int, Dict[str, Any]] = {}
@@ -203,15 +211,45 @@ class ReservationIntelligence:
             except Exception:
                 continue
 
-            days_num = max(1, (e_date - s_date).days)
+            cur = s_date
+            w_count = 0
+            m_count = 0
+            stay_dates = []
+            while cur < e_date:
+                is_w = cur.weekday() in (3, 4, 5)
+                if is_w:
+                    w_count += 1
+                else:
+                    m_count += 1
+                stay_dates.append((cur, is_w))
+                cur += timedelta(days=1)
+
+            tot_days = w_count + m_count
+            if tot_days == 0:
+                continue
+
             gross_rent = float(r.get("gross_rent") or 0.0)
             owner_payout = float(r.get("owner_payout") or 0.0)
-            nightly_gross = gross_rent / days_num if gross_rent > 0 else 0.0
-            nightly_payout = owner_payout / days_num if owner_payout > 0 else 0.0
 
-            cur = s_date
-            while cur < e_date:
-                yr = cur.year
+            if w_count > 0 and m_count > 0:
+                denom = weekend_premium_factor * w_count + m_count
+                mid_gross = gross_rent / denom if denom > 0 else 0.0
+                wknd_gross = mid_gross * weekend_premium_factor
+                mid_payout = owner_payout / denom if denom > 0 else 0.0
+                wknd_payout = mid_payout * weekend_premium_factor
+            elif w_count > 0:
+                wknd_gross = gross_rent / w_count
+                mid_gross = 0.0
+                wknd_payout = owner_payout / w_count
+                mid_payout = 0.0
+            else:
+                wknd_gross = 0.0
+                mid_gross = gross_rent / m_count
+                wknd_payout = 0.0
+                mid_payout = owner_payout / m_count
+
+            for d, is_w in stay_dates:
+                yr = d.year
                 if yr not in years_dict:
                     years_dict[yr] = {
                         "year": yr,
@@ -224,20 +262,15 @@ class ReservationIntelligence:
                         "midweek_payout_sum": 0.0,
                     }
 
-                # Thu=3, Fri=4, Sat=5 -> Weekend stay nights
-                is_weekend = cur.weekday() in (3, 4, 5)
                 years_dict[yr]["total_nights"] += 1
-
-                if is_weekend:
+                if is_w:
                     years_dict[yr]["weekend_nights"] += 1
-                    years_dict[yr]["weekend_gross_sum"] += nightly_gross
-                    years_dict[yr]["weekend_payout_sum"] += nightly_payout
+                    years_dict[yr]["weekend_gross_sum"] += wknd_gross
+                    years_dict[yr]["weekend_payout_sum"] += wknd_payout
                 else:
                     years_dict[yr]["midweek_nights"] += 1
-                    years_dict[yr]["midweek_gross_sum"] += nightly_gross
-                    years_dict[yr]["midweek_payout_sum"] += nightly_payout
-
-                cur += timedelta(days=1)
+                    years_dict[yr]["midweek_gross_sum"] += mid_gross
+                    years_dict[yr]["midweek_payout_sum"] += mid_payout
 
         yearly_results = []
         for yr in sorted(years_dict.keys()):
@@ -255,6 +288,8 @@ class ReservationIntelligence:
             w_payout_adr = round(yd["weekend_payout_sum"] / w_nights, 2) if w_nights else 0.0
             m_payout_adr = round(yd["midweek_payout_sum"] / m_nights, 2) if m_nights else 0.0
 
+            adr_premium_pct = round(((w_adr - m_adr) / m_adr * 100.0), 1) if m_adr > 0 else 0.0
+
             yearly_results.append({
                 "year": yr,
                 "total_nights": tot,
@@ -266,6 +301,7 @@ class ReservationIntelligence:
                 "midweek_adr": m_adr,
                 "weekend_payout_adr": w_payout_adr,
                 "midweek_payout_adr": m_payout_adr,
+                "adr_premium_pct": adr_premium_pct,
             })
 
         # Calculate key strategic narrative comparing pre-2025 vs post-2025
@@ -295,10 +331,12 @@ class ReservationIntelligence:
         segment_type: str = "weekend",
         proposed_rate: Optional[float] = None,
         tolerance_days: int = 15,
+        weekend_premium_factor: float = 1.30,
     ) -> Dict[str, Any]:
         """
         Benchmark an upcoming stay interval against all historical Villa del Sol bookings
         within +-tolerance_days calendar window across all prior years, matching stay type.
+        For mixed stays, allocates rates assuming weekend nights carry a 30% premium.
         """
         try:
             target_date = datetime.strptime(check_in_str, "%Y-%m-%d").date()
@@ -343,35 +381,64 @@ class ReservationIntelligence:
             if day_diff > tolerance_days:
                 continue
 
-            # Determine whether historical reservation was predominantly weekend or midweek
-            # Count weekend nights in stay
+            # Count weekend (Thu, Fri, Sat) vs midweek nights in stay
             cur = r_start
             w_count = 0
-            tot_count = max(1, (r_end - r_start).days)
+            m_count = 0
             while cur < r_end:
                 if cur.weekday() in (3, 4, 5):
                     w_count += 1
+                else:
+                    m_count += 1
                 cur += timedelta(days=1)
 
-            is_hist_weekend = (w_count / tot_count) >= 0.5
-            if is_hist_weekend != is_weekend_target:
+            tot_count = w_count + m_count
+            if tot_count == 0:
                 continue
 
             gross_rent = float(r.get("gross_rent") or 0.0)
             owner_payout = float(r.get("owner_payout") or 0.0)
-            if gross_rent > 0 and tot_count > 0:
-                nightly_gross = round(gross_rent / tot_count, 2)
-                nightly_payout = round(owner_payout / tot_count, 2) if owner_payout > 0 else nightly_gross
-                matched_nightly_rates.append(nightly_gross)
-                matched_payout_rates.append(nightly_payout)
-                matched_stays.append({
-                    "start_date": r["start_date"],
-                    "end_date": r["end_date"],
-                    "nights": tot_count,
-                    "gross_nightly": nightly_gross,
-                    "payout_nightly": nightly_payout,
-                    "confirmation_id": r.get("confirmation_id"),
-                })
+            if gross_rent <= 0:
+                continue
+
+            # Allocate mixed stays with 30% weekend premium factor
+            if w_count > 0 and m_count > 0:
+                denom = weekend_premium_factor * w_count + m_count
+                mid_gross = gross_rent / denom if denom > 0 else 0.0
+                wknd_gross = mid_gross * weekend_premium_factor
+                mid_payout = owner_payout / denom if denom > 0 else 0.0
+                wknd_payout = mid_payout * weekend_premium_factor
+            elif w_count > 0:
+                wknd_gross = gross_rent / w_count
+                mid_gross = 0.0
+                wknd_payout = owner_payout / w_count
+                mid_payout = 0.0
+            else:
+                wknd_gross = 0.0
+                mid_gross = gross_rent / m_count
+                wknd_payout = 0.0
+                mid_payout = owner_payout / m_count
+
+            # Assign rate matching target stay type
+            if is_weekend_target and w_count > 0:
+                nightly_gross = round(wknd_gross, 2)
+                nightly_payout = round(wknd_payout, 2)
+            elif (not is_weekend_target) and m_count > 0:
+                nightly_gross = round(mid_gross, 2)
+                nightly_payout = round(mid_payout, 2)
+            else:
+                continue
+
+            matched_nightly_rates.append(nightly_gross)
+            matched_payout_rates.append(nightly_payout)
+            matched_stays.append({
+                "start_date": r["start_date"],
+                "end_date": r["end_date"],
+                "nights": tot_count,
+                "gross_nightly": nightly_gross,
+                "payout_nightly": nightly_payout,
+                "confirmation_id": r.get("confirmation_id"),
+            })
 
         n = len(matched_nightly_rates)
         if n == 0:

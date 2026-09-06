@@ -1284,9 +1284,11 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
         mid_pct = yr_item["midweek_pct"]
         wknd_adr = yr_item["weekend_adr"]
         mid_adr = yr_item["midweek_adr"]
-        spread = wknd_adr - mid_adr
-        spread_sign = "+" if spread > 0 else ""
-        spread_str = f"{spread_sign}${spread:,.0f}" if (wknd_adr > 0 and mid_adr > 0) else "—"
+        spread_pct = yr_item.get("adr_premium_pct")
+        if spread_pct is None:
+            spread_pct = round(((wknd_adr - mid_adr) / mid_adr * 100.0), 1) if mid_adr > 0 else 0.0
+        spread_sign = "+" if spread_pct > 0 else ""
+        spread_str = f"{spread_sign}{spread_pct:.1f}%" if (wknd_adr > 0 and mid_adr > 0) else "—"
 
         shift_rows_html.append(f"""
           <tr>
@@ -1306,7 +1308,7 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
             </td>
             <td style="font-family:'JetBrains Mono',monospace; color:#818cf8; font-weight:700;">${wknd_adr:,.0f}</td>
             <td style="font-family:'JetBrains Mono',monospace; color:#fb923c; font-weight:700;">${mid_adr:,.0f}</td>
-            <td style="font-family:'JetBrains Mono',monospace; color:#cbd5e1;">{spread_str}</td>
+            <td style="font-family:'JetBrains Mono',monospace; color:#34d399; font-weight:700;">{spread_str}</td>
           </tr>
         """)
     shift_table_body = "\n".join(shift_rows_html)
@@ -1368,6 +1370,9 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
               Summer (Jun–Aug): <span style="color:#f87171; font-weight:600;">{summer_lead.get('window_str', '6–28 days out')} (med {summer_lead.get('median', 20)}d)</span> &bull; 
               Fall/Shoulder (Sep–Jan, May): <span style="color:#fbbf24; font-weight:600;">{fall_lead.get('window_str', '12–134 days out')} (med {fall_lead.get('median', 50)}d)</span>
             </div>
+            <div style="font-size:0.75rem; color:#64748b; margin-top:5px;">
+              <em>Note: For multi-night reservations spanning both weekend and midweek dates, gross revenue is apportioned assuming weekend nights carry a 30% pricing premium over midweek nights.</em>
+            </div>
           </div>
 
           <div style="overflow-x:auto;">
@@ -1381,7 +1386,7 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
                   <th style="text-align:center;">Demand Distribution</th>
                   <th><span style="color:#818cf8; font-size:0.9rem;">●</span> Realized Weekend ADR</th>
                   <th><span style="color:#fb923c; font-size:0.9rem;">●</span> Realized Midweek ADR</th>
-                  <th>ADR Premium</th>
+                  <th>ADR Premium (%)</th>
                 </tr>
               </thead>
               <tbody>

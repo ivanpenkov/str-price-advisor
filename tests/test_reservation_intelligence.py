@@ -121,11 +121,15 @@ class TestReservationIntelligence(unittest.TestCase):
         self.assertIn(2024, years)
         self.assertIn(2025, years)
 
-        # In 2024: Res 101 (3 wkd), Res 102 (1 wkd, 2 mid) -> Tot=6, Wkd=4 (66.7%), Mid=2 (33.3%)
+        # In 2024: Res 101 (3 wkd), Res 102 (1 wkd, 2 mid @ 30% wkd weighting)
+        # Res 102: 1500 / (1.3*1 + 2) = $454.55/mid, $590.91/wkd
         y2024 = years[2024]
         self.assertEqual(y2024["total_nights"], 6)
         self.assertEqual(y2024["weekend_nights"], 4)
         self.assertEqual(y2024["midweek_nights"], 2)
+        self.assertAlmostEqual(y2024["weekend_adr"], 897.73, places=2)
+        self.assertAlmostEqual(y2024["midweek_adr"], 454.55, places=2)
+        self.assertEqual(y2024["adr_premium_pct"], 97.5)
 
         # In 2025: Res 201 (3 mid), Res 202 (3 wkd) -> Tot=6, Wkd=3 (50.0%), Mid=3 (50.0%)
         y2025 = years[2025]
@@ -134,6 +138,9 @@ class TestReservationIntelligence(unittest.TestCase):
         self.assertEqual(y2025["midweek_nights"], 3)
         self.assertEqual(y2025["weekend_pct"], 50.0)
         self.assertEqual(y2025["midweek_pct"], 50.0)
+        self.assertEqual(y2025["weekend_adr"], 1100.0)
+        self.assertEqual(y2025["midweek_adr"], 700.0)
+        self.assertEqual(y2025["adr_premium_pct"], 57.1)
 
     def test_get_historical_benchmarks_for_interval(self):
         """Verify rolling seasonal window rate benchmarks and variance flags."""

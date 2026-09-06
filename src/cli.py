@@ -35,6 +35,7 @@ async def run_weekly_advisory(
     start_date: str = None,
     end_date: str = None,
     push: bool = False,
+    compare_platforms: bool = False,
 ):
     """
     Execute full weekly pricing audit:
@@ -156,6 +157,17 @@ async def run_weekly_advisory(
         property_name=config["property"]["name"],
     )
 
+    # 4b. Cross-Platform Comparison
+    if compare_platforms:
+        print("\n[Step 4b] Scraping cross-platform prices across Airbnb, VRBO, Booking.com, and Kivoya...")
+        from src.platform_comparator import PlatformComparator
+        comparator = PlatformComparator()
+        await comparator.compare_all_intervals(
+            limit=max_segments if quick else None,
+            start_date=start_date,
+            end_date=end_date,
+        )
+
     # 5. HTML Dashboard Generation (docs/index.html)
     print("\n[Step 5/5] Generating interactive static HTML dashboard in docs/...")
     from src.html_generator import HTMLDashboardGenerator
@@ -233,11 +245,19 @@ def main():
     run_parser.add_argument("--start-date", type=str, default=None, help="Filter intervals starting on or after YYYY-MM-DD")
     run_parser.add_argument("--end-date", type=str, default=None, help="Filter intervals ending on or before YYYY-MM-DD")
     run_parser.add_argument("--push", action="store_true", help="Automatically commit and push updated docs and data to GitHub")
+    run_parser.add_argument("--compare-platforms", action="store_true", help="Scrape and compare prices across Airbnb, VRBO, Booking.com, and Kivoya")
 
     subparsers.add_parser("test-kivoya", help="Verify Kivoya API connectivity and rates")
 
     gen_parser = subparsers.add_parser("generate-html", help="Re-generate docs/index.html from existing data")
     gen_parser.add_argument("--push", action="store_true", help="Automatically commit and push docs to GitHub")
+
+    compare_parser = subparsers.add_parser("compare-platforms", help="Compare Villa del Sol pricing across Airbnb, VRBO, Booking.com, and Kivoya")
+    compare_parser.add_argument("--limit", type=int, default=None, help="Limit number of intervals to compare")
+    compare_parser.add_argument("--start-date", type=str, default=None, help="Filter intervals starting on or after YYYY-MM-DD")
+    compare_parser.add_argument("--end-date", type=str, default=None, help="Filter intervals ending on or before YYYY-MM-DD")
+    compare_parser.add_argument("--force", action="store_true", help="Force re-scraping even if cached")
+    compare_parser.add_argument("--push", action="store_true", help="Automatically commit and push updated dashboard to GitHub")
 
     bootstrap_parser = subparsers.add_parser("bootstrap-comps", help="Bootstrap and curate comp registry")
     bootstrap_parser.add_argument("--limit", type=int, default=40, help="Max listings per tier")
@@ -284,6 +304,7 @@ def main():
                 start_date=args.start_date,
                 end_date=args.end_date,
                 push=args.push,
+                compare_platforms=args.compare_platforms,
             ))
         else:
             asyncio.run(run_weekly_advisory(
@@ -291,7 +312,44 @@ def main():
                 start_date=args.start_date,
                 end_date=args.end_date,
                 push=args.push,
+                compare_platforms=args.compare_platforms,
             ))
+    elif args.command == "compare-platforms":
+        from src.platform_comparator import PlatformComparator
+        from src.html_generator import HTMLDashboardGenerator
+        from src.reporter import PriceReportGenerator
+        import shutil
+        config = load_config()
+        comparator = PlatformComparator()
+        results = asyncio.run(comparator.compare_all_intervals(
+            limit=args.limit,
+            start_date=args.start_date,
+            end_date=args.end_date,
+            force_refresh=args.force,
+        ))
+        print(f"\n📊 Successfully processed {len(results)} intervals across platforms.")
+        urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)
+        mod_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("moderate_percent_diff", MODERATE_PCT_DIFF)
+        html_gen = HTMLDashboardGenerator(
+            output_path="docs/index.html",
+            urgent_pct_diff=urgent_pct,
+            moderate_pct_diff=mod_pct,
+        )
+        evaluated_segments = html_gen.generate_full_12_month_evaluation()
+        out = html_gen.generate(evaluated_segments)
+        reporter = PriceReportGenerator(
+            output_dir="data",
+            urgent_pct_diff=urgent_pct,
+            moderate_pct_diff=mod_pct,
+        )
+        reporter.generate_all(evaluated_segments=evaluated_segments, property_name=config.get("property", {}).get("name", "Villa del Sol"))
+        if Path("data/latest_sheet.csv").exists():
+            shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
+        if Path("data/latest_report.md").exists():
+            shutil.copy("data/latest_report.md", "docs/latest_report.md")
+        print(f"✅ Dashboard regenerated successfully at: {out}")
+        if args.push:
+            push_to_github(commit_msg="Update cross-platform price comparisons")
     elif args.command == "generate-html":
         config = load_config()
         from src.html_generator import HTMLDashboardGenerator

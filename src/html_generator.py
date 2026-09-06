@@ -2434,6 +2434,7 @@ class HTMLDashboardGenerator:
                 "price_snippet": c.get("price_snippet", ""),
                 "is_winter": is_winter,
                 "pool_specs": pool_specs,
+                "property_specs": c.get("property_specs") or comp_eval.get("property_specs", {}),
             })
 
         # Sort entries: valid comps sorted by adjusted_effective_nightly, followed by our property in proper place
@@ -2491,7 +2492,7 @@ class HTMLDashboardGenerator:
                       <a href="{item['url']}" target="_blank" rel="noopener noreferrer" style="color:#fbbf24; font-weight:800; font-size:0.92rem; text-decoration:underline;">
                         ⭐ Villa del Sol (Our Property) ↗
                       </a>
-                      <div style="font-size:0.75rem; color:#cbd5e1; margin-top:2px;">South Tempe, AZ • Sleeps 16 • Private Pool & Resort Compound</div>
+                      <div style="font-size:0.75rem; color:#cbd5e1; margin-top:2px;">South Tempe, AZ • 5,400 sq ft • 0.75-acre lot • $2.0M baseline • Sleeps 16 • Resort Compound</div>
                     </td>
                     <td style="padding:10px 14px;">
                       <span class="badge our-position-badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem;">★ OUR POSITION (#{our_rank} of {total_comps} &bull; {our_pct}%)</span>
@@ -2825,8 +2826,30 @@ class HTMLDashboardGenerator:
             heat_label = heat_val.replace("_", " ").title()
             pool_badge = f'<span class="badge" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3); font-size:0.72rem;" title="{pool_sp.get("heating_source", "")}">🏊 {heat_label} Pool</span>' if pool_sp.get("has_pool", True) else '<span class="badge" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); font-size:0.72rem;">🚫 No Pool</span>'
 
+            property_sp = c.get("property_specs", {})
+            sqft_val = property_sp.get("sqft")
+            sqft_src = property_sp.get("sqft_source", "Hedonic Est.")
+            lot_val = property_sp.get("lot_acres")
+            lot_src = property_sp.get("lot_source", "Hedonic Est.")
+            val_est = property_sp.get("est_property_value")
+            val_src = property_sp.get("property_value_source", "Hedonic Est.")
+
+            # Verification badge
+            all_srcs = f"{sqft_src} {lot_src} {val_src}"
+            if "Assessor" in all_srcs:
+                badge_src = '<span class="badge" style="background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3); font-size:0.70rem;" title="Public Records / Assessor Verified">🏛️ Assessor Verified</span>'
+            elif "Listing Disclosed" in all_srcs:
+                badge_src = '<span class="badge" style="background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); font-size:0.70rem;" title="Disclosed by host in listing description">📝 Listing Disclosed</span>'
+            else:
+                badge_src = '<span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; border:1px solid rgba(148,163,184,0.3); font-size:0.70rem;" title="Estimated via Corridor Hedonic Pricing Model">📐 Hedonic Est.</span>'
+
+            # Metric pills in comp-specs
+            sqft_pill = f'<span title="House Size: {sqft_val:,} sq ft ({sqft_src})">📐 {sqft_val:,} sq ft</span>' if sqft_val else ""
+            lot_pill = f'<span title="Lot Size: {lot_val:.2f} acres ({lot_src})">🌳 {lot_val:.2f} ac</span>' if lot_val else ""
+            val_pill = f'<span title="Est. Property Asset Value: ${val_est:,.0f} ({val_src})">🏷️ ${val_est/1e6:.1f}M</span>' if val_est else ""
+
             if is_valid:
-                valid_pill = '<span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3); font-size:0.75rem;">✅ Valid Comp</span>'
+                valid_pill = '<span class="badge" style="background:rgba(160,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3); font-size:0.75rem;">✅ Valid Comp</span>'
                 w_color = "#60a5fa" if w_ratio >= 1.05 else ("#fbbf24" if w_ratio <= 0.95 else "#34d399")
                 s_color = "#60a5fa" if s_ratio >= 1.05 else ("#fbbf24" if s_ratio <= 0.95 else "#34d399")
                 w_bg = "rgba(96,165,250,0.2)" if w_ratio >= 1.05 else ("rgba(251,191,36,0.2)" if w_ratio <= 0.95 else "rgba(52,211,153,0.2)")
@@ -2834,16 +2857,18 @@ class HTMLDashboardGenerator:
 
                 w_pill = f'<span class="badge" style="background:{w_bg}; color:{w_color}; border:1px solid {w_color}44; font-weight:700; font-size:0.75rem;" title="Winter Ratio (Oct-Apr)">❄️ Win: {w_ratio:.2f}x</span>'
                 s_pill = f'<span class="badge" style="background:{s_bg}; color:{s_color}; border:1px solid {s_color}44; font-weight:700; font-size:0.75rem;" title="Summer Ratio (May-Sep)">☀️ Sum: {s_ratio:.2f}x</span>'
-                ratio_pill = f'<div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">{w_pill}{s_pill}{pool_badge}</div>'
+                ratio_pill = f'<div style="display:flex; gap:4px; flex-wrap:wrap; align-items:center;">{w_pill}{s_pill}{pool_badge}{badge_src}</div>'
 
                 scores_row = ""
                 if cat_scores:
                     scores_row = f"""
                     <div style="display:flex; gap:6px; flex-wrap:wrap; font-size:0.72rem; color:#94a3b8; margin-top:6px; padding-top:6px; border-top:1px solid rgba(255,255,255,0.06);">
-                      <span title="Outdoor Resort Yard & Pool (30% weight)">🏊 Yard: <strong style="color:#e2e8f0;">{cat_scores.get('outdoor', 80)}</strong></span>
-                      <span title="Bedrooms, Bathrooms & Capacity (25% weight)">🛏️ Beds: <strong style="color:#e2e8f0;">{cat_scores.get('capacity', 80)}</strong></span>
-                      <span title="Interior Luxury & Games (20% weight)">✨ Luxury: <strong style="color:#e2e8f0;">{cat_scores.get('interior', 80)}</strong></span>
-                      <span title="Location & Corridor (15% weight)">📍 Loc: <strong style="color:#e2e8f0;">{cat_scores.get('location', 80)}</strong></span>
+                      <span title="Outdoor Resort Yard & Lot Size (25% weight)">🏊 Yard: <strong style="color:#e2e8f0;">{cat_scores.get('outdoor', 80)}</strong></span>
+                      <span title="Bedrooms, Bathrooms & House Size (20% weight)">🛏️ Beds: <strong style="color:#e2e8f0;">{cat_scores.get('capacity', 80)}</strong></span>
+                      <span title="Property Asset Value & Scale (15% weight)">🏷️ Value: <strong style="color:#e2e8f0;">{cat_scores.get('property_value', 80)}</strong></span>
+                      <span title="Interior Luxury & Finishes (15% weight)">✨ Luxury: <strong style="color:#e2e8f0;">{cat_scores.get('interior', 80)}</strong></span>
+                      <span title="Location Corridor (15% weight)">📍 Loc: <strong style="color:#e2e8f0;">{cat_scores.get('location', 80)}</strong></span>
+                      <span title="Reputation & Reviews (10% weight)">⭐ Rep: <strong style="color:#e2e8f0;">{cat_scores.get('reputation', 80)}</strong></span>
                     </div>
                     """
 
@@ -2889,6 +2914,9 @@ class HTMLDashboardGenerator:
                     <span>🛏️ {c.get('beds', 8)} Beds</span>
                     <span>🚿 {c.get('baths', 4)} Baths</span>
                     <span>{rating_str}</span>
+                    {sqft_pill}
+                    {lot_pill}
+                    {val_pill}
                   </div>
                   {eval_block}
                 </div>

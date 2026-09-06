@@ -2,18 +2,19 @@
 name: evaluate-comps
 description: >-
   Evaluates luxury short-term rental competitor listings against Villa del Sol (Tempe, AZ),
-  assessing validity, category scores, a desirability ratio, and clear justification.
-  Use this skill whenever you need to evaluate new comps, audit existing comps, or update
-  adjustment ratios in config/comps_registry.json.
+  assessing validity, category scores, a desirability ratio, and clear justification using
+  a 6-factor quality, sizing, and market asset valuation rubric. Use this skill whenever you need
+  to evaluate new comps, audit existing comps, or update adjustment ratios in config/comps_registry.json.
 ---
 
 # Luxury Comp Evaluation & Desirability Adjustment Skill
 
 This skill guides the AI assistant in systematically evaluating short-term rental listings against **Villa del Sol** (920 E Carver Rd, Tempe, AZ) to assign:
 1. **Comp Validity**: `is_valid_comp` (`true` or `false`).
-2. **Category Scores**: Ratings (0–100) across 5 weighted categories.
-3. **Desirability Ratio**: Multiplier representing competitor value relative to Villa del Sol ($1.00 = \text{Equal Quality}$).
-4. **Agent Rationale**: Concise, professional justification for the ratio.
+2. **Category Scores**: Ratings (0–100) across 6 weighted categories.
+3. **Property Sizing & Asset Valuation**: Verified living area (sq ft), lot acreage, and estimated market asset value via public records and the Corridor Hedonic Pricing Model.
+4. **Desirability Ratio**: Multiplier representing competitor value relative to Villa del Sol ($1.00 = \text{Equal Quality}$).
+5. **Agent Rationale**: Concise, professional justification mentioning yard size, house footprint, and asset valuation tiers.
 
 ---
 
@@ -22,7 +23,8 @@ This skill guides the AI assistant in systematically evaluating short-term renta
 Always compare competitor listings against Villa del Sol's verified specs from `data/our_property_profile.json`:
 
 - **Location**: Quiet, gated luxury enclave in **South Tempe, AZ** (minutes from ASU Research Park, Sky Harbor, East Valley corridors, 15–20 min to Old Town Scottsdale).
-- **Lot & Space**: Gated **¾-acre private compound** with main house + detached 1BR/1BA luxury guest casita, totaling **5,400 sq ft**.
+- **Lot & Space**: Gated **¾-acre (0.75-acre) private compound** with main house + detached 1BR/1BA luxury guest casita, totaling **5,400 sq ft**.
+- **Asset Valuation Anchor**: **\$2,000,000** public records benchmark (composite score anchor: **88.0 pts**).
 - **Capacity**: **6 Bedrooms**, **6 Bathrooms** (5.5 on Airbnb), **11 Beds**, **16 Guests**.
 - **Outdoor Resort Amenities (30,000-gal saltwater pool)**:
   - Massive heated saltwater pool with custom rock waterfall grotto.
@@ -38,12 +40,12 @@ Always compare competitor listings against Villa del Sol's verified specs from `
 
 ---
 
-## 2. Weighted Evaluation Rubric
+## 2. 6-Category Weighted Evaluation Rubric
 
-Evaluate each comp across five distinct dimensions on a scale of **0 to 100**:
+Evaluate each comp across six distinct dimensions on a scale of **0 to 100**:
 
-### A. Outdoor Resort Yard & Amenities (Weight: 30%)
-Outdoor scoring distinguishes between **Winter (Oct 1 – Apr 30)** and **Summer (May 1 – Sep 30)** due to Phoenix water temperature dynamics (unheated pools drop to ~55°F in winter, making heating essential, while summer water reaches 85°F–92°F naturally):
+### A. Outdoor Resort Yard & Lot Size (Weight: 25%)
+Outdoor scoring distinguishes between **Winter (Oct 1 – Apr 30)** and **Summer (May 1 – Sep 30)**:
 
 #### 1. Pool Heating Status (Villa del Sol = Free Heated Year-Round):
 - **Winter (Oct 1 – Apr 30)**:
@@ -58,12 +60,18 @@ Outdoor scoring distinguishes between **Winter (Oct 1 – Apr 30)** and **Summer
   - **Unheated**: **0 pts** (No winter penalty)
   - **Heated Spa / Hot Tub**: **+5 pts**
 
-#### 2. Pool Size & Volume (Villa del Sol = 30,000-gal Saltwater Resort Pool with Rock Grotto):
+#### 2. Pool Size & Volume (Villa del Sol = 30,000-gal Saltwater Pool with Grotto):
 - **Large / Resort-Scale ($\ge 25,000$ gal or $\ge 35'$ length or waterfall/grotto/slide)**: **+6 pts**
 - **Standard Residential Pool**: **0 pts** (Neutral)
-- **Small / Cocktail / Plunge Pool (< 10,000 gal or labeled plunge)**: **-8 pts** (Severe capacity constraint for 16 guests)
+- **Small / Cocktail / Plunge Pool (< 10,000 gal or plunge)**: **-8 pts**
 
-#### 3. Sports Courts & Other Yard Features:
+#### 3. Lot Acreage (Villa del Sol = 0.75-acre gated lot):
+- **$\ge 1.0$ acre**: **+8 pts** (Massive private grounds)
+- **$0.65 - 0.99$ acre**: **+5 pts** (Villa del Sol 0.75-acre tier)
+- **$0.35 - 0.64$ acre**: **+2 pts** (Quarter-to-half acre standard)
+- **$< 0.20$ acre**: **-6 pts** (Cramped suburban tract lot)
+
+#### 4. Sports Courts & Other Yard Features:
 - **Full Tennis Court**: **+14 pts**
 - **Dedicated Sports Court (Basketball / Pickleball)**: **+10 pts**
 - **Multi-Sport Complex (Tennis + Pickleball / Basketball)**: **+16 pts**
@@ -72,62 +80,78 @@ Outdoor scoring distinguishes between **Winter (Oct 1 – Apr 30)** and **Summer
 - **Covered BBQ Pavilion / Gas Fire Pit**: **+5 pts**
 - **Custom Waterfall Grotto / Slide**: **+5 pts**
 
-### B. Bedrooms, Bathrooms & Capacity (Weight: 25%)
-- **100**: 7+ large bedrooms, 6+ bathrooms (nearly all ensuites), sleeps 16+ comfortably in real beds (kings/queens), **$\ge 6,500$ sq ft expansive estate footprint**, detached casita for multi-family privacy.
-- **85–95**: 6 bedrooms, 5–6 bathrooms, sleeps 16, **5,000–6,400 sq ft** (Villa del Sol ground truth), detached casita or spacious suites.
-- **70–84**: 5 bedrooms with fewer bathrooms (e.g. 3–4 baths for 14 guests), **$< 4,000$ sq ft** dense layout, heavy reliance on bunks.
-- **< 60**: < 4 bedrooms, < 3 bathrooms, or unable to host 12+ adults comfortably (Disqualify).
+### B. Bedrooms, Bathrooms & House Size (Weight: 20%)
+- **Bedrooms**: $\ge 7$ BR (+20), 6 BR (+15), 5 BR (+8).
+- **Bathrooms**: $\ge 5.5$ BA (+15), $\ge 4.5$ BA (+10), $\ge 3.5$ BA (+5).
+- **Guest Capacity**: $\ge 16$ guests (+10), $\ge 14$ guests (+6).
+- **Casita Presence**: Detached guest house / suite (+5).
+- **Living Area (House Sq Ft, Villa del Sol = 5,400 sq ft)**:
+  - **$\ge 7,000$ sq ft**: **+10 pts** (Mega estate)
+  - **$5,000 - 6,999$ sq ft**: **+6 pts** (Villa del Sol 5,400 sq ft tier)
+  - **$4,000 - 4,999$ sq ft**: **+2 pts** (Mid-size luxury)
+  - **$< 3,000$ sq ft**: **-8 pts** (Under-sized living space)
 
-### C. Interior Luxury, Entertainment & Finishes (Weight: 20%)
-- **100**: Modern designer estate remodel, **private movie theater / cinema**, championship billiards table, arcade / game room, chef-grade kitchen with SubZero / Miele / Viking / Wolf appliances, Savant / Sonos audio, luxury linens.
-- **85–95**: Clean contemporary luxury aesthetic, billiards or dedicated game room, stainless appliances, quartz/granite counters.
-- **70–84**: Standard builder-grade finishes, older furniture, basic TV setup, minimal indoor entertainment.
-- **< 60**: Outdated 1990s interiors, worn furnishings, low ceilings.
+### C. Property Scale & Market Asset Value (Weight: 15%)
+Grades estimated market asset valuation against Villa del Sol's **\$2.0M baseline anchor** (88.0 pts):
+- **$\ge \$4.0\text{M}$**: **98 pts** (Ultra-luxury trophy asset)
+- **$\ge \$3.5\text{M}$**: **96 pts**
+- **$\ge \$2.8\text{M}$**: **93 pts**
+- **$\ge \$2.2\text{M}$**: **90 pts**
+- **$\ge \$1.8\text{M}$**: **88 pts** (Villa del Sol \$2.0M baseline anchor)
+- **$\ge \$1.5\text{M}$**: **82 pts**
+- **$\ge \$1.2\text{M}$**: **75 pts**
+- **$< \$1.2\text{M}$**: **68 pts** (Entry-level rental)
 
-### D. Location Corridor & Neighborhood (Weight: 15%)
-- **100**: Prime Paradise Valley or central Old Town Scottsdale luxury corridor (+10% to +25% peak seasonal market demand).
-- **85–90**: South Tempe (Villa del Sol baseline) / North Central Chandler / South Scottsdale / Arcadia periphery.
-- **70–80**: Gilbert / Central Mesa / South Chandler.
-- **< 70**: Peripheral suburbs (far East Mesa, Queen Creek, Apache Junction) located >35 minutes from airport/events.
+#### Hedonic Corridor Price Benchmarks ($\$/\text{sq ft}$):
+- Paradise Valley: \$800/sq ft
+- Scottsdale / Old Town: \$550/sq ft
+- North Scottsdale: \$575/sq ft
+- South Scottsdale: \$525/sq ft
+- Arcadia: \$475/sq ft
+- South Tempe: \$400/sq ft
+- Chandler / Ahwatukee: \$380/sq ft
+- Gilbert: \$350/sq ft
+- Mesa: \$340/sq ft
+- Default: \$380/sq ft
+- *Lot Multiplier*: $\ge 1.0$ ac (1.25x), $\ge 0.65$ ac (1.15x), $\ge 0.45$ ac (1.08x), $< 0.20$ ac (0.90x).
 
-### E. Reviews & Track Record (Weight: 10%)
-- **100**: 4.95+ rating with 30+ reviews, Guest Favorite / Superhost status.
-- **85–95**: 4.80–4.94 rating with 20+ reviews (matches Villa del Sol: 4.83 with 76 reviews).
-- **70–84**: 4.60–4.79 rating, or new listing with < 5 reviews.
-- **< 70**: < 4.60 rating, or reviews mentioning cleanliness, noise, or maintenance issues.
+### D. Interior Luxury, Entertainment & Finishes (Weight: 15%)
+- **Billiards Table**: +8 pts
+- **Private Movie Theater / Cinema**: +8 pts
+- **Game Room / Arcade / Ping Pong**: +6 pts
+- **Chef's Kitchen (SubZero/Wolf/Viking/Stainless)**: +7 pts
+- **Designer Luxury Remodel / Estate Vibe**: +5 pts
+
+### E. Location Corridor & Neighborhood (Weight: 15%)
+- **95 pts**: Paradise Valley / Old Town / Central Scottsdale.
+- **88 pts**: South Tempe (Villa del Sol baseline) / Arcadia periphery.
+- **82 pts**: Chandler / Gilbert / Ahwatukee.
+- **78 pts**: Mesa.
+- **75 pts**: Other Phoenix Valley corridors.
+
+### F. Reviews & Track Record (Weight: 10%)
+- **98 pts**: 4.95+ rating with 20+ reviews.
+- **94 pts**: 4.90–4.94 rating with 15+ reviews.
+- **88 pts**: 4.80–4.89 rating (matches Villa del Sol: 4.83 with 76 reviews).
+- **78 pts**: 4.70–4.79 rating.
+- **70 pts**: < 4.70 rating.
 
 ---
 
 ## 3. Mathematical Desirability Ratio
 
 Compute the holistic composite score:
-$$\text{Comp Score} = 0.30 A + 0.25 B + 0.20 C + 0.15 D + 0.10 E$$
+$$\text{Comp Score} = 0.25 A + 0.20 B + 0.15 C + 0.15 D + 0.15 E + 0.10 F$$
 
 Villa del Sol baseline score is **88.0 / 100**.
 
 ### Sensitivity-Scaled Expansion Formula
-To avoid artificial mathematical compression where scores near 100 max out at only 1.14x, the system applies a **sensitivity factor ($\text{Sensitivity} = 2.0$)** centered at Villa del Sol's 88.0 benchmark:
-
 $$\text{Delta} = \frac{\text{Comp Score} - 88.0}{88.0}$$
 $$\text{Ratio} = \text{round}\left(\max\left(0.65, \min\left(1.35, 1.0 + 2.0 \times \text{Delta}\right)\right), 2\right)$$
-
-- **Equal Quality Comp (Score 88.0)**:
-  $$\text{Ratio} = 1.0 + 2.0 \times \frac{0}{88.0} = \mathbf{1.00x} \quad \text{(Peer)}$$
-- **Superior Luxury Estate (Score 98.8, e.g. 7BR, 7k sq ft, Tennis, Sauna)**:
-  $$\text{Delta} = \frac{98.8 - 88.0}{88.0} = +0.1227 \implies \text{Ratio} = 1.0 + 2.0 \times 0.1227 = \mathbf{1.25x} \quad \text{(Superior)}$$
-- **Top Tier Mega Compound (Score 100.0, e.g. 9BR, 10k sq ft PV Resort)**:
-  $$\text{Delta} = \frac{100.0 - 88.0}{88.0} = +0.1364 \implies \text{Ratio} = 1.0 + 2.0 \times 0.1364 = \mathbf{1.27x} \quad \text{(Top Tier)}$$
-- **Moderate Comp (Score 76.0, e.g. 5BR Mesa basic house)**:
-  $$\text{Delta} = \frac{76.0 - 88.0}{88.0} = -0.1364 \implies \text{Ratio} = 1.0 + 2.0 \times (-0.1364) = \mathbf{0.73x} \quad \text{(Discount)}$$
 
 ### Adjustment Price Formula
 When guests evaluate prices on Airbnb:
 $$\text{Adjusted Comp Rate} = \frac{\text{Raw Effective Rate}}{\text{Ratio}}$$
-
-- **Discount Comp (Ratio 0.75)**: The comp is 25% less desirable than Villa del Sol. Its \$600 rate adjusts to:
-  $$\frac{\$600}{0.75} = \$800$$
-- **Superior Comp (Ratio 1.25)**: The comp is 25% more desirable than Villa del Sol (e.g. 7k sq ft tennis estate). Its \$1,250 rate adjusts to:
-  $$\frac{\$1,250}{1.25} = \$1,000$$
 
 ---
 
@@ -137,18 +161,11 @@ Mark a listing as `is_valid_comp: false` if:
 1. **Property Type**: Townhouse, condo, duplex, or shared home.
 2. **Missing Essential Amenity**: No private swimming pool.
 3. **Severe Capacity Mismatch**: Fewer than 5 true bedrooms or maximum capacity < 12 guests.
-4. **Extreme Location Outlier**: >30 miles away from Tempe/Scottsdale corridor (e.g., Surprise, Buckeye, Casa Grande).
-
-For disqualified comps:
-- Set `is_valid_comp: false`.
-- Set `validity_reason`: Concise sentence explaining why (e.g. "Disqualified: Only 4 bedrooms and lacks a private swimming pool").
-- Set `desirability_ratio: 0.50` (or estimate, but note that it will be excluded from adjusted pricing calculations).
+4. **Extreme Location Outlier**: Outside competitive drive corridor (e.g., Surprise, Buckeye, Casa Grande, Maricopa).
 
 ---
 
 ## 5. Output Schema
-
-For each listing in `config/comps_registry.json`, generate or update:
 
 ```json
 {
@@ -160,10 +177,19 @@ For each listing in `config/comps_registry.json`, generate or update:
   "pool_specs": {
     "has_pool": true,
     "heating": "free",
-    "heating_source": "Explicit free / complimentary pool heat mentioned in listing text",
+    "heating_source": "Explicit free pool heat mentioned in listing",
     "pool_size": "large",
     "size_source": "Resort-scale pool with waterfall grotto",
     "gallons": 28000
+  },
+  "property_specs": {
+    "sqft": 5800,
+    "sqft_source": "Listing Disclosed",
+    "lot_acres": 0.85,
+    "lot_source": "Listing Disclosed",
+    "est_property_value": 3190000.0,
+    "property_value_source": "Corridor Hedonic Est.",
+    "str_license": "STR-001234"
   },
   "composite_score": 90.2,
   "winter_composite_score": 90.2,
@@ -171,25 +197,11 @@ For each listing in `config/comps_registry.json`, generate or update:
   "category_scores": {
     "outdoor": 91,
     "capacity": 90,
+    "property_value": 93,
     "interior": 87,
     "location": 95,
     "reputation": 92
   },
-  "winter_category_scores": { ... },
-  "summer_category_scores": { ... },
-  "rationale": "Premium comp (5% superior desirability, Winter). Features free heated pool, resort-scale pool, private tennis court.",
-  "winter_rationale": "...",
-  "summer_rationale": "..."
+  "rationale": "Premium comp (5% superior desirability, Winter). Features 0.85-acre lot, free heated pool, $3.2M asset tier."
 }
 ```
-
----
-
-## 6. Execution Workflow
-
-When instructed to evaluate or update comp scores:
-1. Ensure `data/our_property_profile.json` exists (run `python -m src.listing_enricher` if missing).
-2. Read the comp's enriched profile from `data/enriched_comps/{listing_id}.json`.
-3. Apply the 5-factor rubric against Villa del Sol's profile.
-4. Update the comp entry in `config/comps_registry.json`.
-5. Run `.venv/bin/python -m src.cli generate-html` to refresh the dashboard.

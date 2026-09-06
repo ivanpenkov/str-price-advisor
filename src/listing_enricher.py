@@ -354,6 +354,27 @@ class ListingEnricher:
 
         url = f"https://www.airbnb.com/rooms/{listing_id}" if listing_id else ""
 
+        from src.property_valuation import PropertyValuator
+        loc_str = ""
+        if isinstance(ld_parsed.get("address"), dict):
+            loc_str = ld_parsed["address"].get("addressLocality") or ""
+
+        guest_int = 16
+        if guests:
+            m_g = re.search(r"\d+", str(guests))
+            if m_g:
+                guest_int = int(m_g.group(0))
+
+        prop_specs = PropertyValuator.evaluate_property_specs(
+            listing_id=listing_id,
+            title=title or "",
+            description=description or "",
+            location=loc_str,
+            br=bedrooms or 6,
+            ba=baths or 6.0,
+            guests=guest_int,
+        )
+
         return {
             "listing_id": listing_id,
             "title": title,
@@ -371,6 +392,7 @@ class ListingEnricher:
             "photo_url": photo_url,
             "url": url,
             "review_snippets": all_reviews[:15],
+            "property_specs": prop_specs,
             "enriched_at": datetime.now().isoformat(),
         }
 

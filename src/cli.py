@@ -262,7 +262,7 @@ def main():
     bootstrap_parser = subparsers.add_parser("bootstrap-comps", help="Bootstrap and curate comp registry")
     bootstrap_parser.add_argument("--limit", type=int, default=40, help="Max listings per tier")
 
-    eval_parser = subparsers.add_parser("evaluate-comps", help="Evaluate all comps in registry with 5-factor quality rubric and desirability ratios")
+    eval_parser = subparsers.add_parser("evaluate-comps", help="Evaluate all comps in registry with 6-factor quality & valuation rubric")
     eval_parser.add_argument("--no-save", action="store_true", help="Do not write results back to comps_registry.json")
 
     enrich_parser = subparsers.add_parser("enrich-comps", help="Deep scrape amenities, photos, and specs for comps")

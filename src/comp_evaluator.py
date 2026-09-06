@@ -22,6 +22,8 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from src.property_valuation import PropertyValuator
+
 logger = logging.getLogger("comp_evaluator")
 
 
@@ -36,9 +38,10 @@ class CompEvaluator:
     OUR_BASELINE_SCORE = 88.0
 
     CATEGORY_WEIGHTS = {
-        "outdoor": 0.30,
-        "capacity": 0.25,
-        "interior": 0.20,
+        "outdoor": 0.25,
+        "capacity": 0.20,
+        "property_value": 0.15,
+        "interior": 0.15,
         "location": 0.15,
         "reputation": 0.10,
     }
@@ -59,6 +62,9 @@ class CompEvaluator:
             "bathrooms": 6.0,
             "max_guests": 16,
             "lot_size": "0.75 acre",
+            "lot_acres": 0.75,
+            "sqft": 5400,
+            "est_property_value": 2000000.0,
             "address": {"addressLocality": "Tempe"},
             "rating": 4.83,
             "reviews": 76,
@@ -299,10 +305,16 @@ class CompEvaluator:
         rating: float,
         reviews: int,
         pool_specs: Dict[str, Any],
+        property_specs: Optional[Dict[str, Any]],
         is_winter: bool,
     ) -> Dict[str, Any]:
         """Evaluate a comp for a specific season (Winter Oct-Apr vs Summer May-Sep)."""
-        # A. Outdoor Yard (30%)
+        specs = property_specs or {}
+        lot_acres = specs.get("lot_acres", 0.75)
+        est_property_value = specs.get("est_property_value", 2000000.0)
+        final_sqft = specs.get("sqft", sqft)
+
+        # A. Outdoor Yard & Lot Size (25%)
         has_spa = any(w in all_text for w in ["spa", "hot tub", "jacuzzi", "whirlpool"])
         has_tennis = any(w in all_text for w in ["tennis court", "tennis"])
         has_court = any(w in all_text for w in ["basketball", "pickleball", "sports court", "sport court", "half court"]) or has_tennis
@@ -367,9 +379,19 @@ class CompEvaluator:
         if has_grotto:
             outdoor_score += 5
 
+        # Lot acreage adjustment
+        if lot_acres >= 1.0:
+            outdoor_score += 8
+        elif lot_acres >= 0.65:
+            outdoor_score += 5
+        elif lot_acres >= 0.35:
+            outdoor_score += 2
+        elif lot_acres < 0.20:
+            outdoor_score -= 6
+
         outdoor_score = min(100, max(25, outdoor_score))
 
-        # B. Bedrooms & Bathrooms (25%)
+        # B. Bedrooms, Bathrooms & House Size (20%)
         capacity_score = 60
         if br >= 7:
             capacity_score += 20
@@ -394,17 +416,39 @@ class CompEvaluator:
         if has_casita:
             capacity_score += 5
 
-        if sqft:
-            if sqft >= 6500:
-                capacity_score += 8
-            elif sqft >= 5000:
-                capacity_score += 4
-            elif sqft < 4000:
+        if final_sqft:
+            if final_sqft >= 7000:
+                capacity_score += 10
+            elif final_sqft >= 5000:
+                capacity_score += 6
+            elif final_sqft >= 4000:
+                capacity_score += 2
+            elif final_sqft < 3000:
+                capacity_score -= 10
+            elif final_sqft < 4000:
                 capacity_score -= 5
 
-        capacity_score = min(100, max(40, capacity_score))
+        capacity_score = min(100, max(30, capacity_score))
 
-        # C. Interior Luxury & Entertainment (20%)
+        # C. Property Scale & Asset Value (15%)
+        if est_property_value >= 4000000.0:
+            property_value_score = 98
+        elif est_property_value >= 3500000.0:
+            property_value_score = 96
+        elif est_property_value >= 2800000.0:
+            property_value_score = 93
+        elif est_property_value >= 2200000.0:
+            property_value_score = 90
+        elif est_property_value >= 1800000.0:
+            property_value_score = 88  # Villa del Sol $2.0M baseline anchor
+        elif est_property_value >= 1500000.0:
+            property_value_score = 82
+        elif est_property_value >= 1200000.0:
+            property_value_score = 75
+        else:
+            property_value_score = 68
+
+        # D. Interior Luxury & Entertainment (15%)
         has_billiards = any(w in all_text for w in ["pool table", "billiards", "billiard"])
         has_theater = any(w in all_text for w in ["theatre", "theater", "cinema", "movie room"])
         has_game_room = any(w in all_text for w in ["game room", "arcade", "ping pong", "foosball", "shuffleboard"])
@@ -424,7 +468,7 @@ class CompEvaluator:
             interior_score += 5
         interior_score = min(100, interior_score)
 
-        # D. Location Corridor (15%)
+        # E. Location Corridor (15%)
         if any(w in location or w in all_text[:200] for w in ["paradise valley", "pv", "old town", "scottsdale"]):
             location_score = 95
         elif any(w in location or w in all_text[:200] for w in ["tempe", "south tempe", "arcadia"]):
@@ -436,7 +480,7 @@ class CompEvaluator:
         else:
             location_score = 75
 
-        # E. Reputation & Reviews (10%)
+        # F. Reputation & Reviews (10%)
         reputation_score = 75
         if rating >= 4.95 and reviews >= 20:
             reputation_score = 98
@@ -455,6 +499,7 @@ class CompEvaluator:
         composite = (
             self.CATEGORY_WEIGHTS["outdoor"] * outdoor_score
             + self.CATEGORY_WEIGHTS["capacity"] * capacity_score
+            + self.CATEGORY_WEIGHTS["property_value"] * property_value_score
             + self.CATEGORY_WEIGHTS["interior"] * interior_score
             + self.CATEGORY_WEIGHTS["location"] * location_score
             + self.CATEGORY_WEIGHTS["reputation"] * reputation_score
@@ -484,6 +529,13 @@ class CompEvaluator:
         elif pool_size == "plunge":
             shortcomings.append("small plunge pool")
 
+        if lot_acres >= 1.0:
+            highlights.append(f"{lot_acres:.2f}-acre grounds")
+        elif lot_acres >= 0.65:
+            highlights.append(f"{lot_acres:.2f}-acre lot")
+        elif lot_acres < 0.20:
+            shortcomings.append(f"compact {lot_acres:.2f}-acre lot")
+
         if has_tennis:
             highlights.append("private tennis court")
         elif has_court:
@@ -498,8 +550,10 @@ class CompEvaluator:
         if has_billiards:
             highlights.append("pool table")
 
-        if sqft and sqft >= 6500:
-            highlights.append(f"{sqft:,} sq ft estate")
+        if final_sqft and final_sqft >= 6500:
+            highlights.append(f"{final_sqft:,} sq ft estate")
+        elif final_sqft and final_sqft < 3500:
+            shortcomings.append(f"{final_sqft:,} sq ft home")
         elif br >= 7:
             highlights.append(f"{br} bedrooms")
         elif br < 6:
@@ -507,6 +561,11 @@ class CompEvaluator:
 
         if ba < 4.5:
             shortcomings.append(f"{ba} baths")
+
+        if est_property_value >= 3500000.0:
+            highlights.append(f"${est_property_value/1e6:.1f}M asset tier")
+        elif est_property_value < 1400000.0:
+            shortcomings.append(f"${est_property_value/1e6:.1f}M asset tier")
 
         if location_score > 90:
             highlights.append("Scottsdale location premium")
@@ -516,7 +575,7 @@ class CompEvaluator:
         season_label = "Winter" if is_winter else "Summer"
         if ratio >= 1.05:
             pct = round((ratio - 1.0) * 100)
-            summary = f"Premium comp ({pct}% superior desirability, {season_label}). Features " + ", ".join(highlights[:3]) + "."
+            summary = f"Premium comp ({pct}% superior desirability, {season_label}). Features " + ", ".join(highlights[:4]) + "."
         elif ratio <= 0.95:
             pct = round((1.0 - ratio) * 100)
             summary = f"Moderate comp ({pct}% lower desirability, {season_label}). "
@@ -529,7 +588,11 @@ class CompEvaluator:
             else:
                 summary += f"{br}BR estate in {location.title()} with standard luxury amenities."
         else:
-            summary = f"Direct peer comp (near-equal quality, {season_label}). {br}BR / {ba}BA estate matching Villa del Sol's capacity and luxury tier."
+            summary = f"Direct peer comp (near-equal quality, {season_label}). "
+            if highlights:
+                summary += f"Features {highlights[0]}, matching Villa del Sol's capacity and luxury tier."
+            else:
+                summary += f"{br}BR / {ba}BA estate matching Villa del Sol's capacity and luxury tier."
 
         return {
             "desirability_ratio": ratio,
@@ -537,6 +600,7 @@ class CompEvaluator:
             "category_scores": {
                 "outdoor": outdoor_score,
                 "capacity": capacity_score,
+                "property_value": property_value_score,
                 "interior": interior_score,
                 "location": location_score,
                 "reputation": reputation_score,
@@ -658,6 +722,18 @@ class CompEvaluator:
         except Exception:
             reviews = 0
 
+        # Extract property size (house & yard) and estimate market asset value
+        property_specs = PropertyValuator.evaluate_property_specs(
+            listing_id=cid,
+            title=title,
+            description=desc,
+            location=location,
+            br=br,
+            ba=ba,
+            guests=guests,
+        )
+        sqft = property_specs.get("sqft") or sqft
+
         # -------------------------------------------------------------
         # 1. VALIDITY CHECK
         # -------------------------------------------------------------
@@ -670,7 +746,8 @@ class CompEvaluator:
                 "winter_ratio": 0.50,
                 "summer_ratio": 0.50,
                 "pool_specs": pool_specs,
-                "category_scores": {"outdoor": 30, "capacity": 60, "interior": 60, "location": 70, "reputation": 70},
+                "property_specs": property_specs,
+                "category_scores": {"outdoor": 30, "capacity": 60, "property_value": 75, "interior": 60, "location": 70, "reputation": 70},
                 "composite_score": 52.0,
                 "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
             }
@@ -683,7 +760,8 @@ class CompEvaluator:
                 "winter_ratio": 0.55,
                 "summer_ratio": 0.55,
                 "pool_specs": pool_specs,
-                "category_scores": {"outdoor": 65, "capacity": 40, "interior": 65, "location": 75, "reputation": 75},
+                "property_specs": property_specs,
+                "category_scores": {"outdoor": 65, "capacity": 40, "property_value": 75, "interior": 65, "location": 75, "reputation": 75},
                 "composite_score": 60.0,
                 "rationale": f"Disqualified: Under-sized listing ({br} BR / {guests} guests) cannot benchmark 16-guest luxury estates.",
             }
@@ -697,7 +775,8 @@ class CompEvaluator:
                 "winter_ratio": 0.60,
                 "summer_ratio": 0.60,
                 "pool_specs": pool_specs,
-                "category_scores": {"outdoor": 70, "capacity": 75, "interior": 70, "location": 40, "reputation": 75},
+                "property_specs": property_specs,
+                "category_scores": {"outdoor": 70, "capacity": 75, "property_value": 75, "interior": 70, "location": 40, "reputation": 75},
                 "composite_score": 66.0,
                 "rationale": f"Disqualified: Located too far from the Scottsdale/Tempe corridor in {location.title()}.",
             }
@@ -707,31 +786,33 @@ class CompEvaluator:
         # -------------------------------------------------------------
         if season == "summer":
             res = self._evaluate_single_season(
-                comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, is_winter=False
+                comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, property_specs, is_winter=False
             )
             res.update({
                 "is_valid_comp": True,
                 "validity_reason": f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
                 "pool_specs": pool_specs,
+                "property_specs": property_specs,
             })
             return res
         elif season == "winter":
             res = self._evaluate_single_season(
-                comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, is_winter=True
+                comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, property_specs, is_winter=True
             )
             res.update({
                 "is_valid_comp": True,
                 "validity_reason": f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
                 "pool_specs": pool_specs,
+                "property_specs": property_specs,
             })
             return res
 
         # Default: evaluate both Winter and Summer
         winter_res = self._evaluate_single_season(
-            comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, is_winter=True
+            comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, property_specs, is_winter=True
         )
         summer_res = self._evaluate_single_season(
-            comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, is_winter=False
+            comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, property_specs, is_winter=False
         )
 
         return {
@@ -741,6 +822,7 @@ class CompEvaluator:
             "winter_ratio": winter_res["desirability_ratio"],
             "summer_ratio": summer_res["desirability_ratio"],
             "pool_specs": pool_specs,
+            "property_specs": property_specs,
             "composite_score": winter_res["composite_score"],
             "winter_composite_score": winter_res["composite_score"],
             "summer_composite_score": summer_res["composite_score"],
@@ -786,12 +868,35 @@ class CompEvaluator:
             self.REGISTRY_PATH.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
             logger.info(f"Evaluated and saved {evaluated_count} comps to {self.REGISTRY_PATH}")
 
+        # Collect property stats across valid comps
+        valid_sqfts = []
+        valid_lots = []
+        valid_vals = []
+        for tier_key in ("tier_a", "tier_b"):
+            for comp in registry.get(tier_key, {}).values():
+                if comp.get("is_valid_comp"):
+                    sp = comp.get("property_specs", {})
+                    if sp.get("sqft"):
+                        valid_sqfts.append(sp["sqft"])
+                    if sp.get("lot_acres"):
+                        valid_lots.append(sp["lot_acres"])
+                    if sp.get("est_property_value"):
+                        valid_vals.append(sp["est_property_value"])
+
+        avg_sqft = sum(valid_sqfts) / len(valid_sqfts) if valid_sqfts else 0
+        avg_lot = sum(valid_lots) / len(valid_lots) if valid_lots else 0
+        avg_val = sum(valid_vals) / len(valid_vals) if valid_vals else 0
+
         print("\n" + "=" * 60)
-        print("🎯 COMP EVALUATION COMPLETE")
+        print("🎯 COMP EVALUATION COMPLETE (6-Factor Quality & Valuation Rubric)")
         print("=" * 60)
         print(f"  Total Comps Evaluated:     {evaluated_count}")
         print(f"  ✅ Valid Luxury Comps:     {valid_count}")
         print(f"  ⛔ Disqualified Comps:     {disqualified_count}")
+        if valid_sqfts:
+            print(f"  📐 Avg Living Area:        {avg_sqft:,.0f} sq ft (Villa del Sol: 5,400 sq ft)")
+            print(f"  🌳 Avg Lot Size:           {avg_lot:.2f} acres (Villa del Sol: 0.75 acre)")
+            print(f"  🏷️ Avg Est. Asset Value:   ${avg_val:,.0f} (Villa del Sol: $2,000,000)")
         print("=" * 60)
         return registry
 

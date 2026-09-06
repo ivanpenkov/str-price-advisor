@@ -6,6 +6,7 @@ Renders:
 """
 
 from datetime import date, datetime, timedelta
+import html
 import json
 from typing import Dict, List, Optional, Any
 
@@ -689,8 +690,14 @@ def get_calendar_revenue_css() -> str:
       display: inline-block;
     }
     .tooltip-help {
-      border-bottom: 1px dotted #94a3b8;
+      border-bottom: 1px dotted rgba(148, 163, 184, 0.7);
       cursor: help;
+      text-decoration: none;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .tooltip-help:hover {
+      border-bottom-color: #38bdf8;
+      color: #f8fafc;
     }
     """
 
@@ -733,6 +740,7 @@ def classify_stay_type(start_date_str: Optional[str], end_date_str: Optional[str
 def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
     """
     Estimate 'Total on Channel' (pre-tax search total) and 'Guest Checkout Price' (all-in guest total).
+    Includes exact generic formula definitions and substituted calculations for auditing and debugging.
     - Airbnb: Gross Rent + $550 Clean; + 14.2% Airbnb guest fee + 14.07% taxes
     - VRBO: Gross Rent * 1.1448 (14.48% markup) + $550 Clean; + 11.5% Vrbo fee + 14.07% taxes
     - Booking.com: Gross Rent * 1.15 + $550 Clean; + 14.07% taxes
@@ -766,6 +774,10 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         total_on_channel = 0.0
         guest_checkout_price = 0.0
         formula_notes = "Owner stay / block ($0 guest charges)"
+        tot_channel_formula = "Owner Stay: $0.00 guest charges"
+        tot_channel_calc = "$0.00 (Owner stay, no guest charges)"
+        guest_price_formula = "Owner Stay: $0.00 guest charges"
+        guest_price_calc = "$0.00 (Owner stay, no guest charges)"
     elif "maintenance" in type_desc:
         channel_name = "Maintenance Block"
         channel_badge = "MAINT"
@@ -773,6 +785,10 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         total_on_channel = 0.0
         guest_checkout_price = 0.0
         formula_notes = "Maintenance block ($0 guest charges)"
+        tot_channel_formula = "Maintenance Block: $0.00 guest charges"
+        tot_channel_calc = "$0.00 (Maintenance block, no guest charges)"
+        guest_price_formula = "Maintenance Block: $0.00 guest charges"
+        guest_price_calc = "$0.00 (Maintenance block, no guest charges)"
     elif "booking" in hear_about or "booking" in travel_agent:
         channel_name = "Booking.com"
         channel_badge = "Booking.com"
@@ -781,7 +797,12 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         channel_base = round(gross_rent * 1.15, 2)
         total_on_channel = round(channel_base + clean_fee, 2)
         guest_checkout_price = round(total_on_channel * 1.1407, 2)
-        formula_notes = f"Gross Rent + 15% markup + $550 Clean; + 14.07% tax"
+        tax_amt = round(total_on_channel * 0.1407, 2)
+        formula_notes = f"Gross Rent (${gross_rent:,.2f}) × 1.15 + $550 Clean; + 14.07% tax"
+        tot_channel_formula = "(Gross Rent × 1.15 markup) + Cleaning Fee ($550.00)"
+        tot_channel_calc = f"(${gross_rent:,.2f} × 1.15 = ${channel_base:,.2f}) + Cleaning Fee ($550.00) = ${total_on_channel:,.2f}"
+        guest_price_formula = "Total on Channel × 1.1407 (+14.07% STR tax)"
+        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Tax 14.07% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
     elif "expedia" in hear_about or "expedia" in travel_agent:
         channel_name = "Expedia"
         channel_badge = "Expedia"
@@ -790,7 +811,12 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         channel_base = round(gross_rent * 1.15, 2)
         total_on_channel = round(channel_base + clean_fee, 2)
         guest_checkout_price = round(total_on_channel * 1.1407, 2)
-        formula_notes = f"Gross Rent + 15% markup + $550 Clean; + 14.07% tax"
+        tax_amt = round(total_on_channel * 0.1407, 2)
+        formula_notes = f"Gross Rent (${gross_rent:,.2f}) × 1.15 + $550 Clean; + 14.07% tax"
+        tot_channel_formula = "(Gross Rent × 1.15 markup) + Cleaning Fee ($550.00)"
+        tot_channel_calc = f"(${gross_rent:,.2f} × 1.15 = ${channel_base:,.2f}) + Cleaning Fee ($550.00) = ${total_on_channel:,.2f}"
+        guest_price_formula = "Total on Channel × 1.1407 (+14.07% STR tax)"
+        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Tax 14.07% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
     elif "airbnb" in hear_about or "airbnb" in travel_agent or madetype == "WSR":
         channel_name = "Airbnb"
         channel_badge = "Airbnb"
@@ -798,7 +824,13 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         clean_fee = 550.0
         total_on_channel = round(gross_rent + clean_fee, 2)
         guest_checkout_price = round(total_on_channel * 1.2827, 2)
+        fee_amt = round(total_on_channel * 0.142, 2)
+        tax_amt = round(total_on_channel * 0.1407, 2)
         formula_notes = f"Gross Rent (${gross_rent:,.2f}) + $550 Clean; + 14.2% Airbnb fee + 14.07% tax"
+        tot_channel_formula = "Gross Rent + Cleaning Fee ($550.00)"
+        tot_channel_calc = f"Gross Rent (${gross_rent:,.2f}) + Cleaning Fee ($550.00) = ${total_on_channel:,.2f}"
+        guest_price_formula = "Total on Channel × 1.2827 (+14.2% Airbnb guest fee + 14.07% STR tax)"
+        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Airbnb Fee 14.2% (${fee_amt:,.2f}) + Tax 14.07% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
     elif "vrbo" in hear_about or "ha-olb" in hear_about or "vrbo" in travel_agent or "homeaway" in travel_agent or madetype == "PDWTA":
         channel_name = "Vrbo"
         channel_badge = "VRBO"
@@ -807,7 +839,13 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         vrbo_base = round(gross_rent * 1.1448, 2)
         total_on_channel = round(vrbo_base + clean_fee, 2)
         guest_checkout_price = round(total_on_channel * 1.2557, 2)
-        formula_notes = f"Gross Rent + 14.48% markup + $550 Clean; + 11.5% Vrbo fee + 14.07% tax"
+        fee_amt = round(total_on_channel * 0.115, 2)
+        tax_amt = round(total_on_channel * 0.1407, 2)
+        formula_notes = f"Gross Rent (${gross_rent:,.2f}) × 1.1448 + $550 Clean; + 11.5% Vrbo fee + 14.07% tax"
+        tot_channel_formula = "(Gross Rent × 1.1448 markup) + Cleaning Fee ($550.00)"
+        tot_channel_calc = f"(${gross_rent:,.2f} × 1.1448 = ${vrbo_base:,.2f}) + Cleaning Fee ($550.00) = ${total_on_channel:,.2f}"
+        guest_price_formula = "Total on Channel × 1.2557 (+11.5% Vrbo traveler fee + 14.07% STR tax)"
+        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Vrbo Fee 11.5% (${fee_amt:,.2f}) + Tax 14.07% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
     elif madetype == "NET" or "kivoya.com" in hear_about:
         channel_name = "Direct Website"
         channel_badge = "Direct"
@@ -815,14 +853,23 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         clean_fee = 500.0
         total_on_channel = round(gross_rent + clean_fee, 2)
         guest_checkout_price = round(total_on_channel * 1.144, 2)
-        formula_notes = f"Gross Rent + $500 Clean; 0% service fee + 14.4% Tempe STR tax"
+        tax_amt = round(total_on_channel * 0.144, 2)
+        formula_notes = f"Gross Rent (${gross_rent:,.2f}) + $500 Clean; 0% service fee + 14.4% Tempe STR tax"
+        tot_channel_formula = "Gross Rent + Cleaning Fee ($500.00)"
+        tot_channel_calc = f"Gross Rent (${gross_rent:,.2f}) + Cleaning Fee ($500.00) = ${total_on_channel:,.2f}"
+        guest_price_formula = "Total on Channel × 1.1440 (+0% service fee + 14.4% Tempe STR tax)"
+        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Tempe STR Tax 14.4% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
     elif madetype == "ADM":
         channel_name = "Kivoya Admin"
         channel_badge = "Admin"
         channel_color = "#F59E0B"
         total_on_channel = gross_rent
         guest_checkout_price = gross_rent
-        formula_notes = "Internal admin entry / custom rate"
+        formula_notes = f"Internal admin entry / custom rate (${gross_rent:,.2f})"
+        tot_channel_formula = "Gross Rent (Internal admin rate / booking hold)"
+        tot_channel_calc = f"Gross Rent = ${gross_rent:,.2f}"
+        guest_price_formula = "Gross Rent (Internal admin rate, no traveler fee or tax added)"
+        guest_price_calc = f"Gross Rent = ${gross_rent:,.2f}"
     else:
         channel_name = res.get("madetype_name") or "Direct"
         channel_badge = channel_name
@@ -830,7 +877,12 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         clean_fee = 500.0
         total_on_channel = round(gross_rent + clean_fee, 2)
         guest_checkout_price = round(total_on_channel * 1.144, 2)
-        formula_notes = "Standard direct pricing estimate"
+        tax_amt = round(total_on_channel * 0.144, 2)
+        formula_notes = f"Gross Rent (${gross_rent:,.2f}) + $500 Clean; 0% fee + 14.4% tax"
+        tot_channel_formula = "Gross Rent + Cleaning Fee ($500.00)"
+        tot_channel_calc = f"Gross Rent (${gross_rent:,.2f}) + Cleaning Fee ($500.00) = ${total_on_channel:,.2f}"
+        guest_price_formula = "Total on Channel × 1.1440 (+0% fee + 14.4% Tempe STR tax)"
+        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Tempe STR Tax 14.4% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
 
     return {
         "channel_name": channel_name,
@@ -839,6 +891,10 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         "total_on_channel": total_on_channel,
         "guest_checkout_price": guest_checkout_price,
         "formula_notes": formula_notes,
+        "tot_channel_formula": tot_channel_formula,
+        "tot_channel_calc": tot_channel_calc,
+        "guest_price_formula": guest_price_formula,
+        "guest_price_calc": guest_price_calc,
     }
 
 
@@ -1003,6 +1059,13 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
         tot_channel = pricing["total_on_channel"]
         gst_price = pricing["guest_checkout_price"]
         notes = pricing["formula_notes"]
+        tot_formula = pricing["tot_channel_formula"]
+        tot_calc = pricing["tot_channel_calc"]
+        gst_formula = pricing["guest_price_formula"]
+        gst_calc = pricing["guest_price_calc"]
+
+        tot_tooltip = html.escape(f"Formula: {tot_formula}\nCalculation: {tot_calc}", quote=True)
+        gst_tooltip = html.escape(f"Formula: {gst_formula}\nCalculation: {gst_calc}", quote=True)
 
         cross_code = raw.get("cross_reference_code") or ""
         guest_name = raw.get("guest_name") or f"{raw.get('first_name', '')} {raw.get('last_name', '')}".strip()
@@ -1061,15 +1124,19 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
               {cross_html}
             </td>
             <td>
-              <div style="font-weight:700; color:#f8fafc; font-family:'JetBrains Mono'; font-size:0.92rem;">${tot_channel:,.2f}</div>
-              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;" class="tooltip-help" title="{notes}">
-                Pre-tax est. ⓘ
+              <div style="font-weight:700; color:#f8fafc; font-family:'JetBrains Mono'; font-size:0.92rem;">
+                <span class="tooltip-help" title="{tot_tooltip}">${tot_channel:,.2f}</span>
+              </div>
+              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">
+                <span class="tooltip-help" title="{tot_tooltip}">Pre-tax est. ⓘ</span>
               </div>
             </td>
             <td>
-              <div style="font-weight:800; color:#38bdf8; font-family:'JetBrains Mono'; font-size:0.95rem;">${gst_price:,.2f}</div>
-              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;" class="tooltip-help" title="{notes}">
-                All-in guest est. ⓘ
+              <div style="font-weight:800; color:#38bdf8; font-family:'JetBrains Mono'; font-size:0.95rem;">
+                <span class="tooltip-help" title="{gst_tooltip}">${gst_price:,.2f}</span>
+              </div>
+              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">
+                <span class="tooltip-help" title="{gst_tooltip}">All-in guest est. ⓘ</span>
               </div>
             </td>
           </tr>
@@ -1160,8 +1227,12 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
                   <th onclick="sortResTable(2, 'num')" id="resTh2">Nights <span class="sort-arrow">↕</span></th>
                   <th onclick="sortResTable(3, 'num')" id="resTh3">Gross Rent <span class="sort-arrow">↕</span></th>
                   <th onclick="sortResTable(4, 'str')" id="resTh4">Channel <span class="sort-arrow">↕</span></th>
-                  <th onclick="sortResTable(5, 'num')" id="resTh5">Total on Channel (Est.) <span class="sort-arrow">↕</span></th>
-                  <th onclick="sortResTable(6, 'num')" id="resTh6">Guest Checkout Price (Est.) <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(5, 'num')" id="resTh5">
+                    <span class="tooltip-help" title="Formula for Total on Channel (Pre-tax Search Total):&#10;• Airbnb: Gross Rent + $550 Cleaning Fee&#10;• Vrbo: (Gross Rent × 1.1448 markup) + $550 Cleaning Fee&#10;• Booking.com / Expedia: (Gross Rent × 1.15 markup) + $550 Cleaning Fee&#10;• Direct Website: Gross Rent + $500 Cleaning Fee&#10;• Kivoya Admin: Gross Rent (internal rate)&#10;• Owner / Maintenance: $0.00">Total on Channel (Est.) ⓘ</span> <span class="sort-arrow">↕</span>
+                  </th>
+                  <th onclick="sortResTable(6, 'num')" id="resTh6">
+                    <span class="tooltip-help" title="Formula for Guest Checkout Price (All-in Guest Total):&#10;• Airbnb: Total on Channel × 1.2827 (+14.2% Airbnb fee + 14.07% STR tax)&#10;• Vrbo: Total on Channel × 1.2557 (+11.5% Vrbo fee + 14.07% STR tax)&#10;• Booking.com / Expedia: Total on Channel × 1.1407 (+14.07% STR tax)&#10;• Direct Website: Total on Channel × 1.1440 (+14.4% Tempe STR tax)&#10;• Kivoya Admin: Gross Rent (internal rate)&#10;• Owner / Maintenance: $0.00">Guest Checkout Price (Est.) ⓘ</span> <span class="sort-arrow">↕</span>
+                  </th>
                 </tr>
               </thead>
               <tbody id="resTableBody">
@@ -1381,6 +1452,10 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
             "total_on_channel": pricing["total_on_channel"],
             "guest_checkout_price": pricing["guest_checkout_price"],
             "formula_notes": pricing["formula_notes"],
+            "tot_channel_formula": pricing["tot_channel_formula"],
+            "tot_channel_calc": pricing["tot_channel_calc"],
+            "guest_price_formula": pricing["guest_price_formula"],
+            "guest_price_calc": pricing["guest_price_calc"],
             "commission_information": raw_streamline.get("commission_information", {}),
             "raw_streamline": raw_streamline,
         }
@@ -1890,13 +1965,13 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
             <div class="res-fin-label">Net / Night</div>
             <div class="res-fin-value" style="color: #fbbf24;">${{fUSD(adr)}}</div>
           </div>
-          <div class="res-fin-card">
-            <div class="res-fin-label">Total on Channel (Est.)</div>
-            <div class="res-fin-value" style="color: #f8fafc;">${{fUSD(r.total_on_channel || 0)}}</div>
+          <div class="res-fin-card" title="Formula: ${{escapeHtml(r.tot_channel_formula || '')}}&#10;Calculation: ${{escapeHtml(r.tot_channel_calc || '')}}">
+            <div class="res-fin-label"><span class="tooltip-help" title="Formula: ${{escapeHtml(r.tot_channel_formula || '')}}">Total on Channel (Est.) ⓘ</span></div>
+            <div class="res-fin-value" style="color: #f8fafc;"><span class="tooltip-help" title="Formula: ${{escapeHtml(r.tot_channel_formula || '')}}&#10;Calculation: ${{escapeHtml(r.tot_channel_calc || '')}}">${{fUSD(r.total_on_channel || 0)}}</span></div>
           </div>
-          <div class="res-fin-card">
-            <div class="res-fin-label">Guest Checkout (Est.)</div>
-            <div class="res-fin-value" style="color: #38bdf8;">${{fUSD(r.guest_checkout_price || 0)}}</div>
+          <div class="res-fin-card" title="Formula: ${{escapeHtml(r.guest_price_formula || '')}}&#10;Calculation: ${{escapeHtml(r.guest_price_calc || '')}}">
+            <div class="res-fin-label"><span class="tooltip-help" title="Formula: ${{escapeHtml(r.guest_price_formula || '')}}">Guest Checkout (Est.) ⓘ</span></div>
+            <div class="res-fin-value" style="color: #38bdf8;"><span class="tooltip-help" title="Formula: ${{escapeHtml(r.guest_price_formula || '')}}&#10;Calculation: ${{escapeHtml(r.guest_price_calc || '')}}">${{fUSD(r.guest_checkout_price || 0)}}</span></div>
           </div>
         </div>
 
@@ -1984,11 +2059,26 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
                 <td>Stay Classification</td>
                 <td><span class="badge-stay-${{(r.stay_type || 'midweek').toLowerCase()}}">${{r.stay_type || 'Midweek'}}</span> (Weekend = Thu–Sat nights)</td>
               </tr>
-              ${{r.formula_notes ? `
               <tr>
-                <td>Channel Price Formula</td>
-                <td><span style="color:#94a3b8; font-size:0.8rem;">${{r.formula_notes}}</span></td>
-              </tr>` : ''}}
+                <td><span class="tooltip-help" title="Formula: ${{escapeHtml(r.tot_channel_formula || '')}}">Total on Channel (Est.) ⓘ</span></td>
+                <td>
+                  <strong style="color:#f8fafc;" class="tooltip-help" title="Formula: ${{escapeHtml(r.tot_channel_formula || '')}}&#10;Calculation: ${{escapeHtml(r.tot_channel_calc || '')}}">${{fUSD(r.total_on_channel || 0)}}</strong>
+                  <div style="font-size:0.78rem; color:#94a3b8; margin-top:3px; line-height:1.4;">
+                    <span style="color:#cbd5e1; font-weight:600;">Formula:</span> ${{escapeHtml(r.tot_channel_formula || '')}}<br/>
+                    <span style="color:#34d399; font-weight:600;">Calculation:</span> ${{escapeHtml(r.tot_channel_calc || '')}}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="tooltip-help" title="Formula: ${{escapeHtml(r.guest_price_formula || '')}}">Guest Checkout Price (Est.) ⓘ</span></td>
+                <td>
+                  <strong style="color:#38bdf8;" class="tooltip-help" title="Formula: ${{escapeHtml(r.guest_price_formula || '')}}&#10;Calculation: ${{escapeHtml(r.guest_price_calc || '')}}">${{fUSD(r.guest_checkout_price || 0)}}</strong>
+                  <div style="font-size:0.78rem; color:#94a3b8; margin-top:3px; line-height:1.4;">
+                    <span style="color:#cbd5e1; font-weight:600;">Formula:</span> ${{escapeHtml(r.guest_price_formula || '')}}<br/>
+                    <span style="color:#38bdf8; font-weight:600;">Calculation:</span> ${{escapeHtml(r.guest_price_calc || '')}}
+                  </div>
+                </td>
+              </tr>
               <tr>
                 <td>Timeline Classification</td>
                 <td>${{r.is_future === 1 ? '<strong style="color:#fb8c00;">Future Booking</strong> (Subject to guest changes)' : '<strong style="color:#94a3b8;">Past Booking</strong> (Completed stay)'}}</td>

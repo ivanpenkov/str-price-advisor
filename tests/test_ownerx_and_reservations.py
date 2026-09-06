@@ -320,6 +320,10 @@ class TestOwnerXAndReservations(unittest.TestCase):
         self.assertEqual(abnb_est["channel_name"], "Airbnb")
         self.assertEqual(abnb_est["total_on_channel"], 2550.0)  # 2000 + 550
         self.assertEqual(abnb_est["guest_checkout_price"], round(2550.0 * 1.2827, 2))
+        self.assertIn("Gross Rent + Cleaning Fee ($550.00)", abnb_est["tot_channel_formula"])
+        self.assertIn("2,000.00", abnb_est["tot_channel_calc"])
+        self.assertIn("2,550.00", abnb_est["tot_channel_calc"])
+        self.assertIn("2,550.00", abnb_est["guest_price_calc"])
 
         # VRBO booking ($2000 gross rent)
         vrbo_res = {
@@ -334,6 +338,9 @@ class TestOwnerXAndReservations(unittest.TestCase):
         expected_vrbo_tot = expected_vrbo_base + 550.0
         self.assertEqual(vrbo_est["total_on_channel"], expected_vrbo_tot)
         self.assertEqual(vrbo_est["guest_checkout_price"], round(expected_vrbo_tot * 1.2557, 2))
+        self.assertIn("1.1448", vrbo_est["tot_channel_formula"])
+        self.assertIn("2,000.00", vrbo_est["tot_channel_calc"])
+        self.assertIn("1.2557", vrbo_est["guest_price_formula"])
 
         # Direct Website booking ($2000 gross rent)
         direct_res = {
@@ -346,6 +353,8 @@ class TestOwnerXAndReservations(unittest.TestCase):
         self.assertEqual(direct_est["channel_name"], "Direct Website")
         self.assertEqual(direct_est["total_on_channel"], 2500.0)  # 2000 + 500 clean
         self.assertEqual(direct_est["guest_checkout_price"], round(2500.0 * 1.144, 2))
+        self.assertIn("500.00", direct_est["tot_channel_formula"])
+        self.assertIn("2,000.00", direct_est["tot_channel_calc"])
 
         # Owner block
         owner_res = {
@@ -358,6 +367,8 @@ class TestOwnerXAndReservations(unittest.TestCase):
         self.assertEqual(owner_est["channel_name"], "Owner Block")
         self.assertEqual(owner_est["total_on_channel"], 0.0)
         self.assertEqual(owner_est["guest_checkout_price"], 0.0)
+        self.assertIn("0.00", owner_est["tot_channel_calc"])
+        self.assertIn("0.00", owner_est["guest_price_calc"])
 
 
 if __name__ == "__main__":

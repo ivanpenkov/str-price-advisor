@@ -262,11 +262,25 @@ class PlatformComparator:
             )
 
         # Build clean itemized breakdown
-        total = intercepted_price
+        # In the US, Airbnb PDP displays price BEFORE lodging & occupancy taxes.
+        # Taxes on accommodation are charged at checkout:
+        # - 5.0% Hotel/Motel Tax (Tempe)
+        # - 5.5% Transaction Privilege and Use Tax (Arizona)
+        # - 1.8% Local Transaction Privilege and Use Tax (Tempe)
+        # - 0.22% Online Lodging Marketplace Tax (Maricopa County)
+        # Total Tax Rate = 12.52% of the pre-tax stay subtotal.
+        AIRBNB_TAX_RATE = 0.1252
+        pretax_total = intercepted_price
         clean_fee = intercepted_breakdown.get("cleaning", 550.0)
-        tax_est = intercepted_breakdown.get("taxes", round(total * 0.126, 2))
-        svc_est = intercepted_breakdown.get("service", round((total - tax_est - clean_fee) * 0.141, 2))
-        base_est = intercepted_breakdown.get("base", round(total - clean_fee - svc_est - tax_est, 2))
+
+        taxes = intercepted_breakdown.get("taxes") or round(pretax_total * AIRBNB_TAX_RATE, 2)
+        total = round(pretax_total + taxes, 2)
+
+        # pretax_total = accommodation + clean_fee + service_fee
+        # service_fee is ~14.15% of (accommodation + clean_fee)
+        base_plus_clean = round(pretax_total / 1.1415, 2)
+        base_est = round(max(0.0, base_plus_clean - clean_fee), 2)
+        svc_est = round(pretax_total - base_est - clean_fee, 2)
         nightly_est = round(base_est / max(1, nights), 2)
         eff_nightly = round(total / max(1, nights), 2)
 
@@ -278,12 +292,12 @@ class PlatformComparator:
             base_subtotal=base_est,
             cleaning_fee=clean_fee,
             service_fee=svc_est,
-            taxes=tax_est,
+            taxes=taxes,
             total_price=total,
             effective_nightly=eff_nightly,
             booking_url=url,
-            notes="Airbnb checkout price (verified PDP)",
-            raw_snippet=f"${total:,.0f} total (${eff_nightly:,.0f}/nt)",
+            notes="Includes 12.52% Tempe & AZ lodging taxes (Hotel/Motel 5% + State TPT 5.5% + Local TPT 1.8% + Maricopa 0.22%)",
+            raw_snippet=f"${pretax_total:,.0f} pre-tax + ${taxes:,.2f} tax = ${total:,.2f} total",
         )
 
     # -------------------------------------------------------------------------

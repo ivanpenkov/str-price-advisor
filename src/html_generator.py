@@ -2867,6 +2867,23 @@ class HTMLDashboardGenerator:
 
             if cached_data:
                 comp = cached_data
+                # Ensure Airbnb quote includes 12.52% Tempe & AZ lodging taxes if cached pre-tax
+                if "12.52%" not in comp.get("airbnb", {}).get("notes", ""):
+                    pretax = comp["airbnb"].get("total_price") or 0.0
+                    if pretax > 0:
+                        tax = round(pretax * 0.1252, 2)
+                        clean = comp["airbnb"].get("cleaning_fee", 550.0)
+                        base_plus_clean = round(pretax / 1.1415, 2)
+                        base = round(max(0.0, base_plus_clean - clean), 2)
+                        svc = round(pretax - base - clean, 2)
+                        comp["airbnb"]["taxes"] = tax
+                        comp["airbnb"]["base_subtotal"] = base
+                        comp["airbnb"]["service_fee"] = svc
+                        comp["airbnb"]["nightly_rate"] = round(base / max(1, nights), 2)
+                        comp["airbnb"]["total_price"] = round(pretax + tax, 2)
+                        comp["airbnb"]["effective_nightly"] = round(comp["airbnb"]["total_price"] / max(1, nights), 2)
+                        comp["airbnb"]["notes"] = "Includes 12.52% Tempe & AZ lodging taxes (Hotel/Motel 5% + State TPT 5.5% + Local TPT 1.8% + Maricopa 0.22%)"
+
                 a_tot = comp["airbnb"].get("total_price") or 0.0
                 v_tot = comp["vrbo"].get("total_price") or 0.0
                 b_tot = comp["booking"].get("total_price") or 0.0
@@ -2886,18 +2903,24 @@ class HTMLDashboardGenerator:
                 comparisons.append(comp)
             else:
                 # Baseline derivation
+                # our_airbnb_eff or our_airbnb_total is the Airbnb pre-tax price
                 our_airbnb_eff = s.get("our_airbnb_effective_nightly")
                 if our_airbnb_eff and float(our_airbnb_eff) > 0:
-                    a_tot = round(float(our_airbnb_eff) * nights, 2)
-                    a_eff = round(float(our_airbnb_eff), 2)
+                    a_pretax = round(float(our_airbnb_eff) * nights, 2)
                 else:
-                    a_tot = round(s["our_total_price"] * 1.15, 2)
-                    a_eff = round(a_tot / max(1, nights), 2)
+                    a_pretax = round(s["our_total_price"] * 1.15, 2)
+
+                # Add 12.52% Tempe & AZ lodging taxes to get true guest checkout total:
+                # Tempe Hotel/Motel (5.0%) + Arizona State TPT (5.5%) + Tempe City TPT (1.8%) + Maricopa County OLM (0.22%) = 12.52%
+                AIRBNB_TAX_RATE = 0.1252
+                a_tax = round(a_pretax * AIRBNB_TAX_RATE, 2)
+                a_tot = round(a_pretax + a_tax, 2)
+                a_eff = round(a_tot / max(1, nights), 2)
 
                 a_clean = 550.0
-                a_tax = round(a_tot * 0.126, 2)
-                a_svc = round((a_tot - a_clean - a_tax) * 0.141, 2)
-                a_base = round(a_tot - a_clean - a_svc - a_tax, 2)
+                base_plus_clean = round(a_pretax / 1.1415, 2)
+                a_base = round(max(0.0, base_plus_clean - a_clean), 2)
+                a_svc = round(a_pretax - a_base - a_clean, 2)
                 a_nightly = round(a_base / max(1, nights), 2)
 
                 k_base = round(s["our_base_nightly"] * nights, 2)
@@ -2949,7 +2972,7 @@ class HTMLDashboardGenerator:
                         "total_price": a_tot,
                         "effective_nightly": a_eff,
                         "booking_url": f"https://www.airbnb.com/rooms/573857947793833342?check_in={c_in}&check_out={c_out}&adults=16",
-                        "notes": "Verified Airbnb checkout quote" if s.get("is_our_airbnb_live") else "Baseline Airbnb rate projection",
+                        "notes": "Includes 12.52% Tempe & AZ lodging taxes (Hotel/Motel 5% + State TPT 5.5% + Local TPT 1.8% + Maricopa 0.22%)",
                     },
                     "vrbo": {
                         "platform": "vrbo",

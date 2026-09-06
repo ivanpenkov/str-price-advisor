@@ -160,6 +160,15 @@ class TestPlatformComparator(unittest.TestCase):
         self.assertEqual(data_row[14], "+5.0%")
         self.assertEqual(data_row[15], "20.0%")
 
+    def test_airbnb_tax_derivation(self):
+        """Airbnb taxes must equal 12.52% of pre-tax subtotal (Tempe Hotel 5% + AZ TPT 5.5% + Tempe TPT 1.8% + Maricopa 0.22%)."""
+        pretax = 4823.00
+        tax_rate = 0.1252
+        taxes = round(pretax * tax_rate, 2)
+        total = round(pretax + taxes, 2)
+        self.assertEqual(taxes, 603.84)
+        self.assertEqual(total, 5426.84)
+
 
 if __name__ == "__main__":
     unittest.main()

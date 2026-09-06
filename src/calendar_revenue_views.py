@@ -606,13 +606,13 @@ def get_calendar_revenue_css() -> str:
     .res-shift-bar-bg {
       background: #334155;
       border-radius: 4px;
-      height: 6px;
+      height: 7px;
       overflow: hidden;
       display: flex;
       margin-top: 4px;
     }
     .res-shift-bar-mid {
-      background: #38bdf8;
+      background: #f97316;
       height: 100%;
     }
     .res-shift-bar-wknd {
@@ -760,9 +760,9 @@ def get_calendar_revenue_css() -> str:
       display: inline-block;
     }
     .badge-stay-midweek {
-      background: rgba(20, 184, 166, 0.18);
-      color: #2dd4bf;
-      border: 1px solid rgba(20, 184, 166, 0.35);
+      background: rgba(249, 115, 22, 0.18);
+      color: #fb923c;
+      border: 1px solid rgba(249, 115, 22, 0.35);
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 6px;
@@ -1292,12 +1292,12 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
           <tr>
             <td><strong>{yr}</strong></td>
             <td><strong>{tot_n:,}</strong> nts</td>
-            <td>{wknd_n} nts <span style="color:#94a3b8; font-size:0.75rem;">({wknd_pct:.1f}%)</span></td>
-            <td>{mid_n} nts <span style="color:#38bdf8; font-weight:600; font-size:0.75rem;">({mid_pct:.1f}%)</span></td>
+            <td>{wknd_n} nts <span style="color:#a5b4fc; font-weight:600; font-size:0.75rem;">({wknd_pct:.1f}%)</span></td>
+            <td>{mid_n} nts <span style="color:#fb923c; font-weight:700; font-size:0.75rem;">({mid_pct:.1f}%)</span></td>
             <td style="min-width:140px;">
-              <div style="font-size:0.75rem; display:flex; justify-content:space-between; margin-bottom:2px;">
-                <span style="color:#818cf8;">Wknd {wknd_pct:.0f}%</span>
-                <span style="color:#38bdf8;">Mid {mid_pct:.0f}%</span>
+              <div style="font-size:0.75rem; display:flex; justify-content:space-between; margin-bottom:3px;">
+                <span style="color:#818cf8; font-weight:700;">Wknd {wknd_pct:.0f}%</span>
+                <span style="color:#fb923c; font-weight:700;">Mid {mid_pct:.0f}%</span>
               </div>
               <div class="res-shift-bar-bg">
                 <div class="res-shift-bar-wknd" style="width:{wknd_pct}%;"></div>
@@ -1305,7 +1305,7 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
               </div>
             </td>
             <td style="font-family:'JetBrains Mono',monospace; color:#818cf8; font-weight:700;">${wknd_adr:,.0f}</td>
-            <td style="font-family:'JetBrains Mono',monospace; color:#38bdf8; font-weight:700;">${mid_adr:,.0f}</td>
+            <td style="font-family:'JetBrains Mono',monospace; color:#fb923c; font-weight:700;">${mid_adr:,.0f}</td>
             <td style="font-family:'JetBrains Mono',monospace; color:#cbd5e1;">{spread_str}</td>
           </tr>
         """)
@@ -1376,11 +1376,11 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
                 <tr>
                   <th>Year</th>
                   <th>Total Nights</th>
-                  <th>Weekend Nights (Thu–Sat)</th>
-                  <th>Midweek Nights (Sun–Wed)</th>
+                  <th><span style="color:#818cf8; font-size:0.9rem;">●</span> Weekend Nights (Thu–Sat)</th>
+                  <th><span style="color:#fb923c; font-size:0.9rem;">●</span> Midweek Nights (Sun–Wed)</th>
                   <th style="text-align:center;">Demand Distribution</th>
-                  <th>Realized Weekend ADR</th>
-                  <th>Realized Midweek ADR</th>
+                  <th><span style="color:#818cf8; font-size:0.9rem;">●</span> Realized Weekend ADR</th>
+                  <th><span style="color:#fb923c; font-size:0.9rem;">●</span> Realized Midweek ADR</th>
                   <th>ADR Premium</th>
                 </tr>
               </thead>

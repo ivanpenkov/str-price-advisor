@@ -9,3 +9,4 @@ scratch/
 .env
 .env.*
 config/secrets.yaml
+docs/*.pdf

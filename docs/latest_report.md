@@ -1,13 +1,13 @@
 # 🏷️ STR Competitive Pricing Advisory Report
 **Property**: Villa del Sol (920 E Carver Rd, Tempe, AZ)
-**Report Date**: 2026-09-05
+**Report Date**: 2026-09-06
 **Strategy**: Dynamic Luxury Benchmark (75th–80th Percentile with Lead-Time Tapering)
 
 ---
 
 ## 📊 Executive Summary
-- **Total Open Calendar Intervals**: 79
-- 🚨 **Urgent Adjustments (This Week)**: **30** intervals
+- **Total Open Calendar Intervals**: 80
+- 🚨 **Urgent Adjustments (This Week)**: **31** intervals
 - ⚠️ **Moderate Adjustments (Monthly Review)**: **24** intervals
 - ✅ **Competitive / On Target**: **25** intervals
 
@@ -40,6 +40,7 @@ The following dates have major pricing anomalies that require immediate update i
 | `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $449 → $293 | 36 | $449 | $616 (58%) | $596 | $516 (31.5%) | 🔴 **+34.0%** | **$293** |
 | `2027-05-13 -> 2027-05-16` | Weekend | 3 | ↑ Increase $749 → $1206 | 49 | $749 | $916 (35%) | $1334 | $1667 (70%) | 🔵 **-33.3%** | **$1206** |
 | `2027-03-25 -> 2027-03-28` | Weekend | 3 | ↑ Increase $1099 → $1728 | 33 | $1099 | $1266 (27%) | $1950 | $2313 (70%) | 🔵 **-33.2%** | **$1728** |
+| `2027-09-05 -> 2027-09-09` | Midweek | 4 | ↑ Increase $599 → $938 | 103 | $599 | $724 (16%) | $1062 | $1062 (49%) | 🔵 **-31.9%** | **$938** |
 | `2027-02-25 -> 2027-02-28` | Weekend | 3 | ↑ Increase $1099 → $1687 | 38 | $1099 | $1266 (30%) | $2014 | $2263 (65%) | 🔵 **-31.7%** | **$1687** |
 | `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↑ Increase $749 → $1170 | 45 | $749 | $916 (33%) | $1378 | $1624 (70%) | 🔵 **-31.5%** | **$1170** |
 | `2027-05-30 -> 2027-06-03` | Midweek | 4 | ↑ Increase $599 → $924 | 41 | $599 | $724 (24%) | $1078 | $1049 (49%) | 🔵 **-31.0%** | **$924** |
@@ -110,6 +111,7 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 | `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $449 → $293 | 36 | $449 | $616 (58%) | $596 | $516 (31.5%) | 🔴 **+34.0%** | **$293** |
 | `2027-05-13 -> 2027-05-16` | Weekend | 3 | ↑ Increase $749 → $1206 | 49 | $749 | $916 (35%) | $1334 | $1667 (70%) | 🔵 **-33.3%** | **$1206** |
 | `2027-03-25 -> 2027-03-28` | Weekend | 3 | ↑ Increase $1099 → $1728 | 33 | $1099 | $1266 (27%) | $1950 | $2313 (70%) | 🔵 **-33.2%** | **$1728** |
+| `2027-09-05 -> 2027-09-09` | Midweek | 4 | ↑ Increase $599 → $938 | 103 | $599 | $724 (16%) | $1062 | $1062 (49%) | 🔵 **-31.9%** | **$938** |
 | `2027-02-25 -> 2027-02-28` | Weekend | 3 | ↑ Increase $1099 → $1687 | 38 | $1099 | $1266 (30%) | $2014 | $2263 (65%) | 🔵 **-31.7%** | **$1687** |
 | `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↑ Increase $749 → $1170 | 45 | $749 | $916 (33%) | $1378 | $1624 (70%) | 🔵 **-31.5%** | **$1170** |
 | `2027-05-30 -> 2027-06-03` | Midweek | 4 | ↑ Increase $599 → $924 | 41 | $599 | $724 (24%) | $1078 | $1049 (49%) | 🔵 **-31.0%** | **$924** |

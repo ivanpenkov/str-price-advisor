@@ -390,6 +390,16 @@ class HTMLDashboardGenerator:
 
         now_str = datetime.now().strftime("%B %d, %Y at %I:%M %p")
 
+        from src.reservation_store import ReservationStore
+        import src.calendar_revenue_views as crv
+        res_store = ReservationStore()
+        reservations_list = res_store.get_all_reservations(include_cancelled=False)
+        rev_data = res_store.calculate_cumulative_annual_revenue()
+        calendar_tab_html = crv.render_calendar_tab(reservations_list)
+        revenue_tab_html = crv.render_revenue_tab(rev_data)
+        calendar_revenue_css = crv.get_calendar_revenue_css()
+        calendar_revenue_js = crv.get_calendar_revenue_js(reservations_list, rev_data)
+
         html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -399,7 +409,10 @@ class HTMLDashboardGenerator:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
+    {calendar_revenue_css}
+
     :root {{
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
@@ -1190,6 +1203,8 @@ class HTMLDashboardGenerator:
       <button class="tab-btn active" onclick="switchTab('pricing')" role="tab" aria-selected="true">📊 Pricing Recommendations</button>
       <button class="tab-btn" onclick="switchTab('comparison')" role="tab" aria-selected="false">🌐 Channel Price Comparison</button>
       <button class="tab-btn" onclick="switchTab('comps')" role="tab" aria-selected="false">🏡 Competitor Comps ({len(tier_a_comps) + len(tier_b_comps)})</button>
+      <button class="tab-btn" onclick="switchTab('calendar')" role="tab" aria-selected="false">📅 Availability Calendar</button>
+      <button class="tab-btn" onclick="switchTab('revenue')" role="tab" aria-selected="false">📈 Cumulative Revenue</button>
       <button class="tab-btn" onclick="switchTab('methodology')" role="tab" aria-selected="false">📐 Methodology & PMS Guide</button>
       <button class="tab-btn" onclick="switchTab('debug')" role="tab" aria-selected="false">🛠️ Live Data & Debug</button>
     </nav>
@@ -1368,7 +1383,17 @@ class HTMLDashboardGenerator:
       </div>
     </div>
 
-    <!-- TAB 3: METHODOLOGY -->
+    <!-- TAB 4: AVAILABILITY CALENDAR -->
+    <div id="tab-calendar" class="tab-content">
+      {calendar_tab_html}
+    </div>
+
+    <!-- TAB 5: CUMULATIVE REVENUE -->
+    <div id="tab-revenue" class="tab-content">
+      {revenue_tab_html}
+    </div>
+
+    <!-- TAB 6: METHODOLOGY -->
     <div id="tab-methodology" class="tab-content">
       <div class="section-box">
         <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 6px;">Pricing Methodology & Revenue Management Guide</h2>
@@ -1479,7 +1504,15 @@ class HTMLDashboardGenerator:
       const target = document.getElementById('tab-' + tabId);
       if (target) target.classList.add('active');
       
-      event.target.classList.add('active');
+      const btn = (window.event && window.event.target && window.event.target.classList) ? window.event.target : document.querySelector(`button[onclick*="'${{tabId}}'"]`);
+      if (btn) btn.classList.add('active');
+
+      if (tabId === 'revenue' && typeof initRevenueChart === 'function') {{
+        setTimeout(initRevenueChart, 50);
+      }}
+      if (tabId === 'calendar' && typeof renderCalendar === 'function') {{
+        setTimeout(() => renderCalendar(calCurrentYear, calCurrentMonth), 50);
+      }}
     }}
 
     function filterComps() {{
@@ -2176,6 +2209,8 @@ class HTMLDashboardGenerator:
     document.addEventListener('DOMContentLoaded', () => {{
       applyGlobalFilters();
     }});
+
+    {calendar_revenue_js}
   </script>
 </body>
 </html>"""

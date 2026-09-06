@@ -283,6 +283,12 @@ def main():
     add_comp_parser.add_argument("--force", action="store_true", help="Force refresh listing profile even if cached")
     add_comp_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
 
+    sync_res_parser = subparsers.add_parser("sync-reservations", help="Scrape and sync Streamline OwnerX reservations to SQLite and JSON")
+    sync_res_parser.add_argument("--full", action="store_true", help="Sync complete historical reservations since 2022")
+    sync_res_parser.add_argument("--days-back", type=int, default=60, help="Days of past reservations to include in incremental sync (default: 60)")
+    sync_res_parser.add_argument("--dashboard", action="store_true", help="Re-generate HTML dashboard after syncing")
+    sync_res_parser.add_argument("--push", action="store_true", help="Automatically commit and push updated data/docs to GitHub")
+
     remove_comp_parser = subparsers.add_parser("remove-comp", help="Remove competitor listing from registry, purge cache, and update dashboard")
     remove_comp_parser.add_argument("identifier", type=str, help="Airbnb listing ID or URL")
     remove_comp_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
@@ -432,6 +438,67 @@ def main():
         ))
         if args.push:
             push_to_github(commit_msg=f"Scrape interval prices for comp {args.identifier}")
+    elif args.command == "sync-reservations":
+        from src.ownerx_client import OwnerXClient
+        from src.reservation_store import ReservationStore
+        from datetime import date, timedelta
+        import shutil
+
+        print("=" * 70)
+        print("📥 Streamline OwnerX Reservation Sync")
+        print("=" * 70)
+
+        client = OwnerXClient()
+        print("🔑 Authenticating with Streamline OwnerX...")
+        client.authenticate()
+        print(f"  ✓ Authenticated as processor #{client.processor_id}")
+
+        if args.full:
+            print("📦 Full Sync: Fetching all historical and future reservations (2022+)...")
+            raw_res = client.fetch_raw_reservations()
+            mode = "full"
+        else:
+            days = args.days_back or 60
+            cutoff = (date.today() - timedelta(days=days)).strftime("%Y-%m-%d")
+            print(f"⚡ Incremental Sync: Fetching reservations ending >= {cutoff} (past {days} days + all future)...")
+            raw_res = client.fetch_raw_reservations(arriving_after=cutoff)
+            mode = "incremental"
+
+        print(f"  ✓ Fetched {len(raw_res)} reservation records.")
+        normalized = [OwnerXClient.normalize_reservation(r) for r in raw_res]
+        store = ReservationStore()
+        stats = store.upsert_reservations(normalized, sync_mode=mode)
+        print(f"  ✓ Upserted into SQLite: {stats['upserted']} records ({stats['future']} future, {stats['past']} past).")
+        print(f"  ✓ Synced JSON database at: {store.json_path}")
+
+        if args.dashboard:
+            print("\n🎨 Re-generating dashboard with updated reservations...")
+            config = load_config()
+            from src.html_generator import HTMLDashboardGenerator
+            from src.reporter import PriceReportGenerator
+            urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)
+            mod_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("moderate_percent_diff", MODERATE_PCT_DIFF)
+            html_gen = HTMLDashboardGenerator(
+                output_path="docs/index.html",
+                urgent_pct_diff=urgent_pct,
+                moderate_pct_diff=mod_pct,
+            )
+            evaluated_segments = html_gen.generate_full_12_month_evaluation()
+            out = html_gen.generate(evaluated_segments)
+            reporter = PriceReportGenerator(
+                output_dir="data",
+                urgent_pct_diff=urgent_pct,
+                moderate_pct_diff=mod_pct,
+            )
+            reporter.generate_all(evaluated_segments=evaluated_segments, property_name=config.get("property", {}).get("name", "Villa del Sol"))
+            if Path("data/latest_sheet.csv").exists():
+                shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
+            if Path("data/latest_report.md").exists():
+                shutil.copy("data/latest_report.md", "docs/latest_report.md")
+            print(f"✅ Dashboard generated successfully at: {out}")
+
+        if args.push:
+            push_to_github(commit_msg="Sync Streamline OwnerX reservations and update dashboard")
     else:
         parser.print_help()
 

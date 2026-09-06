@@ -17,6 +17,7 @@ This skill provides a complete reference for all command-line operations in `src
 | Command | Primary Purpose | Network / Proxy Required | Key Flags |
 | :--- | :--- | :--- | :--- |
 | `run` | Full weekly or quick pricing advisory audit | **Yes** (Kivoya + Airbnb proxy) | `--weekly`, `--quick`, `--limit`, `--start-date`, `--end-date`, `--push` |
+| `sync-reservations` | Ingest Streamline OwnerX reservations to SQLite & JSON | **Yes** (Direct OwnerX API) | `--full`, `--days-back`, `--dashboard`, `--push` |
 | `generate-html` | Re-render static HTML dashboard from data | **No** (Local only) | `--push` |
 | `evaluate-comps`| Compute 5-factor quality scores & desirability ratios | **No** (Local evaluation) | `--no-save` |
 | `enrich-comps` | Deep scrape / sync listing features (beds, baths, amenities) | **Yes** for live (`--sync-cached` is offline) | `--concurrency`, `--limit`, `--force`, `--sync-cached`, `--our-property` |

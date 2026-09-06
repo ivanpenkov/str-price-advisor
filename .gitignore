@@ -10,3 +10,4 @@ scratch/
 .env.*
 config/secrets.yaml
 docs/*.pdf
+*.db

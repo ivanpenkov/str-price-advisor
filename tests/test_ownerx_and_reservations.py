@@ -318,12 +318,25 @@ class TestOwnerXAndReservations(unittest.TestCase):
         }
         abnb_est = crv.estimate_reservation_channel_pricing(abnb_res)
         self.assertEqual(abnb_est["channel_name"], "Airbnb")
-        self.assertEqual(abnb_est["total_on_channel"], 2550.0)  # 2000 + 550
-        self.assertEqual(abnb_est["guest_checkout_price"], round(2550.0 * 1.2827, 2))
-        self.assertIn("Gross Rent + Cleaning Fee ($550.00)", abnb_est["tot_channel_formula"])
+        # 2000 + 550 = 2550 lodging; + 14.15% service fee ($360.82) = 2910.82 total on channel
+        self.assertEqual(abnb_est["total_on_channel"], 2910.82)
+        # 2910.82 + 12.52% taxes ($364.43) = 3275.25
+        self.assertEqual(abnb_est["guest_checkout_price"], 3275.25)
+        self.assertIn("14.15%", abnb_est["tot_channel_formula"])
         self.assertIn("2,000.00", abnb_est["tot_channel_calc"])
-        self.assertIn("2,550.00", abnb_est["tot_channel_calc"])
-        self.assertIn("2,550.00", abnb_est["guest_price_calc"])
+        self.assertIn("2,910.82", abnb_est["tot_channel_calc"])
+        self.assertIn("3,275.25", abnb_est["guest_price_calc"])
+
+        # User screenshot example: $1,165.30 gross rent -> $1,958.01 search total -> $2,203.15 checkout
+        shot_res = {
+            "gross_rent": 1165.30,
+            "madetype_name": "WSR",
+            "type_description": "Standard",
+            "raw_json": json.dumps({"hear_about_name": "Airbnb"}),
+        }
+        shot_est = crv.estimate_reservation_channel_pricing(shot_res)
+        self.assertEqual(shot_est["total_on_channel"], 1958.01)  # $1,958 on Airbnb search
+        self.assertEqual(shot_est["guest_checkout_price"], 2203.15)  # $2,203.15 at Reserve checkout
 
         # VRBO booking ($2000 gross rent)
         vrbo_res = {

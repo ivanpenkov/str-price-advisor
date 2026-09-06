@@ -407,7 +407,8 @@ class CompManager:
         if proxy_cfg:
             launch_kwargs["proxy"] = proxy_cfg
 
-        accommodates = comp_meta.get("accommodates") or comp_meta.get("beds") or 14
+        # Cap adults at 16 (Airbnb search max) to prevent invalid query parameters
+        accommodates = min(int(comp_meta.get("accommodates") or comp_meta.get("beds") or 10), 16)
 
         async with async_playwright() as p:
             browser = await p.chromium.launch(**launch_kwargs)
@@ -452,7 +453,12 @@ class CompManager:
                                 sdp = sec.get("structuredDisplayPrice")
                                 if sdp and not intercepted_price:
                                     primary = sdp.get("primaryLine", {})
-                                    raw_p = primary.get("price", "")
+                                    raw_p = (
+                                        primary.get("price")
+                                        or primary.get("discountedPrice")
+                                        or primary.get("originalPrice")
+                                        or ""
+                                    )
                                     clean_p = re.sub(r"[^\d.]", "", raw_p)
                                     if clean_p:
                                         try:
@@ -460,10 +466,17 @@ class CompManager:
                                             intercepted_label = primary.get("accessibilityLabel") or raw_p
                                         except Exception:
                                             pass
-                                
-                                # Check unavailability flag
-                                log_event = sec.get("tripDetailsLoggingEventData", {})
-                                if log_event and "selectUnavailable" in str(log_event):
+                                    elif primary.get("accessibilityLabel"):
+                                        m_acc = re.search(r"\$([\d,]+)", primary["accessibilityLabel"])
+                                        if m_acc:
+                                            try:
+                                                intercepted_price = float(m_acc.group(1).replace(",", ""))
+                                                intercepted_label = primary["accessibilityLabel"]
+                                            except Exception:
+                                                pass
+
+                                # Check true unavailability flags
+                                if sec.get("available") is False or sec.get("localizedUnavailabilityMessage"):
                                     is_unavailable = True
                             done_event.set()
                         except Exception:

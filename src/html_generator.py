@@ -1067,6 +1067,13 @@ class HTMLDashboardGenerator:
     .matrix-table tr:last-child td {{
       border-bottom: none;
     }}
+    .matrix-table tr.subtotal-row td {{
+      background: rgba(148, 163, 184, 0.08);
+      font-weight: 700;
+      color: #f8fafc;
+      border-top: 1px dashed rgba(148, 163, 184, 0.25);
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.25);
+    }}
     .matrix-table tr.total-row td {{
       background: rgba(59, 130, 246, 0.1);
       font-weight: 700;
@@ -3332,6 +3339,23 @@ class HTMLDashboardGenerator:
         def f_usd(val: Optional[float]) -> str:
             return f"${val:,.2f}" if val is not None else "N/A"
 
+        def get_pretax(d: Dict[str, Any]) -> Optional[float]:
+            tot = d.get("total_price")
+            tax = d.get("taxes")
+            if tot is not None and tax is not None:
+                return round(tot - tax, 2)
+            base = d.get("base_subtotal")
+            clean = d.get("cleaning_fee")
+            svc = d.get("service_fee") or 0.0
+            if base is not None and clean is not None:
+                return round(base + clean + svc, 2)
+            return None
+
+        a_pretax = get_pretax(a)
+        v_pretax = get_pretax(v)
+        b_pretax = get_pretax(b)
+        k_pretax = get_pretax(k)
+
         return f"""
         <div style="background:rgba(15,23,42,0.92); border:1px solid var(--border-color); border-radius:10px; padding:18px; margin:8px 0; box-shadow:0 8px 24px rgba(0,0,0,0.3);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
@@ -3381,6 +3405,13 @@ class HTMLDashboardGenerator:
                 <td>{f_usd(v.get('service_fee'))}</td>
                 <td>{f_usd(b.get('service_fee'))}</td>
                 <td><span style="color:#34d399; font-weight:700;">$0.00 (0% Direct)</span></td>
+              </tr>
+              <tr class="subtotal-row">
+                <td><strong>Total before taxes</strong> <span style="font-size:0.75rem; color:#94a3b8; font-weight:normal;">(Total on Channel)</span></td>
+                <td><strong style="color:#f8fafc;">{f_usd(a_pretax)}</strong></td>
+                <td><strong style="color:#f8fafc;">{f_usd(v_pretax)}</strong></td>
+                <td><strong style="color:#f8fafc;">{f_usd(b_pretax)}</strong></td>
+                <td><strong style="color:#38bdf8;">{f_usd(k_pretax)}</strong></td>
               </tr>
               <tr>
                 <td>Taxes & Local Surcharges</td>

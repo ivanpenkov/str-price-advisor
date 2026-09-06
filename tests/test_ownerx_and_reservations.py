@@ -355,6 +355,24 @@ class TestOwnerXAndReservations(unittest.TestCase):
         self.assertIn("2,000.00", vrbo_est["tot_channel_calc"])
         self.assertIn("1.2557", vrbo_est["guest_price_formula"])
 
+        # Booking.com booking ($1,746.00 gross rent)
+        booking_res = {
+            "gross_rent": 1746.00,
+            "madetype_name": "PDWTA",
+            "type_description": "Standard",
+            "raw_json": json.dumps({"hear_about_name": "Booking.com"}),
+        }
+        booking_est = crv.estimate_reservation_channel_pricing(booking_res)
+        self.assertEqual(booking_est["channel_name"], "Booking.com")
+        # 1746 + 550 = 2296; + 6% service charge ($137.76) = 2433.76 total on channel
+        self.assertEqual(booking_est["total_on_channel"], 2433.76)
+        # 2433.76 + 16% VAT ($389.40) + 14.5% Tax ($352.90) = 3176.06
+        self.assertEqual(booking_est["guest_checkout_price"], 3176.06)
+        self.assertIn("6%", booking_est["tot_channel_formula"])
+        self.assertIn("16% VAT", booking_est["guest_price_formula"])
+        self.assertIn("2,433.76", booking_est["tot_channel_calc"])
+        self.assertIn("3,176.06", booking_est["guest_price_calc"])
+
         # Direct Website booking ($2000 gross rent)
         direct_res = {
             "gross_rent": 2000.0,

@@ -854,15 +854,25 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         channel_name = "Direct Website"
         channel_badge = "Direct"
         channel_color = "#10B981"
-        clean_fee = 500.0
-        total_on_channel = round(gross_rent + clean_fee, 2)
-        guest_checkout_price = round(total_on_channel * 1.144, 2)
-        tax_amt = round(total_on_channel * 0.144, 2)
-        formula_notes = f"Gross Rent (${gross_rent:,.2f}) + $500 Clean; 0% service fee + 14.4% Tempe STR tax"
-        tot_channel_formula = "Gross Rent + Cleaning Fee ($500.00)"
-        tot_channel_calc = f"Gross Rent (${gross_rent:,.2f}) + Cleaning Fee ($500.00) = ${total_on_channel:,.2f}"
-        guest_price_formula = "Total on Channel × 1.1440 (+0% service fee + 14.4% Tempe STR tax)"
-        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Tempe STR Tax 14.4% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
+        clean_fee = 550.0
+        proc_fee = round(gross_rent * 0.06, 2)
+        admin_fee = round((gross_rent + proc_fee + clean_fee) * 0.03, 2)
+        service_fee = round(proc_fee + admin_fee, 2)
+        total_on_channel = round(gross_rent + clean_fee + service_fee, 2)
+        tax_base = gross_rent + clean_fee + proc_fee
+        tax_amt = round(
+            round(tax_base * 0.055, 2)
+            + round(tax_base * 0.0177, 2)
+            + round(tax_base * 0.018, 2)
+            + round(tax_base * 0.05, 2),
+            2,
+        )
+        guest_checkout_price = round(total_on_channel + tax_amt, 2)
+        formula_notes = f"Gross Rent (${gross_rent:,.2f}) + $550 Clean + 6% Proc (${proc_fee:,.2f}) + 3% Admin (${admin_fee:,.2f}); + 14.07% STR taxes (${tax_amt:,.2f})"
+        tot_channel_formula = "Gross Rent + Cleaning Fee ($550.00) + 6% Processing Fee + 3% Admin Fee"
+        tot_channel_calc = f"Rent (${gross_rent:,.2f}) + Clean ($550.00) + 6% Proc (${proc_fee:,.2f}) + 3% Admin (${admin_fee:,.2f}) = ${total_on_channel:,.2f}"
+        guest_price_formula = "Total on Channel + 14.07% STR Taxes (5.5% State + 1.77% Maricopa + 6.8% Tempe)"
+        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + STR Taxes 14.07% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
     elif madetype == "ADM":
         channel_name = "Kivoya Admin"
         channel_badge = "Admin"
@@ -878,15 +888,25 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         channel_name = res.get("madetype_name") or "Direct"
         channel_badge = channel_name
         channel_color = "#10B981"
-        clean_fee = 500.0
-        total_on_channel = round(gross_rent + clean_fee, 2)
-        guest_checkout_price = round(total_on_channel * 1.144, 2)
-        tax_amt = round(total_on_channel * 0.144, 2)
-        formula_notes = f"Gross Rent (${gross_rent:,.2f}) + $500 Clean; 0% fee + 14.4% tax"
-        tot_channel_formula = "Gross Rent + Cleaning Fee ($500.00)"
-        tot_channel_calc = f"Gross Rent (${gross_rent:,.2f}) + Cleaning Fee ($500.00) = ${total_on_channel:,.2f}"
-        guest_price_formula = "Total on Channel × 1.1440 (+0% fee + 14.4% Tempe STR tax)"
-        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Tempe STR Tax 14.4% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
+        clean_fee = 550.0
+        proc_fee = round(gross_rent * 0.06, 2)
+        admin_fee = round((gross_rent + proc_fee + clean_fee) * 0.03, 2)
+        service_fee = round(proc_fee + admin_fee, 2)
+        total_on_channel = round(gross_rent + clean_fee + service_fee, 2)
+        tax_base = gross_rent + clean_fee + proc_fee
+        tax_amt = round(
+            round(tax_base * 0.055, 2)
+            + round(tax_base * 0.0177, 2)
+            + round(tax_base * 0.018, 2)
+            + round(tax_base * 0.05, 2),
+            2,
+        )
+        guest_checkout_price = round(total_on_channel + tax_amt, 2)
+        formula_notes = f"Gross Rent (${gross_rent:,.2f}) + $550 Clean + 6% Proc (${proc_fee:,.2f}) + 3% Admin (${admin_fee:,.2f}); + 14.07% STR taxes (${tax_amt:,.2f})"
+        tot_channel_formula = "Gross Rent + Cleaning Fee ($550.00) + 6% Processing Fee + 3% Admin Fee"
+        tot_channel_calc = f"Rent (${gross_rent:,.2f}) + Clean ($550.00) + 6% Proc (${proc_fee:,.2f}) + 3% Admin (${admin_fee:,.2f}) = ${total_on_channel:,.2f}"
+        guest_price_formula = "Total on Channel + 14.07% STR Taxes (5.5% State + 1.77% Maricopa + 6.8% Tempe)"
+        guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + STR Taxes 14.07% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
 
     return {
         "channel_name": channel_name,
@@ -1232,10 +1252,10 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
                   <th onclick="sortResTable(3, 'num')" id="resTh3">Gross Rent <span class="sort-arrow">↕</span></th>
                   <th onclick="sortResTable(4, 'str')" id="resTh4">Channel <span class="sort-arrow">↕</span></th>
                   <th onclick="sortResTable(5, 'num')" id="resTh5">
-                    <span class="tooltip-help" title="Formula for Total on Channel (Pre-tax Search Total):&#10;• Airbnb: (Gross Rent + $550 Cleaning) + 14.15% Airbnb Service Fee&#10;• Vrbo: (Gross Rent × 1.1448 markup) + $550 Cleaning Fee&#10;• Booking.com: (Gross Rent + $550 Cleaning) + 6% Service Charge&#10;• Expedia: (Gross Rent × 1.15 markup) + $550 Cleaning Fee&#10;• Direct Website: Gross Rent + $500 Cleaning Fee&#10;• Kivoya Admin: Gross Rent (internal rate)&#10;• Owner / Maintenance: $0.00">Total on Channel (Est.) ⓘ</span> <span class="sort-arrow">↕</span>
+                    <span class="tooltip-help" title="Formula for Total on Channel (Pre-tax Search Total):&#10;• Airbnb: (Gross Rent + $550 Cleaning) + 14.15% Airbnb Service Fee&#10;• Vrbo: (Gross Rent × 1.1448 markup) + $550 Cleaning Fee&#10;• Booking.com: (Gross Rent + $550 Cleaning) + 6% Service Charge&#10;• Expedia: (Gross Rent × 1.15 markup) + $550 Cleaning Fee&#10;• Direct Website: Gross Rent + $550 Cleaning + 6% Processing + 3% Admin Fee&#10;• Kivoya Admin: Gross Rent (internal rate)&#10;• Owner / Maintenance: $0.00">Total on Channel (Est.) ⓘ</span> <span class="sort-arrow">↕</span>
                   </th>
                   <th onclick="sortResTable(6, 'num')" id="resTh6">
-                    <span class="tooltip-help" title="Formula for Guest Checkout Price (All-in Guest Total):&#10;• Airbnb: Total on Channel + 12.52% Tempe & AZ Lodging Taxes&#10;• Vrbo: Total on Channel × 1.2557 (+11.5% Vrbo fee + 14.07% STR tax)&#10;• Booking.com: Total on Channel + 30.5% Taxes (16% VAT + 14.5% Tax)&#10;• Expedia: Total on Channel × 1.1407 (+14.07% STR tax)&#10;• Direct Website: Total on Channel × 1.1440 (+14.4% Tempe STR tax)&#10;• Kivoya Admin: Gross Rent (internal rate)&#10;• Owner / Maintenance: $0.00">Guest Checkout Price (Est.) ⓘ</span> <span class="sort-arrow">↕</span>
+                    <span class="tooltip-help" title="Formula for Guest Checkout Price (All-in Guest Total):&#10;• Airbnb: Total on Channel + 12.52% Tempe & AZ Lodging Taxes&#10;• Vrbo: Total on Channel × 1.2557 (+11.5% Vrbo fee + 14.07% STR tax)&#10;• Booking.com: Total on Channel + 30.5% Taxes (16% VAT + 14.5% Tax)&#10;• Expedia: Total on Channel × 1.1407 (+14.07% STR tax)&#10;• Direct Website: Total on Channel + 14.07% STR Taxes (5.5% State + 1.77% Maricopa + 6.8% Tempe)&#10;• Kivoya Admin: Gross Rent (internal rate)&#10;• Owner / Maintenance: $0.00">Guest Checkout Price (Est.) ⓘ</span> <span class="sort-arrow">↕</span>
                   </th>
                 </tr>
               </thead>

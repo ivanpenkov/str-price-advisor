@@ -102,9 +102,11 @@ class PlatformComparator:
         Calculate Kivoya Direct quote from Streamline VRS seasonal rates and direct fee policy.
         Kivoya Direct:
         - Base Rent: seasonal schedule for dates
-        - Cleaning Fee: $500.00
-        - Service Fee: $0.00 (direct booking advantage)
-        - Local Tax: 14.4% (Tempe, AZ STR tax)
+        - Cleaning Fee: $550.00
+        - Processing Fee: 6% of Base
+        - Admin Fee: 3% of (Base + Processing + Cleaning)
+        - Service Fee: Processing + Admin Fee
+        - Local STR Tax: 14.07% (5.5% State + 1.77% Maricopa + 1.8% Tempe Hotel + 5% Tempe Hotel/Motel)
         """
         rates = self.kivoya_client.get_seasonal_rates()
         total_base = 0.0
@@ -113,16 +115,34 @@ class PlatformComparator:
             total_base += self.kivoya_client.get_rate_for_date(cur, rates)
             cur += timedelta(days=1)
 
-        avg_nightly = round(total_base / max(1, nights), 2)
-        cleaning_fee = 500.0
-        tax_rate = 0.144
-        subtotal = total_base + cleaning_fee
-        taxes = round(subtotal * tax_rate, 2)
-        total_price = round(subtotal + taxes, 2)
-        eff_nightly = round(total_price / max(1, nights), 2)
+        # Attempt real-time quote from Kivoya API first
+        live_quote = self.kivoya_client.get_pre_reservation_quote(check_in_dt, check_out_dt)
+        if live_quote and live_quote.get("total"):
+            base_subtotal = float(live_quote.get("price", total_base))
+            avg_nightly = round(base_subtotal / max(1, nights), 2)
+            req_fees = live_quote.get("required_fees", [])
+            cleaning_fee = 550.0
+            svc_fee = 0.0
+            for f in req_fees:
+                fname = f.get("name", "").lower()
+                fval = float(f.get("value", 0.0))
+                if "clean" in fname:
+                    cleaning_fee = fval
+                else:
+                    svc_fee += fval
+            taxes_details = live_quote.get("taxes_details", [])
+            taxes = sum(float(t.get("value", 0.0)) for t in taxes_details)
+            total_price = float(live_quote.get("total", 0.0))
+        else:
+            calc = self.kivoya_client.calculate_direct_quote(total_base)
+            base_subtotal = calc["base_subtotal"]
+            avg_nightly = round(base_subtotal / max(1, nights), 2)
+            cleaning_fee = calc["cleaning_fee"]
+            svc_fee = calc["service_fee"]
+            taxes = calc["taxes"]
+            total_price = calc["total_price"]
 
-        c_in_str = check_in_dt.strftime("%Y-%m-%d")
-        c_out_str = check_out_dt.strftime("%Y-%m-%d")
+        eff_nightly = round(total_price / max(1, nights), 2)
         booking_url = f"https://www.kivoya.com/{KIVOYA_ID}/"
 
         return PriceBreakdown(
@@ -130,16 +150,16 @@ class PlatformComparator:
             available=True,
             nightly_rate=avg_nightly,
             nights=nights,
-            base_subtotal=round(total_base, 2),
-            cleaning_fee=cleaning_fee,
-            service_fee=0.0,
-            taxes=taxes,
+            base_subtotal=round(base_subtotal, 2),
+            cleaning_fee=round(cleaning_fee, 2),
+            service_fee=round(svc_fee, 2),
+            taxes=round(taxes, 2),
             discount=0.0,
-            total_price=total_price,
+            total_price=round(total_price, 2),
             effective_nightly=eff_nightly,
             booking_url=booking_url,
-            notes="Direct booking: 0% OTA service fee + 14.4% local STR tax",
-            raw_snippet=f"${avg_nightly:,.0f}/nt × {nights}n + ${cleaning_fee:,.0f} clean + ${taxes:,.0f} tax",
+            notes="Direct booking: $550 clean + 6% proc + 3% admin + 14.07% STR taxes",
+            raw_snippet=f"${avg_nightly:,.0f}/nt × {nights}n + ${cleaning_fee:,.0f} clean + ${svc_fee:,.0f} fees + ${taxes:,.0f} tax",
         )
 
     # -------------------------------------------------------------------------

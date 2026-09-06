@@ -382,10 +382,13 @@ class TestOwnerXAndReservations(unittest.TestCase):
         }
         direct_est = crv.estimate_reservation_channel_pricing(direct_res)
         self.assertEqual(direct_est["channel_name"], "Direct Website")
-        self.assertEqual(direct_est["total_on_channel"], 2500.0)  # 2000 + 500 clean
-        self.assertEqual(direct_est["guest_checkout_price"], round(2500.0 * 1.144, 2))
-        self.assertIn("500.00", direct_est["tot_channel_formula"])
+        self.assertEqual(direct_est["total_on_channel"], 2750.10)
+        self.assertEqual(direct_est["guest_checkout_price"], 3125.77)
+        self.assertIn("550.00", direct_est["tot_channel_formula"])
+        self.assertIn("6%", direct_est["tot_channel_formula"])
+        self.assertIn("14.07%", direct_est["guest_price_formula"])
         self.assertIn("2,000.00", direct_est["tot_channel_calc"])
+        self.assertIn("3,125.77", direct_est["guest_price_calc"])
 
         # Owner block
         owner_res = {

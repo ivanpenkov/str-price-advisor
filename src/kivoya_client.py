@@ -305,3 +305,80 @@ class KivoyaClient:
 
         # Default fallback if outside defined periods
         return 599.0
+
+    def get_pre_reservation_quote(
+        self,
+        start_date: date,
+        end_date: date,
+        occupants: int = 1,
+        occupants_small: int = 0,
+        pets: int = 0,
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Fetch real-time quote breakdown from Kivoya Streamline VRS (GetPreReservationPrice).
+        Returns raw API response dict with required_fees, taxes_details, price, total.
+        """
+        try:
+            res = self._call_api(
+                "GetPreReservationPrice",
+                {
+                    "unit_id": self.unit_id,
+                    "startdate": start_date.strftime("%m/%d/%Y"),
+                    "enddate": end_date.strftime("%m/%d/%Y"),
+                    "occupants": occupants,
+                    "occupants_small": occupants_small,
+                    "pets": pets,
+                },
+            )
+            if isinstance(res, dict) and res.get("total"):
+                return res
+        except Exception:
+            pass
+        return None
+
+    @staticmethod
+    def calculate_direct_quote(base_subtotal: float) -> Dict[str, float]:
+        """
+        Calculate Kivoya Direct quote breakdown matching Kivoya / Streamline VRS exact fee engine:
+        - Base: accommodation subtotal
+        - Cleaning Fee: $550.00
+        - Processing Fee: 6.0% of Base
+        - Administrative Fee: 3.0% of (Base + Processing Fee + Cleaning Fee)
+        - Service Fee (Platform Fees): Processing Fee + Admin Fee
+        - Total before taxes (Pre-tax total): Base + Cleaning Fee + Service Fee
+        - Statutory Taxes (14.07% on Base + Cleaning + Processing Fee):
+            * Arizona State TPT: 5.5%
+            * Maricopa County TPT: 1.77%
+            * Tempe Hotel Tax: 1.8%
+            * Tempe Hotel/Motel Transient Lodging Tax: 5.0%
+        - Total Guest Checkout Price: Total before taxes + Taxes
+        """
+        clean_fee = 550.0
+        proc_fee = round(base_subtotal * 0.06, 2)
+        admin_fee = round((base_subtotal + proc_fee + clean_fee) * 0.03, 2)
+        service_fee = round(proc_fee + admin_fee, 2)
+        pretax_total = round(base_subtotal + clean_fee + service_fee, 2)
+
+        tax_base = base_subtotal + clean_fee + proc_fee
+        tax_az = round(tax_base * 0.055, 2)
+        tax_maricopa = round(tax_base * 0.0177, 2)
+        tax_tempe_hotel = round(tax_base * 0.018, 2)
+        tax_tempe_motel = round(tax_base * 0.05, 2)
+        taxes = round(tax_az + tax_maricopa + tax_tempe_hotel + tax_tempe_motel, 2)
+        total_guest = round(pretax_total + taxes, 2)
+
+        return {
+            "base_subtotal": base_subtotal,
+            "cleaning_fee": clean_fee,
+            "processing_fee": proc_fee,
+            "admin_fee": admin_fee,
+            "service_fee": service_fee,
+            "pretax_total": pretax_total,
+            "tax_base": tax_base,
+            "tax_az": tax_az,
+            "tax_maricopa": tax_maricopa,
+            "tax_tempe_hotel": tax_tempe_hotel,
+            "tax_tempe_motel": tax_tempe_motel,
+            "taxes": taxes,
+            "total_price": total_guest,
+        }

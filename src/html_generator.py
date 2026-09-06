@@ -2956,6 +2956,31 @@ class HTMLDashboardGenerator:
                     comp["vrbo"]["effective_nightly"] = round(v_tot / max(1, nights), 2)
                     comp["vrbo"]["notes"] = "Includes 14.07% AZ & Tempe taxes (AZ 5.5% + Tempe Motel 5% + Tempe Hotel 1.8% + Maricopa 1.77%) + VRBO service fee"
 
+                if "14.07%" not in comp.get("kivoya", {}).get("notes", ""):
+                    k_base = round(s["our_base_nightly"] * nights, 2)
+                    k_clean = 550.0
+                    k_proc = round(k_base * 0.06, 2)
+                    k_admin = round((k_base + k_proc + k_clean) * 0.03, 2)
+                    k_svc = round(k_proc + k_admin, 2)
+                    k_pretax = round(k_base + k_clean + k_svc, 2)
+                    k_tax_base = k_base + k_clean + k_proc
+                    k_tax = round(
+                        round(k_tax_base * 0.055, 2)
+                        + round(k_tax_base * 0.0177, 2)
+                        + round(k_tax_base * 0.018, 2)
+                        + round(k_tax_base * 0.05, 2),
+                        2,
+                    )
+                    k_tot = round(k_pretax + k_tax, 2)
+                    comp["kivoya"]["nightly_rate"] = s["our_base_nightly"]
+                    comp["kivoya"]["base_subtotal"] = k_base
+                    comp["kivoya"]["cleaning_fee"] = k_clean
+                    comp["kivoya"]["service_fee"] = k_svc
+                    comp["kivoya"]["taxes"] = k_tax
+                    comp["kivoya"]["total_price"] = k_tot
+                    comp["kivoya"]["effective_nightly"] = round(k_tot / max(1, nights), 2)
+                    comp["kivoya"]["notes"] = "Direct booking: $550 clean + 6% processing + 3% admin fee + 14.07% STR taxes"
+
                 a_tot = comp["airbnb"].get("total_price") or 0.0
                 v_tot = comp["vrbo"].get("total_price") or 0.0
                 b_tot = comp["booking"].get("total_price") or 0.0
@@ -2996,10 +3021,21 @@ class HTMLDashboardGenerator:
                 a_nightly = round(a_base / max(1, nights), 2)
 
                 k_base = round(s["our_base_nightly"] * nights, 2)
-                k_clean = 500.0
-                k_sub = k_base + k_clean
-                k_tax = round(k_sub * 0.144, 2)
-                k_tot = round(k_sub + k_tax, 2)
+                k_clean = 550.0
+                k_proc = round(k_base * 0.06, 2)
+                k_admin = round((k_base + k_proc + k_clean) * 0.03, 2)
+                k_svc = round(k_proc + k_admin, 2)
+                k_pretax = round(k_base + k_clean + k_svc, 2)
+
+                k_tax_base = k_base + k_clean + k_proc
+                k_tax = round(
+                    round(k_tax_base * 0.055, 2)
+                    + round(k_tax_base * 0.0177, 2)
+                    + round(k_tax_base * 0.018, 2)
+                    + round(k_tax_base * 0.05, 2),
+                    2,
+                )
+                k_tot = round(k_pretax + k_tax, 2)
                 k_eff = round(k_tot / max(1, nights), 2)
 
                 # VRBO channel rate: Kivoya syndicates with ~14.48% markup + $550 clean + VRBO service fee + 14.07% statutory taxes
@@ -3081,12 +3117,12 @@ class HTMLDashboardGenerator:
                         "nightly_rate": s["our_base_nightly"],
                         "base_subtotal": k_base,
                         "cleaning_fee": k_clean,
-                        "service_fee": 0.0,
+                        "service_fee": k_svc,
                         "taxes": k_tax,
                         "total_price": k_tot,
                         "effective_nightly": k_eff,
                         "booking_url": "https://www.kivoya.com/503802/",
-                        "notes": "Direct booking: 0% OTA service fee + 14.4% tax",
+                        "notes": "Direct booking: $550 clean + 6% processing + 3% admin fee + 14.07% STR taxes",
                     },
                 }
                 comparisons.append(comp)
@@ -3404,7 +3440,7 @@ class HTMLDashboardGenerator:
                 <td>{f_usd(a.get('service_fee'))}</td>
                 <td>{f_usd(v.get('service_fee'))}</td>
                 <td>{f_usd(b.get('service_fee'))}</td>
-                <td><span style="color:#34d399; font-weight:700;">$0.00 (0% Direct)</span></td>
+                <td>{f_usd(k.get('service_fee'))}</td>
               </tr>
               <tr class="subtotal-row">
                 <td><strong>Total before taxes</strong> <span style="font-size:0.75rem; color:#94a3b8; font-weight:normal;">(Total on Channel)</span></td>

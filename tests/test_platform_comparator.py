@@ -74,18 +74,18 @@ class TestPlatformComparator(unittest.TestCase):
         self.assertEqual(res_zero["tier"], "none")
 
     def test_kivoya_direct_fee_derivation(self):
-        """Kivoya direct rates should include base + $500 clean + 14.4% tax with 0% OTA fee."""
+        """Kivoya direct rates should include base + $550 clean + 6% proc + 3% admin + 14.07% STR taxes."""
         with patch.object(self.comparator.kivoya_client, "get_seasonal_rates", return_value=[]), \
-             patch.object(self.comparator.kivoya_client, "get_rate_for_date", return_value=500.0):
+             patch.object(self.comparator.kivoya_client, "get_rate_for_date", return_value=500.0), \
+             patch.object(self.comparator.kivoya_client, "get_pre_reservation_quote", return_value=None):
             res = self.comparator.get_kivoya_quote(date(2026, 10, 1), date(2026, 10, 4), nights=3)
             self.assertEqual(res.base_subtotal, 1500.0)
             self.assertEqual(res.nightly_rate, 500.0)
-            self.assertEqual(res.cleaning_fee, 500.0)
-            self.assertEqual(res.service_fee, 0.0)
-            # Subtotal before tax = $2000; Tax 14.4% = $288.00; Total = $2288.00
-            self.assertAlmostEqual(res.taxes, 288.0, places=2)
-            self.assertAlmostEqual(res.total_price, 2288.0, places=2)
-            self.assertAlmostEqual(res.effective_nightly, 2288.0 / 3, places=2)
+            self.assertEqual(res.cleaning_fee, 550.0)
+            self.assertEqual(res.service_fee, 154.20)
+            self.assertAlmostEqual(res.taxes, 301.10, places=2)
+            self.assertAlmostEqual(res.total_price, 2505.30, places=2)
+            self.assertAlmostEqual(res.effective_nightly, round(2505.30 / 3, 2), places=2)
 
     def test_generate_tsv_formatting_dict(self):
         """TSV output must match expected columns and format for spreadsheet pasting with dict items."""

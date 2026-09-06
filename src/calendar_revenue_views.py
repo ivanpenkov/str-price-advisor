@@ -263,21 +263,15 @@ def get_calendar_revenue_css() -> str:
     .res-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      display: flex;
+      background: rgba(15, 23, 42, 0.85);
+      display: none;
       align-items: center;
       justify-content: center;
       z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.2s ease, visibility 0.2s ease;
       padding: 16px;
     }
     .res-modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
+      display: flex;
     }
     .res-modal-card {
       background: #1e293b;
@@ -289,12 +283,7 @@ def get_calendar_revenue_css() -> str:
       display: flex;
       flex-direction: column;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-      transform: scale(0.95);
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
-    }
-    .res-modal-overlay.active .res-modal-card {
-      transform: scale(1);
     }
     .res-modal-header {
       display: flex;
@@ -1746,6 +1735,7 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     // RESERVATION DETAILS MODAL (All Streamline Fields)
     // =========================================================================
     function openResModalFromDate(dateStr) {{
+      hideCalTooltip();
       const events = CAL_DATE_MAP[dateStr] || {{ checkin: [], checkout: [], staying: [] }};
       const allActive = [...events.checkout, ...events.checkin, ...events.staying];
       const uniqueResMap = new Map();
@@ -1773,6 +1763,7 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     }}
 
     function openResModalById(resId) {{
+      hideCalTooltip();
       const r = CAL_RESERVATIONS.find(x => x.id == resId || x.confirmation_id == resId);
       if (!r) return;
       const modal = document.getElementById('resModalOverlay');

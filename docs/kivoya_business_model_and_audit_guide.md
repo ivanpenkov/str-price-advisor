@@ -132,7 +132,7 @@ Net Cash Flow:                 $3,987.36
 
 ---
 
-## 4. The 3-Step Audit Strategy (How to Validate)
+## 4. Audit Strategy 1: The Folio Audit (Internal Streamline VRS Ledger)
 
 To prove with 100% certainty whether Kivoya is keeping anything above Gross Rent, you need one specific document: the **Streamline VRS Reservation Folio** (Guest Ledger).
 
@@ -200,18 +200,109 @@ When you receive the folios, perform this exact calculation:
 
 ---
 
-## 5. Summary Audit Matrix
+## 5. Audit Strategy 2: Scraped Price Tracking vs. Owner App (Zero-Cooperation Audit)
 
-| Item | What Guest Pays | Expected by Agreement | Potential Leak to Watch For | Where to Verify |
-| :--- | :---: | :---: | :---: | :---: |
-| **Base Rent** | Set dynamically or seasonally | 100% enters Gross Rent pool; split 82/18 | Kivoya reports lower "internal rate" and pockets OTA markup | Reservation Folio vs. Statement |
-| **Cleaning Fee** | **\$550.00** on OTAs | **\$500.00** paid to cleaners; extra \$50 to Gross Rent | Kivoya retains \$50 as company income | Folio Housekeeping line item |
-| **Damage Waiver** | \$69 – \$120 (if added) | Should not exist unless credited to Gross Rent | Coded 100% as "Company Income" to Kivoya | Folio Ancillary Fee lines |
-| **Taxes** | 12.52% (Airbnb) / 14.07% (VRBO) | 100% remitted to Tempe & AZ State | Excess tax withheld or not remitted | Folio Tax lines vs. City return |
-| **Platform Fee** | Channel fee / host fee | Paid by Kivoya or deducted transparently | Deducted from rent *before* statement split | Folio OTA commission line |
-| **Management Fee** | None (internal split) | **Strictly 18% of Gross Rent** | Effective fee >18% due to pre-rent skims | Statement Summary line |
+What if Kivoya drags their feet, stalls, or refuses to provide internal guest folios?  
+**You do not need their permission or internal receipts to catch revenue leaks.** Because we are already scraping real-time guest checkout prices across all channels, we can independently reconstruct what occurred.
+
+### The Mechanism: Continuous Snapshot Logging
+1. **Pre-Booking Tracking**: Our scraper continuously polls upcoming intervals across **Airbnb**, **VRBO**, **Booking.com**, and **Kivoya Direct**. For every interval, we record:
+   - Base nightly rate & accommodation subtotal
+   - Cleaning fee charged to guest (\$550 on OTAs vs. \$500 on direct)
+   - Channel service fee (\$644 on VRBO)
+   - Statutory taxes calculated to the cent (12.52% Airbnb, 14.07% VRBO, 14.40% Direct)
+   - Total guest checkout payment
+2. **The Booking Trigger**: When an open interval suddenly flips to **"Booked" / "Blocked"**, we lock the **last recorded price snapshot** taken immediately prior to the calendar block.
+3. **The Owner App Cross-Check**: As soon as the reservation syncs into your **Owner Management App (Streamline VRS)**, observe:
+   - Booking channel (e.g. VRBO)
+   - Reported "Gross Rent" (the figure getting split 18% Kivoya / 82% Owner)
 
 ---
 
-*Keep this document on file alongside your Property Management Agreement (PMA) and monthly statements to perform quarterly audits.*
+### The Forensic Reverse-Engineering Formula
+When a booking occurs on an OTA (e.g. VRBO), we compute the expected Gross Rent directly from the market quote:
+
+$$\text{Expected Gross Rent} = \text{Guest Checkout Total} - \text{Taxes} - \text{Channel Platform Fee} - \$500.00\text{ Cleaning}$$
+
+#### Live Case Study (Mar 7–11, 2027 · 4 Nights on VRBO):
+* **Guest Checkout Total**: **\$5,883.10**
+* **Statutory Taxes (14.07%)**: **-\$632.44** (Remitted to AZ ADOR / Tempe)
+* **VRBO Traveler Service Fee**: **-\$644.00** (Retained directly by VRBO)
+* **Pre-Tax Accommodation + Cleaning + Admin**: **\$5,250.66**
+* **VRBO Host Processing Fee (~3%)**: **-\$134.85**
+* **Agreed Cleaning Fee Pass-Through**: **-\$500.00**
+* **Expected Distributable Gross Rent**: **\$3,971.81**
+
+#### What You Will Discover in the Owner App:
+- **Scenario A (Honest Passthrough)**:  
+  The Owner App reports Gross Rent between **\$3,900 and \$3,975**. Kivoya takes 18% (\$702–\$715) and you receive 82% (\$3,198–\$3,260). Everything reconciles.
+- **Scenario B (Channel Markup Skim)**:  
+  The Owner App reports Gross Rent of **\$3,446.00** (which is the \$861.50 direct base rate $\times 4$).  
+  *The Smoking Gun:* Kivoya pocketed the **14.48% VRBO markup (\$499.00)** as internal revenue before declaring Gross Rent, artificially suppressing your 82% share by **\$409.18**.
+- **Scenario C (Cleaning Spread Skim)**:  
+  VRBO billed the guest \$550 for cleaning, but only \$500 was deducted for housekeeping and the \$50.00 spread is missing from Gross Rent.
+- **Scenario D (Ancillary Admin Fee Skim)**:  
+  The pre-tax balance includes an extra \$111.66 property/admin fee that is completely absent from the Gross Rent pool.
+
+> [!TIP]
+> **Independent Proof**: Kivoya cannot claim *"market rates fluctuate"* because our price snapshot timestamp proves the exact rates active on the channel at the exact time the booking occurred. If they claim a special discount was negotiated, they are legally obligated to produce the guest confirmation proving the discounted price.
+
+---
+
+## 6. Audit Strategy 3: State & County TPT Tax License Reconciliation (AZTaxes.gov)
+
+Because you hold your own **Arizona Transaction Privilege Tax (TPT) License** for Villa del Sol, you have independent access to state and county tax records that Kivoya cannot alter.
+
+### Understanding the Arizona STR Tax Structure
+Many owners look for lodging tax records at the Maricopa County courthouse, but in Arizona:
+1. **Maricopa County Assessor & Treasurer**: Only tracks **Real Property Tax** (the annual real estate bill on parcel land and improvements). It contains **no lodging or booking data**.
+2. **Arizona Department of Revenue (ADOR)**: Centrally administers all short-term rental Transaction Privilege Taxes (TPT) for the **State of Arizona (5.5%)**, **Maricopa County (1.77% / 0.22%)**, and the **City of Tempe (1.8% local TPT + 5.0% Transient Lodging / Hotel-Motel Tax)**.
+3. **The Marketplace Facilitator Law ([A.R.S. § 42-5014](https://www.azleg.gov/ars/42/05014.htm))**:
+   - For **Airbnb** and **VRBO** bookings, Arizona law requires the OTA to collect 100% of the taxes and remit them **directly to ADOR under the OTA's corporate tax ID**.
+   - Kivoya does not receive or remit tax money for Airbnb or VRBO bookings.
+   - However, on monthly TPT returns filed under your license, gross revenue from OTAs is reported under Gross Receipts and then deducted under **Schedule B (Marketplace Facilitator Deduction, Code 805)**.
+4. **Direct Bookings (Kivoya.com / Phone)**:
+   - For direct bookings, Kivoya must report the gross receipts and remit the full **14.40%** lodging tax through your TPT license or their master license.
+
+---
+
+### Step-by-Step TPT Tax Audit Procedure
+
+As the TPT license holder, you can log in directly to [AZTaxes.gov](https://www.aztaxes.gov/):
+
+#### Step 1: Download Monthly Returns
+1. Log into your account on **AZTaxes.gov**.
+2. Navigate to **View Returns** $\rightarrow$ Select your **TPT License Number** for Villa del Sol.
+3. Download the filed **Form TPT-2** (or monthly electronic return summary) for the months corresponding to your statements (e.g., July 2026).
+
+#### Step 2: Inspect Business Codes & Jurisdictions
+On the return, locate:
+- **Region Code `MAR` / State**: Business Code `025` (Transient Lodging)
+- **Region Code `TE` (City of Tempe)**: Business Code `025` (Hotel/Motel Transient Lodging) and Business Code `044` (Additional Transient Lodging Tax)
+
+#### Step 3: Compare Gross Receipts to Owner Statement
+Check the line labeled **"Gross Receipts / Gross Revenue"**:
+* **Total Gross Receipts Reported to ADOR**: Does this match the sum of all accommodation revenue + cleaning fees collected for the property that month?
+* **Marketplace Facilitator Deductions**: If July had 4 bookings, does the Schedule of Deductions accurately reflect only the true OTA bookings?
+* **Direct Bookings Tax Remittance**: Were direct bookings reported with the proper 14.4% tax paid to the City of Tempe and ADOR?
+
+#### Red Flags to Identify:
+* **Discrepancy 1 (Tax Gross > Statement Gross)**: If the gross receipts reported to ADOR are higher than the gross revenue reported on Kivoya's Owner Statement, Kivoya reported the true high revenue to the state but concealed a portion from you.
+* **Discrepancy 2 (Tax Gross < Statement Gross)**: If Kivoya filed under your license reporting lower gross receipts than actual, they may be under-reporting to evade city/state taxes—creating **severe audit and tax liability for you as the license holder**.
+* **Discrepancy 3 (Direct Booking Taxes Not Remitted)**: If Kivoya collected 14.4% tax from a direct guest but did not report or remit it on your TPT return, that constitutes tax diversion.
+
+---
+
+## 7. Comprehensive Multi-Angle Audit Matrix
+
+| Audit Dimension | Target Document | What You Are Looking For | How It Proves Leakage |
+| :--- | :--- | :--- | :--- |
+| **Strategy 1: Folio Audit** | Streamline VRS Reservation Folio (Res #17830, #18801) | Full guest charge breakdown: Base, Cleaning, Admin Fee, Damage Waiver | Reveals internal accounts where funds were routed (Owner Account vs. Company Income) |
+| **Strategy 2: Scraped Tracker** | Historical Scraped Price Snapshot vs. Owner Management App | Scraped checkout pre-tax rate vs. Reported Gross Rent in app | Proves if Kivoya pocketed the 14.5% OTA markup or guest fee spreads without needing their receipts |
+| **Strategy 3: Tax Filing Audit** | [AZTaxes.gov](https://www.aztaxes.gov/) Form TPT-2 Monthly Filings | Reported Gross Receipts for Business Code `025` (Tempe / Maricopa) | Cross-references officially declared government revenue against Kivoya's Owner Statement |
+| **Strategy 4: Cleaning Audit** | Cleaning Vendor Invoices vs. Guest Folio | Invoiced cleaning rate (\$500) vs. Guest billed cleaning fee (\$550) | Captures whether the \$50 spread is shared 82/18 in Gross Rent or pocketed 100% by Kivoya |
+
+---
+
+*Keep this document on file alongside your Property Management Agreement (PMA), AZ TPT License records, and monthly statements to perform regular quarterly audits.*
 

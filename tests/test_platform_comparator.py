@@ -169,6 +169,22 @@ class TestPlatformComparator(unittest.TestCase):
         self.assertEqual(taxes, 603.84)
         self.assertEqual(total, 5426.84)
 
+    def test_vrbo_tax_derivation(self):
+        """VRBO taxes must equal individual statutory tax lines (AZ 5.5% + Maricopa TPT 1.77% + Tempe Hotel 1.8% + Tempe Motel 5%)."""
+        lodging_base = 4495.00
+        az_tax = round(lodging_base * 0.055, 2)
+        maricopa_tax = round(lodging_base * 0.0177, 2)
+        tempe_hotel = round(lodging_base * 0.018, 2)
+        tempe_motel = round(lodging_base * 0.05, 2)
+        taxes = round(az_tax + maricopa_tax + tempe_hotel + tempe_motel, 2)
+        total = round(5250.66 + taxes, 2)
+        self.assertEqual(az_tax, 247.22)
+        self.assertEqual(maricopa_tax, 79.56)
+        self.assertEqual(tempe_hotel, 80.91)
+        self.assertEqual(tempe_motel, 224.75)
+        self.assertEqual(taxes, 632.44)
+        self.assertEqual(total, 5883.10)
+
 
 if __name__ == "__main__":
     unittest.main()

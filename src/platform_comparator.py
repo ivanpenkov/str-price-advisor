@@ -471,11 +471,12 @@ class PlatformComparator:
             page_data = await page.evaluate('''() => {
                 const text = document.body.innerText;
                 const unavail = text.includes("Dates unavailable") || text.includes("Not available") || text.includes("Minimum stay");
-                const matches = text.match(/\\$([0-9,]+(?:\\.[0-9]{2})?)\\s*(?:total|for \\d+ nights)/i);
+                const perNightMult = text.match(/\\$([0-9,]+(?:\\.[0-9]{2})?)\\s*(?:x|\\*)\\s*(\\d+)\\s*nights/i);
+                const directTotal = text.match(/\\$([0-9,]+(?:\\.[0-9]{2})?)\\s*(?:total|for \\d+ nights)/i);
                 return {
                     unavail: unavail,
-                    totalMatch: matches ? matches[1] : null,
-                    textSample: text.slice(0, 1500)
+                    perNightMatch: perNightMult ? { rate: perNightMult[1], nights: perNightMult[2] } : null,
+                    totalMatch: directTotal ? directTotal[1] : null,
                 };
             }''')
 
@@ -488,37 +489,28 @@ class PlatformComparator:
                     notes="Dates unavailable or minimum stay restriction",
                 )
 
-            total_str = page_data.get("totalMatch")
-            if total_str:
-                total_val = float(total_str.replace(",", ""))
-                clean_fee = 550.0
-                tax_est = round(total_val * 0.144, 2)
-                svc_est = round(total_val * 0.09, 2)
-                base_rent = round(total_val - clean_fee - svc_est - tax_est, 2)
-                return PriceBreakdown(
-                    platform="vrbo",
-                    available=True,
-                    nightly_rate=round(base_rent / max(1, nights), 2),
-                    nights=nights,
-                    base_subtotal=base_rent,
-                    cleaning_fee=clean_fee,
-                    service_fee=svc_est,
-                    taxes=tax_est,
-                    total_price=total_val,
-                    effective_nightly=round(total_val / max(1, nights), 2),
-                    booking_url=url,
-                    notes="VRBO live listing price",
-                    raw_snippet=f"${total_val:,.0f} total",
-                )
+            # In the US, VRBO displays pre-tax stay total on the PDP
+            # Taxes are charged at checkout:
+            # - 5.5% Arizona Sales Tax
+            # - 1.77% Maricopa County TPT
+            # - 1.8% Tempe Hotel Tax
+            # - 5.0% Tempe Hotel/Motel Tax
+            # Total Statutory VRBO tax rate on lodging base = 14.07%
+            pretax_total = None
+            if page_data.get("perNightMatch"):
+                pnm = page_data["perNightMatch"]
+                pretax_total = round(float(pnm["rate"].replace(",", "")) * int(pnm["nights"]), 2)
+            elif page_data.get("totalMatch"):
+                pretax_total = float(page_data["totalMatch"].replace(",", ""))
 
-            # Graceful fallback: Kivoya channel parity projection (+ VRBO 9.5% guest fee + $550 clean fee + 14.4% tax)
-            if kivoya_ref and kivoya_ref.available and kivoya_ref.base_subtotal:
-                base_rent = kivoya_ref.base_subtotal
+            if pretax_total:
                 clean_fee = 550.0
-                subtotal = base_rent + clean_fee
-                svc_fee = round(subtotal * 0.095, 2)
-                tax = round((subtotal + svc_fee) * 0.144, 2)
-                projected_total = round(subtotal + svc_fee + tax, 2)
+                # VRBO service fee is ~12.26% of pre-tax total; lodging base is ~87.7%
+                lodging_base = round(pretax_total * 0.856, 2)
+                svc_fee = round(pretax_total - lodging_base, 2)
+                base_rent = round(max(0.0, lodging_base - clean_fee), 2)
+                tax_val = round(lodging_base * 0.1407, 2)
+                total_val = round(pretax_total + tax_val, 2)
                 return PriceBreakdown(
                     platform="vrbo",
                     available=True,
@@ -527,12 +519,38 @@ class PlatformComparator:
                     base_subtotal=base_rent,
                     cleaning_fee=clean_fee,
                     service_fee=svc_fee,
+                    taxes=tax_val,
+                    total_price=total_val,
+                    effective_nightly=round(total_val / max(1, nights), 2),
+                    booking_url=url,
+                    notes="Includes 14.07% AZ & Tempe taxes (AZ 5.5% + Tempe Motel 5% + Tempe Hotel 1.8% + Maricopa 1.77%) + VRBO service fee",
+                    raw_snippet=f"${pretax_total:,.0f} pre-tax + ${tax_val:,.2f} tax = ${total_val:,.2f} total",
+                )
+
+            # Graceful fallback: Kivoya channel parity projection (+ VRBO 14.48% channel multiplier + $550 clean + 14.33% service fee + 14.07% tax)
+            if kivoya_ref and kivoya_ref.available and kivoya_ref.nightly_rate:
+                vrbo_base_nightly = round(kivoya_ref.nightly_rate * 1.1448, 2)
+                base_rent = round(vrbo_base_nightly * nights, 2)
+                clean_fee = 550.0
+                lodging_base = base_rent + clean_fee
+                # Admin/property fee + VRBO guest service fee
+                svc_fee = round(lodging_base * 0.1681, 2)
+                tax = round(lodging_base * 0.1407, 2)
+                projected_total = round(lodging_base + svc_fee + tax, 2)
+                return PriceBreakdown(
+                    platform="vrbo",
+                    available=True,
+                    nightly_rate=vrbo_base_nightly,
+                    nights=nights,
+                    base_subtotal=base_rent,
+                    cleaning_fee=clean_fee,
+                    service_fee=svc_fee,
                     taxes=tax,
                     total_price=projected_total,
                     effective_nightly=round(projected_total / max(1, nights), 2),
                     booking_url=url,
-                    notes="Projected via Kivoya channel rate (VRBO direct rate limited)",
-                    raw_snippet=f"${projected_total:,.0f} projected",
+                    notes="Includes 14.07% AZ & Tempe taxes (AZ 5.5% + Tempe Motel 5% + Tempe Hotel 1.8% + Maricopa 1.77%) + VRBO service fee",
+                    raw_snippet=f"${lodging_base + svc_fee:,.0f} pre-tax + ${tax:,.2f} tax = ${projected_total:,.2f} total",
                 )
 
             return PriceBreakdown(

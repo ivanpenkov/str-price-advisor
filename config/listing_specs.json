@@ -1905,7 +1905,7 @@
   "862891705248130792": {
     "listing_id": "862891705248130792",
     "title": "The Wilshire | New Lux Villa Mins to Old Town",
-    "location": "Villa in Scottsdale",
+    "location": "Scottsdale",
     "bedrooms": 7,
     "beds": 11,
     "baths": 5.0,
@@ -3075,5 +3075,38 @@
     "rating": 4.83,
     "reviews": 76,
     "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-573857947793833342/original/4fbdc2c8-a289-46ee-bb29-aadb40679821.jpeg"
+  },
+  "1052192059622520398": {
+    "listing_id": "1052192059622520398",
+    "title": "Heatd Pool | Hot Tub | Walk 2 Lake | Dobson Ranch",
+    "location": "Mesa",
+    "bedrooms": 6,
+    "beds": 9,
+    "baths": 3.0,
+    "rating": 4.94,
+    "reviews": 66,
+    "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTA1MjE5MjA1OTYyMjUyMDM5OA%3D%3D/original/9991f05d-d4a3-4892-bbf7-785978e980f5.jpeg"
+  },
+  "699608423581201252": {
+    "listing_id": "699608423581201252",
+    "title": "Family Retreat: 5BR, Heated Pool, Games & Hot Tub",
+    "location": "Chandler",
+    "bedrooms": 5,
+    "beds": 8,
+    "baths": 3.0,
+    "rating": 4.96,
+    "reviews": 125,
+    "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-699608423581201252/original/cb90406d-2adc-49a1-86a2-a6fcda10d40a.jpeg"
+  },
+  "1400243019671565638": {
+    "listing_id": "1400243019671565638",
+    "title": "7BR Oasis with Resort Pool & Swim-Up Bar",
+    "location": "Scottsdale",
+    "bedrooms": 7,
+    "beds": 8,
+    "baths": 6.0,
+    "rating": 4.78,
+    "reviews": 9,
+    "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1400243019671565638/original/e214af52-3624-48c4-9770-f240dee1638a.jpeg"
   }
 }

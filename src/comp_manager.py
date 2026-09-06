@@ -358,6 +358,58 @@ class CompManager:
         print(f"✨ Comp {listing_id} completely removed, blacklisted, and dashboard refreshed.")
         return True
 
+    @staticmethod
+    def parse_stays_pdp_sections(data: Dict[str, Any]) -> Tuple[Optional[float], Optional[str], bool]:
+        """
+        Extract total stay price, label, and true unavailability from StaysPdpSections payload.
+        Handles both BasicDisplayPriceLine and DiscountedDisplayPriceLine (promotions/discounts),
+        falling back to accessibilityLabel.
+        Returns: (intercepted_price, intercepted_label, is_unavailable)
+        """
+        intercepted_price: Optional[float] = None
+        intercepted_label: Optional[str] = None
+        is_unavailable: bool = False
+
+        sections = (
+            data.get("data", {})
+            .get("presentation", {})
+            .get("stayProductDetailPage", {})
+            .get("sections", {})
+            .get("sections", [])
+        )
+        for s in sections:
+            sec = s.get("section", {})
+            sdp = sec.get("structuredDisplayPrice")
+            if sdp and not intercepted_price:
+                primary = sdp.get("primaryLine", {})
+                raw_p = (
+                    primary.get("price")
+                    or primary.get("discountedPrice")
+                    or primary.get("originalPrice")
+                    or ""
+                )
+                clean_p = re.sub(r"[^\d.]", "", raw_p)
+                if clean_p:
+                    try:
+                        intercepted_price = float(clean_p)
+                        intercepted_label = primary.get("accessibilityLabel") or raw_p
+                    except Exception:
+                        pass
+                elif primary.get("accessibilityLabel"):
+                    m_acc = re.search(r"\$([\d,]+)", primary["accessibilityLabel"])
+                    if m_acc:
+                        try:
+                            intercepted_price = float(m_acc.group(1).replace(",", ""))
+                            intercepted_label = primary["accessibilityLabel"]
+                        except Exception:
+                            pass
+
+            # Check true unavailability flags
+            if sec.get("available") is False or sec.get("localizedUnavailabilityMessage"):
+                is_unavailable = True
+
+        return intercepted_price, intercepted_label, is_unavailable
+
     async def scrape_comp_interval_prices(
         self,
         identifier: str,
@@ -441,43 +493,12 @@ class CompManager:
                         try:
                             body = await resp.text()
                             data = json.loads(body)
-                            sections = (
-                                data.get("data", {})
-                                .get("presentation", {})
-                                .get("stayProductDetailPage", {})
-                                .get("sections", {})
-                                .get("sections", [])
-                            )
-                            for s in sections:
-                                sec = s.get("section", {})
-                                sdp = sec.get("structuredDisplayPrice")
-                                if sdp and not intercepted_price:
-                                    primary = sdp.get("primaryLine", {})
-                                    raw_p = (
-                                        primary.get("price")
-                                        or primary.get("discountedPrice")
-                                        or primary.get("originalPrice")
-                                        or ""
-                                    )
-                                    clean_p = re.sub(r"[^\d.]", "", raw_p)
-                                    if clean_p:
-                                        try:
-                                            intercepted_price = float(clean_p)
-                                            intercepted_label = primary.get("accessibilityLabel") or raw_p
-                                        except Exception:
-                                            pass
-                                    elif primary.get("accessibilityLabel"):
-                                        m_acc = re.search(r"\$([\d,]+)", primary["accessibilityLabel"])
-                                        if m_acc:
-                                            try:
-                                                intercepted_price = float(m_acc.group(1).replace(",", ""))
-                                                intercepted_label = primary["accessibilityLabel"]
-                                            except Exception:
-                                                pass
-
-                                # Check true unavailability flags
-                                if sec.get("available") is False or sec.get("localizedUnavailabilityMessage"):
-                                    is_unavailable = True
+                            price, label, unavail = CompManager.parse_stays_pdp_sections(data)
+                            if price and not intercepted_price:
+                                intercepted_price = price
+                                intercepted_label = label
+                            if unavail:
+                                is_unavailable = True
                             done_event.set()
                         except Exception:
                             pass

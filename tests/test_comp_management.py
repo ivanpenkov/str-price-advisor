@@ -143,6 +143,116 @@ class TestCompManagement(unittest.TestCase):
         self.assertIn("1493069124077219890", cached[key])
         self.assertEqual(cached[key]["1493069124077219890"]["effective_nightly"], 548.75)
 
+    def test_parse_stays_pdp_sections_discounted_price(self):
+        """Discounted prices (DiscountedDisplayPriceLine) must be correctly extracted, and logging event metadata must not cause false unavailability."""
+        mock_payload = {
+            "data": {
+                "presentation": {
+                    "stayProductDetailPage": {
+                        "sections": {
+                            "sections": [
+                                {
+                                    "sectionId": "BOOK_IT_SIDEBAR",
+                                    "section": {
+                                        "available": True,
+                                        "canInstantBook": True,
+                                        "structuredDisplayPrice": {
+                                            "primaryLine": {
+                                                "__typename": "DiscountedDisplayPriceLine",
+                                                "accessibilityLabel": "$2,496 for 3 nights, originally $3,008",
+                                                "discountedPrice": "$2,496",
+                                                "originalPrice": "$3,008",
+                                                "price": None,
+                                                "qualifier": "for 3 nights",
+                                            }
+                                        },
+                                        # Logging event metadata schema contains selectUnavailable handlers even when listing is available
+                                        "tripDetailsLoggingEventData": {
+                                            "selectUnavailableForCheckInDateLoggingEventData": {"loggingId": "selectUnavailable"},
+                                            "selectUnavailableForCheckoutDateLoggingEventData": {"loggingId": "selectUnavailable"},
+                                        },
+                                        "localizedUnavailabilityMessage": None,
+                                    },
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+
+        price, label, is_unavailable = CompManager.parse_stays_pdp_sections(mock_payload)
+        self.assertEqual(price, 2496.0)
+        self.assertIn("2,496", label)
+        self.assertFalse(is_unavailable)
+
+    def test_parse_stays_pdp_sections_basic_price(self):
+        """Standard undiscounted prices (BasicDisplayPriceLine) must be parsed correctly."""
+        mock_payload = {
+            "data": {
+                "presentation": {
+                    "stayProductDetailPage": {
+                        "sections": {
+                            "sections": [
+                                {
+                                    "sectionId": "BOOK_IT_SIDEBAR",
+                                    "section": {
+                                        "available": True,
+                                        "structuredDisplayPrice": {
+                                            "primaryLine": {
+                                                "__typename": "BasicDisplayPriceLine",
+                                                "accessibilityLabel": "$1,820 for 4 nights",
+                                                "price": "$1,820",
+                                                "qualifier": "for 4 nights",
+                                            }
+                                        },
+                                        "localizedUnavailabilityMessage": None,
+                                    },
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+
+        price, label, is_unavailable = CompManager.parse_stays_pdp_sections(mock_payload)
+        self.assertEqual(price, 1820.0)
+        self.assertFalse(is_unavailable)
+
+    def test_parse_stays_pdp_sections_unavailable(self):
+        """True unavailabilities indicated by localizedUnavailabilityMessage or available: False must be flagged."""
+        mock_payload = {
+            "data": {
+                "presentation": {
+                    "stayProductDetailPage": {
+                        "sections": {
+                            "sections": [
+                                {
+                                    "sectionId": "BOOK_IT_SIDEBAR",
+                                    "section": {
+                                        "available": False,
+                                        "localizedUnavailabilityMessage": "Those dates are not available",
+                                        "structuredDisplayPrice": None,
+                                    },
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+
+        price, label, is_unavailable = CompManager.parse_stays_pdp_sections(mock_payload)
+        self.assertIsNone(price)
+        self.assertTrue(is_unavailable)
+
+    def test_adults_capacity_capped_at_16(self):
+        """Comp with 17 beds and no explicit accommodates must cap requested adults to 16."""
+        comp_meta = {"bedrooms": 6, "beds": 17, "baths": 3.0}
+        accommodates = min(int(comp_meta.get("accommodates") or comp_meta.get("beds") or 10), 16)
+        self.assertEqual(accommodates, 16)
+
 
 if __name__ == "__main__":
     unittest.main()

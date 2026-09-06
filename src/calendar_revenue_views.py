@@ -1203,8 +1203,45 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
                 <td>${{r.type_description}} (Code: <code style="color:#cbd5e1;">${{r.type_name}}</code>, ID: ${{r.type_id}})</td>
               </tr>
               <tr>
+                <td>Booking Channel</td>
+                <td>
+                  ${{(() => {{
+                    const m = (r.madetype_name || '').toUpperCase();
+                    const rawH = (raw.hear_about_name || '').toLowerCase();
+                    const rawTA = (raw.travelagent_name || '').toLowerCase();
+                    if (rawH.includes('airbnb') || rawTA.includes('airbnb')) {{
+                      return '<strong style="color:#ff5a5f;">● Airbnb</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Streamline Connect WSR)</span>';
+                    }} else if (rawH.includes('vrbo') || rawH.includes('ha-olb') || rawTA.includes('vrbo') || rawTA.includes('homeaway')) {{
+                      return '<strong style="color:#38bdf8;">● Vrbo / HomeAway</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Partner Distribution PDWTA)</span>';
+                    }} else if (rawH.includes('booking') || rawTA.includes('booking')) {{
+                      return '<strong style="color:#003580; background:#e0e7ff; padding:1px 6px; border-radius:4px;">● Booking.com</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Partner Distribution PDWTA)</span>';
+                    }} else if (rawH.includes('expedia') || rawTA.includes('expedia')) {{
+                      return '<strong style="color:#facc15;">● Expedia</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Streamline Connect WSR)</span>';
+                    }} else if (rawH.includes('home2go') || rawTA.includes('home2go')) {{
+                      return '<strong style="color:#38bdf8;">● HomeToGo</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Partner Distribution PDWTA)</span>';
+                    }} else if (m === 'WSR') {{
+                      return '<strong style="color:#ff5a5f;">● Airbnb</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Streamline Connect WSR)</span>';
+                    }} else if (m === 'PDWTA') {{
+                      return '<strong style="color:#38bdf8;">● Vrbo / Partner OTA</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Partner Distribution PDWTA)</span>';
+                    }} else if (m === 'NET') {{
+                      return '<strong style="color:#34d399;">● Direct Website</strong> <span style="color:#94a3b8; font-size:0.75rem;">(kivoya.com)</span>';
+                    }} else if (m === 'ADM') {{
+                      return '<strong style="color:#fbbf24;">● Kivoya Admin</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Internal Manual Entry)</span>';
+                    }} else if (m === 'OWN') {{
+                      return '<strong style="color:#c084fc;">● Owner Block</strong> <span style="color:#94a3b8; font-size:0.75rem;">(Streamline OwnerX)</span>';
+                    }}
+                    return '<strong style="color:#f8fafc;">' + (r.madetype_name || 'Direct') + '</strong>';
+                  }})()}}
+                </td>
+              </tr>
+              ${{raw.cross_reference_code ? `
+              <tr>
+                <td>Channel Confirmation #</td>
+                <td><code style="color:#38bdf8; font-weight:700; font-size:0.9rem;">${{raw.cross_reference_code}}</code> <span style="color:#94a3b8; font-size:0.75rem;">(Guest Channel Reference)</span></td>
+              </tr>` : ''}}
+              <tr>
                 <td>Status / Made Type</td>
-                <td><span class="badge badge-primary">${{r.status_name}}</span> • Source: <strong>${{r.madetype_name || 'Streamline VRS'}}</strong></td>
+                <td><span class="badge badge-primary">${{r.status_name}}</span> • Streamline Code: <code>${{r.madetype_name || 'WSR'}}</code></td>
               </tr>
               <tr>
                 <td>Occupancy</td>

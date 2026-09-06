@@ -18,6 +18,7 @@ from typing import List, Dict, Any, Optional, Tuple
 from src.kivoya_client import KivoyaClient
 from src.segmentation import CalendarSegmenter
 from src.analytics import PricingAnalyticsEngine
+from src.config import URGENT_PCT_DIFF, MODERATE_PCT_DIFF
 
 
 def _is_spec_or_generic_title(s: str) -> bool:
@@ -88,10 +89,14 @@ class HTMLDashboardGenerator:
         self,
         output_path: str = "docs/index.html",
         comps_registry_path: str = "config/comps_registry.json",
+        urgent_pct_diff: float = URGENT_PCT_DIFF,
+        moderate_pct_diff: float = MODERATE_PCT_DIFF,
     ):
         self.output_path = Path(output_path)
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
         self.comps_path = Path(comps_registry_path)
+        self.urgent_pct_diff = urgent_pct_diff
+        self.moderate_pct_diff = moderate_pct_diff
         self.comps_data = self.load_comps()
         self.comps_dict: Dict[str, Dict[str, Any]] = {}
         for tier in ("tier_a", "tier_b"):
@@ -233,9 +238,9 @@ class HTMLDashboardGenerator:
         analytics = PricingAnalyticsEngine(
             base_percentile=65.0,
             cleaning_fee=500.0,
-            urgent_pct_diff=35.0,
+            urgent_pct_diff=self.urgent_pct_diff,
             urgent_lead_days=60,
-            moderate_pct_diff=10.0,
+            moderate_pct_diff=self.moderate_pct_diff,
         )
 
         cached_comps = self._load_cached_comps_by_key()
@@ -1187,17 +1192,17 @@ class HTMLDashboardGenerator:
           <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 2px;">Filter Intervals:</span>
 
           <!-- Tier Status Checkboxes -->
-          <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals with >{self.urgent_pct_diff:.0f}% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierUrgent" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #ef4444; cursor: pointer; border-radius: 4px;">
             <span>Urgent Action (<span id="count-interval-urgent">{len(open_urgent)}</span>)</span>
           </label>
 
-          <label title="Show intervals with 10%–35% market variance for review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals with {self.moderate_pct_diff:.0f}%–{self.urgent_pct_diff:.0f}% market variance for review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierModerate" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #f59e0b; cursor: pointer; border-radius: 4px;">
             <span>Review (<span id="count-interval-mod">{len(open_moderate)}</span>)</span>
           </label>
 
-          <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals within normal competitive market range (0%–{self.moderate_pct_diff:.0f}% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierOk" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #10b981; cursor: pointer; border-radius: 4px;">
             <span>On Target (<span id="count-interval-ok">{len(open_ok)}</span>)</span>
           </label>
@@ -1326,9 +1331,9 @@ class HTMLDashboardGenerator:
             <h3>📋 4. Action Guide & Priority Thresholds</h3>
             <p>Priority tiers indicate how urgently rates should be adjusted in Kivoya's Streamline PMS rate manager:</p>
             <ul>
-              <li><strong>🚨 Urgent Action (&gt; 35% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
-              <li><strong>⚠️ Review (10% – 35% Discrepancy):</strong> Review during monthly rate refreshes.</li>
-              <li><strong>✅ On Target (0% – 10% Discrepancy):</strong> Normal competitive range &mdash; cell left empty (no rate change needed).</li>
+              <li><strong>🚨 Urgent Action (&gt; {self.urgent_pct_diff:.0f}% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
+              <li><strong>⚠️ Review ({self.moderate_pct_diff:.0f}% – {self.urgent_pct_diff:.0f}% Discrepancy):</strong> Review during monthly rate refreshes.</li>
+              <li><strong>✅ On Target (0% – {self.moderate_pct_diff:.0f}% Discrepancy):</strong> Normal competitive range &mdash; cell left empty (no rate change needed).</li>
               <li><strong>Action Indicators:</strong>
                 <ul style="margin-top: 4px;">
                   <li><strong style="color: #f87171;">↓ Reduce $X &rarr; $Y</strong> (Full Red Text): Price is above target effective cost; lower Kivoya base rate.</li>
@@ -1853,8 +1858,8 @@ class HTMLDashboardGenerator:
           const baseDiff = Math.round(recBase - ourBase);
 
           const absDiff = Math.abs(diff);
-          const isUrgent = (absDiff >= 35.0);
-          const isMod = !isUrgent && (absDiff >= 10.0);
+          const isUrgent = (absDiff >= {self.urgent_pct_diff});
+          const isMod = !isUrgent && (absDiff >= {self.moderate_pct_diff});
 
           const statusEl = document.getElementById('status-' + rowId);
           if (statusEl) {{
@@ -1889,9 +1894,9 @@ class HTMLDashboardGenerator:
           if (diffEl) {{
             const absD = Math.abs(diff);
             const signStr = (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%';
-            if (absD >= 35.0) {{
+            if (absD >= {self.urgent_pct_diff}) {{
               diffEl.innerHTML = '<span class="badge-diff-urgent">' + signStr + '</span>';
-            }} else if (absD >= 10.0) {{
+            }} else if (absD >= {self.moderate_pct_diff}) {{
               diffEl.innerHTML = '<span class="badge-diff-review">' + signStr + '</span>';
             }} else {{
               diffEl.innerHTML = '<span class="badge-diff-ok">' + signStr + '</span>';
@@ -1903,7 +1908,7 @@ class HTMLDashboardGenerator:
 
           const actionEl = document.getElementById('action-' + rowId);
           if (actionEl) {{
-            if (absDiff < 10.0 || baseDiff === 0) {{
+            if (absDiff < {self.moderate_pct_diff} || baseDiff === 0) {{
               actionEl.innerHTML = '';
               actionEl.style.color = '';
             }} else if (baseDiff < 0) {{
@@ -2406,9 +2411,9 @@ class HTMLDashboardGenerator:
             def get_diff_badge(val: float) -> str:
                 abs_val = abs(val)
                 sign_str = f"{val:+.1f}%"
-                if abs_val >= 35.0:
+                if abs_val >= self.urgent_pct_diff:
                     return f'<span class="badge-diff-urgent">{sign_str}</span>'
-                elif abs_val >= 10.0:
+                elif abs_val >= self.moderate_pct_diff:
                     return f'<span class="badge-diff-review">{sign_str}</span>'
                 else:
                     return f'<span class="badge-diff-ok">{sign_str}</span>'
@@ -2418,11 +2423,11 @@ class HTMLDashboardGenerator:
 
             def get_tier_and_status(val: float) -> Tuple[str, str, str]:
                 abs_val = abs(val)
-                if abs_val >= 35.0:
+                if abs_val >= self.urgent_pct_diff:
                     tier = "urgent"
                     status = '<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                     border = "border-left: 4px solid #ef4444;"
-                elif abs_val >= 10.0:
+                elif abs_val >= self.moderate_pct_diff:
                     tier = "moderate"
                     status = '<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                     border = "border-left: 4px solid #f59e0b;"

@@ -12,7 +12,7 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.engine = PricingAnalyticsEngine(
             base_percentile=65.0,
             cleaning_fee=500.0,
-            urgent_pct_diff=35.0,
+            urgent_pct_diff=25.0,
             urgent_lead_days=60,
             moderate_pct_diff=10.0,
         )

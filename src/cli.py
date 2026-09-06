@@ -17,8 +17,7 @@ import sys
 from typing import List, Dict, Any
 
 from playwright.async_api import async_playwright
-import yaml
-
+from src.config import load_settings, URGENT_PCT_DIFF, MODERATE_PCT_DIFF
 from src.kivoya_client import KivoyaClient
 from src.segmentation import CalendarSegmenter
 from src.airbnb_collector import AirbnbCollector
@@ -27,8 +26,7 @@ from src.reporter import PriceReportGenerator
 
 
 def load_config(config_path: str = "config/settings.yaml") -> Dict[str, Any]:
-    with open(config_path, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+    return load_settings(config_path)
 
 
 async def run_weekly_advisory(
@@ -146,7 +144,13 @@ async def run_weekly_advisory(
 
     # 4. Reporting
     print("\n[Step 4/5] Generating multi-format advisory reports...")
-    reporter = PriceReportGenerator(output_dir="data")
+    urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)
+    mod_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("moderate_percent_diff", MODERATE_PCT_DIFF)
+    reporter = PriceReportGenerator(
+        output_dir="data",
+        urgent_pct_diff=urgent_pct,
+        moderate_pct_diff=mod_pct,
+    )
     outputs = reporter.generate_all(
         evaluated_segments=evaluated_results,
         property_name=config["property"]["name"],
@@ -156,7 +160,11 @@ async def run_weekly_advisory(
     print("\n[Step 5/5] Generating interactive static HTML dashboard in docs/...")
     from src.html_generator import HTMLDashboardGenerator
     import shutil
-    html_gen = HTMLDashboardGenerator(output_path="docs/index.html")
+    html_gen = HTMLDashboardGenerator(
+        output_path="docs/index.html",
+        urgent_pct_diff=urgent_pct,
+        moderate_pct_diff=mod_pct,
+    )
     html_file = html_gen.generate()
     shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
     shutil.copy("data/latest_report.md", "docs/latest_report.md")
@@ -285,10 +293,25 @@ def main():
                 push=args.push,
             ))
     elif args.command == "generate-html":
+        config = load_config()
         from src.html_generator import HTMLDashboardGenerator
+        from src.reporter import PriceReportGenerator
         import shutil
-        html_gen = HTMLDashboardGenerator(output_path="docs/index.html")
-        out = html_gen.generate()
+        urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)
+        mod_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("moderate_percent_diff", MODERATE_PCT_DIFF)
+        html_gen = HTMLDashboardGenerator(
+            output_path="docs/index.html",
+            urgent_pct_diff=urgent_pct,
+            moderate_pct_diff=mod_pct,
+        )
+        evaluated_segments = html_gen.generate_full_12_month_evaluation()
+        out = html_gen.generate(evaluated_segments)
+        reporter = PriceReportGenerator(
+            output_dir="data",
+            urgent_pct_diff=urgent_pct,
+            moderate_pct_diff=mod_pct,
+        )
+        reporter.generate_all(evaluated_segments=evaluated_segments, property_name=config.get("property", {}).get("name", "Villa del Sol"))
         if Path("data/latest_sheet.csv").exists():
             shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
         if Path("data/latest_report.md").exists():

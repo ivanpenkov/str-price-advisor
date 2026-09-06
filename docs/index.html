@@ -704,7 +704,7 @@
       </div>
       <div class="header-badges">
         <span class="badge badge-primary">Dynamic Luxury Model (45th–70th %ile)</span>
-        <span class="badge badge-dark">Updated: September 05, 2026 at 09:26 PM</span>
+        <span class="badge badge-dark">Updated: September 05, 2026 at 09:37 PM</span>
       </div>
     </header>
 
@@ -800,14 +800,14 @@
           <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 2px;">Filter Intervals:</span>
 
           <!-- Tier Status Checkboxes -->
-          <label title="Show intervals with >35% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals with >25% market discrepancy requiring immediate rate adjustment" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #f87171; font-weight: 600; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierUrgent" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #ef4444; cursor: pointer; border-radius: 4px;">
-            <span>Urgent Action (<span id="count-interval-urgent">6</span>)</span>
+            <span>Urgent Action (<span id="count-interval-urgent">20</span>)</span>
           </label>
 
-          <label title="Show intervals with 10%–35% market variance for review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
+          <label title="Show intervals with 10%–25% market variance for review" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #fbbf24; font-weight: 600; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
             <input type="checkbox" id="filterTierModerate" checked onchange="filterIntervalTiers()" style="width: 15px; height: 15px; accent-color: #f59e0b; cursor: pointer; border-radius: 4px;">
-            <span>Review (<span id="count-interval-mod">32</span>)</span>
+            <span>Review (<span id="count-interval-mod">18</span>)</span>
           </label>
 
           <label title="Show intervals within normal competitive market range (0%–10% variance)" style="display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #34d399; font-weight: 600; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); padding: 5px 11px; border-radius: 6px; user-select: none;">
@@ -1983,19 +1983,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-1"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-1"
                   data-checkin="2026-09-13"
                   data-checkout="2026-09-17"
                   data-segment-type="Midweek"
                   data-base-price="436"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">+31.2%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">+30.5%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">+31.2%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+30.5%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $436 → $303</strong>'
                   data-raw-action-html='<strong>↓ Reduce $436 → $305</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
@@ -2009,18 +2009,18 @@
                   data-adj-rec='303'
                   data-raw-rec='305'
                   data-target-pct-str='31.5%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-1', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-1">▶</span>
                   <span class="date-pill">2026-09-13 &rarr; 2026-09-17</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-1"><span class="badge-diff-review">+31.2%</span></td>
+                <td id="diff-row-1"><span class="badge-diff-urgent">+31.2%</span></td>
                 <td id="action-row-1" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $436 → $303</strong></td>
                 <td id="n-row-1"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=41</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$436</td>
@@ -5936,11 +5936,11 @@
                   data-segment-type="Midweek"
                   data-base-price="449"
                   data-adj-tier="urgent"
-                  data-raw-tier="moderate"
+                  data-raw-tier="urgent"
                   data-adj-diff-html='<span class="badge-diff-urgent">+35.8%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">+34.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+34.0%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $449 → $287</strong>'
                   data-raw-action-html='<strong>↓ Reduce $449 → $293</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
@@ -5955,7 +5955,7 @@
                   data-raw-rec='293'
                   data-target-pct-str='31.5%'
                   data-adj-border='border-left: 4px solid #ef4444;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-4', event)"
                   title="Click to view full competitor price breakdown"
                   style="border-left: 4px solid #ef4444;">
@@ -7191,11 +7191,11 @@
                   data-segment-type="Midweek"
                   data-base-price="532"
                   data-adj-tier="moderate"
-                  data-raw-tier="moderate"
+                  data-raw-tier="urgent"
                   data-adj-diff-html='<span class="badge-diff-review">+21.9%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">+25.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+25.0%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $532 → $407</strong>'
                   data-raw-action-html='<strong>↓ Reduce $532 → $393</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
@@ -7210,7 +7210,7 @@
                   data-raw-rec='393'
                   data-target-pct-str='38.5%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-5', event)"
                   title="Click to view full competitor price breakdown"
                   style="border-left: 4px solid #f59e0b;">
@@ -8468,18 +8468,18 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-6"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-6"
                   data-checkin="2026-10-26"
                   data-checkout="2026-10-29"
                   data-segment-type="Midweek"
                   data-base-price="399"
-                  data-adj-tier="moderate"
+                  data-adj-tier="urgent"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-26.2%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">-26.2%</span>'
                   data-raw-diff-html='<span class="badge-diff-review">-23.9%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $399 → $600</strong>'
                   data-raw-action-html='<strong>↑ Increase $399 → $577</strong>'
@@ -8494,18 +8494,18 @@
                   data-adj-rec='600'
                   data-raw-rec='577'
                   data-target-pct-str='38.5%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
                   onclick="toggleCompDetails('row-6', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-6">▶</span>
                   <span class="date-pill">2026-10-26 &rarr; 2026-10-29</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-6"><span class="badge-diff-review">-26.2%</span></td>
+                <td id="diff-row-6"><span class="badge-diff-urgent">-26.2%</span></td>
                 <td id="action-row-6" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $399 → $600</strong></td>
                 <td id="n-row-6"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=37</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$399</td>
@@ -12203,18 +12203,18 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-9"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-9"
                   data-checkin="2026-11-29"
                   data-checkout="2026-12-03"
                   data-segment-type="Midweek"
                   data-base-price="674"
-                  data-adj-tier="moderate"
+                  data-adj-tier="urgent"
                   data-raw-tier="urgent"
-                  data-adj-diff-html='<span class="badge-diff-review">+32.1%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">+32.1%</span>'
                   data-raw-diff-html='<span class="badge-diff-urgent">+38.1%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $674 → $480</strong>'
                   data-raw-action-html='<strong>↓ Reduce $674 → $454</strong>'
@@ -12229,18 +12229,18 @@
                   data-adj-rec='480'
                   data-raw-rec='454'
                   data-target-pct-str='45.5%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
                   data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-9', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-9">▶</span>
                   <span class="date-pill">2026-11-29 &rarr; 2026-12-03</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-9"><span class="badge-diff-review">+32.1%</span></td>
+                <td id="diff-row-9"><span class="badge-diff-urgent">+32.1%</span></td>
                 <td id="action-row-9" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $674 → $480</strong></td>
                 <td id="n-row-9"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$674</td>
@@ -16623,19 +16623,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-13"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-13"
                   data-checkin="2026-12-27"
                   data-checkout="2026-12-31"
                   data-segment-type="Midweek"
                   data-base-price="949"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-28.6%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-28.6%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-28.6%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-28.6%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $949 → $1379</strong>'
                   data-raw-action-html='<strong>↑ Increase $949 → $1379</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -16649,18 +16649,18 @@
                   data-adj-rec='1379'
                   data-raw-rec='1379'
                   data-target-pct-str='45.5%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-13', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-13">▶</span>
                   <span class="date-pill">2026-12-27 &rarr; 2026-12-31</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-13"><span class="badge-diff-review">-28.6%</span></td>
+                <td id="diff-row-13"><span class="badge-diff-urgent">-28.6%</span></td>
                 <td id="action-row-13" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $949 → $1379</strong></td>
                 <td id="n-row-13"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=28</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$949</td>
@@ -20426,11 +20426,11 @@
                   data-segment-type="Midweek"
                   data-base-price="712"
                   data-adj-tier="moderate"
-                  data-raw-tier="moderate"
+                  data-raw-tier="urgent"
                   data-adj-diff-html='<span class="badge-diff-review">+16.5%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">+25.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+25.4%</span>'
                   data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $712 → $593</strong>'
                   data-raw-action-html='<strong>↓ Reduce $712 → $542</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
@@ -20445,7 +20445,7 @@
                   data-raw-rec='542'
                   data-target-pct-str='45.5%'
                   data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-16', event)"
                   title="Click to view full competitor price breakdown"
                   style="border-left: 4px solid #f59e0b;">
@@ -25498,19 +25498,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-20"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-20"
                   data-checkin="2027-01-28"
                   data-checkout="2027-01-31"
                   data-segment-type="Weekend"
                   data-base-price="899"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-28.7%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-28.7%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-28.7%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-28.7%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $899 → $1328</strong>'
                   data-raw-action-html='<strong>↑ Increase $899 → $1328</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -25524,18 +25524,18 @@
                   data-adj-rec='1328'
                   data-raw-rec='1328'
                   data-target-pct-str='65%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-20', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-20">▶</span>
                   <span class="date-pill">2027-01-28 &rarr; 2027-01-31</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-20"><span class="badge-diff-review">-28.7%</span></td>
+                <td id="diff-row-20"><span class="badge-diff-urgent">-28.7%</span></td>
                 <td id="action-row-20" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $899 → $1328</strong></td>
                 <td id="n-row-20"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=40</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$899</td>
@@ -31623,19 +31623,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-25"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-25"
                   data-checkin="2027-02-25"
                   data-checkout="2027-02-28"
                   data-segment-type="Weekend"
                   data-base-price="1099"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-31.1%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-31.7%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-31.1%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-31.7%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $1099 → $1669</strong>'
                   data-raw-action-html='<strong>↑ Increase $1099 → $1687</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -31649,18 +31649,18 @@
                   data-adj-rec='1669'
                   data-raw-rec='1687'
                   data-target-pct-str='65%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-25', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-25">▶</span>
                   <span class="date-pill">2027-02-25 &rarr; 2027-02-28</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-25"><span class="badge-diff-review">-31.1%</span></td>
+                <td id="diff-row-25"><span class="badge-diff-urgent">-31.1%</span></td>
                 <td id="action-row-25" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1099 → $1669</strong></td>
                 <td id="n-row-25"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=38</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
@@ -34193,19 +34193,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-27"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-27"
                   data-checkin="2027-03-04"
                   data-checkout="2027-03-07"
                   data-segment-type="Weekend"
                   data-base-price="1199"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-29.0%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-27.6%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-29.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-27.6%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $1199 → $1757</strong>'
                   data-raw-action-html='<strong>↑ Increase $1199 → $1721</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -34219,18 +34219,18 @@
                   data-adj-rec='1757'
                   data-raw-rec='1721'
                   data-target-pct-str='65%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-27', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-27">▶</span>
                   <span class="date-pill">2027-03-04 &rarr; 2027-03-07</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-27"><span class="badge-diff-review">-29.0%</span></td>
+                <td id="diff-row-27"><span class="badge-diff-urgent">-29.0%</span></td>
                 <td id="action-row-27" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1757</strong></td>
                 <td id="n-row-27"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=34</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
@@ -36613,19 +36613,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-29"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-29"
                   data-checkin="2027-03-11"
                   data-checkout="2027-03-14"
                   data-segment-type="Weekend"
                   data-base-price="1199"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-30.4%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-30.4%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-30.4%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-30.4%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $1199 → $1796</strong>'
                   data-raw-action-html='<strong>↑ Increase $1199 → $1796</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -36639,18 +36639,18 @@
                   data-adj-rec='1796'
                   data-raw-rec='1796'
                   data-target-pct-str='70%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-29', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-29">▶</span>
                   <span class="date-pill">2027-03-11 &rarr; 2027-03-14</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-29"><span class="badge-diff-review">-30.4%</span></td>
+                <td id="diff-row-29"><span class="badge-diff-urgent">-30.4%</span></td>
                 <td id="action-row-29" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1199 → $1796</strong></td>
                 <td id="n-row-29"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=35</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1199</td>
@@ -40228,19 +40228,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-32"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-32"
                   data-checkin="2027-03-25"
                   data-checkout="2027-03-28"
                   data-segment-type="Weekend"
                   data-base-price="1099"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-33.5%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-33.2%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-33.5%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-33.2%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $1099 → $1738</strong>'
                   data-raw-action-html='<strong>↑ Increase $1099 → $1728</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -40254,18 +40254,18 @@
                   data-adj-rec='1738'
                   data-raw-rec='1728'
                   data-target-pct-str='70%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-32', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-32">▶</span>
                   <span class="date-pill">2027-03-25 &rarr; 2027-03-28</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-32"><span class="badge-diff-review">-33.5%</span></td>
+                <td id="diff-row-32"><span class="badge-diff-urgent">-33.5%</span></td>
                 <td id="action-row-32" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $1099 → $1738</strong></td>
                 <td id="n-row-32"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=33</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1099</td>
@@ -43663,19 +43663,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-35"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-35"
                   data-checkin="2027-04-04"
                   data-checkout="2027-04-08"
                   data-segment-type="Midweek"
                   data-base-price="1049"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">+25.0%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">+29.4%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">+25.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">+29.4%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↓ Reduce $1049 → $814</strong>'
                   data-raw-action-html='<strong>↓ Reduce $1049 → $782</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#f87171; font-weight:700;'
@@ -43689,18 +43689,18 @@
                   data-adj-rec='814'
                   data-raw-rec='782'
                   data-target-pct-str='49%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-35', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-35">▶</span>
                   <span class="date-pill">2027-04-04 &rarr; 2027-04-08</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-35"><span class="badge-diff-review">+25.0%</span></td>
+                <td id="diff-row-35"><span class="badge-diff-urgent">+25.0%</span></td>
                 <td id="action-row-35" style="font-size:0.85rem; color:#f87171; font-weight:700;"><strong>↓ Reduce $1049 → $814</strong></td>
                 <td id="n-row-35"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=45</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$1049</td>
@@ -57238,19 +57238,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-44"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-44"
                   data-checkin="2027-05-06"
                   data-checkout="2027-05-09"
                   data-segment-type="Weekend"
                   data-base-price="749"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-31.5%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-31.5%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-31.5%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-31.5%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $749 → $1170</strong>'
                   data-raw-action-html='<strong>↑ Increase $749 → $1170</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -57264,18 +57264,18 @@
                   data-adj-rec='1170'
                   data-raw-rec='1170'
                   data-target-pct-str='70%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-44', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-44">▶</span>
                   <span class="date-pill">2027-05-06 &rarr; 2027-05-09</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-44"><span class="badge-diff-review">-31.5%</span></td>
+                <td id="diff-row-44"><span class="badge-diff-urgent">-31.5%</span></td>
                 <td id="action-row-44" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $749 → $1170</strong></td>
                 <td id="n-row-44"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=45</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
@@ -60588,19 +60588,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-46"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-46"
                   data-checkin="2027-05-13"
                   data-checkout="2027-05-16"
                   data-segment-type="Weekend"
                   data-base-price="749"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-31.3%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-33.3%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-31.3%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-33.3%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $749 → $1166</strong>'
                   data-raw-action-html='<strong>↑ Increase $749 → $1206</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -60614,18 +60614,18 @@
                   data-adj-rec='1166'
                   data-raw-rec='1206'
                   data-target-pct-str='70%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-46', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-46">▶</span>
                   <span class="date-pill">2027-05-13 &rarr; 2027-05-16</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-46"><span class="badge-diff-review">-31.3%</span></td>
+                <td id="diff-row-46"><span class="badge-diff-urgent">-31.3%</span></td>
                 <td id="action-row-46" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $749 → $1166</strong></td>
                 <td id="n-row-46"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=48</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$749</td>
@@ -68933,19 +68933,19 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-51"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="true"
                   data-detail-id="row-51"
                   data-checkin="2027-05-30"
                   data-checkout="2027-06-03"
                   data-segment-type="Midweek"
                   data-base-price="599"
-                  data-adj-tier="moderate"
-                  data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-33.0%</span>'
-                  data-raw-diff-html='<span class="badge-diff-review">-31.0%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
-                  data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-tier="urgent"
+                  data-raw-tier="urgent"
+                  data-adj-diff-html='<span class="badge-diff-urgent">-33.0%</span>'
+                  data-raw-diff-html='<span class="badge-diff-urgent">-31.0%</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
+                  data-raw-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $956</strong>'
                   data-raw-action-html='<strong>↑ Increase $599 → $924</strong>'
                   data-adj-action-style='font-size:0.85rem; color:#34d399; font-weight:700;'
@@ -68959,18 +68959,18 @@
                   data-adj-rec='956'
                   data-raw-rec='924'
                   data-target-pct-str='49%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
-                  data-raw-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
+                  data-raw-border='border-left: 4px solid #ef4444;'
                   onclick="toggleCompDetails('row-51', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-51">▶</span>
                   <span class="date-pill">2027-05-30 &rarr; 2027-06-03</span>
                 </td>
                 <td><strong>Midweek</strong></td>
                 <td>4 nights</td>
-                <td id="diff-row-51"><span class="badge-diff-review">-33.0%</span></td>
+                <td id="diff-row-51"><span class="badge-diff-urgent">-33.0%</span></td>
                 <td id="action-row-51" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $956</strong></td>
                 <td id="n-row-51"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=41</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -70338,18 +70338,18 @@
             
 
               <tr class="clickable-row interval-parent-row" id="parent-row-52"
-                  data-tier="moderate"
+                  data-tier="urgent"
                   data-calendar-open="false"
                   data-detail-id="row-52"
                   data-checkin="2027-06-03"
                   data-checkout="2027-06-06"
                   data-segment-type="Weekend"
                   data-base-price="599"
-                  data-adj-tier="moderate"
+                  data-adj-tier="urgent"
                   data-raw-tier="moderate"
-                  data-adj-diff-html='<span class="badge-diff-review">-26.6%</span>'
+                  data-adj-diff-html='<span class="badge-diff-urgent">-26.6%</span>'
                   data-raw-diff-html='<span class="badge-diff-review">-10.7%</span>'
-                  data-adj-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
+                  data-adj-status-html='<span class="badge" style="background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.4); font-weight:700;">🚨 Urgent</span>'
                   data-raw-status-html='<span class="badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; border:1px solid rgba(245,158,11,0.4); font-weight:700;">⚠️ Review</span>'
                   data-adj-action-html='<strong>↑ Increase $599 → $877</strong>'
                   data-raw-action-html='<strong>↑ Increase $599 → $691</strong>'
@@ -70364,18 +70364,18 @@
                   data-adj-rec='877'
                   data-raw-rec='691'
                   data-target-pct-str='70%'
-                  data-adj-border='border-left: 4px solid #f59e0b;'
+                  data-adj-border='border-left: 4px solid #ef4444;'
                   data-raw-border='border-left: 4px solid #f59e0b;'
                   onclick="toggleCompDetails('row-52', event)"
                   title="Click to view full competitor price breakdown"
-                  style="border-left: 4px solid #f59e0b;">
+                  style="border-left: 4px solid #ef4444;">
                 <td>
                   <span class="caret-icon" id="icon-row-52">▶</span>
                   <span class="date-pill">2027-06-03 &rarr; 2027-06-06</span> <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.72rem; padding:2px 6px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒 Closed</span>
                 </td>
                 <td><strong>Weekend</strong></td>
                 <td>3 nights</td>
-                <td id="diff-row-52"><span class="badge-diff-review">-26.6%</span></td>
+                <td id="diff-row-52"><span class="badge-diff-urgent">-26.6%</span></td>
                 <td id="action-row-52" style="font-size:0.85rem; color:#34d399; font-weight:700;"><strong>↑ Increase $599 → $877</strong></td>
                 <td id="n-row-52"><span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);" title="Exact live search executed across corridors for this date">🟢 Live N=5</span></td>
                 <td style="font-family:'JetBrains Mono',monospace;">$599</td>
@@ -88160,8 +88160,8 @@
             <h3>📋 4. Action Guide & Priority Thresholds</h3>
             <p>Priority tiers indicate how urgently rates should be adjusted in Kivoya's Streamline PMS rate manager:</p>
             <ul>
-              <li><strong>🚨 Urgent Action (&gt; 35% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
-              <li><strong>⚠️ Review (10% – 35% Discrepancy):</strong> Review during monthly rate refreshes.</li>
+              <li><strong>🚨 Urgent Action (&gt; 25% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
+              <li><strong>⚠️ Review (10% – 25% Discrepancy):</strong> Review during monthly rate refreshes.</li>
               <li><strong>✅ On Target (0% – 10% Discrepancy):</strong> Normal competitive range &mdash; cell left empty (no rate change needed).</li>
               <li><strong>Action Indicators:</strong>
                 <ul style="margin-top: 4px;">
@@ -89534,9 +89534,9 @@
     "price_diff_percent": 30.5,
     "recommended_base_nightly": 305.0,
     "base_diff": -132.0,
-    "priority_tier": "MODERATE_ADJUSTMENT",
-    "priority_label": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
-    "status": "SLIGHTLY HIGH",
+    "priority_tier": "URGENT_ACTION",
+    "priority_label": "\ud83d\udea8 Urgent Update (This Week)",
+    "status": "OVERPRICED",
     "action_summary": "\u2193 Reduce $436 \u2192 $305",
     "n_comps_adj": 41,
     "comp_p50_adj": 605.25,
@@ -89544,9 +89544,9 @@
     "price_diff_percent_adj": 31.2,
     "recommended_base_nightly_adj": 303.0,
     "base_diff_adj": -134.0,
-    "priority_tier_adj": "MODERATE_ADJUSTMENT",
-    "priority_label_adj": "\u26a0\ufe0f Moderate Adjustment (Monthly)",
-    "status_adj": "SLIGHTLY HIGH",
+    "priority_tier_adj": "URGENT_ACTION",
+    "priority_label_adj": "\ud83d\udea8 Urgent Update (This Week)",
+    "status_adj": "OVERPRICED",
     "action_summary_adj": "\u2193 Reduce $436 \u2192 $303",
     "our_percentile_rank_adj": 61.0,
     "is_live_scan": true
@@ -90427,7 +90427,7 @@
     <!-- Footer -->
     <footer>
       <p>STR Competitive Price Advisor for Villa del Sol • Automated Analysis Engine</p>
-      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 05, 2026 at 09:26 PM</p>
+      <p style="margin-top: 4px; font-size: 0.8rem; color: #64748b;">Hosted on GitHub Pages • Generated on September 05, 2026 at 09:37 PM</p>
     </footer>
   </div>
 
@@ -90909,7 +90909,7 @@
           const baseDiff = Math.round(recBase - ourBase);
 
           const absDiff = Math.abs(diff);
-          const isUrgent = (absDiff >= 35.0);
+          const isUrgent = (absDiff >= 25.0);
           const isMod = !isUrgent && (absDiff >= 10.0);
 
           const statusEl = document.getElementById('status-' + rowId);
@@ -90945,7 +90945,7 @@
           if (diffEl) {
             const absD = Math.abs(diff);
             const signStr = (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%';
-            if (absD >= 35.0) {
+            if (absD >= 25.0) {
               diffEl.innerHTML = '<span class="badge-diff-urgent">' + signStr + '</span>';
             } else if (absD >= 10.0) {
               diffEl.innerHTML = '<span class="badge-diff-review">' + signStr + '</span>';

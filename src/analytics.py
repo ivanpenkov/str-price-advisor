@@ -13,17 +13,25 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 import numpy as np
 
+from src.config import (
+    URGENT_PCT_DIFF,
+    MODERATE_PCT_DIFF,
+    URGENT_LEAD_DAYS,
+    BASE_PERCENTILE,
+    CLEANING_FEE,
+)
+
 
 class PricingAnalyticsEngine:
     """Analyzes competitive price distributions and produces prioritized recommendations."""
 
     def __init__(
         self,
-        base_percentile: float = 65.0,
-        cleaning_fee: float = 500.0,
-        urgent_pct_diff: float = 35.0,
-        urgent_lead_days: int = 60,
-        moderate_pct_diff: float = 10.0,
+        base_percentile: float = BASE_PERCENTILE,
+        cleaning_fee: float = CLEANING_FEE,
+        urgent_pct_diff: float = URGENT_PCT_DIFF,
+        urgent_lead_days: int = URGENT_LEAD_DAYS,
+        moderate_pct_diff: float = MODERATE_PCT_DIFF,
         registry_path: str = "config/comps_registry.json",
     ):
         self.base_percentile = base_percentile

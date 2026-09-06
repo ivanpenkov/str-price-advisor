@@ -15,13 +15,22 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
+from src.config import URGENT_PCT_DIFF, MODERATE_PCT_DIFF
+
 
 class PriceReportGenerator:
     """Generates prioritized reports for the host and property manager."""
 
-    def __init__(self, output_dir: str = "data"):
+    def __init__(
+        self,
+        output_dir: str = "data",
+        urgent_pct_diff: float = URGENT_PCT_DIFF,
+        moderate_pct_diff: float = MODERATE_PCT_DIFF,
+    ):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.urgent_pct_diff = urgent_pct_diff
+        self.moderate_pct_diff = moderate_pct_diff
 
     def generate_all(
         self,
@@ -113,7 +122,7 @@ class PriceReportGenerator:
             f"- ✅ **Competitive / On Target**: **{len(info)}** intervals",
             f"",
             f"> 💡 **Action Guidance for Kivoya Property Manager**:",
-            f"> Review **Section 1** immediately. These intervals are substantially mispriced (>35% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.",
+            f"> Review **Section 1** immediately. These intervals are substantially mispriced (>{self.urgent_pct_diff:.0f}% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.",
             f"",
             f"---",
             f"",
@@ -136,7 +145,7 @@ class PriceReportGenerator:
         if not moderate:
             lines.append("*(No moderate price adjustments needed at this time.)*\n")
         else:
-            lines.append("The following dates are 10%–35% off the target percentile for future dates:\n")
+            lines.append(f"The following dates are {self.moderate_pct_diff:.0f}%–{self.urgent_pct_diff:.0f}% off the target percentile for future dates:\n")
             lines.append(self._format_table(moderate))
             lines.append("")
 
@@ -196,11 +205,11 @@ class PriceReportGenerator:
 
             diff = s["price_diff_percent"]
             diff_str = f"{'+' if diff > 0 else ''}{diff:.1f}%"
-            if diff >= 35.0:
+            if diff >= self.urgent_pct_diff:
                 diff_str = f"🔴 **+{diff:.1f}%**"
-            elif diff <= -35.0:
+            elif diff <= -self.urgent_pct_diff:
                 diff_str = f"🔵 **{diff:.1f}%**"
-            elif abs(diff) >= 10.0:
+            elif abs(diff) >= self.moderate_pct_diff:
                 diff_str = f"🟡 {diff_str}"
 
             rec_base = f"**${s['recommended_base_nightly']:.0f}**"

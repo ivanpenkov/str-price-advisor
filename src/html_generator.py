@@ -1366,12 +1366,12 @@ class HTMLDashboardGenerator:
                 <th>Nights</th>
                 <th>Market Gap</th>
                 <th>Action Needed</th>
+                <th>Historical Track Record</th>
                 <th>Comps (N)</th>
                 <th>Kivoya</th>
                 <th>Effective Total</th>
                 <th>Comp Target</th>
                 <th>Recommended Base Rate</th>
-                <th>Historical Track Record</th>
               </tr>
             </thead>
             <tbody>
@@ -2912,12 +2912,12 @@ class HTMLDashboardGenerator:
                 <td>{s['nights']} nights</td>
                 <td id="diff-{row_id}">{diff_html_adj}</td>
                 <td id="action-{row_id}" style="font-size:0.85rem; {action_style_adj}"><strong>{action_adj}</strong></td>
+                <td id="track-{row_id}">{hist_cell_html}</td>
                 <td id="n-{row_id}">{n_html_adj}</td>
                 <td style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
                 <td id="eff-{row_id}" style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
                 <td id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${target_adj:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({target_pct_str})</span></td>
                 <td id="rec-{row_id}"><span class="rec-price">${rec_adj:.0f}</span></td>
-                <td id="track-{row_id}">{hist_cell_html}</td>
               </tr>
               <tr id="{row_id}" class="comp-details-row" style="display: none;">
                 <td colspan="11">

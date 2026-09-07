@@ -1813,7 +1813,7 @@ class HTMLDashboardGenerator:
           const diff = val - base;
           const color = diff > 0 ? '#34d399' : '#f87171';
           const title = (diff > 0 ? 'Agreed consensus increase from $' : 'Agreed consensus decrease from $') + base + ' to $' + val;
-          return baseSpan + ' <strong style=\"color:' + color + '; font-family:JetBrains Mono,monospace; font-weight:700;\" title=\"' + title + '\">→ $' + val.toLocaleString() + '</strong>';
+          return baseSpan + '<strong style=\"color:' + color + '; font-family:JetBrains Mono,monospace; font-weight:700;\" title=\"' + title + '\"><span style=\"margin:0 6px; display:inline-block;\">→</span>$' + val.toLocaleString() + '</strong>';
         }}
 
         const midCell = row.querySelector('.proposed-cell-mid');
@@ -3124,7 +3124,7 @@ class HTMLDashboardGenerator:
                 else:
                     color = "#f87171"
                     title = f"Agreed consensus decrease from ${base} to ${val} (-${abs(diff)})"
-                return f'{base_str} <strong style="color:{color}; font-family:\'JetBrains Mono\',monospace; font-weight:700;" title="{title}">→ ${val:,}</strong>'
+                return f'{base_str}<strong style="color:{color}; font-family:\'JetBrains Mono\',monospace; font-weight:700;" title="{title}"><span style="margin:0 6px; display:inline-block;">→</span>${val:,}</strong>'
 
             def format_min_nights_cell(prop_min: int, base_min: int) -> str:
                 base_str = f'<span style="color:#ffffff; font-family:\'JetBrains Mono\',monospace; font-weight:600;">{base_min}</span>'
@@ -3137,7 +3137,7 @@ class HTMLDashboardGenerator:
                 else:
                     color = "#f87171"
                     title = f"Rule correction: Reduce min nights from {base_min} to {prop_min} (next 90 days)"
-                return f'{base_str} <strong style="color:{color}; font-family:\'JetBrains Mono\',monospace; font-weight:700;" title="{title}">→ {prop_min}</strong>'
+                return f'{base_str}<strong style="color:{color}; font-family:\'JetBrains Mono\',monospace; font-weight:700;" title="{title}"><span style="margin:0 6px; display:inline-block;">→</span>{prop_min}</strong>'
 
             mid_html = format_rate_cell(mid_avg, mid_base) if not is_hol else '<span style="color:#475569;">—</span>'
             wkd_html = format_rate_cell(wkd_avg, wkd_base) if not is_hol else '<span style="color:#475569;">—</span>'
@@ -3167,9 +3167,9 @@ class HTMLDashboardGenerator:
                   data-spec-med="{spec_med if spec_med is not None else ''}">
                 <td style="font-family:'JetBrains Mono',monospace; white-space:nowrap; font-weight:600;">{f_dt}</td>
                 <td style="font-family:'JetBrains Mono',monospace; white-space:nowrap; font-weight:600;">{t_dt}</td>
-                <td class="proposed-cell-mid">{mid_html}</td>
-                <td class="proposed-cell-wkd">{wkd_html}</td>
-                <td class="proposed-cell-spec">{spec_html}</td>
+                <td class="proposed-cell-mid" style="font-family:'JetBrains Mono',monospace; white-space:nowrap;">{mid_html}</td>
+                <td class="proposed-cell-wkd" style="font-family:'JetBrains Mono',monospace; white-space:nowrap;">{wkd_html}</td>
+                <td class="proposed-cell-spec" style="font-family:'JetBrains Mono',monospace; white-space:nowrap;">{spec_html}</td>
                 <td style="text-align:center; font-family:'JetBrains Mono',monospace; font-weight:600; white-space:nowrap;">{min_html}</td>
                 <td>{hol_html}</td>
               </tr>

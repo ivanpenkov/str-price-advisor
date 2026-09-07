@@ -1799,23 +1799,22 @@ class HTMLDashboardGenerator:
         const isHol = row.dataset.isHoliday === 'true';
 
         function formatCell(valStr, baseStr) {{
-          if (!valStr) return '<span style="color:#475569;">—</span>';
-          const val = parseInt(valStr, 10);
-          const base = baseStr ? parseInt(baseStr, 10) : val;
-          const diff = val - base;
-          let color = '#cbd5e1';
-          let icon = '';
-          let title = `Unchanged base rate ($${{base}})`;
-          if (diff > 0) {{
-            color = '#34d399';
-            icon = '↑ ';
-            title = `Agreed consensus increase from $${{base}} (+$${{diff}})`;
-          }} else if (diff < 0) {{
-            color = '#f87171';
-            icon = '↓ ';
-            title = `Agreed consensus decrease from $${{base}} (-$${{Math.abs(diff)}})`;
+          if (!valStr && !baseStr) return '<span style=\"color:#475569;\">—</span>';
+          if (!baseStr) {{
+            const val = parseInt(valStr, 10);
+            return '<strong style=\"color:#ffffff; font-family:JetBrains Mono,monospace;\">$' + val.toLocaleString() + '</strong>';
           }}
-          return `<strong style="color:${{color}}; font-family:'JetBrains Mono',monospace;" title="${{title}}">${{icon}}$${{val.toLocaleString()}}</strong>`;
+          const base = parseInt(baseStr, 10);
+          const baseFmt = '$' + base.toLocaleString();
+          const baseSpan = '<span style=\"color:#ffffff; font-family:JetBrains Mono,monospace; font-weight:600;\">' + baseFmt + '</span>';
+          if (!valStr) return baseSpan;
+          const val = parseInt(valStr, 10);
+          if (val === base) return baseSpan;
+          const diff = val - base;
+          const color = diff > 0 ? '#34d399' : '#f87171';
+          const arrow = diff > 0 ? '↑ ' : '↓ ';
+          const title = (diff > 0 ? 'Agreed consensus increase from $' : 'Agreed consensus decrease from $') + base + ' to $' + val;
+          return baseSpan + ' <span style=\"color:#64748b; margin:0 2px;\">→</span> <strong style=\"color:' + color + '; font-family:JetBrains Mono,monospace; font-weight:700;\" title=\"' + title + '\">' + arrow + '$' + val.toLocaleString() + '</strong>';
         }}
 
         const midCell = row.querySelector('.proposed-cell-mid');
@@ -3096,6 +3095,7 @@ class HTMLDashboardGenerator:
             f_dt = p["from_date"]
             t_dt = p["to_date"]
             min_n = p["min_nights"]
+            min_base = p.get("min_nights_base", min_n)
             hol_name = p["holiday_name"]
 
             mid_base = p["midweek_base"]
@@ -3111,26 +3111,43 @@ class HTMLDashboardGenerator:
             spec_med = p["special_med"]
 
             def format_rate_cell(val: Optional[int], base: Optional[int]) -> str:
-                if val is None:
+                if base is None and val is None:
                     return '<span style="color:#475569;">—</span>'
-                diff = (val - base) if base is not None else 0
+                if base is None:
+                    return f'<strong style="color:#ffffff; font-family:\'JetBrains Mono\',monospace;">${val:,}</strong>'
+                base_str = f'<span style="color:#ffffff; font-family:\'JetBrains Mono\',monospace; font-weight:600;">${base:,}</span>'
+                if val is None or val == base:
+                    return base_str
+                diff = val - base
                 if diff > 0:
                     color = "#34d399"
-                    title = f"Agreed consensus increase from ${base} (+${diff})"
-                    icon = "↑ "
-                elif diff < 0:
-                    color = "#f87171"
-                    title = f"Agreed consensus decrease from ${base} (-${abs(diff)})"
-                    icon = "↓ "
+                    title = f"Agreed consensus increase from ${base} to ${val} (+${diff})"
+                    arrow = "↑ "
                 else:
-                    color = "#cbd5e1"
-                    title = f"Unchanged base rate (${base})"
-                    icon = ""
-                return f'<strong style="color:{color}; font-family:\'JetBrains Mono\',monospace;" title="{title}">{icon}${val:,}</strong>'
+                    color = "#f87171"
+                    title = f"Agreed consensus decrease from ${base} to ${val} (-${abs(diff)})"
+                    arrow = "↓ "
+                return f'{base_str} <span style="color:#64748b; margin:0 2px;">→</span> <strong style="color:{color}; font-family:\'JetBrains Mono\',monospace; font-weight:700;" title="{title}">{arrow}${val:,}</strong>'
+
+            def format_min_nights_cell(prop_min: int, base_min: int) -> str:
+                base_str = f'<span style="color:#ffffff; font-family:\'JetBrains Mono\',monospace; font-weight:600;">{base_min}</span>'
+                if prop_min == base_min:
+                    return base_str
+                diff = prop_min - base_min
+                if diff > 0:
+                    color = "#34d399"
+                    title = f"Rule correction: Increase min nights from {base_min} to {prop_min} (90+ days out)"
+                    arrow = "↑ "
+                else:
+                    color = "#f87171"
+                    title = f"Rule correction: Reduce min nights from {base_min} to {prop_min} (next 90 days)"
+                    arrow = "↓ "
+                return f'{base_str} <span style="color:#64748b; margin:0 2px;">→</span> <strong style="color:{color}; font-family:\'JetBrains Mono\',monospace; font-weight:700;" title="{title}">{arrow}{prop_min}</strong>'
 
             mid_html = format_rate_cell(mid_avg, mid_base) if not is_hol else '<span style="color:#475569;">—</span>'
             wkd_html = format_rate_cell(wkd_avg, wkd_base) if not is_hol else '<span style="color:#475569;">—</span>'
             spec_html = format_rate_cell(spec_avg, spec_base) if is_hol else '<span style="color:#475569;">—</span>'
+            min_html = format_min_nights_cell(min_n, min_base)
             hol_html = f'<span style="color:#fbbf24; font-weight:700;">{hol_name}</span>' if is_hol else '<span style="color:#475569;">—</span>'
 
             row_bg = "background: rgba(251, 191, 36, 0.04);" if is_hol else ""
@@ -3142,6 +3159,7 @@ class HTMLDashboardGenerator:
                   data-from="{f_dt}"
                   data-to="{t_dt}"
                   data-min-nights="{min_n}"
+                  data-min-base="{min_base}"
                   data-holiday-name="{hol_name}"
                   data-mid-base="{mid_base if mid_base is not None else ''}"
                   data-mid-avg="{mid_avg if mid_avg is not None else ''}"
@@ -3157,7 +3175,7 @@ class HTMLDashboardGenerator:
                 <td class="proposed-cell-mid">{mid_html}</td>
                 <td class="proposed-cell-wkd">{wkd_html}</td>
                 <td class="proposed-cell-spec">{spec_html}</td>
-                <td style="text-align:center; font-family:'JetBrains Mono',monospace; font-weight:600;">{min_n}</td>
+                <td style="text-align:center; font-family:'JetBrains Mono',monospace; font-weight:600; white-space:nowrap;">{min_html}</td>
                 <td>{hol_html}</td>
               </tr>
             """)

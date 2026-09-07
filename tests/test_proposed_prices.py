@@ -101,13 +101,22 @@ class TestProposedPrices(unittest.TestCase):
                 "second_price": None,
                 "min_days": 3,
             },
-            # Regular period
+            # Regular period (within 90 days)
             {
                 "period_name": "Dec 2026",
                 "begin_dt": date(2026, 12, 1),
                 "end_dt": date(2026, 12, 22),
                 "first_price": 399.0,
                 "second_price": 599.0,
+                "min_days": 2,
+            },
+            # Future period (90+ days out)
+            {
+                "period_name": "January 27",
+                "begin_dt": date(2027, 1, 4),
+                "end_dt": date(2027, 1, 31),
+                "first_price": 599.0,
+                "second_price": 799.0,
                 "min_days": 2,
             },
         ]
@@ -142,24 +151,27 @@ class TestProposedPrices(unittest.TestCase):
             },
         ]
 
-        periods = generate_proposed_prices(seasonal_rates, evaluated_segments)
-        self.assertEqual(len(periods), 2)
+        ref_date = date(2026, 9, 6)
+        periods = generate_proposed_prices(seasonal_rates, evaluated_segments, reference_date=ref_date)
+        self.assertEqual(len(periods), 3)
 
-        # 1. Thanksgiving (Holiday)
+        # 1. Thanksgiving (Holiday within 90 days: days_out=81 -> min_nights=2, base=3)
         p_hol = periods[0]
         self.assertTrue(p_hol["is_holiday"])
         self.assertEqual(p_hol["holiday_name"], "Thanksgiving")
-        self.assertEqual(p_hol["min_nights"], 3)
+        self.assertEqual(p_hol["min_nights"], 2)
+        self.assertEqual(p_hol["min_nights_base"], 3)
         self.assertIsNone(p_hol["midweek_avg"])
         self.assertIsNone(p_hol["weekend_avg"])
         self.assertEqual(p_hol["special_base"], 949)
         self.assertEqual(p_hol["special_avg"], 949)
 
-        # 2. Dec 2026 (Regular)
+        # 2. Dec 2026 (Regular within 90 days: days_out=86 -> min_nights=2, base=2)
         p_dec = periods[1]
         self.assertFalse(p_dec["is_holiday"])
         self.assertEqual(p_dec["holiday_name"], "")
         self.assertEqual(p_dec["min_nights"], 2)
+        self.assertEqual(p_dec["min_nights_base"], 2)
         self.assertIsNone(p_dec["special_avg"])
         # Midweek 1 consensus = 500, Midweek 2 consensus = 399
         # Avg = round((500 + 399)/2) = 450, Median = round(median([500, 399])) = 450
@@ -171,6 +183,15 @@ class TestProposedPrices(unittest.TestCase):
         self.assertEqual(p_dec["weekend_avg"], 700)
         self.assertEqual(p_dec["weekend_med"], 700)
 
+        # 3. Jan 2027 (Regular 90+ days in future: days_out=120 -> min_nights=3, base=2)
+        p_jan = periods[2]
+        self.assertFalse(p_jan["is_holiday"])
+        self.assertEqual(p_jan["min_nights"], 3)
+        self.assertEqual(p_jan["min_nights_base"], 2)
+        self.assertEqual(p_jan["midweek_base"], 599)
+        self.assertEqual(p_jan["weekend_base"], 799)
+
 
 if __name__ == "__main__":
     unittest.main()
+

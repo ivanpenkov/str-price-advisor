@@ -103,6 +103,7 @@ def compute_interval_consensus(segment: Dict[str, Any]) -> Dict[str, Any]:
 def generate_proposed_prices(
     seasonal_rates: List[Dict[str, Any]],
     evaluated_segments: List[Dict[str, Any]],
+    reference_date: Optional[date] = None,
 ) -> List[Dict[str, Any]]:
     """
     Map evaluated interval consensus rates into Kivoya's seasonal rate schedule.
@@ -115,6 +116,8 @@ def generate_proposed_prices(
             "is_holiday": False,
             "holiday_name": "",
             "min_nights": 2,
+            "min_nights_base": 2,
+            "min_nights_proposed": 2,
             "midweek_base": 399,
             "midweek_avg": 420,
             "midweek_med": 418,
@@ -131,6 +134,9 @@ def generate_proposed_prices(
     """
     if not seasonal_rates:
         return []
+
+    if reference_date is None:
+        reference_date = date.today()
 
     # Pre-calculate interval consensus for all segments
     interval_consensus_map: List[Dict[str, Any]] = []
@@ -162,7 +168,11 @@ def generate_proposed_prices(
         # A period is treated as a holiday/special rate if second_price is None or if name denotes a known holiday
         is_holiday = (rate.get("second_price") is None)
         holiday_label = clean_holiday_name(pname) if is_holiday else ""
-        min_nights = int(rate.get("min_days", 2))
+
+        # Min nights rule: 2 nights for next 90 days, 3 nights if 90+ days in the future
+        days_out = (b_dt - reference_date).days
+        proposed_min_nights = 2 if days_out <= 90 else 3
+        base_min_nights = int(rate.get("min_days", 2))
 
         # Find all open intervals that overlap with this period
         overlapping_intervals = [
@@ -186,7 +196,9 @@ def generate_proposed_prices(
                 "period_name": pname,
                 "is_holiday": True,
                 "holiday_name": holiday_label,
-                "min_nights": min_nights,
+                "min_nights": proposed_min_nights,
+                "min_nights_base": base_min_nights,
+                "min_nights_proposed": proposed_min_nights,
                 "midweek_base": None,
                 "midweek_avg": None,
                 "midweek_med": None,
@@ -225,7 +237,9 @@ def generate_proposed_prices(
                 "period_name": pname,
                 "is_holiday": False,
                 "holiday_name": "",
-                "min_nights": min_nights,
+                "min_nights": proposed_min_nights,
+                "min_nights_base": base_min_nights,
+                "min_nights_proposed": proposed_min_nights,
                 "midweek_base": cur_mid,
                 "midweek_avg": mid_avg,
                 "midweek_med": mid_med,
@@ -241,3 +255,4 @@ def generate_proposed_prices(
             })
 
     return proposed_periods
+

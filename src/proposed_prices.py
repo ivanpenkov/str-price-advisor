@@ -153,6 +153,8 @@ def generate_proposed_prices(
 
     proposed_periods: List[Dict[str, Any]] = []
 
+    # Parse all rate periods first
+    parsed_rates: List[Dict[str, Any]] = []
     for rate in seasonal_rates:
         b_dt = rate.get("begin_dt")
         e_dt = rate.get("end_dt")
@@ -165,7 +167,6 @@ def generate_proposed_prices(
             continue
 
         pname = rate.get("period_name", "")
-        # A period is treated as a holiday/special rate if second_price is None or if name denotes a known holiday
         is_holiday = (rate.get("second_price") is None)
         holiday_label = clean_holiday_name(pname) if is_holiday else ""
 
@@ -174,21 +175,106 @@ def generate_proposed_prices(
         proposed_min_nights = 2 if days_out <= 90 else 3
         base_min_nights = int(rate.get("min_days", 2))
 
-        # Find all open intervals that overlap with this period
+        parsed_rates.append({
+            "rate_obj": rate,
+            "b_dt": b_dt,
+            "e_dt": e_dt,
+            "pname": pname,
+            "is_holiday": is_holiday,
+            "holiday_label": holiday_label,
+            "min_nights": proposed_min_nights,
+            "min_nights_base": base_min_nights,
+        })
+
+    # First pass: pre-calculate regular periods to establish standard seasonal weekend benchmarks
+    reg_weekend_benchmarks: List[Dict[str, Any]] = []
+    for p in parsed_rates:
+        if not p["is_holiday"]:
+            rate = p["rate_obj"]
+            b_dt = p["b_dt"]
+            e_dt = p["e_dt"]
+            cur_mid = round(float(rate.get("first_price") or rate.get("nightly_rate") or 0.0))
+            cur_wkd = round(float(rate.get("second_price") or cur_mid))
+
+            # Strictly overlapping intervals for regular period
+            overlapping = [
+                item for item in interval_consensus_map
+                if item["start_dt"] < e_dt and item["end_dt"] > b_dt
+            ]
+            wkd_rates = [item["consensus_rate"] for item in overlapping if item["segment_type"] == "weekend"]
+            wkd_avg = round(statistics.mean(wkd_rates)) if wkd_rates else cur_wkd
+            wkd_med = round(statistics.median(wkd_rates)) if wkd_rates else cur_wkd
+
+            reg_weekend_benchmarks.append({
+                "b_dt": b_dt,
+                "e_dt": e_dt,
+                "wkd_base": cur_wkd,
+                "wkd_avg": wkd_avg,
+                "wkd_med": wkd_med,
+            })
+
+    # Second pass: construct proposed periods
+    proposed_periods: List[Dict[str, Any]] = []
+
+    for p in parsed_rates:
+        rate = p["rate_obj"]
+        b_dt = p["b_dt"]
+        e_dt = p["e_dt"]
+        pname = p["pname"]
+        is_holiday = p["is_holiday"]
+        holiday_label = p["holiday_label"]
+        proposed_min_nights = p["min_nights"]
+        base_min_nights = p["min_nights_base"]
+
+        # Strictly overlapping intervals (nights stayed in the period)
         overlapping_intervals = [
             item for item in interval_consensus_map
-            if item["start_dt"] <= e_dt and item["end_dt"] >= b_dt
+            if item["start_dt"] < e_dt and item["end_dt"] > b_dt
         ]
 
         if is_holiday:
             cur_special = round(float(rate.get("first_price") or rate.get("nightly_rate") or 0.0))
-            spec_rates = [item["consensus_rate"] for item in overlapping_intervals]
-            if spec_rates:
-                spec_avg = round(statistics.mean(spec_rates))
-                spec_med = round(statistics.median(spec_rates))
+
+            # Find matching regular periods in the same or adjacent month to get standard weekend benchmark
+            matching_regs = [
+                r for r in reg_weekend_benchmarks
+                if (r["b_dt"].month == b_dt.month and r["b_dt"].year == b_dt.year)
+                or (r["e_dt"].month == e_dt.month and r["e_dt"].year == e_dt.year)
+            ]
+            if not matching_regs and reg_weekend_benchmarks:
+                matching_regs = sorted(
+                    reg_weekend_benchmarks,
+                    key=lambda r: min(abs((r["b_dt"] - b_dt).days), abs((r["e_dt"] - e_dt).days))
+                )[:1]
+
+            if matching_regs:
+                std_wkd_base = max(r["wkd_base"] for r in matching_regs)
+                std_wkd_avg = max(max(r["wkd_base"], r["wkd_avg"]) for r in matching_regs)
+                std_wkd_med = max(max(r["wkd_base"], r["wkd_med"]) for r in matching_regs)
             else:
-                spec_avg = cur_special
-                spec_med = cur_special
+                std_wkd_base = cur_special
+                std_wkd_avg = cur_special
+                std_wkd_med = cur_special
+
+            # Holiday rate floor: standard weekend rate + 10% premium
+            holiday_floor_avg = round(std_wkd_avg * 1.10)
+            holiday_floor_med = round(std_wkd_med * 1.10)
+
+            # Holidays only evaluate weekend consensus rates; midweek shoulder nights do not dilute holiday rates
+            wkd_rates = [
+                item["consensus_rate"] for item in overlapping_intervals
+                if item["segment_type"] == "weekend"
+            ]
+            if wkd_rates:
+                calc_avg = round(statistics.mean(wkd_rates))
+                calc_med = round(statistics.median(wkd_rates))
+            else:
+                calc_avg = cur_special
+                calc_med = cur_special
+
+            # If calculated holiday rate is lower than standard weekend rate, apply +10% premium floor
+            spec_avg = max(calc_avg, holiday_floor_avg, cur_special if not wkd_rates else 0)
+            spec_med = max(calc_med, holiday_floor_med, cur_special if not wkd_rates else 0)
 
             proposed_periods.append({
                 "from_date": b_dt.strftime("%m/%d/%Y"),
@@ -210,7 +296,7 @@ def generate_proposed_prices(
                 "special_med": spec_med,
                 "midweek_count": 0,
                 "weekend_count": 0,
-                "special_count": len(spec_rates),
+                "special_count": len(wkd_rates),
             })
         else:
             cur_mid = round(float(rate.get("first_price") or rate.get("nightly_rate") or 0.0))

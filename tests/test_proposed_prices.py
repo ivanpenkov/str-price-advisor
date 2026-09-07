@@ -191,6 +191,47 @@ class TestProposedPrices(unittest.TestCase):
         self.assertEqual(p_jan["midweek_base"], 599)
         self.assertEqual(p_jan["weekend_base"], 799)
 
+    def test_holiday_weekend_premium_rule(self):
+        """Verify that holiday special rates are never cheaper than standard weekend rates and apply +10% premium floor."""
+        seasonal_rates = [
+            # Regular October: weekend base $599, proposed weekend $599
+            {
+                "period_name": "Oct 26",
+                "begin_dt": date(2026, 10, 1),
+                "end_dt": date(2026, 10, 7),
+                "first_price": 399.0,
+                "second_price": 599.0,
+                "min_days": 2,
+            },
+            # Columbus Day: base $599, second_price None
+            {
+                "period_name": "Columbus Day 24",
+                "begin_dt": date(2026, 10, 8),
+                "end_dt": date(2026, 10, 12),
+                "first_price": 599.0,
+                "second_price": None,
+                "min_days": 3,
+            },
+        ]
+        # Midweek interval overlapping Columbus Day with a low rate of $389
+        evaluated_segments = [
+            {
+                "check_in": "2026-10-11",
+                "check_out": "2026-10-14",
+                "segment_type": "midweek",
+                "our_base_nightly": 532.0,
+                "recommended_base_nightly_adj": 389.0,
+                "historical_benchmark": {"sample_count": 2, "median_rate": 389.0},
+            }
+        ]
+        periods = generate_proposed_prices(seasonal_rates, evaluated_segments, reference_date=date(2026, 9, 6))
+        p_columbus = [p for p in periods if p["is_holiday"]][0]
+        # Standard October weekend is $599. Holiday floor (+10%) is round(599 * 1.10) = $659.
+        # It must NOT drop to the midweek rate of $389!
+        self.assertEqual(p_columbus["special_base"], 599)
+        self.assertEqual(p_columbus["special_avg"], 659)
+        self.assertEqual(p_columbus["special_med"], 659)
+
 
 if __name__ == "__main__":
     unittest.main()

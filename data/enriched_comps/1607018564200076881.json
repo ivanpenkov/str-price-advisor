@@ -93,5 +93,28 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1607018564200076881/original/a2ab8d93-57b6-4616-8717-a82276a1dc34.jpeg",
   "url": "https://www.airbnb.com/rooms/1607018564200076881",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:11.277448"
+  "enriched_at": "2026-09-05T04:57:11.277448",
+  "house_rules": {
+    "check_in_time": "Check-in after 3:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": null,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 3:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "12 guests maximum",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: It was a true pleasure hosting you. We hope you enjoyed your stay. Your check out is scheduled for 10 am. Our cleaners will arrive around 10.30 am. Let us know if that works for your party. \nIf possible, place dirty dishes in the dishwasher and start the wash. Place dirty towels on the floor in the laundry area. Place trash inside the bins outside. THANK YOU! \nThank you again for staying with us."
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:17:17.813609"
 }

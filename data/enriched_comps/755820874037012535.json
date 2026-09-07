@@ -109,5 +109,31 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-755820874037012535/original/0c28a7c7-04e1-40c6-98f3-e9dd34f4e837.jpeg",
   "url": "https://www.airbnb.com/rooms/755820874037012535",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:38.872596"
+  "enriched_at": "2026-09-05T04:57:38.872596",
+  "house_rules": {
+    "check_in_time": "Check-in: 4:00 PM - 11:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": true,
+    "events_allowed": true,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 4:00 PM - 11:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "Commercial photography allowed",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Return all TV remotes close to the TV to which it belongs to.\nReturn ping pong items to original location.\nReturn golf clubs and balls where they go.\nLog out of all your personal streaming accounts on all TV’s (Netflix, Prime, etc)\nCheck all drawers and closets for personal items - don’t forget your chargers!"
+    ],
+    "additional_rules": "Certain events allowed with prior approval and written permission from Manager.\n\n2 Dogs allowed with prior approval from Manager.\n\n10 cars MAX allowed on property. Prior approval needed from manager for more than 10 cars on property.\n\nNo Street Parking.\n\nCheck-in: 4:00 PM Arizona time\n\nCheckout: 10:00 AM Arizona time\n\nSelf check-in with keypad\n\nNo smoking/vaping Indoors (only outside & minimum 15 ft away from exterior doors)\n\nNo unregistered guests on property at any time, for any reason. This l"
+  },
+  "rules_enriched_at": "2026-09-07T01:17:57.345323"
 }

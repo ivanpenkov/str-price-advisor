@@ -80,5 +80,31 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-740490197885439898/original/8f18e8bc-784d-45e5-a3b8-9c3cf4dece5d.jpeg",
   "url": "https://www.airbnb.com/rooms/740490197885439898",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:55:24.232576"
+  "enriched_at": "2026-09-05T04:55:24.232576",
+  "house_rules": {
+    "check_in_time": "Check-in after 3:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 8:00 PM - 5:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 3:00 PM",
+      "Checkout before 11:00 AM",
+      "14 guests maximum",
+      "Pets allowed",
+      "Quiet hours: 8:00 PM - 5:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Please put back any moved furniture inside and outside. Put umbrellas down in backyard and put pool floats on the side of the house by the pool pump."
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:18:42.407892"
 }

@@ -69,5 +69,26 @@
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-661489175613477267/original/3b28d326-d476-495a-8502-ed45794b310d.jpeg",
   "url": "https://www.airbnb.com/rooms/661489175613477267",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:50.891075"
+  "enriched_at": "2026-09-05T04:57:50.891075",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "14 guests maximum",
+      "No pets",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "- No smoking\n- No pets allowed\n- No events, parties, or large gatherings\n- Additional fees and taxes may apply\n- Photo ID may be required upon check-in\n- NOTE: While the home provides step-free entry, internal stairs are required to access all living areas and bedrooms\n- NOTE: The property is a split-level house with 3 bedrooms upstairs, 3 bedrooms downstairs, and no bedrooms on the main floor\n- NOTE: Your safety matters. This property features a Ring Doorbell device with an exterior security ca"
+  },
+  "rules_enriched_at": "2026-09-07T01:18:02.027294"
 }

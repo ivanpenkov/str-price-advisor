@@ -98,5 +98,31 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1371960459560609432/original/c43b1825-ab3f-46ae-bc23-232b3b9fd61f.jpeg",
   "url": "https://www.airbnb.com/rooms/1371960459560609432",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:13.164618"
+  "enriched_at": "2026-09-05T04:57:13.164618",
+  "house_rules": {
+    "check_in_time": "Check-in: 4:00 PM - 10:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 9:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 4:00 PM - 10:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "14 guests maximum",
+      "No pets",
+      "Quiet hours: 10:00 PM - 9:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Lock up",
+      "Additional requests: - Place dirty dishes in dishwasher and start it\n- hot tub covered and locked when not in use\n- Remember to logout of any streaming services on the TV's\n- Please check thoroughly for personal belongings as we do not have the staff/resources to return personal belongings after check out."
+    ],
+    "additional_rules": "◆ Must be 25 years old to book\n\n◆ We reserve the right to deny bookings from local guests - If you are local, please do not instant book, but reach out to us in advance to provide additional details regarding the purpose of your need for local accommodations.\n\n◆ To abide by local legal requirements, you will be asked to complete a secure verification portal by providing a copy of your official government-issued ID, confirming your contact information and sharing the purpose of your stay.  This m"
+  },
+  "rules_enriched_at": "2026-09-07T01:18:07.196287"
 }

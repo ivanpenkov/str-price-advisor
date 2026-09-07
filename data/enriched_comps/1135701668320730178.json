@@ -96,5 +96,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1135701668320730178/original/9fafbf7d-094e-4a3d-9ece-7289c7d618cc.jpeg",
   "url": "https://www.airbnb.com/rooms/1135701668320730178",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:20.410225"
+  "enriched_at": "2026-09-05T04:56:20.410225",
+  "house_rules": {
+    "check_in_time": "Check-in: 4:00 PM - 11:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": 25,
+    "raw_rules": [
+      "Check-in: 4:00 PM - 11:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Start a load of pool towels.\n    Strip the beds of sheets (please leave mattress and pillow protectors on) and place on the floor of the bedroom (only of the beds that you use).\n    Load the dishwasher and start.\n    Check for all belongings. If something is left behind, we cannot guarantee it will be found and returned.\n    Lock all doors as you depart."
+    ],
+    "additional_rules": "- If you open it, close it; if you borrow it, return it; if you turn it on, turn it off; if you break it, fix it; if you use it, take care of it; if you make a mess, clean it up; if you move it, put it back.\n- Travelers must be at least 25 years of age or older to book. \n- Smoking of any kind (tobacco or cannabis) in the home is strictly prohibited. Failure to comply with the non-smoking policy will incur a $2,500 penalty if damage to furniture or any smoking odor is detected.\n- The use of any r"
+  },
+  "rules_enriched_at": "2026-09-07T01:15:31.317457"
 }

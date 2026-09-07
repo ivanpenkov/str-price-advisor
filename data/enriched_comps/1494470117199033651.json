@@ -96,5 +96,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1494470117199033651/original/5291f438-9e18-4f62-885d-be47b46e88a4.jpeg",
   "url": "https://www.airbnb.com/rooms/1494470117199033651",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:38.385065"
+  "enriched_at": "2026-09-05T04:56:38.385065",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Additional rules: Pets & Smoking: No pets or smoking are allowed anywhere on the property.\nPrimary Renter: Must be at least 25 years old.\nQuiet Hours: 10 PM – 8AM, ensuring everyone can rest well.\n Peaceful Retreat: Out of respect for our neighbors and to keep the home serene, no parties or events are permitted.\nPool & Spa: Pool heating is included October–May for your comfort (not available June–September). Please do not touch or alter the pool equipment settings — our team will handle everything for you.",
+    "noise_monitoring": true,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": 25,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "No parties or events",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Replace any furniture that was rearranged.\nLeave used beds unmade.\nPut any last minute dishes in the dishwasher.\nPlease clean up any dirty dishes and put them away."
+    ],
+    "additional_rules": "Pets & Smoking: No pets or smoking are allowed anywhere on the property.\nPrimary Renter: Must be at least 25 years old.\nQuiet Hours: 10 PM – 8AM, ensuring everyone can rest well.\n Peaceful Retreat: Out of respect for our neighbors and to keep the home serene, no parties or events are permitted.\nPool & Spa: Pool heating is included October–May for your comfort (not available June–September). Please do not touch or alter the pool equipment settings — our team will handle everything for you."
+  },
+  "rules_enriched_at": "2026-09-07T01:15:21.345148"
 }

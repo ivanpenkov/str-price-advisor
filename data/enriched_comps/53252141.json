@@ -93,5 +93,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-53252141/original/77f340e6-c543-446c-bb41-63976c679a27.jpeg",
   "url": "https://www.airbnb.com/rooms/53252141",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:55:57.428282"
+  "enriched_at": "2026-09-05T04:55:57.428282",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 9:00 AM - 9:00 PM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "No pets",
+      "Quiet hours: 9:00 AM - 9:00 PM",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "House Rules/Rental Agreement:\n\nWe put a lot of effort and love into designing The Teal Agave for the ultimate comfort and enjoyment of our guests. We want to preserve it for others to enjoy in years to come- including you!\n\nWe ask that you please read and agree to the following house rules/rental agreement before booking your stay with us. If you feel you are unable to abide by these rules, we ask that you book another property that better meets your needs.  Booking our house means you have agre"
+  },
+  "rules_enriched_at": "2026-09-07T01:17:32.702443"
 }

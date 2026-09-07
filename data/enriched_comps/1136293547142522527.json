@@ -85,5 +85,25 @@
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1136293547142522527/original/ec5886d0-9184-416e-8870-ebdc1a83d636.jpeg",
   "url": "https://www.airbnb.com/rooms/1136293547142522527",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:55:58.254074"
+  "enriched_at": "2026-09-05T04:55:58.254074",
+  "house_rules": {
+    "check_in_time": "Check-in after 5:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": "deposit required",
+    "quiet_hours": null,
+    "noise_monitoring": true,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": 25,
+    "raw_rules": [
+      "Check-in after 5:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "You are booking through a third party site (AirBnB) and not directly through vacayAZ. You will be required to provide additional information not provided by AirBnB, as well as sign a rental agreement provided by vacayAZ. \n\nNo professional photo/video shoots unless approved by VacayAZ. \n\nA government issued ID must be provided to VacayAZ after the booking is made to verify age of occupant. \n\nOccupancy is limited to the max amount of guests shown in the listing. \n\nA signed rental agreement is REQU"
+  },
+  "rules_enriched_at": "2026-09-07T01:15:00.872931"
 }

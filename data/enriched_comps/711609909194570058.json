@@ -98,5 +98,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-711609909194570058/original/65197a11-fa3d-42f6-b469-6d4f6986ae67.jpeg",
   "url": "https://www.airbnb.com/rooms/711609909194570058",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:55:46.737971"
+  "enriched_at": "2026-09-05T04:55:46.737971",
+  "house_rules": {
+    "check_in_time": "Check-in after 3:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 3:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking"
+    ],
+    "additional_rules": "House Guidelines, Amenities & Additional Fees\n\nWe’re so happy to host you and want your stay to be relaxing, seamless, and memorable. The following guidelines help us care for the home, respect our neighbors, and ensure a great experience for every guest.\n\nThank you in advance for your understanding and cooperation.\n________________________________________\n\n🏊 Pool & Backyard Enjoyment\n\nPool Heating (Optional)\n•\tPool heating is available upon request for $75 per day or $350 per week.\n\nQuiet Hours"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:24.306088"
 }

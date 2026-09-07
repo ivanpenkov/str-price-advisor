@@ -101,5 +101,28 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MzA2OTEyNDA3NzIxOTg5MA==/original/38248077-e7e3-4ac4-b058-41934b2fd133.jpeg",
   "url": "https://www.airbnb.com/rooms/1493069124077219890",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:09.066068"
+  "enriched_at": "2026-09-05T04:57:09.066068",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 6:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "14 guests maximum",
+      "No pets",
+      "Quiet hours: 10:00 PM - 6:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "Smoking is allowed"
+    ],
+    "additional_rules": "No LARGE PARTIES or EVENTS. \nBachelor and Bachelorette groups are approved.\n\nPlease no PETS or SERVICE ANIMALS we are highly allergic to animal dander, due to this we are unable to use the home if there has been animals present. Please respect our home. Thank you.\n\nPlease Cleanup After Yourselves. Thank you.\n\nEarly check ins & late checkouts are usually not possible, but it never hurts to ask! Early check ins & late checkouts (if they can be arranged) are $100. This helps pay for an extra cleani"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:26.223471"
 }

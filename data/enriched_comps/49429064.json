@@ -80,5 +80,25 @@
   "photo_url": "https://a0.muscache.com/im/pictures/3820697b-d907-43c8-8148-60d7dab511ff.jpg",
   "url": "https://www.airbnb.com/rooms/49429064",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T19:49:39.767445"
+  "enriched_at": "2026-09-05T19:49:39.767445",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Additional rules: This is a NON-SMOKING property: This includes - Cigarettes, Cigars, Juuls, E-cigs, Marijuana, etc. No smoking allowed anywhere on the property, including  inside the home, the garage, the backyard, or the front yard. Any violation of smoking on the property will result in $1000 charge to your airbnb account. \n\n10PM-8AM neighborhood quiet hours.\n\n5 car limit parked at the house. Please use the garage and driveway to park your cars, avoid any parking on the street. Do not park in front of the neighbor's homes or in front of the fire-hydrant in the cul-de-sac.\n\nNo events/large parties at the home. This includes corporate gatherings, wedding ceremonies and/or bachelor/bachelorette events, fraternity parties, etc. \n\nViolation Fees - AIRBNB IS AUTHORIZED TO CHARGE THESE FEES ON YOUR ACCOUNT IF VIOLATED\n\nUn-authorized party or gathering: $500.00\nSmoking Fee: $1000.00\nNoise complaint: $100 \nLate Checkout Fee: $50.00 per 30 minutes after checkout time\n\nFeel free to reach out if you have any questions about the house rules.",
+    "noise_monitoring": true,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "This is a NON-SMOKING property: This includes - Cigarettes, Cigars, Juuls, E-cigs, Marijuana, etc. No smoking allowed anywhere on the property, including  inside the home, the garage, the backyard, or the front yard. Any violation of smoking on the property will result in $1000 charge to your airbnb account. \n\n10PM-8AM neighborhood quiet hours.\n\n5 car limit parked at the house. Please use the garage and driveway to park your cars, avoid any parking on the street. Do not park in front of the neig"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:48.180602"
 }

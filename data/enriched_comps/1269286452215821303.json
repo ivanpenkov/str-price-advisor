@@ -114,5 +114,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI2OTI4NjQ1MjIxNTgyMTMwMw==/original/eaf1ea2b-c627-45d8-a6ac-b64682c2cada.jpeg",
   "url": "https://www.airbnb.com/rooms/1269286452215821303",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:29.955105"
+  "enriched_at": "2026-09-05T04:56:29.955105",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 11:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": null,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "Quiet hours: 11:00 PM - 7:00 AM",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Return keys",
+      "Lock up",
+      "Additional requests: 1. Enjoy the pool & spa (usage fee applies) and turn off equipment when not in use. \n2. Use the BBQ/appliances freely but turn off and clean after. \n3. Wash used dishes or load and start the dishwasher. \n4. If using laundry or steamer, please switch off and leave in good condition. \nThank you for caring for our home."
+    ],
+    "additional_rules": "🏡 Guest Etiquette & Expectations\n\nOur property has been thoughtfully designed to provide a luxurious yet comfortable retreat. To help us maintain this standard for all guests—and to respect our community—we ask that you keep in mind the following:\n\nEvents & Gatherings: Any event, party, or large gathering requires prior written approval. Unauthorized events will result in fines ranging from $500 to $5,000, depending on the size and nature of the gathering. Guests will also be fully responsible f"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:31.639094"
 }

@@ -80,5 +80,25 @@
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-918812982062542680/original/dfc1df47-74d9-4161-bdcd-533558cb57d0.jpeg",
   "url": "https://www.airbnb.com/rooms/918812982062542680",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:05.695421"
+  "enriched_at": "2026-09-05T04:57:05.695421",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "• Reservation holder must be over 21 years of age\n• No smoking\n• No pets\n• No parties or events"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:33.803261"
 }

@@ -99,5 +99,28 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI1NDczNzUxNzA5OTIyNDg0Mw%3D%3D/original/cf0c8554-95d7-43a7-afa6-aeea5feed05d.jpeg",
   "url": "https://www.airbnb.com/rooms/1254737517099224843",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:27.574793"
+  "enriched_at": "2026-09-05T04:56:27.574793",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with keypad",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "Additional requests: Please find check out instructions in guidebook."
+    ],
+    "additional_rules": "HOUSE RULES\n\nInside the Home:\n\n- No smoking of any kind inside the home. Penalty: $500 per night\n- No eating or drinking in bedrooms\n- Furniture (indoor or outdoor) may not be moved\n- Guests are responsible for following checkout instructions. Excessive cleanup may result in additional charges. See Home Guide for details.\n-$25/night per extra guest over 12 people.\n\nPARTIES & UNAUTHORIZED EVENTS\n\nParties, events, or gatherings are not permitted without written approval. Any evidence of a party or"
+  },
+  "rules_enriched_at": "2026-09-07T01:15:48.205238"
 }

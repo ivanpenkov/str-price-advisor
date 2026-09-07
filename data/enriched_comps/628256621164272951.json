@@ -81,5 +81,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-628256621164272951/original/ac5d05d6-b6a5-4876-8718-c58a917ff088.jpeg",
   "url": "https://www.airbnb.com/rooms/628256621164272951",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:30.866617"
+  "enriched_at": "2026-09-05T04:57:30.866617",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Additional requests: 1) Please wash all dishes.\n2) Leave all used towels in the tub(s).\n3) Generally tidy up.\n4) If you used the grill, please use the grill brush to clean up after yourself.\n5) Please return all pickleball equipment back to the closet by the front door\n6)  If you adjusted the temp, please return it to an eco-friendly temp based on the time of year. Please don't leave the A/C at 60 degrees in July haha"
+    ],
+    "additional_rules": "No parties.\nNo roof access. Attempting to access the roof will result in removal from the property. Thank you for your cooperation."
+  },
+  "rules_enriched_at": "2026-09-07T01:15:26.239640"
 }

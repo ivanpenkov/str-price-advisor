@@ -98,5 +98,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ2MDkyMTI1MjkyMDcxNDI2OQ==/original/a3b90441-3973-4fbe-ab8d-95d1ebabe566.png",
   "url": "https://www.airbnb.com/rooms/1460921252920714269",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:14.620095"
+  "enriched_at": "2026-09-05T04:56:14.620095",
+  "house_rules": {
+    "check_in_time": "Check-in after 3:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 9:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 3:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "14 guests maximum",
+      "No pets",
+      "Quiet hours: 9:00 PM - 8:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Check-Out Instructions\n1.  Clean Up: Put away dirty dishes in the dishwasher. Hand wash large pot and pans. Dispose of trash in the designated bins. \n2.  Linens: Place used towels and linens in the laundry area. \n3.  Lock Up: Ensure all doors and windows are locked. \n4.  Feedback: We’d love to hear about your stay! Please leave a review on Airbnb to share your experience."
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:17:33.229359"
 }

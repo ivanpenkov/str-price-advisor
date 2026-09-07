@@ -89,5 +89,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTAwOTEwNTQ1ODUzNTMyNDQ0/original/63d0e38c-bfe4-4aad-88b1-c5ed10f6bd14.jpeg",
   "url": "https://www.airbnb.com/rooms/900910545853532444",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:32.925085"
+  "enriched_at": "2026-09-05T04:56:32.925085",
+  "house_rules": {
+    "check_in_time": "Check-in after 3:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 11:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 3:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "No pets",
+      "Quiet hours: 11:00 PM - 7:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "Throw trash away",
+      "Additional requests: Wash Dishes: Ensure all dishes are washed. If you run the dishwasher before you leave, please make sure it's not overly packed and place on standard wash cycle."
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:17:37.383307"
 }

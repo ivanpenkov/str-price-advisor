@@ -97,5 +97,29 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1322763359166708040/original/6cb53ba9-e688-4939-8ead-325409d3e2e5.jpeg",
   "url": "https://www.airbnb.com/rooms/1322763359166708040",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:36.306444"
+  "enriched_at": "2026-09-05T04:57:36.306444",
+  "house_rules": {
+    "check_in_time": "Check-in: 4:00 PM - 11:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": 25,
+    "raw_rules": [
+      "Check-in: 4:00 PM - 11:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "No pets",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "Additional requests: We don't have an extensive check-out list. Please just do not leave excessive messes such as trash and unrinsed dishes. If any linens have been stained, we appreciate it if you can spray them with stain remover.\nExcessive messes that take our cleaners extra time will be subject to additional charges."
+    ],
+    "additional_rules": "💡Minimum Age Requirement:\n-The primary renter must be 25 years of age or older and must be present for the duration of the stay. Valid ID will be requested to verify compliance.\n\n\n➡️No smoking or vaping anywhere on the property. If you smoke, please take a walk around the block.***\n\n➡️We maintain an allergy and asthma-friendly property. Everything we use is unscented. Please do not use any air fresheners or scented candles. No open flames inside.***\n\n➡️For your safety, no glass outside. We provi"
+  },
+  "rules_enriched_at": "2026-09-07T01:17:12.872824"
 }

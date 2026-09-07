@@ -91,5 +91,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-746195521284356998/original/1fed9034-353b-48f4-a68c-3dbb9f03f8c5.jpeg",
   "url": "https://www.airbnb.com/rooms/746195521284356998",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:13.719949"
+  "enriched_at": "2026-09-05T04:56:13.719949",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "No pets",
+      "No parties or events",
+      "No smoking",
+      "Additional requests: There are no mandatory tasks for you to complete before check-out. However, should you wish to lend a helping hand to our housekeeping team, your efforts in tidying up, disposing of garbage, or starting a load of dishes and/or towels would be deeply appreciated. Your kindness contributes to enhancing the experience for future guests and is truly valued by our team."
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:17:46.978071"
 }

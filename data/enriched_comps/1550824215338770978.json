@@ -81,5 +81,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1550824215338770978/original/a7a11bb1-bcfc-4a0e-8ed4-ebb427cb02e3.jpeg",
   "url": "https://www.airbnb.com/rooms/1550824215338770978",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:47.216705"
+  "enriched_at": "2026-09-05T04:57:47.216705",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Dishes\nPlease bring all dishes from the outdoor kitchen into the main house.\nLoad any used dishes into the main house dishwasher and start the dishwasher using detergent located below the sink before you leave.\nAny unwashed dishes from the casita may be left in the casita sink."
+    ],
+    "additional_rules": "House Rules\n\nNo Parties or Events\nParties, events, gatherings, or celebrations of any kind are strictly prohibited. This includes (but is not limited to) bachelor/bachelorette parties, birthday parties, reunions, or any large group gatherings. Violation of this rule may result in immediate cancellation of the reservation without refund.\n\nMaximum Occupancy\nOnly the number of guests listed on the reservation are permitted on the property at any time. Unregistered guests are not allowed.\n\nQuiet Hou"
+  },
+  "rules_enriched_at": "2026-09-07T01:15:59.867483"
 }

@@ -80,5 +80,29 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMxNTM2MjgzNjA0Nzk1NTc5Ng==/original/cf467957-d886-4c2e-a5a7-3d70ebd9778a.jpeg",
   "url": "https://www.airbnb.com/rooms/1315362836047955796",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T19:55:00.031905"
+  "enriched_at": "2026-09-05T19:55:00.031905",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Turn things off",
+      "Lock up"
+    ],
+    "additional_rules": "Please review the following house rules before booking:\n\n• Smoking and vaping are not permitted anywhere on the property\n• Parties and events are not permitted\n• Only registered guests included on the reservation may enter the property\n• Quiet hours are from 10 PM to 8 AM\n• Please keep outdoor noise at a respectful level, especially around the pool and backyard\n\nPet Policy\n\n• Maximum of 2 dogs with prior approval\n• $250 fee per dog, per stay\n• All dogs must be disclosed before arrival\n• Dogs mus"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:51.404139"
 }

@@ -87,5 +87,25 @@
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1400243019671565638/original/e214af52-3624-48c4-9770-f240dee1638a.jpeg",
   "url": "https://www.airbnb.com/rooms/1400243019671565638",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T19:48:21.367061"
+  "enriched_at": "2026-09-05T19:48:21.367061",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Additional rules: House Rules – PV Homes & Villas\r\n1. No Parties or Events\r\nThis is a peaceful residential home. Absolutely no parties, events, or gatherings without written approval. Violation will result in immediate eviction and a $1,000 fine.\r\n\r\n2. No Unregistered Guests\r\nOnly guests listed on the reservation are allowed on the property. Unauthorized guests will be charged 10% of the nightly rate per person.\r\n\r\n3. No Pets\r\nPets are not allowed under any circumstances. A $1,000 fee applies if evidence of a pet is found.\r\n\r\n4. No Smoking\r\nSmoking or vaping of any kind is strictly prohibited indoors. A $500 deep-cleaning fee will be charged if violated.\r\n\r\n5. Quiet Hours: 10PM – 7AM\r\nPer city ordinance, no loud noise, music, or disruptive activity is allowed during this time. Violations may result in immediate removal.\r\n\r\n6. Minimum Age to Book: 30\r\nThe primary guest must be at least 30 years old and present for the entire stay. ID may be verified upon check-in.\r\n\r\n7. Pool Use & Safety\r\nUse the pool at your own risk. No glass near the pool area. Children must be supervised at all times. Pool heating is available for an additional fee and must be arranged prior to check-in.\r\n\r\n8. Damage & Cleaning\r\nGuests are responsible for any damage or excessive cleaning required after checkout. A $95 damage waiver covers accidental damage up to $1,500. Additional charges may apply for misuse, missing items, or excessive mess.\r\n\r\n9. Early Check-in / Late Checkout\r\nOnly available if pre-approved. Unauthorized late checkouts will incur $200 per 30 minutes.\r\n\r\n10. Security & Monitoring\r\nSecurity cameras are installed at exterior entry points only for guest safety and property protection.",
+    "noise_monitoring": true,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": 30,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "House Rules – PV Homes & Villas\r\n1. No Parties or Events\r\nThis is a peaceful residential home. Absolutely no parties, events, or gatherings without written approval. Violation will result in immediate eviction and a $1,000 fine.\r\n\r\n2. No Unregistered Guests\r\nOnly guests listed on the reservation are allowed on the property. Unauthorized guests will be charged 10% of the nightly rate per person.\r\n\r\n3. No Pets\r\nPets are not allowed under any circumstances. A $1,000 fee applies if evidence of a pet"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:46.179929"
 }

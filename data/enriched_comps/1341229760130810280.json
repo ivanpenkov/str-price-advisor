@@ -110,5 +110,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTM0MTIyOTc2MDEzMDgxMDI4MA==/original/8c81a610-b19f-4553-b819-905d5b6262d8.jpeg",
   "url": "https://www.airbnb.com/rooms/1341229760130810280",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:22.781521"
+  "enriched_at": "2026-09-05T04:57:22.781521",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up"
+    ],
+    "additional_rules": "We love hosting responsible guests who respect our home and neighbors. Please note:\n❌ No Parties or Events or Loud Music – Loud gatherings are strictly prohibited. \n🚭 No Smoking – Its a Smoke-free property. \n\nA noise monitoring device (non-recording) will alert if noise level exceeds 75 decibels. Repeated noise alerts will result in early termination of the stay.\n\nThis home can sleep more than 16 guests. Please reach out if your group is more than 16. Guests must disclose the full guest count (i"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:20.589241"
 }

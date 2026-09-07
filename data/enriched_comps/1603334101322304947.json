@@ -76,5 +76,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1603334101322304947/original/04c35839-7c85-461d-bc18-d25b5d7c2440.jpeg",
   "url": "https://www.airbnb.com/rooms/1603334101322304947",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:56.545077"
+  "enriched_at": "2026-09-05T04:57:56.545077",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": null,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "12 guests maximum",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: - Make sure the TV and light remotes are in their corresponding rooms, where you found them\n- Load all dishes into the dishwasher and start the load\n- Before checkout, please ensure the hot tub is securely covered. This helps keep it clean and ready for the next guests. Thank you!"
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:17:23.274168"
 }

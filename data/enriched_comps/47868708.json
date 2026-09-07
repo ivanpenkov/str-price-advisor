@@ -92,5 +92,28 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-47868708/original/897c7308-513c-4555-bbfc-f949cfa1bfa0.jpeg",
   "url": "https://www.airbnb.com/rooms/47868708",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:28.795386"
+  "enriched_at": "2026-09-05T04:57:28.795386",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "No pets",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking"
+    ],
+    "additional_rules": "1. You will be responsible for any damage you cause to the property. The request will be processed through the airbnb app.\n2.\tGuest count must be accurate and any additional persons visiting during the day need to be approved by host.\n3.\tCheck-in time is any time after 4pm. Check-out time is any time before 10am. You’re welcome to request an early check in or late checkout 24 hours ahead of date requested, but this is not guaranteed and will depend on property availability.\n4.\tPlease limit weari"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:58.449531"
 }

@@ -105,5 +105,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1077813310260513265/original/123122b6-3b05-41bc-abb0-db4ae36dad8b.jpeg",
   "url": "https://www.airbnb.com/rooms/1077813310260513265",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:54:01.866531"
+  "enriched_at": "2026-09-05T04:54:01.866531",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": 21,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "In-home services not allowed: Makeup artists and nail specialists",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up"
+    ],
+    "additional_rules": "1.\tNo parties or events are allowed on the property. This is a zero tolerance rule and reservations will be cancelled without refund for any violation of this.\n2.\tDo not smoke anything inside of the house. There will be a minimum charge of $1000 plus any additional cleaning costs to remove smoke smell.\n3.\tWe love animals too but pets of any kind are not allowed on the property. \n4.\tNo unregistered overnight guests beyond the number noted on the reservation. If you intend on having additional gue"
+  },
+  "rules_enriched_at": "2026-09-07T01:14:38.875205"
 }

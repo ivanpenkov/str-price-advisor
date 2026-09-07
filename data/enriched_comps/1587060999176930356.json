@@ -100,5 +100,28 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1587060999176930356/original/3faa0949-7a92-4684-8371-d1e461f1bc9b.jpeg",
   "url": "https://www.airbnb.com/rooms/1587060999176930356",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:02.800599"
+  "enriched_at": "2026-09-05T04:57:02.800599",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Additional requests: Please ensure that\n- lights are turned off\n-All doors is closed and locked\n-Trash is picked up and placed in a trash can/bag\nIf a blow up mattress was used, please leave it and the used bedding out so our cleaners\nwill see it.\nPlease leave any used towels in one of the tubs/showers.\nWhen you leave please make sure to press the lock box on the keypad to lock the door."
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:15:08.802149"
 }

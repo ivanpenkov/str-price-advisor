@@ -85,5 +85,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MjI1Njk2MTQ%3D/original/25d98295-3917-4c1d-89ca-7bf52a655ce4.jpeg",
   "url": "https://www.airbnb.com/rooms/22569614",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:51.630019"
+  "enriched_at": "2026-09-05T04:56:51.630019",
+  "house_rules": {
+    "check_in_time": "Check-in: 4:00 PM - 10:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 9:00 PM - 9:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 4:00 PM - 10:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "Quiet hours: 9:00 PM - 9:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Please tidy up and leave beds unmade. Make sure you have all of your belongings and turn the AC to 80 on your way out!"
+    ],
+    "additional_rules": "1. Minimum age of primary renter: 25\n2. There is an unfenced diving pool in the backyard. Guests are responsible for exercising caution around the pool.\n3. FOR GUESTS STAYING AT LEAST THREE MONTHS: We require running credit/background checks on the primary renter.  There is a $40 nonrefundable fee that will need to be paid up front (outside of AirBNB) along with filling out a short credit check release document.\n5. Maximum Occupancy: The maximum number of guests is limited to the number of peopl"
+  },
+  "rules_enriched_at": "2026-09-07T01:15:40.064044"
 }

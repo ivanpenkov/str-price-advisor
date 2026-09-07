@@ -102,5 +102,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ1MjYyMzQyNTYzMDczNjM3Ng==/original/65ce9616-5142-4651-a1f8-2c73b4aad379.png",
   "url": "https://www.airbnb.com/rooms/1452623425630736376",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:54:07.634759"
+  "enriched_at": "2026-09-05T04:54:07.634759",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking"
+    ],
+    "additional_rules": "Thank you for considering a stay at our home. We’ve put great care and effort into creating a space that’s welcoming, comfortable, and enjoyable for all our guests. To help preserve this experience for everyone, we’ve established a set of house rules and policies that we kindly ask all guests to follow. These rules are in place for a reason—they ensure the safety, comfort, and respect of both our property and future guests.\n\nPlease take a moment to carefully read through the listing and addition"
+  },
+  "rules_enriched_at": "2026-09-07T01:14:44.227938"
 }

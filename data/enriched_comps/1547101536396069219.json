@@ -86,5 +86,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1547101536396069219/original/5f214319-0cfa-467f-8f95-e2234b62a59f.jpeg",
   "url": "https://www.airbnb.com/rooms/1547101536396069219",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:00.333009"
+  "enriched_at": "2026-09-05T04:57:00.333009",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 9:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "Quiet hours: 9:00 PM - 8:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: You must check out by your stated check out time. Failure to do so results in a $150 flat fee + $100 per hour.\n~Dishes~\nPlease place all dishes in the dishwashers. The sink must be empty of dishes."
+    ],
+    "additional_rules": "- No pets: strictly enforced\n- A noise ordinance is in place from 9:00pm - 8:00am every day. Our neighbors are respectful towards us, and we'd like to treat them with the same respect\n- No smoking, events, fireworks, firearms, or weapons allowed\n- We must be notified at least 24 hours in advance if you'd like the hot tub heated. Otherwise, we might not be able to accommodate"
+  },
+  "rules_enriched_at": "2026-09-07T01:15:44.845840"
 }

@@ -108,5 +108,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-52595140/original/b08e512b-0027-46fd-ba33-ab416e2bb79c.jpeg",
   "url": "https://www.airbnb.com/rooms/52595140",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:52.691995"
+  "enriched_at": "2026-09-05T04:57:52.691995",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: If there are dirty dishes, please start the dishwasher before you depart. Much appreciated!!"
+    ],
+    "additional_rules": "Pets must be approved in advance.\nNo more than 2 small dogs.\nQuiet Hours 10 PM - 8 AM\nNo VAPING of any kind in the house\nNo events with guests not staying at the house."
+  },
+  "rules_enriched_at": "2026-09-07T01:15:54.811251"
 }

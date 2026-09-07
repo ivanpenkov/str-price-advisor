@@ -89,5 +89,28 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-875197009188058699/original/3a81ac63-e21d-4d5a-ae42-3addf1b5dcff.jpeg",
   "url": "https://www.airbnb.com/rooms/875197009188058699",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:07.369538"
+  "enriched_at": "2026-09-05T04:57:07.369538",
+  "house_rules": {
+    "check_in_time": "Check-in: 4:00 PM - 10:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 11:00 PM - 6:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 4:00 PM - 10:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with keypad",
+      "13 guests maximum",
+      "No pets",
+      "Quiet hours: 11:00 PM - 6:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking"
+    ],
+    "additional_rules": "Pool heater is optional for an additional fee of $75/night or $50/night if heating the entire stay. No large parties or events are allowed. STR license 2025309. Scottsdale City code requires a maximum occupancy for this property not to exceed a family size of six adults and their related dependent children."
+  },
+  "rules_enriched_at": "2026-09-07T01:16:53.331095"
 }

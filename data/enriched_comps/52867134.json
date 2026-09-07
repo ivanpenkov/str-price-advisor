@@ -83,5 +83,28 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-52867134/original/a2dc5a94-9ea2-483d-9c54-17daf28a549b.jpeg",
   "url": "https://www.airbnb.com/rooms/52867134",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:55:58.023094"
+  "enriched_at": "2026-09-05T04:55:58.023094",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": 25,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "13 guests maximum",
+      "No pets",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking"
+    ],
+    "additional_rules": "By submitting this reservation, you are agreeing to the following terms and conditions:\n\nCHECK-IN TIME: 4:00 p.m. Early check-in requests may be made twenty-four (24) to forty-eight (48) hours prior to arrival date via email or phone and are subject to availability. Early check-in times are not guaranteed, but will be offered with a fee, if available. Unauthorized early arrival anywhere on our property will result in a violation of our house rules, and an additional charge ($75/per 30 minutes) t"
+  },
+  "rules_enriched_at": "2026-09-07T01:18:42.486754"
 }

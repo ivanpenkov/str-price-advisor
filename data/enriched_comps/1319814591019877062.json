@@ -81,5 +81,33 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMxOTgxNDU5MTAxOTg3NzA2Mg==/original/6ff2e36c-637b-4acd-8975-a93ab5b5ecc9.jpeg",
   "url": "https://www.airbnb.com/rooms/1319814591019877062",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:50.131543"
+  "enriched_at": "2026-09-05T04:56:50.131543",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 9:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "15 guests maximum",
+      "No pets",
+      "Quiet hours: 9:00 PM - 8:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Please return all court/pool equipment to their places (put pickleball rackets and balls/basketballs back inside the entryway room by the garage).\nPlease don’t leave any food items in the refrigerator or freezer."
+    ],
+    "additional_rules": "#1. Noise curfew. No noise outside before 8am or after 9pm. For example, outside music, loud toys (like motorized scooters), and loud socializing. During the day the noise is expected, just kept to a respectful volume as it’s a quiet residential neighborhood and we love and want to respect our neighbors.\n\n#2. You are not allowed to have more than 15 people at the home at any time.\n\n#3.  NO PETS inside or out (no exceptions)\n\n#4. SMOKING INSIDE OR OUTSIDE OF THE HOME IS PROHIBITED. If there is an"
+  },
+  "rules_enriched_at": "2026-09-07T01:18:26.893190"
 }

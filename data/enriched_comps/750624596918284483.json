@@ -87,5 +87,28 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-750624596918284483/original/4dc7d7e4-c540-4024-8a85-133d0bd1eb51.jpeg",
   "url": "https://www.airbnb.com/rooms/750624596918284483",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:49.602078"
+  "enriched_at": "2026-09-05T04:57:49.602078",
+  "house_rules": {
+    "check_in_time": "Check-in: 4:00 PM - 10:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Additional rules: • Quiet hours per the City of Scottsdale are 10:00 PM to 6:00 AM and are strictly enforced to ensure that neighbors are able to enjoy their homes without disturbance.\n\n• Occupancy. If at any time the maximum number of occupants is exceeded or if the Host receives information about excessive noise, Host has the right to evict Guest and all occupants immediately and to bill the Guest a minimum service fee of $1500. \n\n• Smoking is not permitted. If smoking, any substance, is detected or any smoke odor is found in the home after your departure, a minimum $500 cleaning fee will be charged to Guest.",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 4:00 PM - 10:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with keypad",
+      "15 guests maximum",
+      "Pets allowed",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Lock up"
+    ],
+    "additional_rules": "• Quiet hours per the City of Scottsdale are 10:00 PM to 6:00 AM and are strictly enforced to ensure that neighbors are able to enjoy their homes without disturbance.\n\n• Occupancy. If at any time the maximum number of occupants is exceeded or if the Host receives information about excessive noise, Host has the right to evict Guest and all occupants immediately and to bill the Guest a minimum service fee of $1500. \n\n• Smoking is not permitted. If smoking, any substance, is detected or any smoke o"
+  },
+  "rules_enriched_at": "2026-09-07T01:17:42.230669"
 }

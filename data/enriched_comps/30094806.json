@@ -99,5 +99,26 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-30094806/original/b529fc0f-6d0c-47d1-8034-151e079fa185.jpeg",
   "url": "https://www.airbnb.com/rooms/30094806",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:40.851589"
+  "enriched_at": "2026-09-05T04:57:40.851589",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "Pets allowed",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "Pets\n-If you'd like to bring along a pet for your stay, please let us know ahead of time so that we can approve! We charge a pet fee depending on the breed. Dependent on the length of stay, an additional pet fee may apply if additional pet related cleaning is needed after checkout.\n- No pets on the furniture please!\n\nParking\n- Please no street parking \n- Plenty of parking on property\n\nHeating the Pool\n- If you would like the pool heated during your stay, we do charge a heating fee depending on y"
+  },
+  "rules_enriched_at": "2026-09-07T01:18:31.649717"
 }

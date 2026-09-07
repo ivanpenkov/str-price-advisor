@@ -69,5 +69,33 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1249420525058947765/original/9c061c23-7888-46cd-bb26-adb16bfc547f.jpeg",
   "url": "https://www.airbnb.com/rooms/1249420525058947765",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:20.090179"
+  "enriched_at": "2026-09-05T04:57:20.090179",
+  "house_rules": {
+    "check_in_time": "Check-in: 3:00 PM - 10:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 3:00 PM - 10:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "No pets",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Please strip SHEETS ONLY from any beds used during your stay.  If you didn’t use the bed PLEASE leave it made."
+    ],
+    "additional_rules": "RULES AND RESPONSIBILITY ACKNOWLEDGMENT\n\nOnly the number of guests on the original booking are allowed to be in the home.\n\nHouse has brand new carpet. Please be respectful and keep food and drink in eating areas only.  Carpet damage  incurs an extra fee. \n\nBe a respectful Neighbor: Quiet hours are 9 pm to 8 am.  This is a family friendly neighborhood and quiet hours are mandatory.  If neighbors complain or cops are called your booking will be immediately cancelled without a refund.  No illegal a"
+  },
+  "rules_enriched_at": "2026-09-07T01:17:03.207296"
 }

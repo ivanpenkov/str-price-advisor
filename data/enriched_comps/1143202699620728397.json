@@ -110,5 +110,31 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1143202699620728397/original/5bb17579-1db8-44a9-b120-c5a6dd40f340.jpeg",
   "url": "https://www.airbnb.com/rooms/1143202699620728397",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:32.465934"
+  "enriched_at": "2026-09-05T04:57:32.465934",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": null,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 8:00 AM",
+      "Commercial photography allowed",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Leave  all bedding on the beds\nPut all Games back where they belong\nWe try to have a lot of fun activities\nBe sure all parts and pieces are there for next guest.\nIf you discover missing parts please let me know\nPick up all outdoor games\nFurniture needs to be back where you found it\nPut all dishes in sink or dishwasher\nLate checkouts are available but will incur a charge and prior notice"
+    ],
+    "additional_rules": "No Smoking of any kind in our home Please, any smell of smoke and we will charge you accordingly to rid the smell."
+  },
+  "rules_enriched_at": "2026-09-07T01:14:50.813368"
 }

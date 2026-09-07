@@ -82,5 +82,31 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-620502220252141438/original/beff8579-4e90-4d96-b67a-4afad83c1145.jpeg",
   "url": "https://www.airbnb.com/rooms/620502220252141438",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:35.231053"
+  "enriched_at": "2026-09-05T04:56:35.231053",
+  "house_rules": {
+    "check_in_time": "Check-in: 3:00 PM - 5:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 3:00 PM - 5:00 PM",
+      "Checkout before 11:00 AM",
+      "14 guests maximum",
+      "No pets",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Lock up",
+      "Additional requests: Text your Co-Host once you have departed the residence."
+    ],
+    "additional_rules": "The HOA does not permit cars parked on the street anytime of the day or night. Cars are not allowed within the driveway after 10 pm and must be parked in the garage. There is a four car garage.\n\nPlease do not leave doors open, including sliding door, to keep insects and scorpions from entering house."
+  },
+  "rules_enriched_at": "2026-09-07T01:18:17.258821"
 }

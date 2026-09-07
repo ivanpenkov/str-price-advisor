@@ -80,5 +80,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1384784550322094986/original/b136f58f-dd38-4ff7-ad01-30b381caa290.jpeg",
   "url": "https://www.airbnb.com/rooms/1384784550322094986",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:16.803637"
+  "enriched_at": "2026-09-05T04:57:16.803637",
+  "house_rules": {
+    "check_in_time": "Check-in: 4:00 PM - 11:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 4:00 PM - 11:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking"
+    ],
+    "additional_rules": "No Pets\n\nNo Smoking or Vaping\n\nNo Diving in Pool\n\nNo glass in or near pool\n\nQuiet time from 10pm to 7am\n\nNo parties or events allowed. Should this rule be violated Guest will be asked to leave immediately and no refund will be issued.\n\nAccess information for check in will be provided after short term rental agreement is signed and list of guest along with ages provided\n\nProperty does have a noise sensor. In the event the noise sensor is activated the guest will initially be contacted if the prob"
+  },
+  "rules_enriched_at": "2026-09-07T01:15:05.591123"
 }

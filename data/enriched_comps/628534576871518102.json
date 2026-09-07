@@ -103,5 +103,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-628534576871518102/original/df332935-db19-4df2-b850-3f0368883117.png",
   "url": "https://www.airbnb.com/rooms/628534576871518102",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:54:01.849205"
+  "enriched_at": "2026-09-05T04:54:01.849205",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": "forfeiture of security deposit",
+    "quiet_hours": "Quiet hours: 9:00 PM - 8:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "Quiet hours: 9:00 PM - 8:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Throw trash away",
+      "Lock up",
+      "Additional requests: Log off of any smart television apps if you logged in."
+    ],
+    "additional_rules": "House Restrictions: No house parties, No loud music, No events--- NoiseAware are set up at the house and any complaints from authorities will result in automatic checkout and forfeiture of security deposit. NoiseAware is a decibel monitoring system that we use to keep in accordance with local noise regulations. Disclaimer: Nest video system has been installed at the front/rear gates of the house for EXTERIOR ONLY, for your safety.\n\nEquipment: Please do not remove pool vacuum, or fee will be asse"
+  },
+  "rules_enriched_at": "2026-09-07T01:14:38.867710"
 }

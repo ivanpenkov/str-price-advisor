@@ -113,5 +113,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-695672305834920067/original/9e4894ab-fb65-4e23-b50a-4d50bbc822b2.jpeg",
   "url": "https://www.airbnb.com/rooms/695672305834920067",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:31.870202"
+  "enriched_at": "2026-09-05T04:56:31.870202",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": null,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "Commercial photography allowed",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Lock up",
+      "Additional requests: Please place any used dishes in the dishwasher. Thank you!"
+    ],
+    "additional_rules": "The Town of Gilbert's quiet hours begin at 10 PM. \n\nWe are proud to say that we are a pet-friendly property for up to 2 dogs! $150 pet fee for the entire stay. Please notify us if you are bringing a pet, and please pick up after your pet. :) \n\nWe are a non-smoking property. Smoking in the house will result in a $500 remediation fee. \n\nWe do not support parties or gatherings. Every guest/visitor over our max occupancy of 16 will result in a $100 fee per person. (We live in a very family-friendly "
+  },
+  "rules_enriched_at": "2026-09-07T01:18:12.355311"
 }

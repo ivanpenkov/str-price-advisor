@@ -110,5 +110,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ3OTA3Mzc3MTM1OTQwMTA5OA==/original/5b38911d-6277-4dee-baba-0a1b2b417235.jpeg",
   "url": "https://www.airbnb.com/rooms/1479073771359401098",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:03.657061"
+  "enriched_at": "2026-09-05T04:56:03.657061",
+  "house_rules": {
+    "check_in_time": "Check-in: 3:00 PM - 2:00 AM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in: 3:00 PM - 2:00 AM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking"
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:18:47.198211"
 }

@@ -83,5 +83,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1599760926842009555/original/c931e8a1-bf91-4e3d-a8ad-17ba986a3494.jpeg",
   "url": "https://www.airbnb.com/rooms/1599760926842009555",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:19.876864"
+  "enriched_at": "2026-09-05T04:56:19.876864",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": 25,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "14 guests maximum",
+      "No pets",
+      "No parties or events",
+      "No smoking",
+      "Turn things off",
+      "Return keys",
+      "Lock up",
+      "Additional requests: Collect any dirty dishes and start the dishwasher.\nGather up sheets and start a load of laundry if you can.\nIf you used any parking or recreation passes, put them back in their original place.\nDon't forget to pack up all of your belongings. Leave something behind? Don't worry—if we find your item, we're happy to mail it back to you. You only have to pay for shipping."
+    ],
+    "additional_rules": "Primary renter must be 25 years of age (proof of age required)."
+  },
+  "rules_enriched_at": "2026-09-07T01:18:04.569527"
 }

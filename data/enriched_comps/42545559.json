@@ -93,5 +93,27 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-42545559/original/d8e4b5b5-5e0d-4350-bcf3-dac80af67586.jpeg",
   "url": "https://www.airbnb.com/rooms/42545559",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:18.597375"
+  "enriched_at": "2026-09-05T04:57:18.597375",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 9:00 PM - 9:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "No pets",
+      "Quiet hours: 9:00 PM - 9:00 AM",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "House Rules/Rental Agreement \n  \nWe put a lot of effort and love into designing the home for the ultimate comfort and enjoyment of our guests. We want to preserve it for others to enjoy in years to come- including you!  \n  \nWe ask that you please read and agree to the following house rules/rental agreement before booking your stay with us. If you feel you are unable to abide by these rules, we ask that you book another property that meets your needs better.  Booking our house means you have agre"
+  },
+  "rules_enriched_at": "2026-09-07T01:17:07.884347"
 }

@@ -69,5 +69,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE0NDYxMzY5MDkxNjk2NDcwNw%3D%3D/original/3a541057-c845-4445-a346-c3fa137c8b24.jpeg",
   "url": "https://www.airbnb.com/rooms/1144613690916964707",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:14.595902"
+  "enriched_at": "2026-09-05T04:56:14.595902",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": true,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Lock up",
+      "Additional requests: Tidy up furniture if you rearranged any indoors or outside. PLEASE put back in it's original place. If you've used any pool toys, please take them out of the pool and let them dry off on the patio or place in the pool toy bin.\nPut all dirty dishes in the dishwasher or on the counter in the kitchen."
+    ],
+    "additional_rules": "HOUSE RULES\nPlease make sure that you go through the house rules prior to booking. \n\n• PETS: This home is not pet-friendly. The unauthorized bringing of pets will have a penalty of $300 which will go towards the deep cleaning of the property.\n\n• CHECK-IN: Check-in time is after 4PM. Early check-in requests are subject to availability and cannot be guaranteed.\n\n• CHECK-OUT: Check-out time is before 10 AM. We do not allow late check-out as we schedule cleaning ahead of time. Any unauthorized late "
+  },
+  "rules_enriched_at": "2026-09-07T01:16:10.005653"
 }

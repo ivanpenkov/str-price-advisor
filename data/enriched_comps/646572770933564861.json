@@ -78,5 +78,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-646572770933564861/original/b7252c01-ce54-49c8-8a97-27115bfdc0b3.jpeg",
   "url": "https://www.airbnb.com/rooms/646572770933564861",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:35.196564"
+  "enriched_at": "2026-09-05T04:57:35.196564",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 9:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "Pets allowed",
+      "Quiet hours: 10:00 PM - 9:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Turn things off",
+      "Lock up"
+    ],
+    "additional_rules": "PETS: Pet fee is $250 per pet per stay. Maximum 3 pets allowed\r\n\r\nPool Security: The pool has no fence enclosure but does have an upper lock on the back patio sliding doors as an extra barrier to entry to the backyard just in case. All children or adults who can't swim must be supervised carefully. No lifeguard on duty. Swim & use the entire property at your own risk. The hot tub & pool may be heated. \r\n\r\nPOOL: The pool is serviced on Tuesdays, and depending on whether any chemicals may be added"
+  },
+  "rules_enriched_at": "2026-09-07T01:15:49.690474"
 }

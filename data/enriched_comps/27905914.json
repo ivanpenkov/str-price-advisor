@@ -94,5 +94,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/1a1442ad-a9a9-463b-b5df-5b5b20aaa19a.jpg",
   "url": "https://www.airbnb.com/rooms/27905914",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:01.924769"
+  "enriched_at": "2026-09-05T04:57:01.924769",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "No commercial photography",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Lock up"
+    ],
+    "additional_rules": "- Please note:  although children allowed, guest must acknowledge that they understand that the pool in the backyard is not enclosed, and that children must be supervised at all times when outside!\n-We love our neighbors! Quiet hours: 10pm-7am, please. No shoes on  carpet (upstairs loft and master bedroom, one downstairs bedroom).\n- Only the number of guests on the reservation will be allowed on the property.  No other guests allowed without express written consent of host or co-host."
+  },
+  "rules_enriched_at": "2026-09-07T01:17:13.036068"
 }

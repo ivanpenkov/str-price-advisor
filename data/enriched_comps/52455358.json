@@ -124,5 +124,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/28f28fa7-ef20-4094-b068-a46b1c5df2b1.jpg",
   "url": "https://www.airbnb.com/rooms/52455358",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:19.644717"
+  "enriched_at": "2026-09-05T04:57:19.644717",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 9:00 PM - 9:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": 20,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with lockbox",
+      "12 guests maximum",
+      "Pets allowed",
+      "Quiet hours: 9:00 PM - 9:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "Return keys",
+      "Lock up"
+    ],
+    "additional_rules": "⭐️ PETS FEES $250. Must be disclosed at the time of booking. One dog is allowed \nAny stains, waste, odor, hair and damage will result in additional fees. No pets in the pool as it clogs up filters. Message breed &weight . NO CATS\nif the guest brought a cat, additional fees will apply. \nNo pets on the beds and furniture. \nNo parties. \nNo smoking indoors \nNo parking on the street overnight \n\n⭐️ POOL HEAT \nNO extra fees for heating . The heat is set to run from 9am-9pm and set to 85-90 F. Waterfall"
+  },
+  "rules_enriched_at": "2026-09-07T01:18:18.802523"
 }

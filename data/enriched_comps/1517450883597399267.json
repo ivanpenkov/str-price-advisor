@@ -98,5 +98,29 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1517450883597399267/original/d52946be-e2db-4314-b71b-c7450d1babf5.jpeg",
   "url": "https://www.airbnb.com/rooms/1517450883597399267",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:14.289753"
+  "enriched_at": "2026-09-05T04:57:14.289753",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with smart lock",
+      "No pets",
+      "Quiet hours: 10:00 PM - 7:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "Return keys",
+      "Additional requests: Please send us a quick message (via Airbnb) when you’ve checked out.\nLet us know if anything was damaged or broken—accidents happen, and communication helps us handle it smoothly.\nPut all used dishes, glasses, and utensils into the dishwasher. Run it before you leave (detergent is in the kitchen cabinet)."
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:17:02.870304"
 }

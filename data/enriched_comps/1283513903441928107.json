@@ -98,5 +98,29 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI4MzUxMzkwMzQ0MTkyODEwNw%3D%3D/original/5ff0879e-d2c1-4142-a011-cd9308758d99.jpeg",
   "url": "https://www.airbnb.com/rooms/1283513903441928107",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:57:14.746588"
+  "enriched_at": "2026-09-05T04:57:14.746588",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 9:00 PM - 8:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "Pets allowed",
+      "Quiet hours: 9:00 PM - 8:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "Additional requests: Before your departure, we kindly request that you attend to the following tasks:\nLeave the beds unmade.\nPlace used towels in the shower.\nLoad and run the dishwasher.\nEnsure all trash is contained within the trash bag in the large trash bins near the backyard entry gates, adjacent to the garage.\nReturn all furniture and items to their original locations.\nLock all doors and windows."
+    ],
+    "additional_rules": null
+  },
+  "rules_enriched_at": "2026-09-07T01:17:43.659826"
 }

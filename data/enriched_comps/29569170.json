@@ -67,5 +67,25 @@
   "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-29569170/original/0e6a2c1a-e5b7-42ef-b3f1-c6b990b2cdd0.jpeg",
   "url": "https://www.airbnb.com/rooms/29569170",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T19:17:51.265991"
+  "enriched_at": "2026-09-05T19:17:51.265991",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": null,
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "No parties or events",
+      "No smoking"
+    ],
+    "additional_rules": "- No smoking\r\n- No pets allowed\r\n- No events, parties, or large gatherings\r\n- Additional fees and taxes may apply\r\n- Photo ID may be required upon check-in\r\n- NOTE: Your safety matters. This property features 1 exterior security camera. This device may be recording activity for your safety, but should not infringe on your privacy\r\n- NOTE: Stairs are required for access\r\n- NOTE: The property can sleep 16 guests in 8 beds, with room for 2 additional guests using the twin rollaway beds"
+  },
+  "rules_enriched_at": "2026-09-07T01:16:41.326340"
 }

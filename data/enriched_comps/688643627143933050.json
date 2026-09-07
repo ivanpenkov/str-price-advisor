@@ -88,5 +88,32 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-688643627143933050/original/3044c26f-efb1-4589-8a04-afc41ac5356e.jpeg",
   "url": "https://www.airbnb.com/rooms/688643627143933050",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:58:00.669092"
+  "enriched_at": "2026-09-05T04:58:00.669092",
+  "house_rules": {
+    "check_in_time": "Check-in after 4:00 PM",
+    "check_out_time": "Checkout before 11:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 11:00 PM - 7:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": true,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 4:00 PM",
+      "Checkout before 11:00 AM",
+      "Self check-in with smart lock",
+      "12 guests maximum",
+      "Pets allowed",
+      "Quiet hours: 11:00 PM - 7:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "Smoking is allowed",
+      "Gather used towels",
+      "Throw trash away",
+      "Turn things off",
+      "Additional requests: Load and run the dishwasher if needed"
+    ],
+    "additional_rules": "No smoking inside. Please do not allow children to jump off the red brick wall into the pool."
+  },
+  "rules_enriched_at": "2026-09-07T01:18:22.149933"
 }

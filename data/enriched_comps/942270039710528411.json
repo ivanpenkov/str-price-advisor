@@ -103,5 +103,30 @@
   "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-942270039710528411/original/20a2891d-e199-4772-a913-b53111908b9f.jpeg",
   "url": "https://www.airbnb.com/rooms/942270039710528411",
   "review_snippets": [],
-  "enriched_at": "2026-09-05T04:56:24.210653"
+  "enriched_at": "2026-09-05T04:56:24.210653",
+  "house_rules": {
+    "check_in_time": "Check-in after 3:00 PM",
+    "check_out_time": "Checkout before 10:00 AM",
+    "security_deposit": null,
+    "quiet_hours": "Quiet hours: 10:00 PM - 6:00 AM",
+    "noise_monitoring": false,
+    "pets_allowed": false,
+    "events_allowed": false,
+    "min_age": null,
+    "raw_rules": [
+      "Check-in after 3:00 PM",
+      "Checkout before 10:00 AM",
+      "Self check-in with keypad",
+      "No pets",
+      "Quiet hours: 10:00 PM - 6:00 AM",
+      "No parties or events",
+      "Commercial photography allowed",
+      "No smoking",
+      "Gather used towels",
+      "Throw trash away",
+      "Additional requests: Please do not strip the beds."
+    ],
+    "additional_rules": "SWIMMING POOL AND SPA SAFETY ACKNOWLEDGEMENT AND RELEASE (by booking the home you agree to the acknowledgement and release, if you do not please immediately cancel the reservation or tell us that you do not agree).\n\nParents to supervise all children at all times in the pool and backyard. \n\nNo lifeguards on duty. \n\nYour own supervision is the key to prevent drowning: never leave children unsupervised in the pool or spa area- not even for a second! \n\nMake sure someone is always watching children a"
+  },
+  "rules_enriched_at": "2026-09-07T01:17:08.346935"
 }

@@ -461,3 +461,98 @@ bash scripts/launchd/uninstall_launchd.sh
 | **Kivoya connection timeout** | Streamline VRS server maintenance | Run `.venv/bin/python -m src.cli test-kivoya` to test response latency and payload validity. |
 | **Comp quality ratio looks skewed** | Text mining missed pool heating or casita | Check `data/enriched_comps/{listing_id}.json`. Ask Antigravity to audit the listing using `.agents/skills/evaluate-comps/SKILL.md`. |
 
+---
+
+## 8. Frequently Asked Questions (FAQ)
+
+### Q1: When running `scripts/launchd/run_weekly_fullscan.sh`, why is there no output in the terminal, and how do I tell if it is running without errors?
+
+**Why there is no terminal output:**
+All three launchd wrapper scripts ([`run_pms_sync.sh`](file:///Users/ivanpe/str-price-advisor/scripts/launchd/run_pms_sync.sh), [`run_daily_quickscan.sh`](file:///Users/ivanpe/str-price-advisor/scripts/launchd/run_daily_quickscan.sh), and [`run_weekly_fullscan.sh`](file:///Users/ivanpe/str-price-advisor/scripts/launchd/run_weekly_fullscan.sh)) are configured for automated background execution and redirect both standard output and standard error directly into log files:
+```bash
+caffeinate -i "$PROJECT_ROOT/.venv/bin/python" -m src.cli run --weekly --compare-platforms --push >> "$LOG_FILE" 2>&1
+```
+
+**How to verify execution in real time:**
+1. **Stream the live execution logs:**
+   ```bash
+   tail -f ~/Library/Logs/str-price-advisor/weekly_fullscan.log
+   ```
+2. **Check if the process is actively running:**
+   ```bash
+   ps aux | grep -E "weekly_fullscan|src\.cli" | grep -v grep
+   ```
+3. **Completion alerts:** When finished, macOS triggers an audible notification banner (`✅ Weekly Audit Complete` or `❌ Weekly Audit Failed`) and appends the completion timestamp and exit code to the log file.
+
+---
+
+### Q2: Is there a downside to running the weekly script (`run_weekly_fullscan.sh`) every single day?
+
+**Yes, several operational downsides:**
+* **Heavy Anti-Bot & Proxy Exposure:** The weekly script executes `--weekly --compare-platforms`. For all ~79 unbooked intervals across 12 months, it queries Airbnb luxury comps and also checks 4 separate channels (**Airbnb**, **VRBO**, **Booking.com**, and **Kivoya**). Running this daily generates hundreds of live multi-platform browser requests every 24 hours, unnecessarily consuming proxy bandwidth and increasing the risk of CAPTCHAs or IP throttling.
+* **Execution Time & System Resources:** The full 12-month multi-platform scan takes **15 to 30+ minutes**, holding the machine awake via `caffeinate` and keeping headless Chromium instances active. In contrast, the daily quick scan finishes in **1–2 minutes**.
+* **Diminishing Returns on Distant Dates:** Competitor rates 6–12 months out (e.g., next summer) change very slowly. Scraping them daily yields virtually identical recommendations day-to-day.
+* **Git Clutter:** Because `--push` commits and deploys to GitHub Pages, running a 12-month full scan daily produces large, repetitive git commits where 80%+ of future dates had zero rate movement.
+
+---
+
+### Q3: Why prefer running `run_daily_quickscan.sh` daily instead?
+
+* **High-Precision Competitor Sales & Absorption Tracking:** The Competitor Sales Engine ([`CompetitorSalesTracker`](file:///Users/ivanpe/str-price-advisor/docs/COMPETITOR_SALES_TRACKER_DESIGN.md)) detects when competitor listings get booked by diffing consecutive pricing snapshots. Running daily pinpoints the **exact transaction date and booking lead time to within $\pm 24$ hours**, while capturing the exact percentile rank at which the listing cleared. This precision directly trains the Bayesian 2D Strategy Grid. Scanning only weekly aggregates 7 days of sales together, blurring booking velocity and lead-time curves by up to $\pm 6$ days.
+* **Focuses on the Active Booking Window (0–90 Days):** Executes with `--quick --limit 12`, monitoring the upcoming 12 open intervals. This is where market velocity happens: competitors drop rates to fill last-minute vacancies, booking lead times shrink, and pricing adjustments are urgent.
+* **Fast & Lightweight:** Runs in ~1–2 minutes with minimal CPU and memory overhead.
+* **Low Scraping Footprint:** Hits Airbnb only for the first 12 intervals and skips the heavy 4-channel cross-platform scrape.
+* **Timely Daily Alerts:** Flags `🚨 URGENT_ACTION` alerts (unbooked intervals with lead time $\le$ 14–30 days) early each morning so rates can be updated in Kivoya promptly.
+
+---
+
+### Q4: How do we know the first 12 open intervals cover the next 90 days?
+
+**1. Calendar Segmentation Mechanics:**
+In [`src/segmentation.py`](file:///Users/ivanpe/str-price-advisor/src/segmentation.py), the calendar segmenter evaluates dates week-by-week and divides each week into two standard STR rental chunks:
+- **Weekend Segment:** Thursday to Sunday (3 nights) or Friday to Sunday (2 nights).
+- **Midweek Segment:** Sunday to Thursday (4 nights) or partial (2–3 nights).
+
+**2. The Occupancy Math:**
+* **If the calendar had 0 bookings:**
+  $$\frac{12 \text{ intervals}}{2 \text{ intervals/week}} = 6 \text{ weeks} \approx 42 \text{ days}$$
+* **With realistic Villa del Sol bookings:**
+  Because confirmed bookings and owner blocks already occupy dates across upcoming weeks, those occupied weeks produce 0 or partial intervals. It typically takes **~13 to 14 calendar weeks** to accumulate 12 unbooked intervals, which naturally stretches across **~90 to 104 days**.
+
+> [!NOTE]
+> `--limit 12` caps by **count of unbooked intervals**, not a hard calendar date. If you ever need a strict calendar cutoff (e.g., strictly 90 days regardless of how many bookings exist), pass `--end-date $(date -v+90d +%Y-%m-%d)`.
+
+---
+
+### Q5: Is running `scripts/launchd/run_pms_sync.sh` mandatory before running either the daily or weekly script?
+
+| Aspect | Mandatory? | Rationale |
+| :--- | :---: | :--- |
+| **Pricing Audit & Open Intervals** | **NO** | Both daily and weekly scripts query the Kivoya / Streamline VRS API live on the fly ([`KivoyaClient.get_blocked_periods()`](file:///Users/ivanpe/str-price-advisor/src/cli.py#L112-L118)). It fetches live blocked dates in real time to calculate unbooked segments, so market price recommendations are always accurate even without running PMS sync. |
+| **Dashboard Historical & Revenue Tab** | **Recommended** | The interactive HTML dashboard's "Reservations" tab, past revenue KPI cards, and lead-time absorption charts read from the local database (`data/reservations.db`). If PMS sync has not run recently, newly confirmed reservations or cancellations will not appear in that specific table until synced. |
+
+**Automated Sequencing:** The launchd daemons are intentionally timed so that `run_pms_sync.sh` executes at **6:00 AM** (taking ~10 seconds), and `run_daily_quickscan.sh` fires at **6:15 AM** to immediately incorporate fresh reservation data into the dashboard.
+
+---
+
+### Q6: Is there a downside if I only run the weekly scan once a week and skip the daily jobs until my Mac Mini arrives in 2–3 weeks?
+
+**No major downside.** A weekly scan cadence is standard practice for luxury STR revenue management, and running only the weekly script on your laptop is a sensible interim workflow while waiting for your dedicated Mac Mini.
+
+**Minor trade-offs during this 2–3 week bridge:**
+1. *Intra-week price movements:* You won't see mid-week competitor rate cuts for immediate near-term weekends (0–14 day lead times) until Sunday.
+2. *Competitor sales detection precision:* The absorption engine diffs consecutive snapshots to identify sold comps. Daily scans capture the exact sale date with $\pm 24\text{h}$ lead-time precision. Weekly scans still identify that a competitor was booked, but the booking date is estimated within a 7-day window. For a temporary 2–3 week bridge period, this slight loss in lead-time granularity is negligible.
+3. *Dashboard reservations tab:* New bookings will not show up in the dashboard's "Reservations" tab unless PMS sync is run.
+
+**Recommended Interim Routine:**
+Run `run_pms_sync.sh` once right before your weekly full scan (takes only ~5–10 seconds):
+```bash
+# 1. Sync new reservations & financial payouts into SQLite (~10 sec)
+bash scripts/launchd/run_pms_sync.sh
+
+# 2. Run weekly 12-month market scan & platform parity check (~15–25 min)
+bash scripts/launchd/run_weekly_fullscan.sh
+```
+Once your dedicated Mac Mini is provisioned, enable all three launchd daemons per [Section 5](#5-new-mac-mini-provisioning--hardening-runbook) for fully hands-free daily automation.
+
+

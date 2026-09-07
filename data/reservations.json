@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "exported_at": "2026-09-06T17:05:10.860043",
+    "exported_at": "2026-09-06T17:07:50.559128",
     "total_reservations": 4,
     "future_reservations": 0,
     "past_reservations": 4,
@@ -28,7 +28,7 @@
       "management_fee": 0.0,
       "gross_rent": 3300.0,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T17:05:10.859101"
+      "last_scraped_at": "2026-09-06T17:07:50.558032"
     },
     {
       "id": 201,
@@ -50,7 +50,7 @@
       "management_fee": 0.0,
       "gross_rent": 2100.0,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T17:05:10.859101"
+      "last_scraped_at": "2026-09-06T17:07:50.558032"
     },
     {
       "id": 102,
@@ -72,7 +72,7 @@
       "management_fee": 0.0,
       "gross_rent": 1500.0,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T17:05:10.859101"
+      "last_scraped_at": "2026-09-06T17:07:50.558032"
     },
     {
       "id": 101,
@@ -94,7 +94,7 @@
       "management_fee": 0.0,
       "gross_rent": 3000.0,
       "is_future": 0,
-      "last_scraped_at": "2026-09-06T17:05:10.859101"
+      "last_scraped_at": "2026-09-06T17:07:50.558032"
     }
   ]
 }

@@ -62,12 +62,11 @@ flowchart TD
         Filter -- No --> Ignore["Ignore Unregistered Listings"]
         Filter -- Yes --> Verify{"Calendar Verification<br/>(Dates truly blocked?)"}
         Verify -- Confirmed --> SaleRecord["Construct Sale Event Record<br/>• Lead Days N<br/>• Rate $P<br/>• Percentile Y"]
-        Verify -- Unverified --> AbsentRecord["Flag as SEARCH_ABSENT"]
+        Verify -- Unverified --> OmitRecord["Omit Unverified Search Dropouts<br/>(Strictly excluded from database)"]
     end
 
     subgraph Storage ["SQLite Transaction Ledger"]
         SaleRecord --> SQL[("data/reservations.db<br/>TABLE: competitor_sales")]
-        AbsentRecord --> SQL
     end
 
     subgraph Analytics ["Strategy & Velocity Analytics"]
@@ -103,7 +102,7 @@ CREATE TABLE IF NOT EXISTS competitor_sales (
     last_observed_percentile REAL,      -- Market percentile at time of sale (0-100)
     composite_score REAL,               -- 6-factor score (e.g. 92.5)
     desirability_ratio REAL,            -- Desirability ratio (e.g. 1.15)
-    verification_status TEXT NOT NULL,  -- 'CONFIRMED_BLOCKED', 'SEARCH_ABSENT'
+    verification_status TEXT NOT NULL,  -- 'CONFIRMED_BLOCKED' (unverified dropouts are omitted)
     raw_snippet TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(listing_id, check_in, check_out)

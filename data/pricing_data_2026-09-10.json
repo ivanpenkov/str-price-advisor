@@ -1,7 +1,7 @@
 {
   "property": "Villa del Sol",
   "report_date": "2026-09-10",
-  "generated_at": "2026-09-10T17:07:20.118906",
+  "generated_at": "2026-09-10T17:08:36.572852",
   "summary": {
     "total_open_intervals": 79,
     "urgent_count": 35,
@@ -378,11 +378,11 @@
       "lead_time_status": {
         "lead_days": 3,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "LAST_MINUTE",
-        "label": "Last-Minute Distress (3d out \u2022 Normal: 12\u2013134d)",
+        "label": "Last-Minute Distress (3d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#f87171",
         "badge_bg": "rgba(248,113,113,0.15)",
         "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
@@ -4452,11 +4452,11 @@
       "lead_time_status": {
         "lead_days": 11,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "LAST_MINUTE",
-        "label": "Last-Minute Distress (11d out \u2022 Normal: 12\u2013134d)",
+        "label": "Last-Minute Distress (11d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#f87171",
         "badge_bg": "rgba(248,113,113,0.15)",
         "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
@@ -4908,11 +4908,11 @@
       "lead_time_status": {
         "lead_days": 80,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (80d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (80d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -5711,15 +5711,15 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1170",
       "our_percentile_rank_adj": 6.2,
       "historical_benchmark": {
-        "sample_count": 6,
-        "min_rate": 549.0,
+        "sample_count": 5,
+        "min_rate": 564.85,
         "max_rate": 854.18,
-        "median_rate": 617.58,
-        "avg_rate": 642.46,
-        "range_str": "$549\u2013$854 (Med $618)",
-        "variance_pct": 89.4,
+        "median_rate": 638.8,
+        "avg_rate": 661.16,
+        "range_str": "$565\u2013$854 (Med $639)",
+        "variance_pct": 83.2,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+89% vs Track Record",
+        "flag_label": "+83% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -5761,14 +5761,6 @@
             "gross_nightly": 564.85,
             "payout_nightly": 463.18,
             "confirmation_id": 13679
-          },
-          {
-            "start_date": "2026-09-10",
-            "end_date": "2026-09-13",
-            "nights": 3,
-            "gross_nightly": 549.0,
-            "payout_nightly": 450.18,
-            "confirmation_id": 17927
           }
         ]
       },
@@ -6082,15 +6074,15 @@
       "action_summary_adj": "\u2191 Increase $599 \u2192 $1149",
       "our_percentile_rank_adj": 7.7,
       "historical_benchmark": {
-        "sample_count": 4,
-        "min_rate": 549.0,
+        "sample_count": 3,
+        "min_rate": 564.85,
         "max_rate": 854.18,
-        "median_rate": 580.6,
-        "avg_rate": 641.1,
-        "range_str": "$549\u2013$854 (Med $581)",
-        "variance_pct": 97.9,
+        "median_rate": 596.35,
+        "avg_rate": 671.79,
+        "range_str": "$565\u2013$854 (Med $596)",
+        "variance_pct": 92.7,
         "flag": "AGGRESSIVE_PREMIUM",
-        "flag_label": "+98% vs Track Record",
+        "flag_label": "+93% vs Track Record",
         "flag_color": "#fbbf24",
         "matched_stays": [
           {
@@ -6116,25 +6108,17 @@
             "gross_nightly": 564.85,
             "payout_nightly": 463.18,
             "confirmation_id": 13679
-          },
-          {
-            "start_date": "2026-09-10",
-            "end_date": "2026-09-13",
-            "nights": 3,
-            "gross_nightly": 549.0,
-            "payout_nightly": 450.18,
-            "confirmation_id": 17927
           }
         ]
       },
       "lead_time_status": {
         "lead_days": 357,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (357d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (357d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -7797,11 +7781,11 @@
       "lead_time_status": {
         "lead_days": 17,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (17d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (17d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -8293,11 +8277,11 @@
       "lead_time_status": {
         "lead_days": 259,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (259d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (259d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -9147,11 +9131,11 @@
       "lead_time_status": {
         "lead_days": 122,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (122d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (122d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -9860,11 +9844,11 @@
       "lead_time_status": {
         "lead_days": 108,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (108d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (108d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -10364,11 +10348,11 @@
       "lead_time_status": {
         "lead_days": 252,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (252d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (252d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -11653,11 +11637,11 @@
       "lead_time_status": {
         "lead_days": 245,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (245d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (245d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -12228,11 +12212,11 @@
       "lead_time_status": {
         "lead_days": 262,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (262d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (262d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -13171,11 +13155,11 @@
       "lead_time_status": {
         "lead_days": 238,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (238d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (238d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -13556,11 +13540,11 @@
       "lead_time_status": {
         "lead_days": 140,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (140d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (140d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -14066,11 +14050,11 @@
       "lead_time_status": {
         "lead_days": 255,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (255d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (255d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -14432,11 +14416,11 @@
       "lead_time_status": {
         "lead_days": 31,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (31d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (31d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -17841,11 +17825,11 @@
       "lead_time_status": {
         "lead_days": 248,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (248d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (248d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -18242,11 +18226,11 @@
       "lead_time_status": {
         "lead_days": 116,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (116d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (116d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -18619,11 +18603,11 @@
       "lead_time_status": {
         "lead_days": 143,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (143d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (143d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -20090,13 +20074,13 @@
       "action_summary_adj": "\u2193 Reduce $549 \u2192 $418",
       "our_percentile_rank_adj": 50.0,
       "historical_benchmark": {
-        "sample_count": 5,
+        "sample_count": 4,
         "min_rate": 520.01,
         "max_rate": 804.38,
-        "median_rate": 549.0,
-        "avg_rate": 591.68,
-        "range_str": "$520\u2013$804 (Med $549)",
-        "variance_pct": -23.9,
+        "median_rate": 542.51,
+        "avg_rate": 602.36,
+        "range_str": "$520\u2013$804 (Med $543)",
+        "variance_pct": -23.0,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
@@ -20108,14 +20092,6 @@
             "gross_nightly": 804.38,
             "payout_nightly": 659.59,
             "confirmation_id": 10965
-          },
-          {
-            "start_date": "2026-09-10",
-            "end_date": "2026-09-13",
-            "nights": 3,
-            "gross_nightly": 549.0,
-            "payout_nightly": 450.18,
-            "confirmation_id": 17927
           },
           {
             "start_date": "2026-09-18",
@@ -20146,11 +20122,11 @@
       "lead_time_status": {
         "lead_days": 14,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (14d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (14d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -20637,11 +20613,11 @@
       "lead_time_status": {
         "lead_days": 234,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (234d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (234d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -22253,11 +22229,11 @@
       "lead_time_status": {
         "lead_days": 119,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (119d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (119d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -22665,11 +22641,11 @@
       "lead_time_status": {
         "lead_days": 66,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (66d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (66d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -24259,11 +24235,11 @@
       "lead_time_status": {
         "lead_days": 59,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (59d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (59d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -25207,11 +25183,11 @@
       "lead_time_status": {
         "lead_days": 46,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (46d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (46d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -25595,11 +25571,11 @@
       "lead_time_status": {
         "lead_days": 84,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (84d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (84d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -26086,11 +26062,11 @@
       "lead_time_status": {
         "lead_days": 87,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (87d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (87d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -26433,11 +26409,11 @@
       "lead_time_status": {
         "lead_days": 131,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (131d out \u2022 Normal: 12\u2013134d)",
+        "label": "Active Booking Window (131d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -26832,14 +26808,14 @@
       "lead_time_status": {
         "lead_days": 133,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
-        "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (133d out \u2022 Normal: 12\u2013134d)",
-        "badge_color": "#34d399",
-        "badge_bg": "rgba(52,211,153,0.15)",
-        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+        "p75": 131,
+        "status": "PRE_WINDOW",
+        "label": "Pre-Window (133d out \u2022 Normal: 12\u2013131d)",
+        "badge_color": "#38bdf8",
+        "badge_bg": "rgba(56,189,248,0.15)",
+        "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
       },
       "is_live_scan": true
     },
@@ -27304,11 +27280,11 @@
       "lead_time_status": {
         "lead_days": 136,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (136d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (136d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -29077,11 +29053,11 @@
       "lead_time_status": {
         "lead_days": 241,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (241d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (241d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -33009,11 +32985,11 @@
       "lead_time_status": {
         "lead_days": 360,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (360d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (360d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -33068,13 +33044,13 @@
       "action_summary_adj": "",
       "our_percentile_rank_adj": 50.0,
       "historical_benchmark": {
-        "sample_count": 5,
-        "min_rate": 549.0,
+        "sample_count": 4,
+        "min_rate": 555.48,
         "max_rate": 804.38,
-        "median_rate": 564.85,
-        "avg_rate": 614.01,
-        "range_str": "$549\u2013$804 (Med $565)",
-        "variance_pct": 6.0,
+        "median_rate": 580.6,
+        "avg_rate": 630.26,
+        "range_str": "$555\u2013$804 (Med $581)",
+        "variance_pct": 3.2,
         "flag": "ON_TRACK",
         "flag_label": "Aligned With Track Record",
         "flag_color": "#34d399",
@@ -33104,14 +33080,6 @@
             "confirmation_id": 13679
           },
           {
-            "start_date": "2026-09-10",
-            "end_date": "2026-09-13",
-            "nights": 3,
-            "gross_nightly": 549.0,
-            "payout_nightly": 450.18,
-            "confirmation_id": 17927
-          },
-          {
             "start_date": "2026-09-18",
             "end_date": "2026-09-21",
             "nights": 3,
@@ -33124,11 +33092,11 @@
       "lead_time_status": {
         "lead_days": 364,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
-        "normal_window_str": "12\u2013134 days",
+        "normal_window_str": "12\u2013131 days",
         "p25": 12,
-        "p75": 134,
+        "p75": 131,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (364d out \u2022 Normal: 12\u2013134d)",
+        "label": "Pre-Window (364d out \u2022 Normal: 12\u2013131d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."

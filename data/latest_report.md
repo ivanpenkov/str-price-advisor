@@ -13,7 +13,6 @@
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
 > Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
-
 ---
 
 ## 🚨 Section 1: Urgent Action Required (Action This Week)

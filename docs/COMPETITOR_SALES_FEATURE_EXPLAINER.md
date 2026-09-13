@@ -35,7 +35,7 @@ flowchart TD
         Diff["diff_snapshots(prev, curr)"]
         S1 --> Diff
         S2 --> Diff
-        Filter{"Comp in Curated<br/>Registry (103 Comps)?"}
+        Filter{"Comp in Curated<br/>Registry (109 Comps)?"}
         Diff --> Filter
         Filter -- No --> Skip["Ignore Organic Search Churn"]
         Filter -- Yes --> Reconcile{"Present in Curr Snapshot<br/>or Search Cache?"}
@@ -83,8 +83,8 @@ where $\mathcal{C}$ is the collection of active competitor listings observed for
 When comparing snapshot $S_{\text{prev}}$ (date $D_{\text{prev}}$) to $S_{\text{curr}}$ (date $D_{\text{curr}}$) for stay interval $(D_{\text{in}}, D_{\text{out}})$:
 58849\text{Disappeared Comps} = \mathcal{C}_{\text{prev}} \setminus \mathcal{C}_{\text{curr}}58849
 
-Filtered strictly to the curated **103 registered comps** ($\mathcal{R}$ in `config/comps_registry.json`):
-58849\Delta_{\text{sales}} = \{ c \in \mathcal{C}_{\text{prev}} \cap \mathcal{R} \mid c \notin \mathcal{C}_{\text{curr}} \}58849
+Filtered strictly to the curated **109 registered comps** (97 active valid comps + 12 disqualified comps) ($\mathcal{R}$ in `config/comps_registry.json`):
+$$\Delta_{\text{sales}} = \{ c \in \mathcal{C}_{\text{prev}} \cap \mathcal{R} \mid c \notin \mathcal{C}_{\text{curr}} \}$$
 
 ### 3.3 Metrics Recorded for Each Sale
 1. **Lead Time ($N$)**:
@@ -109,13 +109,13 @@ Filtered strictly to the curated **103 registered comps** ($\mathcal{R}$ in `con
 ## 4. Why False Sales Occurred (Failure Mode Analysis)
 
 ### 4.1 Root Cause 1: Page 1 Search Truncation vs. Listing Availability
-* `AirbnbCollector` queries broad area searches:
+* Historically, `AirbnbCollector` only queried broad Page 1 area searches:
   `https://www.airbnb.com/s/Mesa--AZ/homes?adults=16&min_bedrooms=6&checkin=...`
-* **Airbnb only renders 18–24 cards on Page 1**. The collector does not paginate.
+* **Airbnb only renders 18–24 cards on Page 1**. In the early implementation, the collector did not paginate or execute Stage 2 direct fallbacks.
 * There are over 30 matching homes in Mesa and hundreds in Scottsdale.
 * Airbnb’s organic search ranking is dynamic: between Monday and Tuesday, listings rotate positions based on algorithm updates, host responsiveness, and A/B tests.
 * When listing `711609909194570058` slipped from rank #14 on Sep 7 to rank #21 on Sep 8, it fell off Page 1.
-* **The diff engine mistakenly treated "not in top 18 cards" as "booked/blocked"**, stamping 11 sales for a single property on one day.
+* **The diff engine mistakenly treated "not in top 18 cards" as "booked/blocked"**, stamping 11 sales for a single property on one day. (This was subsequently resolved by adding multi-page cursor pagination and Stage 2 targeted direct fallback).
 
 ### 4.2 Root Cause 2: Missing Calendar Verification
 * The architecture design specified calendar verification before finalizing a sale record.

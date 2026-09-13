@@ -324,11 +324,11 @@ playwright install-deps chromium
 Create `/Users/ivanpe/str-price-advisor/.env` with your production API keys and proxy credentials:
 ```bash
 cat << 'EOF' > .env
-# NordVPN / Proxy Configuration (Mandatory for scraping Airbnb/VRBO without rate limits)
-NORDVPN_PROXY_HOST=us.smartproxy.com
-NORDVPN_PROXY_PORT=10001
-NORDVPN_PROXY_USER=your_proxy_username
-NORDVPN_PROXY_PASS=your_proxy_password
+# NordVPN SOCKS5 Proxy Credentials (Mandatory for 10-worker stealth fleet)
+NORDVPN_USER=your_nordvpn_service_username
+NORDVPN_PASS=your_nordvpn_service_password
+STEALTH_MAX_CONNECTIONS=10
+STEALTH_STARTUP_DELAY=0.6
 
 # Kivoya / Streamline VRS PMS Credentials
 KIVOYA_UNIT_ID=503802

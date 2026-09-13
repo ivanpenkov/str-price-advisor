@@ -123,17 +123,17 @@ Bot detection filters look for perfectly uniform intervals between HTTP requests
 ## 6. Multi-IP Parallelization Architecture & 10-Worker Stealth Fleet
 
 ### A. NordVPN SOCKS5 Infrastructure & 10-Worker Fleet
-NordVPN allows up to **10 simultaneous connections** per account. [`src/stealth_connection.py`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py) leverages all 10 connections across major US metropolitan feeder markets (excluding Phoenix):
-1. **Los Angeles** (`feeder-la`: `los-angeles.us.socks.nordhold.net:1080`)
-2. **San Francisco** (`feeder-sf`: `san-francisco.us.socks.nordhold.net:1080`)
-3. **Dallas** (`feeder-dal`: `dallas.us.socks.nordhold.net:1080`)
-4. **Chicago** (`feeder-chi`: `chicago.us.socks.nordhold.net:1080`)
-5. **Denver** (`feeder-den`: `socks-us62.nordvpn.com:1080`)
-6. **Seattle** (`feeder-sea`: `socks-us53.nordvpn.com:1080`)
-7. **Miami** (`feeder-mia`: `socks-us65.nordvpn.com:1080`)
-8. **Atlanta** (`feeder-atl`: `socks-us66.nordvpn.com:1080`)
-9. **Austin** (`feeder-atx`: `socks-us73.nordvpn.com:1080`)
-10. **New York** (`feeder-nyc`: `socks-us30.nordvpn.com:1080`)
+NordVPN allows up to **10 simultaneous connections** per account. [`src/stealth_connection.py`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py) leverages all 10 connections across verified active US metropolitan feeder markets (strictly excluding Phoenix):
+1. **Los Angeles 1** (`feeder-la-1`: `los-angeles.us.socks.nordhold.net:1080`)
+2. **San Francisco 1** (`feeder-sf-1`: `san-francisco.us.socks.nordhold.net:1080`)
+3. **Dallas 1** (`feeder-dal-1`: `dallas.us.socks.nordhold.net:1080`)
+4. **Chicago 1** (`feeder-chi-1`: `chicago.us.socks.nordhold.net:1080`)
+5. **US Anycast 1** (`feeder-us-1`: `us.socks.nordhold.net:1080`)
+6. **San Francisco 2** (`feeder-sf-2`: `socks-us46.nordvpn.com:1080`)
+7. **Los Angeles 2** (`feeder-la-2`: `socks-us61.nordvpn.com:1080`)
+8. **Atlanta 1** (`feeder-atl-1`: `socks-us68.nordvpn.com:1080`)
+9. **San Francisco 3** (`feeder-sf-3`: `socks-us70.nordvpn.com:1080`)
+10. **Dallas 2** (`feeder-dal-2`: `socks-us73.nordvpn.com:1080`)
 
 ### B. Pre-Flight Google Probing & Dynamic Candidate Hot-Swapping
 Rather than blindly starting scrapers with unverified forwarders:
@@ -157,8 +157,19 @@ In [`src/platform_comparator.py`](file:///Users/ivanpe/str-price-advisor/src/pla
 - **Zero Cross-Talk**: Every platform query runs on an independent proxy IP.
 - Total comparison time across 8 intervals drops from over **5 minutes** to under **25 seconds**.
 
-### E. Luxury Comp Scraping (`AirbnbCollector`)
-In [`src/airbnb_collector.py`](file:///Users/ivanpe/str-price-advisor/src/airbnb_collector.py), all 4 location corridors (Tempe, Scottsdale, Chandler, Mesa) are queried concurrently across distinct feeder contexts, pulling up to 3 pages per corridor with zero IP throttling.
+### E. Two-Stage Luxury Comp Scraping & 3-Attempt Transient Retry (`AirbnbCollector`)
+In [`src/airbnb_collector.py`](file:///Users/ivanpe/str-price-advisor/src/airbnb_collector.py), competitor data collection operates in two robust stages:
+1. **Stage 1: Multi-Corridor Search Sweeps**:
+   - All 4 regional location corridors (Tempe, Scottsdale, Chandler, Mesa) are queried concurrently across distinct feeder contexts.
+   - Paginates across 2–3 pages per corridor using base64 cursor tokens (`get_search_cursor()`), extracting up to 72 cards per corridor without IP throttling.
+2. **Stage 2: Targeted Multi-IP Direct Comp Fallback (100% Comp Accounting)**:
+   - If any curated comp in `config/comps_registry.json` was not captured during Stage 1 search results, the collector triggers direct single-comp PDP checks (`fetch_single_comp_pricing`).
+   - Direct PDP requests are distributed concurrently across the 10-node proxy pool via `@asynccontextmanager lease_context()`.
+3. **3-Attempt Transient Navigation Retries**:
+   - Remote SOCKS5 edge resets can occasionally cause transient `net::ERR_EMPTY_RESPONSE` or navigation timeouts.
+   - The collector executes up to **3 attempts** (initial attempt + 2 retries) with polite `AIRBNB_RETRY_DELAY=1.0s` backoff.
+   - Warning logs are suppressed until attempt 3 fails, ensuring console output remains clean during transient hiccups.
+   - If all 3 attempts fail, cache file writing is strictly skipped to prevent **cache poisoning**, allowing subsequent runs to re-attempt the comp.
 
 ### F. Deep Listing Enrichment & Comp Sweeps (`CompManager` / `ListingEnricher`)
 Batch enrichment of 30+ competitor listings and interval calendar verification run concurrently up to 10 workers wide, slashing multi-property refresh times by up to 10x.

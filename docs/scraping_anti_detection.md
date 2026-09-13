@@ -41,7 +41,7 @@ The STR Price Advisor gathers competitive intelligence through a multi-tier prox
 
 ### A. Credential Isolation & Strict Guard
 - External scraping traffic routes through authenticated NordVPN SOCKS5 proxy endpoints. Credentials are isolated inside `.env` (`NORDVPN_USER`, `NORDVPN_PASS`, `NORDVPN_SERVER`, `STEALTH_MAX_CONNECTIONS`).
-- Handled by [`src/stealth_connection.py`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py) (with backwards-compatible adapter [`src/proxy_manager.py`](file:///Users/ivanpe/str-price-advisor/src/proxy_manager.py)).
+- Handled by [`src/stealth_connection.py`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py).
 - **Hard Guard**: If credentials are missing or the forwarder fails to bind, the system aborts immediately with a `RuntimeError` rather than ever falling back to an unproxied connection. Your residential and server IP addresses are never exposed to Airbnb, VRBO, or Booking.com.
 
 ### B. Why `pproxy` Is Required
@@ -71,7 +71,7 @@ By routing web traffic through exit nodes in these feeder cities:
 - Local host surveillance heuristic tripwires are completely bypassed.
 
 ### C. Strict Phoenix Exclusion Logic
-In [`src/proxy_manager.py`](file:///Users/ivanpe/str-price-advisor/src/proxy_manager.py), Phoenix proxy servers are strictly excluded. If an environment variable or configuration accidentally specifies `phoenix.us.socks.nordhold.net`, it is automatically intercepted and redirected to Los Angeles:
+In [`src/stealth_connection.py`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py), Phoenix proxy servers are strictly excluded. If an environment variable or configuration accidentally specifies `phoenix.us.socks.nordhold.net`, it is automatically intercepted and redirected to Los Angeles:
 ```python
 if "phoenix" in host.lower():
     logger.warning(

@@ -76,12 +76,12 @@ flowchart TD
 
 ### 3.1 Interval Snapshot Representation
 Each pricing snapshot contains a list of stay intervals:
-58849\mathcal{I} = \{(D_{\text{in}}, D_{\text{out}}, \mathcal{C})\}58849
+$$\mathcal{I} = \{(D_{\text{in}}, D_{\text{out}}, \mathcal{C})\}$$
 where $\mathcal{C}$ is the collection of active competitor listings observed for that interval, each with an effective nightly rate $R_c = \frac{\text{Total Price}}{\text{Nights}}$.
 
 ### 3.2 Detection of Disappearances
 When comparing snapshot $S_{\text{prev}}$ (date $D_{\text{prev}}$) to $S_{\text{curr}}$ (date $D_{\text{curr}}$) for stay interval $(D_{\text{in}}, D_{\text{out}})$:
-58849\text{Disappeared Comps} = \mathcal{C}_{\text{prev}} \setminus \mathcal{C}_{\text{curr}}58849
+$$\text{Disappeared Comps} = \mathcal{C}_{\text{prev}} \setminus \mathcal{C}_{\text{curr}}$$
 
 Filtered strictly to the curated **109 registered comps** (97 active valid comps + 12 disqualified comps) ($\mathcal{R}$ in `config/comps_registry.json`):
 $$\Delta_{\text{sales}} = \{ c \in \mathcal{C}_{\text{prev}} \cap \mathcal{R} \mid c \notin \mathcal{C}_{\text{curr}} \}$$

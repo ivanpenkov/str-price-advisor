@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "last_updated": "2026-09-14T15:43:22.649901-07:00",
+  "recent_window_days": 30,
+  "recent_reviews_count": 2,
+  "platforms": {
+    "airbnb": {
+      "platform_id": "airbnb",
+      "display_name": "Airbnb",
+      "url": "https://www.airbnb.com/rooms/573857947793833342",
+      "scale": "5.0",
+      "rating": 4.83,
+      "review_count": 77,
+      "sub_scores": {
+        "cleanliness": 4.98,
+        "accuracy": 4.97,
+        "communication": 5.0,
+        "location": 4.93,
+        "check_in": 5.0,
+        "value": 4.88
+      },
+      "last_scraped": "2026-09-14T14:28:10-07:00",
+      "status": "ok"
+    },
+    "vrbo": {
+      "platform_id": "vrbo",
+      "display_name": "VRBO",
+      "url": "https://www.vrbo.com/2685684",
+      "scale": "5.0",
+      "rating": 4.9,
+      "review_count": 34,
+      "sub_scores": {
+        "cleanliness": 4.9,
+        "accuracy": 4.9,
+        "communication": 5.0,
+        "location": 4.8,
+        "check_in": 5.0
+      },
+      "last_scraped": "2026-09-14T14:28:40-07:00",
+      "status": "ok"
+    },
+    "booking": {
+      "platform_id": "booking",
+      "display_name": "Booking.com",
+      "url": "https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html",
+      "scale": "10.0",
+      "rating": 9.4,
+      "review_count": 18,
+      "sub_scores": {
+        "staff": 9.6,
+        "facilities": 9.5,
+        "cleanliness": 9.8,
+        "comfort": 9.4,
+        "value_for_money": 9.1,
+        "location": 9.3,
+        "free_wifi": 10.0
+      },
+      "last_scraped": "2026-09-14T14:29:15-07:00",
+      "status": "ok"
+    },
+    "kivoya": {
+      "platform_id": "kivoya",
+      "display_name": "Kivoya Direct",
+      "url": "https://www.kivoya.com/503802/",
+      "scale": "5.0",
+      "rating": 5.0,
+      "review_count": 12,
+      "sub_scores": {
+        "cleanliness": 5.0,
+        "communication": 5.0,
+        "property": 5.0
+      },
+      "last_scraped": "2026-09-14T15:43:22.648527-07:00",
+      "status": "ok"
+    }
+  },
+  "reviews": [
+    {
+      "id": "e331cbb2c7cf0d7f573752e259e21eb2",
+      "platform": "airbnb",
+      "reviewer_name": "Sarah M.",
+      "reviewer_location": "Scottsdale, AZ",
+      "title": null,
+      "date": "2026-08-28",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Villa del Sol was beyond perfection for our executive retreat! The backyard pool and patio were magnificent, and the bedrooms were spacious and spotless. We will definitely be back.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-08-29",
+        "body": "Thank you so much Sarah! It was our pleasure hosting your team."
+      },
+      "is_recent": true
+    },
+    {
+      "id": "766efddcfdae2d46e0e090df4fe1266e",
+      "platform": "booking",
+      "reviewer_name": "David K.",
+      "reviewer_location": "Germany",
+      "title": "Exceptional luxury stay in Tempe",
+      "date": "2026-08-19",
+      "rating": 9.0,
+      "rating_max": 10.0,
+      "body": "Exceptional property in a quiet Tempe neighborhood. Kitchen was fully stocked and the outdoor grill was top notch. A minor issue with one of the secondary bathroom door locks was quickly attended to.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-08-20",
+        "body": "Thank you David! We appreciate your feedback and had our handyman adjust the bathroom latch right away."
+      },
+      "is_recent": true
+    },
+    {
+      "id": "42616f734493399042b58cbbf4041b31",
+      "platform": "airbnb",
+      "reviewer_name": "Mark P.",
+      "reviewer_location": "Chicago, IL",
+      "title": null,
+      "date": "2026-07-22",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "We had a wonderful stay with our extended family. The kids loved the pool and games room. Front door lock buttons felt sluggish in afternoon heat, but host gave clear instructions.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "8aa1848daaa3ee5723b7e289bf443f87",
+      "platform": "vrbo",
+      "reviewer_name": "Rachel W.",
+      "reviewer_location": "Denver, CO",
+      "title": "Perfect summer getaway with friends",
+      "date": "2026-06-15",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Spacious layout, beautiful pool, and very responsive host. Blender was a bit leaky when making smoothies, but everything else was 5-star quality. Highly recommend!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-06-16",
+        "body": "Thank you Rachel! We've replaced the blender pitcher and gasket. Hope to see you again next summer!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "a988d57d472c69ea400e9ce75cf2a308",
+      "platform": "kivoya",
+      "reviewer_name": "Michael B.",
+      "reviewer_location": "New York, NY",
+      "title": "Unrivaled VIP experience",
+      "date": "2026-05-30",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Direct booking through Kivoya was seamless. The estate exceeded all expectations for our corporate leadership meeting. The backyard resort pool is unmatched in the East Valley.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "e229c9966144e5bc7d0e4ee5e11d0411",
+      "platform": "airbnb",
+      "reviewer_name": "James T.",
+      "reviewer_location": "San Francisco, CA",
+      "title": null,
+      "date": "2026-05-12",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Outstanding stay! The heated pool and outdoor gazebo made our family reunion unforgettable. Host was very responsive. The pool heat had an issue on day 1 but host dispatched the technician within 2 hours.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-05-13",
+        "body": "Thank you James! We resolved that pool heat pump breaker immediately and are glad your family enjoyed the rest of your vacation."
+      },
+      "is_recent": false
+    },
+    {
+      "id": "e5c6a1b2c3d4e5f6a7b8c9d0e1f2a3b4",
+      "platform": "vrbo",
+      "reviewer_name": "Jennifer L.",
+      "reviewer_location": "Dallas, TX",
+      "title": "Luxury oasis in Tempe",
+      "date": "2026-04-18",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "We celebrated our 40th anniversary here with 14 family members. Ample parking, immaculate bedrooms, and a kitchen built for entertaining. Worth every penny.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "f1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+      "platform": "booking",
+      "reviewer_name": "Elena R.",
+      "reviewer_location": "United Kingdom",
+      "title": "Superb luxury property",
+      "date": "2026-03-25",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "Spacious, clean, and beautifully appointed. Outdoor heated pool was 86 degrees and fantastic for the chilly spring evenings. The Kivoya staff was courteous and attentive.",
+      "host_response": null,
+      "is_recent": false
+    }
+  ]
+}

@@ -32,8 +32,9 @@ $$\text{Market Supply (Asking Rates)} \quad \longrightarrow \quad \mathbf{\text{
    - Knowing the empirical booking pace prevents us from panicking and discounting prematurely when dates 90 days away are still unbooked.
 
 3. **Detect Market Compression & Surge Events**:
-   - If 3 or 4 top competitors sell out in a single 48-hour window for a specific weekend (e.g., WM Phoenix Open, Barrett-Jackson, Cactus League Spring Training), the market is rapidly compressing.
-   - Capturing this absorption velocity enables Villa del Sol to raise rates immediately before our own calendar is snapped up at an underpriced rate.
+   - High Compression is defined by **Pure Market Scarcity**: triggered whenever active available competitor inventory drops below **20%** of the active luxury cohort ($>80\%$ market absorption / unavailable).
+   - Across our 97 active luxury comps, this triggers when $\le 19$ comps remain available ($\le 9$ for Tier A, $\le 9$ for Tier B).
+   - Capturing this severe scarcity enables Villa del Sol to elevate target percentiles by $+15\%$ (capped at 90.0%) and enforce a 1.30x base rate surge floor before our own calendar is booked at an underpriced rate.
 
 4. **Eliminate "Leave-Money-on-the-Table" vs. "Perishable Loss" Risk**:
    - Selling too early at low rates sacrifices thousands of dollars in high-season margin.
@@ -119,7 +120,7 @@ The information is visually surfaced on **Tab 5: 🎯 Comps Sales** of the inter
 | **Peak Window Conversion (31–90 Days)** | Guesswork on whether rates are competitive. | Host aligns Villa del Sol to the **empirical median clearing percentile (60%–65%)**, capturing high-intent family vacationers at peak willingness-to-pay. |
 | **Near-Term Demand Compression (15–30 Days)** | Host stubbornly holds high rates until it is too late. | Host recognizes that unbooked dates within 30 days face rising price elasticity; proactively trims to the **50th–55th percentile** to beat remaining competitors to checkout. |
 | **Last-Minute Distress (≤ 14 Days)** | Property sits vacant, resulting in a **100% perishable loss ($0 revenue)**. | Host executes targeted liquidation at the **35th–45th percentile**, securing $2,500–$3,500 in booking revenue that would have otherwise vanished. |
-| **Market Surge Harvesting** | Competitors sell out for a major concert or sporting event, but host doesn't notice until guest books Villa del Sol cheaply. | Sales engine detects that 3 competitors booked in 48 hours for that date; host **immediately raises rates by 25%–40%** to capture the scarcity premium. |
+| **Market Surge Harvesting** | Competitors sell out for a major concert or sporting event, but host doesn't notice until guest books Villa del Sol cheaply. | Sales engine detects pure market scarcity (<20% available comps); host **automatically boosts target percentile by +15% and enforces a 1.30x base rate floor** to capture the scarcity premium. |
 | **Midweek vs. Weekend Optimization** | Midweek and Weekend rates are adjusted uniformly, dampening corporate demand. | Sales engine demonstrates that midweek travelers convert at the **45th percentile**, while weekends convert at the **65th percentile**; host decouples rates accordingly. |
 
 ---
@@ -146,4 +147,8 @@ To satisfy this specification, the implementation must meet the following mandat
    - Must compute 2D Strategy Grids (Lead Horizon $\times$ Stay Type) with Bayesian shrinkage ($k = 3.0$).
    - Must compute Monthly Advance Booking Windows ($P_{25}, P_{50}, P_{75}$) across months 1–12.
    - Must render interactive UI on Tab 5 (`#tab-market-sales`) of `docs/index.html`.
+8. **FR-8: Pure Scarcity Market Compression & Dynamic Percentile Boost**:
+   - Must flag High Compression whenever active available comps drop below $20\%$ of the active cohort ($\le 19$ for 97 all comps, $\le 9$ for Tier A, $\le 9$ for Tier B).
+   - Must boost pricing target percentile by $+15\%$ (capped at $90.0\%$) and apply `SURGE_INCREASE` with a 1.30x base rate floor in `compute_interval_consensus()`.
+   - Must visually highlight compressed dates on the 12-month trajectory chart with vertical amber shading, a dashed threshold guide line, tooltip badges, and a dynamic 5th KPI card.
 

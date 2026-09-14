@@ -17,7 +17,7 @@ While foundational structures (database schema, initial diff logic, and dashboar
 |---|---|---|---|---|
 | **1** | **Bayesian Shrinkage Priors** | §3.4 specifies a tiered $4 \times 2$ horizon matrix (`>90d`, `31–90d`, `15–30d`, `≤14d`) across Weekend and Midweek ($k = 3.0$). When $n = 0$, recommended targets default to baseline priors with empirical $P_{50} = \text{None}$. | Flat static priors (65.0% Weekend / 45.5% Midweek) used across all horizons regardless of lead time. | Replace flat priors with `HORIZON_PRIORS` mapping table and update `compute_strategy_grid()`. |
 | **2** | **Dynamic Target Percentile API** | §3.7.1 specifies `CompetitorSalesTracker.get_target_percentile(lead_days, segment_type)` with in-memory caching of the 2D grid. | Method is absent from `CompetitorSalesTracker`. Only static hardcoded curves exist in `PricingAnalyticsEngine`. | Implement `get_target_percentile()` with caching in `CompetitorSalesTracker`. |
-| **3** | **Market Compression & 48h Surge Engine** | §3.6 specifies tracking 48h booking velocity $\Delta \text{Sales}_{48\text{h}}$, evaluating absolute velocity ($\ge 3$ sales) and relative cohort depletion ($\ge 25\%$ with $N \ge 6, \text{sales} \ge 2$), and generating surge multiplier ($1.30$). | Missing entirely from `CompetitorSalesTracker`. | Implement `detect_market_compression()`, `get_active_compression_alerts()`, and `get_recent_sales(lookback_days=7)`. |
+| **3** | **Market Compression Scarcity Engine** | §3.6 specifies evaluating pure market scarcity: triggered whenever active available comps drop below $20\%$ of cohort ($N_{\text{avail}} / N_{\text{total}} < 0.20$), triggering $+15\%$ percentile boost and $1.30\times$ surge floor. | Implemented in `CompetitorSalesTracker`. | Streamline `detect_market_compression()` to evaluate pure scarcity, support `current_available_count`, and return scarcity alerts. |
 | **4** | **Analytics Engine Wiring** | §3.7.2 specifies `PricingAnalyticsEngine` taking `sales_tracker`, querying dynamic targets, and elevating target percentiles by $+15\%$ (capped at 90%) upon compression. | `PricingAnalyticsEngine` does not accept or call `sales_tracker`. | Wire `sales_tracker` into `PricingAnalyticsEngine` and update `evaluate_segment()`. |
 | **5** | **Consensus Policy Override** | §3.6.3 specifies that when `is_compression_surge == True`, `compute_interval_consensus()` overrides `CONFLICT_HOLD` / `NO_HISTORY_HOLD` and assigns non-compounding surge rate with status `"SURGE_INCREASE"`. | `compute_interval_consensus()` has no awareness of compression or surge overrides. | Implement scarcity surge override and non-compounding rate formula in `compute_interval_consensus()`. |
 | **6** | **Asynchronous Verification Bridge** | §5.2.1 specifies `diff_and_verify_staged_comps()` bridging newly scraped staged comps against predecessors, running defensive guards (Stages 1–6), throttled Playwright PDP checks, and 3-state resolution. | Method is missing. Only synchronous file-to-file diffing exists without live staged comp verification. | Implement `diff_and_verify_staged_comps()` in `CompetitorSalesTracker`. |
@@ -77,29 +77,34 @@ def get_target_percentile(self, lead_time_days: int, segment_type: str = "weeken
     return float(self._cached_strategy_grid["grid"][horizon][norm_seg]["recommended_target"])
 ```
 
-#### 3.1.3 Market Compression & 48h Surge Engine (§3.6)
+#### 3.1.3 Market Compression Scarcity Engine (§3.6)
 ```python
 def detect_market_compression(
     self, 
     check_in: str, 
     check_out: Optional[str] = None, 
-    total_cohort_count: Optional[int] = None
+    total_cohort_count: Optional[int] = None,
+    current_available_count: Optional[int] = None,
 ) -> Dict[str, Any]:
     """
-    Evaluate 48-hour booking velocity for a check-in interval:
-    1. Absolute Velocity: >= 3 sales in 48h.
-    2. Relative Cohort Depletion: >= 25% depletion with N_initial >= 6 and sales >= 2.
+    Evaluate pure market scarcity for a check-in interval:
+    Unified Definition: Triggered when available comps drop below 20% of the active cohort
+    (<20% available, i.e. >80% market absorption / unavailable).
+      - All Comps (N=97): <= 19 comps available
+      - Tier A (N=49):    <= 9 comps available
+      - Tier B (N=48):    <= 9 comps available
     """
 ```
-- Queries `competitor_sales` where `check_in = ? AND verification_status = 'CONFIRMED_BLOCKED'` within 48 hours.
-- Computes $N_{\text{initial}} = \text{total\_cohort\_count} + \Delta \text{Sales}_{48\text{h}}$.
-- Computes $\text{depletion\_ratio} = \frac{\Delta \text{Sales}_{48\text{h}}}{\max(1, N_{\text{initial}})}$.
+- Resolves `current_available_count` (either passed directly or queried from latest snapshot).
+- Computes $\text{avail\_ratio} = \frac{N_{\text{avail}}}{N_{\text{total}}}$.
+- Triggers `is_compressed = True` when $\text{avail\_ratio} < 0.20$.
 - Returns:
   ```python
   {
       "is_compressed": is_compressed,
-      "sales_48h": sales_48h,
-      "depletion_ratio": depletion_ratio,
+      "available_count": current_available_count,
+      "total_cohort_count": total_cohort_count,
+      "available_ratio": avail_ratio,
       "surge_multiplier": 1.30 if is_compressed else 1.0,
       "reason": reason
   }
@@ -107,7 +112,7 @@ def detect_market_compression(
 
 #### 3.1.4 Queries for Alerts & Recent Transactions (§3.7.1)
 - `get_recent_sales(lookback_days: int = 7) -> List[Dict[str, Any]]`: Returns verified sales confirmed in the last 7 days.
-- `get_active_compression_alerts(lookback_hours: int = 48) -> List[Dict[str, Any]]`: Returns upcoming intervals currently exceeding compression thresholds.
+- `get_active_compression_alerts(lookback_hours: int = 48) -> List[Dict[str, Any]]`: Returns upcoming intervals currently meeting pure scarcity compression (<20% available).
 
 #### 3.1.5 Asynchronous Verification Bridge (§5.2.1, §5.2.2)
 ```python
@@ -163,7 +168,7 @@ async def diff_and_verify_staged_comps(
 In `compute_interval_consensus(segment)`:
 - Check `segment.get("is_compression_surge") == True`.
 - When active:
-  - Scarcity detected in the last 48 hours explicitly overrides `CONFLICT_HOLD` and `NO_HISTORY_HOLD`.
+  - Market compression pure scarcity (<20% available comps) explicitly overrides `CONFLICT_HOLD` and `NO_HISTORY_HOLD`.
   - Computes non-compounding surge rate:
     $$P_{\text{proposed, surge}} = \max\left(\text{round}(B \times 1.30), P_{\text{rec, surge}}\right)$$
   - Sets `consensus_rate = proposed_surge` and `status = "SURGE_INCREASE"`.
@@ -211,7 +216,7 @@ The test suite in [`tests/test_competitor_sales_tracker.py`](file:///Users/ivanp
 8. `test_monthly_lead_time_quartiles`: Verifies $P_{25}, P_{50}, P_{75}$ calculations across 12 calendar months.
 9. `test_verify_listing_availability_three_states`: Verifies parser sets `blocked=True` only on explicit unavailable signals; network timeouts return `UNVERIFIED_ERROR` without inserting into SQLite.
 10. `test_diff_and_verify_bridge_flow`: Verifies asynchronous bridge queries PDP for candidates and commits only confirmed blocked listings.
-11. `test_market_compression_surge_detection`: Verifies interval with $\ge 3$ sales in 48h (or $\ge 25\%$ with $\ge 6$ comps) triggers surge directive.
+11. `test_market_compression_surge_detection`: Verifies interval with $< 20\%$ available comps triggers surge directive ($+15\%$ target percentile boost, $1.30\times$ floor); normal availability ($\ge 20\%$) does not trigger.
 12. `test_consensus_policy_surge_override`: Verifies `compute_interval_consensus` overrides `CONFLICT_HOLD` and `NO_HISTORY_HOLD` when `is_compression_surge=True`.
 13. `test_get_target_percentile_empirical_lookup`: Verifies `get_target_percentile()` maps lead days to horizons, uses cached grid, and returns Bayesian targets.
 14. `test_reporter_embeds_sales_and_surge_alerts`: Verifies `latest_report.md` includes recent sales table and scarcity warnings.

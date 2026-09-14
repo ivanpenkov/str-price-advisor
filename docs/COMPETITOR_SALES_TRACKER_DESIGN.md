@@ -16,7 +16,7 @@ In a finite short-term rental market, when a previously available competitor lis
 
 By capturing consecutive daily pricing snapshots ($\mathcal{S}_{T-1}, \mathcal{S}_T$), detecting listing disappearances, verifying true calendar unavailability, and recording transactions with their exact **lead-time horizon** ($N$ days before check-in) and **clearing price percentile** ($Y^{\text{th}}$ percentile), the engine builds an empirical sales ledger. This ledger powers:
 1. **Dynamic Target Pricing**: Replaces static, hardcoded percentiles in [`src/analytics.py`](file:///Users/ivanpe/str-price-advisor/src/analytics.py) and [`src/proposed_prices.py`](file:///Users/ivanpe/str-price-advisor/src/proposed_prices.py) with empirical Bayesian-shrunk clearing percentiles.
-2. **Market Compression & Surge Harvesting**: Detects rapid competitor absorption (e.g., $\ge 3$ competitors booking in a 48-hour window) and applies premium surge multipliers ($+25\%\text{–}40\%$) to capture scarcity demand.
+2. **Market Compression & Surge Harvesting**: Detects pure market scarcity whenever active available competitor inventory drops below $20\%$ of the cohort and applies target percentile boosts ($+15\%$) and surge floors ($1.30\times$) to capture scarcity demand.
 3. **Interactive & Advisory Reporting**: Powers Tab 5 on [`docs/index.html`](file:///Users/ivanpe/str-price-advisor/docs/index.html) and weekly markdown audit alerts in [`data/latest_report.md`](file:///Users/ivanpe/str-price-advisor/data/latest_report.md).
 
 ### 1.3 The False-Positive Trap & Anti-Detection Defenses
@@ -79,7 +79,7 @@ flowchart TD
     subgraph Analytics ["4. Strategy & Compression Analytics Engine"]
         SQL --> GridEngine["2D Empirical Strategy Matrix<br/>(4 Lead Horizons × Weekend/Midweek)"]
         SQL --> BayesEngine["Bayesian Shrinkage (k = 3.0)<br/>Horizon-Specific Target Priors"]
-        SQL --> SurgeEngine["Market Compression Detector<br/>(>= 3 sales in 48h window)"]
+        SQL --> SurgeEngine["Pure Scarcity Compression Detector<br/>(&lt; 20% available inventory)"]
         SQL --> WindowsEngine["Monthly Advance Booking Windows<br/>(P25, Median, P75 for Months 1–12)"]
     end
 
@@ -158,36 +158,46 @@ For each stay month $m \in \{1, 2, \dots, 12\}$:
 $$\mathcal{L}_m = \{N_s \mid s \in \text{Sales}, \text{Month}(D_{\text{in}, s}) = m\}$$
 Quartiles $P_{25}, \text{Median } (P_{50}), P_{75}$ are computed using standard rank interpolation ($p \cdot (n - 1)$) to generate the empirical booking pace window ($P_{25}\text{–}P_{75}$ days out).
 
-### 3.6 Market Compression & 48-Hour Demand Surge Engine
-Market compression occurs when competitor inventory is rapidly absorbed within a narrow time window, indicating high-intensity unconstrained demand (e.g., WM Phoenix Open, Barrett-Jackson, Cactus League Spring Training, major concerts, or multi-generational wedding blocks).
+### 3.6 Market Compression & Pure Market Scarcity Engine
+Market compression occurs when competitor inventory is heavily depleted, leaving fewer than 20% of the luxury cohort available. This severe market scarcity indicates high-intensity unconstrained demand (e.g., WM Phoenix Open, Barrett-Jackson, Cactus League Spring Training, major concerts, or multi-generational wedding blocks).
 
-#### 3.6.1 Velocity Formulation
-For any stay interval with check-in date $D_{\text{in}}$, the 48-hour absorption velocity is defined as the count of confirmed sales detected within the last 48 hours:
-$$\Delta \text{Sales}_{48\text{h}}(D_{\text{in}}) = \left| \left\{ s \in \text{Sales} \mid s.\text{check\_in} = D_{\text{in}} \land (T_{\text{curr}} - s.\text{detected\_date}) \le 48\text{ hours} \right\} \right|$$
+#### 3.6.1 Pure Market Scarcity Formulation
+Rather than relying on noisy short-term 48-hour scraping diffs, High Compression is defined by **Pure Market Scarcity**: triggered whenever active available competitor inventory drops below **$20\%$** of the active luxury cohort ($>80\%$ market absorption / unavailable).
 
-#### 3.6.2 Compression Threshold & Trigger Guards
-An interval is flagged as `MARKET_COMPRESSION_SURGE` when either:
-1. **Absolute Velocity**: $\Delta \text{Sales}_{48\text{h}}(D_{\text{in}}) \ge 3$ confirmed competitor sales within 48 hours, or
-2. **Relative Cohort Depletion**: 
-   $$\text{Cohort Depletion Ratio}(D_{\text{in}}) = \frac{\Delta \text{Sales}_{48\text{h}}(D_{\text{in}})}{\max(1, N_{\text{initial}}(D_{\text{in}}))} \ge 0.25$$
-   where $N_{\text{initial}}(D_{\text{in}}) = |\mathcal{C}_{\text{prev}}(D_{\text{in}}) \cap \mathcal{R}|$ or reconstructed from current active comps as $N_{\text{initial}} = N_{\text{active}} + \Delta \text{Sales}_{48\text{h}}(D_{\text{in}})$.  
-   **Guard Condition**: To prevent false surges on sparse corridors, Relative Cohort Depletion triggers **only if** $N_{\text{initial}}(D_{\text{in}}) \ge 6$ and $\Delta \text{Sales}_{48\text{h}}(D_{\text{in}}) \ge 2$.
+For an active cohort of registered luxury comps $\mathcal{R}$ with total count $N_{\text{total}}$ and available comps count $N_{\text{avail}}(D_{\text{in}})$:
+$$\text{Availability Ratio}(D_{\text{in}}) = \frac{N_{\text{avail}}(D_{\text{in}})}{N_{\text{total}}} < 0.20 \quad \Longleftrightarrow \quad N_{\text{avail}}(D_{\text{in}}) \le \lfloor 0.20 \cdot N_{\text{total}} - 10^{-9} \rfloor$$
+
+#### 3.6.2 Cohort Compression Thresholds
+Across our active curated competitor cohorts, the exact scarcity triggers are:
+1. **All Active Comps ($N_{\text{total}} = 97$)**:
+   $$\text{Threshold} = 0.20 \times 97 = 19.4 \implies \mathbf{N_{\text{avail}} \le 19 \text{ comps}} \quad (19 / 97 = 19.58\% < 20\%)$$
+2. **Tier A Cohort ($N_{\text{total}} = 49$, 16+ guests, 6+ BR)**:
+   $$\text{Threshold} = 0.20 \times 49 = 9.8 \implies \mathbf{N_{\text{avail}} \le 9 \text{ comps}} \quad (9 / 49 = 18.37\% < 20\%)$$
+3. **Tier B Cohort ($N_{\text{total}} = 48$, 12–15 guests, 5 BR)**:
+   $$\text{Threshold} = 0.20 \times 48 = 9.6 \implies \mathbf{N_{\text{avail}} \le 9 \text{ comps}} \quad (9 / 48 = 18.75\% < 20\%)$$
 
 #### 3.6.3 Pricing Directive, Non-Compounding Surge & Consensus Policy Override
-To capture scarcity premiums while preventing compounding double-surges (e.g., elevating the percentile and then multiplying the resulting rate by 1.30), the pricing engine enforces a single coherent surge pipeline:
+To capture scarcity premiums while preventing compounding double-surges (e.g., elevating the percentile and then multiplying the resulting rate by 1.30), the pricing engine enforces a unified surge pipeline:
 
-1. **Upstream Market Elevation (`PricingAnalyticsEngine`)**: In [`src/analytics.py`](file:///Users/ivanpe/str-price-advisor/src/analytics.py), the target percentile is elevated to the aggressive ceiling:
+1. **Upstream Market Elevation (`PricingAnalyticsEngine`)**: In [`src/analytics.py`](file:///Users/ivanpe/str-price-advisor/src/analytics.py), whenever scarcity compression is detected ($N_{\text{avail}} / N_{\text{total}} < 0.20$), the target percentile is boosted by **$+15\%$** (capped at $90.0\%$):
    $$\hat{Y}_{\text{target, surge}} = \min(90.0\%, \hat{Y}_{\text{target}} + 15.0\%)$$
-   which generates the unconstrained surge market recommendation $P_{\text{rec, surge}}$.
+   which elevates the recommended market clearing rate $P_{\text{rec, surge}}$ (e.g., P65 $\to$ P80, P75 $\to$ P90).
 2. **Non-Compounding Surge Rate (`src/proposed_prices.py`)**:
    $$P_{\text{proposed, surge}} = \min\left(P_{\text{ceiling}}, \max\left(\text{round}(P_{\text{proposed, normal}} \times 1.30), P_{\text{rec, surge}}\right)\right)$$
 3. **Consensus Policy Override in `compute_interval_consensus()`**:
    Under ordinary circumstances, `compute_interval_consensus()` holds base rate $B$ (`CONFLICT_HOLD` or `NO_HISTORY_HOLD`) if historical median $H$ disagrees with market recommendation $M$. 
    **Policy Override Invariant**: When `segment.get("is_compression_surge") == True`:
-   - Empirical real-time scarcity detected in the last 48 hours explicitly **overrides** `CONFLICT_HOLD` and `NO_HISTORY_HOLD`.
+   - Empirical real-time scarcity compression explicitly **overrides** `CONFLICT_HOLD` and `NO_HISTORY_HOLD`.
    - The interval consensus rate is assigned directly to $P_{\text{proposed, surge}}$ with status `"SURGE_INCREASE"`.
-   - Protects Villa del Sol from selling out at outdated rates when the surrounding market rapidly compresses.
-4. **Alert Generation**: Triggers high-priority warnings in [`data/latest_report.md`](file:///Users/ivanpe/str-price-advisor/data/latest_report.md) and displays a `⚡ Scarcity Surge` badge on the HTML dashboard.
+   - Protects Villa del Sol from selling out at outdated rates when the surrounding market experiences extreme scarcity.
+4. **Alert Generation**: Triggers high-priority warnings in [`data/latest_report.md`](file:///Users/ivanpe/str-price-advisor/data/latest_report.md), outputs alerts in the CLI, and displays a `⚡ Scarcity Surge` badge on the HTML dashboard.
+
+#### 3.6.4 Visual Trajectory Highlighting on Comp Sales Chart (`docs/index.html#tab-market-sales`)
+High Compression is visually integrated into the 12-Month Market Availability & Absorption Trajectory chart:
+1. **Vertical Amber Column Shading**: Subtle translucent amber columns (`rgba(245, 158, 11, 0.12)`) drawn directly onto the canvas behind every calendar date under high compression ($<20\%$ available comps).
+2. **Horizontal Dashed Threshold Guide Line**: A crisp dashed amber line drawn across the chart at $y = 0.80 \times N_{\text{total}}$ labeled `⚡ 20% Availability Threshold (≤X comps)`.
+3. **Streamlined Minimal Tooltips**: Focused strictly on core context: day of week, ISO date, and Villa del Sol availability status (e.g., `Mon, 2026-12-21` and `🟨 Villa del Sol: Available & Open` / `⬛ Villa del Sol: Booked Guest Stay`), eliminating secondary clutter while canvas shading and the 5th KPI card communicate compression.
+4. **5th Trajectory KPI Card (`#trajCompressionDays`)**: A dedicated KPI card displaying the total count and percentage of visible days under compression, dynamically recalculating on 90D, 6M, and 12M range zooms.
 
 ### 3.7 Dynamic Pricing Engine Integration (`src/proposed_prices.py` & `src/analytics.py`)
 To satisfy PRD §4.1, static percentile curves in [`src/analytics.py`](file:///Users/ivanpe/str-price-advisor/src/analytics.py) are replaced with dynamic empirical targets queried from the sales tracker.
@@ -207,16 +217,18 @@ def detect_market_compression(
     self, 
     check_in: str, 
     check_out: Optional[str] = None, 
-    total_cohort_count: Optional[int] = None
+    total_cohort_count: Optional[int] = None,
+    current_available_count: Optional[int] = None,
 ) -> Dict[str, Any]:
     """
-    Evaluate 48-hour booking velocity for an interval.
-    Reconstructs initial cohort as total_cohort_count + sales_48h if current active count is passed.
+    Evaluate pure market scarcity for an interval.
+    Triggers when available comps drop below 20% of the active cohort (avail_ratio < 0.20).
     Returns:
       {
         'is_compressed': bool,
-        'sales_48h': int,
-        'depletion_ratio': float,
+        'available_count': int,
+        'total_cohort_count': int,
+        'available_ratio': float,
         'surge_multiplier': 1.30,
         'reason': str
       }
@@ -226,7 +238,7 @@ def get_recent_sales(self, lookback_days: int = 7) -> List[Dict[str, Any]]:
     """Query verified sales confirmed in the last lookback_days for markdown audit reports."""
 
 def get_active_compression_alerts(self, lookback_hours: int = 48) -> List[Dict[str, Any]]:
-    """Retrieve all intervals currently exceeding compression velocity thresholds."""
+    """Retrieve all upcoming intervals currently meeting pure scarcity compression (<20% available)."""
 ```
 
 #### 3.7.2 Analytics Evaluation Wiring
@@ -234,15 +246,21 @@ In [`src/analytics.py`](file:///Users/ivanpe/str-price-advisor/src/analytics.py)
 ```python
 if self.sales_tracker:
     target_pct = self.sales_tracker.get_target_percentile(lead_days, segment_type=seg_type)
+    reg_comps = self.sales_tracker.load_registered_comps()
+    tot_reg = len(reg_comps) if reg_comps else len(effective_rates_to_use)
     compression = self.sales_tracker.detect_market_compression(
-        check_in=segment["check_in"],
+        check_in=segment.get("check_in", ""),
         check_out=segment.get("check_out"),
-        total_cohort_count=len(comp_effective_rates)
+        total_cohort_count=tot_reg,
+        current_available_count=len(effective_rates_to_use),
     )
-    if compression["is_compressed"]:
+    if compression.get("is_compressed"):
         target_pct = min(90.0, target_pct + 15.0)
         segment["is_compression_surge"] = True
         segment["compression_details"] = compression
+    else:
+        segment["is_compression_surge"] = False
+        segment.pop("compression_details", None)
 else:
     target_pct = self.get_target_percentile(lead_days, segment_type=seg_type)
 ```
@@ -465,8 +483,8 @@ Whenever a competitor listing is disqualified or removed:
 `PriceReportGenerator._build_markdown_report` embeds two dedicated sections into [`data/latest_report.md`](file:///Users/ivanpe/str-price-advisor/data/latest_report.md):
 
 1. **⚡ Market Compression & Scarcity Alerts**:
-   - Emitted whenever $\Delta \text{Sales}_{48\text{h}} \ge 3$ or Relative Cohort Depletion $\ge 25\%$.
-   - Advises host: *"3 top competitors booked in the last 48 hours for [Dates]. Scarcity surge directive applied (+30% rate adjustment)."*
+   - Emitted whenever available comps drop below $20\%$ of the active luxury cohort ($N_{\text{avail}} / N_{\text{total}} < 0.20$).
+   - Advises host: *"Severe market scarcity (<20% comps available for [Dates]). Scarcity surge directive applied (+30% rate adjustment)."*
 2. **🎯 Recent Confirmed Competitor Sales Ledger**:
    - Table of sales confirmed within the past 7 days: Property Name, Stay Dates, Lead Days, Realized Nightly Rate, Quality-Adjusted Rate, and Market Percentile at Sale.
 
@@ -514,7 +532,7 @@ Any conforming implementation must satisfy the following automated verification 
 | **Monthly Quartiles** | `test_monthly_lead_time_quartiles` | Verifies $P_{25}, P_{50}, P_{75}$ calculations across 12 calendar months. |
 | **Three-State PDP Verification** | `test_verify_listing_availability_three_states` | Verifies parser sets `blocked=True` only on explicit unavailable signal; network timeouts return `UNVERIFIED_ERROR` without inserting into DB. |
 | **Verification Bridge** | `test_diff_and_verify_bridge_flow` | Verifies asynchronous bridge queries PDP for candidates and commits only blocked listings. |
-| **Compression Surge & Guards** | `test_market_compression_surge_detection` | Verifies interval with $\ge 3$ sales in 48h (or $\ge 25\%$ with $\ge 6$ comps) triggers surge directive; sparse cohorts do not false-trigger. |
+| **Compression Surge & Scarcity** | `test_market_compression_surge_detection` | Verifies interval with $< 20\%$ available comps triggers surge directive ($+15\%$ target percentile boost, $1.30\times$ floor); normal availability ($\ge 20\%$) does not trigger. |
 | **Consensus Policy Override** | `test_consensus_policy_surge_override` | Verifies `compute_interval_consensus` overrides `CONFLICT_HOLD` and `NO_HISTORY_HOLD` when `is_compression_surge=True`. |
 | **Dynamic Target Lookup** | `test_get_target_percentile_empirical_lookup` | Verifies `get_target_percentile()` maps lead days to horizons, uses cached grid, and returns Bayesian targets. |
 | **Advisory Report Alerts** | `test_reporter_embeds_sales_and_surge_alerts` | Verifies `latest_report.md` includes recent sales table and scarcity warnings. |

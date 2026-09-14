@@ -144,3 +144,33 @@ To ensure 100% data integrity moving forward:
 
 3. **Active Automated Reconciliation**:
    - At dashboard build time, purge any sale where direct single-comp checkout cache or live search shows the property as available.
+
+---
+
+## 6. Market Compression & Pure Market Scarcity Model
+
+### 6.1 Why 48-Hour Velocity Was Replaced by Pure Market Scarcity
+The initial prototype attempted to detect compression via a 48-hour sales velocity diff ($\Delta \text{Sales}_{48\text{h}} \ge 3$ or relative depletion $\ge 25\%$). In practice, this formulation suffered from significant operational limitations:
+- **Scan Cadence Sensitivity**: Because daily scans only cover 12 near-term intervals while full scans run weekly, 48-hour velocity diffs missed major booking activity occurring between scans on far-out intervals.
+- **Conflation of Pace with Tightness**: A market with 95 out of 97 comps booked months ago is experiencing extreme scarcity today, regardless of whether the last 3 bookings occurred in the last 48 hours or last month.
+
+### 6.2 The Unified Definition: Pure Market Scarcity (<20% Available Comps)
+**High Compression** is triggered whenever active available competitor inventory drops below **$20\%$** of the active curated cohort ($>80\%$ market absorption / unavailable):
+$$\text{Availability Ratio} = \frac{N_{\text{avail}}}{N_{\text{total}}} < 0.20$$
+
+Across our active competitor cohorts:
+- **All Active Comps ($N_{\text{total}} = 97$)**: High Compression triggers when **$N_{\text{avail}} \le 19$ comps** ($19 / 97 = 19.58\% < 20\%$).
+- **Tier A Cohort ($N_{\text{total}} = 49$)**: High Compression triggers when **$N_{\text{avail}} \le 9$ comps** ($9 / 49 = 18.37\% < 20\%$).
+- **Tier B Cohort ($N_{\text{total}} = 48$)**: High Compression triggers when **$N_{\text{avail}} \le 9$ comps** ($9 / 48 = 18.75\% < 20\%$).
+
+### 6.3 Algorithmic Pricing Actions
+When an interval is identified as under High Compression:
+1. **Target Percentile Boost**: The base target percentile is boosted by **$+15\%$** (capped at $90.0\%$, e.g., P65 $\to$ P80, P75 $\to$ P90) in `PricingAnalyticsEngine.evaluate_segment()`.
+2. **Consensus Policy Override**: In `compute_interval_consensus()`, `is_compression_surge = True` overrides `CONFLICT_HOLD` and `NO_HISTORY_HOLD`, establishing a non-compounding **$1.30\times$ base rate surge floor** with status `"SURGE_INCREASE"`.
+
+### 6.4 Visualization on the 12-Month Trajectory Chart
+The Comp Sales dashboard (`docs/index.html#tab-market-sales`) makes compression instantly visible:
+- **Translucent Amber Columns**: Shaded behind compressed dates on the Chart.js canvas.
+- **Horizontal Dashed Threshold Line**: Placed at $y = 0.80 \times N_{\text{total}}$ with label `⚡ 20% Available Threshold (≤X comps)`.
+- **Dynamic KPI Card**: `#trajCompressionDays` displays the total count and percentage of visible days under compression for the selected zoom window (90D, 6M, 12M).
+- **Interactive Tooltips**: Prominently display a `🔥 HIGH COMPRESSION` alert badge when hovering over compressed dates.

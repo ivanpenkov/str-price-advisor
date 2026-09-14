@@ -269,8 +269,8 @@ class TestOwnerXAndReservations(unittest.TestCase):
         res_tab_html = crv.render_reservations_tab(reservations, today=date(2026, 9, 6))
         self.assertIn("resTable", res_tab_html)
         self.assertIn("res-filter-toolbar", res_tab_html)
-        self.assertIn("Total on Channel (Est.)", res_tab_html)
-        self.assertIn("Guest Checkout Price (Est.)", res_tab_html)
+        self.assertIn("Actual Gross Rent", res_tab_html)
+        self.assertIn("Expected Gross Rent", res_tab_html)
         self.assertIn("Weekend", res_tab_html)
 
         rev_html = crv.render_revenue_tab(rev_data)
@@ -404,6 +404,407 @@ class TestOwnerXAndReservations(unittest.TestCase):
         self.assertIn("0.00", owner_est["tot_channel_calc"])
         self.assertIn("0.00", owner_est["guest_price_calc"])
 
+        # Future SQLite reservation where only raw_json has madetype_name (no top-level field, no hear_about)
+        future_abnb_sqlite = {
+            "id": 901,
+            "gross_rent": 1500.0,
+            "type_description": "Standard",
+            "raw_json": json.dumps({"madetype_name": "WSR"}),
+        }
+        future_abnb_est = crv.estimate_reservation_channel_pricing(future_abnb_sqlite)
+        self.assertEqual(future_abnb_est["channel_name"], "Airbnb")
+        self.assertEqual(future_abnb_est["channel_color"], "#FF5A5F")
+
+        future_vrbo_sqlite = {
+            "id": 902,
+            "gross_rent": 1500.0,
+            "type_description": "Standard",
+            "raw_json": json.dumps({"madetype_name": "PDWTA"}),
+        }
+        future_vrbo_est = crv.estimate_reservation_channel_pricing(future_vrbo_sqlite)
+        self.assertEqual(future_vrbo_est["channel_name"], "Vrbo")
+        self.assertEqual(future_vrbo_est["channel_color"], "#2563EB")
+
+    def test_reservation_store_unpacks_raw_json_channel_fields(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            db_path = Path(tmp_dir) / "test_reservations.db"
+            json_path = Path(tmp_dir) / "test_reservations.json"
+            store = ReservationStore(db_path=db_path, json_path=json_path)
+
+            records = [
+                {
+                    "id": 501,
+                    "confirmation_id": 5001,
+                    "start_date": "2026-10-01",
+                    "end_date": "2026-10-05",
+                    "gross_rent": 2000.0,
+                    "raw_json": json.dumps({
+                        "madetype_name": "WSR",
+                        "hear_about_name": "Airbnb",
+                        "travelagent_name": "",
+                    }),
+                },
+                {
+                    "id": 502,
+                    "confirmation_id": 5002,
+                    "start_date": "2026-11-01",
+                    "end_date": "2026-11-05",
+                    "gross_rent": 2200.0,
+                    "raw_json": json.dumps({
+                        "madetype_name": "PDWTA",
+                        "hear_about_name": "",
+                        "travelagent_name": "Vrbo",
+                    }),
+                },
+            ]
+            store.upsert_reservations(records)
+
+            # Check get_all_reservations unpacks
+            all_res = store.get_all_reservations()
+            self.assertEqual(len(all_res), 2)
+            self.assertEqual(all_res[0]["madetype_name"], "WSR")
+            self.assertEqual(all_res[0]["hear_about_name"], "Airbnb")
+            self.assertEqual(all_res[1]["madetype_name"], "PDWTA")
+            self.assertEqual(all_res[1]["travelagent_name"], "Vrbo")
+
+            # Check export_to_json unpacks
+            store.export_to_json()
+            with open(json_path) as f:
+                data = json.load(f)
+            self.assertEqual(len(data["reservations"]), 2)
+            res_by_id = {r["id"]: r for r in data["reservations"]}
+            self.assertEqual(res_by_id[501]["madetype_name"], "WSR")
+            self.assertEqual(res_by_id[502]["madetype_name"], "PDWTA")
+
+    def test_property_rate_snapshots_and_calendar_rates(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            db_path = Path(tmp_dir) / "test_reservations.db"
+            json_path = Path(tmp_dir) / "test_reservations.json"
+            store = ReservationStore(db_path=db_path, json_path=json_path)
+
+            # Record early snapshot
+            early_rates = {
+                "2026-10-15": {"nightly_rate": 450.0, "interval_type": "weekend", "season_name": "Fall", "period_name": "Oct"},
+                "2026-10-16": {"nightly_rate": 450.0, "interval_type": "weekend", "season_name": "Fall", "period_name": "Oct"},
+            }
+            store.record_rate_snapshots("2026-08-01", early_rates)
+
+            # Record revised snapshot later
+            revised_rates = {
+                "2026-10-15": {"nightly_rate": 550.0, "interval_type": "weekend", "season_name": "Fall", "period_name": "Oct"},
+                "2026-10-16": {"nightly_rate": 550.0, "interval_type": "weekend", "season_name": "Fall", "period_name": "Oct"},
+            }
+            store.record_rate_snapshots("2026-09-01", revised_rates)
+
+            # Rate lookup as of 2026-08-15 should return 450.0
+            snap_aug = store.get_rate_at_time("2026-10-15", "2026-08-15")
+            self.assertIsNotNone(snap_aug)
+            self.assertEqual(snap_aug["nightly_rate"], 450.0)
+
+            # Rate lookup as of 2026-09-05 should return 550.0
+            snap_sep = store.get_rate_at_time("2026-10-15", "2026-09-05")
+            self.assertIsNotNone(snap_sep)
+            self.assertEqual(snap_sep["nightly_rate"], 550.0)
+
+            # Test daily calendar rate mapping
+            mock_res = [
+                {
+                    "id": 1,
+                    "creation_date": "08/10/2026 14:00:00",
+                    "start_date": "2026-10-15",
+                    "end_date": "2026-10-17",
+                    "status_name": "Booked",
+                    "is_future": 1,
+                }
+            ]
+            rates_map = store.get_daily_calendar_rates(mock_res, current_kivoya_rates=[])
+            # For 2026-10-15, booked on 08/10 -> should have rate 450
+            self.assertEqual(rates_map["2026-10-15"]["rate"], 450)
+            self.assertEqual(rates_map["2026-10-15"]["type"], "booked_snapshot")
+
+            # Check JS generation contains CAL_DAILY_RATES and toggle button
+            js = crv.get_calendar_revenue_js(mock_res, {"by_year": {}}, rates_map=rates_map)
+            self.assertIn("CAL_DAILY_RATES", js)
+            self.assertIn("setCalRatesVisible", js)
+
+            # Check calendar tab HTML includes Rates toggle
+            tab_html = crv.render_calendar_tab(mock_res)
+            self.assertIn("calRatesOnBtn", tab_html)
+            self.assertIn("calRatesOffBtn", tab_html)
+
+    def test_parse_reservation_creation_date(self):
+        from src.reservation_store import parse_reservation_creation_date
+        self.assertEqual(parse_reservation_creation_date("03/01/2026 13:02:45"), "2026-03-01")
+        self.assertEqual(parse_reservation_creation_date("2026-05-15T14:04:10"), "2026-05-15")
+        self.assertEqual(parse_reservation_creation_date("2026-07-20 09:30:00"), "2026-07-20")
+        self.assertEqual(parse_reservation_creation_date("11/18/2025 09:44:56"), "2025-11-18")
+        self.assertEqual(parse_reservation_creation_date(""), None)
+        self.assertEqual(parse_reservation_creation_date(None), None)
+
+    def test_audit_reservation_payout(self):
+        from src.reservation_store import audit_reservation_payout
+
+        # Mock rate snapshots
+        snapshots = {
+            "2026-06-01": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-06-02": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-06-03": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-11-01": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-11-02": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-11-03": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+        }
+        # 3 nights * $500 = $1,500 expected gross -> expected owner (82%) = $1,230.00
+
+        # Case 1: Verified booking (matches exactly)
+        res_verified = {
+            "id": 201,
+            "confirmation_id": 8001,
+            "creation_date": "03/10/2026 10:00:00",
+            "start_date": "2026-06-01",
+            "end_date": "2026-06-04",
+            "days_number": 3,
+            "gross_rent": 1500.0,
+            "owner_payout": 1230.0,
+            "status_name": "Booked",
+            "type_name": "STA",
+        }
+        audit_v = audit_reservation_payout(res_verified, all_snapshots=snapshots)
+        self.assertEqual(audit_v["audit_status"], "verified")
+        self.assertFalse(audit_v["audit_failed"])
+        self.assertEqual(audit_v["expected_gross_rent"], 1500.0)
+        self.assertEqual(audit_v["expected_owner_payout"], 1230.0)
+        self.assertAlmostEqual(audit_v["discrepancy"], 0.0, places=2)
+
+        # Case 2: Shortfall booking (underpaid by > $5, non-summer, non-routine promo)
+        res_shortfall = {
+            "id": 202,
+            "confirmation_id": 8002,
+            "creation_date": "03/15/2026 12:00:00",
+            "start_date": "2026-11-01",
+            "end_date": "2026-11-04",
+            "days_number": 3,
+            "gross_rent": 1200.0,
+            "owner_payout": 984.0,  # Shortfall: 984 - 1230 = -246
+            "status_name": "Booked",
+            "type_name": "STA",
+            "hear_about_name": "Airbnb",
+        }
+        audit_s = audit_reservation_payout(res_shortfall, all_snapshots=snapshots)
+        self.assertEqual(audit_s["audit_status"], "shortfall")
+        self.assertTrue(audit_s["audit_failed"])
+        self.assertAlmostEqual(audit_s["audit_shortfall"], 246.0, places=2)
+        self.assertIn("Shortfall", audit_s["status_label"])
+        self.assertIn("Airbnb", audit_s["diagnostic_text"])
+        self.assertEqual(len(audit_s["nightly_breakdown"]), 3)
+
+        # Case 3: Legacy booking (created prior to Feb 1, 2026)
+        res_legacy = {
+            "id": 203,
+            "confirmation_id": 8003,
+            "creation_date": "01/15/2026 08:00:00",
+            "start_date": "2026-06-01",
+            "end_date": "2026-06-04",
+            "days_number": 3,
+            "gross_rent": 1000.0,
+            "owner_payout": 820.0,
+            "status_name": "Booked",
+            "type_name": "STA",
+        }
+        audit_l = audit_reservation_payout(res_legacy, all_snapshots=snapshots)
+        self.assertEqual(audit_l["audit_status"], "legacy")
+        self.assertTrue(audit_l["is_legacy"])
+        self.assertFalse(audit_l["audit_failed"])
+
+        # Case 4: Owner / Maintenance Stay (Exempt)
+        res_exempt = {
+            "id": 204,
+            "confirmation_id": 8004,
+            "creation_date": "04/01/2026 09:00:00",
+            "start_date": "2026-06-01",
+            "end_date": "2026-06-04",
+            "days_number": 3,
+            "gross_rent": 0.0,
+            "owner_payout": 0.0,
+            "status_name": "Booked",
+            "type_name": "OWN",
+            "type_description": "Owner Block",
+        }
+        audit_e = audit_reservation_payout(res_exempt, all_snapshots=snapshots)
+        self.assertEqual(audit_e["audit_status"], "exempt")
+        self.assertTrue(audit_e["is_exempt"])
+        self.assertFalse(audit_e["audit_failed"])
+
+        # Case 5: Summer Low-Season Markdown (May–Aug, 22%–38% discount)
+        res_summer = {
+            "id": 205,
+            "confirmation_id": 8005,
+            "creation_date": "02/07/2026 14:00:00",
+            "start_date": "2026-06-01",
+            "end_date": "2026-06-04",
+            "days_number": 3,
+            "gross_rent": 1080.0,  # 1500 -> 1080 is 28.0% discount
+            "owner_payout": 885.6,
+            "status_name": "Booked",
+            "type_name": "STA",
+        }
+        audit_summer = audit_reservation_payout(res_summer, all_snapshots=snapshots)
+        self.assertEqual(audit_summer["audit_status"], "discount_summer")
+        self.assertTrue(audit_summer["is_known_discount"])
+        self.assertFalse(audit_summer["audit_failed"])
+        self.assertEqual(audit_summer["discount_category"], "summer")
+        self.assertIn("Summer", audit_summer["status_label"])
+        self.assertIn("Low-Season Summer Markdown", audit_summer["diagnostic_text"])
+        self.assertEqual(audit_summer["rule_title"], "☀️ Summer Low-Season Markdown")
+
+        # Case 6: Weekly Stay Discount (7+ nights, 14%–26% discount)
+        res_weekly = {
+            "id": 206,
+            "confirmation_id": 8006,
+            "creation_date": "03/15/2026 10:00:00",
+            "start_date": "2026-10-04",
+            "end_date": "2026-10-11",
+            "days_number": 7,
+            "gross_rent": 2800.0,  # e.g. Catalog 3393 -> 2800 is ~17.5% discount
+            "owner_payout": 2296.0,
+            "status_name": "Booked",
+            "type_name": "STA",
+        }
+        audit_weekly = audit_reservation_payout(res_weekly, all_snapshots=snapshots)
+        self.assertEqual(audit_weekly["audit_status"], "discount_weekly")
+        self.assertTrue(audit_weekly["is_known_discount"])
+        self.assertFalse(audit_weekly["audit_failed"])
+        self.assertEqual(audit_weekly["discount_category"], "weekly")
+        self.assertIn("Weekly", audit_weekly["status_label"])
+
+        # Case 7: Standard 10% Channel Promotion (6%–15% discount)
+        res_promo = {
+            "id": 207,
+            "confirmation_id": 8007,
+            "creation_date": "04/01/2026 10:00:00",
+            "start_date": "2026-10-23",
+            "end_date": "2026-10-26",
+            "days_number": 3,
+            "gross_rent": 1440.0,  # Catalog 1597 -> 1440 is ~9.8% discount
+            "owner_payout": 1180.8,
+            "status_name": "Booked",
+            "type_name": "STA",
+        }
+        audit_promo = audit_reservation_payout(res_promo, all_snapshots=snapshots)
+        self.assertEqual(audit_promo["audit_status"], "discount_promo")
+        self.assertTrue(audit_promo["is_known_discount"])
+        self.assertFalse(audit_promo["audit_failed"])
+        self.assertEqual(audit_promo["discount_category"], "promo")
+        self.assertIn("Promo", audit_promo["status_label"])
+
+    def test_reservations_tab_and_calendar_audit_ui(self):
+        mock_reservations = [
+            {
+                "id": 301,
+                "confirmation_id": 9101,
+                "creation_date": "03/15/2026 10:00:00",
+                "start_date": "2026-09-10",
+                "end_date": "2026-09-13",
+                "days_number": 3,
+                "gross_rent": 1000.0,
+                "owner_payout": 820.0,
+                "status_name": "Booked",
+                "type_name": "STA",
+                "type_description": "Standard",
+                "is_future": 1,
+            }
+        ]
+        # Check Reservations tab rendering contains audit KPI card, column, and filter
+        tab_html = crv.render_reservations_tab(mock_reservations, today=date(2026, 9, 6))
+        self.assertIn("Rate Audit Shortfalls", tab_html)
+        self.assertIn("Platform Discounts Applied", tab_html)
+        self.assertIn("resFilterShortfall", tab_html)
+        self.assertIn("resFilterDiscounts", tab_html)
+        self.assertIn("resFilterPromo", tab_html)
+        self.assertIn("resFilterSummer", tab_html)
+        self.assertIn("resFilterWeekly", tab_html)
+        self.assertIn("Rate Audit", tab_html)
+        self.assertIn("Expected Gross Rent", tab_html)
+        self.assertIn("data-expectedgross", tab_html)
+        self.assertIn("data-audit-status", tab_html)
+
+        # Check JS rendering contains audit markers and dialog section
+        js = crv.get_calendar_revenue_js(mock_reservations, {"by_year": {}}, today=date(2026, 9, 6))
+        self.assertIn("cal-day-audit-warn", js)
+        self.assertIn("Owner Payout & Published Rate Audit", js)
+        self.assertIn("Night-by-Night Rate Breakdown", js)
+
+    def test_recent_rate_changes_and_affected_intervals(self):
+        """Verify get_recent_rate_change_dates and get_intervals_with_recent_rate_changes."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            db_path = Path(tmp_dir) / "test_reservations.db"
+            json_path = Path(tmp_dir) / "test_reservations.json"
+            store = ReservationStore(db_path=db_path, json_path=json_path)
+
+            # Snapshot 1: 2026-08-01 (Baseline)
+            snap_1 = {
+                "2026-09-13": {"nightly_rate": 549.0, "interval_type": "weekend"},
+                "2026-09-14": {"nightly_rate": 399.0, "interval_type": "midweek"},
+                "2026-09-15": {"nightly_rate": 399.0, "interval_type": "midweek"},
+                "2026-09-16": {"nightly_rate": 399.0, "interval_type": "midweek"},
+                "2026-09-20": {"nightly_rate": 549.0, "interval_type": "weekend"},
+                "2026-10-15": {"nightly_rate": 450.0, "interval_type": "midweek"},
+            }
+            store.record_rate_snapshots("2026-08-01", snap_1)
+
+            # Snapshot 2: 2026-09-01 (Old change, >7 days before 2026-09-10)
+            # 2026-10-15 changed from 450 to 500 on 2026-09-01 (9 days ago)
+            snap_2 = dict(snap_1)
+            snap_2["2026-10-15"] = {"nightly_rate": 500.0, "interval_type": "midweek"}
+            store.record_rate_snapshots("2026-09-01", snap_2)
+
+            # Snapshot 3: 2026-09-08 (Recent change, 2 days before 2026-09-10)
+            # 2026-09-13 lowered from 549 to 399
+            snap_3 = dict(snap_2)
+            snap_3["2026-09-13"] = {"nightly_rate": 399.0, "interval_type": "midweek"}
+            store.record_rate_snapshots("2026-09-08", snap_3)
+
+            as_of = date(2026, 9, 10)
+
+            # Query recent rate changes within 7 days
+            changes_7d = store.get_recent_rate_change_dates(days_back=7, as_of_date=as_of)
+            # 2026-09-13 should be detected (changed on 2026-09-08, 2 days ago)
+            self.assertIn("2026-09-13", changes_7d)
+            self.assertEqual(len(changes_7d["2026-09-13"]), 1)
+            self.assertEqual(changes_7d["2026-09-13"][0]["old_rate"], 549.0)
+            self.assertEqual(changes_7d["2026-09-13"][0]["new_rate"], 399.0)
+            self.assertEqual(changes_7d["2026-09-13"][0]["change_date"], "2026-09-08")
+
+            # 2026-10-15 should NOT be detected (changed on 2026-09-01, 9 days ago, >7 days)
+            self.assertNotIn("2026-10-15", changes_7d)
+            # Unchanged dates like 2026-09-14 should NOT be in changes
+            self.assertNotIn("2026-09-14", changes_7d)
+
+            # If days_back=10, 2026-10-15 SHOULD be included
+            changes_10d = store.get_recent_rate_change_dates(days_back=10, as_of_date=as_of)
+            self.assertIn("2026-10-15", changes_10d)
+            self.assertEqual(changes_10d["2026-10-15"][0]["old_rate"], 450.0)
+            self.assertEqual(changes_10d["2026-10-15"][0]["new_rate"], 500.0)
+
+            # Test get_intervals_with_recent_rate_changes
+            intervals = [
+                {"check_in": "2026-09-13", "check_out": "2026-09-17", "nights": 4, "segment_type": "midweek"},
+                {"check_in": "2026-09-20", "check_out": "2026-09-24", "nights": 4, "segment_type": "midweek"},
+                {"check_in": "2026-10-15", "check_out": "2026-10-18", "nights": 3, "segment_type": "weekend"},
+            ]
+
+            affected = store.get_intervals_with_recent_rate_changes(intervals, days_back=7, as_of_date=as_of)
+            self.assertEqual(len(affected), 1)
+            self.assertEqual(affected[0]["check_in"], "2026-09-13")
+            self.assertEqual(affected[0]["check_out"], "2026-09-17")
+            self.assertIn("affected_rate_changes", affected[0])
+            self.assertIn("2026-09-13", affected[0]["affected_rate_changes"])
+
+            # A full week after (e.g. 2026-09-16, 8 days after 2026-09-08), 0 intervals are affected
+            as_of_future = date(2026, 9, 16)
+            affected_future = store.get_intervals_with_recent_rate_changes(intervals, days_back=7, as_of_date=as_of_future)
+            self.assertEqual(len(affected_future), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
+

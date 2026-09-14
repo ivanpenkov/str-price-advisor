@@ -64,6 +64,27 @@
         "est_property_value": 4160000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (6.5 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~7,000 sq ft)"
+        ],
+        "deficits": [
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Scottsdale."
       }
     },
     "628534576871518102": {
@@ -130,6 +151,29 @@
         "est_property_value": 2530000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2038650"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Dedicated movie theater / cinema room",
+          "Flawless guest track record (4.99★ with 158 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "1452623425630736376": {
@@ -196,6 +240,28 @@
         "est_property_value": 2720000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2044357"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Dedicated movie theater / cinema room"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.5 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "1558065119520691944": {
@@ -262,6 +328,26 @@
         "est_property_value": 1980000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (8 bedrooms) accommodating large travel groups"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Mesa."
       }
     },
     "746927337513825183": {
@@ -328,6 +414,27 @@
         "est_property_value": 4900000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Free / complimentary pool heating included",
+          "Expansive floor plan (~8,250 sq ft)"
+        ],
+        "deficits": [
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Scottsdale."
       }
     },
     "1143202699620728397": {
@@ -345,19 +452,19 @@
       "amenities_count": 87,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.95,
+      "desirability_ratio": 1.0,
       "category_scores": {
         "outdoor": 69,
-        "capacity": 86,
+        "capacity": 96,
         "property_value": 96,
         "interior": 100,
         "location": 88,
         "reputation": 88
       },
-      "composite_score": 85.8,
-      "rationale": "Moderate comp (5% lower desirability, Winter). Features 0.85-acre lot, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "winter_ratio": 0.95,
-      "summer_ratio": 1.04,
+      "composite_score": 87.8,
+      "rationale": "Direct peer comp (near-equal quality, Winter). Features 0.85-acre lot, matching Villa del Sol's capacity and luxury tier.",
+      "winter_ratio": 1.0,
+      "summer_ratio": 1.09,
       "pool_specs": {
         "has_pool": true,
         "heating": "unheated",
@@ -366,11 +473,11 @@
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 85.8,
-      "summer_composite_score": 89.8,
+      "winter_composite_score": 87.8,
+      "summer_composite_score": 91.8,
       "winter_category_scores": {
         "outdoor": 69,
-        "capacity": 86,
+        "capacity": 96,
         "property_value": 96,
         "interior": 100,
         "location": 88,
@@ -378,22 +485,41 @@
       },
       "summer_category_scores": {
         "outdoor": 85,
-        "capacity": 86,
+        "capacity": 96,
         "property_value": 96,
         "interior": 100,
         "location": 88,
         "reputation": 88
       },
-      "winter_rationale": "Moderate comp (5% lower desirability, Winter). Features 0.85-acre lot, but noted gaps: unheated pool in winter, 3.0 baths.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). Features 0.85-acre lot, matching Villa del Sol's capacity and luxury tier.",
+      "winter_rationale": "Direct peer comp (near-equal quality, Winter). Features 0.85-acre lot, matching Villa del Sol's capacity and luxury tier.",
+      "summer_rationale": "Premium comp (9% superior desirability, Summer). Features 0.85-acre lot, movie theater, heated spa, pool table.",
       "property_specs": {
-        "sqft": 5650,
+        "sqft": 5850,
         "sqft_source": "Corridor Hedonic Est.",
         "lot_acres": 0.85,
         "lot_source": "Corridor Hedonic Est.",
-        "est_property_value": 3570000.0,
+        "est_property_value": 3700000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Mesa."
       }
     },
     "1442997693061036066": {
@@ -460,6 +586,29 @@
         "est_property_value": 3800000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21342266"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (6.0 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~6,400 sq ft)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Scottsdale."
       }
     },
     "1329097682770073862": {
@@ -526,6 +675,26 @@
         "est_property_value": 3920000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21342266"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand"
+        ],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "1628548270397523375": {
@@ -592,6 +761,28 @@
         "est_property_value": 3000000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2043000"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Private sauna / wellness feature"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "1136293547142522527": {
@@ -658,6 +849,28 @@
         "est_property_value": 4430000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21342266"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (6.0 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~7,450 sq ft)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Scottsdale."
       }
     },
     "1240027547507854574": {
@@ -724,6 +937,27 @@
         "est_property_value": 2700000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21493938"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "1384784550322094986": {
@@ -790,72 +1024,28 @@
         "est_property_value": 4280000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2039358"
-      }
-    },
-    "1587060999176930356": {
-      "listing_id": "1587060999176930356",
-      "name": "Two Homes w/ Pool | 8BR Mesa Retreat | Sleeps 24",
-      "location": "Mesa",
-      "bedrooms": 8,
-      "beds": 8,
-      "baths": 5.0,
-      "rating": 4.0,
-      "reviews": 1,
-      "url": "https://www.airbnb.com/rooms/1587060999176930356",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1587060999176930356/original/3faa0949-7a92-4684-8371-d1e461f1bc9b.jpeg",
-      "amenities_count": 77,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.79,
-      "category_scores": {
-        "outdoor": 61,
-        "capacity": 100,
-        "property_value": 90,
-        "interior": 75,
-        "location": 78,
-        "reputation": 70
       },
-      "composite_score": 78.7,
-      "rationale": "Moderate comp (21% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, Mesa location discount.",
-      "winter_ratio": 0.79,
-      "summer_ratio": 0.88,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 78.7,
-      "summer_composite_score": 82.7,
-      "winter_category_scores": {
-        "outdoor": 61,
-        "capacity": 100,
-        "property_value": 90,
-        "interior": 75,
-        "location": 78,
-        "reputation": 70
-      },
-      "summer_category_scores": {
-        "outdoor": 77,
-        "capacity": 100,
-        "property_value": 90,
-        "interior": 75,
-        "location": 78,
-        "reputation": 70
-      },
-      "winter_rationale": "Moderate comp (21% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, Mesa location discount.",
-      "summer_rationale": "Moderate comp (12% lower desirability, Summer). Features heated spa, but noted gaps: Mesa location discount.",
-      "property_specs": {
-        "sqft": 7200,
-        "sqft_source": "Corridor Hedonic Est.",
-        "lot_acres": 0.5,
-        "lot_source": "Corridor Hedonic Est.",
-        "est_property_value": 2640000.0,
-        "property_value_source": "Corridor Hedonic Est.",
-        "str_license": null
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,200 sq ft)",
+          "Flawless guest track record (4.95★ with 37 reviews)"
+        ],
+        "deficits": [
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Scottsdale."
       }
     },
     "48680831": {
@@ -922,72 +1112,29 @@
         "est_property_value": 5020000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21342266"
-      }
-    },
-    "1442265380006443515": {
-      "listing_id": "1442265380006443515",
-      "name": "Remarkable Resort Home - Minutes from Old Town",
-      "location": "Apartment in Scottsdale",
-      "bedrooms": 6,
-      "beds": 12,
-      "baths": 3.0,
-      "rating": 4.88,
-      "reviews": 16,
-      "url": "https://www.airbnb.com/rooms/1442265380006443515",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1442265380006443515/original/e82b63ed-64b2-4c16-ade5-8cfdda53f47b.jpeg",
-      "amenities_count": 52,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Apartment In Scottsdale.",
-      "desirability_ratio": 0.91,
-      "category_scores": {
-        "outdoor": 79,
-        "capacity": 87,
-        "property_value": 90,
-        "interior": 70,
-        "location": 95,
-        "reputation": 88
       },
-      "composite_score": 84.2,
-      "rationale": "Moderate comp (9% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 3.0 baths.",
-      "winter_ratio": 0.91,
-      "summer_ratio": 0.93,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 84.2,
-      "summer_composite_score": 84.7,
-      "winter_category_scores": {
-        "outdoor": 79,
-        "capacity": 87,
-        "property_value": 90,
-        "interior": 70,
-        "location": 95,
-        "reputation": 88
-      },
-      "summer_category_scores": {
-        "outdoor": 81,
-        "capacity": 87,
-        "property_value": 90,
-        "interior": 70,
-        "location": 95,
-        "reputation": 88
-      },
-      "winter_rationale": "Moderate comp (9% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 3.0 baths.",
-      "summer_rationale": "Moderate comp (7% lower desirability, Summer). Features heated spa, but noted gaps: pool heat fee required, 3.0 baths.",
-      "property_specs": {
-        "sqft": 4800,
-        "sqft_source": "Corridor Hedonic Est.",
-        "lot_acres": 0.4,
-        "lot_source": "Corridor Hedonic Est.",
-        "est_property_value": 2640000.0,
-        "property_value_source": "Corridor Hedonic Est.",
-        "str_license": "21342266"
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (8.0 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~7,300 sq ft)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Scottsdale."
       }
     },
     "1640779184675228639": {
@@ -1054,6 +1201,25 @@
         "est_property_value": 1940000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Mesa."
       }
     },
     "1257280665542111508": {
@@ -1120,6 +1286,28 @@
         "est_property_value": 5620000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21570179"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~6,500 sq ft)",
+          "Flawless guest track record (4.95★ with 61 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.5 BA) creating potential morning rush congestion",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Paradise Valley Village."
       }
     },
     "1494470117199033651": {
@@ -1187,6 +1375,27 @@
         "est_property_value": 1670000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (5.00★ with 24 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.5 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Mesa."
       }
     },
     "1065386372914424948": {
@@ -1254,6 +1463,27 @@
         "est_property_value": 5020000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,300 sq ft)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Villa In Scottsdale."
       }
     },
     "628256621164272951": {
@@ -1321,6 +1551,28 @@
         "est_property_value": 5570000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (6.5 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~8,100 sq ft)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Villa In North Scottsdale."
       }
     },
     "1650904135823994226": {
@@ -1388,6 +1640,27 @@
         "est_property_value": 4900000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (9 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (7.5 bathrooms) avoiding morning bottlenecks",
+          "Free / complimentary pool heating included"
+        ],
+        "deficits": [
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 9BR luxury estate comp in North Scottsdale."
       }
     },
     "1135701668320730178": {
@@ -1455,6 +1728,28 @@
         "est_property_value": 4690000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21405841"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,900 sq ft)",
+          "Flawless guest track record (5.00★ with 43 reviews)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 8BR luxury estate comp in North Scottsdale."
       }
     },
     "1762462636165970118": {
@@ -1522,6 +1817,26 @@
         "est_property_value": 5550000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21648655"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Dedicated movie theater / cinema room"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Paradise Valley Village."
       }
     },
     "757175004186905494": {
@@ -1589,6 +1904,27 @@
         "est_property_value": 2700000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Flawless guest track record (4.98★ with 63 reviews)"
+        ],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Unheated pool significantly limits winter utility",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "22569614": {
@@ -1656,6 +1992,25 @@
         "est_property_value": 2640000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Limited bathrooms (3.5 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Kierland."
       }
     },
     "1163963378107916642": {
@@ -1723,6 +2078,28 @@
         "est_property_value": 4690000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,900 sq ft)",
+          "Dedicated movie theater / cinema room"
+        ],
+        "deficits": [
+          "Unheated pool significantly limits winter utility",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Scottsdale."
       }
     },
     "1547101536396069219": {
@@ -1790,6 +2167,29 @@
         "est_property_value": 2930000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "309839"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (7.0 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~6,700 sq ft)",
+          "Flawless guest track record (5.00★ with 39 reviews)"
+        ],
+        "deficits": [
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Chandler."
       }
     },
     "1254737517099224843": {
@@ -1857,6 +2257,27 @@
         "est_property_value": 1750000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (5.00★ with 23 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Chandler."
       }
     },
     "646572770933564861": {
@@ -1924,6 +2345,27 @@
         "est_property_value": 1850000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (5.00★ with 66 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Gilbert) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Gilbert."
       }
     },
     "1125598445109401829": {
@@ -1991,6 +2433,29 @@
         "est_property_value": 2680000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,300 sq ft)",
+          "Flawless guest track record (5.00★ with 26 reviews)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Mesa."
       }
     },
     "52595140": {
@@ -2058,6 +2523,28 @@
         "est_property_value": 2200000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~6,000 sq ft)",
+          "Dedicated movie theater / cinema room"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Villa in Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Villa In Mesa."
       }
     },
     "1543607622549442899": {
@@ -2125,6 +2612,27 @@
         "est_property_value": 4660000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "str-2025-004207"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (9 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (6.0 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~7,850 sq ft)"
+        ],
+        "deficits": [
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 9BR luxury estate comp in Scottsdale."
       }
     },
     "1550824215338770978": {
@@ -2192,6 +2700,28 @@
         "est_property_value": 2870000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,600 sq ft)"
+        ],
+        "deficits": [
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Gilbert) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Gilbert."
       }
     },
     "1247200709739597595": {
@@ -2259,6 +2789,27 @@
         "est_property_value": 2280000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~6,200 sq ft)"
+        ],
+        "deficits": [
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Mesa."
       }
     },
     "1520493073616950985": {
@@ -2326,6 +2877,27 @@
         "est_property_value": 2700000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21474868"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.95★ with 21 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Mesa."
       }
     },
     "1704473005987174091": {
@@ -2393,73 +2965,28 @@
         "est_property_value": 2990000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
-      }
-    },
-    "1144613690916964707": {
-      "listing_id": "1144613690916964707",
-      "name": "Mesa Manor w/Mini Golf | Ping Pong | WiFi | BBQ",
-      "location": "Mesa",
-      "bedrooms": 8,
-      "beds": 16,
-      "baths": 4.5,
-      "rating": 4.64,
-      "reviews": 66,
-      "url": "https://www.airbnb.com/rooms/1144613690916964707",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE0NDYxMzY5MDkxNjk2NDcwNw%3D%3D/original/3a541057-c845-4445-a346-c3fa137c8b24.jpeg",
-      "amenities_count": 46,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 8BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.98,
-      "category_scores": {
-        "outdoor": 94,
-        "capacity": 100,
-        "property_value": 90,
-        "interior": 76,
-        "location": 78,
-        "reputation": 70
       },
-      "composite_score": 87.1,
-      "rationale": "Direct peer comp (near-equal quality, Winter). Features dedicated sports court, matching Villa del Sol's capacity and luxury tier.",
-      "accommodates": 30,
-      "winter_ratio": 0.98,
-      "summer_ratio": 0.99,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 87.1,
-      "summer_composite_score": 87.6,
-      "winter_category_scores": {
-        "outdoor": 94,
-        "capacity": 100,
-        "property_value": 90,
-        "interior": 76,
-        "location": 78,
-        "reputation": 70
-      },
-      "summer_category_scores": {
-        "outdoor": 96,
-        "capacity": 100,
-        "property_value": 90,
-        "interior": 76,
-        "location": 78,
-        "reputation": 70
-      },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). Features dedicated sports court, matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). Features dedicated sports court, matching Villa del Sol's capacity and luxury tier.",
-      "property_specs": {
-        "sqft": 7200,
-        "sqft_source": "Corridor Hedonic Est.",
-        "lot_acres": 0.5,
-        "lot_source": "Corridor Hedonic Est.",
-        "est_property_value": 2640000.0,
-        "property_value_source": "Corridor Hedonic Est.",
-        "str_license": null
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (9 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,900 sq ft)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.5 BA) creating potential morning rush congestion",
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Gilbert) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 9BR luxury estate comp in Gilbert."
       }
     },
     "1559652898884891337": {
@@ -2527,6 +3054,27 @@
         "est_property_value": 4900000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (11 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (12.0 bathrooms) avoiding morning bottlenecks",
+          "Free / complimentary pool heating included"
+        ],
+        "deficits": [
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 11BR luxury estate comp in Scottsdale."
       }
     },
     "16363441": {
@@ -2594,6 +3142,25 @@
         "est_property_value": 1860000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "302119"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Chandler."
       }
     },
     "1625632307698164475": {
@@ -2661,6 +3228,27 @@
         "est_property_value": 2440000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Dedicated movie theater / cinema room"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Mesa."
       }
     },
     "1341229760130810280": {
@@ -2728,6 +3316,29 @@
         "est_property_value": 1780000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Private sauna / wellness feature",
+          "Dedicated movie theater / cinema room",
+          "Flawless guest track record (5.00★ with 66 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Mesa."
       }
     },
     "711609909194570058": {
@@ -2795,6 +3406,27 @@
         "est_property_value": 1560000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.97★ with 102 reviews)"
+        ],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Villa in Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Villa In Mesa."
       }
     },
     "1493069124077219890": {
@@ -2862,6 +3494,28 @@
         "est_property_value": 2580000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Flawless guest track record (4.96★ with 48 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "944305567506818495": {
@@ -2929,6 +3583,25 @@
         "est_property_value": 1800000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Phoenix."
       }
     },
     "1269286452215821303": {
@@ -2995,6 +3668,27 @@
         "est_property_value": 3470000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2037435"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Dedicated movie theater / cinema room",
+          "Flawless guest track record (5.00★ with 25 reviews)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "918812982062542680": {
@@ -3062,6 +3756,26 @@
         "est_property_value": 2590000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~6,400 sq ft)"
+        ],
+        "deficits": [
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Phoenix."
       }
     },
     "53478007": {
@@ -3129,6 +3843,27 @@
         "est_property_value": 2910000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Dedicated movie theater / cinema room"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Scottsdale."
       }
     },
     "862891705248130792": {
@@ -3196,73 +3931,29 @@
         "est_property_value": 3680000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2038652"
-      }
-    },
-    "29569170": {
-      "listing_id": "29569170",
-      "name": "Heated Pool & Putting Green: Chandler Home!",
-      "location": "Chandler",
-      "bedrooms": 6,
-      "beds": 8,
-      "baths": 4.5,
-      "rating": 4.56,
-      "reviews": 93,
-      "url": "https://www.airbnb.com/rooms/29569170",
-      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-29569170/original/0e6a2c1a-e5b7-42ef-b3f1-c6b990b2cdd0.jpeg",
-      "amenities_count": 44,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 6BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.97,
-      "winter_ratio": 0.97,
-      "summer_ratio": 0.98,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "fee",
-        "heating_source": "Explicit pool heating fee disclosed in listing text",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
       },
-      "composite_score": 86.6,
-      "winter_composite_score": 86.6,
-      "summer_composite_score": 87.1,
-      "category_scores": {
-        "outdoor": 84,
-        "capacity": 97,
-        "property_value": 88,
-        "interior": 91,
-        "location": 82,
-        "reputation": 70
-      },
-      "winter_category_scores": {
-        "outdoor": 84,
-        "capacity": 97,
-        "property_value": 88,
-        "interior": 91,
-        "location": 82,
-        "reputation": 70
-      },
-      "summer_category_scores": {
-        "outdoor": 86,
-        "capacity": 97,
-        "property_value": 88,
-        "interior": 91,
-        "location": 82,
-        "reputation": 70
-      },
-      "rationale": "Direct peer comp (near-equal quality, Winter). Features heated spa, matching Villa del Sol's capacity and luxury tier.",
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). Features heated spa, matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Direct peer comp (near-equal quality, Summer). Features heated spa, matching Villa del Sol's capacity and luxury tier.",
-      "discovered_at_sample": "2026-09-05 manual addition",
-      "accommodates": 16,
-      "property_specs": {
-        "sqft": 4900,
-        "sqft_source": "Corridor Hedonic Est.",
-        "lot_acres": 0.4,
-        "lot_source": "Corridor Hedonic Est.",
-        "est_property_value": 1860000.0,
-        "property_value_source": "Corridor Hedonic Est.",
-        "str_license": null
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~6,200 sq ft)",
+          "Flawless guest track record (4.99★ with 103 reviews)"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Scottsdale."
       }
     },
     "1052192059622520398": {
@@ -3330,6 +4021,27 @@
         "est_property_value": 1500000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Free / complimentary pool heating included"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Mesa."
       }
     },
     "1400243019671565638": {
@@ -3397,6 +4109,28 @@
         "est_property_value": 4100000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (6.0 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~6,900 sq ft)"
+        ],
+        "deficits": [
+          "Unheated pool significantly limits winter utility",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Scottsdale."
       }
     },
     "49429064": {
@@ -3464,6 +4198,25 @@
         "est_property_value": 1860000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Chandler."
       }
     },
     "1315362836047955796": {
@@ -3531,6 +4284,29 @@
         "est_property_value": 2750000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,500 sq ft)",
+          "Flawless guest track record (5.00★ with 45 reviews)"
+        ],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 8BR luxury estate comp in Mesa."
       }
     }
   },
@@ -3600,6 +4376,28 @@
         "est_property_value": 1870000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Flawless guest track record (4.96★ with 156 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Scottsdale."
       }
     },
     "1119722139111767613": {
@@ -3667,6 +4465,28 @@
         "est_property_value": 2040000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Flawless guest track record (4.96★ with 53 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Scottsdale."
       }
     },
     "47868708": {
@@ -3734,6 +4554,27 @@
         "est_property_value": 1870000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "str-000044"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.98★ with 123 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Unheated pool significantly limits winter utility"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Tempe."
       }
     },
     "1517450883597399267": {
@@ -3801,6 +4642,25 @@
         "est_property_value": 1790000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "str-001186"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Tempe."
       }
     },
     "1249420525058947765": {
@@ -3868,6 +4728,27 @@
         "est_property_value": 1290000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (5.00★ with 59 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Phoenix."
       }
     },
     "42545559": {
@@ -3935,6 +4816,27 @@
         "est_property_value": 1870000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Scottsdale."
       }
     },
     "942270039710528411": {
@@ -4002,6 +4904,28 @@
         "est_property_value": 1260000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Free / complimentary pool heating included",
+          "Flawless guest track record (4.97★ with 126 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Mesa."
       }
     },
     "1322763359166708040": {
@@ -4069,6 +4993,27 @@
         "est_property_value": 1360000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "str-001033"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (5.00★ with 35 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Tempe."
       }
     },
     "27905914": {
@@ -4136,6 +5081,27 @@
         "est_property_value": 1820000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.95★ with 124 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Unheated pool significantly limits winter utility",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Villa In Phoenix."
       }
     },
     "1607018564200076881": {
@@ -4203,6 +5169,27 @@
         "est_property_value": 2420000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand"
+        ],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Scottsdale."
       }
     },
     "931203617899460144": {
@@ -4270,6 +5257,28 @@
         "est_property_value": 2200000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2023-4056"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Flawless guest track record (4.95★ with 118 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Scottsdale."
       }
     },
     "39090468": {
@@ -4337,6 +5346,27 @@
         "est_property_value": 2140000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.96★ with 78 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Mesa."
       }
     },
     "1603334101322304947": {
@@ -4404,6 +5434,27 @@
         "est_property_value": 2040000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (5.00★ with 24 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.5 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Unheated pool significantly limits winter utility"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Tempe."
       }
     },
     "1668964939355027746": {
@@ -4471,6 +5522,25 @@
         "est_property_value": 2040000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Mesa."
       }
     },
     "1526873844395559455": {
@@ -4538,6 +5608,25 @@
         "est_property_value": 1410000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (2.5 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Unheated pool significantly limits winter utility"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Mesa."
       }
     },
     "1460921252920714269": {
@@ -4605,6 +5694,27 @@
         "est_property_value": 2920000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2040420"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Flawless guest track record (5.00★ with 26 reviews)"
+        ],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in South Scottsdale."
       }
     },
     "53252141": {
@@ -4672,6 +5782,27 @@
         "est_property_value": 1870000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Scottsdale."
       }
     },
     "900910545853532444": {
@@ -4739,6 +5870,25 @@
         "est_property_value": 1680000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Tempe."
       }
     },
     "1165319935245172999": {
@@ -4806,6 +5956,28 @@
         "est_property_value": 2670000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21342266"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Dedicated movie theater / cinema room",
+          "Flawless guest track record (4.98★ with 40 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Fashion Square."
       }
     },
     "750624596918284483": {
@@ -4873,6 +6045,27 @@
         "est_property_value": 2750000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.99★ with 159 reviews)"
+        ],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Arcadia."
       }
     },
     "1283513903441928107": {
@@ -4940,73 +6133,27 @@
         "est_property_value": 2960000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
-      }
-    },
-    "746195521284356998": {
-      "listing_id": "746195521284356998",
-      "name": "Desert Playground | Pool, Gym, Bocce & Pickleball.",
-      "location": "Paradise Valley Village",
-      "bedrooms": 5,
-      "beds": 6,
-      "baths": 4.0,
-      "rating": 4.94,
-      "reviews": 114,
-      "url": "https://www.airbnb.com/rooms/746195521284356998",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-746195521284356998/original/1fed9034-353b-48f4-a68c-3dbb9f03f8c5.jpeg",
-      "amenities_count": 68,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 5BR luxury estate comp in Paradise Valley Village.",
-      "desirability_ratio": 1.06,
-      "category_scores": {
-        "outdoor": 100,
-        "capacity": 73,
-        "property_value": 93,
-        "interior": 90,
-        "location": 95,
-        "reputation": 94
       },
-      "composite_score": 90.7,
-      "rationale": "Premium comp (6% superior desirability, Winter). Features heated pool, 0.85-acre lot, dedicated sports court, heated spa.",
-      "accommodates": 7,
-      "winter_ratio": 1.06,
-      "summer_ratio": 1.06,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 90.7,
-      "summer_composite_score": 90.7,
-      "winter_category_scores": {
-        "outdoor": 100,
-        "capacity": 73,
-        "property_value": 93,
-        "interior": 90,
-        "location": 95,
-        "reputation": 94
-      },
-      "summer_category_scores": {
-        "outdoor": 100,
-        "capacity": 73,
-        "property_value": 93,
-        "interior": 90,
-        "location": 95,
-        "reputation": 94
-      },
-      "winter_rationale": "Premium comp (6% superior desirability, Winter). Features heated pool, 0.85-acre lot, dedicated sports court, heated spa.",
-      "summer_rationale": "Premium comp (6% superior desirability, Summer). Features heated pool, 0.85-acre lot, dedicated sports court, heated spa.",
-      "property_specs": {
-        "sqft": 3500,
-        "sqft_source": "Listing Disclosed",
-        "lot_acres": 0.85,
-        "lot_source": "Corridor Hedonic Est.",
-        "est_property_value": 3220000.0,
-        "property_value_source": "Corridor Hedonic Est.",
-        "str_license": "21477054"
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.97★ with 30 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Paradise Valley Village."
       }
     },
     "905223542527412860": {
@@ -5074,6 +6221,29 @@
         "est_property_value": 3000000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21342266"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Dedicated movie theater / cinema room",
+          "Flawless guest track record (4.95★ with 44 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Scottsdale."
       }
     },
     "1293774182776540730": {
@@ -5141,6 +6311,27 @@
         "est_property_value": 3920000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2148062"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (5.00★ with 59 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Paradise Valley Village."
       }
     },
     "891168360613545464": {
@@ -5208,6 +6399,28 @@
         "est_property_value": 2960000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Flawless guest track record (4.96★ with 94 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Scottsdale."
       }
     },
     "755820874037012535": {
@@ -5275,6 +6488,28 @@
         "est_property_value": 3030000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "2024508"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand",
+          "Excellent bathroom ratio (6.0 bathrooms) avoiding morning bottlenecks",
+          "Flawless guest track record (4.98★ with 131 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in North Scottsdale."
       }
     },
     "739707480178231807": {
@@ -5342,6 +6577,25 @@
         "est_property_value": 3280000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Paradise Valley Village."
       }
     },
     "661489175613477267": {
@@ -5409,6 +6663,25 @@
         "est_property_value": 950000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Chandler."
       }
     },
     "1599760926842009555": {
@@ -5476,6 +6749,25 @@
         "est_property_value": 3540000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Chandler."
       }
     },
     "1371960459560609432": {
@@ -5543,6 +6835,28 @@
         "est_property_value": 1770000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Free / complimentary pool heating included",
+          "Flawless guest track record (5.00★ with 43 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.5 BA) creating potential morning rush congestion",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Chandler."
       }
     },
     "1608243763033582138": {
@@ -5560,32 +6874,32 @@
       "amenities_count": 55,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Chandler.",
-      "desirability_ratio": 0.69,
+      "desirability_ratio": 0.82,
       "category_scores": {
-        "outdoor": 59,
+        "outdoor": 81,
         "capacity": 75,
         "property_value": 82,
         "interior": 76,
         "location": 82,
         "reputation": 88
       },
-      "composite_score": 74.5,
-      "rationale": "Moderate comp (31% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 5 BR vs our 6 BR.",
+      "composite_score": 80.0,
+      "rationale": "Moderate comp (18% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 4.0 baths.",
       "accommodates": 12,
-      "winter_ratio": 0.69,
-      "summer_ratio": 0.78,
+      "winter_ratio": 0.82,
+      "summer_ratio": 0.81,
       "pool_specs": {
         "has_pool": true,
-        "heating": "unheated",
-        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
+        "heating": "standard_heated",
+        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 74.5,
-      "summer_composite_score": 78.5,
+      "winter_composite_score": 80.0,
+      "summer_composite_score": 79.5,
       "winter_category_scores": {
-        "outdoor": 59,
+        "outdoor": 81,
         "capacity": 75,
         "property_value": 82,
         "interior": 76,
@@ -5593,15 +6907,15 @@
         "reputation": 88
       },
       "summer_category_scores": {
-        "outdoor": 75,
+        "outdoor": 79,
         "capacity": 75,
         "property_value": 82,
         "interior": 76,
         "location": 82,
         "reputation": 88
       },
-      "winter_rationale": "Moderate comp (31% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, 5 BR vs our 6 BR.",
-      "summer_rationale": "Moderate comp (22% lower desirability, Summer). Features heated spa, but noted gaps: 5 BR vs our 6 BR, 4.0 baths.",
+      "winter_rationale": "Moderate comp (18% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 4.0 baths.",
+      "summer_rationale": "Moderate comp (19% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 4.0 baths.",
       "property_specs": {
         "sqft": 4300,
         "sqft_source": "Corridor Hedonic Est.",
@@ -5610,6 +6924,25 @@
         "est_property_value": 1630000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21487526"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Chandler."
       }
     },
     "695672305834920067": {
@@ -5677,6 +7010,27 @@
         "est_property_value": 910000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.99★ with 188 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Gilbert."
       }
     },
     "1637937154787852120": {
@@ -5744,6 +7098,25 @@
         "est_property_value": 1790000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Chandler."
       }
     },
     "620502220252141438": {
@@ -5811,6 +7184,27 @@
         "est_property_value": 2130000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21661671"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.98★ with 53 reviews)"
+        ],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Chandler."
       }
     },
     "52455358": {
@@ -5878,73 +7272,28 @@
         "est_property_value": 1620000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
-      }
-    },
-    "688643627143933050": {
-      "listing_id": "688643627143933050",
-      "name": "Modern Island Getaway w/ Heated Pool, Bar & Gazebo",
-      "location": "Gilbert",
-      "bedrooms": 5,
-      "beds": 6,
-      "baths": 3.0,
-      "rating": 4.98,
-      "reviews": 121,
-      "url": "https://www.airbnb.com/rooms/688643627143933050",
-      "discovered_at_sample": "2026-10-15 to 2026-10-18",
-      "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-688643627143933050/original/3044c26f-efb1-4589-8a04-afc41ac5356e.jpeg",
-      "amenities_count": 65,
-      "is_valid_comp": true,
-      "validity_reason": "Valid 5BR luxury estate comp in Gilbert.",
-      "desirability_ratio": 0.89,
-      "category_scores": {
-        "outdoor": 91,
-        "capacity": 63,
-        "property_value": 75,
-        "interior": 96,
-        "location": 82,
-        "reputation": 98
       },
-      "composite_score": 83.1,
-      "rationale": "Moderate comp (11% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
-      "accommodates": 10,
-      "winter_ratio": 0.89,
-      "summer_ratio": 0.88,
-      "pool_specs": {
-        "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
-        "pool_size": "standard",
-        "size_source": "Standard residential backyard pool",
-        "gallons": null
-      },
-      "winter_composite_score": 83.1,
-      "summer_composite_score": 82.6,
-      "winter_category_scores": {
-        "outdoor": 91,
-        "capacity": 63,
-        "property_value": 75,
-        "interior": 96,
-        "location": 82,
-        "reputation": 98
-      },
-      "summer_category_scores": {
-        "outdoor": 89,
-        "capacity": 63,
-        "property_value": 75,
-        "interior": 96,
-        "location": 82,
-        "reputation": 98
-      },
-      "winter_rationale": "Moderate comp (11% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
-      "summer_rationale": "Moderate comp (12% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
-      "property_specs": {
-        "sqft": 3750,
-        "sqft_source": "Corridor Hedonic Est.",
-        "lot_acres": 0.3,
-        "lot_source": "Corridor Hedonic Est.",
-        "est_property_value": 1310000.0,
-        "property_value_source": "Corridor Hedonic Est.",
-        "str_license": null
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Free / complimentary pool heating included",
+          "Flawless guest track record (4.99★ with 170 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (2.0 BA) creating potential morning rush congestion",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Chandler."
       }
     },
     "1358887338136661145": {
@@ -6012,6 +7361,26 @@
         "est_property_value": 1770000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Dedicated movie theater / cinema room"
+        ],
+        "deficits": [
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Gilbert) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Gilbert."
       }
     },
     "1319814591019877062": {
@@ -6079,6 +7448,28 @@
         "est_property_value": 2440000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (7 bedrooms) accommodating large travel groups",
+          "Excellent bathroom ratio (6.0 bathrooms) avoiding morning bottlenecks",
+          "Expansive floor plan (~6,650 sq ft)",
+          "Flawless guest track record (5.00★ with 37 reviews)"
+        ],
+        "deficits": [
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 7BR luxury estate comp in Mesa."
       }
     },
     "1498682060046080673": {
@@ -6146,6 +7537,25 @@
         "est_property_value": 1580000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Gilbert) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Gilbert."
       }
     },
     "30094806": {
@@ -6213,6 +7623,25 @@
         "est_property_value": 1190000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (2.5 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Gilbert."
       }
     },
     "1686281156322769090": {
@@ -6280,6 +7709,27 @@
         "est_property_value": 2040000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Free / complimentary pool heating included"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Chandler."
       }
     },
     "1485481343360527002": {
@@ -6347,6 +7797,28 @@
         "est_property_value": 1490000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Dedicated movie theater / cinema room",
+          "Flawless guest track record (5.00★ with 46 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Gilbert) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Gilbert."
       }
     },
     "1670456737865497023": {
@@ -6414,6 +7886,25 @@
         "est_property_value": 1300000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21420075"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (2.5 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Gilbert."
       }
     },
     "52867134": {
@@ -6481,6 +7972,27 @@
         "est_property_value": 1300000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21411881"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Free / complimentary pool heating included"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Gilbert) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Gilbert."
       }
     },
     "740490197885439898": {
@@ -6548,6 +8060,27 @@
         "est_property_value": 1520000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (5.00★ with 46 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Gilbert) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Gilbert."
       }
     },
     "1734227719495774011": {
@@ -6615,6 +8148,25 @@
         "est_property_value": 1510000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.5 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Mesa."
       }
     },
     "1479073771359401098": {
@@ -6632,32 +8184,32 @@
       "amenities_count": 87,
       "is_valid_comp": true,
       "validity_reason": "Valid 5BR luxury estate comp in Mesa.",
-      "desirability_ratio": 0.96,
+      "desirability_ratio": 0.99,
       "category_scores": {
-        "outdoor": 91,
+        "outdoor": 97,
         "capacity": 73,
         "property_value": 82,
         "interior": 100,
         "location": 78,
         "reputation": 98
       },
-      "composite_score": 86.2,
-      "rationale": "Direct peer comp (near-equal quality, Winter). Features heated pool, matching Villa del Sol's capacity and luxury tier.",
+      "composite_score": 87.7,
+      "rationale": "Direct peer comp (near-equal quality, Winter). Features free heated pool, matching Villa del Sol's capacity and luxury tier.",
       "accommodates": 16,
-      "winter_ratio": 0.96,
-      "summer_ratio": 0.95,
+      "winter_ratio": 0.99,
+      "summer_ratio": 0.96,
       "pool_specs": {
         "has_pool": true,
-        "heating": "standard_heated",
-        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "heating": "free",
+        "heating_source": "Explicit free / complimentary pool heat mentioned in listing text",
         "pool_size": "standard",
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 86.2,
-      "summer_composite_score": 85.7,
+      "winter_composite_score": 87.7,
+      "summer_composite_score": 86.2,
       "winter_category_scores": {
-        "outdoor": 91,
+        "outdoor": 97,
         "capacity": 73,
         "property_value": 82,
         "interior": 100,
@@ -6665,15 +8217,15 @@
         "reputation": 98
       },
       "summer_category_scores": {
-        "outdoor": 89,
+        "outdoor": 91,
         "capacity": 73,
         "property_value": 82,
         "interior": 100,
         "location": 78,
         "reputation": 98
       },
-      "winter_rationale": "Direct peer comp (near-equal quality, Winter). Features heated pool, matching Villa del Sol's capacity and luxury tier.",
-      "summer_rationale": "Moderate comp (5% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "winter_rationale": "Direct peer comp (near-equal quality, Winter). Features free heated pool, matching Villa del Sol's capacity and luxury tier.",
+      "summer_rationale": "Direct peer comp (near-equal quality, Summer). Features free heated pool, matching Villa del Sol's capacity and luxury tier.",
       "property_specs": {
         "sqft": 3900,
         "sqft_source": "Corridor Hedonic Est.",
@@ -6682,6 +8234,29 @@
         "est_property_value": 1520000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Free / complimentary pool heating included",
+          "Dedicated movie theater / cinema room",
+          "Flawless guest track record (4.95★ with 63 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Mesa."
       }
     },
     "1153792853758526471": {
@@ -6749,6 +8324,27 @@
         "est_property_value": 2020000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Dedicated movie theater / cinema room"
+        ],
+        "deficits": [
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court",
+          "Lacks dedicated championship billiards table"
+        ],
+        "justification": "Valid 6BR luxury estate comp in Mesa."
       }
     },
     "816204349600160886": {
@@ -6816,6 +8412,25 @@
         "est_property_value": 1800000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": "21479076"
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Mesa."
       }
     },
     "699608423581201252": {
@@ -6883,16 +8498,38 @@
         "est_property_value": 1410000.0,
         "property_value_source": "Corridor Hedonic Est.",
         "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": true,
+        "status": "VALID",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Free / complimentary pool heating included",
+          "Flawless guest track record (4.96★ with 125 reviews)"
+        ],
+        "deficits": [
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Valid 5BR luxury estate comp in Chandler."
       }
     }
   },
   "metadata": {
-    "last_updated": "2026-09-05T19:55:00.061619",
+    "last_updated": "2026-09-11T18:43:21.989064",
     "total_count": 110,
     "evaluated_at": "comp_evaluator.py",
-    "valid_comps_count": 103,
-    "disqualified_comps_count": 0,
-    "total_comps": 103
+    "valid_comps_count": 97,
+    "disqualified_comps_count": 6,
+    "total_comps": 97
   },
   "excluded_comps": {
     "809687707688713264": {
@@ -6930,6 +8567,531 @@
       "name": "Casa Nuda 7BR 8King Beds",
       "reason": "Disqualified: Property lacks a private swimming pool.",
       "excluded_at": "2026-09-05T04:34:20.278540"
+    }
+  },
+  "disqualified": {
+    "1587060999176930356": {
+      "listing_id": "1587060999176930356",
+      "name": "Two Homes w/ Pool | 8BR Mesa Retreat | Sleeps 24",
+      "location": "Mesa",
+      "bedrooms": 8,
+      "beds": 8,
+      "baths": 5.0,
+      "rating": 4.0,
+      "reviews": 1,
+      "url": "https://www.airbnb.com/rooms/1587060999176930356",
+      "discovered_at_sample": "2026-10-15 to 2026-10-18",
+      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1587060999176930356/original/3faa0949-7a92-4684-8371-d1e461f1bc9b.jpeg",
+      "amenities_count": 77,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Loss of privacy / owner on premises or dual houses across the street.",
+      "desirability_ratio": 0.65,
+      "category_scores": {
+        "outdoor": 70,
+        "capacity": 70,
+        "property_value": 75,
+        "interior": 70,
+        "location": 70,
+        "reputation": 70
+      },
+      "composite_score": 71.0,
+      "rationale": "Disqualified: Loss of privacy / owner on premises or dual houses across the street.",
+      "winter_ratio": 0.65,
+      "summer_ratio": 0.65,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "unheated",
+        "heating_source": "Unheated (no pool heating mentioned in verified amenities/description)",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "winter_composite_score": 78.7,
+      "summer_composite_score": 82.7,
+      "winter_category_scores": {
+        "outdoor": 61,
+        "capacity": 100,
+        "property_value": 90,
+        "interior": 75,
+        "location": 78,
+        "reputation": 70
+      },
+      "summer_category_scores": {
+        "outdoor": 77,
+        "capacity": 100,
+        "property_value": 90,
+        "interior": 75,
+        "location": 78,
+        "reputation": 70
+      },
+      "winter_rationale": "Moderate comp (21% lower desirability, Winter). Features heated spa, but noted gaps: unheated pool in winter, Mesa location discount.",
+      "summer_rationale": "Moderate comp (12% lower desirability, Summer). Features heated spa, but noted gaps: Mesa location discount.",
+      "property_specs": {
+        "sqft": 7200,
+        "sqft_source": "Corridor Hedonic Est.",
+        "lot_acres": 0.5,
+        "lot_source": "Corridor Hedonic Est.",
+        "est_property_value": 2640000.0,
+        "property_value_source": "Corridor Hedonic Est.",
+        "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": false,
+        "status": "DISQUALIFIED",
+        "criteria_checklist": {
+          "single_family_compound": false,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,200 sq ft)"
+        ],
+        "deficits": [
+          "Disqualified: Loss of privacy / owner on premises or dual houses across the street.",
+          "Unheated pool significantly limits winter utility",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Disqualified: Loss of privacy / owner on premises or dual houses across the street."
+      }
+    },
+    "1442265380006443515": {
+      "listing_id": "1442265380006443515",
+      "name": "Remarkable Resort Home - Minutes from Old Town",
+      "location": "Apartment in Scottsdale",
+      "bedrooms": 6,
+      "beds": 12,
+      "baths": 3.0,
+      "rating": 4.88,
+      "reviews": 16,
+      "url": "https://www.airbnb.com/rooms/1442265380006443515",
+      "discovered_at_sample": "2026-10-15 to 2026-10-18",
+      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1442265380006443515/original/e82b63ed-64b2-4c16-ade5-8cfdda53f47b.jpeg",
+      "amenities_count": 52,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Loss of privacy / owner on premises or dual houses across the street.",
+      "desirability_ratio": 0.65,
+      "category_scores": {
+        "outdoor": 70,
+        "capacity": 70,
+        "property_value": 75,
+        "interior": 70,
+        "location": 70,
+        "reputation": 70
+      },
+      "composite_score": 71.0,
+      "rationale": "Disqualified: Loss of privacy / owner on premises or dual houses across the street.",
+      "winter_ratio": 0.65,
+      "summer_ratio": 0.65,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "winter_composite_score": 84.2,
+      "summer_composite_score": 84.7,
+      "winter_category_scores": {
+        "outdoor": 79,
+        "capacity": 87,
+        "property_value": 90,
+        "interior": 70,
+        "location": 95,
+        "reputation": 88
+      },
+      "summer_category_scores": {
+        "outdoor": 81,
+        "capacity": 87,
+        "property_value": 90,
+        "interior": 70,
+        "location": 95,
+        "reputation": 88
+      },
+      "winter_rationale": "Moderate comp (9% lower desirability, Winter). Features heated spa, but noted gaps: pool heat fee required, 3.0 baths.",
+      "summer_rationale": "Moderate comp (7% lower desirability, Summer). Features heated spa, but noted gaps: pool heat fee required, 3.0 baths.",
+      "property_specs": {
+        "sqft": 4800,
+        "sqft_source": "Corridor Hedonic Est.",
+        "lot_acres": 0.4,
+        "lot_source": "Corridor Hedonic Est.",
+        "est_property_value": 2640000.0,
+        "property_value_source": "Corridor Hedonic Est.",
+        "str_license": "21342266"
+      },
+      "validity_details": {
+        "is_valid_comp": false,
+        "status": "DISQUALIFIED",
+        "criteria_checklist": {
+          "single_family_compound": false,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Prime Scottsdale corridor commanding high regional demand"
+        ],
+        "deficits": [
+          "Disqualified: Loss of privacy / owner on premises or dual houses across the street.",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction"
+        ],
+        "justification": "Disqualified: Loss of privacy / owner on premises or dual houses across the street."
+      }
+    },
+    "1144613690916964707": {
+      "listing_id": "1144613690916964707",
+      "name": "Mesa Manor w/Mini Golf | Ping Pong | WiFi | BBQ",
+      "location": "Mesa",
+      "bedrooms": 8,
+      "beds": 16,
+      "baths": 4.5,
+      "rating": 4.64,
+      "reviews": 66,
+      "url": "https://www.airbnb.com/rooms/1144613690916964707",
+      "discovered_at_sample": "2026-10-15 to 2026-10-18",
+      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE0NDYxMzY5MDkxNjk2NDcwNw%3D%3D/original/3a541057-c845-4445-a346-c3fa137c8b24.jpeg",
+      "amenities_count": 46,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Low guest satisfaction rating (4.64★ with 66 reviews; below luxury STR standards).",
+      "desirability_ratio": 0.7,
+      "category_scores": {
+        "outdoor": 75,
+        "capacity": 80,
+        "property_value": 75,
+        "interior": 75,
+        "location": 75,
+        "reputation": 40
+      },
+      "composite_score": 72.0,
+      "rationale": "Disqualified: Low guest satisfaction rating (4.64★ with 66 reviews; below luxury STR standards).",
+      "accommodates": 30,
+      "winter_ratio": 0.7,
+      "summer_ratio": 0.7,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "winter_composite_score": 87.1,
+      "summer_composite_score": 87.6,
+      "winter_category_scores": {
+        "outdoor": 94,
+        "capacity": 100,
+        "property_value": 90,
+        "interior": 76,
+        "location": 78,
+        "reputation": 70
+      },
+      "summer_category_scores": {
+        "outdoor": 96,
+        "capacity": 100,
+        "property_value": 90,
+        "interior": 76,
+        "location": 78,
+        "reputation": 70
+      },
+      "winter_rationale": "Direct peer comp (near-equal quality, Winter). Features dedicated sports court, matching Villa del Sol's capacity and luxury tier.",
+      "summer_rationale": "Direct peer comp (near-equal quality, Summer). Features dedicated sports court, matching Villa del Sol's capacity and luxury tier.",
+      "property_specs": {
+        "sqft": 7200,
+        "sqft_source": "Corridor Hedonic Est.",
+        "lot_acres": 0.5,
+        "lot_source": "Corridor Hedonic Est.",
+        "est_property_value": 2640000.0,
+        "property_value_source": "Corridor Hedonic Est.",
+        "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": false,
+        "status": "DISQUALIFIED",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": false,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "High bedroom count (8 bedrooms) accommodating large travel groups",
+          "Expansive floor plan (~7,200 sq ft)"
+        ],
+        "deficits": [
+          "Disqualified: Low guest satisfaction rating (4.64★ with 66 reviews; below luxury STR standards).",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Mesa) with lower baseline rates than South Tempe / Scottsdale",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Disqualified: Low guest satisfaction rating (4.64★ with 66 reviews; below luxury STR standards)."
+      }
+    },
+    "29569170": {
+      "listing_id": "29569170",
+      "name": "Heated Pool & Putting Green: Chandler Home!",
+      "location": "Chandler",
+      "bedrooms": 6,
+      "beds": 8,
+      "baths": 4.5,
+      "rating": 4.56,
+      "reviews": 93,
+      "url": "https://www.airbnb.com/rooms/29569170",
+      "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-29569170/original/0e6a2c1a-e5b7-42ef-b3f1-c6b990b2cdd0.jpeg",
+      "amenities_count": 44,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Low guest satisfaction rating (4.56★ with 93 reviews; below luxury STR standards).",
+      "desirability_ratio": 0.7,
+      "winter_ratio": 0.7,
+      "summer_ratio": 0.7,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "fee",
+        "heating_source": "Explicit pool heating fee disclosed in listing text",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "composite_score": 72.0,
+      "winter_composite_score": 86.6,
+      "summer_composite_score": 87.1,
+      "category_scores": {
+        "outdoor": 75,
+        "capacity": 80,
+        "property_value": 75,
+        "interior": 75,
+        "location": 75,
+        "reputation": 40
+      },
+      "winter_category_scores": {
+        "outdoor": 84,
+        "capacity": 97,
+        "property_value": 88,
+        "interior": 91,
+        "location": 82,
+        "reputation": 70
+      },
+      "summer_category_scores": {
+        "outdoor": 86,
+        "capacity": 97,
+        "property_value": 88,
+        "interior": 91,
+        "location": 82,
+        "reputation": 70
+      },
+      "rationale": "Disqualified: Low guest satisfaction rating (4.56★ with 93 reviews; below luxury STR standards).",
+      "winter_rationale": "Direct peer comp (near-equal quality, Winter). Features heated spa, matching Villa del Sol's capacity and luxury tier.",
+      "summer_rationale": "Direct peer comp (near-equal quality, Summer). Features heated spa, matching Villa del Sol's capacity and luxury tier.",
+      "discovered_at_sample": "2026-09-05 manual addition",
+      "accommodates": 16,
+      "property_specs": {
+        "sqft": 4900,
+        "sqft_source": "Corridor Hedonic Est.",
+        "lot_acres": 0.4,
+        "lot_source": "Corridor Hedonic Est.",
+        "est_property_value": 1860000.0,
+        "property_value_source": "Corridor Hedonic Est.",
+        "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": false,
+        "status": "DISQUALIFIED",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": true,
+          "guest_rating_benchmark": false,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Disqualified: Low guest satisfaction rating (4.56★ with 93 reviews; below luxury STR standards).",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale",
+          "Pool heat incurs additional fee ($50–$150/night), introducing guest friction",
+          "Secondary pricing corridor (Chandler) with lower baseline rates than South Tempe / Scottsdale"
+        ],
+        "justification": "Disqualified: Low guest satisfaction rating (4.56★ with 93 reviews; below luxury STR standards)."
+      }
+    },
+    "746195521284356998": {
+      "listing_id": "746195521284356998",
+      "name": "Desert Playground | Pool, Gym, Bocce & Pickleball.",
+      "location": "Paradise Valley Village",
+      "bedrooms": 5,
+      "beds": 6,
+      "baths": 4.0,
+      "rating": 4.94,
+      "reviews": 114,
+      "url": "https://www.airbnb.com/rooms/746195521284356998",
+      "discovered_at_sample": "2026-10-15 to 2026-10-18",
+      "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-746195521284356998/original/1fed9034-353b-48f4-a68c-3dbb9f03f8c5.jpeg",
+      "amenities_count": 68,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Only 5 bedrooms (capacity 7 guests), below the 5 BR / 12 guest threshold.",
+      "desirability_ratio": 0.55,
+      "category_scores": {
+        "outdoor": 65,
+        "capacity": 40,
+        "property_value": 75,
+        "interior": 65,
+        "location": 75,
+        "reputation": 75
+      },
+      "composite_score": 60.0,
+      "rationale": "Disqualified: Under-sized listing (5 BR / 7 guests) cannot benchmark 16-guest luxury estates.",
+      "accommodates": 7,
+      "winter_ratio": 0.55,
+      "summer_ratio": 0.55,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "standard_heated",
+        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "winter_composite_score": 90.7,
+      "summer_composite_score": 90.7,
+      "winter_category_scores": {
+        "outdoor": 100,
+        "capacity": 73,
+        "property_value": 93,
+        "interior": 90,
+        "location": 95,
+        "reputation": 94
+      },
+      "summer_category_scores": {
+        "outdoor": 100,
+        "capacity": 73,
+        "property_value": 93,
+        "interior": 90,
+        "location": 95,
+        "reputation": 94
+      },
+      "winter_rationale": "Premium comp (6% superior desirability, Winter). Features heated pool, 0.85-acre lot, dedicated sports court, heated spa.",
+      "summer_rationale": "Premium comp (6% superior desirability, Summer). Features heated pool, 0.85-acre lot, dedicated sports court, heated spa.",
+      "property_specs": {
+        "sqft": 3500,
+        "sqft_source": "Listing Disclosed",
+        "lot_acres": 0.85,
+        "lot_source": "Corridor Hedonic Est.",
+        "est_property_value": 3220000.0,
+        "property_value_source": "Corridor Hedonic Est.",
+        "str_license": "21477054"
+      },
+      "validity_details": {
+        "is_valid_comp": false,
+        "status": "DISQUALIFIED",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": false,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [],
+        "deficits": [
+          "Disqualified: Only 5 bedrooms (capacity 7 guests), below the 5 BR / 12 guest threshold.",
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Lacks regulation basketball half-court"
+        ],
+        "justification": "Disqualified: Only 5 bedrooms (capacity 7 guests), below the 5 BR / 12 guest threshold."
+      }
+    },
+    "688643627143933050": {
+      "listing_id": "688643627143933050",
+      "name": "Modern Island Getaway w/ Heated Pool, Bar & Gazebo",
+      "location": "Gilbert",
+      "bedrooms": 5,
+      "beds": 6,
+      "baths": 3.0,
+      "rating": 4.98,
+      "reviews": 121,
+      "url": "https://www.airbnb.com/rooms/688643627143933050",
+      "discovered_at_sample": "2026-10-15 to 2026-10-18",
+      "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-688643627143933050/original/3044c26f-efb1-4589-8a04-afc41ac5356e.jpeg",
+      "amenities_count": 65,
+      "is_valid_comp": false,
+      "validity_reason": "Disqualified: Only 5 bedrooms (capacity 10 guests), below the 5 BR / 12 guest threshold.",
+      "desirability_ratio": 0.55,
+      "category_scores": {
+        "outdoor": 65,
+        "capacity": 40,
+        "property_value": 75,
+        "interior": 65,
+        "location": 75,
+        "reputation": 75
+      },
+      "composite_score": 60.0,
+      "rationale": "Disqualified: Under-sized listing (5 BR / 10 guests) cannot benchmark 16-guest luxury estates.",
+      "accommodates": 10,
+      "winter_ratio": 0.55,
+      "summer_ratio": 0.55,
+      "pool_specs": {
+        "has_pool": true,
+        "heating": "standard_heated",
+        "heating_source": "Heated pool declared in amenities/title (standard/unspecified fee)",
+        "pool_size": "standard",
+        "size_source": "Standard residential backyard pool",
+        "gallons": null
+      },
+      "winter_composite_score": 83.1,
+      "summer_composite_score": 82.6,
+      "winter_category_scores": {
+        "outdoor": 91,
+        "capacity": 63,
+        "property_value": 75,
+        "interior": 96,
+        "location": 82,
+        "reputation": 98
+      },
+      "summer_category_scores": {
+        "outdoor": 89,
+        "capacity": 63,
+        "property_value": 75,
+        "interior": 96,
+        "location": 82,
+        "reputation": 98
+      },
+      "winter_rationale": "Moderate comp (11% lower desirability, Winter). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "summer_rationale": "Moderate comp (12% lower desirability, Summer). Features heated pool, but noted gaps: 5 BR vs our 6 BR, 3.0 baths.",
+      "property_specs": {
+        "sqft": 3750,
+        "sqft_source": "Corridor Hedonic Est.",
+        "lot_acres": 0.3,
+        "lot_source": "Corridor Hedonic Est.",
+        "est_property_value": 1310000.0,
+        "property_value_source": "Corridor Hedonic Est.",
+        "str_license": null
+      },
+      "validity_details": {
+        "is_valid_comp": false,
+        "status": "DISQUALIFIED",
+        "criteria_checklist": {
+          "single_family_compound": true,
+          "private_swimming_pool": true,
+          "guest_capacity_12_plus": false,
+          "guest_rating_benchmark": true,
+          "corridor_drive_radius": true
+        },
+        "strengths": [
+          "Flawless guest track record (4.98★ with 121 reviews)"
+        ],
+        "deficits": [
+          "Disqualified: Only 5 bedrooms (capacity 10 guests), below the 5 BR / 12 guest threshold.",
+          "Fewer bedrooms (5 BR) compared to Villa del Sol's 6BR + guest casita",
+          "Limited bathrooms (3.0 BA) creating potential morning rush congestion",
+          "Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale"
+        ],
+        "justification": "Disqualified: Only 5 bedrooms (capacity 10 guests), below the 5 BR / 12 guest threshold."
+      }
     }
   }
 }

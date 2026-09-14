@@ -1,0 +1,70 @@
+[
+  {
+    "holiday_name": "Labor Day",
+    "kivoya_period_name": "Labor day 26",
+    "premium_pct": 0,
+    "floor_rate": 499,
+    "min_nights": 3,
+    "description": "End of summer pool weekend and ASU opening home games"
+  },
+  {
+    "holiday_name": "Columbus Day",
+    "kivoya_period_name": "Columbus Day 24",
+    "premium_pct": 0,
+    "floor_rate": 499,
+    "min_nights": 3,
+    "description": "Fall break 3-day weekend with cooling weather"
+  },
+  {
+    "holiday_name": "Thanksgiving",
+    "kivoya_period_name": "Thanksgiving 26",
+    "premium_pct": 10,
+    "floor_rate": 499,
+    "min_nights": 3,
+    "description": "High family & ASU alumni compression; multi-gen gathering"
+  },
+  {
+    "holiday_name": "Christmas & New Year",
+    "kivoya_period_name": "Christmas & New Year 2026",
+    "premium_pct": 10,
+    "floor_rate": 499,
+    "min_nights": 3,
+    "description": "Peak national holiday winter escape; 6BR luxury estate demand"
+  },
+  {
+    "holiday_name": "Holy Week",
+    "kivoya_period_name": "Holy Week 27",
+    "split_pricing": true,
+    "premium_pct": 0,
+    "floor_midweek": 699,
+    "floor_weekend": 1049,
+    "floor_rate": 699,
+    "min_nights": 3,
+    "description": "Peak MLB Spring Training finals and Easter family travel"
+  },
+  {
+    "holiday_name": "Memorial Day",
+    "kivoya_period_name": "Memorial Day 27",
+    "premium_pct": 0,
+    "floor_rate": 699,
+    "min_nights": 3,
+    "description": "Official kickoff to summer pool season before peak heat"
+  },
+  {
+    "holiday_name": "WM Phoenix Open",
+    "kivoya_period_name": null,
+    "from_date": "02/07/2028",
+    "to_date": "02/13/2028",
+    "split_pricing": true,
+    "premium_pct": 0,
+    "floor_midweek": 749,
+    "floor_weekend": 1099,
+    "floor_rate": 699,
+    "base_midweek": 749,
+    "base_weekend": 1099,
+    "min_nights": 3,
+    "custom_event": true,
+    "description": "Arizona's highest tourism & ADR compression event (~700k attendees)"
+  }
+]
+

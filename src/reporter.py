@@ -26,11 +26,13 @@ class PriceReportGenerator:
         output_dir: str = "data",
         urgent_pct_diff: float = URGENT_PCT_DIFF,
         moderate_pct_diff: float = MODERATE_PCT_DIFF,
+        sales_tracker: Optional[Any] = None,
     ):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.urgent_pct_diff = urgent_pct_diff
         self.moderate_pct_diff = moderate_pct_diff
+        self.sales_tracker = sales_tracker
 
     def generate_all(
         self,
@@ -123,11 +125,68 @@ class PriceReportGenerator:
             f"",
             f"> 💡 **Action Guidance for Kivoya Property Manager**:",
             f"> Review **Section 1** immediately. These intervals are substantially mispriced (>{self.urgent_pct_diff:.0f}% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.",
-            f"",
             f"---",
             f"",
-            f"## 🚨 Section 1: Urgent Action Required (Action This Week)",
         ]
+
+        if self.sales_tracker:
+            # ⚡ Market Compression & Scarcity Alerts (Design Doc §7.4)
+            alerts = list(self.sales_tracker.get_active_compression_alerts())
+            existing_alert_keys = {(a.get("check_in"), a.get("check_out")) for a in alerts}
+            for s in (urgent + moderate + info):
+                if s.get("is_compression_surge") and (s.get("check_in"), s.get("check_out")) not in existing_alert_keys:
+                    c_det = s.get("compression_details") or {}
+                    alerts.append({
+                        "check_in": s.get("check_in"),
+                        "check_out": s.get("check_out"),
+                        "available_count": c_det.get("available_count"),
+                        "total_cohort_count": c_det.get("total_cohort_count"),
+                        "available_ratio": c_det.get("available_ratio"),
+                        "reason": c_det.get("reason", "Severe market scarcity (<20% comps available)"),
+                    })
+                    existing_alert_keys.add((s.get("check_in"), s.get("check_out")))
+
+            lines.append("## ⚡ Market Compression & Scarcity Alerts")
+            if alerts:
+                for a in alerts:
+                    detail = a.get("reason", "Severe market scarcity (<20% comps available).")
+                    lines.append(
+                        f"> ⚡ **Market Compression Alert for `{a['check_in']} -> {a['check_out']}`**: "
+                        f"{detail}. "
+                        f"Scarcity surge directive applied (+30% rate adjustment)."
+                    )
+            else:
+                lines.append("*(No active market compression alerts detected across upcoming intervals.)*")
+            lines.append("")
+
+            # 🎯 Recent Confirmed Competitor Sales Ledger (Design Doc §7.4)
+            recent_sales = self.sales_tracker.get_recent_sales(lookback_days=7)
+            lines.append("## 🎯 Recent Confirmed Competitor Sales Ledger (Past 7 Days)")
+            if recent_sales:
+                lines.append("| Property Name | Stay Dates | Nights | Lead Days | Realized Rate | Quality-Adjusted Rate | Market Percentile | Status |")
+                lines.append("|---|---|---|---|---|---|---|---|")
+                for s in recent_sales:
+                    pname = s.get("listing_name") or f"Listing #{s.get('listing_id')}"
+                    cin = s.get("check_in")
+                    cout = s.get("check_out")
+                    nights_val = s.get("nights", 3)
+                    lead = s.get("lead_time_days", 0)
+                    rate = s.get("last_observed_rate", 0.0)
+                    adj_rate = s.get("last_observed_adj_rate", rate)
+                    pct = s.get("last_observed_percentile", 50.0)
+                    lines.append(
+                        f"| {pname} | `{cin} -> {cout}` | {nights_val} | {lead}d | "
+                        f"${rate:,.2f} | ${adj_rate:,.2f} | {pct:.1f}% | ✅ Confirmed |"
+                    )
+            else:
+                lines.append("*(No competitor sales confirmed within the past 7 days.)*")
+            lines.append("")
+            lines.append("---")
+            lines.append("")
+
+        lines.extend([
+            f"## 🚨 Section 1: Urgent Action Required (Action This Week)",
+        ])
 
         if not urgent:
             lines.append("*(No urgent price discrepancies detected this week. Rates are well aligned!)*\n")

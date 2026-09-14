@@ -17,7 +17,7 @@ An autonomous AI agent system designed for **Villa del Sol** (920 E Carver Rd, T
 3. **Multi-Tier Luxury Comp Intelligence**:
    - **Tier A (Direct Comps)**: 16+ guests, 6+ bedrooms, heated pool/spa, resort yards.
    - **Tier B (Secondary Comps)**: 12–15 guests, 5+ bedrooms, luxury estates.
-   - Uses Playwright stealth automation with randomized human delays (3–7s) and local disk caching to prevent redundant requests and protect IP reputation without third-party proxy subscriptions.
+   - Uses Playwright stealth automation with a **10-Worker Multi-IP NordVPN Stealth Connection Pool** (`src/stealth_connection.py`), routing requests across out-of-state feeder hubs with RFC 1928/1929 SOCKS5 authentication, dynamic candidate hot-swapping, zero Phoenix IP leakage, randomized human delays (3–7s), and local disk caching to prevent redundant requests and protect IP reputation.
 4. **Dynamic Lead-Time Pricing Engine**:
    - Benchmarks against the luxury comps with dynamic lead-time and day-of-week tapering.
    - **Lead-time tapering curve**:
@@ -26,7 +26,7 @@ An autonomous AI agent system designed for **Villa del Sol** (920 E Carver Rd, T
      - `30 – 60 days`: 55th percentile (tapering to encourage booking).
      - `< 30 days`: 45th percentile (last-minute booking conversion).
      - *Midweek*: 30% discount curve (49th, 45.5th, 38.5th, and 31.5th percentiles).
-   - Translates competitive effective total guest cost back into the **recommended base nightly rate** (accounting for our \$500 cleaning fee).
+   - Translates competitive effective total guest cost back into the **recommended base nightly rate** (accounting for our $500 cleaning fee).
 5. **Actionable 3-Tier Reporting**:
    - **Section 1: Urgent Action Required (Weekly)**: Intervals where current price is >25% off market or imminent arrival (<60 days).
    - **Section 2: Moderate Adjustments (Monthly Review)**: Intervals 10%–25% off target for intermediate dates (60–180 days).
@@ -39,47 +39,71 @@ An autonomous AI agent system designed for **Villa del Sol** (920 E Carver Rd, T
 
 ### 1. Environment Setup
 ```bash
-# Clone or navigate to the directory
+# Navigate to directory and activate virtual environment
 cd /Users/ivanpe/str-price-advisor
-
-# Activate virtual environment
 source .venv/bin/activate
 
-# Install dependencies (already installed)
+# Install dependencies and Playwright browser binaries
 pip install -r requirements.txt
 playwright install chromium
 ```
 
-### 2. Verify Kivoya Connection
+### 2. Audit Stealth Multi-IP NordVPN Connection Pool
+```bash
+# Verify 10-node out-of-state proxy fleet and latency
+python -m src.cli test-stealth --count 10
+```
+
+### 3. Verify Kivoya & Streamline API Connection
 ```bash
 python -m src.cli test-kivoya
 ```
 
-### 3. Bootstrap / Refresh Comp Registry
+### 4. Bootstrap / Evaluate Comp Registry
 ```bash
+# Discover initial luxury competitors in Phoenix East Valley
 python -m src.cli bootstrap-comps --limit 30
-```
-*(Curates verified listings into `config/comps_registry.json`)*.
 
-### 4. Run Weekly Price Advisory Audit
+# Evaluate comps using the 6-factor luxury rubric ($2.0M baseline valuation)
+python -m src.cli evaluate-comps
+```
+
+### 5. Run Weekly Price Advisory Audit
 ```bash
 # Run quick audit on upcoming intervals (e.g. next 12 intervals)
 python -m src.cli run --quick --limit 12
 
-# Run full 12-month annual scan
-python -m src.cli run --weekly
+# Run full 12-month annual scan with cross-platform channel comparison
+python -m src.cli run --weekly --compare-platforms
+```
+
+### 6. Track Competitor Sales & Absorption Velocity
+```bash
+# Detect comp bookings via snapshot diffing and compute 2D strategy grid
+python -m src.cli track-competitor-sales --dashboard
+```
+
+### 7. Re-generate or Refresh HTML Dashboard
+```bash
+python -m src.cli generate-html
 ```
 
 ---
 
 ## 📁 Output Reports & Static Dashboard
 
-Every run updates both static reporting documents and a responsive web dashboard:
+Every run updates both static reporting documents and a responsive 10-tab web dashboard:
 - **Interactive Web Dashboard (`docs/index.html`)**:
-  - **Tab 1 (Pricing Recommendations)**: 🚨 Urgent Actions (Weekly) &rarr; ⚠️ Moderate Adjustments (Monthly) &rarr; ℹ️ Full 12-Month Calendar.
-  - **Tab 2 (Curated Comps Registry)**: 109 verified competitors with search, filter pills, and direct **"Open on Airbnb ↗"** links.
-  - **Tab 3 (Methodology & Guide)**: Complete documentation for you and your Kivoya property manager.
-  - **Tab 4 (Live Data & Debug)**: Download buttons for CSV and Markdown reports + raw JSON inspect.
+  - **Tab 1 (📊 Pricing)**: 🚨 Urgent Actions (Weekly) &rarr; ⚠️ Moderate Adjustments (Monthly) &rarr; ℹ️ Full 12-Month Calendar with lead-time percentiles and historical realized benchmarks.
+  - **Tab 2 (🌐 Channels)**: Real-time price parity comparison matrix across Airbnb, VRBO, Booking.com, and Kivoya Direct with full fee and tax itemization.
+  - **Tab 3 (⚙️ Streamline PMS)**: Rate management diagnostics, published base rates, and direct channel markup auditing.
+  - **Tab 4 (🏡 Comps)**: 109 curated competitors (97 active valid comps + 12 disqualified) with search, tier filter pills, and direct **"Open on Airbnb ↗"** links.
+  - **Tab 5 (🎯 Comps Sales)**: 2D empirical strategy matrix (Lead Horizon $\times$ Stay Type), absorption velocity KPIs, and live competitor booking transaction feed.
+  - **Tab 6 (📅 Calendar)**: 6-month interactive rolling calendar grid with dual color modes (Status vs. Channel) and modal reservation inspection.
+  - **Tab 7 (📑 Reservations)**: Complete 2022–2027 historical and advance reservation ledger with search, filtering, and sorting.
+  - **Tab 8 (📈 Revenue)**: Cumulative annual revenue pacing curves (2022–2027) with YoY comparisons and executive KPIs.
+  - **Tab 9 (📐 Methodology & PMS Guide)**: Complete pricing engine documentation, fee formulas, and operational communication guide for Kivoya.
+  - **Tab 10 (🛠️ Live Data & Debug)**: Downloadable CSV spreadsheets, Markdown reports, raw JSON data inspect, and proxy pool health telemetry.
 - **`data/latest_report.md`**: Executive markdown summary with warning badges.
 - **`data/latest_sheet.csv`**: Structured spreadsheet for importing directly into Google Sheets or Kivoya.
 
@@ -95,34 +119,5 @@ The dashboard is generated into `docs/index.html` and is designed for direct Git
    - **Branch**: Select **`main`** and choose the folder **`/docs`**.
    - Click **Save**.
 4. GitHub Pages will publish your dashboard at your personal GitHub URL!
-5. You can also view it locally anytime by double-clicking `docs/index.html` on your Mac.
-
----
-
-## 🚀 Quickstart & Usage
-
-### 1. Environment Setup
-```bash
-cd /Users/ivanpe/str-price-advisor
-source .venv/bin/activate
-```
-
-### 2. Verify Kivoya Connection
-```bash
-python -m src.cli test-kivoya
-```
-
-### 3. Generate or Refresh HTML Dashboard
-```bash
-python -m src.cli generate-html
-```
-
-### 4. Run Weekly Price Advisory Audit
-```bash
-# Run quick audit on upcoming intervals (e.g. next 12 intervals)
-python -m src.cli run --quick --limit 12
-
-# Run full 12-month annual scan
-python -m src.cli run --weekly
-```
+5. You can also view it locally anytime by opening `docs/index.html` on your Mac.
 

@@ -25,7 +25,7 @@ Always compare competitor listings against Villa del Sol's verified specs from `
 - **Location**: Quiet, gated luxury enclave in **South Tempe, AZ** (minutes from ASU Research Park, Sky Harbor, East Valley corridors, 15–20 min to Old Town Scottsdale).
 - **Lot & Space**: Gated **¾-acre (0.75-acre) private compound** with main house + detached 1BR/1BA luxury guest casita, totaling **5,400 sq ft**.
 - **Asset Valuation Anchor**: **\$2,000,000** public records benchmark (composite score anchor: **88.0 pts**).
-- **Capacity**: **6 Bedrooms**, **6 Bathrooms** (5.5 on Airbnb), **11 Beds**, **16 Guests**.
+- **Capacity**: **6 Bedrooms**, **5 Bathrooms**, **11 Beds**, **16 Guests**.
 - **Outdoor Resort Amenities (30,000-gal saltwater pool)**:
   - Massive heated saltwater pool with custom rock waterfall grotto.
   - In-ground heated spa.

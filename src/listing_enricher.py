@@ -6,6 +6,7 @@ Caches enriched listing profiles under data/enriched_comps/.
 """
 
 import asyncio
+from contextlib import asynccontextmanager
 import json
 import logging
 import os
@@ -32,12 +33,15 @@ class ListingEnricher:
         self.ENRICHED_DIR.mkdir(parents=True, exist_ok=True)
         self.browser: Optional[Browser] = None
         self.context: Optional[BrowserContext] = None
-        from src.proxy_manager import ProxyManager
-        self.proxy_mgr = ProxyManager(required=True)
+        self.worker_contexts: List[BrowserContext] = []
+        self._context_queue: Optional[asyncio.Queue] = None
+        from src.stealth_connection import StealthConnectionManager
+        self.proxy_mgr = StealthConnectionManager(required=True)
 
-    async def init_browser(self, p):
-        """Launch headless browser with anti-detection args and proxy support."""
-        proxy_cfg = await self.proxy_mgr.start()
+    async def init_browser(self, p, num_workers: int = 1):
+        """Launch headless browser with anti-detection args and stealth proxy pool support."""
+        self.worker_contexts = []
+        self._context_queue = asyncio.Queue()
         launch_kwargs = {
             "headless": self.headless,
             "args": [
@@ -45,24 +49,85 @@ class ListingEnricher:
                 "--no-sandbox",
             ],
         }
-        if proxy_cfg:
-            launch_kwargs["proxy"] = proxy_cfg
 
-        self.browser = await p.chromium.launch(**launch_kwargs)
-        self.context = await self.browser.new_context(
-            viewport={"width": 1366, "height": 850},
-            user_agent=(
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-            ),
-        )
+        if num_workers > 1:
+            target_workers = min(num_workers, self.proxy_mgr.max_workers)
+            proxy_configs = await self.proxy_mgr.start_pool(num_workers=target_workers)
+            self.browser = await p.chromium.launch(**launch_kwargs)
+            if proxy_configs:
+                for cfg in proxy_configs:
+                    proxy_arg = {"server": cfg["server"]} if isinstance(cfg, dict) and "server" in cfg else cfg
+                    ctx = await self.browser.new_context(
+                        viewport={"width": 1366, "height": 850},
+                        user_agent=(
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                        ),
+                        proxy=proxy_arg,
+                    )
+                    self.worker_contexts.append(ctx)
+                    self._context_queue.put_nowait(ctx)
+                self.context = self.worker_contexts[0]
+            else:
+                self.context = await self.browser.new_context(
+                    viewport={"width": 1366, "height": 850},
+                    user_agent=(
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                    ),
+                )
+                self.worker_contexts.append(self.context)
+                self._context_queue.put_nowait(self.context)
+        else:
+            proxy_cfg = await self.proxy_mgr.start()
+            if proxy_cfg:
+                launch_kwargs["proxy"] = proxy_cfg
+
+            self.browser = await p.chromium.launch(**launch_kwargs)
+            self.context = await self.browser.new_context(
+                viewport={"width": 1366, "height": 850},
+                user_agent=(
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                ),
+            )
+            self.worker_contexts.append(self.context)
+            self._context_queue.put_nowait(self.context)
+
+    @asynccontextmanager
+    async def lease_context(self):
+        """Lease a worker context from the pool, returning it upon completion."""
+        if getattr(self, "_context_queue", None) is not None:
+            ctx = await self._context_queue.get()
+            try:
+                yield ctx
+            finally:
+                self._context_queue.put_nowait(ctx)
+        else:
+            yield self.context
 
     async def close_browser(self):
         """Close browser resources and terminate proxy bridge."""
-        if self.context:
-            await self.context.close()
+        if hasattr(self, "worker_contexts"):
+            for ctx in self.worker_contexts:
+                try:
+                    await ctx.close()
+                except Exception:
+                    pass
+            self.worker_contexts.clear()
+        elif self.context:
+            try:
+                await self.context.close()
+            except Exception:
+                pass
+        self.context = None
+        self._context_queue = None
         if self.browser:
-            await self.browser.close()
+            try:
+                await self.browser.close()
+            except Exception:
+                pass
+            self.browser = None
         await self.proxy_mgr.stop()
 
     def get_cached_profile(self, listing_id: str) -> Optional[Dict[str, Any]]:
@@ -265,6 +330,215 @@ class ListingEnricher:
         }
 
     @classmethod
+    def parse_house_rules(cls, dom_rules: Optional[List[str]] = None, deferred_text: str = "") -> Dict[str, Any]:
+        """Parse structured house rules from DOM items and deferred client state."""
+        raw_rules: List[str] = list(dom_rules or [])
+        ci_time = None
+        co_time = None
+        deposit = None
+        quiet_hours = None
+        noise_monitoring = False
+        pets_allowed = None
+        events_allowed = None
+        min_age = None
+        additional_rules_text = ""
+
+        def extract_text(val: Any) -> str:
+            if not val:
+                return ""
+            if isinstance(val, str):
+                return val.replace("\u202f", " ").strip()
+            if isinstance(val, dict):
+                if "content" in val and isinstance(val["content"], dict):
+                    res = extract_text(val["content"])
+                    if res:
+                        return res
+                for k in ("localizedStringWithTranslationPreference", "localizedString", "text", "html", "source", "title"):
+                    if k in val and isinstance(val[k], str):
+                        return val[k].replace("\u202f", " ").strip()
+                for v in val.values():
+                    if isinstance(v, (str, dict)):
+                        res = extract_text(v)
+                        if res:
+                            return res
+            return ""
+
+        if deferred_text:
+            try:
+                data = json.loads(deferred_text)
+
+                rules_obj = None
+                pet_policy = None
+
+                def find_objects(obj):
+                    nonlocal rules_obj, pet_policy
+                    if isinstance(obj, dict):
+                        if "pdpPresentation" in obj and isinstance(obj["pdpPresentation"], dict) and "rules" in obj["pdpPresentation"]:
+                            rules_obj = obj["pdpPresentation"]["rules"]
+                        if "petPolicy" in obj and isinstance(obj["petPolicy"], dict):
+                            pet_policy = obj["petPolicy"]
+                        for v in obj.values():
+                            find_objects(v)
+                    elif isinstance(obj, list):
+                        for item in obj:
+                            find_objects(item)
+
+                find_objects(data)
+
+                if pet_policy and "isAllowed" in pet_policy:
+                    pets_allowed = bool(pet_policy["isAllowed"])
+
+                if rules_obj:
+                    group_items = rules_obj.get("groupItems") or []
+                    for g in group_items:
+                        for item in g.get("items") or []:
+                            title = extract_text(item.get("title"))
+                            desc = extract_text(item.get("description"))
+                            title_lower = title.lower()
+                            if "additional rules" not in title_lower:
+                                rule_line = f"{title}: {desc}".strip(" :") if desc else title
+                                if rule_line and rule_line not in raw_rules:
+                                    raw_rules.append(rule_line)
+                            elif desc:
+                                additional_rules_text = (additional_rules_text + "\n" + desc).strip()
+
+                            item_combined = f"{title} {desc}".strip()
+                            item_combined_lower = item_combined.lower()
+                            if "self check-in" not in item_combined_lower and "additional rules" not in title.lower():
+                                if re.search(r"check-?in\s*(?:after|before|between|from|:|\b)", item_combined, re.I):
+                                    m_time = re.search(r"(?:check-?in[^\d\n]*)?(\d{1,2}(?::\d{2})?\s*(?:am|pm)(?:\s*(?:-|–|to)\s*\d{1,2}(?::\d{2})?\s*(?:am|pm))?)", item_combined, re.I)
+                                    if m_time and not ci_time:
+                                        ci_time = title if any(c.isdigit() for c in title) else (f"{title}: {desc}" if desc else m_time.group(0))
+
+                                if re.search(r"check-?out\s*(?:after|before|by|until|between|from|:|\b)", item_combined, re.I):
+                                    m_time = re.search(r"(?:check-?out[^\d\n]*)?(\d{1,2}(?::\d{2})?\s*(?:am|pm))", item_combined, re.I)
+                                    if m_time and not co_time:
+                                        co_time = title if any(c.isdigit() for c in title) else (f"{title}: {desc}" if desc else m_time.group(0))
+
+                            if "quiet hours" in item_combined_lower and not quiet_hours:
+                                quiet_hours = f"{title}: {desc}" if desc else title
+
+                    add_rules = rules_obj.get("additionalRules") or {}
+                    if add_rules:
+                        extra_text = extract_text(add_rules)
+                        if extra_text:
+                            additional_rules_text = (additional_rules_text + "\n" + extra_text).strip()
+
+                # Fallback: search rules recursively in any other format
+                if not ci_time or not co_time:
+                    def search_legacy_rules(obj):
+                        nonlocal ci_time, co_time, deposit, quiet_hours
+                        if isinstance(obj, dict):
+                            title = str(obj.get("title") or obj.get("text") or "")
+                            sub = str(obj.get("subtitle") or "")
+                            combined = f"{title} {sub}".strip().lower()
+                            if "self check-in" not in combined and "check-in" in combined and any(c.isdigit() for c in combined):
+                                ci_time = ci_time or sub or title
+                            elif "checkout" in combined or "check-out" in combined:
+                                if any(c.isdigit() for c in combined):
+                                    co_time = co_time or sub or title
+                            elif "quiet hours" in combined and not quiet_hours:
+                                quiet_hours = sub or title
+                            for v in obj.values():
+                                search_legacy_rules(v)
+                        elif isinstance(obj, list):
+                            for item in obj:
+                                search_legacy_rules(item)
+
+                    search_legacy_rules(data)
+
+            except Exception as e:
+                logger.debug(f"Could not parse house rules from deferred state: {e}")
+
+        # Combine raw rules and additional rules
+        combined_text = "\n".join(raw_rules)
+        if additional_rules_text:
+            combined_text += "\n" + additional_rules_text
+
+        # Evaluate rules from raw_rules and dom_rules
+        for rule in raw_rules:
+            r_lower = rule.lower()
+            if not ci_time and "self check-in" not in r_lower and "check-in" in r_lower and any(c.isdigit() for c in rule):
+                ci_time = rule
+            elif not co_time and ("checkout" in r_lower or "check-out" in r_lower or "check out" in r_lower) and any(c.isdigit() for c in rule):
+                co_time = rule
+            elif not quiet_hours and "quiet hours" in r_lower:
+                quiet_hours = rule
+            elif not deposit and ("deposit" in r_lower or "security" in r_lower) and len(rule) < 80:
+                deposit = rule
+            if any(k in r_lower for k in ("noise monitor", "decibel", "minut", "noiseaware", "sound meter")):
+                noise_monitoring = True
+            if pets_allowed is None:
+                if "no pets" in r_lower or "pets not allowed" in r_lower or "pets are not allowed" in r_lower:
+                    pets_allowed = False
+                elif "pets allowed" in r_lower or "pet friendly" in r_lower:
+                    pets_allowed = True
+            if events_allowed is None:
+                if "no parties" in r_lower or "no events" in r_lower or "parties or events not allowed" in r_lower:
+                    events_allowed = False
+                elif "events allowed" in r_lower:
+                    events_allowed = True
+            m_age = re.search(r"(\d{2})\s*(?:\+|years|or older)", r_lower)
+            if m_age and not min_age:
+                min_age = int(m_age.group(1))
+
+        # Deep regex scans across combined_text (including full additional rules)
+        if not quiet_hours:
+            m_q = re.search(
+                r"quiet\s*(?:hours|times?)\s*(?:are|from|between|:)?\s*([0-9]{1,2}(?::[0-9]{2})?\s*(?:am|pm)?\s*(?:to|-)\s*[0-9]{1,2}(?::[0-9]{2})?\s*(?:am|pm)?)",
+                combined_text,
+                re.IGNORECASE,
+            )
+            if m_q:
+                quiet_hours = m_q.group(0).strip()
+
+        if not min_age:
+            m_a = re.search(
+                r"(?:under|minimum\s*age\s*(?:of|is)?|must\s*be\s*at\s*least|primary\s*renter\s*must\s*be)\s*([23][0-9])",
+                combined_text,
+                re.IGNORECASE,
+            )
+            if m_a:
+                min_age = int(m_a.group(1))
+
+        if not deposit:
+            m_d = re.search(
+                r"(\$\s*(\d[\d,]*)\s*(?:security|damage|incidental|hold|refundable)?\s*deposit|(?:security|damage|incidental|hold|refundable)?\s*deposit\s*(?:of\s*)?\$\s*(\d[\d,]*)|(?:hold\s*(?:a\s*)?deposit|deposit\s*required|refundable\s*(?:security\s*)?deposit|forfeiture\s*of\s*security\s*deposit))",
+                combined_text,
+                re.IGNORECASE,
+            )
+            if m_d:
+                deposit = m_d.group(0).strip()
+
+        if any(k in combined_text.lower() for k in ("noise monitor", "decibel", "minut", "noiseaware", "sound meter")):
+            noise_monitoring = True
+
+        if events_allowed is None:
+            if re.search(r"no\s*(?:parties|events|gatherings)", combined_text, re.IGNORECASE):
+                events_allowed = False
+            elif re.search(r"events?\s*(?:are\s*)?allowed", combined_text, re.IGNORECASE):
+                events_allowed = True
+
+        if pets_allowed is None:
+            if re.search(r"no\s*pets|pets\s*(?:are\s*)?not\s*allowed", combined_text, re.IGNORECASE):
+                pets_allowed = False
+            elif re.search(r"pets?\s*allowed|pet\s*friendly", combined_text, re.IGNORECASE):
+                pets_allowed = True
+
+        return {
+            "check_in_time": ci_time,
+            "check_out_time": co_time,
+            "security_deposit": deposit,
+            "quiet_hours": quiet_hours,
+            "noise_monitoring": noise_monitoring,
+            "pets_allowed": pets_allowed,
+            "events_allowed": events_allowed,
+            "min_age": min_age,
+            "raw_rules": raw_rules[:30],
+            "additional_rules": additional_rules_text[:500] if additional_rules_text else None,
+        }
+
+    @classmethod
     def parse_page_content(
         cls,
         deferred_text: str = "",
@@ -277,6 +551,7 @@ class ListingEnricher:
         og_title: Optional[str] = None,
         listing_id: str = "",
         dom_reviews: Optional[List[str]] = None,
+        dom_house_rules: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """Combine all page sources into a normalized listing profile dictionary."""
         deferred_parsed = cls.parse_deferred_state(deferred_text)
@@ -371,7 +646,7 @@ class ListingEnricher:
             description=description or "",
             location=loc_str,
             br=bedrooms or 6,
-            ba=baths or 6.0,
+            ba=baths or 5.0,
             guests=guest_int,
         )
 
@@ -393,6 +668,7 @@ class ListingEnricher:
             "url": url,
             "review_snippets": all_reviews[:15],
             "property_specs": prop_specs,
+            "house_rules": cls.parse_house_rules(dom_rules=dom_house_rules, deferred_text=deferred_text),
             "enriched_at": datetime.now().isoformat(),
         }
 
@@ -451,6 +727,26 @@ class ListingEnricher:
             });
             return Array.from(new Set(items)).slice(0, 15);
         }""")
+        dom_house_rules = await page.evaluate("""() => {
+            const rules = [];
+            const selectors = [
+                "[data-section-id='POLICIES_DEFAULT'] li",
+                "[data-section-id='POLICIES_DEFAULT'] div[role='group'] > div",
+                "[data-section-id='HOUSE_RULES_DEFAULT'] li",
+                "[data-section-id='THINGS_TO_KNOW'] li",
+                "div[data-plugin-in-point-id='HOUSE_RULES_DEFAULT'] li",
+                "[data-testid='house-rules'] li"
+            ];
+            selectors.forEach(sel => {
+                document.querySelectorAll(sel).forEach(el => {
+                    const text = el.innerText.trim();
+                    if (text && text.length > 3 && text.length < 250 && !rules.includes(text)) {
+                        rules.push(text);
+                    }
+                });
+            });
+            return rules;
+        }""")
 
         return self.parse_page_content(
             deferred_text=deferred_text or "",
@@ -463,6 +759,7 @@ class ListingEnricher:
             og_title=og_title,
             listing_id=listing_id,
             dom_reviews=dom_reviews,
+            dom_house_rules=dom_house_rules,
         )
 
     async def enrich_listing(self, page: Page, listing_id: str, force_refresh: bool = False) -> Dict[str, Any]:
@@ -492,7 +789,7 @@ class ListingEnricher:
             "kivoya_unit_id": 503802,
             "airbnb_room_id": self.OUR_AIRBNB_ID,
             "bedrooms": 6,
-            "bathrooms": 6.0,
+            "bathrooms": 5.0,
             "max_guests": 16,
             "lot_size": "0.75-acre private gated compound",
             "detached_guest_house": True,
@@ -509,7 +806,7 @@ class ListingEnricher:
             ],
             "key_specs": {
                 "bedrooms": 6,
-                "bathrooms": 6,
+                "bathrooms": 5,
                 "beds": 11,
                 "guests": 16,
                 "pool": "Private heated saltwater with grotto",
@@ -628,7 +925,7 @@ class ListingEnricher:
         print(f"🚀 Starting parallel enrichment for {target_desc} (workers={concurrency})...")
 
         async with async_playwright() as p:
-            await self.init_browser(p)
+            await self.init_browser(p, num_workers=concurrency)
             sem = asyncio.Semaphore(concurrency)
             progress = {"completed": 0, "total": len(all_comps)}
 
@@ -661,39 +958,42 @@ class ListingEnricher:
                             print(f"[{progress['completed']}/{progress['total']}] ⚡ [Cached] {cid}: {disp_title} ({comp.get('beds')} beds, {comp.get('amenities_count')} amenities)")
                             return
 
-                    page = await self.context.new_page()
-                    try:
-                        enriched = await self.enrich_listing(page, cid, force_refresh=force_refresh)
-                        if enriched.get("title"):
-                            cur_name = comp.get("name") or comp.get("title") or ""
-                            if not cur_name or self.clean_profile_title(cur_name) is None or cur_name.startswith("503 Service"):
-                                comp["name"] = enriched["title"]
-                                comp["title"] = enriched["title"]
-                        if enriched.get("photo_url"):
-                            comp["photo_url"] = enriched["photo_url"]
-                        if enriched.get("bedrooms") is not None:
-                            comp["bedrooms"] = enriched["bedrooms"]
-                        if enriched.get("beds") is not None:
-                            comp["beds"] = enriched["beds"]
-                        if enriched.get("baths") is not None:
-                            comp["baths"] = enriched["baths"]
-                        if enriched.get("rating") is not None:
-                            comp["rating"] = enriched["rating"]
-                        if enriched.get("reviews") is not None:
-                            comp["reviews"] = enriched["reviews"]
-                        comp["amenities_count"] = enriched.get("amenities_count", 0)
-                        progress["completed"] += 1
-                        disp_title = (enriched.get("title") or comp.get("title") or comp.get("name") or f"Listing {cid}")[:35]
-                        print(f"[{progress['completed']}/{progress['total']}] ✅ {cid}: {disp_title} ({comp.get('beds')} beds, {comp.get('amenities_count')} amenities)")
-                    except Exception as e:
-                        progress["completed"] += 1
-                        print(f"[{progress['completed']}/{progress['total']}] ⚠️ Error {cid}: {e}")
-                    finally:
-                        await page.close()
+                    async with self.lease_context() as ctx:
+                        page = await ctx.new_page()
+                        try:
+                            enriched = await self.enrich_listing(page, cid, force_refresh=force_refresh)
+                            if enriched.get("title"):
+                                cur_name = comp.get("name") or comp.get("title") or ""
+                                if not cur_name or self.clean_profile_title(cur_name) is None or cur_name.startswith("503 Service"):
+                                    comp["name"] = enriched["title"]
+                                    comp["title"] = enriched["title"]
+                            if enriched.get("photo_url"):
+                                comp["photo_url"] = enriched["photo_url"]
+                            if enriched.get("bedrooms") is not None:
+                                comp["bedrooms"] = enriched["bedrooms"]
+                            if enriched.get("beds") is not None:
+                                comp["beds"] = enriched["beds"]
+                            if enriched.get("baths") is not None:
+                                comp["baths"] = enriched["baths"]
+                            if enriched.get("rating") is not None:
+                                comp["rating"] = enriched["rating"]
+                            if enriched.get("reviews") is not None:
+                                comp["reviews"] = enriched["reviews"]
+                            comp["amenities_count"] = enriched.get("amenities_count", 0)
+                            progress["completed"] += 1
+                            disp_title = (enriched.get("title") or comp.get("title") or comp.get("name") or f"Listing {cid}")[:35]
+                            print(f"[{progress['completed']}/{progress['total']}] ✅ {cid}: {disp_title} ({comp.get('beds')} beds, {comp.get('amenities_count')} amenities)")
+                        except Exception as e:
+                            progress["completed"] += 1
+                            print(f"[{progress['completed']}/{progress['total']}] ⚠️ Error {cid}: {e}")
+                        finally:
+                            await page.close()
                     await asyncio.sleep(1.0)
 
-            await asyncio.gather(*(process_comp(c) for c in all_comps))
-            await self.close_browser()
+            try:
+                await asyncio.gather(*(process_comp(c) for c in all_comps))
+            finally:
+                await self.close_browser()
 
         # Update registry if any updated comps are in it
         registry_modified = False
@@ -852,6 +1152,111 @@ class ListingEnricher:
         self.SPECS_PATH.write_text(json.dumps(specs, indent=2, ensure_ascii=False), encoding="utf-8")
         print(f"✨ Synchronized {updated_count} comps from cached profiles to registry and listing_specs.json!")
         return registry
+
+    async def enrich_house_rules_only(
+        self,
+        listing_ids: Optional[List[str]] = None,
+        concurrency: int = 2,
+        limit: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Targeted scrape of dedicated House Rules / Policies sections for comps
+        to backfill check-in/out times, deposits, and noise policies without re-scraping full media/specs.
+        """
+        registry = {}
+        if self.REGISTRY_PATH.exists():
+            try:
+                registry = json.loads(self.REGISTRY_PATH.read_text(encoding="utf-8"))
+            except Exception:
+                registry = {}
+
+        target_ids: List[str] = []
+        if listing_ids:
+            for raw_id in listing_ids:
+                m = re.search(r"(\d{5,})", str(raw_id))
+                cid = m.group(1) if m else str(raw_id).strip()
+                if cid and cid not in target_ids:
+                    target_ids.append(cid)
+        else:
+            for tier in ("tier_a", "tier_b"):
+                for cid in registry.get(tier, {}):
+                    if cid not in target_ids:
+                        target_ids.append(str(cid))
+
+        if limit:
+            target_ids = target_ids[:limit]
+
+        logger.info(f"Targeting {len(target_ids)} comps for house rules enrichment...")
+        p = await async_playwright().start()
+        try:
+            await self.init_browser(p, num_workers=concurrency)
+        except Exception:
+            await p.stop()
+            raise
+
+        sem = asyncio.Semaphore(concurrency)
+        progress = {"completed": 0, "total": len(target_ids), "updated": 0}
+
+        async def process_one(cid: str):
+            async with sem:
+                cached = self.get_cached_profile(cid) or {"listing_id": cid}
+                async with self.lease_context() as ctx:
+                    page = await ctx.new_page()
+                    try:
+                        url = f"https://www.airbnb.com/rooms/{cid}"
+                        await page.goto(url, wait_until="domcontentloaded", timeout=30000)
+                        await page.wait_for_timeout(2500)
+
+                        deferred_text = await page.evaluate("""() => {
+                            const el = document.getElementById('data-deferred-state-0');
+                            if (el && el.innerText && el.innerText.includes('rules')) return el.innerText;
+                            const scripts = Array.from(document.querySelectorAll("script[id^='data-deferred-state']"));
+                            for (const s of scripts) {
+                                if (s.innerText.includes('rules') || s.innerText.includes('pdpPresentation')) return s.innerText;
+                            }
+                            return el ? el.innerText : '';
+                        }""")
+                        dom_house_rules = await page.evaluate("""() => {
+                            const rules = [];
+                            const selectors = [
+                                "[data-section-id='POLICIES_DEFAULT'] li",
+                                "[data-section-id='POLICIES_DEFAULT'] div[role='group'] > div",
+                                "[data-section-id='HOUSE_RULES_DEFAULT'] li",
+                                "[data-section-id='THINGS_TO_KNOW'] li",
+                                "div[data-plugin-in-point-id='HOUSE_RULES_DEFAULT'] li",
+                                "[data-testid='house-rules'] li"
+                            ];
+                            selectors.forEach(sel => {
+                                document.querySelectorAll(sel).forEach(el => {
+                                    const text = el.innerText.trim();
+                                    if (text && text.length > 3 && text.length < 250 && !rules.includes(text)) {
+                                        rules.push(text);
+                                    }
+                                });
+                            });
+                            return rules;
+                        }""")
+
+                        rules = self.parse_house_rules(dom_rules=dom_house_rules, deferred_text=deferred_text)
+                        cached["house_rules"] = rules
+                        cached["rules_enriched_at"] = datetime.now().isoformat()
+                        self.save_cached_profile(cid, cached)
+                        progress["completed"] += 1
+                        progress["updated"] += 1
+                        print(f"[{progress['completed']}/{progress['total']}] 📜 Rules saved for {cid}: in={rules.get('check_in_time')} out={rules.get('check_out_time')} deposit={rules.get('security_deposit')}")
+                    except Exception as e:
+                        progress["completed"] += 1
+                        print(f"[{progress['completed']}/{progress['total']}] ⚠️ Error rules for {cid}: {e}")
+                    finally:
+                        await page.close()
+                await asyncio.sleep(1.0)
+
+        try:
+            await asyncio.gather(*(process_one(cid) for cid in target_ids))
+        finally:
+            await self.close_browser()
+            await p.stop()
+        return progress
 
 
 if __name__ == "__main__":

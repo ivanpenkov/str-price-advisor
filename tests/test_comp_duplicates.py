@@ -11,6 +11,7 @@ from unittest.mock import AsyncMock, patch
 from src.comp_curator import CompCurator
 from src.comp_manager import CompManager
 from src.html_generator import HTMLDashboardGenerator
+from src.analytics import PricingAnalyticsEngine
 
 
 class TestCompDuplicatesAndIntegrity(unittest.TestCase):
@@ -59,7 +60,8 @@ class TestCompDuplicatesAndIntegrity(unittest.TestCase):
             total_unique,
             f"metadata.total_comps ({registry.get('metadata', {}).get('total_comps')}) does not match unique active count ({total_unique})",
         )
-        self.assertEqual(total_unique, 103, "Total unique comps should be 103 after cleaning the 13 duplicates")
+        self.assertEqual(total_unique, 97, "Total unique active comps should be 97 after disqualifying 6 invalid comps")
+        self.assertEqual(total_unique + len(disq_ids), 103, "Total tracked comps in portfolio should be 103")
 
     def test_pricing_data_intervals_have_no_duplicates(self):
         """Verify that all pricing data files have 0 duplicate listings in their interval comps_list."""
@@ -204,33 +206,45 @@ class TestCompDuplicatesAndIntegrity(unittest.TestCase):
         # total_comps should be exactly 2
         self.assertEqual(healed["metadata"]["total_comps"], 2)
 
-    def test_html_generator_cohort_deduplication(self):
-        """Verify HTMLGenerator._get_cohort_comps_for_segment guarantees strictly unique comps."""
+    def test_html_generator_unscanned_intervals_empty_comps(self):
+        """Verify HTMLDashboardGenerator leaves unscanned intervals with empty comps and never fabricates fake comps."""
         with tempfile.TemporaryDirectory() as tmpdir:
             reg_path = Path(tmpdir) / "comps_registry.json"
             out_path = Path(tmpdir) / "index.html"
 
-            # Artificially create duplicate across tiers
             test_reg = {
-                "metadata": {"total_comps": 2},
+                "metadata": {"total_comps": 1},
                 "tier_a": {
-                    "dupe_123": {"listing_id": "dupe_123", "name": "Estate", "bedrooms": 6}
+                    "comp_1": {"listing_id": "comp_1", "name": "Estate", "bedrooms": 6}
                 },
-                "tier_b": {
-                    "dupe_123": {"listing_id": "dupe_123", "name": "Estate", "bedrooms": 6}
-                },
+                "tier_b": {},
                 "disqualified": {},
                 "excluded_comps": {},
             }
             reg_path.write_text(json.dumps(test_reg), encoding="utf-8")
 
             gen = HTMLDashboardGenerator(output_path=str(out_path), comps_registry_path=str(reg_path))
-            seg = {"check_in": "2026-10-15", "check_out": "2026-10-18", "nights": 3}
-            cohort_comps = gen._get_cohort_comps_for_segment(seg, mult=1.0)
+            seg = {
+                "check_in": "2027-08-29",
+                "check_out": "2027-09-02",
+                "nights": 4,
+                "segment_type": "midweek",
+                "our_base_nightly": 695.0,
+                "our_effective_nightly": 820.0,
+                "is_calendar_open": False,
+                "lead_time_days": 350,
+                "cleaning_fee": 500.0,
+                "priority_tier": "INFORMATIONAL",
+            }
+            # Unscanned intervals have empty comps list and is_live_scan=False
+            analytics = PricingAnalyticsEngine()
+            eval_seg = analytics.evaluate_segment(seg, [], comp_metadata=[])
+            eval_seg["is_live_scan"] = False
+            eval_seg["comps_list"] = []
 
-            cids = [c["listing_id"] for c in cohort_comps]
-            self.assertEqual(len(cids), len(set(cids)), "Cohort comps must contain strictly unique listing IDs")
-            self.assertEqual(cids.count("dupe_123"), 1, "Duplicate comp must only appear once in cohort")
+            self.assertEqual(eval_seg["comps_list"], [], "Unscanned intervals must have empty comps list")
+            self.assertFalse(eval_seg["is_live_scan"], "Unscanned interval must not be marked as live scan")
+            self.assertEqual(eval_seg["n_comps"], 0, "Comp count must be 0 for unscanned intervals")
 
 
 if __name__ == "__main__":

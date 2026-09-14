@@ -34,6 +34,7 @@ class PricingAnalyticsEngine:
         moderate_pct_diff: float = MODERATE_PCT_DIFF,
         registry_path: str = "config/comps_registry.json",
         res_intel: Optional[Any] = None,
+        sales_tracker: Optional[Any] = None,
     ):
         self.base_percentile = base_percentile
         self.cleaning_fee = cleaning_fee
@@ -41,6 +42,7 @@ class PricingAnalyticsEngine:
         self.urgent_lead_days = urgent_lead_days
         self.moderate_pct_diff = moderate_pct_diff
         self.registry_path = Path(registry_path)
+        self.sales_tracker = sales_tracker
         self.comp_registry: Dict[str, Dict[str, Any]] = self._load_registry()
         self.excluded_comps: set = self._load_excluded_comps()
         if res_intel is not None:
@@ -53,11 +55,13 @@ class PricingAnalyticsEngine:
                 self.res_intel = None
 
     def _load_excluded_comps(self) -> set:
-        """Load set of excluded/blacklisted listing IDs."""
+        """Load set of excluded/blacklisted and disqualified listing IDs."""
         if self.registry_path.exists():
             try:
                 data = json.loads(self.registry_path.read_text(encoding="utf-8"))
-                return {str(k) for k in data.get("excluded_comps", {}).keys()}
+                excluded = {str(k) for k in data.get("excluded_comps", {}).keys()}
+                excluded.update({str(k) for k in data.get("disqualified", {}).keys()})
+                return excluded
             except Exception:
                 pass
         return set()
@@ -71,6 +75,10 @@ class PricingAnalyticsEngine:
                 for tier in ("tier_a", "tier_b"):
                     for cid, comp in data.get(tier, {}).items():
                         comps[str(cid)] = comp
+                for cid, comp in data.get("disqualified", {}).items():
+                    c_copy = dict(comp)
+                    c_copy["is_valid_comp"] = False
+                    comps[str(cid)] = c_copy
             except Exception:
                 pass
         return comps
@@ -209,13 +217,19 @@ class PricingAnalyticsEngine:
         # Enrich comp metadata with quality evaluation from registry and compute adjusted rates
         enriched_comps_list = []
         adj_comp_effective_rates = []
+        valid_comp_effective_rates = []
         for c in (comp_metadata or []):
             comp_dict = dict(c)
             cid = str(comp_dict.get("listing_id") or "")
             if cid and cid in self.excluded_comps:
                 continue
+            # If comp_registry is loaded, ignore uncurated listings unless explicitly flagged valid (in tests)
+            if self.comp_registry and cid not in self.comp_registry and "is_valid_comp" not in comp_dict:
+                continue
             reg_comp = self.comp_registry.get(cid, {})
-            is_valid = reg_comp.get("is_valid_comp", comp_dict.get("is_valid_comp", True))
+            is_valid = reg_comp.get("is_valid_comp", comp_dict.get("is_valid_comp", True if not self.comp_registry else False))
+            if cid in self.comp_registry and not self.comp_registry[cid].get("is_valid_comp", True):
+                is_valid = False
             ratio = float(reg_comp.get("desirability_ratio", comp_dict.get("desirability_ratio", 1.0)))
             eff_rate = float(comp_dict.get("effective_nightly") or 0.0)
 
@@ -226,23 +240,45 @@ class PricingAnalyticsEngine:
             comp_dict["category_scores"] = reg_comp.get("category_scores", comp_dict.get("category_scores", {}))
             comp_dict["composite_score"] = reg_comp.get("composite_score", comp_dict.get("composite_score", 88.0))
 
-            if eff_rate > 0 and is_valid and ratio > 0:
-                adj_rate = round(eff_rate / ratio, 2)
-                comp_dict["adjusted_effective_nightly"] = adj_rate
-                adj_comp_effective_rates.append(adj_rate)
+            if eff_rate > 0 and is_valid:
+                valid_comp_effective_rates.append(eff_rate)
+                if ratio > 0:
+                    adj_rate = round(eff_rate / ratio, 2)
+                    comp_dict["adjusted_effective_nightly"] = adj_rate
+                    adj_comp_effective_rates.append(adj_rate)
+                else:
+                    comp_dict["adjusted_effective_nightly"] = eff_rate
+                    adj_comp_effective_rates.append(eff_rate)
             else:
                 comp_dict["adjusted_effective_nightly"] = eff_rate
-                if is_valid and eff_rate > 0:
-                    adj_comp_effective_rates.append(eff_rate)
 
             enriched_comps_list.append(comp_dict)
 
-        if not adj_comp_effective_rates and comp_effective_rates:
+        if not adj_comp_effective_rates and comp_effective_rates and comp_metadata is None:
             adj_comp_effective_rates = comp_effective_rates
 
-        clean_comps = self.remove_outliers(comp_effective_rates)
+        effective_rates_to_use = valid_comp_effective_rates if comp_metadata is not None else comp_effective_rates
+        clean_comps = self.remove_outliers(effective_rates_to_use)
         seg_type = segment.get("segment_type", "weekend")
-        target_pct = self.get_target_percentile(lead_days, segment_type=seg_type)
+        if self.sales_tracker:
+            target_pct = self.sales_tracker.get_target_percentile(lead_days, segment_type=seg_type)
+            reg_comps = self.sales_tracker.load_registered_comps()
+            tot_reg = len(reg_comps) if reg_comps else (len(self.comp_registry) if self.comp_registry else 97)
+            compression = self.sales_tracker.detect_market_compression(
+                check_in=segment.get("check_in", ""),
+                check_out=segment.get("check_out"),
+                total_cohort_count=tot_reg,
+                current_available_count=len(effective_rates_to_use),
+            )
+            if compression.get("is_compressed"):
+                target_pct = min(90.0, target_pct + 15.0)
+                segment["is_compression_surge"] = True
+                segment["compression_details"] = compression
+            else:
+                segment["is_compression_surge"] = False
+                segment.pop("compression_details", None)
+        else:
+            target_pct = self.get_target_percentile(lead_days, segment_type=seg_type)
         pct_stats = self.calculate_percentiles(clean_comps, target_pct)
         target_eff = pct_stats["target_val"]
 
@@ -296,7 +332,7 @@ class PricingAnalyticsEngine:
         elif n_comps <= 4:
             sample_significance = "VERY_LOW"
             sample_label = f"🔥 Near Sold Out (N={n_comps})"
-            sample_note = f"Only {n_comps} comps available. Extreme market compression."
+            sample_note = f"Only {n_comps} comps available. Very low sample size."
         elif n_comps < 10:
             sample_significance = "LOW"
             sample_label = f"⚠️ Low Sample (N={n_comps})"
@@ -340,7 +376,7 @@ class PricingAnalyticsEngine:
             else:
                 action_summary = f"↑ Increase ${our_base:.0f} → ${rec_base:.0f}"
 
-        if action_summary and sample_significance in ["SOLD_OUT", "VERY_LOW"]:
+        if action_summary and segment.get("is_compression_surge"):
             action_summary += " • High compression"
 
         if adj_abs_diff < 10.0 or adj_rec_diff == 0:
@@ -351,7 +387,7 @@ class PricingAnalyticsEngine:
             else:
                 adj_action_summary = f"↑ Increase ${our_base:.0f} → ${adj_rec_base:.0f}"
 
-        if adj_action_summary and len(clean_adj_comps) <= 4 and len(clean_adj_comps) > 0:
+        if adj_action_summary and segment.get("is_compression_surge") and len(clean_adj_comps) > 0:
             adj_action_summary += " • High compression"
 
         cin = segment.get("check_in", "")
@@ -385,7 +421,7 @@ class PricingAnalyticsEngine:
             **segment,
             "n_comps": n_comps,
             "comps_count": n_comps,
-            "comps_raw_count": len(comp_effective_rates),
+            "comps_raw_count": len(valid_comp_effective_rates) if comp_metadata is not None else len(comp_effective_rates),
             "comps_list": enriched_comps_list,
             "sample_significance": sample_significance,
             "sample_label": sample_label,

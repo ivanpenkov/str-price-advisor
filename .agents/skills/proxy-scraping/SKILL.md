@@ -24,34 +24,45 @@ Credentials must be stored securely in the root `.env` file (which is tracked in
 ```bash
 NORDVPN_USER=your_nordvpn_service_username
 NORDVPN_PASS=your_nordvpn_service_password
-NORDVPN_SERVER=phoenix.us.socks.nordhold.net:1080
+NORDVPN_SERVER=los-angeles.us.socks.nordhold.net:1080
 ```
 
 > [!NOTE]
-> - `nordvpn.com` proxy hostnames are deprecated/dead in DNS. Always use `nordhold.net` (e.g. `phoenix.us.socks.nordhold.net:1080` or `us.socks.nordhold.net:1080`).
+> - `nordvpn.com` proxy hostnames are deprecated/dead in DNS. Always use `nordhold.net` (e.g. `los-angeles.us.socks.nordhold.net:1080` or `us.socks.nordhold.net:1080`).
 > - The credentials are your **NordVPN manual service credentials** (not your general email/password account login).
 
-### B. Chromium & Playwright Local Forwarder (`pproxy`)
+### B. Out-of-State Travel Feeder Market Proxy Pool (Zero Phoenix Policy)
+To prevent detection by Airbnb's anti-scraping and surveillance systems:
+1. **Never scrape from Phoenix IPs**: Scraping Phoenix-area short-term rentals from a Phoenix residential or datacenter IP looks like local host competitor intelligence. All proxy traffic is routed strictly through major out-of-state tourist feeder markets:
+   - **Los Angeles** (`los-angeles.us.socks.nordhold.net:1080`)
+   - **San Francisco** (`san-francisco.us.socks.nordhold.net:1080`)
+   - **Dallas** (`dallas.us.socks.nordhold.net:1080`)
+   - **Chicago** (`chicago.us.socks.nordhold.net:1080`)
+   - Fallback: US Anycast (`us.socks.nordhold.net:1080`)
+2. **Never scrape from International IPs**: European/Asian exit nodes trigger automatic currency re-localization (EUR/GBP) and European VAT calculation changes that distort extracted USD nightly rates.
+3. **Multi-Context Concurrency**: `ProxyManager.start_pool(num_workers=4)` launches distinct local forwarders on independent ephemeral ports. Playwright assigns each corridor (`Tempe--AZ`, `Scottsdale--AZ`, `Chandler--AZ`, `Mesa--AZ`) to an isolated `BrowserContext` bound to a different feeder proxy endpoint, enabling true parallel scraping.
+
+### C. Chromium & Playwright Local Forwarder (`pproxy`)
 Chromium does not natively support authenticated SOCKS5 proxies (`socks5://user:pass@host:port`).
-To overcome this limitation, [`src/proxy_manager.py`](file:///Users/ivanpe/str-price-advisor/src/proxy_manager.py) starts an ephemeral local forwarder bridge using Python's `pproxy` module on an available localhost port:
+To overcome this limitation, [`src/stealth_connection.py`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py) starts ephemeral local forwarder bridges using Python's `pproxy` module on dynamic localhost ports:
 
-$$\text{Chromium / Scraper} \xrightarrow{\text{HTTP Proxy}} \text{localhost:port} \xrightarrow{\text{Auth SOCKS5}} \text{NordVPN (phoenix.us.socks.nordhold.net)} \xrightarrow{\text{HTTPS}} \text{Airbnb / VRBO / Target}$$
+$$\text{Chromium / Contexts} \xrightarrow{\text{HTTP Proxy}} \text{localhost:ports} \xrightarrow{\text{Auth SOCKS5}} \text{NordVPN Feeder Hubs (LA, SF, Dallas, Chicago)} \xrightarrow{\text{HTTPS}} \text{Airbnb / VRBO}$$
 
-When scraping concludes, the `pproxy` background forwarder process is automatically terminated.
+When scraping concludes, the `pproxy` background forwarder processes are automatically terminated.
 
 ---
 
 ## 2. Standard Implementation Patterns
 
 ### Pattern 1: Playwright Async Scraping (Default)
-Always use [`ProxyManager`](file:///Users/ivanpe/str-price-advisor/src/proxy_manager.py) to acquire the proxy dictionary:
+Always use [`StealthConnectionManager`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py) to acquire the proxy dictionary:
 
 ```python
 from playwright.async_api import async_playwright
-from src.proxy_manager import ProxyManager
+from src.stealth_connection import StealthConnectionManager
 
 async def scrape_target():
-    proxy_mgr = ProxyManager(required=True)
+    proxy_mgr = StealthConnectionManager(required=True)
     proxy_cfg = await proxy_mgr.start()  # {"server": "http://127.0.0.1:<port>"}
 
     async with async_playwright() as p:
@@ -81,7 +92,7 @@ async def scrape_target():
 When making raw HTTP requests to Kivoya or OTA endpoints:
 ```python
 import os
-from src.proxy_manager import ProxyManager
+from src.stealth_connection import StealthConnectionManager
 
 # If pproxy is running on localhost:port:
 proxies = {
@@ -91,7 +102,7 @@ proxies = {
 ```
 
 ### Pattern 3: CLI Commands
-All built-in project CLI commands that hit external platforms are already wired to use `ProxyManager(required=True)`:
+All built-in project CLI commands that hit external platforms are already wired to use `StealthConnectionManager(required=True)`:
 - Weekly price audit: `python -m src.cli run --weekly`
 - Quick interval sweep: `python -m src.cli run --quick`
 - Bootstrap registry: `python -m src.cli bootstrap-comps`
@@ -110,9 +121,9 @@ test -f .env && grep -E 'NORDVPN_USER|NORDVPN_PASS' .env
 # 2. Test proxy bridge via pproxy and curl
 .venv/bin/python -c "
 import asyncio, os
-from src.proxy_manager import ProxyManager
+from src.stealth_connection import StealthConnectionManager
 async def check():
-    mgr = ProxyManager(required=True)
+    mgr = StealthConnectionManager(required=True)
     cfg = await mgr.start()
     print('Proxy server config:', cfg)
     await mgr.stop()

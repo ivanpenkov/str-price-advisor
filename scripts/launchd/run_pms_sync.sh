@@ -19,7 +19,7 @@ echo "⏰ [$(date '+%Y-%m-%d %H:%M:%S')] Starting Daily PMS Reservation Sync..."
 cd "$PROJECT_ROOT" || exit 1
 
 # Prevent system sleep during execution using caffeinate
-caffeinate -i "$PROJECT_ROOT/.venv/bin/python" -m src.cli sync-reservations --days-back 60 --dashboard --push >> "$LOG_FILE" 2>&1
+caffeinate -i "$PROJECT_ROOT/.venv/bin/python" -u -m src.cli sync-reservations --days-back 60 --dashboard --push >> "$LOG_FILE" 2>&1
 EXIT_CODE=$?
 
 if [ $EXIT_CODE -eq 0 ]; then

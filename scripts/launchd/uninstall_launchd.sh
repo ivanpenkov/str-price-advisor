@@ -13,6 +13,7 @@ PLISTS=(
     "com.villasol.pms-sync.plist"
     "com.villasol.daily-quickscan.plist"
     "com.villasol.weekly-fullscan.plist"
+    "com.villasol.mobile-ntfy-bridge.plist"
 )
 
 echo "================================================================="

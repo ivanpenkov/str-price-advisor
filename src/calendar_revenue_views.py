@@ -232,6 +232,54 @@ def get_calendar_revenue_css() -> str:
       color: #ffffff !important;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     }
+    .cal-day-price {
+      position: absolute;
+      bottom: 2px;
+      right: 3px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: #f8fafc;
+      background: rgba(15, 23, 42, 0.82);
+      padding: 0 3px;
+      border-radius: 3px;
+      line-height: 1.35;
+      pointer-events: none;
+      z-index: 4;
+      letter-spacing: -0.25px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    .cal-hide-rates .cal-day-price {
+      display: none !important;
+    }
+    .cal-day-audit-warn {
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      font-size: 0.72rem;
+      z-index: 5;
+      line-height: 1;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
+      pointer-events: none;
+    }
+    .cal-day-has-shortfall {
+      box-shadow: none !important;
+    }
+    .cal-day-has-discount {
+      box-shadow: none !important;
+    }
+    .res-row-shortfall {
+      background: rgba(239, 68, 68, 0.04);
+    }
+    .res-row-shortfall:hover {
+      background: rgba(239, 68, 68, 0.09) !important;
+    }
+    .res-row-discount {
+      background: rgba(245, 158, 11, 0.03);
+    }
+    .res-row-discount:hover {
+      background: rgba(245, 158, 11, 0.07) !important;
+    }
     .cal-other-month {
       opacity: 0.25;
       background: rgba(15, 23, 42, 0.6) !important;
@@ -692,7 +740,6 @@ def get_calendar_revenue_css() -> str:
     }
     .res-table-wrapper {
       overflow-x: auto;
-      max-height: 720px;
     }
     .res-table {
       width: 100%;
@@ -789,6 +836,242 @@ def get_calendar_revenue_css() -> str:
       border-bottom-color: #38bdf8;
       color: #f8fafc;
     }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVE ENHANCEMENTS FOR CALENDAR & REVENUE VIEWS (< 768px)
+       ========================================================================== */
+    @media (max-width: 768px) {
+      /* Mobile Revenue KPI Cards: Stack 1-column to prevent horizontal clipping */
+      .rev-kpi-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .rev-kpi-card {
+        padding: 14px 16px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Mobile 2x2 KPI Grids for Reservations */
+      .res-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .res-kpi-card {
+        padding: 12px 14px !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      .rev-kpi-value,
+      .res-kpi-card-val {
+        font-size: 1.35rem !important;
+      }
+
+      .rev-kpi-label,
+      .res-kpi-card-label {
+        font-size: 0.70rem !important;
+      }
+
+      /* Ultra-compact font for calendar day rates on mobile */
+      .cal-day-price {
+        font-size: 0.52rem !important;
+        padding: 0 2px !important;
+        letter-spacing: -0.3px !important;
+        max-width: 90% !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+      }
+
+      /* Mobile Touch Chart Container */
+      .rev-chart-container {
+        padding: 14px !important;
+        border-radius: 12px !important;
+        margin-bottom: 18px !important;
+      }
+
+      .rev-chart-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+      }
+
+      .rev-chart-wrapper {
+        height: 300px !important;
+      }
+
+      .rev-toggles {
+        gap: 6px !important;
+        margin-top: 10px !important;
+      }
+
+      .rev-toggle-btn {
+        padding: 5px 10px !important;
+        font-size: 0.76rem !important;
+        min-height: 36px !important;
+      }
+
+      /* Mobile Bottom Sheet Modal */
+      .res-modal-overlay {
+        padding: 0 !important;
+        align-items: flex-end !important;
+      }
+
+      .res-modal-card {
+        max-width: 100% !important;
+        max-height: 92vh !important;
+        border-radius: 20px 20px 0 0 !important;
+        border-bottom: none !important;
+        border-left: 1px solid #475569 !important;
+        border-right: 1px solid #475569 !important;
+        border-top: 1px solid #64748b !important;
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7) !important;
+        animation: slideUpMobileSheet 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      }
+
+      @keyframes slideUpMobileSheet {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+
+      .res-modal-header {
+        padding: 14px 18px !important;
+        position: relative !important;
+      }
+
+      .res-modal-header::before {
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 38px;
+        height: 4px;
+        background: #475569;
+        border-radius: 9999px;
+      }
+
+      .res-modal-body {
+        padding: 14px 16px !important;
+        gap: 14px !important;
+      }
+
+      .res-fin-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+
+      /* Mobile Card Transformation for Reservations Table */
+      .res-table-card {
+        padding: 12px !important;
+        border-radius: 12px !important;
+      }
+
+      .res-table-wrapper {
+        overflow-x: visible !important;
+      }
+
+      .res-table {
+        display: block !important;
+        width: 100% !important;
+      }
+
+      .res-table > thead {
+        display: none !important;
+      }
+
+      .res-table > tbody {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+      }
+
+      .res-row {
+        display: flex !important;
+        flex-direction: column !important;
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        border-radius: 12px !important;
+        padding: 14px !important;
+        gap: 6px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+      }
+
+      .res-row:active {
+        transform: scale(0.99) !important;
+      }
+
+      .res-row > td {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 3px 0 !important;
+        border: none !important;
+        font-size: 0.88rem !important;
+        white-space: normal !important;
+      }
+
+      .res-row > td::before {
+        content: attr(data-label);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #94a3b8;
+        letter-spacing: 0.05em;
+      }
+
+      .res-row > td[data-label="Dates"]::before {
+        display: none !important;
+      }
+
+      .res-row > td[data-label="Dates"] {
+        font-size: 0.98rem !important;
+        font-weight: 700 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding-bottom: 8px !important;
+        margin-bottom: 4px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 3px !important;
+      }
+
+      /* Calendar Controls */
+      .cal-controls-card {
+        padding: 12px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+      }
+
+      .cal-nav-group {
+        justify-content: space-between !important;
+      }
+
+      .cal-legend {
+        justify-content: center !important;
+        gap: 10px !important;
+      }
+
+      .res-controls-bar {
+        padding: 12px !important;
+      }
+
+      .res-filters-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+      }
+
+      .res-search-box {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+    }
     """
 
 
@@ -840,9 +1123,8 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
     - Owner: $0 (maintenance/owner stay)
     """
     gross_rent = float(res.get("gross_rent") or 0.0)
-    madetype = (res.get("madetype_name") or "").upper()
 
-    raw_str = res.get("raw_json") or "{}"
+    raw_str = res.get("raw_json") or res.get("raw_streamline") or res.get("raw_data") or "{}"
     if isinstance(raw_str, str):
         try:
             raw = json.loads(raw_str)
@@ -853,9 +1135,10 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
     else:
         raw = {}
 
-    hear_about = (raw.get("hear_about_name") or "").lower()
-    travel_agent = (raw.get("travelagent_name") or "").lower()
-    type_desc = (res.get("type_description") or "").lower()
+    madetype = (res.get("madetype_name") or raw.get("madetype_name") or "").upper()
+    hear_about = (res.get("hear_about_name") or raw.get("hear_about_name") or "").lower()
+    travel_agent = (res.get("travelagent_name") or raw.get("travelagent_name") or "").lower()
+    type_desc = (res.get("type_description") or raw.get("type_description") or "").lower()
 
     if "owner" in type_desc or madetype == "OWN":
         channel_name = "Owner Block"
@@ -925,7 +1208,15 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         tot_channel_calc = f"Rent (${gross_rent:,.2f}) + Clean ($550.00) = Lodging (${lodging_subtotal:,.2f}) + Airbnb Fee 14.15% (${service_fee:,.2f}) = ${total_on_channel:,.2f}"
         guest_price_formula = "Total on Channel + 12.52% Tempe & AZ Lodging Taxes"
         guest_price_calc = f"Total on Channel (${total_on_channel:,.2f}) + Lodging Tax 12.52% (${tax_amt:,.2f}) = ${guest_checkout_price:,.2f}"
-    elif "vrbo" in hear_about or "ha-olb" in hear_about or "vrbo" in travel_agent or "homeaway" in travel_agent or madetype == "PDWTA":
+    elif (
+        "vrbo" in hear_about
+        or "ha-olb" in hear_about
+        or "home2go" in hear_about
+        or "vrbo" in travel_agent
+        or "homeaway" in travel_agent
+        or "hometogo" in travel_agent
+        or madetype == "PDWTA"
+    ):
         channel_name = "Vrbo"
         channel_badge = "VRBO"
         channel_color = "#2563EB"
@@ -975,7 +1266,7 @@ def estimate_reservation_channel_pricing(res: Dict[str, Any]) -> Dict[str, Any]:
         guest_price_formula = "Gross Rent (Internal admin rate, no traveler fee or tax added)"
         guest_price_calc = f"Gross Rent = ${gross_rent:,.2f}"
     else:
-        channel_name = res.get("madetype_name") or "Direct"
+        channel_name = res.get("madetype_name") or raw.get("madetype_name") or "Direct"
         channel_badge = channel_name
         channel_color = "#10B981"
         clean_fee = 550.0
@@ -1056,13 +1347,22 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
           <div class="cal-toggle-group">
             <span class="cal-toggle-label">Color By:</span>
             <div class="cal-toggle-pill">
-              <button id="calColorStatusBtn" class="cal-toggle-btn active" onclick="setCalColorMode('status')">Status</button>
-              <button id="calColorChannelBtn" class="cal-toggle-btn" onclick="setCalColorMode('channel')">Channel</button>
+              <button id="calColorStatusBtn" class="cal-toggle-btn" onclick="setCalColorMode('status')">Status</button>
+              <button id="calColorChannelBtn" class="cal-toggle-btn active" onclick="setCalColorMode('channel')">Channel</button>
+            </div>
+          </div>
+
+          <!-- Nightly Rates Visibility Toggle -->
+          <div class="cal-toggle-group">
+            <span class="cal-toggle-label">Rates:</span>
+            <div class="cal-toggle-pill">
+              <button id="calRatesOnBtn" class="cal-toggle-btn" onclick="setCalRatesVisible(true)">Show</button>
+              <button id="calRatesOffBtn" class="cal-toggle-btn active" onclick="setCalRatesVisible(false)">Hide</button>
             </div>
           </div>
 
           <!-- Legend: Status Mode -->
-          <div id="calLegendStatus" class="cal-legend">
+          <div id="calLegendStatus" class="cal-legend" style="display: none;">
             <div class="cal-legend-item">
               <span class="cal-legend-swatch swatch-vacant"></span>
               <span>Vacant</span>
@@ -1082,7 +1382,7 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
           </div>
 
           <!-- Legend: Channel Mode -->
-          <div id="calLegendChannel" class="cal-legend" style="display: none;">
+          <div id="calLegendChannel" class="cal-legend">
             <div class="cal-legend-item">
               <span class="cal-legend-swatch swatch-vacant"></span>
               <span>Vacant</span>
@@ -1118,7 +1418,7 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
           </div>
         </div>
 
-        <div id="calMonthsGrid" class="cal-months-grid">
+        <div id="calMonthsGrid" class="cal-months-grid cal-hide-rates">
           <!-- 6 Month Grid Cards rendered via JS -->
         </div>
 
@@ -1127,10 +1427,29 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
     """
 
 
-def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[date] = None) -> str:
+def render_reservations_tab(
+    reservations: List[Dict[str, Any]],
+    today: Optional[date] = None,
+    current_kivoya_rates: Optional[List[Dict[str, Any]]] = None,
+) -> str:
     """Render Reservations tab with KPI summary bar and interactive sortable/filterable table."""
     if today is None:
         today = date.today()
+
+    all_snapshots = {}
+    try:
+        from src.reservation_store import ReservationStore, audit_reservation_payout, parse_reservation_creation_date
+        store = ReservationStore()
+        all_snapshots = store.load_all_rate_snapshots()
+    except Exception:
+        pass
+
+    if current_kivoya_rates is None:
+        try:
+            from src.kivoya_client import KivoyaClient
+            current_kivoya_rates = KivoyaClient().get_seasonal_rates()
+        except Exception:
+            current_kivoya_rates = []
 
     valid_res = [r for r in reservations if str(r.get("status_name", "")).lower() != "cancelled"]
     valid_res.sort(key=lambda x: str(x.get("start_date") or ""), reverse=True)
@@ -1148,8 +1467,43 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
     future_gross = sum(float(r.get("gross_rent") or 0.0) for r in valid_res if r.get("is_future") == 1)
     future_nights = sum(int(r.get("days_number") or 0) for r in valid_res if r.get("is_future") == 1)
 
-    rows_html = []
+    audited_list = []
+    shortfall_count = 0
+    shortfall_total = 0.0
+    known_discount_count = 0
+    known_discount_total = 0.0
+    summer_discount_count = 0
+    weekly_discount_count = 0
+    promo_discount_count = 0
+    verified_count = 0
+    legacy_count = 0
+    exempt_count = 0
+
     for r in valid_res:
+        audit = audit_reservation_payout(r, all_snapshots=all_snapshots, current_kivoya_rates=current_kivoya_rates)
+        audited_list.append((r, audit))
+        if audit["audit_failed"]:
+            shortfall_count += 1
+            shortfall_total += audit["audit_shortfall"]
+        elif audit.get("is_known_discount"):
+            known_discount_count += 1
+            known_discount_total += audit["audit_shortfall"]
+            cat = audit.get("discount_category")
+            if cat == "summer":
+                summer_discount_count += 1
+            elif cat == "weekly":
+                weekly_discount_count += 1
+            elif cat == "promo":
+                promo_discount_count += 1
+        elif audit["audit_status"] in ("verified", "surplus"):
+            verified_count += 1
+        elif audit["audit_status"] == "legacy":
+            legacy_count += 1
+        elif audit["audit_status"] in ("exempt", "cancelled"):
+            exempt_count += 1
+
+    rows_html = []
+    for r, audit in audited_list:
         res_id = r.get("id")
         cid = r.get("confirmation_id") or res_id
         start_str = r.get("start_date") or ""
@@ -1199,59 +1553,87 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
         cross_html = f'<div style="font-size:0.75rem; color:#38bdf8; font-family:\'JetBrains Mono\', monospace; margin-top:2px;">#{cross_code}</div>' if cross_code else ''
         guest_html = f' • <span style="color:#cbd5e1;">{guest_name}</span>' if guest_name else ''
 
-        search_str = f"{cid} {cross_code} {guest_name} {start_str} {end_str} {ch_name} {stay_type} {r.get('type_description', '')}".lower()
+        audit_status = audit["audit_status"]
+        audit_shortfall = audit["audit_shortfall"]
+        audit_failed = audit["audit_failed"]
+        is_known_discount = audit.get("is_known_discount", False)
+        row_extra_class = " res-row-shortfall" if audit_failed else (" res-row-discount" if is_known_discount else "")
+
+        if audit_failed:
+            audit_subtext = f'<div style="font-size:0.7rem; color:#f87171; margin-top:2px; font-family:\'JetBrains Mono\'; font-weight:700;">Exp: ${audit["expected_owner_payout"]:,.2f}</div>'
+        elif is_known_discount:
+            audit_subtext = f'<div style="font-size:0.7rem; color:#f59e0b; margin-top:2px; font-family:\'JetBrains Mono\'; font-weight:600;">Base: ${audit["expected_owner_payout"]:,.2f} (-${audit_shortfall:,.0f})</div>'
+        elif audit_status in ("verified", "surplus"):
+            audit_subtext = f'<div style="font-size:0.7rem; color:#34d399; margin-top:2px; font-family:\'JetBrains Mono\';">Exp: ${audit["expected_owner_payout"]:,.2f}</div>'
+        elif audit.get("booking_date_parsed"):
+            audit_subtext = f'<div style="font-size:0.7rem; color:#64748b; margin-top:2px;">Booked: {audit["booking_date_parsed"]}</div>'
+        else:
+            audit_subtext = ""
+
+        c_date_iso = parse_reservation_creation_date(r.get("creation_date") or raw.get("creation_date"))
+        if c_date_iso:
+            try:
+                b_date_dt = datetime.strptime(c_date_iso, "%Y-%m-%d").date()
+                b_date_fmt = b_date_dt.strftime("%b %d, %Y")
+            except Exception:
+                b_date_fmt = c_date_iso
+        else:
+            b_date_fmt = "Pre-2026"
+
+        search_str = f"{cid} {cross_code} {guest_name} {start_str} {end_str} {c_date_iso or ''} {b_date_fmt} {ch_name} {stay_type} {r.get('type_description', '')} {audit_status} {audit['status_label']}".lower()
 
         rows_html.append(f"""
-          <tr class="res-row" onclick="openResModalById({res_id})" 
+          <tr class="res-row{row_extra_class}" onclick="openResModalById({res_id})" 
               data-id="{res_id}" 
               data-cid="{cid}" 
               data-future="{is_future}" 
               data-channel="{ch_name}" 
               data-type="{stay_type}" 
               data-start="{start_str}"
+              data-booked="{c_date_iso or ''}"
               data-nights="{nights}"
               data-gross="{gross_rent:.2f}"
-              data-totchannel="{tot_channel:.2f}"
-              data-guestprice="{gst_price:.2f}"
+              data-expectedgross="{audit['expected_gross_rent']:.2f}"
+              data-audit-status="{audit_status}"
+              data-audit-shortfall="{audit_shortfall:.2f}"
               data-search="{search_str}">
-            <td>
+            <td data-label="Dates">
               <div style="font-weight:700; color:#f8fafc; font-size:0.9rem;">{date_fmt}</div>
               <div style="font-size:0.75rem; color:#94a3b8; margin-top:3px;">
                 {status_badge} • Conf <strong>#{cid}</strong>{guest_html}
               </div>
             </td>
-            <td>
+            <td data-label="Booked">
+              <div style="font-weight:700; color:#f8fafc; font-size:0.86rem; white-space:nowrap;">{b_date_fmt}</div>
+            </td>
+            <td data-label="Type">
               <span class="badge-stay-{stay_type.lower()}">{stay_type}</span>
             </td>
-            <td>
+            <td data-label="Nights">
               <strong style="color:#f8fafc; font-family:'JetBrains Mono'; font-size:0.92rem;">{nights}</strong>
               <span style="color:#94a3b8; font-size:0.75rem;"> nts</span>
             </td>
-            <td>
+            <td data-label="Actual Gross">
               <div style="font-weight:800; color:#34d399; font-family:'JetBrains Mono'; font-size:0.95rem;">${gross_rent:,.2f}</div>
               <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">
                 Owner: <span style="color:#cbd5e1; font-weight:600;">${owner_payout:,.2f}</span> (82%)
               </div>
             </td>
-            <td>
+            <td data-label="Expected Gross">
+              <div style="font-weight:800; color:#38bdf8; font-family:'JetBrains Mono'; font-size:0.95rem;">${audit['expected_gross_rent']:,.2f}</div>
+              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">
+                Owner: <span style="color:#cbd5e1; font-weight:600;">${audit['expected_owner_payout']:,.2f}</span> (82%)
+              </div>
+            </td>
+            <td data-label="Channel">
               <span class="badge" style="background:{ch_color}22; color:{ch_color}; border:1px solid {ch_color}55; font-weight:700;">● {ch_name}</span>
               {cross_html}
             </td>
-            <td>
-              <div style="font-weight:700; color:#f8fafc; font-family:'JetBrains Mono'; font-size:0.92rem;">
-                <span class="tooltip-help" title="{tot_tooltip}">${tot_channel:,.2f}</span>
-              </div>
-              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">
-                <span class="tooltip-help" title="{tot_tooltip}">Pre-tax est. ⓘ</span>
-              </div>
-            </td>
-            <td>
-              <div style="font-weight:800; color:#38bdf8; font-family:'JetBrains Mono'; font-size:0.95rem;">
-                <span class="tooltip-help" title="{gst_tooltip}">${gst_price:,.2f}</span>
-              </div>
-              <div style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">
-                <span class="tooltip-help" title="{gst_tooltip}">All-in guest est. ⓘ</span>
-              </div>
+            <td data-label="Rate Audit">
+              <span class="badge" style="background:{audit['badge_bg']}; color:{audit['badge_color']}; border:1px solid {audit['badge_color']}66; font-weight:700; font-size:0.75rem; padding:2px 8px;">
+                {audit['status_label']}
+              </span>
+              {audit_subtext}
             </td>
           </tr>
         """)
@@ -1313,6 +1695,59 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
         """)
     shift_table_body = "\n".join(shift_rows_html)
 
+    # Build Monthly Lead Horizons Table rows for Villa del Sol
+    monthly_rows = []
+    months_lead = lead_analytics.get("months", {})
+    for m in range(1, 13):
+        m_info = months_lead.get(m, {})
+        m_name = m_info.get("month_name", "")
+        m_season = m_info.get("season", "")
+        m_count = m_info.get("count", 0)
+        m_med = m_info.get("median", 0)
+        m_window = m_info.get("window_str", "—")
+        m_min = m_info.get("min", 0)
+        m_max = m_info.get("max", 0)
+        m_guide = m_info.get("guidance", "")
+
+        if "Peak Winter" in m_season:
+            badge_bg = "rgba(56,189,248,0.15)"
+            badge_color = "#38bdf8"
+            badge_border = "rgba(56,189,248,0.3)"
+        elif "Summer Value" in m_season:
+            badge_bg = "rgba(239,68,68,0.15)"
+            badge_color = "#f87171"
+            badge_border = "rgba(239,68,68,0.3)"
+        else:
+            badge_bg = "rgba(245,158,11,0.15)"
+            badge_color = "#fbbf24"
+            badge_border = "rgba(245,158,11,0.3)"
+
+        if m_count > 0:
+            med_html = f"<strong style=\"color:#f8fafc; font-family:'JetBrains Mono',monospace;\">{m_med}d</strong>"
+            win_html = f"<span style=\"color:#34d399; font-family:'JetBrains Mono',monospace; font-weight:700;\">{m_window}</span>"
+            rng_html = f"<span style=\"color:#94a3b8; font-family:'JetBrains Mono',monospace;\">{m_min}–{m_max}d</span>"
+        else:
+            med_html = "<span style=\"color:#64748b;\">—</span>"
+            win_html = "<span style=\"color:#64748b;\">—</span>"
+            rng_html = "<span style=\"color:#64748b;\">—</span>"
+
+        monthly_rows.append(f"""
+          <tr>
+            <td style="font-weight:700; color:#f8fafc; white-space:nowrap;">{m_name}</td>
+            <td style="white-space:nowrap;">
+              <span class="badge" style="background:{badge_bg}; color:{badge_color}; border:1px solid {badge_border}; font-size:0.75rem; font-weight:700;">
+                {m_season.split('(')[0].strip()}
+              </span>
+            </td>
+            <td style="text-align:center; font-family:'JetBrains Mono',monospace; font-weight:700; color:#f8fafc;">{m_count}</td>
+            <td style="text-align:center;">{med_html}</td>
+            <td style="text-align:center;">{win_html}</td>
+            <td style="text-align:center;">{rng_html}</td>
+            <td style="font-size:0.84rem; color:#cbd5e1; line-height:1.4;">{m_guide}</td>
+          </tr>
+        """)
+    monthly_lead_rows_html = "\n".join(monthly_rows)
+
     return f"""
       <div class="res-tab-wrapper">
         <!-- KPI Summary Cards -->
@@ -1346,6 +1781,18 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
             <div class="res-kpi-card-val" style="color:#fbbf24;">${avg_adr:,.2f}</div>
             <div class="res-kpi-card-sub">Average gross rate per booked night</div>
           </div>
+
+          <div class="res-kpi-card" style="border-color: rgba(239, 68, 68, 0.4); background: linear-gradient(180deg, rgba(239,68,68,0.06) 0%, rgba(15,23,42,0) 100%);">
+            <div class="res-kpi-card-label" style="color: #f87171;">⚠️ Rate Audit Shortfalls</div>
+            <div class="res-kpi-card-val" style="color: #ef4444;">-${shortfall_total:,.2f}</div>
+            <div class="res-kpi-card-sub">{shortfall_count} True Shortfalls • {verified_count} Verified</div>
+          </div>
+
+          <div class="res-kpi-card" style="border-color: rgba(245, 158, 11, 0.4); background: linear-gradient(180deg, rgba(245,158,11,0.06) 0%, rgba(15,23,42,0) 100%);">
+            <div class="res-kpi-card-label" style="color: #fbbf24;">🏷️ Platform Discounts Applied</div>
+            <div class="res-kpi-card-val" style="color: #f59e0b;">-${known_discount_total:,.2f}</div>
+            <div class="res-kpi-card-sub">{known_discount_count} Applied: {summer_discount_count} Summer • {weekly_discount_count} Wkly • {promo_discount_count} Promo</div>
+          </div>
         </div>
 
         <!-- Annual Shift & Advance Booking Windows Intelligence Section -->
@@ -1371,7 +1818,7 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
               Fall/Shoulder (Sep–Jan, May): <span style="color:#fbbf24; font-weight:600;">{fall_lead.get('window_str', '12–134 days out')} (med {fall_lead.get('median', 50)}d)</span>
             </div>
             <div style="font-size:0.75rem; color:#64748b; margin-top:5px;">
-              <em>Note: For multi-night reservations spanning both weekend and midweek dates, gross revenue is apportioned assuming weekend nights carry a 30% pricing premium over midweek nights.</em>
+              <em>Note: For multi-night reservations spanning both weekend and midweek dates, gross revenue is apportioned assuming weekend nights carry a 50% pricing premium over midweek nights.</em>
             </div>
           </div>
 
@@ -1396,12 +1843,89 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
           </div>
         </div>
 
+        <!-- Monthly Advance Booking Horizons (Villa del Sol Empirical Pace) -->
+        <div class="section-box" style="margin-bottom: 24px;">
+          <div class="section-header" style="margin-bottom: 14px;">
+            <div>
+              <div class="section-title" style="font-size: 1.25rem;">
+                ⏱️ Monthly Advance Booking Horizons (Villa del Sol Empirical Pace)
+              </div>
+              <p class="section-desc" style="margin-top: 4px; margin-bottom: 0;">
+                Empirical distribution of confirmed booking lead times (25th–75th interquartile range) across {overall_lead.get('count', 88)} reservations broken down by month, identifying peak conversion windows and booking lead patterns.
+              </p>
+            </div>
+          </div>
+
+          <!-- All-Year Summary KPI Strip -->
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:18px;">
+            <div style="background:rgba(15,23,42,0.6); border:1px solid #334155; border-radius:8px; padding:12px 14px;">
+              <div style="font-size:0.72rem; color:#94a3b8; font-weight:700; text-transform:uppercase;">Total Reservations Analyzed</div>
+              <div style="font-size:1.35rem; font-weight:800; color:#f8fafc; font-family:'JetBrains Mono',monospace; margin-top:3px;">
+                {overall_lead.get('count', 0)} stays
+              </div>
+              <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">Across all historical seasons</div>
+            </div>
+
+            <div style="background:rgba(15,23,42,0.6); border:1px solid #334155; border-radius:8px; padding:12px 14px;">
+              <div style="font-size:0.72rem; color:#38bdf8; font-weight:700; text-transform:uppercase;">All-Year Median Lead Time</div>
+              <div style="font-size:1.35rem; font-weight:800; color:#38bdf8; font-family:'JetBrains Mono',monospace; margin-top:3px;">
+                {overall_lead.get('median', 0)} days
+              </div>
+              <div style="font-size:0.75rem; color:#cbd5e1; margin-top:2px;">Typical booking lead horizon</div>
+            </div>
+
+            <div style="background:rgba(15,23,42,0.6); border:1px solid #334155; border-radius:8px; padding:12px 14px;">
+              <div style="font-size:0.72rem; color:#34d399; font-weight:700; text-transform:uppercase;">Normal Booking Window (P25–P75)</div>
+              <div style="font-size:1.35rem; font-weight:800; color:#34d399; font-family:'JetBrains Mono',monospace; margin-top:3px;">
+                {overall_lead.get('p25', 0)}–{overall_lead.get('p75', 0)} days
+              </div>
+              <div style="font-size:0.75rem; color:#cbd5e1; margin-top:2px;">50% of bookings convert here</div>
+            </div>
+
+            <div style="background:rgba(15,23,42,0.6); border:1px solid #334155; border-radius:8px; padding:12px 14px;">
+              <div style="font-size:0.72rem; color:#fbbf24; font-weight:700; text-transform:uppercase;">Full Empirical Lead Range</div>
+              <div style="font-size:1.35rem; font-weight:800; color:#fbbf24; font-family:'JetBrains Mono',monospace; margin-top:3px;">
+                {overall_lead.get('min', 0)}–{overall_lead.get('max', 0)} days
+              </div>
+              <div style="font-size:0.75rem; color:#cbd5e1; margin-top:2px;">Same-day to ~1 year in advance</div>
+            </div>
+          </div>
+
+          <!-- Monthly Lead Horizons Table -->
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr style="background: rgba(255,255,255,0.03);">
+                  <th style="width: 110px;">Month</th>
+                  <th style="width: 170px;">Season Tier</th>
+                  <th style="text-align:center; width: 75px;">Stays (n)</th>
+                  <th style="text-align:center; width: 105px;">Median Lead</th>
+                  <th style="text-align:center; width: 140px;">Normal Window (P₂₅–P₇₅)</th>
+                  <th style="text-align:center; width: 110px;">Range (Min–Max)</th>
+                  <th>Market Dynamic & Strategic Guidance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {monthly_lead_rows_html}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <!-- Filter & Search Toolbar -->
         <div class="res-filter-toolbar">
           <div class="res-filter-group">
             <button id="resFilterAll" class="res-pill-btn active" onclick="setResFilterStatus('all')">All ({total_count})</button>
-            <button id="resFilterFuture" class="res-pill-btn" onclick="setResFilterStatus('future')">Future / In-House ({future_count})</button>
+            <button id="resFilterShortfall" class="res-pill-btn" style="color:#ef4444; font-weight:700;" onclick="setResFilterStatus('shortfall')">⚠️ Shortfall ({shortfall_count})</button>
+            <button id="resFilterDiscounts" class="res-pill-btn" style="color:#f59e0b; font-weight:700;" onclick="setResFilterStatus('discounts')">🏷️ All Discounts ({known_discount_count})</button>
+            <button id="resFilterPromo" class="res-pill-btn" style="color:#3b82f6; font-weight:600;" onclick="setResFilterStatus('promo')">🏷️ Promo ({promo_discount_count})</button>
+            <button id="resFilterSummer" class="res-pill-btn" style="color:#f97316; font-weight:600;" onclick="setResFilterStatus('summer')">☀️ Summer ({summer_discount_count})</button>
+            <button id="resFilterWeekly" class="res-pill-btn" style="color:#06b6d4; font-weight:600;" onclick="setResFilterStatus('weekly')">📅 Weekly ({weekly_discount_count})</button>
+            <button id="resFilterVerified" class="res-pill-btn" style="color:#10b981; font-weight:700;" onclick="setResFilterStatus('verified')">✅ Verified ({verified_count})</button>
+            <button id="resFilterFuture" class="res-pill-btn" onclick="setResFilterStatus('future')">Future ({future_count})</button>
             <button id="resFilterPast" class="res-pill-btn" onclick="setResFilterStatus('past')">Past ({past_count})</button>
+            <button id="resFilterLegacy" class="res-pill-btn" onclick="setResFilterStatus('legacy')">Legacy ({legacy_count})</button>
+            <button id="resFilterExempt" class="res-pill-btn" onclick="setResFilterStatus('exempt')">Exempt ({exempt_count})</button>
           </div>
 
           <div class="res-filter-group">
@@ -1439,17 +1963,14 @@ def render_reservations_tab(reservations: List[Dict[str, Any]], today: Optional[
             <table class="res-table" id="resTable">
               <thead>
                 <tr>
-                  <th onclick="sortResTable(0, 'date')" id="resTh0" class="sorted">Dates <span class="sort-arrow">▼</span></th>
-                  <th onclick="sortResTable(1, 'str')" id="resTh1">Type <span class="sort-arrow">↕</span></th>
-                  <th onclick="sortResTable(2, 'num')" id="resTh2">Nights <span class="sort-arrow">↕</span></th>
-                  <th onclick="sortResTable(3, 'num')" id="resTh3">Gross Rent <span class="sort-arrow">↕</span></th>
-                  <th onclick="sortResTable(4, 'str')" id="resTh4">Channel <span class="sort-arrow">↕</span></th>
-                  <th onclick="sortResTable(5, 'num')" id="resTh5">
-                    <span class="tooltip-help" title="Formula for Total on Channel (Pre-tax Search Total):&#10;• Airbnb: (Gross Rent + $550 Cleaning) + 14.15% Airbnb Service Fee&#10;• Vrbo: (Gross Rent × 1.1448 markup) + $550 Cleaning Fee&#10;• Booking.com: (Gross Rent + $550 Cleaning) + 6% Service Charge&#10;• Expedia: (Gross Rent × 1.15 markup) + $550 Cleaning Fee&#10;• Direct Website: Gross Rent + $550 Cleaning + 6% Processing + 3% Admin Fee&#10;• Kivoya Admin: Gross Rent (internal rate)&#10;• Owner / Maintenance: $0.00">Total on Channel (Est.) ⓘ</span> <span class="sort-arrow">↕</span>
-                  </th>
-                  <th onclick="sortResTable(6, 'num')" id="resTh6">
-                    <span class="tooltip-help" title="Formula for Guest Checkout Price (All-in Guest Total):&#10;• Airbnb: Total on Channel + 12.52% Tempe & AZ Lodging Taxes&#10;• Vrbo: Total on Channel × 1.2557 (+11.5% Vrbo fee + 14.07% STR tax)&#10;• Booking.com: Total on Channel + 30.5% Taxes (16% VAT + 14.5% Tax)&#10;• Expedia: Total on Channel × 1.1407 (+14.07% STR tax)&#10;• Direct Website: Total on Channel + 14.07% STR Taxes (5.5% State + 1.77% Maricopa + 6.8% Tempe)&#10;• Kivoya Admin: Gross Rent (internal rate)&#10;• Owner / Maintenance: $0.00">Guest Checkout Price (Est.) ⓘ</span> <span class="sort-arrow">↕</span>
-                  </th>
+                  <th onclick="sortResTable(0, 'date')" id="resTh0" class="sorted">Stay Dates <span class="sort-arrow">▼</span></th>
+                  <th onclick="sortResTable(1, 'date')" id="resTh1">Booked Date <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(2, 'str')" id="resTh2">Type <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(3, 'num')" id="resTh3">Nights <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(4, 'num')" id="resTh4">Actual Gross Rent <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(5, 'num')" id="resTh5">Expected Gross Rent <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(6, 'str')" id="resTh6">Channel <span class="sort-arrow">↕</span></th>
+                  <th onclick="sortResTable(7, 'num')" id="resTh7">Rate Audit <span class="sort-arrow">↕</span></th>
                 </tr>
               </thead>
               <tbody id="resTableBody">
@@ -1481,6 +2002,13 @@ def render_revenue_tab(rev_data: Dict[str, Any]) -> str:
     future_pipeline = max(0.0, tot_booked - ytd_rev)
     tot_nights = cy_stats.get("total_nights", 0)
     adr = cy_stats.get("adr", 0.0)
+
+    # YoY Comparison for Total On-the-Books vs Prior Year Total
+    py_stats = by_year.get(py, {})
+    py_total_rev = py_stats.get("total_revenue", 0.0)
+    tot_yoy_pct = round(((tot_booked - py_total_rev) / py_total_rev) * 100.0, 1) if py_total_rev > 0 else 0.0
+    tot_growth_sign = "+" if tot_yoy_pct > 0 else ""
+    tot_growth_color = "#34d399" if tot_yoy_pct >= 0 else "#f87171"
 
     ny = cy + 1
     ny_stats = by_year.get(ny, {})
@@ -1543,7 +2071,7 @@ def render_revenue_tab(rev_data: Dict[str, Any]) -> str:
             <div class="rev-kpi-label">{cy} Total On-the-Books</div>
             <div class="rev-kpi-value" style="color: #fb8c00;">${tot_booked:,.2f}</div>
             <div class="rev-kpi-sub">
-              Actuals (${ytd_rev:,.0f}) + Future Bookings (${future_pipeline:,.0f})
+              <span style="color:{tot_growth_color}; font-weight:700;">{tot_growth_sign}{tot_yoy_pct}% YoY</span> vs {py} Total (${py_total_rev:,.0f}) • Actuals (${ytd_rev:,.0f}) + Future (${future_pipeline:,.0f})
             </div>
           </div>
 
@@ -1619,10 +2147,40 @@ def render_revenue_tab(rev_data: Dict[str, Any]) -> str:
     """
 
 
-def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[str, Any], today: Optional[date] = None) -> str:
+def get_calendar_revenue_js(
+    reservations: List[Dict[str, Any]],
+    rev_data: Dict[str, Any],
+    today: Optional[date] = None,
+    rates_map: Optional[Dict[str, Dict[str, Any]]] = None,
+    current_kivoya_rates: Optional[List[Dict[str, Any]]] = None,
+) -> str:
     """Generate JavaScript for interactive calendar grid, reservation modal dialog, and Chart.js cumulative curve."""
     if today is None:
         today = date.today()
+
+    all_snapshots = {}
+    if rates_map is None:
+        try:
+            from src.reservation_store import ReservationStore
+            store = ReservationStore()
+            all_snapshots = store.load_all_rate_snapshots()
+            rates_map = store.get_daily_calendar_rates(reservations, today=today)
+        except Exception:
+            rates_map = {}
+    else:
+        try:
+            from src.reservation_store import ReservationStore
+            store = ReservationStore()
+            all_snapshots = store.load_all_rate_snapshots()
+        except Exception:
+            pass
+
+    if current_kivoya_rates is None:
+        try:
+            from src.kivoya_client import KivoyaClient
+            current_kivoya_rates = KivoyaClient().get_seasonal_rates()
+        except Exception:
+            current_kivoya_rates = []
 
     today_str = today.strftime("%Y-%m-%d")
     clean_res = []
@@ -1640,6 +2198,13 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         stay_type = classify_stay_type(r.get("start_date"), r.get("end_date"))
         pricing = estimate_reservation_channel_pricing(r)
 
+        audit_res = {}
+        try:
+            from src.reservation_store import audit_reservation_payout
+            audit_res = audit_reservation_payout(r, all_snapshots=all_snapshots, current_kivoya_rates=current_kivoya_rates)
+        except Exception:
+            pass
+
         item = {
             "id": r.get("id"),
             "confirmation_id": r.get("confirmation_id"),
@@ -1652,7 +2217,9 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
             "type_name": r.get("type_name", "STA"),
             "type_description": r.get("type_description", "Standard"),
             "status_name": r.get("status_name", "Booked"),
-            "madetype_name": raw_streamline.get("madetype_name", ""),
+            "madetype_name": r.get("madetype_name") or raw_streamline.get("madetype_name", ""),
+            "hear_about_name": r.get("hear_about_name") or raw_streamline.get("hear_about_name", ""),
+            "travelagent_name": r.get("travelagent_name") or raw_streamline.get("travelagent_name", ""),
             "occupants": r.get("occupants", 0),
             "occupants_small": r.get("occupants_small", 0),
             "pets": r.get("pets", 0),
@@ -1675,11 +2242,30 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
             "guest_price_calc": pricing["guest_price_calc"],
             "commission_information": raw_streamline.get("commission_information", {}),
             "raw_streamline": raw_streamline,
+            "audit_status": audit_res.get("audit_status", "legacy"),
+            "audit_failed": audit_res.get("audit_failed", False),
+            "is_known_discount": audit_res.get("is_known_discount", False),
+            "discount_category": audit_res.get("discount_category", "none"),
+            "discount_pct": audit_res.get("discount_pct", 0.0),
+            "rule_title": audit_res.get("rule_title", ""),
+            "audit_status_label": audit_res.get("status_label", "Legacy"),
+            "audit_badge_color": audit_res.get("badge_color", "#94a3b8"),
+            "audit_badge_bg": audit_res.get("badge_bg", "rgba(148,163,184,0.15)"),
+            "audit_expected_gross_rent": audit_res.get("expected_gross_rent", float(r.get("gross_rent") or 0.0)),
+            "audit_expected_owner_payout": audit_res.get("expected_owner_payout", float(r.get("owner_payout") or 0.0)),
+            "audit_discrepancy": audit_res.get("discrepancy", 0.0),
+            "audit_discrepancy_pct": audit_res.get("discrepancy_pct", 0.0),
+            "audit_shortfall": audit_res.get("audit_shortfall", 0.0),
+            "audit_is_legacy": audit_res.get("is_legacy", True),
+            "audit_is_exempt": audit_res.get("is_exempt", False),
+            "audit_nightly_breakdown": audit_res.get("nightly_breakdown", []),
+            "audit_diagnostic_text": audit_res.get("diagnostic_text", ""),
         }
         clean_res.append(item)
 
     res_json = json.dumps(clean_res)
     rev_json = json.dumps(rev_data)
+    rates_json = json.dumps(rates_map)
 
     return f"""
     // =========================================================================
@@ -1687,6 +2273,7 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     // =========================================================================
     const CAL_RESERVATIONS = {res_json};
     const REVENUE_DATA = {rev_json};
+    const CAL_DAILY_RATES = {rates_json};
     const CURRENT_TODAY_STR = '{today_str}';
 
     // Map date strings 'YYYY-MM-DD' to reservation events
@@ -1704,11 +2291,15 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         CAL_DATE_MAP[r.end_date].checkout.push(r);
 
         // Staying nights (between start_date and end_date - 1 day)
-        let s = new Date(r.start_date + 'T00:00:00');
-        let e = new Date(r.end_date + 'T00:00:00');
+        // Noon ensures timezone transitions never cross midnight boundaries
+        let s = new Date(r.start_date + 'T12:00:00');
+        let e = new Date(r.end_date + 'T12:00:00');
         s.setDate(s.getDate() + 1);
         while (s < e) {{
-          let dStr = s.toISOString().split('T')[0];
+          let y = s.getFullYear();
+          let m = String(s.getMonth() + 1).padStart(2, '0');
+          let d = String(s.getDate()).padStart(2, '0');
+          let dStr = `${{y}}-${{m}}-${{d}}`;
           if (!CAL_DATE_MAP[dStr]) CAL_DATE_MAP[dStr] = {{ checkin: [], checkout: [], staying: [] }};
           CAL_DATE_MAP[dStr].staying.push(r);
           s.setDate(s.getDate() + 1);
@@ -1725,7 +2316,7 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-    let calColorMode = 'status'; // 'status' or 'channel'
+    let calColorMode = 'channel'; // 'status' or 'channel'
 
     function setCalColorMode(mode) {{
       calColorMode = mode;
@@ -1747,6 +2338,31 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         }}
       }}
       renderCalendar(calCurrentYear, calCurrentMonth);
+    }}
+
+    let calRatesVisible = false;
+
+    function setCalRatesVisible(visible) {{
+      calRatesVisible = visible;
+      const onBtn = document.getElementById('calRatesOnBtn');
+      const offBtn = document.getElementById('calRatesOffBtn');
+      const grid = document.getElementById('calMonthsGrid');
+      if (grid) {{
+        if (visible) {{
+          grid.classList.remove('cal-hide-rates');
+        }} else {{
+          grid.classList.add('cal-hide-rates');
+        }}
+      }}
+      if (onBtn && offBtn) {{
+        if (visible) {{
+          onBtn.classList.add('active');
+          offBtn.classList.remove('active');
+        }} else {{
+          onBtn.classList.remove('active');
+          offBtn.classList.add('active');
+        }}
+      }}
     }}
 
     function getTypeColor(typeDesc) {{
@@ -1790,6 +2406,11 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
       const container = document.getElementById('calMonthsGrid');
       if (!container) return;
       container.innerHTML = '';
+      if (!calRatesVisible) {{
+        container.classList.add('cal-hide-rates');
+      }} else {{
+        container.classList.remove('cal-hide-rates');
+      }}
 
       // Sync dropdown
       const sel = document.getElementById('calMonthSelect');
@@ -1858,39 +2479,62 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
               
               td.dataset.date = dateStr;
 
+              // Lookup nightly rate
+              const rateInfo = (typeof CAL_DAILY_RATES !== 'undefined') ? CAL_DAILY_RATES[dateStr] : null;
+              let priceBadge = '';
+              if (rateInfo && rateInfo.rate !== null && rateInfo.rate !== undefined) {{
+                priceBadge = `<span class="cal-day-price">$${{rateInfo.rate}}</span>`;
+              }}
+
               // Check booking patterns for diagonal split
               const hasIn = events.checkin.length > 0;
               const hasOut = events.checkout.length > 0;
               const hasMid = events.staying.length > 0;
+
+              // Check rate audit failure across events on this date
+              const allDayEvents = [...events.checkin, ...events.checkout, ...events.staying];
+              const failedEv = allDayEvents.find(ev => ev && ev.audit_failed);
+              // Suppress routine channel promos (<16%) from displaying badges or amber borders on the calendar grid
+              const visibleDiscountEv = allDayEvents.find(ev => ev && ev.is_known_discount && ev.discount_category !== 'promo');
+              let auditWarnBadge = '';
+              if (failedEv) {{
+                auditWarnBadge = `<span class="cal-day-audit-warn" title="⚠️ Rate Audit Shortfall: -$${{failedEv.audit_shortfall.toFixed(2)}}">⚠️</span>`;
+                td.classList.add('cal-day-has-shortfall');
+              }} else if (visibleDiscountEv) {{
+                const dIcon = visibleDiscountEv.discount_category === 'summer' ? '☀️' : (visibleDiscountEv.discount_category === 'weekly' ? '📅' : '🏷️');
+                const title = visibleDiscountEv.rule_title || `${{dIcon}} Known Discount`;
+                auditWarnBadge = `<span class="cal-day-audit-warn" title="${{title}} (-${{visibleDiscountEv.discount_pct}}%): -$${{visibleDiscountEv.audit_shortfall.toFixed(2)}}">${{dIcon}}</span>`;
+                td.classList.add('cal-day-has-discount');
+              }}
 
               if (hasOut && hasIn) {{
                 // Turnover day: morning guest leaves, afternoon guest arrives!
                 const colorOut = getEventColor(events.checkout[0]);
                 const colorIn = getEventColor(events.checkin[0]);
                 td.style.background = `linear-gradient(135deg, ${{colorOut}} calc(50% - 1px), #ffffff calc(50% - 1px), #ffffff calc(50% + 1px), ${{colorIn}} calc(50% + 1px))`;
-                td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>`;
+                td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>${{priceBadge}}${{auditWarnBadge}}`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, out: events.checkout[0], in: events.checkin[0] }});
               }} else if (hasIn) {{
                 // Arrival day: vacant morning, guest afternoon
                 const colorIn = getEventColor(events.checkin[0]);
                 td.style.background = `linear-gradient(135deg, #1e293b 50%, ${{colorIn}} 50%)`;
-                td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>`;
+                td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>${{priceBadge}}${{auditWarnBadge}}`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, in: events.checkin[0] }});
               }} else if (hasOut) {{
                 // Departure day: guest morning, vacant afternoon
                 const colorOut = getEventColor(events.checkout[0]);
                 td.style.background = `linear-gradient(135deg, ${{colorOut}} 50%, #1e293b 50%)`;
-                td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>`;
+                td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>${{priceBadge}}${{auditWarnBadge}}`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, out: events.checkout[0] }});
               }} else if (hasMid) {{
                 // Full stayed night
                 const colorMid = getEventColor(events.staying[0]);
                 td.style.backgroundColor = colorMid;
-                td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>`;
+                td.innerHTML = `<span class="${{dayNumClass}} cal-day-booked">${{dayCounter}}</span>${{priceBadge}}${{auditWarnBadge}}`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, stay: events.staying[0] }});
               }} else {{
                 // Vacant day
-                td.innerHTML = `<span class="${{dayNumClass}}">${{dayCounter}}</span>`;
+                td.innerHTML = `<span class="${{dayNumClass}}">${{dayCounter}}</span>${{priceBadge}}`;
                 td.dataset.info = JSON.stringify({{ date: dateStr, vacant: true }});
               }}
 
@@ -1998,6 +2642,48 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
             <strong>#${{info.stay.confirmation_id || info.stay.id}}</strong> (${{info.stay.type_description}})<br>
             <span style="color:#94a3b8; font-size:0.75rem;">${{ch}}${{info.stay.start_date}} to ${{info.stay.end_date}} (${{info.stay.days_number}} nts)</span><br>
             <span style="color:#fbbf24; font-weight:600; font-size:0.8rem;">Net Payout: $${{parseFloat(info.stay.owner_payout || 0).toLocaleString('en-US', {{minimumFractionDigits: 2}})}}</span>
+          </div>`;
+        }}
+      }}
+
+      const rateInfo = (typeof CAL_DAILY_RATES !== 'undefined') ? CAL_DAILY_RATES[info.date] : null;
+      if (rateInfo) {{
+        if (rateInfo.rate !== null && rateInfo.rate !== undefined) {{
+          html += `<div style="margin-top:6px; padding-top:4px; border-top:1px dashed #334155; font-size:0.8rem;">
+            <span style="color:#38bdf8; font-weight:700;">Nightly Rate:</span> <strong style="color:#f8fafc;">$${{rateInfo.rate}}</strong> <span style="color:#94a3b8; font-size:0.75rem;">(${{rateInfo.label}})</span>
+          </div>`;
+        }} else if (rateInfo.label) {{
+          html += `<div style="margin-top:6px; padding-top:4px; border-top:1px dashed #334155; font-size:0.8rem; color:#64748b;">
+            <span style="color:#94a3b8;">Nightly Rate:</span> ${{rateInfo.label}}
+          </div>`;
+        }}
+      }}
+
+      // Check if any event has audit shortfall or known discount
+      const allEvs = [info.in, info.out, info.stay].filter(Boolean);
+      const failedEv = allEvs.find(ev => ev && ev.audit_failed);
+      const discountEv = allEvs.find(ev => ev && ev.is_known_discount);
+      if (failedEv) {{
+        const diffStr = (failedEv.audit_shortfall || 0).toFixed(2);
+        const expStr = (failedEv.audit_expected_owner_payout || 0).toFixed(2);
+        const actStr = (failedEv.owner_payout || 0).toFixed(2);
+        html += `<div style="margin-top:8px; padding:6px 10px; border-radius:6px; background:rgba(239,68,68,0.2); border:1px solid rgba(239,68,68,0.4); font-size:0.78rem; color:#fca5a5; line-height:1.4;">
+          <strong style="color:#ef4444;">⚠️ Rate Audit Shortfall:</strong> -$${{diffStr}}<br>
+          <span style="color:#cbd5e1; font-size:0.72rem;">Expected Owner Net: $${{expStr}} vs Actual: $${{actStr}}</span>
+        </div>`;
+      }} else if (discountEv) {{
+        const diffStr = (discountEv.audit_shortfall || 0).toFixed(2);
+        const title = discountEv.rule_title || 'Known Platform Discount';
+        if (discountEv.discount_category === 'promo') {{
+          html += `<div style="margin-top:8px; padding:5px 8px; border-radius:6px; background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.25); font-size:0.75rem; color:#93c5fd; line-height:1.4;">
+            <strong style="color:#60a5fa;">🏷️ Promo (-${{discountEv.discount_pct}}%):</strong> <span style="color:#cbd5e1;">Channel Promotion / Early Bird</span><br>
+            <span style="color:#94a3b8; font-size:0.7rem;">Catalog variance: -$${{diffStr}}</span>
+          </div>`;
+        }} else {{
+          const dIcon = discountEv.discount_category === 'summer' ? '☀️' : (discountEv.discount_category === 'weekly' ? '📅' : '🏷️');
+          html += `<div style="margin-top:8px; padding:6px 10px; border-radius:6px; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.35); font-size:0.78rem; color:#fde68a; line-height:1.4;">
+            <strong style="color:#fbbf24;">${{title}} (-${{discountEv.discount_pct}}%):</strong><br>
+            <span style="color:#cbd5e1; font-size:0.72rem;">Realized vs Catalog variance: -$${{diffStr}} (Systematic Rule)</span>
           </div>`;
         }}
       }}
@@ -2304,6 +2990,166 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
           </table>
         </div>
 
+        <!-- Owner Payout & Published Rate Audit Diagnostic Section -->
+        ${{(() => {{
+          const auditStatus = r.audit_status || 'legacy';
+          const isFailed = r.audit_failed === true;
+          let auditBorderColor = '#334155';
+          let auditBannerBg = 'rgba(15, 23, 42, 0.6)';
+          let auditBannerBorder = '#334155';
+          let auditBannerColor = '#cbd5e1';
+          let auditBannerTitle = 'Published Rate Audit';
+
+          if (isFailed) {{
+            auditBorderColor = 'rgba(239, 68, 68, 0.5)';
+            auditBannerBg = 'rgba(239, 68, 68, 0.12)';
+            auditBannerBorder = 'rgba(239, 68, 68, 0.35)';
+            auditBannerColor = '#fca5a5';
+            auditBannerTitle = '⚠️ Unexplained Payout Shortfall Detected';
+          }} else if (auditStatus === 'discount_summer') {{
+            auditBorderColor = 'rgba(249, 115, 22, 0.5)';
+            auditBannerBg = 'rgba(249, 115, 22, 0.12)';
+            auditBannerBorder = 'rgba(249, 115, 22, 0.35)';
+            auditBannerColor = '#fdba74';
+            auditBannerTitle = '☀️ Identified Rule: Summer Low-Season Markdown';
+          }} else if (auditStatus === 'discount_weekly') {{
+            auditBorderColor = 'rgba(6, 182, 212, 0.5)';
+            auditBannerBg = 'rgba(6, 182, 212, 0.12)';
+            auditBannerBorder = 'rgba(6, 182, 212, 0.35)';
+            auditBannerColor = '#67e8f9';
+            auditBannerTitle = '📅 Identified Rule: Weekly Stay Discount';
+          }} else if (auditStatus === 'discount_promo') {{
+            auditBorderColor = 'rgba(59, 130, 246, 0.5)';
+            auditBannerBg = 'rgba(59, 130, 246, 0.12)';
+            auditBannerBorder = 'rgba(59, 130, 246, 0.35)';
+            auditBannerColor = '#93c5fd';
+            auditBannerTitle = '🏷️ Identified Rule: Standard Channel Promotion';
+          }} else if (auditStatus === 'verified') {{
+            auditBorderColor = 'rgba(16, 185, 129, 0.4)';
+            auditBannerBg = 'rgba(16, 185, 129, 0.12)';
+            auditBannerBorder = 'rgba(16, 185, 129, 0.3)';
+            auditBannerColor = '#6ee7b7';
+            auditBannerTitle = '✅ Payout Verified with Rate Schedule';
+          }} else if (auditStatus === 'surplus') {{
+            auditBorderColor = 'rgba(56, 189, 248, 0.4)';
+            auditBannerBg = 'rgba(56, 189, 248, 0.12)';
+            auditBannerBorder = 'rgba(56, 189, 248, 0.3)';
+            auditBannerColor = '#7dd3fc';
+            auditBannerTitle = '💎 Payout Exceeds Published Rate Target';
+          }} else if (auditStatus === 'exempt') {{
+            auditBannerTitle = '🏷️ Owner / Maintenance Stay (Exempt)';
+          }} else {{
+            auditBannerTitle = 'ℹ️ Historical Pre-Baseline Booking';
+          }}
+
+          let nightlyBreakdownHtml = '';
+          if (r.audit_nightly_breakdown && r.audit_nightly_breakdown.length > 0) {{
+            const rows = r.audit_nightly_breakdown.map(nb => {{
+              const varColor = nb.variance < -1 ? '#ef4444' : (nb.variance > 1 ? '#38bdf8' : '#34d399');
+              const varSign = nb.variance >= 0 ? '+' : '';
+              const dayBadge = nb.is_weekend 
+                ? '<span class="badge" style="background:rgba(129,140,248,0.2); color:#818cf8; font-size:0.7rem; padding:1px 5px;">Weekend</span>'
+                : '<span class="badge" style="background:rgba(251,146,60,0.15); color:#fb923c; font-size:0.7rem; padding:1px 5px;">Midweek</span>';
+              return `
+                <tr style="border-bottom: 1px solid #1e293b;">
+                  <td style="padding: 6px 8px; font-family:'JetBrains Mono'; color:#f8fafc;">${{nb.date}}</td>
+                  <td style="padding: 6px 8px; color:#cbd5e1;">${{nb.day_name}}</td>
+                  <td style="padding: 6px 8px;">${{dayBadge}}</td>
+                  <td style="padding: 6px 8px; text-align:right; font-family:'JetBrains Mono'; color:#cbd5e1;">$${{parseFloat(nb.catalog_rate).toFixed(2)}}</td>
+                  <td style="padding: 6px 8px; text-align:right; font-family:'JetBrains Mono'; color:#f8fafc; font-weight:700;">$${{parseFloat(nb.effective_booked_rate).toFixed(2)}}</td>
+                  <td style="padding: 6px 8px; text-align:right; font-family:'JetBrains Mono'; color:${{varColor}}; font-weight:700;">${{varSign}}$${{parseFloat(nb.variance).toFixed(2)}}</td>
+                </tr>
+              `;
+            }}).join('');
+
+            nightlyBreakdownHtml = `
+              <details style="background: #0b1120; border: 1px solid #1e293b; border-radius: 8px; padding: 10px 14px; margin-top: 14px;" ${{isFailed || r.is_known_discount ? 'open' : ''}}>
+                <summary style="cursor: pointer; font-weight: 700; color: #38bdf8; font-size: 0.82rem; user-select: none;">
+                  📅 Night-by-Night Rate Breakdown vs Catalog Target (${{r.audit_nightly_breakdown.length}} nights)
+                </summary>
+                <div style="overflow-x:auto; margin-top:8px;">
+                  <table style="width:100%; border-collapse:collapse; font-size:0.78rem;">
+                    <thead>
+                      <tr style="border-bottom: 1px solid #334155; color:#94a3b8; text-align:left;">
+                        <th style="padding: 6px 8px;">Stay Night</th>
+                        <th style="padding: 6px 8px;">Day</th>
+                        <th style="padding: 6px 8px;">Segment</th>
+                        <th style="padding: 6px 8px; text-align:right;">Catalog Target</th>
+                        <th style="padding: 6px 8px; text-align:right;">Booked Effective</th>
+                        <th style="padding: 6px 8px; text-align:right;">Daily Variance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${{rows}}
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            `;
+          }}
+
+          const varColor = (r.audit_discrepancy || 0) < -5 ? '#ef4444' : ((r.audit_discrepancy || 0) > 5 ? '#38bdf8' : '#34d399');
+          const varSign = (r.audit_discrepancy || 0) >= 0 ? '+' : '';
+
+          return `
+            <div style="background: #0f172a; border: 1px solid ${{auditBorderColor}}; border-radius: 12px; padding: 16px 18px; margin-top: 16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #1e293b; padding-bottom:8px;">
+                <div>
+                  <h4 style="font-size: 0.95rem; font-weight: 800; color: #f8fafc; margin: 0; display:flex; align-items:center; gap:8px;">
+                    <span>⚖️ Owner Payout & Published Rate Audit</span>
+                  </h4>
+                  <div style="font-size:0.74rem; color:#94a3b8; margin-top:2px;">
+                    Baseline: February 1, 2026 Schedule • 82.00% Owner Net Share
+                  </div>
+                </div>
+                <div>
+                  <span class="badge" style="background:${{r.audit_badge_bg || 'rgba(148,163,184,0.15)'}}; color:${{r.audit_badge_color || '#94a3b8'}}; border:1px solid ${{r.audit_badge_color || '#94a3b8'}}66; font-size:0.8rem; font-weight:700; padding:4px 10px;">
+                    ${{r.audit_status_label || 'Legacy'}}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Status Banner -->
+              <div style="background:${{auditBannerBg}}; border:1px solid ${{auditBannerBorder}}; border-radius:8px; padding:10px 14px; margin-bottom:12px; font-size:0.82rem; color:${{auditBannerColor}}; line-height:1.5;">
+                <strong>${{auditBannerTitle}}:</strong> ${{escapeHtml(r.audit_diagnostic_text || '')}}
+              </div>
+
+              <!-- Financial Comparison Cards -->
+              <div class="res-fin-grid" style="margin-bottom:0;">
+                <div class="res-fin-card">
+                  <div class="res-fin-label">Expected Distributable</div>
+                  <div class="res-fin-value" style="color: #cbd5e1;">${{fUSD(r.audit_expected_gross_rent || 0)}}</div>
+                  <div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">Catalog sum</div>
+                </div>
+                <div class="res-fin-card">
+                  <div class="res-fin-label">Expected Owner Net (82%)</div>
+                  <div class="res-fin-value" style="color: #38bdf8;">${{fUSD(r.audit_expected_owner_payout || 0)}}</div>
+                  <div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">Agreed payout target</div>
+                </div>
+                <div class="res-fin-card">
+                  <div class="res-fin-label">Actual Distributable</div>
+                  <div class="res-fin-value" style="color: #f8fafc;">${{fUSD(r.gross_rent || 0)}}</div>
+                  <div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">Streamline reported</div>
+                </div>
+                <div class="res-fin-card">
+                  <div class="res-fin-label">Actual Owner Payout</div>
+                  <div class="res-fin-value" style="color: ${{isFailed ? '#ef4444' : '#34d399'}};">${{fUSD(r.owner_payout || 0)}}</div>
+                  <div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">Reported in portal</div>
+                </div>
+                <div class="res-fin-card">
+                  <div class="res-fin-label">Audit Variance</div>
+                  <div class="res-fin-value" style="color: ${{varColor}};">
+                    ${{varSign}}${{fUSD(r.audit_discrepancy || 0)}}
+                  </div>
+                  <div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">${{varSign}}${{r.audit_discrepancy_pct || 0}}% variance</div>
+                </div>
+              </div>
+
+              ${{nightlyBreakdownHtml}}
+            </div>
+          `;
+        }})()}}
+
         <!-- Raw Streamline API Response Viewer -->
         <details style="background: #0b1120; border: 1px solid #334155; border-radius: 10px; padding: 12px 16px;">
           <summary style="cursor: pointer; font-weight: 700; color: #38bdf8; font-size: 0.85rem; user-select: none;">
@@ -2340,15 +3186,15 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
     // =========================================================================
     // RESERVATIONS TABLE LOGIC (Filtering & Multi-column Sorting)
     // =========================================================================
-    let currentResStatusFilter = 'all'; // 'all', 'future', 'past'
+    let currentResStatusFilter = 'all'; // 'all', 'shortfall', 'verified', 'future', 'past', 'legacy', 'exempt'
     let resSortCol = 0;
     let resSortAsc = false; // default newest check-in first
 
     function setResFilterStatus(status) {{
       currentResStatusFilter = status;
-      ['All', 'Future', 'Past'].forEach(s => {{
+      ['All', 'Shortfall', 'Discounts', 'Promo', 'Summer', 'Weekly', 'Verified', 'Future', 'Past', 'Legacy', 'Exempt'].forEach(s => {{
         const btn = document.getElementById('resFilter' + s);
-        if (btn) btn.classList.toggle('active', s.toLowerCase() === status);
+        if (btn) btn.classList.toggle('active', s.toLowerCase() === status.toLowerCase());
       }});
       applyReservationFilters();
     }}
@@ -2366,10 +3212,19 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
         const channel = row.dataset.channel || '';
         const stayType = row.dataset.type || '';
         const searchText = row.dataset.search || '';
+        const auditStatus = row.dataset.auditStatus || '';
 
         let matchStatus = true;
         if (currentResStatusFilter === 'future') matchStatus = isFuture;
         else if (currentResStatusFilter === 'past') matchStatus = !isFuture;
+        else if (currentResStatusFilter === 'shortfall') matchStatus = (auditStatus === 'shortfall');
+        else if (currentResStatusFilter === 'discounts') matchStatus = auditStatus.startsWith('discount_');
+        else if (currentResStatusFilter === 'promo') matchStatus = (auditStatus === 'discount_promo');
+        else if (currentResStatusFilter === 'summer') matchStatus = (auditStatus === 'discount_summer');
+        else if (currentResStatusFilter === 'weekly') matchStatus = (auditStatus === 'discount_weekly');
+        else if (currentResStatusFilter === 'verified') matchStatus = (auditStatus === 'verified' || auditStatus === 'surplus');
+        else if (currentResStatusFilter === 'legacy') matchStatus = (auditStatus === 'legacy');
+        else if (currentResStatusFilter === 'exempt') matchStatus = (auditStatus === 'exempt');
 
         let matchChannel = (channelFilter === 'all') || (channel === channelFilter);
         let matchType = (typeFilter === 'all') || (stayType === typeFilter);
@@ -2391,7 +3246,7 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
 
     function resetReservationFilters() {{
       currentResStatusFilter = 'all';
-      ['All', 'Future', 'Past'].forEach(s => {{
+      ['All', 'Shortfall', 'Discounts', 'Promo', 'Summer', 'Weekly', 'Verified', 'Future', 'Past', 'Legacy', 'Exempt'].forEach(s => {{
         const btn = document.getElementById('resFilter' + s);
         if (btn) btn.classList.toggle('active', s === 'All');
       }});
@@ -2410,9 +3265,12 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
       }} else {{
         resSortCol = colIdx;
         resSortAsc = (sortType === 'str');
+        if (sortType === 'date') {{
+          resSortAsc = false;
+        }}
       }}
 
-      for (let i = 0; i <= 6; i++) {{
+      for (let i = 0; i <= 7; i++) {{
         const th = document.getElementById('resTh' + i);
         if (th) {{
           th.classList.toggle('sorted', i === colIdx);
@@ -2433,23 +3291,26 @@ def get_calendar_revenue_js(reservations: List[Dict[str, Any]], rev_data: Dict[s
           valA = a.dataset.start || '';
           valB = b.dataset.start || '';
         }} else if (colIdx === 1) {{
+          valA = a.dataset.booked || '';
+          valB = b.dataset.booked || '';
+        }} else if (colIdx === 2) {{
           valA = a.dataset.type || '';
           valB = b.dataset.type || '';
-        }} else if (colIdx === 2) {{
+        }} else if (colIdx === 3) {{
           valA = parseFloat(a.dataset.nights || 0);
           valB = parseFloat(b.dataset.nights || 0);
-        }} else if (colIdx === 3) {{
+        }} else if (colIdx === 4) {{
           valA = parseFloat(a.dataset.gross || 0);
           valB = parseFloat(b.dataset.gross || 0);
-        }} else if (colIdx === 4) {{
+        }} else if (colIdx === 5) {{
+          valA = parseFloat(a.dataset.expectedgross || 0);
+          valB = parseFloat(b.dataset.expectedgross || 0);
+        }} else if (colIdx === 6) {{
           valA = a.dataset.channel || '';
           valB = b.dataset.channel || '';
-        }} else if (colIdx === 5) {{
-          valA = parseFloat(a.dataset.totchannel || 0);
-          valB = parseFloat(b.dataset.totchannel || 0);
-        }} else if (colIdx === 6) {{
-          valA = parseFloat(a.dataset.guestprice || 0);
-          valB = parseFloat(b.dataset.guestprice || 0);
+        }} else if (colIdx === 7) {{
+          valA = parseFloat(a.dataset.auditShortfall || 0);
+          valB = parseFloat(b.dataset.auditShortfall || 0);
         }}
 
         if (typeof valA === 'number') {{

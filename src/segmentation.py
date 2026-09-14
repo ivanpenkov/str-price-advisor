@@ -136,7 +136,8 @@ class CalendarSegmenter:
         total_guest_price = round(total_base + self.cleaning_fee, 2)
         effective_nightly = round(total_guest_price / nights, 2)
 
-        is_cal_open = (check_in <= open_end_date) if open_end_date else True
+        last_night = check_out - timedelta(days=1)
+        is_cal_open = (last_night <= open_end_date) if open_end_date else True
         cal_end_str = open_end_date.strftime("%Y-%m-%d") if open_end_date else None
 
         return {

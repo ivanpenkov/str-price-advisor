@@ -93,7 +93,7 @@ class TestPropertyValuator(unittest.TestCase):
             description="",
             location="Tempe",
             br=6,
-            ba=6.0,
+            ba=5.0,
             guests=16,
         )
         self.assertEqual(specs["sqft"], 5400)

@@ -1,0 +1,54 @@
+{
+  "inbound_topic": "ivan-str-cmd-8e2b4f91",
+  "outbound_topic": "ivan-str-advisor-xyz",
+  "workspace_dir": "/Users/ivanpe/str-price-advisor",
+  "agy_path": "/Users/ivanpe/.local/bin/agy",
+  "python_path": "/Users/ivanpe/str-price-advisor/.venv/bin/python",
+  "notify_script": "/Users/ivanpe/.gemini/config/scripts/notify_mobile.sh",
+  "reconnect_delay": 3.0,
+  "max_output_length": 3800,
+  "command_timeout_sec": 300,
+  "shortcuts": {
+    "status": {
+      "desc": "System health, comp portfolio, sales, and reservations overview",
+      "command": [".venv/bin/python", "-m", "src.cli", "status"]
+    },
+    "audit": {
+      "desc": "Audit competitor portfolio against luxury rubric",
+      "command": [".venv/bin/python", "-m", "src.cli", "audit-comps"]
+    },
+    "sales": {
+      "desc": "Display competitor sales and absorption velocity summary",
+      "command": [".venv/bin/python", "-m", "src.cli", "track-competitor-sales"]
+    },
+    "sales-verify": {
+      "desc": "Live calendar verification sweep of competitor sales",
+      "command": [".venv/bin/python", "-m", "src.cli", "track-competitor-sales", "--verify", "--dashboard"]
+    },
+    "dashboard": {
+      "desc": "Regenerate HTML dashboard docs/index.html",
+      "command": [".venv/bin/python", "-m", "src.cli", "generate-html"]
+    },
+    "test-kivoya": {
+      "desc": "Verify Kivoya PMS API connectivity and live rates",
+      "command": [".venv/bin/python", "-m", "src.cli", "test-kivoya"]
+    },
+    "test-stealth": {
+      "desc": "Test health of stealth NordVPN connections",
+      "command": [".venv/bin/python", "-m", "src.cli", "test-stealth"]
+    },
+    "sync-reservations": {
+      "desc": "Scrape and sync Streamline OwnerX reservations",
+      "command": [".venv/bin/python", "-m", "src.cli", "sync-reservations"]
+    },
+    "rating": {
+      "desc": "Villa del Sol platform ratings and recent 30-day reviews feed",
+      "command": [".venv/bin/python", "-m", "src.cli", "show-ratings", "--mobile"]
+    },
+    "ratings": {
+      "desc": "Villa del Sol platform ratings and recent 30-day reviews feed",
+      "command": [".venv/bin/python", "-m", "src.cli", "show-ratings", "--mobile"]
+    }
+  }
+}
+

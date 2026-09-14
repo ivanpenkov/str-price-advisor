@@ -129,7 +129,9 @@
     "baths": 5.0,
     "rating": 4.0,
     "reviews": 1,
-    "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1587060999176930356/original/3faa0949-7a92-4684-8371-d1e461f1bc9b.jpeg"
+    "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1587060999176930356/original/3faa0949-7a92-4684-8371-d1e461f1bc9b.jpeg",
+    "is_valid_comp": false,
+    "validity_reason": "Host/Owner resides on premises in the basement; two separate houses across the street rented together; 4.00★ rating."
   },
   "48680831": {
     "listing_id": "48680831",
@@ -151,7 +153,9 @@
     "baths": 3.0,
     "rating": 4.88,
     "reviews": 16,
-    "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1442265380006443515/original/e82b63ed-64b2-4c16-ade5-8cfdda53f47b.jpeg"
+    "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1442265380006443515/original/e82b63ed-64b2-4c16-ade5-8cfdda53f47b.jpeg",
+    "is_valid_comp": false,
+    "validity_reason": "Mislabeled property type (Rental unit / apartment in Scottsdale) with severe bathroom bottleneck (3.0 BA for 18 guests); $150/nt pool heat fee."
   },
   "1640779184675228639": {
     "listing_id": "1640779184675228639",
@@ -393,7 +397,9 @@
     "baths": 4.5,
     "rating": 4.64,
     "reviews": 66,
-    "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE0NDYxMzY5MDkxNjk2NDcwNw%3D%3D/original/3a541057-c845-4445-a346-c3fa137c8b24.jpeg"
+    "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE0NDYxMzY5MDkxNjk2NDcwNw%3D%3D/original/3a541057-c845-4445-a346-c3fa137c8b24.jpeg",
+    "is_valid_comp": false,
+    "validity_reason": "Low guest review rating (4.64★ with 66 reviews; below luxury STR standards); overcrowded dormitory/party setup (30 guests in 4.5 BA)."
   },
   "1559652898884891337": {
     "listing_id": "1559652898884891337",
@@ -690,7 +696,9 @@
     "baths": 4.0,
     "rating": 4.94,
     "reviews": 114,
-    "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-746195521284356998/original/1fed9034-353b-48f4-a68c-3dbb9f03f8c5.jpeg"
+    "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-746195521284356998/original/1fed9034-353b-48f4-a68c-3dbb9f03f8c5.jpeg",
+    "is_valid_comp": false,
+    "validity_reason": "Severe capacity restriction (7 guests maximum); fails minimum capacity threshold for large group comp."
   },
   "905223542527412860": {
     "listing_id": "905223542527412860",
@@ -844,7 +852,9 @@
     "baths": 3.0,
     "rating": 4.98,
     "reviews": 121,
-    "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-688643627143933050/original/3044c26f-efb1-4589-8a04-afc41ac5356e.jpeg"
+    "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-688643627143933050/original/3044c26f-efb1-4589-8a04-afc41ac5356e.jpeg",
+    "is_valid_comp": false,
+    "validity_reason": "Severe capacity restriction (10 guests maximum); fails minimum 12+ guest threshold for large estate comp."
   },
   "1358887338136661145": {
     "listing_id": "1358887338136661145",
@@ -1405,7 +1415,9 @@
     "baths": 4.5,
     "rating": 4.56,
     "reviews": 93,
-    "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-29569170/original/0e6a2c1a-e5b7-42ef-b3f1-c6b990b2cdd0.jpeg"
+    "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-29569170/original/0e6a2c1a-e5b7-42ef-b3f1-c6b990b2cdd0.jpeg",
+    "is_valid_comp": false,
+    "validity_reason": "Low guest review rating (4.56★ across 93 reviews; bottom 5% of Phoenix Valley STRs); maintenance and cleanliness issues."
   },
   "858613170601453396": {
     "listing_id": "858613170601453396",

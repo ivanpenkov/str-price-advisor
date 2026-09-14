@@ -19,6 +19,7 @@ Computes:
 import json
 import logging
 import re
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -59,7 +60,7 @@ class CompEvaluator:
         return {
             "property_name": "Villa del Sol",
             "bedrooms": 6,
-            "bathrooms": 6.0,
+            "bathrooms": 5.0,
             "max_guests": 16,
             "lot_size": "0.75 acre",
             "lot_acres": 0.75,
@@ -155,13 +156,17 @@ class CompEvaluator:
         has_full_details = len(amenities) >= 10 or len(text_lower) > 250
 
         free_patterns = [
-            "free pool heat", "free heated pool", "free pool heating", "complimentary pool heat",
-            "complimentary heated pool", "pool heat included", "pool heat is included",
-            "pool heat is always included", "no pool heat fee", "no pool heating fee",
-            "no extra charge for pool", "no extra charge for pool heat", "no extra fee for pool",
-            "no additional cost for pool", "no additional fee for pool", "no extra charge for pool heat",
-            "|free pool heat|", "free heated", "heated pool included", "heated pool is free",
-            "heated pool at no extra charge", "heated pool, no fees", "pool is heated at no extra charge",
+            "free pool heat", "free heated pool", "free-heated pool", "free pool heating",
+            "complimentary pool heat", "complimentary pool heating", "complimentary heated pool",
+            "pool heat included", "pool heat is included", "pool heat is always included",
+            "pool heating included", "pool heating is included", "pool heating is always included",
+            "no pool heat fee", "no pool heating fee", "no fee for pool heat", "no fee for pool heating", "no fees for pool heat", "no fees for pool heating",
+            "no extra charge for pool", "no extra charge for pool heat", "no extra fee for pool", "no extra fee for pool heat", "no extra fee for pool heating",
+            "no additional cost for pool", "no additional fee for pool",
+            "|free pool heat|", "heated pool included", "heated pool is free",
+            "heated pool at no extra charge", "heated pool, no fees", "heated pool, no fee",
+            "pool is heated at no extra charge", "heated, sparkling pool (included)", "heated pool (included)",
+            "pool heat is free", "pool heating is free", "pool heat is complimentary", "pool heating is complimentary",
         ]
         fee_patterns = [
             "pool heat fee", "pool heating fee", "fee to heat", "fees apply heating pool",
@@ -210,8 +215,10 @@ class CompEvaluator:
         elif any(p in text_lower for p in fee_patterns) or fee_regex.search(text_lower):
             heating = "fee"
             heating_source = "Explicit pool heating fee disclosed in listing text"
-        elif any("heated" in a and "pool" in a for a in amenities_lower) or any(
-            w in text_lower for w in ["htd pool", "heated pool", "heated private pool", "pool is heated", "pool heating"]
+        elif any("heated" in a and "pool" in a for a in amenities_lower) or re.search(
+            r"\b(?:htd\s*pool|(?<!not\s)(?<!not\sa\s)(?<!no\s)heated\b[^\.\n!?]{0,30}\bpool|pool\b(?![^\.\n!?]{0,30}\b(?:not|never|cannot|no|unheated)\b)[^\.\n!?]{0,30}\b(?:is\s+)?heat(?:ed|ing))\b",
+            text_clean,
+            re.IGNORECASE,
         ):
             heating = "standard_heated"
             heating_source = "Heated pool declared in amenities/title (standard/unspecified fee)"
@@ -685,7 +692,17 @@ class CompEvaluator:
                 beds = br
 
         # Determine guest capacity
-        guests = comp_meta.get("guests") or comp_meta.get("max_guests") or comp_meta.get("accommodates") or enriched.get("guests")
+        guests = comp_meta.get("guests") or comp_meta.get("max_guests") or comp_meta.get("accommodates")
+        en_guests = enriched.get("guests")
+        if en_guests:
+            try:
+                en_g_int = int(str(en_guests).replace("+", "").strip())
+                # If guest count is <= 2 on a 4+ BR home, it is a default scraper query artifact
+                if not (br >= 4 and en_g_int <= 2):
+                    guests = guests or en_g_int
+            except Exception:
+                pass
+
         if not guests:
             for item in enriched.get("overview", []):
                 if "guest" in item.lower():
@@ -711,8 +728,8 @@ class CompEvaluator:
             location = loc_val.get("addressLocality", "") if isinstance(loc_val, dict) else str(loc_val)
             location = location.lower()
 
-        rating = enriched.get("rating") or comp_meta.get("rating")
-        reviews = enriched.get("reviews") or comp_meta.get("reviews") or 0
+        rating = comp_meta.get("rating") if comp_meta.get("rating") is not None else enriched.get("rating")
+        reviews = comp_meta.get("reviews") if comp_meta.get("reviews") is not None else (enriched.get("reviews") or 0)
         try:
             rating = float(rating) if rating is not None else 4.80
         except Exception:
@@ -738,10 +755,21 @@ class CompEvaluator:
         # 1. VALIDITY CHECK
         # -------------------------------------------------------------
         has_pool = pool_specs["has_pool"]
+        outlier_cities = ["surprise", "buckeye", "casa grande", "maricopa", "goodyear", "sun city"]
+        corridor_ok = not any(city in location for city in outlier_cities) and not any(city in all_text[:200] for city in outlier_cities)
+        single_family = "owner reside" not in all_text and "in a basement" not in all_text and not ("two homes" in all_text and "across the street" in all_text) and "apartment" not in location.lower()
+        if "rental unit" in all_text[:200].lower() and ba <= 3.0 and guests >= 18:
+            single_family = False
+
+        capacity_ok = guests >= 12
+        rating_ok = rating >= 4.70 or rating == 0.0 or reviews < 3
+
         if not has_pool:
+            v_details = self._build_validity_details(False, "DISQUALIFIED", "Disqualified: Property lacks a private swimming pool.", single_family, False, capacity_ok, rating_ok, corridor_ok, comp_meta, enriched, {"outdoor": 30, "capacity": 60, "property_value": 75, "interior": 60, "location": 70, "reputation": 70}, 0.50)
             return {
                 "is_valid_comp": False,
                 "validity_reason": "Disqualified: Property lacks a private swimming pool.",
+                "validity_details": v_details,
                 "desirability_ratio": 0.50,
                 "winter_ratio": 0.50,
                 "summer_ratio": 0.50,
@@ -752,10 +780,30 @@ class CompEvaluator:
                 "rationale": "Disqualified from luxury comp cohort because verified listing details show no private swimming pool.",
             }
 
-        if br < 4 or (br < 5 and guests < 12):
+        if not single_family:
+            reason = "Disqualified: Loss of privacy / owner on premises or dual houses across the street."
+            v_details = self._build_validity_details(False, "DISQUALIFIED", reason, False, has_pool, capacity_ok, rating_ok, corridor_ok, comp_meta, enriched, {"outdoor": 70, "capacity": 70, "property_value": 75, "interior": 70, "location": 70, "reputation": 70}, 0.65)
             return {
                 "is_valid_comp": False,
-                "validity_reason": f"Disqualified: Only {br} bedrooms (capacity {guests} guests), below the 5 BR / 12 guest threshold.",
+                "validity_reason": reason,
+                "validity_details": v_details,
+                "desirability_ratio": 0.65,
+                "winter_ratio": 0.65,
+                "summer_ratio": 0.65,
+                "pool_specs": pool_specs,
+                "property_specs": property_specs,
+                "category_scores": {"outdoor": 70, "capacity": 70, "property_value": 75, "interior": 70, "location": 70, "reputation": 70},
+                "composite_score": 71.0,
+                "rationale": reason,
+            }
+
+        if br < 4 or not capacity_ok:
+            reason = f"Disqualified: Only {br} bedrooms (capacity {guests} guests), below the 5 BR / 12 guest threshold."
+            v_details = self._build_validity_details(False, "DISQUALIFIED", reason, single_family, has_pool, False, rating_ok, corridor_ok, comp_meta, enriched, {"outdoor": 65, "capacity": 40, "property_value": 75, "interior": 65, "location": 75, "reputation": 75}, 0.55)
+            return {
+                "is_valid_comp": False,
+                "validity_reason": reason,
+                "validity_details": v_details,
                 "desirability_ratio": 0.55,
                 "winter_ratio": 0.55,
                 "summer_ratio": 0.55,
@@ -766,11 +814,13 @@ class CompEvaluator:
                 "rationale": f"Disqualified: Under-sized listing ({br} BR / {guests} guests) cannot benchmark 16-guest luxury estates.",
             }
 
-        outlier_cities = ["surprise", "buckeye", "casa grande", "maricopa", "goodyear", "sun city"]
-        if any(city in location for city in outlier_cities) or any(city in all_text[:200] for city in outlier_cities):
+        if not corridor_ok:
+            reason = f"Disqualified: Located in peripheral suburb ({location.title()}), outside competitive drive corridor."
+            v_details = self._build_validity_details(False, "DISQUALIFIED", reason, single_family, has_pool, capacity_ok, rating_ok, False, comp_meta, enriched, {"outdoor": 70, "capacity": 75, "property_value": 75, "interior": 70, "location": 40, "reputation": 75}, 0.60)
             return {
                 "is_valid_comp": False,
-                "validity_reason": f"Disqualified: Located in peripheral suburb ({location.title()}), outside competitive drive corridor.",
+                "validity_reason": reason,
+                "validity_details": v_details,
                 "desirability_ratio": 0.60,
                 "winter_ratio": 0.60,
                 "summer_ratio": 0.60,
@@ -781,6 +831,23 @@ class CompEvaluator:
                 "rationale": f"Disqualified: Located too far from the Scottsdale/Tempe corridor in {location.title()}.",
             }
 
+        if not rating_ok:
+            reason = f"Disqualified: Low guest satisfaction rating ({rating:.2f}★ with {reviews} reviews; below luxury STR standards)."
+            v_details = self._build_validity_details(False, "DISQUALIFIED", reason, single_family, has_pool, capacity_ok, False, corridor_ok, comp_meta, enriched, {"outdoor": 75, "capacity": 80, "property_value": 75, "interior": 75, "location": 75, "reputation": 40}, 0.70)
+            return {
+                "is_valid_comp": False,
+                "validity_reason": reason,
+                "validity_details": v_details,
+                "desirability_ratio": 0.70,
+                "winter_ratio": 0.70,
+                "summer_ratio": 0.70,
+                "pool_specs": pool_specs,
+                "property_specs": property_specs,
+                "category_scores": {"outdoor": 75, "capacity": 80, "property_value": 75, "interior": 75, "location": 75, "reputation": 40},
+                "composite_score": 72.0,
+                "rationale": reason,
+            }
+
         # -------------------------------------------------------------
         # 2. EVALUATE SEASONS
         # -------------------------------------------------------------
@@ -788,9 +855,11 @@ class CompEvaluator:
             res = self._evaluate_single_season(
                 comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, property_specs, is_winter=False
             )
+            v_details = self._build_validity_details(True, "VALID", f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.", single_family, has_pool, capacity_ok, rating_ok, corridor_ok, comp_meta, enriched, res["category_scores"], res["desirability_ratio"])
             res.update({
                 "is_valid_comp": True,
                 "validity_reason": f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
+                "validity_details": v_details,
                 "pool_specs": pool_specs,
                 "property_specs": property_specs,
             })
@@ -799,9 +868,11 @@ class CompEvaluator:
             res = self._evaluate_single_season(
                 comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, property_specs, is_winter=True
             )
+            v_details = self._build_validity_details(True, "VALID", f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.", single_family, has_pool, capacity_ok, rating_ok, corridor_ok, comp_meta, enriched, res["category_scores"], res["desirability_ratio"])
             res.update({
                 "is_valid_comp": True,
                 "validity_reason": f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
+                "validity_details": v_details,
                 "pool_specs": pool_specs,
                 "property_specs": property_specs,
             })
@@ -815,9 +886,16 @@ class CompEvaluator:
             comp_meta, enriched, all_text, sqft, br, ba, beds, guests, location, rating, reviews, pool_specs, property_specs, is_winter=False
         )
 
+        v_details = self._build_validity_details(
+            True, "VALID", f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
+            single_family, has_pool, capacity_ok, rating_ok, corridor_ok, comp_meta, enriched,
+            winter_res["category_scores"], winter_res["desirability_ratio"]
+        )
+
         return {
             "is_valid_comp": True,
             "validity_reason": f"Valid {br}BR luxury estate comp in {location.title() or 'Phoenix corridor'}.",
+            "validity_details": v_details,
             "desirability_ratio": winter_res["desirability_ratio"],  # Peak Winter baseline
             "winter_ratio": winter_res["desirability_ratio"],
             "summer_ratio": summer_res["desirability_ratio"],
@@ -832,6 +910,68 @@ class CompEvaluator:
             "rationale": winter_res["rationale"],
             "winter_rationale": winter_res["rationale"],
             "summer_rationale": summer_res["rationale"],
+        }
+
+    def _build_validity_details(
+        self,
+        is_valid: bool,
+        status: str,
+        reason: str,
+        single_family: bool,
+        has_pool: bool,
+        capacity_ok: bool,
+        rating_ok: bool,
+        corridor_ok: bool,
+        comp_meta: Dict[str, Any],
+        enriched: Dict[str, Any],
+        category_scores: Dict[str, int],
+        ratio: float,
+    ) -> Dict[str, Any]:
+        amenities = [a.lower() for a in enriched.get("amenities", [])]
+        br = comp_meta.get("bedrooms") or 6
+        ba = comp_meta.get("baths") or 4.0
+        rating = comp_meta.get("rating") or 0.0
+        reviews = comp_meta.get("reviews") or 0
+        loc = comp_meta.get("location", "")
+        pool_heat = comp_meta.get("pool_specs", {}).get("heating", "standard_heated")
+
+        strengths = []
+        deficits = []
+
+        if "scottsdale" in loc.lower(): strengths.append("Prime Scottsdale corridor commanding high regional demand")
+        if br > 6: strengths.append(f"High bedroom count ({br} bedrooms) accommodating large travel groups")
+        if ba >= 6: strengths.append(f"Excellent bathroom ratio ({ba} bathrooms) avoiding morning bottlenecks")
+        if pool_heat == "free": strengths.append("Free / complimentary pool heating included")
+        if comp_meta.get("property_specs", {}).get("sqft", 0) >= 6000: strengths.append(f"Expansive floor plan (~{comp_meta['property_specs']['sqft']:,} sq ft)")
+        if any("pickleball" in a for a in amenities): strengths.append("Dedicated private pickleball court")
+        if any("tennis" in a for a in amenities): strengths.append("Private tennis court")
+        if any("sauna" in a for a in amenities): strengths.append("Private sauna / wellness feature")
+        if any("theater" in a or "cinema" in a for a in amenities): strengths.append("Dedicated movie theater / cinema room")
+        if rating >= 4.95 and reviews >= 20: strengths.append(f"Flawless guest track record ({rating:.2f}★ with {reviews} reviews)")
+
+        if br < 6: deficits.append(f"Fewer bedrooms ({br} BR) compared to Villa del Sol's 6BR + guest casita")
+        if ba <= 3.5: deficits.append(f"Limited bathrooms ({ba} BA) creating potential morning rush congestion")
+        if comp_meta.get("property_specs", {}).get("lot_acres", 0.4) < 0.5: deficits.append("Suburban tract lot size (<0.50 acre) lacking Villa del Sol's gated 0.75-acre compound scale")
+        if pool_heat == "fee": deficits.append("Pool heat incurs additional fee ($50–$150/night), introducing guest friction")
+        elif pool_heat == "unheated": deficits.append("Unheated pool significantly limits winter utility")
+        if "mesa" in loc.lower() or "gilbert" in loc.lower() or "chandler" in loc.lower(): deficits.append(f"Secondary pricing corridor ({loc}) with lower baseline rates than South Tempe / Scottsdale")
+        if not any("basketball" in a for a in amenities): deficits.append("Lacks regulation basketball half-court")
+        if not any("pool table" in a for a in amenities): deficits.append("Lacks dedicated championship billiards table")
+        if not is_valid: deficits.insert(0, reason)
+
+        return {
+            "is_valid_comp": is_valid,
+            "status": status,
+            "criteria_checklist": {
+                "single_family_compound": single_family,
+                "private_swimming_pool": has_pool,
+                "guest_capacity_12_plus": capacity_ok,
+                "guest_rating_benchmark": rating_ok,
+                "corridor_drive_radius": corridor_ok
+            },
+            "strengths": strengths[:4],
+            "deficits": deficits[:4],
+            "justification": reason or f"Evaluated as {status.lower()} comp with {ratio:.2f}x desirability ratio."
         }
 
     def evaluate_all_in_registry(self, save: bool = True) -> Dict[str, Any]:
@@ -860,10 +1000,26 @@ class CompEvaluator:
                 else:
                     disqualified_count += 1
 
+        # Also evaluate disqualified comps to refresh their validity_details and category_scores
+        for cid, comp in registry.get("disqualified", {}).items():
+            orig_reason = comp.get("validity_reason")
+            ev = self.evaluate_comp(comp)
+            # Ensure disqualified status is retained
+            ev["is_valid_comp"] = False
+            if orig_reason and not ev.get("validity_reason", "").startswith("Disqualified:"):
+                ev["validity_reason"] = orig_reason
+            if "validity_details" in ev:
+                ev["validity_details"]["is_valid_comp"] = False
+                ev["validity_details"]["status"] = "DISQUALIFIED"
+                if orig_reason:
+                    ev["validity_details"]["justification"] = orig_reason
+            comp.update(ev)
+            disqualified_count += 1
+
         if save:
             registry["metadata"]["evaluated_at"] = Path(__file__).name
             registry["metadata"]["valid_comps_count"] = valid_count
-            registry["metadata"]["disqualified_comps_count"] = disqualified_count
+            registry["metadata"]["disqualified_comps_count"] = len(registry.get("disqualified", {}))
             registry["metadata"]["total_comps"] = len(set(registry.get("tier_a", {}).keys()) | set(registry.get("tier_b", {}).keys()))
             self.REGISTRY_PATH.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
             logger.info(f"Evaluated and saved {evaluated_count} comps to {self.REGISTRY_PATH}")
@@ -899,6 +1055,129 @@ class CompEvaluator:
             print(f"  🏷️ Avg Est. Asset Value:   ${avg_val:,.0f} (Villa del Sol: $2,000,000)")
         print("=" * 60)
         return registry
+
+    def audit_portfolio(
+        self,
+        save_report: bool = False,
+        output_path: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """
+        Systematically audits all listings in comps_registry.json against the 6-factor luxury rubric.
+        Identifies active listings that violate validity criteria and verifies already-disqualified listings.
+        Generates structured findings and optionally exports a markdown report.
+        """
+        if not self.REGISTRY_PATH.exists():
+            raise FileNotFoundError(f"Registry not found: {self.REGISTRY_PATH}")
+
+        registry = json.loads(self.REGISTRY_PATH.read_text(encoding="utf-8"))
+        active_valid = []
+        proposed_disqualifications = []
+        already_disqualified = []
+
+        for tier in ("tier_a", "tier_b"):
+            for cid, comp in registry.get(tier, {}).items():
+                ev = self.evaluate_comp(comp)
+                rec = dict(comp)
+                rec["evaluation"] = ev
+                rec["current_tier"] = tier
+                if ev["is_valid_comp"]:
+                    active_valid.append(rec)
+                else:
+                    proposed_disqualifications.append(rec)
+
+        for cid, comp in registry.get("disqualified", {}).items():
+            ev = self.evaluate_comp(comp)
+            rec = dict(comp)
+            rec["evaluation"] = ev
+            rec["current_tier"] = "disqualified"
+            already_disqualified.append(rec)
+
+        total_portfolio = len(active_valid) + len(proposed_disqualifications) + len(already_disqualified)
+
+        result = {
+            "total_portfolio": total_portfolio,
+            "active_valid_count": len(active_valid),
+            "proposed_disqualifications_count": len(proposed_disqualifications),
+            "already_disqualified_count": len(already_disqualified),
+            "proposed_disqualifications": [
+                {
+                    "listing_id": c.get("listing_id"),
+                    "name": c.get("name"),
+                    "tier": c.get("current_tier"),
+                    "location": c.get("location"),
+                    "reason": c["evaluation"].get("validity_reason"),
+                    "details": c["evaluation"].get("validity_details"),
+                }
+                for c in proposed_disqualifications
+            ],
+            "already_disqualified": [
+                {
+                    "listing_id": c.get("listing_id"),
+                    "name": c.get("name"),
+                    "location": c.get("location"),
+                    "reason": c.get("validity_reason") or c["evaluation"].get("validity_reason"),
+                    "details": c.get("validity_details") or c["evaluation"].get("validity_details"),
+                }
+                for c in already_disqualified
+            ],
+        }
+
+        print("\n" + "=" * 70)
+        print("📋 COMPETITOR PORTFOLIO AUDIT REPORT")
+        print("=" * 70)
+        print(f"  Total Properties Audited:          {total_portfolio}")
+        print(f"  ✅ Active Valid Comps:             {len(active_valid)}")
+        print(f"  ⚠️  Proposed Disqualifications:     {len(proposed_disqualifications)}")
+        print(f"  ⛔ Existing Disqualified Comps:    {len(already_disqualified)}")
+
+        if proposed_disqualifications:
+            print("\n🚨 PROPOSED EXCLUSIONS FROM ACTIVE PORTFOLIO:")
+            for p in proposed_disqualifications:
+                print(f"   • [{p.get('current_tier')}] {p.get('listing_id')} - {p.get('name')}")
+                print(f"     Reason: {p['evaluation'].get('validity_reason')}")
+        else:
+            print("\n✨ All active portfolio comps currently meet luxury validity criteria!")
+
+        if already_disqualified:
+            print(f"\n⛔ VERIFIED DISQUALIFIED COMPS ({len(already_disqualified)}):")
+            for d in already_disqualified:
+                reason = d.get("validity_reason") or d["evaluation"].get("validity_reason")
+                print(f"   • {d.get('listing_id')} - {d.get('name')} ({d.get('location')})")
+                print(f"     Reason: {reason}")
+        print("=" * 70)
+
+        if save_report or output_path:
+            out_file = Path(output_path) if output_path else Path("data/comp_portfolio_audit.md")
+            out_file.parent.mkdir(parents=True, exist_ok=True)
+            report_lines = [
+                "# Competitor Portfolio Audit & Validity Report",
+                f"\nGenerated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n",
+                f"- **Total Properties Audited**: {total_portfolio}",
+                f"- **Active Valid Comps**: {len(active_valid)}",
+                f"- **Proposed Disqualifications**: {len(proposed_disqualifications)}",
+                f"- **Existing Disqualified Comps**: {len(already_disqualified)}\n",
+                "## Existing Disqualified Comps\n",
+                "| ID | Name | Location | Disqualification Reason |",
+                "| :--- | :--- | :--- | :--- |",
+            ]
+            for d in already_disqualified:
+                r = d.get("validity_reason") or d["evaluation"].get("validity_reason") or ""
+                report_lines.append(f"| [{d.get('listing_id')}](https://www.airbnb.com/rooms/{d.get('listing_id')}) | {d.get('name', '')} | {d.get('location', '')} | {r} |")
+
+            if proposed_disqualifications:
+                report_lines.extend([
+                    "\n## Proposed Disqualifications (Action Required)\n",
+                    "| ID | Current Tier | Name | Location | Proposed Reason |",
+                    "| :--- | :--- | :--- | :--- | :--- |",
+                ])
+                for p in proposed_disqualifications:
+                    r = p["evaluation"].get("validity_reason") or ""
+                    report_lines.append(f"| [{p.get('listing_id')}](https://www.airbnb.com/rooms/{p.get('listing_id')}) | {p.get('current_tier')} | {p.get('name', '')} | {p.get('location', '')} | {r} |")
+
+            out_file.write_text("\n".join(report_lines), encoding="utf-8")
+            print(f"📄 Audit report exported to: {out_file}")
+
+        return result
 
 
 if __name__ == "__main__":

@@ -131,3 +131,129 @@ class CompCurator:
         print("=" * 60)
         return registry
 
+    async def discover_comps(
+        self,
+        corridors: Optional[List[str]] = None,
+        limit: int = 20,
+        tier: str = "both",
+        min_rating: float = 4.85,
+        output_json: bool = False,
+    ) -> List[Dict[str, Any]]:
+        """
+        Scan nearby market corridors (Tempe, Chandler, Ahwatukee, Scottsdale) for candidate luxury properties.
+        Filters out properties already in the registry or excluded, evaluates similarity to Villa del Sol,
+        and ranks top candidates.
+        """
+        registry = self.load_registry()
+        existing_ids = (
+            set(registry.get("tier_a", {}).keys())
+            | set(registry.get("tier_b", {}).keys())
+            | set(registry.get("disqualified", {}).keys())
+            | set(registry.get("excluded_comps", {}).keys())
+            | {"573857947793833342"}
+        )
+
+        corridor_map = {
+            "tempe": "Tempe--AZ",
+            "scottsdale": "Scottsdale--AZ",
+            "chandler": "Chandler--AZ",
+            "ahwatukee": "Phoenix--AZ",
+            "gilbert": "Gilbert--AZ",
+            "mesa": "Mesa--AZ",
+        }
+        target_locations = []
+        if corridors:
+            for c in corridors:
+                c_clean = c.strip().lower()
+                if c_clean in corridor_map:
+                    target_locations.append(corridor_map[c_clean])
+                else:
+                    target_locations.append(f"{c_clean.title()}--AZ")
+        if not target_locations:
+            target_locations = ["Tempe--AZ", "Chandler--AZ", "Scottsdale--AZ", "Phoenix--AZ"]
+
+        tier_list = ["tier_a", "tier_b"] if tier == "both" else [tier]
+
+        print(f"\n🔍 [CompCurator] Initiating nearby luxury comp discovery...")
+        print(f"  Target corridors: {target_locations}")
+        print(f"  Tiers: {tier_list} | Min rating: {min_rating}★ | Limit: {limit}")
+
+        collector = AirbnbCollector()
+        discovered: Dict[str, Dict[str, Any]] = {}
+
+        async with async_playwright() as p:
+            await collector.init_browser(p)
+
+            for t_code in tier_list:
+                for s_in, s_out in self.SAMPLE_DATES:
+                    if len(discovered) >= limit * 2:
+                        break
+                    print(f"  Scanning {t_code} for {s_in} -> {s_out}...")
+                    comps = await collector.fetch_comps_for_dates(
+                        check_in=s_in,
+                        check_out=s_out,
+                        nights=3,
+                        tier=t_code,
+                        locations=target_locations,
+                        use_cache=True,
+                    )
+                    for c in comps:
+                        cid = str(c.get("listing_id") or "")
+                        if not cid or cid in existing_ids or cid in discovered:
+                            continue
+
+                        rating = float(c.get("rating") or 0.0)
+                        reviews = int(c.get("reviews") or 0)
+                        br = int(c.get("bedrooms") or 0)
+                        # Filter criteria: min rating (or new), min 5 BR
+                        if rating > 0 and rating < min_rating and reviews >= 5:
+                            continue
+                        if br < 5:
+                            continue
+
+                        # Compute preliminary similarity score against Villa del Sol baseline
+                        sim_score = 70.0
+                        if br >= 6: sim_score += 10.0
+                        if float(c.get("baths") or 0.0) >= 5.0: sim_score += 5.0
+                        if rating >= 4.90: sim_score += 10.0
+                        loc = (c.get("location") or "").lower()
+                        if "tempe" in loc or "ahwatukee" in loc: sim_score += 5.0
+
+                        candidate = {
+                            "listing_id": cid,
+                            "name": c.get("title") or c.get("name"),
+                            "location": c.get("location"),
+                            "bedrooms": br,
+                            "beds": c.get("beds"),
+                            "baths": c.get("baths"),
+                            "rating": rating,
+                            "reviews": reviews,
+                            "url": f"https://www.airbnb.com/rooms/{cid}",
+                            "photo_url": c.get("photo_url"),
+                            "similarity_score": min(100.0, sim_score),
+                            "discovered_tier": t_code,
+                        }
+                        discovered[cid] = candidate
+
+            await collector.close_browser()
+
+        candidates = sorted(discovered.values(), key=lambda x: (x["similarity_score"], x["rating"]), reverse=True)[:limit]
+
+        if output_json:
+            print(json.dumps(candidates, indent=2))
+            return candidates
+
+        print("\n" + "=" * 70)
+        print(f"🏆 DISCOVERED {len(candidates)} NEARBY LUXURY CANDIDATES")
+        print("=" * 70)
+        for idx, cand in enumerate(candidates, 1):
+            r_str = f"⭐ {cand['rating']:.2f} ({cand['reviews']})" if cand['rating'] > 0 else "⭐ New"
+            print(f" {idx:2d}. [{cand['discovered_tier'].upper()}] {cand['name']}")
+            print(f"     ID: {cand['listing_id']} | {cand['location']} | {cand['bedrooms']} BR | {cand['baths']} BA | {r_str} | Similarity: {cand['similarity_score']:.0f}%")
+            print(f"     URL: {cand['url']}")
+        print("=" * 70)
+        print("💡 To add any candidate to the registry, run:")
+        print("   .venv/bin/python -m src.cli add-comp <listing_id> --scrape-prices\n")
+
+        return candidates
+

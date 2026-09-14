@@ -16,17 +16,27 @@ This skill provides a complete reference for all command-line operations in `src
 
 | Command | Primary Purpose | Network / Proxy Required | Key Flags |
 | :--- | :--- | :--- | :--- |
-| `run` | Full weekly or quick pricing advisory audit | **Yes** (Kivoya + Airbnb proxy) | `--weekly`, `--quick`, `--limit`, `--start-date`, `--end-date`, `--push` |
+| `run` | Full weekly or quick pricing advisory audit | **Yes** (Kivoya + Airbnb proxy) | `--weekly`, `--quick`, `--limit`, `--start-date`, `--end-date`, `--compare-platforms`, `--no-compare-platforms`, `--force`, `--max-cache-age`, `--sequential`, `--push` |
+| `test-stealth` | Audit health and latency of 10-node stealth VPN pool | **Yes** (NordVPN SOCKS5 + Google probe) | `--count`, `--target` |
+| `compare-platforms` | Real-time cross-platform parity (Airbnb, VRBO, Booking, Kivoya) | **Yes** (10-node proxy pool) | `--quick`, `--limit`, `--start-date`, `--end-date`, `--force`, `--sequential`, `--push` |
 | `sync-reservations` | Ingest Streamline OwnerX reservations to SQLite & JSON | **Yes** (Direct OwnerX API) | `--full`, `--days-back`, `--dashboard`, `--push` |
 | `track-competitor-sales` | Detect comp bookings via snapshot diffing & compute 2D strategy grid | **No** (Local snapshots) | `--backfill`, `--verify`, `--dashboard`, `--push` |
-| `generate-html` | Re-render static HTML dashboard from data | **No** (Local only) | `--push` |
-| `evaluate-comps`| Compute 5-factor quality scores & desirability ratios | **No** (Local evaluation) | `--no-save` |
+| `generate-html` | Re-render static 10-tab HTML dashboard from data | **No** (Local only) | `--push` |
+| `evaluate-comps`| Compute 6-factor luxury quality scores & desirability ratios | **No** (Local evaluation) | `--no-save` |
 | `enrich-comps` | Deep scrape / sync listing features (beds, baths, amenities) | **Yes** for live (`--sync-cached` is offline) | `--concurrency`, `--limit`, `--force`, `--sync-cached`, `--our-property` |
 | `add-comp` | Deep scrape, evaluate, and register new competitor listing | **Yes** (NordVPN proxy) | `--tier`, `--scrape-prices`, `--limit`, `--force`, `--push` |
 | `remove-comp` | Remove comp from registry, purge cache, and update dashboard | **No** (Local only) | `--push` |
 | `scrape-comp-prices` | Scrape live checkout rates for a single comp across intervals | **Yes** (NordVPN proxy) | `--limit`, `--start-date`, `--end-date`, `--push` |
+| `audit-comps` | Audit active comps against 6-factor luxury rubric | **No** (Local analysis) | `--auto-disqualify`, `--push` |
+| `disqualify-comp` | Move comp to disqualified section, purge cache, and refresh | **No** (Local registry) | `--reason`, `--push` |
+| `requalify-comp` | Restore disqualified comp to active tiers & refresh dashboard | **No** (Local registry) | `--tier`, `--push` |
+| `discover-comps` | Discover high-potential luxury comps matching Villa del Sol | **Yes** (Airbnb proxy) | `--location`, `--limit`, `--min-bedrooms`, `--min-guests` |
+| `snapshot-rates` | Record snapshot of current Kivoya nightly rates to SQLite | **Yes** (Kivoya API) | `--push` |
 | `bootstrap-comps`| Discover and curate initial competitor registry | **Yes** (Airbnb proxy) | `--limit` |
 | `test-kivoya` | Verify Kivoya / Streamline VRS PMS connection | **Yes** (Direct Kivoya API) | None |
+| `sync-ratings` | Ingest and synchronize ratings/reviews across 4 channels | **Yes** for live (offline/mock fallback) | `--platform`, `--force`, `--backfill`, `--no-dashboard` |
+| `show-ratings` | Display ratings scorecards and recent reviews (CLI / mobile / JSON) | **No** (Local store) | `--mobile`, `--json` |
+| `audit-reviews`| Print operational review triage report with severity highlights | **No** (Local markdown) | None |
 
 ---
 
@@ -37,14 +47,15 @@ This skill provides a complete reference for all command-line operations in `src
 Executes the 5-step pricing advisory pipeline:
 1. **Kivoya Ingestion**: Connects to Kivoya / Streamline VRS AJAX API for Unit `503802` to retrieve all active reservations and blocked dates.
 2. **Date Segmentation**: Generates open weekend (3-night Thu–Sun / Fri–Mon) and midweek (3-night Mon–Thu) stay intervals over the next 12 months.
-3. **Comp Data Collection**: Launches Playwright with NordVPN proxy to scrape real-time guest checkout prices across all competitor comps for each open interval.
+3. **Comp Data Collection**: Launches Playwright with the 10-worker NordVPN stealth pool to scrape real-time guest checkout prices across all competitor comps for each open interval.
 4. **Dual-Percentile Analytics**: Calculates raw and quality-adjusted market percentiles (incorporating lead-time tapering, 30% midweek discount, and fee normalization).
-5. **Report Generation**: Outputs `data/latest_report.md`, `data/latest_sheet.csv`, `data/pricing_data_YYYY-MM-DD.json`, and updates `docs/index.html`.
+5. **Cross-Platform Parity (Optional/Weekly)**: When `--compare-platforms` is enabled, audits live checkout prices across Airbnb, VRBO, Booking.com, and Kivoya Direct.
+6. **Report Generation**: Outputs `data/latest_report.md`, `data/latest_sheet.csv`, `data/pricing_data_YYYY-MM-DD.json`, and updates `docs/index.html`.
 
 #### Usage & Examples:
 ```bash
-# Full 12-month weekly audit (all open intervals)
-.venv/bin/python -m src.cli run --weekly
+# Full 12-month weekly audit with cross-platform channel comparison
+.venv/bin/python -m src.cli run --weekly --compare-platforms
 
 # Quick check (evaluates first 10-12 upcoming intervals)
 .venv/bin/python -m src.cli run --quick --limit 12
@@ -52,8 +63,50 @@ Executes the 5-step pricing advisory pipeline:
 # Filter by specific date window (e.g., peak spring season)
 .venv/bin/python -m src.cli run --quick --start-date 2027-02-01 --end-date 2027-04-30
 
+# Force live scraping even if disk cache is younger than 20 hours
+.venv/bin/python -m src.cli run --quick --limit 12 --force
+
 # With automated GitHub push (use ONLY if user explicitly requested)
 .venv/bin/python -m src.cli run --quick --push
+```
+
+---
+
+### `test-stealth`: Audit 10-Worker Multi-IP NordVPN Stealth Fleet
+
+Audits the RFC 1928 SOCKS5 authentication, port binding, and live packet latency of all parallel stealth forwarders:
+- Probes target URL (`https://www.google.com` by default) through each active `pproxy` local forwarder.
+- Automatically hot-swaps unready or packet-dropping candidate nodes.
+- Prints a formatted latency audit table with city hubs, local ports, remote nodes, and online status badges.
+
+#### Usage:
+```bash
+# Audit all 10 stealth forwarders
+.venv/bin/python -m src.cli test-stealth --count 10
+
+# Audit specific count or test target
+.venv/bin/python -m src.cli test-stealth --count 5 --target https://www.google.com
+```
+
+---
+
+### `compare-platforms`: Real-Time Cross-Platform Price Parity
+
+Performs live multi-channel guest checkout price comparison for Villa del Sol across **Airbnb**, **VRBO**, **Booking.com**, and **Kivoya Direct**:
+- Identifies syndication markups, fee discrepancies, and rate divergence.
+- Leases isolated proxy contexts concurrently from the 10-worker pool.
+- Automatically falls back to verified Step 3 price cache (Airbnb) or Kivoya PMS rate projections (Booking/VRBO) on transient platform errors.
+
+#### Usage:
+```bash
+# Run comparison across first 12 open intervals
+.venv/bin/python -m src.cli compare-platforms --quick --limit 12
+
+# Run full 12-month comparison
+.venv/bin/python -m src.cli compare-platforms
+
+# Filter by date range
+.venv/bin/python -m src.cli compare-platforms --start-date 2026-10-01 --end-date 2026-12-31
 ```
 
 ---
@@ -81,15 +134,16 @@ Re-renders the interactive HTML dashboard (`docs/index.html`) using the latest p
 
 ### `evaluate-comps`: Quality Scoring & Desirability Ratios
 
-Runs the 5-factor evaluation rubric across all competitor listings in `config/comps_registry.json`:
-- **Outdoor Resort Yard & Pool (30%)**
-- **Bedrooms, Bathrooms & Capacity (25%)**
-- **Interior Luxury & Games (20%)**
-- **Location & Corridor (15%)**
-- **Reputation & Review Quality (10%)**
+Runs the 6-factor evaluation rubric across all competitor listings in `config/comps_registry.json`:
+- **Resort Amenities & Outdoor Living (25%)**: Private heated pool, spa, sports courts, outdoor kitchen.
+- **Bedrooms, Bathrooms & Capacity (20%)**: King suites, bedroom count, ensuite bath ratio, 16+ guest scale.
+- **Market Asset Valuation & Scale (15%)**: Property market valuation benchmarked against Villa del Sol ($2.0M baseline), lot acreage (0.75 acre), and living square footage (5,400 sq ft).
+- **Interior Luxury, Finishes & Entertainment (15%)**: Chef's kitchen, custom game rooms, movie theater, luxury appointments.
+- **Location & Corridor (15%)**: Proximity to Tempe/South Scottsdale corridor vs peripheral East Valley.
+- **Reputation & Review Quality (10%)**: Star rating (4.70★ minimum threshold), review volume, Guest Favorite / Superhost status.
 
 Calculates:
-- `composite_score` (0–100) benchmarked against Villa del Sol's score (88.0).
+- `composite_score` (0–100) benchmarked against Villa del Sol's baseline score (88.0).
 - `desirability_ratio` ($\text{Score} / 88.0$).
 - `is_valid_comp` (`true` or `false`) and `validity_reason`.
 
@@ -134,7 +188,7 @@ Enriches competitor listings with verified data extracted from Apollo client def
 
 ### `add-comp`: Add, Evaluate, and Register Competitor Listing
 
-Scrapes listing profile via NordVPN proxy, scores quality against Villa del Sol using the 5-factor luxury rubric, registers into `config/comps_registry.json` and `config/listing_specs.json`, and optionally triggers interval price scraping.
+Scrapes listing profile via NordVPN proxy, scores quality against Villa del Sol using the 6-factor luxury rubric, registers into `config/comps_registry.json` and `config/listing_specs.json`, and optionally triggers interval price scraping.
 
 #### Usage:
 ```bash
@@ -239,6 +293,70 @@ Diffs consecutive daily pricing snapshots (`pricing_data_YYYY-MM-DD.json`) to de
 
 ---
 
+### `audit-comps`: Comp Portfolio Quality & Rubric Audit
+
+Audits the active competitor portfolio in `config/comps_registry.json` against Villa del Sol's 6-factor luxury rubric:
+- Inspects room counts, bathroom ratios, on-site owner presence, capacity caps (<12 guests), and low review ratings (<4.70★).
+- Identifies invalid or low-quality comps and prints a structured proposal.
+- Passing `--auto-disqualify` moves proposed comps directly to the disqualified section.
+
+#### Usage:
+```bash
+# Audit active comps and display findings
+.venv/bin/python -m src.cli audit-comps
+
+# Audit and automatically move failing comps to disqualified
+.venv/bin/python -m src.cli audit-comps --auto-disqualify
+```
+
+---
+
+### `disqualify-comp` & `requalify-comp`: Competitor Status Lifecycle
+
+Manages the active vs. disqualified status of competitor listings:
+- **`disqualify-comp`**: Moves listing to the `disqualified` dictionary in `config/comps_registry.json`, purges its price cache and sales ledger records, and refreshes `docs/index.html`.
+- **`requalify-comp`**: Restores listing from `disqualified` back to active (`tier_a` or `tier_b`), re-runs evaluation, and refreshes `docs/index.html`.
+
+#### Usage:
+```bash
+# Disqualify comp with custom reason
+.venv/bin/python -m src.cli disqualify-comp 12345678 --reason "Capacity cap 10 guests; owner on site"
+
+# Restore disqualified comp back to Tier B
+.venv/bin/python -m src.cli requalify-comp 12345678 --tier tier_b
+```
+
+---
+
+### `discover-comps`: Market Expansion Discovery
+
+Discovers high-potential luxury comps matching Villa del Sol's profile (5+ bedrooms, 12+ guests, pool, 4.85+ rating) across Phoenix East Valley (Tempe, Chandler, Ahwatukee, South Scottsdale):
+- Pulls live search cards via NordVPN proxy.
+- Filters out already registered listings and ranks candidates by feature similarity.
+
+#### Usage:
+```bash
+# Discover candidates in Chandler/Tempe corridor
+.venv/bin/python -m src.cli discover-comps --location "Chandler, AZ" --limit 15
+
+# Discover large direct comps (16+ guests, 6+ bedrooms)
+.venv/bin/python -m src.cli discover-comps --min-bedrooms 6 --min-guests 16
+```
+
+---
+
+### `snapshot-rates`: Kivoya Nightly Rate Snapshot Ledger
+
+Records an instantaneous timestamped snapshot of current Kivoya / Streamline VRS published base nightly rates across all seasons into SQLite (`data/reservations.db: rate_snapshots`):
+- Provides historical auditability when Kivoya updates rates.
+
+#### Usage:
+```bash
+.venv/bin/python -m src.cli snapshot-rates
+```
+
+---
+
 ## 3. Standard Operational Workflows (Recipes)
 
 ### Workflow 1: Complete Comp Feature Update & Scoring Pipeline
@@ -294,6 +412,20 @@ Run this whenever historical snapshots have accumulated or after daily market sc
 
 # Step 2: Refresh static HTML dashboard with updated 2D strategy matrix & bookings feed
 .venv/bin/python -m src.cli generate-html --push
+```
+
+### Workflow 7: Ratings & Reviews Synchronization & Analysis
+Run this to update cross-platform guest sentiment or review recent guest feedback:
+```bash
+# Step 1: Sync ratings across Airbnb, VRBO, Booking.com, and Kivoya Direct
+.venv/bin/python -m src.cli sync-ratings
+
+# Step 2: View terminal ratings overview or mobile push format
+.venv/bin/python -m src.cli show-ratings
+.venv/bin/python -m src.cli show-ratings --mobile
+
+# Step 3: Print operational review triage report with severity highlights
+.venv/bin/python -m src.cli audit-reviews
 ```
 
 ---

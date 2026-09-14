@@ -35,7 +35,7 @@ When a user requests adding a new listing (by providing an Airbnb URL or listing
 2. **What Happens Under the Hood**:
    - **Check Existing**: Checks if the listing is already in `config/comps_registry.json`. If it already exists, alerts the host and avoids redundant profile scraping.
    - **Profile Deep Scrape**: Launches Playwright with the NordVPN proxy to scrape full metadata: title, bedrooms, beds, bathrooms, guest capacity, photo, and all 70+ amenities into `data/enriched_comps/{listing_id}.json`.
-   - **Quality Evaluation**: Runs `CompEvaluator` using the 5-factor luxury rubric (Outdoor 30%, Capacity 25%, Interior 20%, Location 15%, Reputation 10%) to compute category scores, composite score, and desirability ratio (e.g. 1.05x).
+   - **Quality Evaluation**: Runs `CompEvaluator` using the 6-factor luxury rubric (Resort Amenities 25%, Capacity 20%, Market Asset Valuation vs. $2.0M baseline 15%, Interior Luxury 15%, Location 15%, Reputation 10%) to compute category scores, composite score, and desirability ratio (e.g. 1.05x).
    - **Catalog Registration**: Saves the record to `config/comps_registry.json` and updates `config/listing_specs.json`.
    - **Interval Pricing Extraction**: Queries Airbnb with NordVPN proxy for each open Kivoya calendar interval, intercepting `StaysPdpSections` to capture live stay pricing (or flag as booked/unavailable).
    - **Dashboard Refresh**: Automatically regenerates `docs/index.html` so the new comp and its live prices appear immediately.

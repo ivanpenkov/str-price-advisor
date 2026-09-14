@@ -24,6 +24,20 @@ class KivoyaClient:
     BASE_URL = "https://www.kivoya.com/wp-admin/admin-ajax.php"
     DEFAULT_UNIT_ID = 503802
 
+    # Class-level in-memory cache to prevent redundant HTTP requests within the same process
+    _cache_seasonal_rates: Optional[List[Dict[str, Any]]] = None
+    _cache_blocked_periods: Optional[List[Dict[str, Any]]] = None
+    _cache_daily_availability: Optional[Dict[date, Dict[str, Any]]] = None
+    _cache_calendar_open_end_date: Optional[date] = None
+
+    @classmethod
+    def clear_cache(cls):
+        """Clear all in-memory caches."""
+        cls._cache_seasonal_rates = None
+        cls._cache_blocked_periods = None
+        cls._cache_daily_availability = None
+        cls._cache_calendar_open_end_date = None
+
     def __init__(self, unit_id: int = DEFAULT_UNIT_ID, user_agent: Optional[str] = None):
         self.unit_id = unit_id
         self.user_agent = user_agent or (
@@ -59,7 +73,7 @@ class KivoyaClient:
             data = json.loads(body)
             return data.get("data", {})
 
-    def get_blocked_periods(self) -> List[Dict[str, Any]]:
+    def get_blocked_periods(self, force_refresh: bool = False) -> List[Dict[str, Any]]:
         """
         Fetch all blocked dates and reservations.
         Returns a list of dicts:
@@ -74,6 +88,9 @@ class KivoyaClient:
             ...
         ]
         """
+        if not force_refresh and KivoyaClient._cache_blocked_periods is not None:
+            return KivoyaClient._cache_blocked_periods
+
         raw_data = self._call_api(
             "GetPropertyAvailabilityCalendarRawData",
             {"unit_id": self.unit_id}
@@ -100,13 +117,18 @@ class KivoyaClient:
                     })
                 except ValueError:
                     continue
-        return sorted(parsed, key=lambda x: x["start_dt"])
+        sorted_blocked = sorted(parsed, key=lambda x: x["start_dt"])
+        KivoyaClient._cache_blocked_periods = sorted_blocked
+        return sorted_blocked
 
-    def get_daily_availability(self) -> Dict[date, Dict[str, Any]]:
+    def get_daily_availability(self, force_refresh: bool = False) -> Dict[date, Dict[str, Any]]:
         """
         Fetch daily availability directly from Kivoya Streamline API (GetPropertyAvailabilityRawData).
         Maps date -> {"available": bool, "change_over": str}
         """
+        if not force_refresh and KivoyaClient._cache_daily_availability is not None:
+            return KivoyaClient._cache_daily_availability
+
         raw_data = self._call_api(
             "GetPropertyAvailabilityRawData",
             {"unit_id": self.unit_id}
@@ -129,9 +151,10 @@ class KivoyaClient:
                     }
             except Exception:
                 pass
+        KivoyaClient._cache_daily_availability = result
         return result
 
-    def get_calendar_open_end_date(self) -> Optional[date]:
+    def get_calendar_open_end_date(self, force_refresh: bool = False) -> Optional[date]:
         """
         Detect the date until which the booking calendar is open in Kivoya / Streamline VRS.
         Normally the calendar is open until a given month and closed after that.
@@ -140,6 +163,9 @@ class KivoyaClient:
         2. Daily availability: last available date before calendar closure
         3. Local cache fallback in data/cache/calendar_cutoff.json
         """
+        if not force_refresh and KivoyaClient._cache_calendar_open_end_date is not None:
+            return KivoyaClient._cache_calendar_open_end_date
+
         cache_path = Path("data/cache/calendar_cutoff.json")
 
         try:
@@ -162,6 +188,7 @@ class KivoyaClient:
                     )
                 except Exception:
                     pass
+                KivoyaClient._cache_calendar_open_end_date = end_dt
                 return end_dt
         except Exception:
             pass
@@ -171,11 +198,14 @@ class KivoyaClient:
             try:
                 data = json.loads(cache_path.read_text(encoding="utf-8"))
                 if data.get("open_end_date"):
-                    return datetime.strptime(data["open_end_date"], "%Y-%m-%d").date()
+                    cached_dt = datetime.strptime(data["open_end_date"], "%Y-%m-%d").date()
+                    KivoyaClient._cache_calendar_open_end_date = cached_dt
+                    return cached_dt
             except Exception:
                 pass
 
         # Safe fallback: calendar is open through end of May 2027
+        KivoyaClient._cache_calendar_open_end_date = date(2027, 5, 31)
         return date(2027, 5, 31)
 
     def get_calendar_closed_start_date(self) -> Optional[date]:
@@ -217,7 +247,7 @@ class KivoyaClient:
             return {day_map[s]}
         return set()
 
-    def get_seasonal_rates(self) -> List[Dict[str, Any]]:
+    def get_seasonal_rates(self, force_refresh: bool = False) -> List[Dict[str, Any]]:
         """
         Fetch all configured seasonal rates.
         Returns a list of rate periods:
@@ -238,6 +268,9 @@ class KivoyaClient:
             ...
         ]
         """
+        if not force_refresh and KivoyaClient._cache_seasonal_rates is not None:
+            return KivoyaClient._cache_seasonal_rates
+
         cache_path = Path("data/cache/kivoya_seasonal_rates.json")
         rates = []
         try:
@@ -264,7 +297,9 @@ class KivoyaClient:
                     r["second_days"] = set(r.get("second_days") or [])
                     reconstituted.append(r)
                 if reconstituted:
-                    return sorted(reconstituted, key=lambda x: x["begin_dt"])
+                    sorted_reconstituted = sorted(reconstituted, key=lambda x: x["begin_dt"])
+                    KivoyaClient._cache_seasonal_rates = sorted_reconstituted
+                    return sorted_reconstituted
             except Exception:
                 pass
 
@@ -324,6 +359,7 @@ class KivoyaClient:
             except Exception:
                 pass
 
+        KivoyaClient._cache_seasonal_rates = sorted_rates
         return sorted_rates
 
     def get_rate_for_date(self, target_date: date, rates: Optional[List[Dict[str, Any]]] = None) -> float:
@@ -342,7 +378,25 @@ class KivoyaClient:
                     return r["first_price"]
                 return r["nightly_rate"]
 
-        # Default fallback if outside defined periods
+        # Check if rate exists in SQLite rate snapshots (for backfilled historical dates)
+        try:
+            import sqlite3
+            db_file = Path("data/reservations.db")
+            if db_file.exists():
+                with sqlite3.connect(str(db_file)) as conn:
+                    cursor = conn.cursor()
+                    cursor.execute("""
+                        SELECT nightly_rate FROM property_rate_snapshots
+                        WHERE calendar_date = ?
+                        ORDER BY snapshot_date DESC LIMIT 1
+                    """, (target_date.strftime("%Y-%m-%d"),))
+                    row = cursor.fetchone()
+                    if row and row[0] is not None:
+                        return float(row[0])
+        except Exception:
+            pass
+
+        # Default fallback if outside defined periods and not in snapshots
         return 599.0
 
     def get_pre_reservation_quote(

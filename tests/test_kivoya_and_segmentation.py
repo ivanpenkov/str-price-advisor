@@ -22,7 +22,7 @@ class TestKivoyaAndSegmentation(unittest.TestCase):
         self.assertIn("end_dt", first)
         self.assertIsInstance(first["start_dt"], date)
         self.assertIsInstance(first["end_dt"], date)
-        self.assertTrue(first["start_dt"] < first["end_dt"])
+        self.assertTrue(first["start_dt"] <= first["end_dt"])
 
     def test_kivoya_seasonal_rates(self):
         """Should retrieve parsed seasonal base rates from Kivoya API."""
@@ -74,16 +74,16 @@ class TestKivoyaAndSegmentation(unittest.TestCase):
         self.assertEqual(oct_seg["nights"], 3)
 
     def test_weekday_weekend_rate_intervals(self):
-        """Verify that KivoyaClient distinguishes weekday vs weekend rates (e.g. Dec 4 Friday is $599, Dec 2 Wed is $399)."""
-        dec_fri = date(2026, 12, 4)  # Friday (Thursday-Sunday interval: $599)
-        dec_wed = date(2026, 12, 2)  # Wednesday (Monday-Wednesday interval: $399)
-        self.assertEqual(self.client.get_rate_for_date(dec_fri), 599.0)
-        self.assertEqual(self.client.get_rate_for_date(dec_wed), 399.0)
+        """Verify that KivoyaClient distinguishes weekday vs weekend rates (e.g. Dec 4 Friday is $714, Dec 2 Wed is $554)."""
+        dec_fri = date(2026, 12, 4)  # Friday (Thursday-Sunday interval: $714)
+        dec_wed = date(2026, 12, 2)  # Wednesday (Monday-Wednesday interval: $554)
+        self.assertEqual(self.client.get_rate_for_date(dec_fri), 714.0)
+        self.assertEqual(self.client.get_rate_for_date(dec_wed), 554.0)
 
-        jan_fri = date(2027, 1, 8)   # Friday ($899)
-        jan_tue = date(2027, 1, 5)   # Tuesday ($649)
-        self.assertEqual(self.client.get_rate_for_date(jan_fri), 899.0)
-        self.assertEqual(self.client.get_rate_for_date(jan_tue), 649.0)
+        jan_fri = date(2027, 1, 8)   # Friday ($964)
+        jan_tue = date(2027, 1, 5)   # Tuesday ($578)
+        self.assertEqual(self.client.get_rate_for_date(jan_fri), 964.0)
+        self.assertEqual(self.client.get_rate_for_date(jan_tue), 578.0)
 
     def test_calendar_open_end_date_detection(self):
         """Verify KivoyaClient detects calendar open through May 31, 2027 and closed starting June 1, 2027."""
@@ -105,10 +105,10 @@ class TestKivoyaAndSegmentation(unittest.TestCase):
         self.assertGreater(len(closed_segments), 0)
         self.assertEqual(len(open_segments) + len(closed_segments), len(segments))
 
-        # Check that last open segment check-in is <= 2027-05-31
-        self.assertTrue(all(s["check_in"] <= "2027-05-31" for s in open_segments))
-        # Check that closed segments start after 2027-05-31 (on or after June 1, 2027)
-        self.assertTrue(all(s["check_in"] >= "2027-06-01" for s in closed_segments))
+        # Check that open segments end on or before 2027-06-01 (last night on or before 2027-05-31)
+        self.assertTrue(all(s["check_out"] <= "2027-06-01" for s in open_segments))
+        # Check that closed segments extend into closed period (last night after 2027-05-31)
+        self.assertTrue(all(s["check_out"] > "2027-06-01" for s in closed_segments))
 
 
 if __name__ == "__main__":

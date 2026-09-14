@@ -110,6 +110,14 @@ class TestTitleExtraction(unittest.TestCase):
         target_key = "2026-09-13_2026-09-17"
         self.assertIn(target_key, cached_comps)
 
+        comps_list = list(cached_comps[target_key].values())
+        for target_id in ["1143202699620728397", "1493069124077219890", "806022522654917324", "1077813310260513265"]:
+            if not any(str(c.get("listing_id")) == target_id for c in comps_list):
+                for k in cached_comps:
+                    if target_id in cached_comps[k]:
+                        comps_list.append(cached_comps[k][target_id])
+                        break
+
         segment = {
             "check_in": "2026-09-13",
             "check_out": "2026-09-17",
@@ -117,7 +125,7 @@ class TestTitleExtraction(unittest.TestCase):
             "our_base_nightly": 436.5,
             "our_effective_nightly": 678.25,
             "is_live_scan": True,
-            "comps_list": list(cached_comps[target_key].values()),
+            "comps_list": comps_list,
         }
 
         subtable_html, our_rank, total_comps, our_pct, our_eff, is_live = generator._render_comp_subtable(

@@ -1,0 +1,57 @@
+# Fallback Intervals Catalog for Closed-Calendar Periods
+# Applied when Kivoya Streamline PMS calendar is closed (e.g. beyond May 31, 2027)
+
+monthly_defaults:
+  summer: # June, July, August
+    months: [6, 7, 8]
+    base_midweek: 389.0
+    base_weekend: 449.0
+    min_nights: 2
+  fall_shoulder: # September
+    months: [9]
+    base_midweek: 399.0
+    base_weekend: 549.0
+    min_nights: 3
+  winter_spring: # October through May
+    months: [1, 2, 3, 4, 5, 10, 11, 12]
+    base_midweek: 599.0
+    base_weekend: 749.0
+    min_nights: 3
+
+holidays:
+  - name: "4th of July"
+    month: 7
+    start_day: 1
+    end_day: 5
+    floor_rate: 699.0
+    min_nights: 3
+  - name: "Labor Day"
+    floating: "first_monday_september"
+    floor_rate: 499.0
+    min_nights: 3
+  - name: "Columbus Day"
+    floating: "second_monday_october"
+    floor_rate: 499.0
+    min_nights: 3
+  - name: "Thanksgiving"
+    floating: "fourth_thursday_november"
+    floor_rate: 499.0
+    min_nights: 3
+  - name: "Christmas & New Year"
+    month: 12
+    start_day: 24
+    end_month: 1
+    end_day: 2
+    floor_rate: 499.0
+    min_nights: 3
+  - name: "Holy Week"
+    floating: "easter_computus"
+    floor_midweek: 699.0
+    floor_weekend: 1049.0
+    floor_rate: 699.0
+    min_nights: 3
+  - name: "Memorial Day"
+    floating: "last_monday_may"
+    floor_rate: 699.0
+    min_nights: 3
+

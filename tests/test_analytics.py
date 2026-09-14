@@ -117,7 +117,124 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         result = self.engine.evaluate_segment(segment, comp_rates)
         self.assertEqual(result["n_comps"], 2)
         self.assertEqual(result["sample_significance"], "VERY_LOW")
-        self.assertIn("High compression", result["action_summary"])
+
+    def test_evaluate_segment_strictly_ignores_unregistered_comps(self):
+        """Curated registry should strictly discard unvetted organic search listings."""
+        segment = {
+            "check_in": "2026-11-20",
+            "check_out": "2026-11-23",
+            "nights": 3,
+            "lead_time_days": 75,
+            "our_base_nightly": 800.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 2900.0,
+            "our_effective_nightly": 966.67,
+        }
+        comp_metadata = [
+            {
+                "listing_id": "1077813310260513265",  # Registered comp (Desert Diamond)
+                "name": "Desert Diamond",
+                "effective_nightly": 1250.0,
+            },
+            {
+                "listing_id": "999999999999999",  # Unregistered organic search hit
+                "name": "Random Organic House",
+                "effective_nightly": 400.0,
+            },
+        ]
+        eval_res = self.engine.evaluate_segment(segment, [1250.0, 400.0], comp_metadata=comp_metadata)
+        # Unregistered listing must be completely excluded from enriched comps list
+        comp_ids = [str(c["listing_id"]) for c in eval_res["comps_list"]]
+        self.assertIn("1077813310260513265", comp_ids)
+        self.assertNotIn("999999999999999", comp_ids)
+        # Only the 1 registered comp is evaluated
+        self.assertEqual(eval_res["n_comps_adj"], 1)
+
+    def test_evaluate_segment_strictly_ignores_disqualified_comps(self):
+        """Disqualified comps must not skew raw percentiles, target values, or comp counts."""
+        segment = {
+            "check_in": "2026-11-20",
+            "check_out": "2026-11-23",
+            "nights": 3,
+            "lead_time_days": 75,
+            "our_base_nightly": 800.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 2900.0,
+            "our_effective_nightly": 966.67,
+        }
+        self.engine.comp_registry["valid_comp_1"] = {
+            "listing_id": "valid_comp_1",
+            "name": "Valid Luxury Estate",
+            "is_valid_comp": True,
+            "desirability_ratio": 1.0,
+        }
+        self.engine.comp_registry["disq_comp_1"] = {
+            "listing_id": "disq_comp_1",
+            "name": "Disqualified Listing",
+            "is_valid_comp": False,
+            "desirability_ratio": 0.5,
+            "validity_reason": "Low rating",
+        }
+        comp_metadata = [
+            {"listing_id": "valid_comp_1", "effective_nightly": 800.0},
+            {"listing_id": "disq_comp_1", "effective_nightly": 2500.0},
+        ]
+        rates = [800.0, 2500.0]
+        eval_res = self.engine.evaluate_segment(segment, rates, comp_metadata=comp_metadata)
+
+        # Raw counts and percentiles must reflect only the valid comp
+        self.assertEqual(eval_res["n_comps"], 1)
+        self.assertEqual(eval_res["comps_count"], 1)
+        self.assertEqual(eval_res["comps_raw_count"], 1)
+        self.assertEqual(eval_res["comp_target_eff"], 800.0)
+        self.assertEqual(eval_res["comp_p50_eff"], 800.0)
+        self.assertEqual(eval_res["comp_min_eff"], 800.0)
+        self.assertEqual(eval_res["comp_max_eff"], 800.0)
+
+        # Disqualified comp is retained in comps_list for UI with is_valid_comp=False
+        comps_by_id = {c["listing_id"]: c for c in eval_res["comps_list"]}
+        self.assertTrue(comps_by_id["valid_comp_1"]["is_valid_comp"])
+        self.assertFalse(comps_by_id["disq_comp_1"]["is_valid_comp"])
+
+    def test_evaluate_segment_market_compression_boost(self):
+        """When market compression triggers (scarcity or velocity), target_pct should be boosted by +15% (capped at 90%)."""
+        class MockSalesTracker:
+            def get_target_percentile(self, lead_days, segment_type="weekend"):
+                return 65.0
+
+            def load_registered_comps(self):
+                return {f"comp_{i}": {} for i in range(100)}
+
+            def detect_market_compression(self, check_in, check_out=None, total_cohort_count=None, current_available_count=None):
+                is_comp = bool(current_available_count is not None and total_cohort_count and (current_available_count / total_cohort_count) < 0.20)
+                return {
+                    "is_compressed": is_comp,
+                    "available_count": current_available_count,
+                    "total_cohort_count": total_cohort_count,
+                    "available_ratio": (current_available_count / total_cohort_count) if total_cohort_count else 1.0,
+                    "surge_multiplier": 1.30 if is_comp else 1.0,
+                    "reason": "High scarcity compression" if is_comp else "Normal availability",
+                }
+
+        self.engine.sales_tracker = MockSalesTracker()
+        segment = {
+            "check_in": "2026-11-01",
+            "check_out": "2026-11-04",
+            "nights": 3,
+            "lead_time_days": 45,
+            "segment_type": "weekend",
+            "our_base_nightly": 900.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 3200.0,
+            "our_effective_nightly": 1066.67,
+        }
+        # 15 comps available out of 100 registered comps -> 15% available (<20%) -> High Compression!
+        rates = [700.0 + i * 20 for i in range(15)]
+        eval_res = self.engine.evaluate_segment(segment, rates)
+        self.assertTrue(eval_res["is_compression_surge"])
+        self.assertEqual(eval_res["target_percentile"], 80.0)
+        self.assertIn("compression_details", eval_res)
+        self.assertIn("High compression", eval_res["action_summary"])
 
 
 if __name__ == "__main__":

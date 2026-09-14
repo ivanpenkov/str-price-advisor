@@ -226,6 +226,25 @@ class TestAirbnbParsing(unittest.TestCase):
         self.assertEqual(parsed["bedrooms"], 8)
         self.assertEqual(parsed["beds"], 12)
 
+    def test_get_search_cursor_encoding(self):
+        """Verify get_search_cursor produces valid Base64 encoded JSON tokens."""
+        import base64
+        import json
+
+        # Page 2 cursor (offset 18)
+        cursor_18 = AirbnbCollector.get_search_cursor(18)
+        decoded_18 = json.loads(base64.b64decode(cursor_18.encode("utf-8")).decode("utf-8"))
+        self.assertEqual(decoded_18["items_offset"], 18)
+        self.assertEqual(decoded_18["section_offset"], 0)
+        self.assertEqual(decoded_18["version"], 1)
+
+        # Page 3 cursor (offset 36)
+        cursor_36 = AirbnbCollector.get_search_cursor(36)
+        decoded_36 = json.loads(base64.b64decode(cursor_36.encode("utf-8")).decode("utf-8"))
+        self.assertEqual(decoded_36["items_offset"], 36)
+        self.assertEqual(decoded_36["section_offset"], 0)
+        self.assertEqual(decoded_36["version"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

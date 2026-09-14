@@ -5,6 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-09-12
+
+### Added
+- **10-Worker Multi-IP NordVPN Stealth Fleet (`src/stealth_connection.py`)**:
+  - Engineered dedicated `StealthConnectionManager` orchestrating up to 10 parallel local `pproxy` SOCKS5 forwarder bridges.
+  - Strictly routes through out-of-state feeder tourist hubs (Los Angeles, San Francisco, Dallas, Chicago, Atlanta) with zero Phoenix IP leakage.
+  - Implemented pre-flight Google health probing (`https://www.google.com`, ~270ms latency) and dynamic candidate hot-swapping across a 40+ candidate node pool on packet loss or edge authentication desync.
+  - Added FIFO Playwright worker context queue (`asyncio.Queue` / `@asynccontextmanager lease_worker()`) eliminating socket leaks, process clutter, and port collisions (`get_free_port()`).
+  - Added standalone diagnostic CLI command: `python -m src.cli test-stealth [--count N]`.
+
+- **Competitor Sales Absorption & Velocity Engine (`src/competitor_sales_tracker.py`)**:
+  - Automated daily snapshot diffing engine tracking competitor bookings across stay intervals.
+  - Enforced direct calendar verification (`StaysPdpSections`) and snapshot reconciliation to eliminate false sales from search ranking fluctuations.
+  - Constructed **2D Empirical Strategy Matrix** (4 Lead Horizons $\times$ Weekend/Midweek) with Bayesian shrinkage ($k=3$).
+  - Built Monthly Advance Booking Windows table and absorption velocity KPIs.
+  - Added SQLite transaction ledger (`data/reservations.db: competitor_sales`) and CLI command `python -m src.cli track-competitor-sales`.
+
+- **6-Factor Luxury Valuation & Quality Rubric (`src/comp_evaluator.py`, `src/comp_curator.py`)**:
+  - Upgraded comp evaluation from 5-factor to a rigorous **6-factor luxury rubric**:
+    1. Lot Acreage & Privacy (15%)
+    2. Living Sq Footage & Scale (15%)
+    3. Bedroom / King Suite Composition (20%)
+    4. Bath Ratio & Ensuite Convenience (15%)
+    5. Resort Amenities & Outdoor Living (25%)
+    6. Rating, Reviews & Superhost Status (10%)
+  - Integrated market asset valuation benchmarking comparing competitor properties against Villa del Sol's $2.0M baseline.
+  - Added CLI command `python -m src.cli evaluate-comps`.
+
+- **Cross-Platform Real-Time Price Parity Comparator (`src/platform_comparator.py`)**:
+  - Concurrent multi-interval and multi-channel scraping across Airbnb, VRBO, Booking.com, and Kivoya Direct using leased proxy contexts.
+  - Multi-attempt context rotation across distinct cities on transient network or `ERR_EMPTY_RESPONSE` errors.
+  - Automatic fallback to verified Step 3 price cache (Airbnb) or Kivoya PMS rate feed projections (Booking.com / VRBO) with fee and tax normalization.
+  - Added CLI command `python -m src.cli compare-platforms` and integration into `run --weekly --compare-platforms`.
+
+- **Two-Stage Corridor Search & 3-Attempt Transient Retry (`src/airbnb_collector.py`)**:
+  - Implemented Stage 1 multi-page cursor-based corridor pagination (`get_search_cursor()`) across 4 regional markets.
+  - Implemented Stage 2 multi-IP direct comp fallback guaranteeing 100% comp accounting for all listings in `config/comps_registry.json`.
+  - Added 3-attempt transient navigation retry with polite `AIRBNB_RETRY_DELAY=1.0s` backoff, warning suppression until attempt 3, and cache poisoning prevention.
+
+- **Expanded 10-Tab Web Dashboard (`src/html_generator.py`)**:
+  - Expanded dashboard navigation to 10 comprehensive tabs:
+    1. 📊 Pricing Recommendations
+    2. 🌐 Channel Comparison
+    3. ⚙️ Streamline PMS Diagnostics
+    4. 🏡 Curated Luxury Comps Registry (109 Comps)
+    5. 🎯 Comps Sales & Absorption Matrix
+    6. 📅 Rolling Availability Calendar
+    7. 📑 Reservations Ledger
+    8. 📈 Cumulative Revenue Pacing
+    9. 📐 Methodology & PMS Guide
+    10. 🛠️ Live Data & Debug
+
 ---
 
 ## [1.0.0] - 2026-09-06

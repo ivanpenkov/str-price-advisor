@@ -199,6 +199,67 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertEqual(res["pool_specs"]["heating"], "fee")
         self.assertIn("fee disclosed", res["pool_specs"]["heating_source"].lower())
 
+    def test_comp_evaluator_free_heated_pool_patterns(self):
+        """Verify various explicit free heated pool phrases are detected as heating='free'."""
+        evaluator = CompEvaluator()
+
+        # Hyphenated Free-heated pool
+        res = evaluator.extract_pool_specs(
+            all_text="Backyard Paradise – Free-heated pool, oversized hot tub, putting green.",
+            amenities=["Pool", "Hot tub"],
+        )
+        self.assertEqual(res["heating"], "free")
+        self.assertIn("free", res["heating_source"].lower())
+
+        # Pool heat is always included
+        res = evaluator.extract_pool_specs(
+            all_text="Pool heat is always included in your rate, no surprises.",
+            amenities=["Pool"],
+        )
+        self.assertEqual(res["heating"], "free")
+
+        # Heated, sparkling pool (included)
+        res = evaluator.extract_pool_specs(
+            all_text="Backyard with heated, sparkling pool (included) + hot tub.",
+            amenities=["Pool", "Hot tub"],
+        )
+        self.assertEqual(res["heating"], "free")
+
+        # Title FREE heated POOL
+        res = evaluator.extract_pool_specs(
+            all_text="Lakefront|FREE heated POOL|SPA|Paddleboat|Ocotillo Stunning 5BR house.",
+            amenities=["Pool", "Hot tub"],
+        )
+        self.assertEqual(res["heating"], "free")
+
+    def test_comp_evaluator_heated_and_fenced_pool(self):
+        """Verify 'Heated, Fenced Pool' or 'heated and fenced pool' is recognized as heated rather than unheated."""
+        evaluator = CompEvaluator()
+        res = evaluator.extract_pool_specs(
+            all_text="Clean Mid-Mod Charmer - Heated, Fenced Pool! Features a heated and fenced pool in the backyard.",
+            amenities=["Pool", "Wifi", "BBQ grill", "Air conditioning", "Kitchen", "Patio", "TV", "Washer", "Dryer", "Free parking"],
+        )
+        self.assertEqual(res["heating"], "standard_heated")
+        self.assertIn("heated pool declared", res["heating_source"].lower())
+
+    def test_comp_evaluator_unheated_pool_negation(self):
+        """Verify listings disclaiming pool heating evaluate to 'unheated'."""
+        evaluator = CompEvaluator()
+        disclaimers = [
+            "Beautiful private swimming pool. Note: Not a heated pool.",
+            "Backyard oasis with private swimming pool (no heated pool).",
+            "Private pool in backyard. Swimming pool is not heated.",
+            "Private swimming pool in backyard. Swimming pool cannot be heated.",
+            "Private swimming pool in backyard. Swimming pool never heated.",
+            "Enjoy the private swimming pool! Heated patio also provided.",
+        ]
+        for text in disclaimers:
+            res = evaluator.extract_pool_specs(
+                all_text=text,
+                amenities=["Pool", "Wifi", "BBQ grill", "Air conditioning", "Kitchen", "Patio", "TV", "Washer", "Dryer", "Free parking"],
+            )
+            self.assertEqual(res["heating"], "unheated", f"Expected unheated for: {text}")
+
 
 
     def test_adjustment_ratio_math(self):
@@ -263,8 +324,8 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
 
         eval_res = self.engine.evaluate_segment(segment, raw_rates, comp_metadata=comp_metadata)
 
-        # Raw count includes all 3 comps
-        self.assertEqual(eval_res["n_comps"], 3)
+        # Raw count strictly excludes disqualified comps per pricing rules
+        self.assertEqual(eval_res["n_comps"], 2)
         # Adjusted count only includes the 2 valid comps
         self.assertEqual(eval_res["n_comps_adj"], 2)
 
@@ -272,8 +333,8 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertAlmostEqual(eval_res["comp_p50_adj"], 1000.0, places=1)
         self.assertAlmostEqual(eval_res["comp_target_adj"], 1000.0, places=1)
 
-        # In raw rates: includes the $300 outlier/disqualified comp
-        self.assertLess(eval_res["comp_p50_eff"], 1000.0)
+        # In raw rates: reflects only the 2 valid comps [900, 1150]
+        self.assertGreater(eval_res["comp_p50_eff"], 900.0)
 
         # Verify action summary contains dollar amounts and no percentage string
         action_summary = eval_res.get("action_summary", "")

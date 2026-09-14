@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from playwright.async_api import async_playwright
 
-from src.proxy_manager import ProxyManager
+from src.stealth_connection import StealthConnectionManager
 from src.listing_enricher import ListingEnricher
 from src.comp_evaluator import CompEvaluator
 from src.segmentation import CalendarSegmenter
@@ -107,9 +107,16 @@ class CompManager:
                 disqualified.pop(cid, None)
 
         unique_comps = len(set(tier_a.keys()) | set(tier_b.keys()))
+        disq_count = len(disqualified)
         registry.setdefault("metadata", {})
         if registry["metadata"].get("total_comps") != unique_comps:
             registry["metadata"]["total_comps"] = unique_comps
+            modified = True
+        if registry["metadata"].get("valid_comps_count") != unique_comps:
+            registry["metadata"]["valid_comps_count"] = unique_comps
+            modified = True
+        if registry["metadata"].get("disqualified_comps_count") != disq_count:
+            registry["metadata"]["disqualified_comps_count"] = disq_count
             modified = True
 
         return registry, modified
@@ -416,6 +423,182 @@ class CompManager:
         print(f"✨ Comp {listing_id} completely removed, blacklisted, and dashboard refreshed.")
         return True
 
+    def disqualify_comp(
+        self,
+        identifier: str,
+        reason: str,
+        validity_details: Optional[Dict[str, Any]] = None,
+    ) -> bool:
+        """
+        Move a competitor listing to the 'disqualified' section of comps_registry.json,
+        purge its single-comp price cache, purge historical sales from SQLite, and refresh the dashboard.
+        """
+        listing_id = extract_listing_id(identifier)
+        print(f"\n⛔ [CompManager] Initiating disqualification for comp ID: {listing_id}")
+        logger.info(f"Disqualifying comp ID: {listing_id} (Reason: {reason})")
+
+        registry = self._load_registry()
+        found_tier = None
+        comp_record = None
+
+        for t in ("tier_a", "tier_b"):
+            if listing_id in registry.get(t, {}):
+                found_tier = t
+                comp_record = registry[t].pop(listing_id)
+                print(f"  ✓ Moved {listing_id} from {found_tier} to disqualified section")
+                break
+
+        if not comp_record and listing_id in registry.get("disqualified", {}):
+            comp_record = registry["disqualified"][listing_id]
+            found_tier = "disqualified"
+
+        if not comp_record:
+            specs = self._load_specs()
+            if listing_id in specs:
+                comp_record = dict(specs[listing_id])
+
+        if not comp_record:
+            print(f"⚠️ Listing ID {listing_id} not found in registry or specs.")
+            return False
+
+        # Update record with disqualification fields
+        comp_record["is_valid_comp"] = False
+        comp_record["validity_reason"] = reason
+        if validity_details:
+            comp_record["validity_details"] = validity_details
+        elif "validity_details" not in comp_record:
+            comp_record["validity_details"] = {
+                "is_valid_comp": False,
+                "status": "DISQUALIFIED",
+                "justification": reason,
+                "criteria_checklist": {
+                    "single_family_compound": "owner" not in reason.lower() and "two homes" not in reason.lower() and "apartment" not in reason.lower(),
+                    "private_swimming_pool": "pool" not in reason.lower(),
+                    "guest_capacity_12_plus": "capacity" not in reason.lower() and "guests max" not in reason.lower(),
+                    "guest_rating_benchmark": "rating" not in reason.lower(),
+                    "corridor_drive_radius": "corridor" not in reason.lower(),
+                },
+                "strengths": [],
+                "deficits": [reason],
+            }
+
+        disqualified = registry.setdefault("disqualified", {})
+        disqualified[listing_id] = comp_record
+
+        # Update metadata
+        registry.setdefault("metadata", {})
+        registry["metadata"]["last_updated"] = datetime.now().isoformat()
+        registry["metadata"]["total_comps"] = len(set(registry.get("tier_a", {}).keys()) | set(registry.get("tier_b", {}).keys()))
+        registry["metadata"]["valid_comps_count"] = registry["metadata"]["total_comps"]
+        registry["metadata"]["disqualified_comps_count"] = len(disqualified)
+        self._save_registry(registry)
+        print(f"  ✓ Saved to config/comps_registry.json (disqualified count: {len(disqualified)})")
+
+        # Update listing_specs.json with is_valid_comp: False
+        specs = self._load_specs()
+        if listing_id in specs:
+            specs[listing_id]["is_valid_comp"] = False
+            specs[listing_id]["validity_reason"] = reason
+            self._save_specs(specs)
+            print(f"  ✓ Updated listing specs in {self.SPECS_PATH}")
+
+        # Purge single-comp pricing cache
+        purged = 0
+        for cf in self.CACHE_DIR.glob(f"search_*_comp_{listing_id}.json"):
+            try:
+                cf.unlink()
+                purged += 1
+            except Exception:
+                pass
+        if purged > 0:
+            print(f"  ✓ Purged {purged} single-comp cached price files in {self.CACHE_DIR}")
+
+        # Purge from search_*.json in cache
+        scrubbed_cache_files = 0
+        for cache_file in self.CACHE_DIR.glob("search_*.json"):
+            try:
+                data = json.loads(cache_file.read_text(encoding="utf-8"))
+                if isinstance(data, list):
+                    filtered = [it for it in data if str(it.get("listing_id")) != listing_id]
+                    if len(filtered) != len(data):
+                        cache_file.write_text(json.dumps(filtered, indent=2), encoding="utf-8")
+                        scrubbed_cache_files += 1
+            except Exception:
+                pass
+        if scrubbed_cache_files > 0:
+            print(f"  ✓ Scrubbed {listing_id} from {scrubbed_cache_files} cached search sweeps in {self.CACHE_DIR}")
+
+        # Purge sales records from SQLite reservations.db
+        try:
+            from src.competitor_sales_tracker import CompetitorSalesTracker
+            tracker = CompetitorSalesTracker()
+            with tracker._get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM competitor_sales WHERE listing_id = ?", (listing_id,))
+                conn.commit()
+                if cursor.rowcount > 0:
+                    print(f"  ✓ Purged {cursor.rowcount} historical sales records for {listing_id} from competitor_sales")
+        except Exception as e:
+            logger.warning(f"Could not purge sales for {listing_id}: {e}")
+
+        # Regenerate dashboard
+        self._regenerate_dashboard()
+        print(f"✨ Comp {listing_id} successfully disqualified and dashboard updated.")
+        return True
+
+    def requalify_comp(self, identifier: str, target_tier: Optional[str] = None) -> bool:
+        """
+        Requalify a previously disqualified comp, moving it back to tier_a or tier_b and re-evaluating.
+        """
+        listing_id = extract_listing_id(identifier)
+        print(f"\n🔄 [CompManager] Initiating requalification for comp ID: {listing_id}")
+        logger.info(f"Requalifying comp ID: {listing_id}")
+
+        registry = self._load_registry()
+        disqualified = registry.get("disqualified", {})
+
+        if listing_id not in disqualified:
+            print(f"⚠️ Listing ID {listing_id} is not in the disqualified section.")
+            return False
+
+        comp_record = disqualified.pop(listing_id)
+        ev = self.evaluator.evaluate_comp(comp_record)
+        comp_record.update(ev)
+        comp_record["is_valid_comp"] = True
+        comp_record["validity_reason"] = f"Requalified comp in {comp_record.get('location', '')}."
+        if "validity_details" in comp_record:
+            comp_record["validity_details"]["is_valid_comp"] = True
+            comp_record["validity_details"]["status"] = "VALID"
+            comp_record["validity_details"]["justification"] = comp_record["validity_reason"]
+
+        if not target_tier:
+            br = comp_record.get("bedrooms") or 6
+            guests = comp_record.get("guests") or 16
+            try:
+                guests_num = int(str(guests).replace("+", "").strip())
+            except Exception:
+                guests_num = 16
+            target_tier = "tier_a" if (br >= 6 or guests_num >= 16) else "tier_b"
+
+        registry.setdefault(target_tier, {})[listing_id] = comp_record
+        registry.setdefault("metadata", {})
+        registry["metadata"]["last_updated"] = datetime.now().isoformat()
+        registry["metadata"]["total_comps"] = len(set(registry.get("tier_a", {}).keys()) | set(registry.get("tier_b", {}).keys()))
+        registry["metadata"]["valid_comps_count"] = registry["metadata"]["total_comps"]
+        registry["metadata"]["disqualified_comps_count"] = len(disqualified)
+        self._save_registry(registry)
+        print(f"  ✓ Moved {listing_id} to {target_tier} in {self.REGISTRY_PATH}")
+
+        specs = self._load_specs()
+        if listing_id in specs:
+            specs[listing_id]["is_valid_comp"] = True
+            specs[listing_id]["validity_reason"] = comp_record["validity_reason"]
+            self._save_specs(specs)
+
+        self._regenerate_dashboard()
+        print(f"✨ Comp {listing_id} successfully requalified and dashboard updated.")
+        return True
+
     @staticmethod
     def parse_stays_pdp_sections(data: Dict[str, Any]) -> Tuple[Optional[float], Optional[str], bool, Optional[str]]:
         """
@@ -505,11 +688,16 @@ class CompManager:
         if limit:
             segments = segments[:limit]
 
+        if not segments:
+            print("  ℹ️ No target intervals found for scanning.")
+            return []
+
         print(f"  📅 Target intervals to scan: {len(segments)}")
 
         results: List[Dict[str, Any]] = []
-        proxy_mgr = ProxyManager(required=True)
-        proxy_cfg = await proxy_mgr.start()
+        proxy_mgr = StealthConnectionManager(required=True)
+        max_workers = min(len(segments), proxy_mgr.max_workers)
+        proxy_configs = await proxy_mgr.start_pool(num_workers=max_workers)
 
         launch_kwargs = {
             "headless": True,
@@ -518,118 +706,181 @@ class CompManager:
                 "--no-sandbox",
             ],
         }
-        if proxy_cfg:
-            launch_kwargs["proxy"] = proxy_cfg
 
         # Cap adults at 16 (Airbnb search max) to prevent invalid query parameters
         accommodates = min(int(comp_meta.get("accommodates") or comp_meta.get("beds") or 10), 16)
 
-        async with async_playwright() as p:
+        try:
+            p = await async_playwright().start()
             browser = await p.chromium.launch(**launch_kwargs)
-            context = await browser.new_context(
-                viewport={"width": 1366, "height": 850},
-                user_agent=(
-                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-                ),
-            )
-            page = await context.new_page()
+            contexts = []
+            worker_queue = asyncio.Queue()
+            if proxy_configs:
+                for cfg in proxy_configs:
+                    proxy_arg = {"server": cfg["server"]} if isinstance(cfg, dict) and "server" in cfg else cfg
+                    ctx = await browser.new_context(
+                        viewport={"width": 1366, "height": 850},
+                        user_agent=(
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                        ),
+                        proxy=proxy_arg,
+                    )
+                    contexts.append(ctx)
+                    worker_queue.put_nowait(ctx)
+            else:
+                ctx = await browser.new_context(
+                    viewport={"width": 1366, "height": 850},
+                    user_agent=(
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                    ),
+                )
+                contexts.append(ctx)
+                worker_queue.put_nowait(ctx)
 
+            sem = asyncio.Semaphore(len(contexts))
             total_segs = len(segments)
-            for idx, seg in enumerate(segments, 1):
+            completed_count = 0
+
+            async def _scrape_single_interval(seg_info):
+                nonlocal completed_count
+                idx, seg = seg_info
                 c_in = seg["check_in"]
                 c_out = seg["check_out"]
                 nights = seg["nights"]
 
-                print(f"  [{idx}/{total_segs}] Checking {c_in} -> {c_out} ({nights}n)...", end="", flush=True)
-
-                intercepted_price: Optional[float] = None
-                intercepted_label: Optional[str] = None
-                is_unavailable: bool = False
-                intercepted_reason: Optional[str] = None
-
-                done_event = asyncio.Event()
-
-                async def on_response(resp):
-                    nonlocal intercepted_price, intercepted_label, is_unavailable, intercepted_reason
-                    if "StaysPdpSections" in resp.url:
-                        try:
-                            body = await resp.text()
-                            data = json.loads(body)
-                            price, label, unavail, reason = CompManager.parse_stays_pdp_sections(data)
-                            if price and not intercepted_price:
-                                intercepted_price = price
-                                intercepted_label = label
-                            if unavail:
-                                is_unavailable = True
-                            if reason and not intercepted_reason:
-                                intercepted_reason = reason
-                            done_event.set()
-                        except Exception:
-                            pass
-
-                page.on("response", on_response)
-
-                url = f"https://www.airbnb.com/rooms/{listing_id}?check_in={c_in}&check_out={c_out}&adults={accommodates}"
-                try:
-                    await page.goto(url, wait_until="domcontentloaded", timeout=25000)
-                    await page.evaluate("() => window.scrollTo(0, 1500)")
+                async with sem:
+                    ctx = await worker_queue.get()
                     try:
-                        await asyncio.wait_for(done_event.wait(), timeout=6.0)
-                    except asyncio.TimeoutError:
-                        pass
-                except Exception as e:
-                    logger.warning(f"Timeout/error loading {url}: {e}")
-                finally:
-                    page.remove_listener("response", on_response)
+                        page = await ctx.new_page()
 
-                cache_file = self.CACHE_DIR / f"search_{c_in}_{c_out}_comp_{listing_id}.json"
+                        intercepted_price: Optional[float] = None
+                        intercepted_label: Optional[str] = None
+                        is_unavailable: bool = False
+                        intercepted_reason: Optional[str] = None
 
-                if intercepted_price and intercepted_price > 0.0:
-                    eff_nightly = round(intercepted_price / max(1, nights), 2)
-                    status = "AVAILABLE"
-                    item = {
-                        "listing_id": str(listing_id),
-                        "title": comp_meta.get("name") or comp_meta.get("title", f"Comp {listing_id}"),
-                        "location": comp_meta.get("location", "Scottsdale"),
-                        "bedrooms": comp_meta.get("bedrooms", 6),
-                        "beds": comp_meta.get("beds", 10),
-                        "baths": comp_meta.get("baths", 4.0),
-                        "nights": nights,
-                        "total_price": intercepted_price,
-                        "effective_nightly": eff_nightly,
-                        "rating": comp_meta.get("rating"),
-                        "reviews": comp_meta.get("reviews"),
-                        "confidence": "CONFIRMED",
-                        "confidence_reason": "Direct single-comp checkout pricing via Airbnb API",
-                        "price_snippet": f"${intercepted_price:,.0f} for {nights} nights | ${eff_nightly:,.0f}/night",
-                        "raw_snippet": f"Single Comp Sweep | {comp_meta.get('name')} | {intercepted_label or f'${intercepted_price}'}",
-                        "photo_url": comp_meta.get("photo_url"),
-                    }
-                    cache_file.write_text(json.dumps([item], indent=2, ensure_ascii=False), encoding="utf-8")
-                    print(f" ✅ ${eff_nightly:,.0f}/night (Total ${intercepted_price:,.0f})")
-                    results.append({"interval": f"{c_in}_{c_out}", "status": status, "rate": eff_nightly, "total": intercepted_price})
-                else:
-                    if intercepted_reason:
-                        status = f"UNAVAILABLE ({intercepted_reason})"
-                        print(f" ⛔ UNAVAILABLE ({intercepted_reason})")
-                    else:
-                        status = "BOOKED / UNAVAILABLE"
-                        print(" ⛔ BOOKED / UNAVAILABLE")
-                    # If previously had cached available rate for this date, remove stale rate
-                    if cache_file.exists():
+                        done_event = asyncio.Event()
+
+                        async def on_response(resp):
+                            nonlocal intercepted_price, intercepted_label, is_unavailable, intercepted_reason
+                            if "StaysPdpSections" in resp.url:
+                                try:
+                                    body = await resp.text()
+                                    data = json.loads(body)
+                                    price, label, unavail, reason = CompManager.parse_stays_pdp_sections(data)
+                                    if price and not intercepted_price:
+                                        intercepted_price = price
+                                        intercepted_label = label
+                                    if unavail:
+                                        is_unavailable = True
+                                    if reason and not intercepted_reason:
+                                        intercepted_reason = reason
+                                    done_event.set()
+                                except Exception:
+                                    pass
+
+                        page.on("response", on_response)
+
+                        url = f"https://www.airbnb.com/rooms/{listing_id}?check_in={c_in}&check_out={c_out}&adults={accommodates}"
                         try:
-                            cache_file.unlink()
-                        except Exception:
-                            pass
-                    results.append({"interval": f"{c_in}_{c_out}", "status": status, "rate": None, "total": None})
+                            await page.goto(url, wait_until="domcontentloaded", timeout=25000)
+                            await page.evaluate("() => window.scrollTo(0, 1500)")
+                            try:
+                                await asyncio.wait_for(done_event.wait(), timeout=6.0)
+                            except asyncio.TimeoutError:
+                                pass
+                        except Exception as e:
+                            logger.warning(f"Timeout/error loading {url}: {e}")
+                        finally:
+                            page.remove_listener("response", on_response)
+                            await page.close()
+                    finally:
+                        worker_queue.put_nowait(ctx)
 
-                # Polite delay between intervals
-                await asyncio.sleep(1.5)
+                    completed_count += 1
+                    cache_file = self.CACHE_DIR / f"search_{c_in}_{c_out}_comp_{listing_id}.json"
 
-            await browser.close()
+                    if intercepted_price and intercepted_price > 0.0:
+                        eff_nightly = round(intercepted_price / max(1, nights), 2)
+                        status = "AVAILABLE"
+                        item = {
+                            "listing_id": str(listing_id),
+                            "title": comp_meta.get("name") or comp_meta.get("title", f"Comp {listing_id}"),
+                            "location": comp_meta.get("location", "Scottsdale"),
+                            "bedrooms": comp_meta.get("bedrooms", 6),
+                            "beds": comp_meta.get("beds", 10),
+                            "baths": comp_meta.get("baths", 4.0),
+                            "nights": nights,
+                            "total_price": intercepted_price,
+                            "effective_nightly": eff_nightly,
+                            "rating": comp_meta.get("rating"),
+                            "reviews": comp_meta.get("reviews"),
+                            "confidence": "CONFIRMED",
+                            "confidence_reason": "Direct single-comp checkout pricing via Airbnb API",
+                            "price_snippet": f"${intercepted_price:,.0f} for {nights} nights | ${eff_nightly:,.0f}/night",
+                            "raw_snippet": f"Single Comp Sweep | {comp_meta.get('name')} | {intercepted_label or f'${intercepted_price}'}",
+                            "photo_url": comp_meta.get("photo_url"),
+                        }
+                        cache_file.write_text(json.dumps([item], indent=2, ensure_ascii=False), encoding="utf-8")
+                        print(f"  [{completed_count}/{total_segs}] Checking {c_in} -> {c_out} ({nights}n)... ✅ ${eff_nightly:,.0f}/night (Total ${intercepted_price:,.0f})")
+                        return {"interval": f"{c_in}_{c_out}", "status": status, "rate": eff_nightly, "total": intercepted_price}
+                    else:
+                        if intercepted_reason:
+                            status = f"UNAVAILABLE ({intercepted_reason})"
+                            print(f"  [{completed_count}/{total_segs}] Checking {c_in} -> {c_out} ({nights}n)... ⛔ UNAVAILABLE ({intercepted_reason})")
+                        else:
+                            status = "BOOKED / UNAVAILABLE"
+                            print(f"  [{completed_count}/{total_segs}] Checking {c_in} -> {c_out} ({nights}n)... ⛔ BOOKED / UNAVAILABLE")
 
-        await proxy_mgr.stop()
+                        # If previously had cached available rate for this date, capture it and record confirmed booking
+                        prev_rate = None
+                        if cache_file.exists():
+                            try:
+                                cached_items = json.loads(cache_file.read_text(encoding="utf-8"))
+                                if cached_items and isinstance(cached_items, list):
+                                    prev_rate = cached_items[0].get("effective_nightly") or (cached_items[0].get("total_price", 0) / max(1, nights))
+                            except Exception:
+                                pass
+                            try:
+                                cache_file.unlink()
+                            except Exception:
+                                pass
+
+                        if prev_rate and float(prev_rate) > 0:
+                            try:
+                                from src.competitor_sales_tracker import CompetitorSalesTracker
+                                tracker = CompetitorSalesTracker()
+                                tracker.record_direct_sale(
+                                    listing_id=listing_id,
+                                    check_in=c_in,
+                                    check_out=c_out,
+                                    nights=nights,
+                                    last_observed_rate=float(prev_rate),
+                                    verification_status="CONFIRMED_BLOCKED",
+                                    raw_snippet=f"Direct Verified Checkout Sweep | {status}",
+                                )
+                                logger.info(f"Recorded confirmed competitor sale for {listing_id} ({c_in}->{c_out}) at ${prev_rate:.0f}/night.")
+                            except Exception as e:
+                                logger.warning(f"Could not record direct competitor sale: {e}")
+
+                        return {"interval": f"{c_in}_{c_out}", "status": status, "rate": None, "total": None}
+
+            try:
+                results = list(await asyncio.gather(*[_scrape_single_interval((idx, s)) for idx, s in enumerate(segments, 1)]))
+            finally:
+                for ctx in contexts:
+                    try:
+                        await ctx.close()
+                    except Exception:
+                        pass
+                try:
+                    await browser.close()
+                except Exception:
+                    pass
+                await p.stop()
+        finally:
+            await proxy_mgr.stop()
 
         # Regenerate HTML dashboard so new prices appear immediately
         self._regenerate_dashboard()

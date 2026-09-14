@@ -4,7 +4,7 @@
 **Document Filename:** `docs/weighted_pricing_requirements.md`  
 **Version:** 1.3.0  
 **Status:** Updated with Interview Decisions (Approved for Implementation)  
-**Target Asset:** Villa del Sol (Tempe, AZ — 6BR / 6BA Luxury Estate)  
+**Target Asset:** Villa del Sol (Tempe, AZ — 6BR / 5BA Luxury Estate)  
 **Author:** Antigravity (Pair Programming with Property Owner)  
 **Date:** September 2026  
 
@@ -12,7 +12,7 @@
 
 ## 1. Executive Summary & Context
 
-Villa del Sol is a premier 6-bedroom, 6-bathroom luxury vacation rental estate in Tempe, Arizona. The property utilizes an automated pricing advisory engine (`str-price-advisor`) to evaluate competitive luxury properties, analyze historical booking realizations, and synthesize proposed nightly rates aligned directly with Kivoya / Streamline PMS seasonal rate periods.
+Villa del Sol is a premier 6-bedroom, 5-bathroom luxury vacation rental estate in Tempe, Arizona. The property utilizes an automated pricing advisory engine (`str-price-advisor`) to evaluate competitive luxury properties, analyze historical booking realizations, and synthesize proposed nightly rates aligned directly with Kivoya / Streamline PMS seasonal rate periods.
 
 Under the legacy pricing consensus algorithm:
 1. **Agreement Requirement**: The engine requires directional consensus between competitive market recommendations ($P_{\text{comp}}$) and historical performance benchmarks ($P_{\text{hist}}$). If market data suggests an increase but historical booking data suggests a decrease (or is flat), the system triggers a `CONFLICT_HOLD` and holds the price at the existing base rate.

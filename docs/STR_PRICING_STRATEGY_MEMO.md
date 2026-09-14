@@ -9,7 +9,7 @@
 
 ## Executive Summary & Objective
 
-The purpose of this memo is to present the **institutional revenue management and competitive pricing strategy** governing Villa del Sol, a premier 6-bedroom, 4-bathroom luxury resort estate in Tempe, Arizona. 
+The purpose of this memo is to present the **institutional revenue management and competitive pricing strategy** governing Villa del Sol, a premier 6-bedroom, 5-bathroom luxury resort estate in Tempe, Arizona. 
 
 Modern short-term rental (STR) revenue management in the Phoenix metropolitan area faces two standard failure modes:
 1. **Generic Dynamic Pricing Algorithms (e.g., PriceLabs, Wheelhouse, Beyond):** These algorithms treat large-scale luxury compounds like commodity 1-bedroom condos or generic hotel rooms. They consistently overprice Phoenix’s extreme summer low season (>105°F heat), causing catastrophic vacancy, while severely underpricing high-compression golf, spring training, and festival weekends due to aggressive automated discounting.
@@ -25,7 +25,7 @@ We invite our property management partners and local STR market specialists to r
 
 | Asset Attribute | Property Specification | Strategic Pricing Implication |
 | :--- | :--- | :--- |
-| **Physical Layout** | 6 Bedrooms, 4 Full Bathrooms | Direct entry into the high-occupancy 16-guest group market. |
+| **Physical Layout** | 6 Bedrooms, 5 Full Bathrooms | Direct entry into the high-occupancy 16-guest group market. |
 | **Sleep Capacity** | Accommodates 16 Guests in Dedicated Beds | Out-competes standard 3–4 bedroom homes; commands significant group cost-per-person advantages. |
 | **Backyard Amenities** | Private heated pool, rock grotto, cascading waterfall, heated spa, putting green, full outdoor basketball/sports court, covered dining patio. | Year-round leisure asset; sports amenities drive corporate retreats and multi-family bookings during off-peak periods. |
 | **Micro-Location** | South Tempe (E Carver Rd / Rural Rd corridor) | 15–20 minutes to Old Town Scottsdale, 15 minutes to Phoenix Sky Harbor Airport (PHX), 12 minutes to ASU, 15 minutes to major Spring Training facilities (Cactus League). |

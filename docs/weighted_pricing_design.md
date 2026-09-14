@@ -4,7 +4,7 @@
 **Document Filename:** `docs/weighted_pricing_design.md`  
 **Version:** 1.4.0  
 **Status:** Grill-Me Interview Decisions Integrated (Approved for Implementation)  
-**Target Asset:** Villa del Sol (Tempe, AZ — 6BR / 6BA Luxury Estate)  
+**Target Asset:** Villa del Sol (Tempe, AZ — 6BR / 5BA Luxury Estate)  
 **Author:** Antigravity (Pair Programming with Property Owner)  
 **Reviewer:** Design Reviewer Subagent (Rounds 1 & 2) & Owner Interview  
 **Date:** September 2026  

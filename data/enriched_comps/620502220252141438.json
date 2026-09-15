@@ -1,7 +1,7 @@
 {
   "listing_id": "620502220252141438",
   "title": "17th Fairway Spanish Retreat",
-  "description": "This newly constructed custom home is a spacious six bedroom, 5 1/2 bathroom house with a large modern kitchen, a pool, a sport court, and an outdoor kitchen to entertain the whole family. \n\nFour of the bedrooms are located in the main portion of the house while the additional two bedrooms are located in the guest suite wing of the home, which includes its own kitchenette, living room, and laundry room.\n\nTPT: 21661671\nChandler License: 307385\n\n Other things to note \nThe home has a 6’ deep 36 x 15’ pool and 9 x 15’ spa. The pool or spa can be heated upon request. The cost for either is $90/day from October through April and $50/day from May through Sept.",
+  "description": "This newly constructed custom home is a spacious six bedroom, 5 1/2 bathroom house with a large modern kitchen, a pool, a sport court, and an outdoor kitchen to entertain the whole family. \n\nFour of the bedrooms are located in the main portion of the house while the additional two bedrooms are located in the guest suite wing of the home, which includes its own kitchenette, living room, and laundry room.\n\nTPT: 21661671\nChandler License: 307385\n\n Other things to note \nThe home has a 6\u2019 deep 36 x 15\u2019 pool and 9 x 15\u2019 spa. The pool or spa can be heated upon request. The cost for either is $90/day from October through April and $50/day from May through Sept.",
   "bedrooms": 6,
   "beds": 9,
   "baths": 5.5,
@@ -38,7 +38,7 @@
     "First aid kit",
     "Free dryer",
     "Free parking on premises",
-    "Free washer – In building",
+    "Free washer \u2013 In building",
     "Freezer",
     "Hair dryer",
     "Hangers",
@@ -53,7 +53,7 @@
     "Outdoor furniture",
     "Outdoor kitchen with sink",
     "Pool",
-    "Private backyard – Fully fenced",
+    "Private backyard \u2013 Fully fenced",
     "Refrigerator",
     "Room-darkening shades",
     "Shampoo",
@@ -108,5 +108,7 @@
     ],
     "additional_rules": "The HOA does not permit cars parked on the street anytime of the day or night. Cars are not allowed within the driveway after 10 pm and must be parked in the garage. There is a four car garage.\n\nPlease do not leave doors open, including sliding door, to keep insects and scorpions from entering house."
   },
-  "rules_enriched_at": "2026-09-07T01:18:17.258821"
+  "rules_enriched_at": "2026-09-07T01:18:17.258821",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

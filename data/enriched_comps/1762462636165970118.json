@@ -34,7 +34,7 @@
     "Fire pit",
     "Fireplace guards",
     "First aid kit",
-    "Free dryer – In unit",
+    "Free dryer \u2013 In unit",
     "Free parking on premises",
     "Freezer",
     "Hair dryer",
@@ -58,10 +58,10 @@
     "Outdoor furniture",
     "Outdoor kitchen with sink",
     "Outdoor shower",
-    "Pack ’n play/Travel crib - always at the listing",
+    "Pack \u2019n play/Travel crib - always at the listing",
     "Pool",
     "Portable fans",
-    "Private backyard – Fully fenced",
+    "Private backyard \u2013 Fully fenced",
     "Private gym in building",
     "Private patio or balcony",
     "Refrigerator",
@@ -116,5 +116,7 @@
     ],
     "additional_rules": null
   },
-  "rules_enriched_at": "2026-09-07T01:15:34.552483"
+  "rules_enriched_at": "2026-09-07T01:15:34.552483",
+  "is_guest_favorite": false,
+  "guest_favorite_badge": null
 }

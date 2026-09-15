@@ -31,9 +31,9 @@
     "Fire pit",
     "First aid kit",
     "Folding or convertible high chair - available upon request",
-    "Free dryer – In unit",
-    "Free residential garage on premises – 7 spaces",
-    "Free washer – In unit",
+    "Free dryer \u2013 In unit",
+    "Free residential garage on premises \u2013 7 spaces",
+    "Free washer \u2013 In unit",
     "Freezer",
     "Hair dryer",
     "Hangers",
@@ -52,10 +52,10 @@
     "Outdoor furniture",
     "Outdoor playground",
     "Oven",
-    "Pack ’n play/Travel crib - available upon request",
+    "Pack \u2019n play/Travel crib - available upon request",
     "Ping pong table",
     "Private BBQ grill: gas",
-    "Private backyard – Fully fenced",
+    "Private backyard \u2013 Fully fenced",
     "Private entrance",
     "Private hot tub - available all year, open 24 hours",
     "Private outdoor pool - available all year, open 24 hours, heated",
@@ -110,5 +110,7 @@
     ],
     "additional_rules": "By submitting this reservation, you are agreeing to the following terms and conditions:\n\nCHECK-IN TIME: 4:00 p.m. Early check-in requests may be made twenty-four (24) to forty-eight (48) hours prior to arrival date via email or phone and are subject to availability. Early check-in times are not guaranteed, but will be offered with a fee, if available. Unauthorized early arrival anywhere on our property will result in a violation of our house rules, and an additional charge ($75/per 30 minutes) t"
   },
-  "rules_enriched_at": "2026-09-07T01:18:56.645947"
+  "rules_enriched_at": "2026-09-07T01:18:56.645947",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

@@ -1,7 +1,7 @@
 {
   "listing_id": "1550824215338770978",
   "title": "YNotStay_GilbertAZ",
-  "description": "Private resort-style retreat perfect for families and groups! Main-level king suite with spa ensuite, 3 queen bedrooms upstairs, and a kid-friendly lower level with bunks and luxury reclining couches. Open living space with a 95” TV, coffee & soda bar, plus a private casita with 2 queen bedrooms, office, kitchen, and living room. Backyard features a shallow to diving depth commercial pool with slide, grotto, mini golf, cornhole, Outdoor kitchen, fireplace, and more—pickleball court coming soon!",
+  "description": "Private resort-style retreat perfect for families and groups! Main-level king suite with spa ensuite, 3 queen bedrooms upstairs, and a kid-friendly lower level with bunks and luxury reclining couches. Open living space with a 95\u201d TV, coffee & soda bar, plus a private casita with 2 queen bedrooms, office, kitchen, and living room. Backyard features a shallow to diving depth commercial pool with slide, grotto, mini golf, cornhole, Outdoor kitchen, fireplace, and more\u2014pickleball court coming soon!",
   "bedrooms": 8,
   "beds": 12,
   "baths": 4.5,
@@ -108,5 +108,7 @@
     ],
     "additional_rules": "House Rules\n\nNo Parties or Events\nParties, events, gatherings, or celebrations of any kind are strictly prohibited. This includes (but is not limited to) bachelor/bachelorette parties, birthday parties, reunions, or any large group gatherings. Violation of this rule may result in immediate cancellation of the reservation without refund.\n\nMaximum Occupancy\nOnly the number of guests listed on the reservation are permitted on the property at any time. Unregistered guests are not allowed.\n\nQuiet Hou"
   },
-  "rules_enriched_at": "2026-09-07T01:15:59.867483"
+  "rules_enriched_at": "2026-09-07T01:15:59.867483",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

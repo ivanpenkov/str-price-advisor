@@ -20,7 +20,7 @@
     "Ceiling fan",
     "Central air conditioning",
     "Central heating",
-    "Children’s dinnerware",
+    "Children\u2019s dinnerware",
     "Cleaning available during stay",
     "Cleaning products",
     "Clothing storage: walk-in closet, closet, and dresser",
@@ -40,7 +40,7 @@
     "Fire extinguisher",
     "Fire pit",
     "First aid kit",
-    "Free driveway parking on premises – 5 spaces",
+    "Free driveway parking on premises \u2013 5 spaces",
     "Freezer",
     "Garden view",
     "HDTV",
@@ -61,7 +61,7 @@
     "Outdoor dining area",
     "Outdoor furniture",
     "Oven",
-    "Pack ’n play/Travel crib",
+    "Pack \u2019n play/Travel crib",
     "Ping pong table",
     "Pool view",
     "Private entrance",
@@ -119,5 +119,7 @@
     ],
     "additional_rules": "- Please note:  although children allowed, guest must acknowledge that they understand that the pool in the backyard is not enclosed, and that children must be supervised at all times when outside!\n-We love our neighbors! Quiet hours: 10pm-7am, please. No shoes on  carpet (upstairs loft and master bedroom, one downstairs bedroom).\n- Only the number of guests on the reservation will be allowed on the property.  No other guests allowed without express written consent of host or co-host."
   },
-  "rules_enriched_at": "2026-09-07T01:17:13.036068"
+  "rules_enriched_at": "2026-09-07T01:17:13.036068",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

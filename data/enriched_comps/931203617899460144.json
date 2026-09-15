@@ -38,8 +38,8 @@
     "Outdoor dining area",
     "Outdoor furniture",
     "Oven",
-    "Pack ’n play/Travel crib",
-    "Private backyard – Fully fenced",
+    "Pack \u2019n play/Travel crib",
+    "Private backyard \u2013 Fully fenced",
     "Private entrance",
     "Private outdoor pool - available all year, open 24 hours, heated, pool toys",
     "Refrigerator",
@@ -90,5 +90,7 @@
     ],
     "additional_rules": null
   },
-  "rules_enriched_at": "2026-09-07T01:17:17.721547"
+  "rules_enriched_at": "2026-09-07T01:17:17.721547",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

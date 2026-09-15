@@ -1,7 +1,7 @@
 {
   "listing_id": "1283513903441928107",
   "title": "Luxury Scottsdale Home | Pool & Heated Spa",
-  "description": "Modern hideaway that blends thoughtful design and comfort in a newly renovated 5-bedroom, 3-bathroom retreat nestled in one of Scottsdale's top neighborhoods. This home offers a seamless balance of style and relaxation. Every detail has been carefully considered to create a luxurious space where you can unwind, entertain, and make lasting memories. Whether you're here for a quick getaway or a more extended stay, this retreat invites you to experience Arizona in the best way possible.\n\n The space \nWhy You'll Love Your Unique Experience at The Desert Hideaway:\n\n• Pet Friendly! Pets are welcome for an extra $50 (per night) pet fee. \n• Luxurious Furnishings: Relax and unwind in style amidst tastefully appointed furnishings throughout the house.\n• Inviting Pool: The pool is gated, and guests can take a refreshing dip or lounge poolside under the sun. Pool can be heated Mid May-Mid September only (heating is a $100/day extra) \n• Heated Spa available year-round! \n• Outdoor BBQ: Grill up delectable meals on the built-in BBQ, adding a sizzle to your evenings.\n• Outdoor Oasis: Retreat to the outdoor lounge area, where a charming pergola provides shade and creates an inviting, relaxing space.\n• Gourmet Kitchen: The chef's kitchen has top-of-the-line appliances, making it a dream come true for food enthusiasts. A private chef can be recommended upon request.\n• Four Dining areas \n• Three living areas\n• Entertainment Galore: Upstairs hangout room with pool table, board games, shuffleboard, and more!\n• Outdoor Firepit: Plenty of seating\n• Take advantage of our cozy in-home Fitness Center, equipped with a treadmill, a bike, a bench, and a stand with free weights.\n• Fun for All Ages: Challenge friends and family to games of corn hole or board games, ensuring endless laughter and memories.\n• Designated work area in each bedroom\n\nSleeping Arrangements & Bathrooms (Sleeps 12 Comfortably):\n\nPrimary Suite 1: Two Queens \nBedroom 2: One Queen\nBedroom 3: One Queen\nBedroom 4: One King\nBedroom 5: One Queen\n\nEvery corner of this residence exudes careful consideration, fostering an exceptional living experience. The open-concept layout effortlessly facilitates gatherings and cherished moments with your loved ones.\n\nThe centerpiece of this home is the chef’s kitchen, fully equipped with premium appliances that inspire culinary creativity. This impressive space includes a built-in BBQ, a comfortable seating area, a shimmering pool, a relaxing hot tub, and a dog run. Very kid-friendly! \n\nFor those seeking more than just a place to stay—an experience that caters to refined tastes and elevates every moment—this remarkable resort-style home awaits. Reserve your stay today and immerse yourself in luxury.\n\n Guest access \nYou'll enter and exit through the front door. Keypad code provided before check-in.",
+  "description": "Modern hideaway that blends thoughtful design and comfort in a newly renovated 5-bedroom, 3-bathroom retreat nestled in one of Scottsdale's top neighborhoods. This home offers a seamless balance of style and relaxation. Every detail has been carefully considered to create a luxurious space where you can unwind, entertain, and make lasting memories. Whether you're here for a quick getaway or a more extended stay, this retreat invites you to experience Arizona in the best way possible.\n\n The space \nWhy You'll Love Your Unique Experience at The Desert Hideaway:\n\n\u2022 Pet Friendly! Pets are welcome for an extra $50 (per night) pet fee. \n\u2022 Luxurious Furnishings: Relax and unwind in style amidst tastefully appointed furnishings throughout the house.\n\u2022 Inviting Pool: The pool is gated, and guests can take a refreshing dip or lounge poolside under the sun. Pool can be heated Mid May-Mid September only (heating is a $100/day extra) \n\u2022 Heated Spa available year-round! \n\u2022 Outdoor BBQ: Grill up delectable meals on the built-in BBQ, adding a sizzle to your evenings.\n\u2022 Outdoor Oasis: Retreat to the outdoor lounge area, where a charming pergola provides shade and creates an inviting, relaxing space.\n\u2022 Gourmet Kitchen: The chef's kitchen has top-of-the-line appliances, making it a dream come true for food enthusiasts. A private chef can be recommended upon request.\n\u2022 Four Dining areas \n\u2022 Three living areas\n\u2022 Entertainment Galore: Upstairs hangout room with pool table, board games, shuffleboard, and more!\n\u2022 Outdoor Firepit: Plenty of seating\n\u2022 Take advantage of our cozy in-home Fitness Center, equipped with a treadmill, a bike, a bench, and a stand with free weights.\n\u2022 Fun for All Ages: Challenge friends and family to games of corn hole or board games, ensuring endless laughter and memories.\n\u2022 Designated work area in each bedroom\n\nSleeping Arrangements & Bathrooms (Sleeps 12 Comfortably):\n\nPrimary Suite 1: Two Queens \nBedroom 2: One Queen\nBedroom 3: One Queen\nBedroom 4: One King\nBedroom 5: One Queen\n\nEvery corner of this residence exudes careful consideration, fostering an exceptional living experience. The open-concept layout effortlessly facilitates gatherings and cherished moments with your loved ones.\n\nThe centerpiece of this home is the chef\u2019s kitchen, fully equipped with premium appliances that inspire culinary creativity. This impressive space includes a built-in BBQ, a comfortable seating area, a shimmering pool, a relaxing hot tub, and a dog run. Very kid-friendly! \n\nFor those seeking more than just a place to stay\u2014an experience that caters to refined tastes and elevates every moment\u2014this remarkable resort-style home awaits. Reserve your stay today and immerse yourself in luxury.\n\n Guest access \nYou'll enter and exit through the front door. Keypad code provided before check-in.",
   "bedrooms": 5,
   "beds": 9,
   "baths": 3.0,
@@ -24,7 +24,7 @@
     "Ceiling fan",
     "Central heating",
     "Children's playroom",
-    "Children’s books and toys",
+    "Children\u2019s books and toys",
     "Cleaning products",
     "Clothing storage",
     "Coffee",
@@ -62,7 +62,7 @@
     "Outdoor dining area",
     "Outdoor furniture",
     "Outdoor shower",
-    "Pack ’n play/Travel crib",
+    "Pack \u2019n play/Travel crib",
     "Pets allowed",
     "Pool table",
     "Portable fans",
@@ -122,5 +122,7 @@
     ],
     "additional_rules": null
   },
-  "rules_enriched_at": "2026-09-07T01:17:43.659826"
+  "rules_enriched_at": "2026-09-07T01:17:43.659826",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

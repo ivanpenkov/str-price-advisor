@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "last_updated": "2026-09-14T15:43:22.649901-07:00",
+  "last_updated": "2026-09-14T17:31:13.473603-07:00",
   "recent_window_days": 30,
   "recent_reviews_count": 2,
   "platforms": {
@@ -26,15 +26,21 @@
       "platform_id": "vrbo",
       "display_name": "VRBO",
       "url": "https://www.vrbo.com/2685684",
-      "scale": "5.0",
-      "rating": 4.9,
+      "scale": "10.0",
+      "rating_max": 10.0,
+      "rating": 9.6,
       "review_count": 34,
+      "badge": {
+        "name": "Loved by Guests",
+        "subtitle": "Top 10% of guest reviews in this area",
+        "badge_type": "top_percentile"
+      },
       "sub_scores": {
-        "cleanliness": 4.9,
-        "accuracy": 4.9,
-        "communication": 5.0,
-        "location": 4.8,
-        "check_in": 5.0
+        "cleanliness": 9.8,
+        "accuracy": 9.8,
+        "communication": 10.0,
+        "location": 9.6,
+        "check_in": 10.0
       },
       "last_scraped": "2026-09-14T14:28:40-07:00",
       "status": "ok"
@@ -70,7 +76,7 @@
         "communication": 5.0,
         "property": 5.0
       },
-      "last_scraped": "2026-09-14T15:43:22.648527-07:00",
+      "last_scraped": "2026-09-14T17:31:13.472858-07:00",
       "status": "ok"
     }
   },
@@ -129,8 +135,8 @@
       "reviewer_location": "Denver, CO",
       "title": "Perfect summer getaway with friends",
       "date": "2026-06-15",
-      "rating": 5.0,
-      "rating_max": 5.0,
+      "rating": 9.8,
+      "rating_max": 10.0,
       "body": "Spacious layout, beautiful pool, and very responsive host. Blender was a bit leaky when making smoothies, but everything else was 5-star quality. Highly recommend!",
       "host_response": {
         "responder_name": "Villa del Sol Host",
@@ -176,8 +182,8 @@
       "reviewer_location": "Dallas, TX",
       "title": "Luxury oasis in Tempe",
       "date": "2026-04-18",
-      "rating": 5.0,
-      "rating_max": 5.0,
+      "rating": 10.0,
+      "rating_max": 10.0,
       "body": "We celebrated our 40th anniversary here with 14 family members. Ample parking, immaculate bedrooms, and a kitchen built for entertaining. Worth every penny.",
       "host_response": null,
       "is_recent": false

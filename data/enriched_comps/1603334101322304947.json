@@ -27,7 +27,7 @@
     "Fire extinguisher",
     "Fire pit",
     "First aid kit",
-    "Free dryer – In unit",
+    "Free dryer \u2013 In unit",
     "Free parking on premises",
     "Free street parking",
     "Hair dryer",
@@ -44,7 +44,7 @@
     "Outdoor dining area",
     "Outdoor furniture",
     "Oven",
-    "Pack ’n play/Travel crib - always at the listing",
+    "Pack \u2019n play/Travel crib - always at the listing",
     "Ping pong table",
     "Pool",
     "Pool table",
@@ -98,5 +98,7 @@
     ],
     "additional_rules": null
   },
-  "rules_enriched_at": "2026-09-07T01:17:23.274168"
+  "rules_enriched_at": "2026-09-07T01:17:23.274168",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

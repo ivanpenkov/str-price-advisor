@@ -29,7 +29,7 @@
     "Extra pillows and blankets",
     "Fire extinguisher",
     "Folding or convertible high chair",
-    "Free driveway parking on premises – 2 spaces",
+    "Free driveway parking on premises \u2013 2 spaces",
     "Free street parking",
     "Gas stove",
     "Hair dryer",
@@ -40,7 +40,7 @@
     "Kitchen",
     "Outdoor dining area",
     "Outdoor furniture",
-    "Pack ’n play/Travel crib",
+    "Pack \u2019n play/Travel crib",
     "Pool",
     "Pool table",
     "Self check-in",
@@ -93,9 +93,11 @@
       "Throw trash away",
       "Turn things off",
       "Lock up",
-      "Additional requests: Please strip SHEETS ONLY from any beds used during your stay.  If you didn’t use the bed PLEASE leave it made."
+      "Additional requests: Please strip SHEETS ONLY from any beds used during your stay.  If you didn\u2019t use the bed PLEASE leave it made."
     ],
     "additional_rules": "RULES AND RESPONSIBILITY ACKNOWLEDGMENT\n\nOnly the number of guests on the original booking are allowed to be in the home.\n\nHouse has brand new carpet. Please be respectful and keep food and drink in eating areas only.  Carpet damage  incurs an extra fee. \n\nBe a respectful Neighbor: Quiet hours are 9 pm to 8 am.  This is a family friendly neighborhood and quiet hours are mandatory.  If neighbors complain or cops are called your booking will be immediately cancelled without a refund.  No illegal a"
   },
-  "rules_enriched_at": "2026-09-07T01:17:03.207296"
+  "rules_enriched_at": "2026-09-07T01:17:03.207296",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

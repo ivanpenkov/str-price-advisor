@@ -101,5 +101,7 @@
     ],
     "additional_rules": null
   },
-  "rules_enriched_at": "2026-09-07T01:16:03.654728"
+  "rules_enriched_at": "2026-09-07T01:16:03.654728",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

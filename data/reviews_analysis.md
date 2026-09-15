@@ -3,7 +3,7 @@
 **Data Source**: `data/ratings_reviews.json` (Total Reviews: 8)
 
 ## Executive Summary
-- **Overall Guest Satisfaction**: Exceptional across all 4 channels (Airbnb 4.83/5.0, VRBO 4.90/5.0, Booking.com 9.4/10.0, Kivoya Direct 5.0/5.0).
+- **Overall Guest Satisfaction**: Exceptional across all 4 channels (Airbnb 4.83/5.0, VRBO 9.6/10.0 [Loved by Guests • Top 10%], Booking.com 9.4/10.0, Kivoya Direct 5.0/5.0).
 - **Open Severe Issues**: 0
 - **Open Recurring Problems**: 1 (Front Door Smart Lock Keypad Lag in Afternoon Heat)
 - **Open Minor Issues**: 0

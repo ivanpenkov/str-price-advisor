@@ -1,7 +1,7 @@
 {
   "listing_id": "1052192059622520398",
   "title": "Heatd Pool | Hot Tub | Walk 2 Lake | Dobson Ranch",
-  "description": "Dive into adventure in our heated Pebble Tec pool or unwind in the bubbling 5-person hot tub. Gather around the glowing gas firepit or escape the sun under the shaded pergola, surrounded by blooming garden roses and vibrant flowers.\n\nStep outside and kayak across the scenic lake, challenge your crew to a game of tennis, disc golf, or 18-holes at the local golf course — just steps from the front door.\n\nWe also provide premium car rentals, ground transportation services and Airport pickups.\n\n The space \nOur Place by the Lake offers:\n\n•6 bedrooms/ 3 Full Bathrooms\n\n•HEATED POOL INCLUDED\n\n**Note: Pool heater is set to 83 degrees. $25/day to have pool heated above 83 degrees**\n\n•Smart tv's throughout \n\n• Private Backyard\n\n•Pool Toys\n\n•Hot Tub\n\n•Gas Fire Pit\n\n•Outdoor gas grill\n\n•Large Shaded Pergola\n\n• Lake Access (75ft from house)\n\n• Kayaks, Fishing Equipment, Disc Golf, Corn Hole boards, Tennis equipment included. \n\n•2020 Lincoln Navigator L (Seats 7) available for rent\n\n•Airport Shuttle Service Available \n\nSTR LICENSE: LIC24-09058\n\n Guest access \nGuests will access property through front door smart lock.\n\n Other things to note \nADDITIONAL AMENITIES AVAILABLE:\n\n• Ask about our active-duty military discount\n\n•Rental cars \n\n•Airport Shuttle \n\n•Ground Transportation\n\n•Wine Tours\n\n•Baby Equipment \n\n•Pantry/ Food Stocking",
+  "description": "Dive into adventure in our heated Pebble Tec pool or unwind in the bubbling 5-person hot tub. Gather around the glowing gas firepit or escape the sun under the shaded pergola, surrounded by blooming garden roses and vibrant flowers.\n\nStep outside and kayak across the scenic lake, challenge your crew to a game of tennis, disc golf, or 18-holes at the local golf course \u2014 just steps from the front door.\n\nWe also provide premium car rentals, ground transportation services and Airport pickups.\n\n The space \nOur Place by the Lake offers:\n\n\u20226 bedrooms/ 3 Full Bathrooms\n\n\u2022HEATED POOL INCLUDED\n\n**Note: Pool heater is set to 83 degrees. $25/day to have pool heated above 83 degrees**\n\n\u2022Smart tv's throughout \n\n\u2022 Private Backyard\n\n\u2022Pool Toys\n\n\u2022Hot Tub\n\n\u2022Gas Fire Pit\n\n\u2022Outdoor gas grill\n\n\u2022Large Shaded Pergola\n\n\u2022 Lake Access (75ft from house)\n\n\u2022 Kayaks, Fishing Equipment, Disc Golf, Corn Hole boards, Tennis equipment included. \n\n\u20222020 Lincoln Navigator L (Seats 7) available for rent\n\n\u2022Airport Shuttle Service Available \n\nSTR LICENSE: LIC24-09058\n\n Guest access \nGuests will access property through front door smart lock.\n\n Other things to note \nADDITIONAL AMENITIES AVAILABLE:\n\n\u2022 Ask about our active-duty military discount\n\n\u2022Rental cars \n\n\u2022Airport Shuttle \n\n\u2022Ground Transportation\n\n\u2022Wine Tours\n\n\u2022Baby Equipment \n\n\u2022Pantry/ Food Stocking",
   "bedrooms": 6,
   "beds": 9,
   "baths": 3.0,
@@ -24,7 +24,7 @@
     "Ceiling fan",
     "Central heating",
     "Children's playroom",
-    "Children’s dinnerware",
+    "Children\u2019s dinnerware",
     "Cleaning products",
     "Clothing storage: closet",
     "Coffee",
@@ -44,7 +44,7 @@
     "Fire extinguisher",
     "Fire pit",
     "First aid kit",
-    "Free dryer – In unit",
+    "Free dryer \u2013 In unit",
     "Free parking on premises",
     "Free street parking",
     "Freezer",
@@ -66,11 +66,11 @@
     "Mosquito net",
     "Outdoor dining area",
     "Outdoor furniture",
-    "Pack ’n play/Travel crib - available upon request",
+    "Pack \u2019n play/Travel crib - available upon request",
     "Patio or balcony",
     "Pets allowed",
     "Portable fans",
-    "Private backyard – Fully fenced",
+    "Private backyard \u2013 Fully fenced",
     "Private entrance",
     "Private hot tub - available seasonally, open 24 hours",
     "Private outdoor kitchen",
@@ -129,5 +129,7 @@
     ],
     "additional_rules": "Please be respectful to our neighbors and observe 10pm-7am quiet hours."
   },
-  "rules_enriched_at": "2026-09-07T01:16:43.620354"
+  "rules_enriched_at": "2026-09-07T01:16:43.620354",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

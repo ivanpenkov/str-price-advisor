@@ -18,7 +18,7 @@
     "Carbon monoxide alarm",
     "Ceiling fan",
     "Central heating",
-    "Children’s dinnerware",
+    "Children\u2019s dinnerware",
     "Cleaning available during stay",
     "Cleaning products",
     "Clothing storage: walk-in closet, closet, and dresser",
@@ -35,7 +35,7 @@
     "Fire extinguisher",
     "Fire pit",
     "First aid kit",
-    "Free dryer – In unit",
+    "Free dryer \u2013 In unit",
     "Free parking on premises",
     "Free street parking",
     "Freezer",
@@ -55,7 +55,7 @@
     "Outdoor dining area",
     "Outdoor furniture",
     "Oven",
-    "Pack ’n play/Travel crib - always at the listing",
+    "Pack \u2019n play/Travel crib - always at the listing",
     "Patio or balcony",
     "Ping pong table",
     "Pool",
@@ -115,5 +115,7 @@
     ],
     "additional_rules": null
   },
-  "rules_enriched_at": "2026-09-07T01:18:32.925103"
+  "rules_enriched_at": "2026-09-07T01:18:32.925103",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

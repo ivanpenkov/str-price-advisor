@@ -44,10 +44,10 @@
     "Microwave",
     "Outdoor furniture",
     "Oven",
-    "Pack ’n play/Travel crib",
+    "Pack \u2019n play/Travel crib",
     "Pool table",
     "Portable fans",
-    "Private backyard – Fully fenced",
+    "Private backyard \u2013 Fully fenced",
     "Private hot tub - available all year",
     "Private patio or balcony",
     "Private pool",
@@ -100,5 +100,7 @@
     ],
     "additional_rules": "This is a NON-SMOKING property: This includes - Cigarettes, Cigars, Juuls, E-cigs, Marijuana, etc. No smoking allowed anywhere on the property, including  inside the home, the garage, the backyard, or the front yard. Any violation of smoking on the property will result in $1000 charge to your airbnb account. \n\n10PM-8AM neighborhood quiet hours.\n\n5 car limit parked at the house. Please use the garage and driveway to park your cars, avoid any parking on the street. Do not park in front of the neig"
   },
-  "rules_enriched_at": "2026-09-07T01:16:48.180602"
+  "rules_enriched_at": "2026-09-07T01:16:48.180602",
+  "is_guest_favorite": false,
+  "guest_favorite_badge": null
 }

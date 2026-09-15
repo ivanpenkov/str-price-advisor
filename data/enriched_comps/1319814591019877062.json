@@ -32,7 +32,7 @@
     "Extra pillows and blankets",
     "Fire extinguisher",
     "First aid kit",
-    "Free dryer – In unit",
+    "Free dryer \u2013 In unit",
     "Free parking on premises",
     "Free street parking",
     "Freezer",
@@ -51,7 +51,7 @@
     "Piano",
     "Ping pong table",
     "Pool table",
-    "Private backyard – Fully fenced",
+    "Private backyard \u2013 Fully fenced",
     "Private entrance",
     "Private hot tub - available all year, open 24 hours",
     "Private outdoor pool - available all year, open 24 hours, heated",
@@ -105,9 +105,11 @@
       "Throw trash away",
       "Turn things off",
       "Lock up",
-      "Additional requests: Please return all court/pool equipment to their places (put pickleball rackets and balls/basketballs back inside the entryway room by the garage).\nPlease don’t leave any food items in the refrigerator or freezer."
+      "Additional requests: Please return all court/pool equipment to their places (put pickleball rackets and balls/basketballs back inside the entryway room by the garage).\nPlease don\u2019t leave any food items in the refrigerator or freezer."
     ],
-    "additional_rules": "#1. Noise curfew. No noise outside before 8am or after 9pm. For example, outside music, loud toys (like motorized scooters), and loud socializing. During the day the noise is expected, just kept to a respectful volume as it’s a quiet residential neighborhood and we love and want to respect our neighbors.\n\n#2. You are not allowed to have more than 15 people at the home at any time.\n\n#3.  NO PETS inside or out (no exceptions)\n\n#4. SMOKING INSIDE OR OUTSIDE OF THE HOME IS PROHIBITED. If there is an"
+    "additional_rules": "#1. Noise curfew. No noise outside before 8am or after 9pm. For example, outside music, loud toys (like motorized scooters), and loud socializing. During the day the noise is expected, just kept to a respectful volume as it\u2019s a quiet residential neighborhood and we love and want to respect our neighbors.\n\n#2. You are not allowed to have more than 15 people at the home at any time.\n\n#3.  NO PETS inside or out (no exceptions)\n\n#4. SMOKING INSIDE OR OUTSIDE OF THE HOME IS PROHIBITED. If there is an"
   },
-  "rules_enriched_at": "2026-09-07T01:18:26.893190"
+  "rules_enriched_at": "2026-09-07T01:18:26.893190",
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

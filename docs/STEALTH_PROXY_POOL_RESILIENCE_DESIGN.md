@@ -75,7 +75,7 @@ flowchart TD
     end
 
     subgraph NordVPN ["NordVPN AAA Session Accounting"]
-        Active10["10 Active Sessions<br/>(feeder-la-1 .. dal-2)"]
+        Active10["10 Active Sessions<br/>(feeder-sf-1 .. dal-2)"]
         Lingering["10 Linger Sessions<br/>(3–6 min grace period)"]
         Rejected["10th Connection REJECTED<br/>(0x01 Limit Reached)"]
     end
@@ -285,8 +285,8 @@ To prevent the workstation from colliding with personal devices (operator mobile
    DEFAULT_MAX_STEALTH_CONNECTIONS: int = 8
    ```
    *Rationale*: NordVPN permits 10 connections. Using 8 leaves 2 guaranteed slots for personal devices.
-2. **Default Hub Definition**:
-   The primary hub list `DEFAULT_STEALTH_HUBS` retains 10 curated nodes (`feeder-la-1` through `feeder-dal-2`). When `num_workers=8`, the first 8 hubs are prioritized. If any of the first 8 fail, the remaining 2 primary hubs and the 12 candidate servers act as immediate warm backups.
+2. **Default Hub Definition & AFRINIC Exclusion**:
+   The primary hub list `DEFAULT_STEALTH_HUBS` retains curated, verified US datacenter nodes (`feeder-sf-1`, `feeder-dal-1`, `feeder-chi-1`, `feeder-ny-1`, `feeder-us-1`, `feeder-sf-2`, `feeder-sf-3`, `feeder-dal-2`). Hosts resolving to AFRINIC subnets (`feeder-la-1`, `feeder-la-2`, `feeder-atl-1`) are permanently purged to avoid foreign GeoIP misclassification. When `num_workers=8`, the first 8 hubs are prioritized. If any fail, candidate servers act as immediate warm backups.
 3. **Environment Override**:
    The operator can set `STEALTH_MAX_CONNECTIONS=10` in `.env` if dedicated to a headless server, or `STEALTH_MAX_CONNECTIONS=6` if sharing credentials across multiple active machines.
 

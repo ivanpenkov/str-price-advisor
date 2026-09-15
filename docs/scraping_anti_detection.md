@@ -122,28 +122,36 @@ Bot detection filters look for perfectly uniform intervals between HTTP requests
 
 ## 6. Multi-IP Parallelization Architecture & 10-Worker Stealth Fleet
 
-### A. NordVPN SOCKS5 Infrastructure & 10-Worker Fleet
-NordVPN allows up to **10 simultaneous connections** per account. [`src/stealth_connection.py`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py) leverages all 10 connections across verified active US metropolitan feeder markets (strictly excluding Phoenix):
-1. **Los Angeles 1** (`feeder-la-1`: `los-angeles.us.socks.nordhold.net:1080`)
-2. **San Francisco 1** (`feeder-sf-1`: `san-francisco.us.socks.nordhold.net:1080`)
-3. **Dallas 1** (`feeder-dal-1`: `dallas.us.socks.nordhold.net:1080`)
-4. **Chicago 1** (`feeder-chi-1`: `chicago.us.socks.nordhold.net:1080`)
-5. **US Anycast 1** (`feeder-us-1`: `us.socks.nordhold.net:1080`)
+### A. NordVPN SOCKS5 Infrastructure & Clean US Datacenter Fleet
+NordVPN allows up to **10 simultaneous connections** per account. [`src/stealth_connection.py`](file:///Users/ivanpe/str-price-advisor/src/stealth_connection.py) leverages verified, active out-of-state US metropolitan feeder markets (strictly excluding Phoenix):
+1. **San Francisco 1** (`feeder-sf-1`: `san-francisco.us.socks.nordhold.net:1080` -> HostRoyale, CA)
+2. **Dallas 1** (`feeder-dal-1`: `dallas.us.socks.nordhold.net:1080` -> M247, TX)
+3. **Chicago 1** (`feeder-chi-1`: `chicago.us.socks.nordhold.net:1080` -> HostRoyale / Datacamp, IL)
+4. **New York 1** (`feeder-ny-1`: `new-york.us.socks.nordhold.net:1080` -> M247, NY)
+5. **US Anycast 1** (`feeder-us-1`: `us.socks.nordhold.net:1080` -> M247, US)
 6. **San Francisco 2** (`feeder-sf-2`: `socks-us46.nordvpn.com:1080`)
-7. **Los Angeles 2** (`feeder-la-2`: `socks-us61.nordvpn.com:1080`)
-8. **Atlanta 1** (`feeder-atl-1`: `socks-us68.nordvpn.com:1080`)
-9. **San Francisco 3** (`feeder-sf-3`: `socks-us70.nordvpn.com:1080`)
-10. **Dallas 2** (`feeder-dal-2`: `socks-us73.nordvpn.com:1080`)
+7. **San Francisco 3** (`feeder-sf-3`: `socks-us70.nordvpn.com:1080`)
+8. **Dallas 2** (`feeder-dal-2`: `socks-us73.nordvpn.com:1080`)
+9. **Standby Candidate 1** (`socks-us60.nordvpn.com:1080`)
+10. **Standby Candidate 2** (`socks-us63.nordvpn.com:1080`)
 
-### B. Pre-Flight Google Probing & Dynamic Candidate Hot-Swapping
+#### Permanent Decommissioning of African Subnet Hostnames (`feeder-la-1`, `feeder-la-2`, `feeder-atl-1`)
+- **Root Cause**: An authoritative WHOIS and DNS audit revealed that NordVPN hostnames `los-angeles.us.socks.nordhold.net` (`196.247.4.27`), `socks-us61.nordvpn.com` (`196.247.4.11`), and `socks-us68.nordvpn.com` (`196.196.27.147`) resolve to IP ranges registered to **AFRINIC (African Network Information Centre)** under netname `FIBERSA` (`country: ZA`, South Africa).
+- **Impact**: Travel platforms (Airbnb, Vrbo, Booking.com) and edge CDNs (Akamai, Cloudflare) check the client IP's ASN/country registration. Accessing Airbnb from these IPs triggered automatic HTTP 302 redirects to `https://www.airbnb.co.za/` and immediate Cloudflare/Akamai bot challenges, causing page scraping to fail with navigation errors.
+- **Remediation**: All African netblock hosts (`196.0.0.0/8`, `102.0.0.0/8`, `105.0.0.0/8`, `41.0.0.0/8`) are permanently blacklisted and purged from the active proxy pool.
+
+### B. Pre-Flight GeoIP & E2E Google Probing
 Rather than blindly starting scrapers with unverified forwarders:
-- **Fast End-to-End Probing**: Before scraping begins, `StealthConnectionManager` issues asynchronous HTTP GET requests to `https://www.google.com` across all spawned forwarders via local loopback sockets (~270ms latency with true TLS handshake).
-- **Dynamic Hot-Swapping**: If any forwarder fails RFC 1928 authentication or drops packets to Google (e.g. transient NordVPN host outage), the manager automatically selects a verified replacement node from a 40+ candidate node pool (`CANDIDATE_STEALTH_SERVERS`), kills the broken forwarder, spawns a new bridge, and verifies connectivity without disrupting the rest of the pool.
+- **Subnet CIDR Filter**: `StealthConnectionManager` resolves candidate hostnames prior to spawning and rejects any IP residing in blacklisted foreign subnets.
+- **Automated Pre-Flight GeoIP Probe**: Probes `http://ip-api.com/json` through each local forwarder port. If `country != "United States"`, the node is flagged as compromised and discarded immediately.
+- **Cross-Border TLD Navigation Guard**: In Playwright, navigation listeners monitor response URLs. If an OTA request for a US property redirects to a foreign ccTLD (`.co.za`, `.ru`, `.co.uk`), the session is immediately aborted and marked for proxy rotation.
+- **Fast End-to-End Google Probing**: Before scraping begins, `StealthConnectionManager` issues asynchronous HTTP GET requests to `https://www.google.com` across all spawned forwarders via local loopback sockets (~270ms latency with true TLS handshake).
+- **Dynamic Hot-Swapping**: If any forwarder fails RFC 1928 authentication or drops packets, the manager automatically selects a verified replacement node from `CANDIDATE_STEALTH_SERVERS`, kills the broken forwarder, spawns a new bridge, and verifies connectivity without disrupting the rest of the pool.
 - **Pre-Flight Validation CLI**:
   ```bash
-  python -m src.cli test-stealth --count 10
+  python -m src.cli test-stealth --count 8
   ```
-  Generates an instant latency audit table and confirms all 10 endpoints are operational. This pre-flight check runs automatically before daily quick scans and weekly full scans.
+  Generates an instant latency audit table and confirms all endpoints are operational. This pre-flight check runs automatically before daily quick scans and weekly full scans.
 
 ### C. Playwright Multi-Context Worker Leasing
 Launching multiple separate browser instances consumes excessive system resources. Instead, we launch **1 persistent Chromium browser** and instantiate **isolated `BrowserContext` instances** bound to distinct feeder forwarders:
@@ -223,3 +231,16 @@ To avoid unnecessary network traffic and minimize our footprint:
    - In `compare_all_intervals()`, the comparator inspects cache files *before* launching Chromium or starting proxy forwarders. If all intervals in the requested date range are already cached, browser initialization is completely skipped.
 3. **Lightweight Response Sniffing**:
    - Bandwidth telemetry inspects `content-length` response headers (`_track_response_bytes`) without buffering full media or video assets in memory.
+
+---
+
+## 10. WAF & Rate Limiting Protections (Booking.com & VRBO)
+
+### A. Booking.com AWS WAF Challenge Auto-Resolution
+- **WAF Response Signature**: Booking.com issues an HTTP `202 Accepted` status with an embedded AWS WAF JavaScript challenge (`token.awswaf.com/challenge.js` and `window.awsWafCookieDomainList = ['booking.com']`).
+- **Auto-Token Acquisition**: Rather than failing immediately or scraping incomplete HTML, the scraper pauses to let the challenge script execute in the browser context. Once the `aws-waf-token` cookie is persisted, the page auto-reloads or navigates cleanly with HTTP `200 OK` and complete DOM hydration.
+
+### B. VRBO OneTrust & Rate Limiting Protections
+- **OneTrust Cookie Overlay Eviction**: Expedia/VRBO overlays full-screen consent modals (`#onetrust-banner-sdk`, `#onetrust-consent-sdk`, `.onetrust-pc-dark-filter`) that intercept DOM clicks. The scraper executes a DOM pre-cleaning script to remove these elements before clicking review buttons.
+- **Apollo GraphQL Throttling Defense**: Direct calls to VRBO's `/graphql` endpoint may return HTTP `429 Too Many Requests` to automated browsers. The crawler implements dual-layer extraction: primary parsing against SSR JSON-LD / HTML state data (`window.__INITIAL_STATE__`), falling back to paginated DOM review card harvesting.
+

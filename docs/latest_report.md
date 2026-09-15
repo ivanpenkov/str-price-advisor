@@ -1,6 +1,6 @@
 # 🏷️ STR Competitive Pricing Advisory Report
 **Property**: Villa del Sol (920 E Carver Rd, Tempe, AZ)
-**Report Date**: 2026-09-14
+**Report Date**: 2026-09-15
 **Strategy**: Dynamic Luxury Benchmark (75th–80th Percentile with Lead-Time Tapering)
 
 ---
@@ -8,8 +8,8 @@
 ## 📊 Executive Summary
 - **Total Open Calendar Intervals**: 80
 - 🚨 **Urgent Adjustments (This Week)**: **21** intervals
-- ⚠️ **Moderate Adjustments (Monthly Review)**: **26** intervals
-- ✅ **Competitive / On Target**: **33** intervals
+- ⚠️ **Moderate Adjustments (Monthly Review)**: **25** intervals
+- ✅ **Competitive / On Target**: **34** intervals
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
 > Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
@@ -56,7 +56,6 @@ The following dates are 10%–25% off the target percentile for future dates:
 | `2027-07-15 -> 2027-07-18` | Weekend | 3 | ↑ Increase $599 → $788 | 40 | $599 | $766 (35%) | $821 | $954 (70%) | 🟡 -19.8% | **$788** | $350–$875 (med $596, +32% vs Track Record) |
 | `2027-05-30 -> 2027-06-03` | Midweek | 4 | ↓ Reduce $798 → $647 | 64 | $798 | $924 (64%) | $777 | $772 (49%) | 🟡 +19.6% | **$647** | $439–$567 (med $439, Aligned With Track Record) |
 | `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $490 → $397 | 61 | $490 | $615 (61%) | $673 | $631 (45.5%) | 🟡 +17.9% | **$397** | $365–$969 (med $489, Aligned With Track Record) |
-| `2027-03-14 -> 2027-03-17` | Midweek | 3 | ↑ Increase $984 → $1231 | 49 | $984 | $1151 (33%) | $1710 | $1705 (49%) | 🟡 -17.7% | **$1231** | $574–$1153 (med $1017, Aligned With Track Record) |
 | `2027-03-07 -> 2027-03-11` | Midweek | 4 | ↓ Reduce $984 → $820 | 60 | $984 | $1109 (58%) | $1192 | $1157 (45.5%) | 🟡 +17.4% | **$820** | $574–$1153 (med $1017, Aligned With Track Record) |
 | `2027-04-22 -> 2027-04-25` | Weekend | 3 | ↑ Increase $1199 → $1487 | 48 | $1199 | $1366 (62%) | $1288 | $2022 (70%) | 🟡 -17.4% | **$1487** | $578–$1730 (med $1006, Aligned With Track Record) |
 | `2027-03-11 -> 2027-03-14` | Weekend | 3 | ↑ Increase $1492 → $1755 | 44 | $1492 | $1659 (59%) | $1884 | $2355 (65%) | 🟡 -13.7% | **$1755** | $861–$1730 (med $1368, Aligned With Track Record) |
@@ -111,7 +110,6 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 | `2027-07-15 -> 2027-07-18` | Weekend | 3 | ↑ Increase $599 → $788 | 40 | $599 | $766 (35%) | $821 | $954 (70%) | 🟡 -19.8% | **$788** | $350–$875 (med $596, +32% vs Track Record) |
 | `2027-05-30 -> 2027-06-03` | Midweek | 4 | ↓ Reduce $798 → $647 | 64 | $798 | $924 (64%) | $777 | $772 (49%) | 🟡 +19.6% | **$647** | $439–$567 (med $439, Aligned With Track Record) |
 | `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $490 → $397 | 61 | $490 | $615 (61%) | $673 | $631 (45.5%) | 🟡 +17.9% | **$397** | $365–$969 (med $489, Aligned With Track Record) |
-| `2027-03-14 -> 2027-03-17` | Midweek | 3 | ↑ Increase $984 → $1231 | 49 | $984 | $1151 (33%) | $1710 | $1705 (49%) | 🟡 -17.7% | **$1231** | $574–$1153 (med $1017, Aligned With Track Record) |
 | `2027-03-07 -> 2027-03-11` | Midweek | 4 | ↓ Reduce $984 → $820 | 60 | $984 | $1109 (58%) | $1192 | $1157 (45.5%) | 🟡 +17.4% | **$820** | $574–$1153 (med $1017, Aligned With Track Record) |
 | `2027-04-22 -> 2027-04-25` | Weekend | 3 | ↑ Increase $1199 → $1487 | 48 | $1199 | $1366 (62%) | $1288 | $2022 (70%) | 🟡 -17.4% | **$1487** | $578–$1730 (med $1006, Aligned With Track Record) |
 | `2027-03-11 -> 2027-03-14` | Weekend | 3 | ↑ Increase $1492 → $1755 | 44 | $1492 | $1659 (59%) | $1884 | $2355 (65%) | 🟡 -13.7% | **$1755** | $861–$1730 (med $1368, Aligned With Track Record) |
@@ -140,6 +138,7 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 | `2027-01-28 -> 2027-01-31` | Weekend | 3 | - | 49 | $964 | $1131 (59%) | $1147 | $1514 (65%) | -9.0% | **$1075** | $650–$933 (med $834, Aligned With Track Record) |
 | `2027-02-28 -> 2027-03-04` | Midweek | 4 | - | 66 | $925 | $1050 (52%) | $1262 | $1200 (45.5%) | +7.1% | **$856** | $501–$1421 (med $587, Aligned With Track Record) |
 | `2027-03-04 -> 2027-03-07` | Weekend | 3 | - | 46 | $1492 | $1659 (61%) | $1726 | $2150 (65%) | -5.4% | **$1587** | $861–$1730 (med $1368, Aligned With Track Record) |
+| `2027-03-14 -> 2027-03-17` | Midweek | 3 | - | 49 | $984 | $1151 (33%) | $1710 | $1549 (45.5%) | -9.4% | **$1103** | $574–$1153 (med $1017, Aligned With Track Record) |
 | `2027-03-21 -> 2027-03-25` | Midweek | 4 | - | 59 | $1099 | $1224 (54%) | $1408 | $1393 (49%) | +7.6% | **$1012** | $516–$1252 (med $758, Aligned With Track Record) |
 | `2027-03-28 -> 2027-04-01` | Midweek | 4 | - | 62 | $1013 | $1138 (48%) | $1406 | $1391 (49%) | -2.9% | **$1047** | $516–$1252 (med $758, Aligned With Track Record) |
 | `2027-04-04 -> 2027-04-08` | Midweek | 4 | - | 70 | $749 | $874 (50%) | $1060 | $1051 (49%) | +1.5% | **$736** | $516–$1252 (med $935, Aligned With Track Record) |

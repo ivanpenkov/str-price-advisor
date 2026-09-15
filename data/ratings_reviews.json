@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "last_updated": "2026-09-14T21:12:45.591660-07:00",
+  "last_updated": "2026-09-14T22:31:30.090786-07:00",
   "recent_window_days": 30,
   "recent_reviews_count": 4,
   "platforms": {
@@ -19,8 +19,10 @@
         "check_in": 4.92,
         "value": 4.73
       },
-      "last_scraped": "2026-09-14T21:12:45.545619-07:00",
-      "status": "ok"
+      "last_scraped": "2026-09-14T22:31:30.059991-07:00",
+      "status": "ok",
+      "harvested_count": 80,
+      "harvest_ratio": 1.039
     },
     "vrbo": {
       "platform_id": "vrbo",
@@ -42,8 +44,10 @@
         "location": 9.6,
         "check_in": 10.0
       },
-      "last_scraped": "2026-09-14T21:12:39.781256-07:00",
-      "status": "ok"
+      "last_scraped": "2026-09-14T22:31:29.422135-07:00",
+      "status": "partial_harvest",
+      "harvested_count": 2,
+      "harvest_ratio": 0.0588
     },
     "booking": {
       "platform_id": "booking",
@@ -61,8 +65,10 @@
         "location": 9.3,
         "free_wifi": 10.0
       },
-      "last_scraped": "2026-09-14T21:12:35.647644-07:00",
-      "status": "ok"
+      "last_scraped": "2026-09-14T22:31:24.760696-07:00",
+      "status": "partial_harvest",
+      "harvested_count": 2,
+      "harvest_ratio": 0.1111
     },
     "kivoya": {
       "platform_id": "kivoya",
@@ -76,8 +82,10 @@
         "communication": 5.0,
         "property": 5.0
       },
-      "last_scraped": "2026-09-14T21:12:32.871794-07:00",
-      "status": "ok"
+      "last_scraped": "2026-09-14T22:31:21.854590-07:00",
+      "status": "partial_harvest",
+      "harvested_count": 1,
+      "harvest_ratio": 0.0833
     }
   },
   "reviews": [

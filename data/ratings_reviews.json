@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "last_updated": "2026-09-14T19:44:09.755487-07:00",
+  "last_updated": "2026-09-14T21:12:45.591660-07:00",
   "recent_window_days": 30,
-  "recent_reviews_count": 2,
+  "recent_reviews_count": 4,
   "platforms": {
     "airbnb": {
       "platform_id": "airbnb",
@@ -12,14 +12,14 @@
       "rating": 4.83,
       "review_count": 77,
       "sub_scores": {
-        "cleanliness": 4.98,
-        "accuracy": 4.97,
-        "communication": 5.0,
-        "location": 4.93,
-        "check_in": 5.0,
-        "value": 4.88
+        "cleanliness": 4.87,
+        "accuracy": 4.75,
+        "communication": 4.86,
+        "location": 4.94,
+        "check_in": 4.92,
+        "value": 4.73
       },
-      "last_scraped": "2026-09-14T19:44:08.638804-07:00",
+      "last_scraped": "2026-09-14T21:12:45.545619-07:00",
       "status": "ok"
     },
     "vrbo": {
@@ -42,7 +42,7 @@
         "location": 9.6,
         "check_in": 10.0
       },
-      "last_scraped": "2026-09-14T19:44:09.726834-07:00",
+      "last_scraped": "2026-09-14T21:12:39.781256-07:00",
       "status": "ok"
     },
     "booking": {
@@ -61,7 +61,7 @@
         "location": 9.3,
         "free_wifi": 10.0
       },
-      "last_scraped": "2026-09-14T19:44:05.156793-07:00",
+      "last_scraped": "2026-09-14T21:12:35.647644-07:00",
       "status": "ok"
     },
     "kivoya": {
@@ -76,11 +76,45 @@
         "communication": 5.0,
         "property": 5.0
       },
-      "last_scraped": "2026-09-14T19:44:04.611332-07:00",
+      "last_scraped": "2026-09-14T21:12:32.871794-07:00",
       "status": "ok"
     }
   },
   "reviews": [
+    {
+      "id": "be0b97f275e87c66225f95a5730a7ef8",
+      "platform": "airbnb",
+      "reviewer_name": "Karter",
+      "reviewer_location": "2 years on Airbnb",
+      "title": null,
+      "date": "2026-09-06",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "It was a beautiful space and experience, we had a great get together. Enjoyed the pool and the space that we had.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-09-07",
+        "body": "Thank you so much for your kind words! We are delighted to hear that you enjoyed the beautiful space, the pool, and that you had such a wonderful gathering. It was truly a pleasure hosting you, and we hope to have the opportunity to welcome you back again in the future. You will always be welcome! 😊<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
+      },
+      "is_recent": true
+    },
+    {
+      "id": "8d6042b7fd599d4c72b0154abb5d8bab",
+      "platform": "airbnb",
+      "reviewer_name": "Chris",
+      "reviewer_location": "2 years on Airbnb",
+      "title": null,
+      "date": "2026-08-31",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Excellent listing, house was clean and everything looked very nice. <br/>All aspexts of the reservation and booking went smoothly and their communication was excellent.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-09-07",
+        "body": "Thank you so much for sharing your experience and for your kind words! We’re very happy to hear that you enjoyed the house and that everything went smoothly with your reservation. <br/>It was a pleasure hosting you, and we hope to have the opportunity to welcome you back again soon. <br/>You’ll always be welcome! 😊<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
+      },
+      "is_recent": true
+    },
     {
       "id": "e331cbb2c7cf0d7f573752e259e21eb2",
       "platform": "airbnb",
@@ -116,6 +150,40 @@
       "is_recent": true
     },
     {
+      "id": "568d093fcb4ea510f1a6a07d4189c60e",
+      "platform": "airbnb",
+      "reviewer_name": "Kirsten",
+      "reviewer_location": "Chapel Hill, North Carolina",
+      "title": null,
+      "date": "2026-08-09",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "We very much enjoyed our stay.   They were very responsive and the house was fantastic for a large group.  Thank you!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-08-01",
+        "body": "Hi Kirsten,<br/>Thank you so much for your wonderful review! We’re absolutely delighted to hear that you enjoyed your stay and that the house was a great fit for your group. It was our pleasure to assist you, and we truly appreciate your kind words.<br/>We would love to welcome you back in the future! As a returning guest, we’d be happy to offer you a special discount on your next stay. 😊<br/>Whenever you’re ready to plan your next getaway, please feel free to contact us directly at 623-999-5111, and we’ll be happy to assist you with your reservation and apply your special returning-guest discount.<br/>We hope to host you again soon!<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "ac093f197b92f6a41094d570055163a8",
+      "platform": "airbnb",
+      "reviewer_name": "Jordan",
+      "reviewer_location": "3 months on Airbnb",
+      "title": null,
+      "date": "2026-08-02",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Beautiful home with an amazing host! The pictures don’t do this place enough justice. Everything was wonderful! Will definitely be booking this place again.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-08-01",
+        "body": "Thank you so much for your wonderful review, Jordan! We're truly happy to hear that you enjoyed your stay and that the home exceeded your expectations. It was a pleasure hosting you, and we sincerely appreciate your kind words. We look forward to welcoming you back for another stay in the future!<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
+      },
+      "is_recent": false
+    },
+    {
       "id": "42616f734493399042b58cbbf4041b31",
       "platform": "airbnb",
       "reviewer_name": "Mark P.",
@@ -125,6 +193,53 @@
       "rating": 5.0,
       "rating_max": 5.0,
       "body": "We had a wonderful stay with our extended family. The kids loved the pool and games room. Front door lock buttons felt sluggish in afternoon heat, but host gave clear instructions.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "30896c3e2a502b6ce13a393f2921846f",
+      "platform": "airbnb",
+      "reviewer_name": "Jacob",
+      "reviewer_location": "Rio Rancho, New Mexico",
+      "title": null,
+      "date": "2026-07-12",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The Airbnb was amazing! Everything exceeded all of our expectations. The house was super clean. All the services that our offered are amazing. Thankyou for the amazing experience.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-07-01",
+        "body": "Hi! 😊<br/>Thank you so much for your wonderful review! 🌟 It truly means a lot to us.<br/>We're delighted to hear that the home exceeded your expectations and that you enjoyed the cleanliness and all the services we offer. 🏡✨ Knowing you had such a great experience is the best reward for our team.<br/>It was a pleasure hosting you, and we would love to welcome you back anytime! 🌴💙 Safe travels, and we hope to see you again soon.<br/>Carlos Sánchez<br/>Kivoya Reservations Team 🏝️"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "c487e67c3cfe43147c549f9f06d07adb",
+      "platform": "airbnb",
+      "reviewer_name": "Kerisha",
+      "reviewer_location": "Gardena, California",
+      "title": null,
+      "date": "2026-07-06",
+      "rating": 2.0,
+      "rating_max": 5.0,
+      "body": "The home was beautiful, spacious, and suitable for a large family gathering, but it was not completely as depicted in the listing. I was initially disappointed by the late 5:00 p.m. check-in time. We had 14 overnight guests, which was within the 15-person limit, yet I was charged an additional fee for my son and my daughter-in-law, who lives in Tempe, to visit our family. I felt this was unreasonable. The home was also not properly stocked for our group. There were not enough bath towels, so we purchased additional towels from Walmart. We also bought pool items to enjoy during our stay. The television in the children’s room did not work. The owners should conduct inventory and maintenance checks before each reservation to ensure everything is functional and adequately supplied. Most importantly, we saw roaches and other bugs in several areas of the home. This property has great potential, but it needs better maintenance, pest control, and attention to detail.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-09-08",
+        "body": "Thank you, Kerisha, for sharing your feedback. We are glad to hear that you found the property beautiful, spacious, and suitable for a large family gathering. However, we feel it is important to clarify several points, as some statements in this review do not accurately reflect what occurred during your stay or the communication documented through Airbnb.<br/>Regarding the additional guest, your reservation was for 14 guests, while the maximum occupancy of the property is 15 people. However, the family members you mentioned were additional visitors beyond the registered guests, and our house rules clearly state that outside visitors are not permitted without prior authorization. You were informed of the applicable additional guest charge and accepted it. In fact, in one of the messages in the Airbnb conversation, you reacted with a heart to our explanation, indicating that you understood and accepted the arrangement at the time. Therefore, this charge was neither unexpected nor imposed without prior notice.<br/>It is also important to clarify that several of the issues mentioned in this review were not reported to our team during your stay, but rather after or at the time of checkout. This is particularly relevant because our team was available throughout your stay to address any concerns. By not reporting these matters when they occurred, we were not given the opportunity to inspect them, correct them, or send our staff to address them while you were still at the property.<br/>Regarding the television in the children's room, this was an issue that you did report during your stay, and our team followed up on it promptly. The same applies to your other requests, including your request regarding the pool grotto. Our team remained available and followed up on the requests you actually communicated to us throughout your stay.<br/>Regarding the towels and other supplies, we make every effort to ensure that each property is properly prepared and stocked before every guest's arrival. However, if additional towels or other items were needed during your stay, we would have been happy to assist if you had notified us at the time. Since this was not reported to us during the stay, we were not given the opportunity to address it promptly.<br/>As for the presence of insects, the property is located in a warm environment with weather and humidity conditions that can occasionally cause ants or other small insects to appear unexpectedly, even when regular cleaning and pest-control measures are in place. Nevertheless, we take these comments seriously and continue taking the necessary measures to keep the property properly maintained.<br/>Most importantly, throughout your stay, our team promptly addressed the concerns that were actually reported to us and remained available to assist you. For this reason, we regret that the review includes issues that were not reported at the time they allegedly occurred, as this prevented us from having the opportunity to resolve them directly with you.<br/>We are always open to constructive feedback and use it to improve our properties and guest experience. At the same time, we believe reviews should accurately reflect both the condition of the property and the communication and assistance that were actually provided during the reservation.<br/>We appreciate your positive comments about the property and will continue working to provide our guests with a comfortable stay and a well-maintained home.<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "b2cac1b9a9221487e27553d134575d36",
+      "platform": "airbnb",
+      "reviewer_name": "Ross",
+      "reviewer_location": "Los Angeles, California",
+      "title": null,
+      "date": "2026-06-22",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great place and will be booking with this company again",
       "host_response": null,
       "is_recent": false
     },
@@ -146,6 +261,40 @@
       "is_recent": false
     },
     {
+      "id": "57cf031170d4cc5c285d92b073819926",
+      "platform": "airbnb",
+      "reviewer_name": "Destiny",
+      "reviewer_location": "6 years on Airbnb",
+      "title": null,
+      "date": "2026-06-14",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "We had an amazing weekend stay here for our bachelorette celebration and we will definitely be staying here again! Very beautiful house. The host(s) were all very communicative and helpful.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-06-01",
+        "body": "Thank you so much for your kind words Destiny 😊✨<br/>We are truly happy to hear that you had an amazing weekend celebrating your bachelorette at the house 💍🎉🏡 It means a lot to know you enjoyed your stay and found the home beautiful.<br/>We also really appreciate your mention of our communication — it was a pleasure hosting you and supporting you during your visit 🙏😊<br/>You are always welcome back anytime, we would be delighted to host you again in the future 🌴💫<br/>Warm regards,<br/>Carlos Sánchez"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "8acc96281d4393f4783e2a12178f1b8f",
+      "platform": "airbnb",
+      "reviewer_name": "Christian",
+      "reviewer_location": "Avondale, Arizona",
+      "title": null,
+      "date": "2026-06-12",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The place was great!! Accommodated our group well.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-07-01",
+        "body": "Hi Christian! 😊<br/>Thank you so much for your kind review! We're thrilled to hear that the property worked out so well for your group and that you had a great stay. 🌴✨<br/>It was a pleasure hosting you, and we truly appreciate you choosing to stay with us. We hope to welcome you back again for another wonderful visit in the future! ☀️🏡<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
+      },
+      "is_recent": false
+    },
+    {
       "id": "a988d57d472c69ea400e9ce75cf2a308",
       "platform": "kivoya",
       "reviewer_name": "Michael B.",
@@ -156,6 +305,23 @@
       "rating_max": 5.0,
       "body": "Direct booking through Kivoya was seamless. The estate exceeded all expectations for our corporate leadership meeting. The backyard resort pool is unmatched in the East Valley.",
       "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "4b277234ca7aff178fe819839d5f865e",
+      "platform": "airbnb",
+      "reviewer_name": "Jon",
+      "reviewer_location": "Roswell, Georgia",
+      "title": null,
+      "date": "2026-05-15",
+      "rating": 4.0,
+      "rating_max": 5.0,
+      "body": "Great home for big groups. Master bedroom needs a new mattress and one of showers had an inoperable faucet for hot water. The backyard was great but the house needs an overall deep clean.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-05-01",
+        "body": "Thank you for your feedback and for staying with us. We’re very happy to hear that you enjoyed the home and that it worked well for your group 😊<br/>We also truly appreciate you bringing these issues to our attention. We will share your comments regarding the mattress, the shower faucet, and the overall cleaning with our maintenance and housekeeping teams so they can be addressed promptly.<br/>We’re glad you enjoyed the backyard and hope to have the opportunity to host you again in the future 🌴🏡✨"
+      },
       "is_recent": false
     },
     {
@@ -176,6 +342,40 @@
       "is_recent": false
     },
     {
+      "id": "57e2c007688927f56695cd92089e27f0",
+      "platform": "airbnb",
+      "reviewer_name": "Maria",
+      "reviewer_location": "Highland Park, Illinois",
+      "title": null,
+      "date": "2026-05-05",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The home is AH-MAZING!!! The pictures do not do it justice. We had our family in for a wedding. It was the perfect place to make memories. The pool, basketball court, pool table offered something for every age. They were also able to allow us in earlier, which was a HUGE stress relief with family coming in at all time before the rehearsal dinner. The kitchen was stocked and was a chef’s kitchen that I only dream of having. Between the home and the response time, there is no better way to host. They do it right. So grateful for this beautiful home and the spot it holds in our family memories. Thank you!!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-05-01",
+        "body": "Thank you so much for your incredibly kind words! 😊 It truly means a lot to us to know that your family was able to create such special memories during such an important occasion.<br/>You are such a lovely person, and it was honestly a pleasure hosting you and your family. Comments like yours are the reason we love what we do! 🌴✨<br/>We’re so happy the home, amenities, and early check-in helped make everything smoother and more enjoyable for your wedding celebration.<br/>Thank you again for choosing to stay with us, and we would absolutely love to host you again anytime in the future! 💙<br/>Best regards,<br/>Carlos Sánchez"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "0b3b3b319673c71e8a2970c869821e11",
+      "platform": "airbnb",
+      "reviewer_name": "Jason",
+      "reviewer_location": "3 years on Airbnb",
+      "title": null,
+      "date": "2026-04-26",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great place, great location and great memories made! Will be back for sure!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-05-01",
+        "body": "Thank you so much for your kind words! 😊 We’re thrilled to hear you enjoyed the place, the location, and created great memories during your stay. 🌴✨<br/>It was truly a pleasure hosting you, and we’ll be very happy to welcome you back anytime in the future!<br/>Best regards,<br/>Carlos Sánchez"
+      },
+      "is_recent": false
+    },
+    {
       "id": "e5c6a1b2c3d4e5f6a7b8c9d0e1f2a3b4",
       "platform": "vrbo",
       "reviewer_name": "Jennifer L.",
@@ -189,6 +389,40 @@
       "is_recent": false
     },
     {
+      "id": "9e6e0eb0b2a9861465ef38821e6ef9fd",
+      "platform": "airbnb",
+      "reviewer_name": "Nathan",
+      "reviewer_location": "Haverhill, Massachusetts",
+      "title": null,
+      "date": "2026-04-12",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Such an incredible home and an awesome backyard! <br/>The hosts are quick to respond, and certainly know how to provide an amazing place & experience to enjoy a trip out to AZ! <br/>Would absolutely stay here again and 10/10 would recommend!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-05-01",
+        "body": "Thank you so much for your amazing review! 😊 We’re truly happy to hear that you enjoyed the home, the backyard, and your overall experience with us. 🌴✨<br/>It means a lot to know that our responsiveness and hospitality helped make your trip to Arizona even more enjoyable. Thank you as well for your recommendation — we truly appreciate it! ⭐<br/>It was a pleasure hosting you, and we would absolutely love to welcome you back anytime in the future!<br/>Best regards,<br/>Carlos Sánchez"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "4ce9812992828ea5835804da50422f38",
+      "platform": "airbnb",
+      "reviewer_name": "Brian",
+      "reviewer_location": "Oakland, California",
+      "title": null,
+      "date": "2026-03-29",
+      "rating": 4.0,
+      "rating_max": 5.0,
+      "body": "We had a great stay",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-04-01",
+        "body": "Thank you for your stay, see you soon!!"
+      },
+      "is_recent": false
+    },
+    {
       "id": "f1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
       "platform": "booking",
       "reviewer_name": "Elena R.",
@@ -198,6 +432,961 @@
       "rating": 10.0,
       "rating_max": 10.0,
       "body": "Spacious, clean, and beautifully appointed. Outdoor heated pool was 86 degrees and fantastic for the chilly spring evenings. The Kivoya staff was courteous and attentive.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "9ad320b9c745d4dbe0b597843fb8efdb",
+      "platform": "airbnb",
+      "reviewer_name": "Marc",
+      "reviewer_location": "Ripon, California",
+      "title": null,
+      "date": "2026-03-23",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The house is beautiful and the backyard is very nice. our family and friends had a great time and we will definitely be back next year.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "6ba435d3d1a11d3deaa756cff8c67b1f",
+      "platform": "airbnb",
+      "reviewer_name": "Rahim",
+      "reviewer_location": "Burnaby, Canada",
+      "title": null,
+      "date": "2026-03-16",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The property was well worth the price. The pool and outdoor area were fantastic. Overall, great stay.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "54cf9d8b08da9c7734bc12c880e6048d",
+      "platform": "airbnb",
+      "reviewer_name": "Micah",
+      "reviewer_location": "Phoenix, Arizona",
+      "title": null,
+      "date": "2026-03-13",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Wonderful Host.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "bf5c8e6bceb2ec969f103034df812123",
+      "platform": "airbnb",
+      "reviewer_name": "Chontell",
+      "reviewer_location": "Columbia, South Carolina",
+      "title": null,
+      "date": "2026-03-08",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "This home was absolutely amazing. It was beautiful, spacious, and perfect for hosting our executive retreat. The space was clean, comfortable, and had everything we needed for a relaxing and productive getaway. Our group had a wonderful experience and truly enjoyed every moment there. Thank you for creating such a welcoming space. We would definitely love to return in the future.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "fb4629d3095c4ab5b456f22603db780d",
+      "platform": "airbnb",
+      "reviewer_name": "Nicholas",
+      "reviewer_location": "2 years on Airbnb",
+      "title": null,
+      "date": "2026-02-22",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great house. Tons of space, and very clean. The backyard is fantastic.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-02-01",
+        "body": "Thank you Mr. Nicholas for your past stay. Thank you for your review. Hope we can see you back again. <br/>Regards!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "800611d470426f48bc7baa416d2cc11a",
+      "platform": "airbnb",
+      "reviewer_name": "Sam",
+      "reviewer_location": "Tucson, Arizona",
+      "title": null,
+      "date": "2026-02-15",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Kivoya is one of the best Host that we ever deal with<br/>Always responsive and helpful",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2026-02-01",
+        "body": "Hello Mr. Sam, thank you so much for your review, your stay. Hope we can see you back. Regards!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "f7bf8ea8efeb33bc01fd9103f34e2bd8",
+      "platform": "airbnb",
+      "reviewer_name": "Danny",
+      "reviewer_location": "Huntington, New York",
+      "title": null,
+      "date": "2026-01-26",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Had a great stay at this beautiful home. Outdoor amenities were amazing as well and the house was better than the photos. Would recommend and also come back!",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "f91e3c544c78cb821b46d83bebf5f960",
+      "platform": "airbnb",
+      "reviewer_name": "Lisa",
+      "reviewer_location": "8 years on Airbnb",
+      "title": null,
+      "date": "2025-11-24",
+      "rating": 2.0,
+      "rating_max": 5.0,
+      "body": "Nice, large house with a great backyard. However, the front door smart lock didn't work most of the time and was very inconvenient. Even after someone came out to fix it, the door wasnt unlocking after the first time. The stove wasn't working upon arrival and prevented us from cooking a few meals with the family. I'm hoping these inconveniences get addressed for future guests. Beautiful home, but wouldn't book this again.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-12-01",
+        "body": "Hi Lisa, thank you for sharing your feedback. We’re glad you enjoyed the home and backyard, and we’re sorry for the inconvenience you experienced with the front door lock during your stay. Our team adjusted it the next day, and it is now working properly.<br/>We also appreciate your patience with the stove issue, which was resolved the same day once the gas company arrived. Everything has been functioning well since.<br/>We take great pride in offering a smooth, comfortable, and high-quality experience for all our guests. This home has consistently received five-star reviews, and we remain committed to maintaining that standard so future guests can book with confidence and enjoy a wonderful stay."
+      },
+      "is_recent": false
+    },
+    {
+      "id": "5fe93237eb1c3fafb0e76b79aa10466d",
+      "platform": "airbnb",
+      "reviewer_name": "Chris",
+      "reviewer_location": "Helena, Montana",
+      "title": null,
+      "date": "2025-11-18",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "great stay. wonderful house and the host was super responsive. we had a great family trip and would gladly return. highly recommend",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-11-01",
+        "body": "Thank you very much for your review and staying with us!! Hope we can see you back again. <br/>Regards"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "d299f3072b3241333cd7c554f38b7ef9",
+      "platform": "airbnb",
+      "reviewer_name": "Hunter",
+      "reviewer_location": "Boston, Massachusetts",
+      "title": null,
+      "date": "2025-10-30",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The house was more incredible in person. The host was fast to communicate. I will be definitely booking another stay at this amazing house.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-11-01",
+        "body": "Hello Mr. Hunter, thank you so much for your review. Happy you had a nice time and enjoyed! Hope we can see you back. Regards!<br/>Carmen Canez"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "8af72c37757455a9c68bcc5e20c2ec2b",
+      "platform": "airbnb",
+      "reviewer_name": "Javier",
+      "reviewer_location": "Long Beach, California",
+      "title": null,
+      "date": "2025-10-25",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Everything was terrific! Thank you!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-11-01",
+        "body": "Thank you very much. Hope we can see you back. Regards!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "7074a63abbe62def20caae1d25e8e54c",
+      "platform": "airbnb",
+      "reviewer_name": "Lauren",
+      "reviewer_location": "Chandler, Arizona",
+      "title": null,
+      "date": "2025-10-12",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "We had a easy and breezy check in and check out expereince. The host company was very responsive and quick to respond to any questions I had. The grounds are beautiful and private and were perfect for hosting my wedding party members for the night before and day of the wedding to get ready. I would not hesitate to recommend staying at this listing with this host!",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "f3213eaa7180d44599fe6a9ca5e3412f",
+      "platform": "airbnb",
+      "reviewer_name": "Carley",
+      "reviewer_location": "5 years on Airbnb",
+      "title": null,
+      "date": "2025-10-06",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Loved the house for the group we had. We spent most of our time outside with the pool, basketball court, and outdoor tables. We wish we could have had another day spent at the house!",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "0461a429170b33e0f1858df462a9fb28",
+      "platform": "airbnb",
+      "reviewer_name": "Nicole",
+      "reviewer_location": "Catalina, Arizona",
+      "title": null,
+      "date": "2025-10-02",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "This home was amazing.  It is perfect for a large group who doesn't want to be on top of each other. The living space, bedrooms and bathrooms were all phenomenal and having an extra guest house was amazing.  Thank you for letting us stay here.  It was a perfect place for our team to get away, plan and think.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-10-01",
+        "body": "Thank you for your review, we hope to see you soon!!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "e7b7f930f21e7a5146b43a2ccf4e1e53",
+      "platform": "airbnb",
+      "reviewer_name": "Ruben",
+      "reviewer_location": "Fallbrook, California",
+      "title": null,
+      "date": "2025-09-07",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great place to stay. The neighborhood felt very safe. Everything is also very close by.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-10-01",
+        "body": "Thanks for staying with us, you’re welcome back any time"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "6aa316bf17396b9a3a53fdc086a0fc44",
+      "platform": "airbnb",
+      "reviewer_name": "John",
+      "reviewer_location": "Spring Valley, California",
+      "title": null,
+      "date": "2025-08-10",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "We had a wonderful stay at this Airbnb! The location couldn’t have been better – so convenient and close to all the local attractions, making it super easy to explore the area. Communication with the host was top-notch; they were always quick to respond and provided clear, helpful instructions. The apartment itself was spotless – you can tell the host really cares about keeping the space clean and comfortable. I felt right at home from the moment I arrived. Highly recommend this place to anyone looking for a relaxing and hassle-free stay!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Hello John,<br/>Thank you so much for your kind words. We're glad to hear that you found the location and communication impeccable, and that you felt at home from the very first moment. Taking care of every detail and keeping the space clean and welcoming is something we take very seriously.<br/>Thank you for recommending our place and for highlighting how easy everything was. We'd love to welcome you back for another relaxing and hassle-free stay!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "d977193743f4866719d15093ac8f526c",
+      "platform": "airbnb",
+      "reviewer_name": "Mileah",
+      "reviewer_location": "5 years on Airbnb",
+      "title": null,
+      "date": "2025-07-27",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "We stayed here for a family girls trip. Upon entering, we were in awe of how beautiful the outside of the house was. Once we entered, we felt the same about the interior, a beautiful entry, clean interior, plenty of space, as well as a beautiful yard with games. The pool was BIG and spotless. The temperature was always perfect! Not too hot or cold. We never had to skim the pool of any bugs our whole stay either. This spacious house was PERFECT for our stay and had everything we needed. We will be coming back for more!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Hello Mileah,<br/>Thank you so much for sharing your detailed experience! We're delighted to hear that the home's exterior and interior design made a great impression on you from the very first moment. It's wonderful that you highlighted the spaciousness, the beautiful patio, the games, and, of course, the large, immaculate, and perfectly heated pool. Knowing that everything was ready to enjoy without worrying about insects really makes us happy.<br/>We're thrilled to know that you consider the house \"PERFECT\" for your group and that you plan to return. It would be an honor to welcome you back and continue contributing to your memorable getaways. We look forward to seeing you with open arms!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "07cb08ceac41509901a88e0e7f11c766",
+      "platform": "airbnb",
+      "reviewer_name": "Sylvester",
+      "reviewer_location": "Las Vegas, Nevada",
+      "title": null,
+      "date": "2025-07-13",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Excellent and facilitated all our needs for a great weekend",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you so much for staying with us, we appreciate your kind words. <br/>You are always welcome back!<br/>Aaron Higuera"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "d016ba930945818adaae714f21bf47c5",
+      "platform": "airbnb",
+      "reviewer_name": "Evangelina",
+      "reviewer_location": "Tempe, Arizona",
+      "title": null,
+      "date": "2025-06-25",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Felt like home",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "We are glad you enjoyed your stay in Villa del Sol! <br/>You are welcome back any time you want!<br/>Aaron Higuera"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "a4b7ac3a69df60fb48dddcf2ca38d952",
+      "platform": "airbnb",
+      "reviewer_name": "Aaron",
+      "reviewer_location": "Gilbert, Arizona",
+      "title": null,
+      "date": "2025-06-23",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great place, great host!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you so much for your kind words! <br/>You are always welcome back whenever you are in town. <br/>Aaron Higuera"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "49b9abc61ed93158ab632647e69b39d0",
+      "platform": "airbnb",
+      "reviewer_name": "John",
+      "reviewer_location": "4 years on Airbnb",
+      "title": null,
+      "date": "2025-06-04",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "-",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-10-01",
+        "body": "Thank you"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "3b267ead1566333df16e3374b42d4252",
+      "platform": "airbnb",
+      "reviewer_name": "Ben",
+      "reviewer_location": "Rye, New York",
+      "title": null,
+      "date": "2025-05-18",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Perfect",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-06-01",
+        "body": "Thank you Ben for your review, and we hope to see you soon!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "45105bab6e5c2646512f57bf44db116e",
+      "platform": "airbnb",
+      "reviewer_name": "Aaron",
+      "reviewer_location": "Toronto, Canada",
+      "title": null,
+      "date": "2025-05-04",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great place to stay with a big group. Very spacious and the backyard is huge.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-06-01",
+        "body": "Hi Aaron,<br/>Thank you for your comments  and we hope to see you soon!!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "4e386414566f17839e3508fcf4a6756c",
+      "platform": "airbnb",
+      "reviewer_name": "Ryan",
+      "reviewer_location": "5 years on Airbnb",
+      "title": null,
+      "date": "2025-04-27",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Amazing place to stay. Pool is massive. Putting green and basketball hoop are a nice touch. Was comfortably able to fit 16 people.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-04-01",
+        "body": "Thank you for your stay!! we hope to see you soon!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "4d63d0a000c9450b5fbe7de507711b0d",
+      "platform": "airbnb",
+      "reviewer_name": "Sarah",
+      "reviewer_location": "North Bend, Washington",
+      "title": null,
+      "date": "2025-04-13",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "This was the perfect place for our extended family to stay during a family wedding. There was plenty of space for all of us. Alma and her team went above and beyond to accommodate both an early checkin and a late check out. They were also quick to respond when we had questions. Thank you so much for everything you did.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-04-01",
+        "body": "Hello Sarah, good morning! Thank you very much for your review and information provided. Will sure look into this. Happy to hear all was good and had a nice time."
+      },
+      "is_recent": false
+    },
+    {
+      "id": "5a3b21c0b454a99441fb0463bbf9ddab",
+      "platform": "airbnb",
+      "reviewer_name": "Patrick",
+      "reviewer_location": "Novi, Michigan",
+      "title": null,
+      "date": "2025-04-09",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "This house is awesome with great amenities such as the heated pool and large back yard for a large group! The host was very accommodating and the communication between us was excellent. <br/>Overall our stay was excellent and we will be looking to book here again this time next year. <br/>Pat Parsons",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you Patrick for your comments and hopefuly we could see you soon!!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "18ee568372eb7d60aea1cd6857b655c9",
+      "platform": "airbnb",
+      "reviewer_name": "Yvette",
+      "reviewer_location": "Scottsdale, Arizona",
+      "title": null,
+      "date": "2025-03-16",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "We had a wonderful stay at Villa Del Sol. The house was beautiful. Our group felt comfortable; it truly felt like a home away from home. The host was kind, welcoming, and very responsive to all of our needs, making sure we had everything we needed for a perfect stay. Our family had such a great time, we couldn’t be happier!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-03-01",
+        "body": "Hello Mrs. Yvette, thank you so much for your review. Appreciate your feedback and happy to hear you had a great time. Will sure see you back again. Regards!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "f3c69ef3e4d3a318fc922a21cd898b73",
+      "platform": "airbnb",
+      "reviewer_name": "Nikki",
+      "reviewer_location": "Boston, Massachusetts",
+      "title": null,
+      "date": "2025-02-25",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Our stay was awesome! Kivoya was super responsive and quick with communication! The house was stunning and in a great location to where our plans were. We definitely plan to come back!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-03-01",
+        "body": "Hello Nikki, Happy to hear you had a nice time and enjoyed your past stay. Will see you back again. Regards!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "3ae5c06ea45290ddfefeae6393ea6f94",
+      "platform": "airbnb",
+      "reviewer_name": "Joe",
+      "reviewer_location": "Wheeling, West Virginia",
+      "title": null,
+      "date": "2025-02-10",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The place was great for our large group. Lots of space and activities. A few restaurants and stores within a half mile. The outdoor area was great and would be very nice in the spring or fall especially.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "HelloJoe,<br/>Thank you so much for sharing your experience with us. We're glad to hear that our space was ideal for your large group and that you enjoyed both the outdoor area and the convenience of having restaurants and shops nearby. We love that the setting was so inviting for everyone, especially with the potential it has in spring or fall.<br/>It will be a pleasure to welcome you again and provide another enjoyable stay. We hope to see you soon!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "732e81a010b208a0cf8db619e240d409",
+      "platform": "airbnb",
+      "reviewer_name": "Kristin",
+      "reviewer_location": "Castle Rock, Colorado",
+      "title": null,
+      "date": "2025-02-02",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great place for multiple people! Accomodated 13 individuals easily. Large kitchen, well stocked and host was super responsive when we needed some assistance. Thanks for a great stay!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Hello Kristin, We're glad to hear that our space was ideal for your large group and we hope to see you soon!!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "c8ab0fc9275ce09fc461aac9021d8769",
+      "platform": "airbnb",
+      "reviewer_name": "Wil",
+      "reviewer_location": "Phoenix, Arizona",
+      "title": null,
+      "date": "2025-01-26",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Nice",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you! We're glad you enjoyed your stay. You're welcome back anytime!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "ebdeb205dbdac934817e9c9d5d545c73",
+      "platform": "airbnb",
+      "reviewer_name": "James",
+      "reviewer_location": "Oceanside, New York",
+      "title": null,
+      "date": "2025-01-19",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The place was fantastic pool clean and refreshing kitchen was amazing would highly recommend",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you so much! We're thrilled to hear you enjoyed the pool and kitchen. Really appreciate the recommendation — you're welcome back anytime!<br/>-Aaron Higuera"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "77dee9158f5f01c0761797afc59fa17d",
+      "platform": "airbnb",
+      "reviewer_name": "Benson",
+      "reviewer_location": "2 years on Airbnb",
+      "title": null,
+      "date": "2024-10-31",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "This house was amazing!  Just like the pictures.  Enjoyed our time here!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you! We're so happy to hear you enjoyed your stay and that the house lived up to your expectations. You're welcome back anytime!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "9c47a02ab3d5f57974f62f3a9b213452",
+      "platform": "airbnb",
+      "reviewer_name": "Anthony",
+      "reviewer_location": "Rockledge, Pennsylvania",
+      "title": null,
+      "date": "2024-09-30",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Place was awesome!!!!! Any questions I had I was able to get a fast response!!! High recommend this place!",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you so much! We're thrilled you had a great stay and that communication was smooth. We really appreciate the recommendation — you're welcome back anytime!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "071914459ff81b83ef164fe20ea2f2ad",
+      "platform": "airbnb",
+      "reviewer_name": "Griffin",
+      "reviewer_location": "Las Vegas, Nevada",
+      "title": null,
+      "date": "2024-09-16",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great home to stay in with a big family/group. Pool was nice, rooms were great, all around great experience.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you! We're so glad the home worked well for your group and that you enjoyed the pool and overall experience. We'd love to host you again anytime!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "c293483e922ae399bc4af14e46a7739b",
+      "platform": "airbnb",
+      "reviewer_name": "Shun-Te",
+      "reviewer_location": "Tainan City, Taiwan",
+      "title": null,
+      "date": "2024-09-01",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "It was a great trip. The house is terrific and fit our group.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2025-08-01",
+        "body": "Thank you! We’re so glad the house was a good fit for your group and that you had a great trip. You’re welcome back anytime!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "a14b7a047c5f8b8df8fb4dc38696ceea",
+      "platform": "airbnb",
+      "reviewer_name": "Elie",
+      "reviewer_location": "Tempe, Arizona",
+      "title": null,
+      "date": "2024-07-28",
+      "rating": 4.0,
+      "rating_max": 5.0,
+      "body": "Beautiful, clean home, friendly and responsive host. Minor issues for being a luxury property, I emailed the host with my comments in hopes of making this a more perfect experience for future guests.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "201342a5d3e859ab01bf6b923243fd1b",
+      "platform": "airbnb",
+      "reviewer_name": "Izabella",
+      "reviewer_location": "Phoenix, Arizona",
+      "title": null,
+      "date": "2024-06-30",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great home to stay at! Would definitely stay there again.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2024-07-01",
+        "body": "Thank you for your comments and we hope to see you soon!!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "6cedbff6f18abcd95b32b594964d7cf9",
+      "platform": "airbnb",
+      "reviewer_name": "Sharmane",
+      "reviewer_location": "Tulalip, Washington",
+      "title": null,
+      "date": "2024-05-27",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Host was very responsive and accommodating to my requests. Very beautiful home and would recommend to others.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "58700ca26951ae564bf3f0589c3174c5",
+      "platform": "airbnb",
+      "reviewer_name": "Brayden",
+      "reviewer_location": "Fort Macleod, Canada",
+      "title": null,
+      "date": "2024-05-19",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The best host. Very caring. Place was phenomenal.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "4878d622c0210eddd61b859d079c0aa9",
+      "platform": "airbnb",
+      "reviewer_name": "Jacob",
+      "reviewer_location": "San Diego, California",
+      "title": null,
+      "date": "2024-04-28",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Awesome house with a beautiful backyard. Host was responsive and easy to talk to. Home was clean and in a good location. It's about 23 min from Scottsdale but has lots of restaurants around it. Not far from a Costco either. 5/5.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "9df0e058c43d9f461c80f76abc805527",
+      "platform": "airbnb",
+      "reviewer_name": "Mike",
+      "reviewer_location": "Hudson, Massachusetts",
+      "title": null,
+      "date": "2024-04-07",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "House was amazing. Perfect spot for a larger group.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2024-04-01",
+        "body": "Thank you for your stay and we hope to see you soon!!!"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "1c759ef3cc9f8220053b5a7ae376568c",
+      "platform": "airbnb",
+      "reviewer_name": "Hank",
+      "reviewer_location": "Hermosa Beach, California",
+      "title": null,
+      "date": "2024-03-24",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "This house was awesome and absolutely perfect for our group. Lots of space and room to do things and the hosts were very helpful and responsive! Would recommend to anyone with a large group",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "f838159ecc9fd59f46c2b595a040c104",
+      "platform": "airbnb",
+      "reviewer_name": "Carlos",
+      "reviewer_location": "New York, New York",
+      "title": null,
+      "date": "2024-02-25",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great property, we came for work and had a large team, the house is great and obviously cool with all the amenities. Everything was very comfortable and clean. Highly recommend.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2024-02-01",
+        "body": "Thank you Mr. Fragio. Hope we can see you back again. Regards! Kivoya Team"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "5faf759e8cc0bad472bc0d4805e9c275",
+      "platform": "airbnb",
+      "reviewer_name": "Bronson",
+      "reviewer_location": "Tempe, Arizona",
+      "title": null,
+      "date": "2024-01-15",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Everything about this experience was amazing, truly couldn't ask for more.",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2024-01-01",
+        "body": "Thank you Mr. Bronson. Hope we can see you back again. Regards! Kivoya Team"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "175ec1119b9a5d89295a36586ff3772c",
+      "platform": "airbnb",
+      "reviewer_name": "Lisa",
+      "reviewer_location": "Santa Clarita, California",
+      "title": null,
+      "date": "2023-12-23",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Loved our stay! Thank you!",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "ee1eb492450f25568225fcf1fc48ad4d",
+      "platform": "airbnb",
+      "reviewer_name": "Melvin",
+      "reviewer_location": "5 years on Airbnb",
+      "title": null,
+      "date": "2023-11-27",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "My family really enjoyed our stay. The host was very responsive and accommodating.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "47c7d0e367ed6d4e06cbf76d7d074bd4",
+      "platform": "airbnb",
+      "reviewer_name": "Victor",
+      "reviewer_location": "Burr Ridge, Illinois",
+      "title": null,
+      "date": "2023-10-22",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "This home was perfect for our stay.  We were in town for our daughter's destination wedding, and the home served as a base for the whole family, a place for my daughters to work on wedding projects, and a place for the bridesmaids to get ready on the morning of the wedding.  The outside area and the pool were great for hanging out.  We also loved the area -- close to everything you could want.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "ab21deb1d17fdef7d69acbf27398c1f9",
+      "platform": "airbnb",
+      "reviewer_name": "Roberto",
+      "reviewer_location": "Phoenix, Arizona",
+      "title": null,
+      "date": "2023-08-22",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Lovely place, everything was perfect, the Host company was extremely responsive trough all the stay, Will  come back for sure",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "2bb14a73609c67bdf6aa2383b4344227",
+      "platform": "airbnb",
+      "reviewer_name": "Amber",
+      "reviewer_location": "Santa Clarita, California",
+      "title": null,
+      "date": "2023-08-10",
+      "rating": 4.0,
+      "rating_max": 5.0,
+      "body": "we enjoyed our stay and the kids loved the pool.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "c539bb7270da1ef039723971ca17e723",
+      "platform": "airbnb",
+      "reviewer_name": "Adriana",
+      "reviewer_location": "5 years on Airbnb",
+      "title": null,
+      "date": "2023-06-26",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great location and the house was absolutely beautiful. Very spacious and perfect for a large group. The pool was amazing and backyard was breathtaking.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "bf2bb01b241f0158044bbe62bbd8b622",
+      "platform": "airbnb",
+      "reviewer_name": "Lilie",
+      "reviewer_location": "Fremont, California",
+      "title": null,
+      "date": "2023-05-28",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "The place is beautiful.  Was perfect for our large family party of 10 adults and 6 kiddos.  Kitchen was perfect for preparing family breakfast and dinner and the grill outside kept our family happy at lunchtime!  The pool and backyard were perfect for family fun.  Wish the basketball hoop was functional as it was positioned pretty low; but the kids made the best of it.  <br/>The guest room is just steps from the main house and was perfect for my cousin, his wife and two kids to have their own space to retreat to when they wanted to be away from the larger group.  The beds are comfortable and clean, and the 4 1/2 bathrooms ensured all had plenty of options to shower and get ready to hit the town. <br/>Will definitely book again should we find ourselves Tempe bound.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "5dfd8736c225c438e58cc011ded577ca",
+      "platform": "airbnb",
+      "reviewer_name": "Kashif",
+      "reviewer_location": "Long Beach, California",
+      "title": null,
+      "date": "2023-05-07",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Beautiful place!",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "5c5b267767cac3c25e6012709909ac21",
+      "platform": "airbnb",
+      "reviewer_name": "Kimberly",
+      "reviewer_location": "6 years on Airbnb",
+      "title": null,
+      "date": "2023-01-01",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Wonderful place to come together in a large group.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "5f62472f63c442baae885c0780c95554",
+      "platform": "airbnb",
+      "reviewer_name": "Tim",
+      "reviewer_location": "Fremont, California",
+      "title": null,
+      "date": "2022-11-27",
+      "rating": 4.0,
+      "rating_max": 5.0,
+      "body": "Some minor issue, hot water is not working in one beds, which is very inconvenient. And it gets fixed by the 3rd day of our stays. But overall is good.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "a0be7ec2ef7dff2ed33f43034306c4b7",
+      "platform": "airbnb",
+      "reviewer_name": "Benjamin",
+      "reviewer_location": "Hoboken, New Jersey",
+      "title": null,
+      "date": "2022-11-07",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Had a great trip here",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "8ee361a51b86ec0ca56ce4f31e7a8716",
+      "platform": "airbnb",
+      "reviewer_name": "Pedro",
+      "reviewer_location": "Miami, Florida",
+      "title": null,
+      "date": "2022-10-16",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Huge and amazing house for a fun weekend of activities. Everything worked well and we had no issues for our large group",
+      "host_response": {
+        "responder_name": "Villa del Sol Host",
+        "date": "2022-10-01",
+        "body": "Thank you for you comments, we hope to see you soon!!\r<br/>\r<br/>Regards\r<br/>Kivoya Vacation Rentals"
+      },
+      "is_recent": false
+    },
+    {
+      "id": "a20faf9737288569ced77e3a3302e4f0",
+      "platform": "airbnb",
+      "reviewer_name": "Lucas",
+      "reviewer_location": "Costa Mesa, California",
+      "title": null,
+      "date": "2022-06-26",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Great communication throughout entire process and wonderful stay overall!",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "ec60a92de709de7bb4c11f3033b5e0d0",
+      "platform": "airbnb",
+      "reviewer_name": "Mary",
+      "reviewer_location": "Albuquerque, New Mexico",
+      "title": null,
+      "date": "2022-06-01",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Beautiful house!  Well maintained!  Excellent location!  Very attentive to our needs.  We definitely would recommend this house!!",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "59181e2bb11afc02a801fe1b560d1bb6",
+      "platform": "airbnb",
+      "reviewer_name": "Rachel",
+      "reviewer_location": "10 years on Airbnb",
+      "title": null,
+      "date": "2022-04-25",
+      "rating": 4.0,
+      "rating_max": 5.0,
+      "body": "The house in itself is a beautiful place.    There were a few minor hiccups, which the host took care of immediately.   Communication was quick.    And the pool is amazing.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "3f584e915af9d23f1b2a6987507b645b",
+      "platform": "airbnb",
+      "reviewer_name": "Jessica",
+      "reviewer_location": "Detroit, Michigan",
+      "title": null,
+      "date": "2022-04-10",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Amazing place to stay!! Host was so nice and communication was great. Would defiantly come back.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "d27a63be6dae2cce826961b48e29cad1",
+      "platform": "airbnb",
+      "reviewer_name": "Liz",
+      "reviewer_location": "Salt Lake City, Utah",
+      "title": null,
+      "date": "2022-03-29",
+      "rating": 4.0,
+      "rating_max": 5.0,
+      "body": "This house is amazing!  It worked well for our family.  There’s space for communal visiting as well as space for folks to retreat to when they need to work/a little peace and quiet.  The home is the cleanest AirBnB I’ve ever stayed in, and the host is the most responsive host I’ve ever dealt with.  We had a few minor hiccups, but each time the host responded to my message within just a few minutes.  Each issue was remedied almost immediately.  We’d stay again.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "585d955eb54986e5a98a160e078aaa1d",
+      "platform": "airbnb",
+      "reviewer_name": "Daniel",
+      "reviewer_location": "9 years on Airbnb",
+      "title": null,
+      "date": "2022-03-06",
+      "rating": 5.0,
+      "rating_max": 5.0,
+      "body": "Beautiful place with everything you need. Very willing to work with you and communication was great.",
       "host_response": null,
       "is_recent": false
     }

@@ -1,22 +1,28 @@
 # 🏷️ STR Competitive Pricing Advisory Report
 **Property**: Villa del Sol (920 E Carver Rd, Tempe, AZ)
-**Report Date**: 2026-09-15
+**Report Date**: 2026-09-16
 **Strategy**: Dynamic Luxury Benchmark (75th–80th Percentile with Lead-Time Tapering)
 
 ---
 
 ## 📊 Executive Summary
 - **Total Open Calendar Intervals**: 12
-- 🚨 **Urgent Adjustments (This Week)**: **9** intervals
+- 🚨 **Urgent Adjustments (This Week)**: **7** intervals
 - ⚠️ **Moderate Adjustments (Monthly Review)**: **1** intervals
-- ✅ **Competitive / On Target**: **2** intervals
+- ✅ **Competitive / On Target**: **4** intervals
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
 > Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
 ---
 
 ## ⚡ Market Compression & Scarcity Alerts
-*(No active market compression alerts detected across upcoming intervals.)*
+> ⚡ **Market Compression Alert for `2026-11-08 -> 2026-11-11`**: High scarcity compression: only 17/97 (17.5%) comps available for check-in 2026-11-08. Scarcity surge directive applied (+30% rate adjustment).
+> ⚡ **Market Compression Alert for `2026-12-27 -> 2026-12-31`**: High scarcity compression: only 17/97 (17.5%) comps available for check-in 2026-12-27. Scarcity surge directive applied (+30% rate adjustment).
+> ⚡ **Market Compression Alert for `2026-09-24 -> 2026-09-27`**: High scarcity compression: only 17/97 (17.5%) comps available for check-in 2026-09-24. Scarcity surge directive applied (+30% rate adjustment).
+> ⚡ **Market Compression Alert for `2026-09-27 -> 2026-09-30`**: High scarcity compression: only 0/97 (0.0%) comps available for check-in 2026-09-27. Scarcity surge directive applied (+30% rate adjustment).
+> ⚡ **Market Compression Alert for `2026-10-11 -> 2026-10-14`**: High scarcity compression: only 0/97 (0.0%) comps available for check-in 2026-10-11. Scarcity surge directive applied (+30% rate adjustment).
+> ⚡ **Market Compression Alert for `2026-10-26 -> 2026-10-29`**: High scarcity compression: only 0/97 (0.0%) comps available for check-in 2026-10-26. Scarcity surge directive applied (+30% rate adjustment).
+> ⚡ **Market Compression Alert for `2026-10-29 -> 2026-11-01`**: High scarcity compression: only 16/97 (16.5%) comps available for check-in 2026-10-29. Scarcity surge directive applied (+30% rate adjustment).
 
 ## 🎯 Recent Confirmed Competitor Sales Ledger (Past 7 Days)
 | Property Name | Stay Dates | Nights | Lead Days | Realized Rate | Quality-Adjusted Rate | Market Percentile | Status |
@@ -62,12 +68,6 @@
 | Game Time - 6 Bedroom Elite Vacation Paradise | `2027-07-18 -> 2027-07-22` | 4 | 308d | $515.50 | $515.50 | 25.0% | ✅ Confirmed |
 | Game Time - 6 Bedroom Elite Vacation Paradise | `2027-07-22 -> 2027-07-25` | 3 | 312d | $731.67 | $731.67 | 30.2% | ✅ Confirmed |
 | Game Time - 6 Bedroom Elite Vacation Paradise | `2027-07-25 -> 2027-07-29` | 4 | 315d | $515.50 | $515.50 | 25.5% | ✅ Confirmed |
-| HÓZHÓ | Golf Simulator, Pool, Theatre & Pickleball | `2026-12-03 -> 2026-12-06` | 3 | 86d | $4,121.33 | $3,378.14 | 100.0% | ✅ Confirmed |
-| Casa Mesa • Private Paradise w Pool, Putt, & Games | `2026-12-03 -> 2026-12-06` | 3 | 86d | $874.00 | $1,016.28 | 38.5% | ✅ Confirmed |
-| Luxe Oasis! Pool, Spa, Golf, Theater & Games! | `2026-12-06 -> 2026-12-10` | 4 | 89d | $592.75 | $559.20 | 25.0% | ✅ Confirmed |
-| Luxe Oasis! Pool, Spa, Golf, Theater & Games! | `2026-12-20 -> 2026-12-23` | 3 | 103d | $857.33 | $808.80 | 66.7% | ✅ Confirmed |
-| Spacious Fun Retreat: 8BR|4.5BTH|Pool|Game room | `2027-02-04 -> 2027-02-07` | 3 | 149d | $997.00 | $1,017.35 | 7.7% | ✅ Confirmed |
-| Minutes From Old Town Scottsdale, Sleeps 20 | `2027-03-21 -> 2027-03-25` | 4 | 194d | $1,359.25 | $1,247.02 | 54.5% | ✅ Confirmed |
 
 ---
 
@@ -76,15 +76,13 @@ The following dates have major pricing anomalies that require immediate update i
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $752 → $325 | 64 | $752 | $876 (77%) | $684 | $549 (24.2%) | 🔴 **+94.9%** | **$325** | $353–$920 (med $505, -34% vs Track Record) |
-| `2026-09-21 -> 2026-09-24` | Midweek | 3 | ↓ Reduce $399 → $249 | 54 | $399 | $566 (68%) | $497 | $427 (30.8%) | 🔴 **+58.7%** | **$249** | $347–$554 (med $427, -42% vs Track Record) |
-| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $399 → $249 | 46 | $399 | $566 (67%) | $560 | $494 (30.8%) | 🔴 **+45.6%** | **$249** | $347–$554 (med $427, -42% vs Track Record) |
-| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $554 → $353 | 51 | $554 | $679 (57%) | $762 | $580 (24.2%) | 🔴 **+42.1%** | **$353** | $353–$760 (med $535, -27% vs Track Record) |
-| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $249 | 64 | $399 | $566 (58%) | $613 | $476 (24.2%) | 🔴 **+37.0%** | **$249** | $333–$969 (med $472, -39% vs Track Record) |
-| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $490 → $327 | 61 | $490 | $615 (59%) | $680 | $547 (24.2%) | 🔴 **+36.0%** | **$327** | $365–$969 (med $523, -33% vs Track Record) |
-| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↓ Reduce $490 → $318 | 47 | $490 | $657 (53%) | $715 | $561 (24.2%) | 🔴 **+35.4%** | **$318** | $365–$969 (med $503, Aligned With Track Record) |
-| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $532 → $376 | 44 | $532 | $699 (75%) | $628 | $629 (50.8%) | 🔴 **+28.8%** | **$376** | $333–$554 (med $447, Aligned With Track Record) |
-| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $406 | 24 | $549 | $716 (71%) | $644 | $641 (49.6%) | 🔴 **+25.0%** | **$406** | $520–$1485 (med $648, -37% vs Track Record) |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $752 → $314 | 18 | $752 | $876 (94%) | $603 | $535 (24.2%) | 🔴 **+99.8%** | **$314** | $353–$920 (med $505, -34% vs Track Record) |
+| `2026-09-21 -> 2026-09-24` | Midweek | 3 | ↓ Reduce $399 → $249 | 30 | $399 | $566 (70%) | $486 | $374 (30.8%) | 🔴 **+81.1%** | **$249** | $347–$554 (med $427, -42% vs Track Record) |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $554 → $293 | 19 | $554 | $679 (74%) | $612 | $508 (24.2%) | 🔴 **+62.4%** | **$293** | $353–$760 (med $535, -36% vs Track Record) |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $490 → $277 | 21 | $490 | $615 (90%) | $585 | $487 (24.2%) | 🔴 **+52.8%** | **$277** | $365–$969 (med $523, -36% vs Track Record) |
+| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↓ Reduce $490 → $293 • High compression | 16 | $490 | $657 (69%) | $649 | $532 (39.2%) | 🔴 **+42.7%** | **$293** | $365–$969 (med $503, -30% vs Track Record) |
+| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $766 • High compression | 16 | $1060 | $1185 (100%) | $1020 | $1092 (72.6%) | 🔴 **+33.0%** | **$766** | $313–$1574 (med $605, +54% vs Track Record) |
+| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $381 • High compression | 16 | $549 | $716 (94%) | $549 | $613 (64.6%) | 🔴 **+30.7%** | **$381** | $520–$1485 (med $648, -37% vs Track Record) |
 
 ---
 
@@ -93,7 +91,7 @@ The following dates are 10%–25% off the target percentile for future dates:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $847 | 27 | $1060 | $1185 (74%) | $1078 | $1191 (57.6%) | 🟡 +21.9% | **$847** | $313–$1574 (med $605, +53% vs Track Record) |
+| `2026-12-03 -> 2026-12-06` | Weekend | 3 | ↓ Reduce $714 → $597 | 23 | $714 | $881 (74%) | $925 | $926 (52.2%) | 🟡 +15.4% | **$597** | $530–$1379 (med $657, Aligned With Track Record) |
 
 ---
 
@@ -102,18 +100,18 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $752 → $325 | 64 | $752 | $876 (77%) | $684 | $549 (24.2%) | 🔴 **+94.9%** | **$325** | $353–$920 (med $505, -34% vs Track Record) |
-| `2026-09-21 -> 2026-09-24` | Midweek | 3 | ↓ Reduce $399 → $249 | 54 | $399 | $566 (68%) | $497 | $427 (30.8%) | 🔴 **+58.7%** | **$249** | $347–$554 (med $427, -42% vs Track Record) |
-| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $399 → $249 | 46 | $399 | $566 (67%) | $560 | $494 (30.8%) | 🔴 **+45.6%** | **$249** | $347–$554 (med $427, -42% vs Track Record) |
-| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $554 → $353 | 51 | $554 | $679 (57%) | $762 | $580 (24.2%) | 🔴 **+42.1%** | **$353** | $353–$760 (med $535, -27% vs Track Record) |
-| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $249 | 64 | $399 | $566 (58%) | $613 | $476 (24.2%) | 🔴 **+37.0%** | **$249** | $333–$969 (med $472, -39% vs Track Record) |
-| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $490 → $327 | 61 | $490 | $615 (59%) | $680 | $547 (24.2%) | 🔴 **+36.0%** | **$327** | $365–$969 (med $523, -33% vs Track Record) |
-| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↓ Reduce $490 → $318 | 47 | $490 | $657 (53%) | $715 | $561 (24.2%) | 🔴 **+35.4%** | **$318** | $365–$969 (med $503, Aligned With Track Record) |
-| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $532 → $376 | 44 | $532 | $699 (75%) | $628 | $629 (50.8%) | 🔴 **+28.8%** | **$376** | $333–$554 (med $447, Aligned With Track Record) |
-| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $406 | 24 | $549 | $716 (71%) | $644 | $641 (49.6%) | 🔴 **+25.0%** | **$406** | $520–$1485 (med $648, -37% vs Track Record) |
-| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $847 | 27 | $1060 | $1185 (74%) | $1078 | $1191 (57.6%) | 🟡 +21.9% | **$847** | $313–$1574 (med $605, +53% vs Track Record) |
-| `2026-10-29 -> 2026-11-01` | Weekend | 3 | - | 56 | $599 | $766 (57%) | $857 | $866 (52.2%) | +2.6% | **$580** | $541–$1453 (med $679, Aligned With Track Record) |
-| `2026-12-03 -> 2026-12-06` | Weekend | 3 | - | 47 | $714 | $881 (62%) | $938 | $972 (52.2%) | +9.9% | **$635** | $530–$1379 (med $657, Aligned With Track Record) |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $752 → $314 | 18 | $752 | $876 (94%) | $603 | $535 (24.2%) | 🔴 **+99.8%** | **$314** | $353–$920 (med $505, -34% vs Track Record) |
+| `2026-09-21 -> 2026-09-24` | Midweek | 3 | ↓ Reduce $399 → $249 | 30 | $399 | $566 (70%) | $486 | $374 (30.8%) | 🔴 **+81.1%** | **$249** | $347–$554 (med $427, -42% vs Track Record) |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $554 → $293 | 19 | $554 | $679 (74%) | $612 | $508 (24.2%) | 🔴 **+62.4%** | **$293** | $353–$760 (med $535, -36% vs Track Record) |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $490 → $277 | 21 | $490 | $615 (90%) | $585 | $487 (24.2%) | 🔴 **+52.8%** | **$277** | $365–$969 (med $523, -36% vs Track Record) |
+| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↓ Reduce $490 → $293 • High compression | 16 | $490 | $657 (69%) | $649 | $532 (39.2%) | 🔴 **+42.7%** | **$293** | $365–$969 (med $503, -30% vs Track Record) |
+| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $766 • High compression | 16 | $1060 | $1185 (100%) | $1020 | $1092 (72.6%) | 🔴 **+33.0%** | **$766** | $313–$1574 (med $605, +54% vs Track Record) |
+| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $381 • High compression | 16 | $549 | $716 (94%) | $549 | $613 (64.6%) | 🔴 **+30.7%** | **$381** | $520–$1485 (med $648, -37% vs Track Record) |
+| `2026-12-03 -> 2026-12-06` | Weekend | 3 | ↓ Reduce $714 → $597 | 23 | $714 | $881 (74%) | $925 | $926 (52.2%) | 🟡 +15.4% | **$597** | $530–$1379 (med $657, Aligned With Track Record) |
+| `2026-09-27 -> 2026-09-30` | Midweek | 3 | - | 🔥 0 *(Near Sold Out)* | $399 | $566 (50%) | $0 | $0 (45.8%) | 0.0% | **$399** | $347–$554 (med $427, Aligned With Track Record) |
+| `2026-10-11 -> 2026-10-14` | Midweek | 3 | - | 🔥 0 *(Near Sold Out)* | $532 | $699 (50%) | $0 | $0 (65.8%) | 0.0% | **$532** | $333–$554 (med $447, Aligned With Track Record) |
+| `2026-10-26 -> 2026-10-29` | Midweek | 3 | - | 🔥 0 *(Near Sold Out)* | $399 | $566 (50%) | $0 | $0 (39.2%) | 0.0% | **$399** | $333–$969 (med $472, Aligned With Track Record) |
+| `2026-10-29 -> 2026-11-01` | Weekend | 3 | - | 16 | $599 | $766 (62%) | $784 | $977 (67.2%) | -9.1% | **$676** | $541–$1453 (med $679, Aligned With Track Record) |
 
 ---
 *Generated autonomously by STR Price Advisor Agent.*

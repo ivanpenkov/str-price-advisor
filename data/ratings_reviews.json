@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "last_updated": "2026-09-15T06:15:11.686911-07:00",
+  "last_updated": "2026-09-15T17:03:23.430631-07:00",
   "recent_window_days": 30,
   "recent_reviews_count": 4,
   "platforms": {
@@ -19,7 +19,7 @@
         "check_in": 4.92,
         "value": 4.73
       },
-      "last_scraped": "2026-09-15T06:15:09.966200-07:00",
+      "last_scraped": "2026-09-15T17:03:20.925688-07:00",
       "status": "ok",
       "harvested_count": 80,
       "harvest_ratio": 1.039
@@ -31,7 +31,7 @@
       "scale": "10.0",
       "rating_max": 10.0,
       "rating": 9.6,
-      "review_count": 34,
+      "review_count": 24,
       "badge": {
         "name": "Loved by Guests",
         "subtitle": "Top 10% of guest reviews in this area",
@@ -39,23 +39,22 @@
       },
       "sub_scores": {
         "cleanliness": 9.8,
-        "accuracy": 9.8,
-        "communication": 10.0,
-        "location": 9.6,
-        "check_in": 10.0
+        "check_in": 9.8,
+        "communication": 9.6,
+        "location": 9.8
       },
-      "last_scraped": "2026-09-15T06:15:11.644116-07:00",
-      "status": "partial_harvest",
-      "harvested_count": 2,
-      "harvest_ratio": 0.0588
+      "last_scraped": "2026-09-15T17:03:23.390999-07:00",
+      "status": "ok",
+      "harvested_count": 24,
+      "harvest_ratio": 1.0
     },
     "booking": {
       "platform_id": "booking",
       "display_name": "Booking.com",
       "url": "https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html",
       "scale": "10.0",
-      "rating": 9.4,
-      "review_count": 18,
+      "rating": 9.0,
+      "review_count": 3,
       "sub_scores": {
         "staff": 9.6,
         "facilities": 9.5,
@@ -65,27 +64,10 @@
         "location": 9.3,
         "free_wifi": 10.0
       },
-      "last_scraped": "2026-09-15T06:15:08.291968-07:00",
-      "status": "partial_harvest",
-      "harvested_count": 2,
-      "harvest_ratio": 0.1111
-    },
-    "kivoya": {
-      "platform_id": "kivoya",
-      "display_name": "Kivoya Direct",
-      "url": "https://www.kivoya.com/503802/",
-      "scale": "5.0",
-      "rating": 5.0,
-      "review_count": 12,
-      "sub_scores": {
-        "cleanliness": 5.0,
-        "communication": 5.0,
-        "property": 5.0
-      },
-      "last_scraped": "2026-09-15T06:15:05.479917-07:00",
-      "status": "partial_harvest",
-      "harvested_count": 1,
-      "harvest_ratio": 0.0833
+      "last_scraped": "2026-09-15T17:03:20.725093-07:00",
+      "status": "ok",
+      "harvested_count": 3,
+      "harvest_ratio": 1.0
     }
   },
   "reviews": [
@@ -118,7 +100,7 @@
       "body": "Excellent listing, house was clean and everything looked very nice. <br/>All aspexts of the reservation and booking went smoothly and their communication was excellent.",
       "host_response": {
         "responder_name": "Villa del Sol Host",
-        "date": "2026-09-08",
+        "date": "2026-09-01",
         "body": "Thank you so much for sharing your experience and for your kind words! We’re very happy to hear that you enjoyed the house and that everything went smoothly with your reservation. <br/>It was a pleasure hosting you, and we hope to have the opportunity to welcome you back again soon. <br/>You’ll always be welcome! 😊<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
       },
       "is_recent": true
@@ -233,7 +215,7 @@
       "body": "The home was beautiful, spacious, and suitable for a large family gathering, but it was not completely as depicted in the listing. I was initially disappointed by the late 5:00 p.m. check-in time. We had 14 overnight guests, which was within the 15-person limit, yet I was charged an additional fee for my son and my daughter-in-law, who lives in Tempe, to visit our family. I felt this was unreasonable. The home was also not properly stocked for our group. There were not enough bath towels, so we purchased additional towels from Walmart. We also bought pool items to enjoy during our stay. The television in the children’s room did not work. The owners should conduct inventory and maintenance checks before each reservation to ensure everything is functional and adequately supplied. Most importantly, we saw roaches and other bugs in several areas of the home. This property has great potential, but it needs better maintenance, pest control, and attention to detail.",
       "host_response": {
         "responder_name": "Villa del Sol Host",
-        "date": "2026-09-09",
+        "date": "2026-09-08",
         "body": "Thank you, Kerisha, for sharing your feedback. We are glad to hear that you found the property beautiful, spacious, and suitable for a large family gathering. However, we feel it is important to clarify several points, as some statements in this review do not accurately reflect what occurred during your stay or the communication documented through Airbnb.<br/>Regarding the additional guest, your reservation was for 14 guests, while the maximum occupancy of the property is 15 people. However, the family members you mentioned were additional visitors beyond the registered guests, and our house rules clearly state that outside visitors are not permitted without prior authorization. You were informed of the applicable additional guest charge and accepted it. In fact, in one of the messages in the Airbnb conversation, you reacted with a heart to our explanation, indicating that you understood and accepted the arrangement at the time. Therefore, this charge was neither unexpected nor imposed without prior notice.<br/>It is also important to clarify that several of the issues mentioned in this review were not reported to our team during your stay, but rather after or at the time of checkout. This is particularly relevant because our team was available throughout your stay to address any concerns. By not reporting these matters when they occurred, we were not given the opportunity to inspect them, correct them, or send our staff to address them while you were still at the property.<br/>Regarding the television in the children's room, this was an issue that you did report during your stay, and our team followed up on it promptly. The same applies to your other requests, including your request regarding the pool grotto. Our team remained available and followed up on the requests you actually communicated to us throughout your stay.<br/>Regarding the towels and other supplies, we make every effort to ensure that each property is properly prepared and stocked before every guest's arrival. However, if additional towels or other items were needed during your stay, we would have been happy to assist if you had notified us at the time. Since this was not reported to us during the stay, we were not given the opportunity to address it promptly.<br/>As for the presence of insects, the property is located in a warm environment with weather and humidity conditions that can occasionally cause ants or other small insects to appear unexpectedly, even when regular cleaning and pest-control measures are in place. Nevertheless, we take these comments seriously and continue taking the necessary measures to keep the property properly maintained.<br/>Most importantly, throughout your stay, our team promptly addressed the concerns that were actually reported to us and remained available to assist you. For this reason, we regret that the review includes issues that were not reported at the time they allegedly occurred, as this prevented us from having the opportunity to resolve them directly with you.<br/>We are always open to constructive feedback and use it to improve our properties and guest experience. At the same time, we believe reviews should accurately reflect both the condition of the property and the communication and assistance that were actually provided during the reservation.<br/>We appreciate your positive comments about the property and will continue working to provide our guests with a comfortable stay and a well-maintained home.<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
       },
       "is_recent": false
@@ -249,23 +231,6 @@
       "rating_max": 5.0,
       "body": "Great place and will be booking with this company again",
       "host_response": null,
-      "is_recent": false
-    },
-    {
-      "id": "8aa1848daaa3ee5723b7e289bf443f87",
-      "platform": "vrbo",
-      "reviewer_name": "Rachel W.",
-      "reviewer_location": "Denver, CO",
-      "title": "Perfect summer getaway with friends",
-      "date": "2026-06-15",
-      "rating": 9.8,
-      "rating_max": 10.0,
-      "body": "Spacious layout, beautiful pool, and very responsive host. Blender was a bit leaky when making smoothies, but everything else was 5-star quality. Highly recommend!",
-      "host_response": {
-        "responder_name": "Villa del Sol Host",
-        "date": "2026-06-16",
-        "body": "Thank you Rachel! We've replaced the blender pitcher and gasket. Hope to see you again next summer!"
-      },
       "is_recent": false
     },
     {
@@ -300,19 +265,6 @@
         "date": "2026-07-01",
         "body": "Hi Christian! 😊<br/>Thank you so much for your kind review! We're thrilled to hear that the property worked out so well for your group and that you had a great stay. 🌴✨<br/>It was a pleasure hosting you, and we truly appreciate you choosing to stay with us. We hope to welcome you back again for another wonderful visit in the future! ☀️🏡<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team"
       },
-      "is_recent": false
-    },
-    {
-      "id": "a988d57d472c69ea400e9ce75cf2a308",
-      "platform": "kivoya",
-      "reviewer_name": "Michael B.",
-      "reviewer_location": "New York, NY",
-      "title": "Unrivaled VIP experience",
-      "date": "2026-05-30",
-      "rating": 5.0,
-      "rating_max": 5.0,
-      "body": "Direct booking through Kivoya was seamless. The estate exceeded all expectations for our corporate leadership meeting. The backyard resort pool is unmatched in the East Valley.",
-      "host_response": null,
       "is_recent": false
     },
     {
@@ -381,19 +333,6 @@
         "date": "2026-05-01",
         "body": "Thank you so much for your kind words! 😊 We’re thrilled to hear you enjoyed the place, the location, and created great memories during your stay. 🌴✨<br/>It was truly a pleasure hosting you, and we’ll be very happy to welcome you back anytime in the future!<br/>Best regards,<br/>Carlos Sánchez"
       },
-      "is_recent": false
-    },
-    {
-      "id": "e5c6a1b2c3d4e5f6a7b8c9d0e1f2a3b4",
-      "platform": "vrbo",
-      "reviewer_name": "Jennifer L.",
-      "reviewer_location": "Dallas, TX",
-      "title": "Luxury oasis in Tempe",
-      "date": "2026-04-18",
-      "rating": 10.0,
-      "rating_max": 10.0,
-      "body": "We celebrated our 40th anniversary here with 14 family members. Ample parking, immaculate bedrooms, and a kitchen built for entertaining. Worth every penny.",
-      "host_response": null,
       "is_recent": false
     },
     {
@@ -496,6 +435,33 @@
       "is_recent": false
     },
     {
+      "id": "dc2be0379df2b2b05d97d2b1f048ad49",
+      "platform": "vrbo",
+      "reviewer_name": "Ryan D.",
+      "reviewer_location": null,
+      "title": null,
+      "date": "2026-03-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "This was a great property for our High School baseball team to stay. Very large, clean, and nice property in a quiet neighborhood. Alma was very responsive and we enjoyed our stay.",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2026-03-01",
+        "body": "Thank you for you review and we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 4 nights in Mar 2026",
+      "nights": 4,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy",
+        "value for money"
+      ]
+    },
+    {
       "id": "fb4629d3095c4ab5b456f22603db780d",
       "platform": "airbnb",
       "reviewer_name": "Nicholas",
@@ -528,6 +494,33 @@
         "body": "Hello Mr. Sam, thank you so much for your review, your stay. Hope we can see you back. Regards!"
       },
       "is_recent": false
+    },
+    {
+      "id": "c12371a0b8968beac27136427503a089",
+      "platform": "vrbo",
+      "reviewer_name": "Alexis W.",
+      "reviewer_location": null,
+      "title": "The perfect place to stay for a wedding!",
+      "date": "2026-02-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "The perfect place to stay for a wedding!",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2026-02-01",
+        "body": "Thank you for your stay and we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 3 nights in Feb 2026",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
     },
     {
       "id": "f7bf8ea8efeb33bc01fd9103f34e2bd8",
@@ -688,6 +681,32 @@
       "is_recent": false
     },
     {
+      "id": "089cc01b2fd90af075224fa62ae33d3b",
+      "platform": "vrbo",
+      "reviewer_name": "John H.",
+      "reviewer_location": null,
+      "title": "Great",
+      "date": "2025-08-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "Great",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2025-08-01",
+        "body": "Thank you for your feedback, we appreciate any comments that can help us know more about our guests experiences and areas of improvement. You are always welcome back. Best regards"
+      },
+      "stay_text": "Stayed 4 nights in Aug 2025",
+      "nights": 4,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ]
+    },
+    {
       "id": "d977193743f4866719d15093ac8f526c",
       "platform": "airbnb",
       "reviewer_name": "Mileah",
@@ -807,6 +826,33 @@
       "is_recent": false
     },
     {
+      "id": "f87e33f98b1e1f9c5edab454af716aef",
+      "platform": "vrbo",
+      "reviewer_name": "christy_hawley",
+      "reviewer_location": null,
+      "title": "Week stay large group",
+      "date": "2025-05-01",
+      "rating": 8.0,
+      "rating_max": 10.0,
+      "body": "Overall this was a beautiful property. It accommodated our group well. However upon arrival it was not equipped for 18 guests (bedding & towels) the property manager remedied it quickly. We asked that the water feature be turned on each day and it was only turned on once. Everything else was great except the king bed in room 3 was so broken down that a valley (divot) is completely visible when just looking at the bed. This needs to be replaced.",
+      "host_response": {
+        "responder_name": "Edgar Arias - Host",
+        "date": "2025-05-01",
+        "body": "Hello Christy, Thank you so much for taking the time to leave a review—we truly appreciate it. I want to sincerely apologize for the inconvenience you experienced with the water fountain. We did our best to set it up as requested on both occasions, but we’re grateful you brought this to our attention. We'll take a closer look to understand why it isn’t functioning properly, especially since it’s controlled through a mobile application. We’ll also check the bed you mentioned and make sure everything is in proper condition. Additionally, we'll be more mindful with the linens to ensure we always have enough prepared for our guests. Thanks again for your valuable feedback—it truly helps us improve! Warm regards, Edgar Arias"
+      },
+      "stay_text": "Stayed 6 nights in May 2025",
+      "nights": 6,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
+    },
+    {
       "id": "4e386414566f17839e3508fcf4a6756c",
       "platform": "airbnb",
       "reviewer_name": "Ryan",
@@ -858,6 +904,33 @@
       "is_recent": false
     },
     {
+      "id": "9338b36945d8966c795f466e698a31e3",
+      "platform": "vrbo",
+      "reviewer_name": "Dakota W.",
+      "reviewer_location": null,
+      "title": null,
+      "date": "2025-04-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "Liked: cleanliness, check-in, communication, location, listing accuracy",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2025-04-01",
+        "body": "Thank you for your comments and we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 3 nights in Apr 2025",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
+    },
+    {
       "id": "18ee568372eb7d60aea1cd6857b655c9",
       "platform": "airbnb",
       "reviewer_name": "Yvette",
@@ -873,6 +946,60 @@
         "body": "Hello Mrs. Yvette, thank you so much for your review. Appreciate your feedback and happy to hear you had a great time. Will sure see you back again. Regards!"
       },
       "is_recent": false
+    },
+    {
+      "id": "76ba3c74f98e1bd22a9ab5feb7874715",
+      "platform": "vrbo",
+      "reviewer_name": "Robert N.",
+      "reviewer_location": null,
+      "title": "Weekend in AZ",
+      "date": "2025-03-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "The property was spacious and great for a group! Perfect for a long weekend getaway.",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2025-03-01",
+        "body": "Thank you very much for review and your past stay. Looking forward to see you back. Regards!"
+      },
+      "stay_text": "Stayed 3 nights in Mar 2025",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
+    },
+    {
+      "id": "76c0fa38d3d5dcec0503c570007b1c1d",
+      "platform": "vrbo",
+      "reviewer_name": "Chad B.",
+      "reviewer_location": null,
+      "title": "Swaggy Tempe Pad",
+      "date": "2025-03-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "The house was incredible and even cooler than the pictures! Truly feels like your own swaggy mansion. Plenty of room, amazing back yard and pool, and comfortable spacious rooms to fit any party size. Highly recommend!",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2025-03-01",
+        "body": "Thank you for your comments and we hope to see you soon in any of the properties we manage."
+      },
+      "stay_text": "Stayed 3 nights in Mar 2025",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
     },
     {
       "id": "f3c69ef3e4d3a318fc922a21cd898b73",
@@ -926,6 +1053,33 @@
       "is_recent": false
     },
     {
+      "id": "69e5c1f57da017b772b0b351446cf025",
+      "platform": "vrbo",
+      "reviewer_name": "Elaine R.",
+      "reviewer_location": null,
+      "title": "Nice place good location",
+      "date": "2025-02-01",
+      "rating": 8.0,
+      "rating_max": 10.0,
+      "body": "Plenty of room for our party of 9. Pretty well stocked. A little short on some amenities like body wash shampoo and washcloths. But basic needs were pretty much there. Great location. Comfortable.",
+      "host_response": {
+        "responder_name": "Carmen Canez - Host",
+        "date": "2025-02-01",
+        "body": "Hello Elaine, good afternoon! Thank you for your review. Appreciate and will sure look for this enough amenities. Regards! Carmen Canez"
+      },
+      "stay_text": "Stayed 3 nights in Feb 2025",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
+    },
+    {
       "id": "c8ab0fc9275ce09fc461aac9021d8769",
       "platform": "airbnb",
       "reviewer_name": "Wil",
@@ -958,6 +1112,87 @@
         "body": "Thank you so much! We're thrilled to hear you enjoyed the pool and kitchen. Really appreciate the recommendation — you're welcome back anytime!<br/>-Aaron Higuera"
       },
       "is_recent": false
+    },
+    {
+      "id": "9986baca6c510b797f5c2f71bc836d8e",
+      "platform": "vrbo",
+      "reviewer_name": "Jennifer L.",
+      "reviewer_location": null,
+      "title": "The Perfect Compound",
+      "date": "2024-12-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "We stayed here for our wedding weekend and the house is GORGEOUS. The owners were very quick to respond and so friendly and accommodating. We’ve stayed at multiple different house rentals companies and this was by far the best. Thank you again!",
+      "host_response": {
+        "responder_name": "Alma Rosa - Host",
+        "date": "2024-12-01",
+        "body": "Hi Jennifer, We are very happy about your stay, We hope to see you soon!! Regards Alma Rosa"
+      },
+      "stay_text": "Stayed 2 nights in Dec 2024",
+      "nights": 2,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with partner, traveled with group"
+    },
+    {
+      "id": "a6740f9bf780758d15a16927660004ca",
+      "platform": "vrbo",
+      "reviewer_name": "Justina W.",
+      "reviewer_location": null,
+      "title": "Nice place for big group",
+      "date": "2024-11-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "The property manager was really responsive and friendly. There were a few issues with things not working when we arrived, but again, the property manager was prompt to address them even on Thanksgiving day. Ample parking, including use of the garage, and plenty of space for our large group with kids.",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2024-11-01",
+        "body": "Thank you Justina, We really appreciate your comments, and hope to see you soon!!"
+      },
+      "stay_text": "Stayed 3 nights in Nov 2024",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with family and young children"
+    },
+    {
+      "id": "9dab6f6757e15314b4d7ffe376e8f90d",
+      "platform": "vrbo",
+      "reviewer_name": "Jesus E.",
+      "reviewer_location": null,
+      "title": "Thank you!",
+      "date": "2024-11-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "We found the rental property to be very comfortable and spacious. Only issue we had was la casita toilet not flowing enough flush water",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2024-11-01",
+        "body": "thank you for your comments and we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 2 nights in Nov 2024",
+      "nights": 2,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
     },
     {
       "id": "77dee9158f5f01c0761797afc59fa17d",
@@ -1041,6 +1276,33 @@
       "is_recent": false
     },
     {
+      "id": "e2e6b105cd95b1811827e0cec17b8bfd",
+      "platform": "vrbo",
+      "reviewer_name": "Daesha H.",
+      "reviewer_location": null,
+      "title": "Beautiful home",
+      "date": "2024-07-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "The house is beautiful",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2024-07-01",
+        "body": "Thank you, we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 2 nights in Jul 2024",
+      "nights": 2,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
+    },
+    {
       "id": "201342a5d3e859ab01bf6b923243fd1b",
       "platform": "airbnb",
       "reviewer_name": "Izabella",
@@ -1082,6 +1344,32 @@
       "body": "The best host. Very caring. Place was phenomenal.",
       "host_response": null,
       "is_recent": false
+    },
+    {
+      "id": "167b084cdc9dccb85b982505168cb299",
+      "platform": "vrbo",
+      "reviewer_name": "Deb C.",
+      "reviewer_location": null,
+      "title": "Beautiful home",
+      "date": "2024-05-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "Enjoyed this very private beautiful house. Would stay again if need to be in Arizona. Love location!",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2024-05-01",
+        "body": "Thank you for your comments, we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 4 nights in May 2024",
+      "nights": 4,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ]
     },
     {
       "id": "4878d622c0210eddd61b859d079c0aa9",
@@ -1127,6 +1415,60 @@
       "is_recent": false
     },
     {
+      "id": "8d698852053174be02e695cf1dbc98c7",
+      "platform": "vrbo",
+      "reviewer_name": "John H.",
+      "reviewer_location": null,
+      "title": "Multi-generational vacation.",
+      "date": "2024-03-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "This property was perfect for our group. We all had a great time.",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2024-03-01",
+        "body": "Thank you for your comments and we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 5 nights in Mar 2024",
+      "nights": 5,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with family and young children"
+    },
+    {
+      "id": "d0037fffc2081289629f4f58add25671",
+      "platform": "vrbo",
+      "reviewer_name": "Michael M.",
+      "reviewer_location": null,
+      "title": "Phoenix work conference",
+      "date": "2024-03-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "Spacious, clean, and convenient! We'll stay again next year.",
+      "host_response": {
+        "responder_name": "Alma Rosa - Host",
+        "date": "2024-03-01",
+        "body": "Thank you Michael for your comments, We will be happy to be your host again!! Regards Alma Rosa"
+      },
+      "stay_text": "Stayed 5 nights in Mar 2024",
+      "nights": 5,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
+    },
+    {
       "id": "f838159ecc9fd59f46c2b595a040c104",
       "platform": "airbnb",
       "reviewer_name": "Carlos",
@@ -1142,6 +1484,33 @@
         "body": "Thank you Mr. Fragio. Hope we can see you back again. Regards! Kivoya Team"
       },
       "is_recent": false
+    },
+    {
+      "id": "5d4446e8b895bd74b0a594810c7fa38c",
+      "platform": "vrbo",
+      "reviewer_name": "Danny C.",
+      "reviewer_location": null,
+      "title": "Weekend stay",
+      "date": "2024-02-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "We had a great freakin time.",
+      "host_response": {
+        "responder_name": "Alma Rosa - Host",
+        "date": "2024-02-01",
+        "body": "Thank you, we are glad you liked it, and we hope to see you soon!! Regards. Alma Rosa"
+      },
+      "stay_text": "Stayed 3 nights in Feb 2024",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group"
     },
     {
       "id": "5faf759e8cc0bad472bc0d4805e9c275",
@@ -1187,6 +1556,32 @@
       "is_recent": false
     },
     {
+      "id": "5b9072ea39a1a6a3fada0d778fda8818",
+      "platform": "vrbo",
+      "reviewer_name": "Fred M.",
+      "reviewer_location": null,
+      "title": "Family time",
+      "date": "2023-11-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "This property was an excellent space for us to stay as extended family while we were in the area for a family wedding. There were lots of fun things to do at the house and shopping and groceries were close and accessible. The property manager was flexible with check in which allowed for us to get access to case out the kitchen before a big grocery shop. This was much appreciated. They also checked in with us to make sure everything was going well. If ever there was a question they were quick to respond. The kitchen was well equipped for feeding our large crew and the beds were comfortable. Thank you for a great stay. We would do it again.",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2023-11-01",
+        "body": "Thank you for your comments and we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 4 nights in Nov 2023",
+      "nights": 4,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ]
+    },
+    {
       "id": "47c7d0e367ed6d4e06cbf76d7d074bd4",
       "platform": "airbnb",
       "reviewer_name": "Victor",
@@ -1224,6 +1619,60 @@
       "body": "we enjoyed our stay and the kids loved the pool.",
       "host_response": null,
       "is_recent": false
+    },
+    {
+      "id": "1110819ef98cf03346c9195b0693df18",
+      "platform": "vrbo",
+      "reviewer_name": "Austin D.",
+      "reviewer_location": null,
+      "title": "Amazing house",
+      "date": "2023-08-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "The house was amazing for my family to all be together and have a relaxing time as well as feel super spacious for everyone that was staying. The house was well maintained and very clean",
+      "host_response": {
+        "responder_name": "Alma Rosa - Host",
+        "date": "2023-08-01",
+        "body": "Thank you for you comments. We hope to see you soon!! Regards Alma Rosa"
+      },
+      "stay_text": "Stayed 2 nights in Aug 2023",
+      "nights": 2,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with family and young children"
+    },
+    {
+      "id": "5a28b98f7be9aeb4359a9bf90ce638a5",
+      "platform": "vrbo",
+      "reviewer_name": "Milind R.",
+      "reviewer_location": null,
+      "title": "Nice stay",
+      "date": "2023-07-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "Our guests enjoyed swimming in nice swimming pool.",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2023-07-01",
+        "body": "Thank you for your comments, we hope to see you soon!!"
+      },
+      "stay_text": "Stayed 2 nights in Jul 2023",
+      "nights": 2,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ],
+      "traveled_with": "Traveled with group, traveled with family and young children"
     },
     {
       "id": "c539bb7270da1ef039723971ca17e723",
@@ -1265,6 +1714,84 @@
       "is_recent": false
     },
     {
+      "id": "a3dc64df5b87248bd4dd5b62999e3a97",
+      "platform": "vrbo",
+      "reviewer_name": "Rick G.",
+      "reviewer_location": null,
+      "title": "Perfect Place",
+      "date": "2023-03-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "Wonderful location, great home and wonderful management. Thank you for allowing us to stay....",
+      "host_response": {
+        "responder_name": "Alma Rosa - Host",
+        "date": "2023-03-01",
+        "body": "Thank for your comments Rick, We hope to see you soon!! Regards Alma Rosa"
+      },
+      "stay_text": "Stayed 5 nights in Mar 2023",
+      "nights": 5,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ]
+    },
+    {
+      "id": "20c4bccfe325a174d9c0ce3823a87e3f",
+      "platform": "vrbo",
+      "reviewer_name": "Orlin S.",
+      "reviewer_location": null,
+      "title": "Great House",
+      "date": "2023-03-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "Had a great time. The property is very nice as advertised. Management company communicated well and took care of our needs.",
+      "host_response": {
+        "responder_name": "Alma Rosa - Host",
+        "date": "2023-03-01",
+        "body": "Thank you for your comments, we hope to see you soon!! Regards. Alma Rosa"
+      },
+      "stay_text": "Stayed 3 nights in Mar 2023",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ]
+    },
+    {
+      "id": "69201734603a6b409fc8b3bdfc44d215",
+      "platform": "vrbo",
+      "reviewer_name": "Vivan C.",
+      "reviewer_location": null,
+      "title": "Would Go Back Again",
+      "date": "2023-03-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "This property was great for our large group! We were in town for the Chandler Rotary Invitational event. It was close to the high school, restaurants and stores. The hosts were very responsive to emails/texts & accommodating. The kids loved the pool, though they would have loved to spend more time in it if it was warmed up a bit more.",
+      "host_response": {
+        "responder_name": "VrboOwner - Premier Host",
+        "date": "2023-03-01",
+        "body": "Thank you very much for your comments, Hopefully we will see you again!! Regards"
+      },
+      "stay_text": "Stayed 3 nights in Mar 2023",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ]
+    },
+    {
       "id": "5c5b267767cac3c25e6012709909ac21",
       "platform": "airbnb",
       "reviewer_name": "Kimberly",
@@ -1302,6 +1829,34 @@
       "body": "Had a great trip here",
       "host_response": null,
       "is_recent": false
+    },
+    {
+      "id": "1f27f37804ee6c5bcdb6c2809fa8d163",
+      "platform": "vrbo",
+      "reviewer_name": "Kevin T.",
+      "reviewer_location": null,
+      "title": "Great house but very unenjoyable experience with property management company",
+      "date": "2022-11-01",
+      "rating": 2.0,
+      "rating_max": 10.0,
+      "body": "I have nothing but good things to say about the home. My problem was with the company that manages the rental. After our reservation was made and people were staying in the home for several nights, the rental company contacted me and asked for a photo of my face with my driver license visible in the photo. They also wanted a photo of the credit card used to make the reservation. They told me they had experienced fraud in the past so they wanted to verify my identity. I told them I was uncomfortable meeting these demands because of how those photos could potentially be misused (identity theft) and they told me that if I refused they would have to cancel the remainder of the reservation. I complied because I didn’t have anywhere to send the guests on such short notice, but I will make sure to never rent from this company again.",
+      "host_response": {
+        "responder_name": "Alma Rosa - Host",
+        "date": "2022-11-01",
+        "body": "Hi Kevin, We are sorry to hear that, unfortunately the request about identity verification was for the second reservation you make directly with us, since we do not have the information as VRBO does, we really appreciate the reservation you made with us and hopefully we can see you again, we are willing to offer you a special rate next time reserving directly with us. Regards Alma Rosa"
+      },
+      "stay_text": "Stayed 6 nights in Nov 2022",
+      "nights": 6,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "location",
+        "listing accuracy"
+      ],
+      "disliked": [
+        "communication"
+      ]
     },
     {
       "id": "8ee361a51b86ec0ca56ce4f31e7a8716",
@@ -1345,6 +1900,32 @@
       "body": "Beautiful house!  Well maintained!  Excellent location!  Very attentive to our needs.  We definitely would recommend this house!!",
       "host_response": null,
       "is_recent": false
+    },
+    {
+      "id": "ef1883e12a4e6a381b6fe23b1a7da9c8",
+      "platform": "vrbo",
+      "reviewer_name": "Wade G.",
+      "reviewer_location": null,
+      "title": "Great Stay and House",
+      "date": "2022-05-01",
+      "rating": 10.0,
+      "rating_max": 10.0,
+      "body": "The house exceeded expectations and the check-in/check-out process was seamless.",
+      "host_response": {
+        "responder_name": "Alma Rosa - Host",
+        "date": "2022-05-01",
+        "body": "Thank you Wade for your comments. See you soon!! Regards Alma Rosa"
+      },
+      "stay_text": "Stayed 3 nights in May 2022",
+      "nights": 3,
+      "is_recent": false,
+      "liked": [
+        "cleanliness",
+        "check-in",
+        "communication",
+        "location",
+        "listing accuracy"
+      ]
     },
     {
       "id": "59181e2bb11afc02a801fe1b560d1bb6",
@@ -1395,6 +1976,19 @@
       "rating": 5.0,
       "rating_max": 5.0,
       "body": "Beautiful place with everything you need. Very willing to work with you and communication was great.",
+      "host_response": null,
+      "is_recent": false
+    },
+    {
+      "id": "d8d58f377af8072f1a13911b025f45aa",
+      "platform": "booking",
+      "reviewer_name": "Dedi",
+      "reviewer_location": "United States",
+      "title": null,
+      "date": "",
+      "rating": 9.0,
+      "rating_max": 10.0,
+      "body": "We really enjoyed the heated pool! The ability for everybody to have their own bedroom was amazing!",
       "host_response": null,
       "is_recent": false
     }

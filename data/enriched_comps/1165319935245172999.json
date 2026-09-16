@@ -114,6 +114,6 @@
     "additional_rules": "You are booking through a third party site (AirBnB) and not directly through vacayAZ. You will be required to provide additional information not provided by AirBnB, as well as sign a rental agreement provided by vacayAZ. \n\nNo professional photo/video shoots unless approved by VacayAZ. \n\nA government issued ID must be provided to VacayAZ after the booking is made to verify age of occupants. \n\nOccupancy is limited to the max amount of guests shown in the listing. \n\nA signed rental agreement is REQ"
   },
   "rules_enriched_at": "2026-09-07T01:17:38.511565",
-  "is_guest_favorite": false,
-  "guest_favorite_badge": null
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

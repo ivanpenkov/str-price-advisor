@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "last_updated": "2026-09-17T06:39:00.435287-07:00",
+  "last_updated": "2026-09-17T08:56:24.022859-07:00",
   "recent_window_days": 30,
   "recent_reviews_count": 4,
   "platforms": {
@@ -64,8 +64,8 @@
         "location": 9.3,
         "free_wifi": 10.0
       },
-      "last_scraped": "2026-09-16T07:05:50.128769-07:00",
-      "status": "stale_error",
+      "last_scraped": "2026-09-17T08:56:24.022709-07:00",
+      "status": "ok",
       "harvested_count": 3,
       "harvest_ratio": 1.0
     }

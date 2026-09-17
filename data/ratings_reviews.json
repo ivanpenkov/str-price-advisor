@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "last_updated": "2026-09-16T07:05:50.158956-07:00",
+  "last_updated": "2026-09-17T06:38:59.978302-07:00",
   "recent_window_days": 30,
   "recent_reviews_count": 4,
   "platforms": {
@@ -20,7 +20,7 @@
         "value": 4.73
       },
       "last_scraped": "2026-09-16T07:05:47.595313-07:00",
-      "status": "ok",
+      "status": "stale_error",
       "harvested_count": 80,
       "harvest_ratio": 1.039
     },
@@ -65,7 +65,7 @@
         "free_wifi": 10.0
       },
       "last_scraped": "2026-09-16T07:05:50.128769-07:00",
-      "status": "ok",
+      "status": "stale_error",
       "harvested_count": 3,
       "harvest_ratio": 1.0
     }

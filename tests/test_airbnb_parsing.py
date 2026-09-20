@@ -27,6 +27,8 @@ class TestAirbnbParsing(unittest.TestCase):
         self.assertEqual(parsed["confidence"], "CONFIRMED")
         self.assertEqual(parsed["bedrooms"], 6)
         self.assertEqual(parsed["baths"], 4.5)
+        self.assertTrue(parsed.get("is_guest_favorite"))
+        self.assertEqual(parsed.get("guest_favorite_badge"), "Guest Favorite")
 
     def test_regular_nightly_and_total_before_taxes(self):
         """Card with standard nightly and total before taxes."""
@@ -43,6 +45,8 @@ class TestAirbnbParsing(unittest.TestCase):
         self.assertEqual(parsed["total_price"], 3259.0)
         self.assertEqual(parsed["effective_nightly"], 814.75)
         self.assertEqual(parsed["confidence"], "CONFIRMED")
+        self.assertTrue(parsed.get("is_guest_favorite"))
+        self.assertEqual(parsed.get("guest_favorite_badge"), "Guest Favorite")
         self.assertEqual(parsed["bedrooms"], 7)
         self.assertEqual(parsed["baths"], 4.0)
 

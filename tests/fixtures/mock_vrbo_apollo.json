@@ -1,0 +1,29 @@
+{
+  "propertyReviewSummary": {
+    "rating": 9.6,
+    "totalCount": 34,
+    "badgeName": "Loved by Guests",
+    "badgeSubtitle": "Top 10% of guest reviews in this area",
+    "categoryRatings": [
+      {"name": "Cleanliness", "rating": 9.8},
+      {"name": "Accuracy", "rating": 9.8},
+      {"name": "Communication", "rating": 10.0},
+      {"name": "Location", "rating": 9.6},
+      {"name": "Check-in", "rating": 10.0}
+    ]
+  },
+  "reviewList": [
+    {
+      "reviewer": {"name": "Rachel W.", "location": "Denver, CO"},
+      "submissionDate": "2026-06-15",
+      "title": "Perfect summer getaway with friends",
+      "rating": 9.8,
+      "text": "Spacious layout, beautiful pool, and very responsive host. Blender was a bit leaky when making smoothies, but everything else was 5-star quality. Highly recommend!",
+      "managementResponse": {
+        "text": "Thank you Rachel! We've replaced the blender pitcher and gasket. Hope to see you again next summer!",
+        "date": "2026-06-16"
+      }
+    }
+  ]
+}
+

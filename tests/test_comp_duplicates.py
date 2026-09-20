@@ -60,8 +60,8 @@ class TestCompDuplicatesAndIntegrity(unittest.TestCase):
             total_unique,
             f"metadata.total_comps ({registry.get('metadata', {}).get('total_comps')}) does not match unique active count ({total_unique})",
         )
-        self.assertEqual(total_unique, 97, "Total unique active comps should be 97 after disqualifying 6 invalid comps")
-        self.assertEqual(total_unique + len(disq_ids), 103, "Total tracked comps in portfolio should be 103")
+        self.assertEqual(total_unique, 102, "Total unique active comps should be 102 after adding 5 qualified comps")
+        self.assertEqual(total_unique + len(disq_ids), 108, "Total tracked comps in portfolio should be 108")
 
     def test_pricing_data_intervals_have_no_duplicates(self):
         """Verify that all pricing data files have 0 duplicate listings in their interval comps_list."""

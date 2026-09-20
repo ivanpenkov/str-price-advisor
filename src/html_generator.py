@@ -3,9 +3,14 @@ HTML Dashboard Generator for STR Competitive Price Advisor.
 Generates a standalone, responsive static web application (docs/index.html)
 featuring:
 1. Pricing Recommendations Tab (Urgent Updates -> Moderate Updates -> All 12 Months)
-2. Curated Comps Registry Tab (109 listings with filters and direct Airbnb links)
-3. Methodology & Architecture Tab (Educational & debugging guide for host and property manager)
-4. Raw Data / JSON Tab
+2. Ratings & Reviews Intelligence Tab
+3. Streamline PMS Live Feed & Diagnostics Tab
+4. Curated Comps Registry Tab (109 listings with filters and direct Airbnb links)
+5. Competitor Sales Velocity & Strategy Matrix Tab
+6. Availability Calendar Tab
+7. Historical & Advance Reservations Ledger Tab
+8. Cumulative Pacing & Revenue Pacing Curves Tab
+9. Multi-Channel Price Parity Comparison Matrix Tab
 """
 
 import html
@@ -123,9 +128,12 @@ class HTMLDashboardGenerator:
         """Load cross-platform ratings and reviews data from data/ratings_reviews.json."""
         if getattr(self, "_injected_ratings_data", None) is not None:
             return self._injected_ratings_data
+        if getattr(self, "_cached_ratings_data", None) is not None:
+            return self._cached_ratings_data
         if self.ratings_path.exists():
             try:
-                return json.loads(self.ratings_path.read_text(encoding="utf-8"))
+                self._cached_ratings_data = json.loads(self.ratings_path.read_text(encoding="utf-8"))
+                return self._cached_ratings_data
             except Exception as e:
                 logger.warning(f"Failed to load ratings data from {self.ratings_path}: {e}")
         return None
@@ -350,7 +358,7 @@ class HTMLDashboardGenerator:
                 rec["tier"] = "disqualified"
                 rec["is_valid_comp"] = False
                 comp_validity_data[cid] = rec
-        comp_validity_json = json.dumps(comp_validity_data, ensure_ascii=False)
+        comp_validity_json = json.dumps(comp_validity_data, ensure_ascii=False).replace("</", "<\\/")
 
         # Sort intervals into tiers
         urgent = [s for s in evaluated_segments if s["priority_tier"] == "URGENT_ACTION"]
@@ -871,6 +879,13 @@ class HTMLDashboardGenerator:
       border-color: rgba(239, 68, 68, 0.4);
     }}
 
+    .reviews-date-pills {{
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }}
+
     .reviews-search-box {{
       position: relative;
       min-width: 260px;
@@ -975,42 +990,149 @@ class HTMLDashboardGenerator:
       border: 1px solid rgba(16, 185, 129, 0.4);
     }}
 
+    .review-grid-2col {{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 6px;
+    }}
+
+    .review-guest-col {{
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid rgba(51, 65, 85, 0.65);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }}
+
+    .review-team-col {{
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }}
+
+    .review-col-header {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #94a3b8;
+    }}
+
+    .review-col-header.guest {{
+      color: #cbd5e1;
+    }}
+
     .review-title {{
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #f1f5f9;
       margin-bottom: 8px;
     }}
 
     .review-body {{
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.6;
       color: #cbd5e1;
       white-space: pre-line;
+      flex: 1;
     }}
 
     .review-host-reply {{
-      margin-top: 14px;
-      padding: 12px 16px;
+      margin-top: 0;
+      padding: 16px;
       background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(59, 130, 246, 0.25);
       border-left: 3px solid #3b82f6;
-      border-radius: 0 8px 8px 0;
+      border-radius: 10px;
       font-size: 0.85rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }}
 
     .review-reply-header {{
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
       font-weight: 700;
       color: #60a5fa;
-      font-size: 0.8rem;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }}
+
+    .review-reply-header-empty {{
+      color: #64748b;
+    }}
+
+    .review-reply-date-pill {{
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #94a3b8;
+      background: rgba(59, 130, 246, 0.12);
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: none;
+      letter-spacing: normal;
+    }}
+
+    .review-empty-badge {{
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #64748b;
+      background: rgba(100, 116, 139, 0.12);
+      border: 1px solid rgba(100, 116, 139, 0.25);
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: none;
+      letter-spacing: normal;
+    }}
+
+    .review-host-reply.review-reply-empty {{
+      border: 1px dashed rgba(100, 116, 139, 0.35);
+      border-left: 3px solid #64748b;
+      background: rgba(15, 23, 42, 0.35);
     }}
 
     .review-reply-body {{
-      color: #94a3b8;
-      line-height: 1.5;
+      color: #cbd5e1;
+      line-height: 1.55;
+      font-size: 0.88rem;
+    }}
+
+    .review-reply-body-empty {{
+      color: #64748b;
+      font-style: italic;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      min-height: 60px;
+      text-align: center;
+      padding: 10px;
+    }}
+
+    @media (max-width: 768px) {{
+      .review-grid-2col {{
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }}
+      .review-host-reply {{
+        height: auto;
+      }}
     }}
 
     /* Section Cards */
@@ -1586,49 +1708,6 @@ class HTMLDashboardGenerator:
       border-color: rgba(59, 130, 246, 0.6);
       color: #93c5fd;
     }}
-
-    /* Methodology formatting */
-    .methodology-grid {{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 24px;
-    }}
-
-    .method-card {{
-      background: #0f172a;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 24px;
-    }}
-
-    .method-card h3 {{
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #60a5fa;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }}
-
-    .method-card p, .method-card li {{
-      font-size: 0.92rem;
-      color: #cbd5e1;
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }}
-
-    .formula-box {{
-      background: #1e293b;
-      border-left: 4px solid #3b82f6;
-      padding: 12px 16px;
-      border-radius: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: #93c5fd;
-      margin: 12px 0;
-    }}
-
     /* Filter Bar Styles */
     .filter-card {{
       background: var(--bg-card);
@@ -1931,7 +2010,7 @@ class HTMLDashboardGenerator:
         white-space: normal !important;
       }}
 
-      .clickable-row.interval-parent-row > td[data-label="Historical"] {{
+      .clickable-row.interval-parent-row > td[data-label="Historical AVG"] {{
         flex-direction: column;
         align-items: flex-end;
         gap: 2px;
@@ -2031,7 +2110,6 @@ class HTMLDashboardGenerator:
     <!-- Navigation Tabs -->
     <nav class="tabs-nav" role="tablist">
       <button class="tab-btn active" onclick="switchTab('pricing')" role="tab" aria-selected="true">📊 Pricing</button>
-      <button class="tab-btn" onclick="switchTab('comparison')" role="tab" aria-selected="false">🌐 Channels</button>
       <button class="tab-btn" onclick="switchTab('reviews')" role="tab" id="tab-btn-reviews" aria-selected="false">⭐ Reviews{bell_badge_html}</button>
       <button class="tab-btn" onclick="switchTab('streamline')" role="tab" aria-selected="false">⚙️ Streamline PMS</button>
       <button class="tab-btn" onclick="switchTab('comps')" role="tab" aria-selected="false">🏡 Comps ({len(tier_a_comps) + len(tier_b_comps)})</button>
@@ -2039,8 +2117,7 @@ class HTMLDashboardGenerator:
       <button class="tab-btn" onclick="switchTab('calendar')" role="tab" aria-selected="false">📅 Calendar</button>
       <button class="tab-btn" onclick="switchTab('reservations')" role="tab" aria-selected="false">📑 Reservations ({len(reservations_list)})</button>
       <button class="tab-btn" onclick="switchTab('revenue')" role="tab" aria-selected="false">📈 Revenue</button>
-      <button class="tab-btn" onclick="switchTab('methodology')" role="tab" aria-selected="false">📐 Methodology & PMS Guide</button>
-      <button class="tab-btn" onclick="switchTab('debug')" role="tab" aria-selected="false">🛠️ Live Data & Debug</button>
+      <button class="tab-btn" onclick="switchTab('comparison')" role="tab" aria-selected="false">🌐 Channels</button>
     </nav>
 
     <!-- TAB 1: PRICING RECOMMENDATIONS -->
@@ -2168,7 +2245,7 @@ class HTMLDashboardGenerator:
                 <th>Nights</th>
                 <th>Market Gap</th>
                 <th>Action Needed</th>
-                <th>Historical Track Record</th>
+                <th>Historical AVG</th>
                 <th>Comps (N)</th>
                 <th>Kivoya</th>
                 <th>Effective Total</th>
@@ -2182,11 +2259,6 @@ class HTMLDashboardGenerator:
           </table>
         </div>
       </div>
-    </div>
-
-    <!-- TAB 1.5: CHANNEL PRICE COMPARISON -->
-    <div id="tab-comparison" class="tab-content">
-      {self._render_comparison_tab(all_sorted)}
     </div>
 
     <!-- TAB 1.6: RATINGS & REVIEWS INTELLIGENCE -->
@@ -2254,100 +2326,9 @@ class HTMLDashboardGenerator:
       {revenue_tab_html}
     </div>
 
-    <!-- TAB 6: METHODOLOGY -->
-    <div id="tab-methodology" class="tab-content">
-      <div class="section-box">
-        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 6px;">Pricing Methodology & Revenue Management Guide</h2>
-        <p class="section-desc">
-          How the pricing engine works, why it prevents underpricing, and how to communicate adjustments to Kivoya.
-        </p>
-
-        <div class="methodology-grid">
-          <div class="method-card">
-            <h3>🔗 1. Zero-Scraping Kivoya PMS Ingestion</h3>
-            <p>We connect directly to Kivoya's underlying <strong>Streamline VRS AJAX API</strong>:</p>
-            <p><code>GetPropertyAvailabilityCalendarRawData</code> pulls all reservations and blocked periods for Unit <code>503802</code> in clean JSON.</p>
-            <p><code>GetPropertyRatesRawData</code> pulls your exact seasonal rate schedule. We never guess your current rate or rely on flaky web scrapers for your home.</p>
-          </div>
-
-          <div class="method-card">
-            <h3>⚖️ 2. Apples-to-Apples Live Airbnb Guest Checkout Pricing</h3>
-            <p>Guests on Airbnb evaluate <strong>Total Stay Cost</strong> (Base + Cleaning Fee + Channel Markup + Service Fee), not internal PMS rates.</p>
-            <p>We scrape Villa del Sol's <strong>actual guest checkout price directly from Airbnb</strong> (e.g. <em>$693.50/night</em> for Sep 6&ndash;10) rather than relying solely on internal Kivoya rates ($499 base + $500 clean = $624/night). This captures Streamline VRS / Kivoya OTA distribution markups, ensuring that our market percentiles, comp rankings, and subtable comparisons are 100% apples-to-apples against competitor Airbnb listings.</p>
-            <p>When computing your recommended PMS rate, we factor in the OTA markup so your adjustment in Kivoya accurately hits the Airbnb target:</p>
-            <div class="formula-box">
-              Target Kivoya Total = (Target Airbnb Stay Total) &divide; Channel Factor<br>
-              Rec Base Rate = (Target Kivoya Total &minus; $500 Clean) &divide; Nights
-            </div>
-          </div>
-
-          <div class="method-card">
-            <h3>📉 3. Dynamic Lead-Time Tapering Curve & Midweek Discount</h3>
-            <p>Villa del Sol is a luxury resort compound (gated ¾-acre, heated pool/grotto, basketball court, putting green, casita). We benchmark against the top 20%–25% of luxury comps on weekends, while applying a <strong>30% lower target percentile midweek</strong> to drive weekday occupancy where competitor pricing rarely adjusts:</p>
-            <ul>
-              <li><strong>Weekend Targets:</strong>
-                <ul style="margin-top: 4px; margin-bottom: 6px;">
-                  <li><strong>&gt; 180 Days Out:</strong> 70th Percentile (Capture early high-intent planners at top-dollar).</li>
-                  <li><strong>60 – 180 Days Out:</strong> 65th Percentile (Standard booking window).</li>
-                  <li><strong>30 – 60 Days Out:</strong> 55th Percentile (Tapering to encourage booking).</li>
-                  <li><strong>&lt; 30 Days Out:</strong> 45th Percentile (Protect occupancy for near-term dates).</li>
-                </ul>
-              </li>
-              <li><strong>Midweek Targets (30% Competitive Discount):</strong>
-                <ul style="margin-top: 4px;">
-                  <li><strong>&gt; 180 Days Out:</strong> 49.0th Percentile (0.70 &times; 0.70).</li>
-                  <li><strong>60 – 180 Days Out:</strong> 45.5th Percentile (0.65 &times; 0.70).</li>
-                  <li><strong>30 – 60 Days Out:</strong> 38.5th Percentile (0.55 &times; 0.70).</li>
-                  <li><strong>&lt; 30 Days Out:</strong> 31.5th Percentile (0.45 &times; 0.70) to win bookings in slow midweeks.</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
-          <div class="method-card">
-            <h3>📋 4. Action Guide & Priority Thresholds</h3>
-            <p>Priority tiers indicate how urgently rates should be adjusted in Kivoya's Streamline PMS rate manager:</p>
-            <ul>
-              <li><strong>🚨 Urgent Action (&gt; {self.urgent_pct_diff:.0f}% Discrepancy):</strong> Major market gap requiring immediate rate adjustment this week (filter with 1-click using <em>'🚨 Urgent Action Only'</em>).</li>
-              <li><strong>⚠️ Review ({self.moderate_pct_diff:.0f}% – {self.urgent_pct_diff:.0f}% Discrepancy):</strong> Review during monthly rate refreshes.</li>
-              <li><strong>✅ On Target (0% – {self.moderate_pct_diff:.0f}% Discrepancy):</strong> Normal competitive range &mdash; cell left empty (no rate change needed).</li>
-              <li><strong>Action Indicators:</strong>
-                <ul style="margin-top: 4px;">
-                  <li><strong style="color: #f87171;">↓ Reduce $X &rarr; $Y</strong> (Full Red Text): Price is above target effective cost; lower Kivoya base rate.</li>
-                  <li><strong style="color: #34d399;">↑ Increase $X &rarr; $Y</strong> (Full Green Text): Price is below target effective cost; raise Kivoya base rate to capture revenue.</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
-          <div class="method-card" style="border-color: rgba(245, 158, 11, 0.35);">
-            <h3 style="color: #fbbf24;">📊 5. Understanding 'N' (Comps Count) & Sold-Out Alerts</h3>
-            <p>The <strong>Comps (N)</strong> column tracks how many comparable properties are available for each specific date:</p>
-            <ul>
-              <li><strong>High N (N &ge; 15):</strong> Robust available inventory in the market. High statistical significance for percentiles.</li>
-              <li><strong>Low N (N &le; 4): 🔥 Near Sold Out / Market Compression Alert:</strong> When N is very low, almost all direct competitors are <strong>already booked</strong> (e.g. Phoenix Open, Spring Training, major conventions).</li>
-              <li><strong>Action on Low N:</strong> <em>Do not discount!</em> Your pricing power is at its peak. Hold rates high or increase them as remaining guests scramble for scarce inventory.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 4: DEBUG / RAW DATA -->
-    <div id="tab-debug" class="tab-content">
-      <div class="section-box">
-        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 6px;">Live System Diagnostic & Data Export</h2>
-        <p class="section-desc">Raw JSON data feeds for technical audit, debugging, and verification.</p>
-        
-        <div style="display: flex; gap: 12px; margin-bottom: 20px;">
-          <a href="latest_sheet.csv" download class="badge badge-primary" style="text-decoration:none; padding:10px 16px;">📥 Download Google Sheets CSV</a>
-          <a href="latest_report.md" download class="badge badge-dark" style="text-decoration:none; padding:10px 16px;">📄 Download Markdown Report</a>
-        </div>
-
-        <div style="background: #0b1120; border: 1px solid var(--border-color); border-radius: 10px; padding: 18px;">
-          <pre style="color: #93c5fd; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; overflow-x: auto; max-height: 400px;">{json.dumps(evaluated_segments[:3], indent=2, default=str)}</pre>
-        </div>
-      </div>
+    <!-- TAB 6.5: CHANNEL PRICE COMPARISON -->
+    <div id="tab-comparison" class="tab-content">
+      {self._render_comparison_tab(all_sorted)}
     </div>
 
     <!-- Footer -->
@@ -2361,15 +2342,103 @@ class HTMLDashboardGenerator:
   {validity_modal_html}
 
   <script>
-    function switchTab(tabId) {{
+    const VALID_TABS = ['pricing', 'reviews', 'streamline', 'comps', 'market-sales', 'calendar', 'reservations', 'revenue', 'comparison'];
+    let currentActiveTabId = 'pricing';
+    let isInitialTabLoad = true;
+
+    if ('scrollRestoration' in history) {{
+      history.scrollRestoration = 'manual';
+    }}
+
+    function saveCurrentTabScroll() {{
+      if (currentActiveTabId) {{
+        try {{
+          sessionStorage.setItem('str_advisor_scroll_' + currentActiveTabId, String(window.scrollY));
+        }} catch (e) {{}}
+      }}
+    }}
+
+    let scrollDebounceTimer = null;
+    function handleScrollEnd() {{
+      saveCurrentTabScroll();
+    }}
+
+    if ('onscrollend' in window) {{
+      window.addEventListener('scrollend', handleScrollEnd, {{ passive: true }});
+    }} else {{
+      window.addEventListener('scroll', () => {{
+        clearTimeout(scrollDebounceTimer);
+        scrollDebounceTimer = setTimeout(handleScrollEnd, 100);
+      }}, {{ passive: true }});
+    }}
+
+    window.addEventListener('beforeunload', saveCurrentTabScroll);
+    document.addEventListener('visibilitychange', () => {{
+      if (document.visibilityState === 'hidden') {{
+        saveCurrentTabScroll();
+      }}
+    }});
+
+    function switchTab(tabId, pushHistory = true, restoreScroll = true) {{
+      if (!VALID_TABS.includes(tabId)) {{
+        tabId = 'pricing';
+      }}
+
+      // Clear pending scroll debounce timer to prevent cross-tab scroll leakage
+      if (scrollDebounceTimer) {{
+        clearTimeout(scrollDebounceTimer);
+        scrollDebounceTimer = null;
+      }}
+
+      // If clicking the already active tab (user interaction), scroll to top
+      if (currentActiveTabId === tabId && !isInitialTabLoad) {{
+        const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({{ top: 0, behavior: prefersReducedMotion ? 'instant' : 'smooth' }});
+        try {{
+          sessionStorage.setItem('str_advisor_scroll_' + tabId, '0');
+        }} catch (e) {{}}
+        return;
+      }}
+
+      // Save previous tab scroll before switching
+      if (currentActiveTabId && currentActiveTabId !== tabId) {{
+        saveCurrentTabScroll();
+      }}
+
+      // Immediately update active tab reference to prevent race conditions during DOM reflows
+      currentActiveTabId = tabId;
+
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => {{
+        el.classList.remove('active');
+        el.setAttribute('aria-selected', 'false');
+      }});
       
       const target = document.getElementById('tab-' + tabId);
       if (target) target.classList.add('active');
       
-      const btn = (window.event && window.event.target && window.event.target.classList) ? (window.event.target.closest('.tab-btn') || window.event.target) : document.querySelector(`button[onclick*="'${{tabId}}'"]`);
-      if (btn) btn.classList.add('active');
+      const btn = document.querySelector(`button.tab-btn[onclick*="'${{tabId}}'"]`);
+      if (btn) {{
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        const nav = btn.closest('.tabs-nav');
+        if (nav && typeof nav.scrollTo === 'function') {{
+          nav.scrollTo({{ left: Math.max(0, btn.offsetLeft - 16), behavior: 'instant' }});
+        }}
+      }}
+
+      try {{
+        localStorage.setItem('str_advisor_active_tab', tabId);
+      }} catch (e) {{}}
+
+      const targetHash = '#' + tabId;
+      if (window.location.hash !== targetHash) {{
+        if (pushHistory && !isInitialTabLoad) {{
+          history.pushState({{ tabId: tabId }}, '', targetHash);
+        }} else {{
+          history.replaceState({{ tabId: tabId }}, '', targetHash);
+        }}
+      }}
 
       if (tabId === 'revenue' && typeof initRevenueChart === 'function') {{
         setTimeout(initRevenueChart, 50);
@@ -2383,31 +2452,75 @@ class HTMLDashboardGenerator:
       if (tabId === 'reservations' && typeof initReservationsTable === 'function') {{
         setTimeout(initReservationsTable, 50);
       }}
+      if (tabId === 'reviews' && typeof filterReviews === 'function') {{
+        setTimeout(filterReviews, 30);
+      }}
+
+      if (restoreScroll) {{
+        let savedScroll = 0;
+        try {{
+          const savedStr = sessionStorage.getItem('str_advisor_scroll_' + tabId);
+          if (savedStr) savedScroll = Math.max(0, parseInt(savedStr, 10) || 0);
+        }} catch (e) {{}}
+
+        requestAnimationFrame(() => {{
+          window.scrollTo({{ top: savedScroll, behavior: 'instant' }});
+          // Secondary scroll pass at 60ms to account for dynamic tab sub-components
+          // (such as initRevenueChart or filterReviews) that expand layout after 30-50ms
+          setTimeout(() => {{
+            if (currentActiveTabId === tabId && savedScroll > 0) {{
+              window.scrollTo({{ top: savedScroll, behavior: 'instant' }});
+            }}
+          }}, 60);
+        }});
+      }}
+    }}
+
+    window.addEventListener('popstate', () => {{
+      const hashTab = (window.location.hash || '').replace('#', '').trim();
+      const targetTab = VALID_TABS.includes(hashTab) ? hashTab : 'pricing';
+      if (targetTab !== currentActiveTabId) {{
+        switchTab(targetTab, false, true);
+      }}
+    }});
+
+    function setReviewDateFilter(range, btn) {{
+      const input = document.getElementById('reviewDateFilterVal');
+      if (input) {{
+        input.value = range;
+      }}
+      document.querySelectorAll('.reviews-date-pills .filter-pill-btn').forEach(b => {{
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      }});
+      const targetBtn = btn || document.getElementById('rev-date-' + range);
+      if (targetBtn) {{
+        targetBtn.classList.add('active');
+        targetBtn.setAttribute('aria-pressed', 'true');
+      }}
+      filterReviews();
     }}
 
     function filterReviews() {{
       const plat = document.getElementById('reviewPlatformFilter') ? document.getElementById('reviewPlatformFilter').value : 'all';
       const rating = document.getElementById('reviewRatingFilter') ? document.getElementById('reviewRatingFilter').value : 'all';
-      const recentOnly = document.getElementById('reviewRecentToggle') ? document.getElementById('reviewRecentToggle').classList.contains('active') : false;
+      const dateRange = document.getElementById('reviewDateFilterVal') ? document.getElementById('reviewDateFilterVal').value : '30';
       const search = (document.getElementById('reviewSearchInput') ? document.getElementById('reviewSearchInput').value : '').toLowerCase().trim();
 
       const cards = document.querySelectorAll('.review-card');
       let visibleCount = 0;
+      const now = new Date();
 
       cards.forEach(card => {{
         const cardPlat = card.getAttribute('data-platform') || '';
         const cardScore = parseFloat(card.getAttribute('data-rating') || '0');
         const cardMax = parseFloat(card.getAttribute('data-rating-max') || '5');
-        const cardRecent = card.getAttribute('data-is-recent') === 'true';
+        const cardDateStr = card.getAttribute('data-date') || '';
         const cardSearch = (card.getAttribute('data-search-text') || '').toLowerCase();
 
         let show = true;
 
         if (plat !== 'all' && cardPlat !== plat) {{
-          show = false;
-        }}
-
-        if (show && recentOnly && !cardRecent) {{
           show = false;
         }}
 
@@ -2424,8 +2537,21 @@ class HTMLDashboardGenerator:
           }}
         }}
 
+        if (show && dateRange !== 'all') {{
+          if (!cardDateStr) {{
+            show = false;
+          }} else {{
+            const cardDate = new Date(cardDateStr + 'T00:00:00');
+            const diffDays = Math.floor((now.getTime() - cardDate.getTime()) / (1000 * 60 * 60 * 24));
+            const maxDays = parseInt(dateRange, 10);
+            if (isNaN(diffDays) || diffDays > maxDays || diffDays < -1) {{
+              show = false;
+            }}
+          }}
+        }}
+
         if (show && search.length > 0) {{
-          const terms = search.split(/\s+/).filter(Boolean);
+          const terms = search.split(/\\s+/).filter(Boolean);
           if (!terms.every(t => cardSearch.includes(t))) {{
             show = false;
           }}
@@ -2446,11 +2572,10 @@ class HTMLDashboardGenerator:
     }}
 
     function toggleRecentFilter() {{
-      const btn = document.getElementById('reviewRecentToggle');
-      if (btn) {{
-        btn.classList.toggle('active');
-        filterReviews();
-      }}
+      const currentVal = document.getElementById('reviewDateFilterVal')?.value;
+      const target = (currentVal === '30') ? 'all' : '30';
+      const btn = document.getElementById(target === '30' ? 'rev-date-30' : 'rev-date-all');
+      setReviewDateFilter(target, btn);
     }}
 
     function filterSalesFeed(statusFilter, btn) {{
@@ -3463,7 +3588,26 @@ class HTMLDashboardGenerator:
     }}
 
     document.addEventListener('DOMContentLoaded', () => {{
+      let initialTab = 'pricing';
+      const hashCandidate = (window.location.hash || '').replace('#', '').trim();
+      if (VALID_TABS.includes(hashCandidate)) {{
+        initialTab = hashCandidate;
+      }} else if (!hashCandidate) {{
+        try {{
+          const storedTab = localStorage.getItem('str_advisor_active_tab');
+          if (storedTab && VALID_TABS.includes(storedTab)) {{
+            initialTab = storedTab;
+          }}
+        }} catch (e) {{}}
+      }}
+
+      switchTab(initialTab, false, true);
+      isInitialTabLoad = false;
+
       applyGlobalFilters();
+      if (typeof filterReviews === 'function') {{
+        filterReviews();
+      }}
       if (typeof filterProposedOpenCalendar === 'function') {{
         filterProposedOpenCalendar();
       }}
@@ -3482,21 +3626,22 @@ class HTMLDashboardGenerator:
         self.output_path.write_text(html, encoding="utf-8")
         return str(self.output_path)
 
-    def _format_rating_display(self, rating: Optional[float], reviews: int) -> str:
-        """Format listing rating and reviews count (e.g. '5.0 (2)', '4.95 (19)', 'New (0)')."""
+    def _format_rating_display(self, rating: Optional[float], reviews: int, is_guest_favorite: bool = False) -> str:
+        """Format listing rating and reviews count with optional Guest Favorite badge."""
+        gf_badge = '<div style="margin-top:3px;"><span class="badge" style="background:linear-gradient(135deg, rgba(245,158,11,0.2), rgba(217,119,6,0.3)); color:#fbbf24; border:1px solid rgba(245,158,11,0.5); font-size:0.65rem; font-weight:700; padding:1px 5px; border-radius:4px;" title="Top rated Airbnb Guest Favorite (+2-3% desirability boost)">🏅 Guest Favorite</span></div>' if is_guest_favorite else ""
         if rating is not None and rating > 0:
-            return f'<span style="font-weight:700; color:#fbbf24;">★ {rating:.2f}</span> <span style="color:#94a3b8; font-size:0.75rem;">({reviews})</span>'
+            return f'<span style="font-weight:700; color:#fbbf24;">★ {rating:.2f}</span> <span style="color:#94a3b8; font-size:0.75rem;">({reviews})</span>{gf_badge}'
         elif reviews > 0:
-            return f'<span style="color:#cbd5e1;">(No star)</span> <span style="color:#94a3b8; font-size:0.75rem;">({reviews})</span>'
+            return f'<span style="color:#cbd5e1;">(No star)</span> <span style="color:#94a3b8; font-size:0.75rem;">({reviews})</span>{gf_badge}'
         else:
-            return '<span style="color:#64748b; font-style:italic; font-size:0.8rem;">New (0)</span>'
+            return f'<span style="color:#64748b; font-style:italic; font-size:0.8rem;">New (0)</span>{gf_badge}'
 
     def _render_comp_subtable(self, s: Dict[str, Any], row_id: str) -> Tuple[str, int, int, int, float, bool]:
         """Render expandable nested subtable of all comps sorted by price with Villa del Sol highlighted."""
         nights = s.get("nights", 3)
         c_in = s.get("check_in")
         c_out = s.get("check_out")
-        our_base = float(s.get("our_base_nightly", 0.0))
+        our_base = float(s.get("our_base_nightly") or 0.0)
 
         # Check if live Airbnb price exists for our property
         is_our_live = False
@@ -3529,6 +3674,9 @@ class HTMLDashboardGenerator:
             if (c_in and c_out)
             else "https://www.airbnb.com/rooms/573857947793833342"
         )
+        rdata = self.load_ratings() or {}
+        vds_airbnb_revs = int(rdata.get("platforms", {}).get("airbnb", {}).get("review_count", 77))
+        vds_airbnb_rating = float(rdata.get("platforms", {}).get("airbnb", {}).get("rating", 4.83))
         our_entry = {
             "is_our_property": True,
             "listing_id": "573857947793833342",
@@ -3537,8 +3685,8 @@ class HTMLDashboardGenerator:
             "bedrooms": 6,
             "beds": "11 beds",
             "baths": "6.0 BA",
-            "rating": 4.83,
-            "reviews": 76,
+            "rating": vds_airbnb_rating,
+            "reviews": vds_airbnb_revs,
             "effective_nightly": our_eff,
             "total_price": our_total,
             "url": our_url,
@@ -3651,6 +3799,15 @@ class HTMLDashboardGenerator:
             clean_win_ratio = float(c.get("winter_ratio") or comp_eval.get("winter_ratio") or c.get("desirability_ratio") or comp_eval.get("desirability_ratio") or ratio)
             clean_sum_ratio = float(c.get("summer_ratio") or comp_eval.get("summer_ratio") or c.get("desirability_ratio") or comp_eval.get("desirability_ratio") or ratio)
 
+            is_gf = bool(
+                c.get("is_guest_favorite")
+                or comp_eval.get("is_guest_favorite")
+                or "guest favorite" in str(c.get("raw_snippet") or "").lower()
+                or "guest favorite" in str(comp_eval.get("raw_snippet") or "").lower()
+                or "guest favorite" in str(c.get("badge") or "").lower()
+                or "guest favorite" in str(comp_eval.get("badge") or "").lower()
+            )
+
             clean_comps.append({
                 "is_our_property": False,
                 "listing_id": cid,
@@ -3661,6 +3818,7 @@ class HTMLDashboardGenerator:
                 "baths": f"{ba} BA",
                 "rating": c_rating,
                 "reviews": c_reviews,
+                "is_guest_favorite": is_gf,
                 "effective_nightly": eff_rate,
                 "adjusted_effective_nightly": adj_rate,
                 "desirability_ratio": ratio,
@@ -3713,8 +3871,12 @@ class HTMLDashboardGenerator:
                     if is_our_live else
                     '<span class="badge" style="background:rgba(59,130,246,0.2); color:#93c5fd; font-size:0.68rem; margin-left:6px; vertical-align:middle;">📊 Kivoya PMS Est.</span>'
                 )
+                rdata = self.load_ratings() or {}
+                vds_airbnb_revs = int(rdata.get("platforms", {}).get("airbnb", {}).get("review_count", 77))
+                vds_airbnb_rating = float(rdata.get("platforms", {}).get("airbnb", {}).get("rating", 4.83))
+
                 subtable_rows.append(f"""
-                  <tr class="comp-item-row our-property-row" data-is-our="true" data-location="South Tempe, AZ" data-price="{item['effective_nightly']:.2f}" data-raw-price="{item['effective_nightly']:.2f}" data-adj-price="{item['effective_nightly']:.2f}" data-valid="true" data-rating="4.83" data-reviews="76">
+                  <tr class="comp-item-row our-property-row" data-is-our="true" data-location="South Tempe, AZ" data-price="{item['effective_nightly']:.2f}" data-raw-price="{item['effective_nightly']:.2f}" data-adj-price="{item['effective_nightly']:.2f}" data-valid="true" data-rating="{vds_airbnb_rating:.2f}" data-reviews="{vds_airbnb_revs}">
                     <td style="padding:10px 14px; text-align:center;">
                       <span class="badge our-rank-badge" style="background:#f59e0b; color:#0f172a; font-weight:800; font-size:0.75rem; padding:3px 8px;">★ YOU (#{our_rank})</span>
                     </td>
@@ -3727,7 +3889,7 @@ class HTMLDashboardGenerator:
                       <div style="font-size:0.72rem; color:#cbd5e1; margin-top:2px;">Our Luxury Compound Benchmark</div>
                     </td>
                     <td style="padding:10px 14px; text-align:center;">
-                      <span style="font-weight:800; color:#fbbf24;">★ 4.83</span> <span style="color:#fde68a; font-size:0.75rem;">(76)</span>
+                      <span style="font-weight:800; color:#fbbf24;">★ {vds_airbnb_rating:.2f}</span> <span style="color:#fde68a; font-size:0.75rem;">({vds_airbnb_revs})</span>
                     </td>
                     <td style="padding:10px 14px; text-align:center; font-weight:700; color:#f8fafc;">6 BR</td>
                     <td style="padding:10px 14px; text-align:center; font-weight:700; color:#f8fafc;">11 beds</td>
@@ -3769,7 +3931,7 @@ class HTMLDashboardGenerator:
 
                 r_str = f"{item['rating']:.2f}" if item['rating'] is not None else ""
                 rev_val = item['reviews']
-                rating_html = self._format_rating_display(item['rating'], rev_val)
+                rating_html = self._format_rating_display(item['rating'], rev_val, is_guest_favorite=item.get("is_guest_favorite", False))
                 loc_escaped = html.escape(str(item.get('location', '')), quote=True)
 
                 if is_valid:
@@ -3846,8 +4008,8 @@ class HTMLDashboardGenerator:
         else:
             rows_html = "".join(subtable_rows)
 
-        hb = s.get("historical_benchmark", {})
-        lt = s.get("lead_time_status", {})
+        hb = s.get("historical_benchmark") or {}
+        lt = s.get("lead_time_status") or {}
         lt_label = lt.get("label", "Booking Window")
         lt_action = lt.get("action", "")
         lt_color = lt.get("badge_color", "#34d399")
@@ -4018,17 +4180,19 @@ class HTMLDashboardGenerator:
             action_style_raw = get_action_style(action_raw)
             action_style_adj = get_action_style(action_adj)
 
+            our_base = float(s.get("our_base_nightly") or 0.0)
+
             if total_comps > 0:
                 if is_our_live:
                     live_dot = '<span style="color:#34d399; font-size:0.75rem; margin-left:2px;" title="Live Airbnb checkout price verified">🟢</span>'
-                    rank_tooltip = f"Live Airbnb Rate: ${our_eff:.0f}/night (${s.get('our_airbnb_total', our_eff * s['nights']):.0f} total). Villa del Sol ranks #{our_rank} out of {total_comps} competitors ({our_pct}th percentile). Base Kivoya rate is ${s['our_base_nightly']:.0f}."
+                    rank_tooltip = f"Live Airbnb Rate: ${our_eff:.0f}/night (${s.get('our_airbnb_total', our_eff * s['nights']):.0f} total). Villa del Sol ranks #{our_rank} out of {total_comps} competitors ({our_pct}th percentile). Base Kivoya rate is ${our_base:.0f}."
                 else:
                     live_dot = ''
                     rank_tooltip = f"Villa del Sol ranks #{our_rank} out of {total_comps} competitors ({our_pct}th percentile in effective total guest cost)"
-                eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong>{live_dot} <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\" title=\"{rank_tooltip}\">({our_pct}%)</span>"
+                eff_cell_html = f'<strong style="color:#f1f5f9;">${our_eff:.0f}</strong>{live_dot} <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;" title="{rank_tooltip}">({our_pct}%)</span>'
             else:
                 stored_pct = round(s.get("our_percentile_rank_adj", s.get("our_percentile_rank", 50.0)))
-                eff_cell_html = f"<strong style=\"color:#f1f5f9;\">${our_eff:.0f}</strong> <span style=\"font-size:0.78rem; color:#94a3b8; font-weight:600;\">({stored_pct}%)</span>"
+                eff_cell_html = f'<strong style="color:#f1f5f9;">${our_eff:.0f}</strong> <span style="font-size:0.78rem; color:#94a3b8; font-weight:600;">({stored_pct}%)</span>'
 
             target_pct = s.get("target_percentile", 65.0)
             target_pct_str = f"{target_pct:.1f}".rstrip("0").rstrip(".") + "%"
@@ -4037,29 +4201,22 @@ class HTMLDashboardGenerator:
             cal_open_str = str(is_cal_open).lower()
             closed_tag = '' if is_cal_open else ' <span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; font-size:0.75rem; padding:2px 5px; border:1px solid rgba(148,163,184,0.25);" title="Booking calendar currently closed in Kivoya">🔒</span>'
 
-            hist = s.get("historical_benchmark", {})
+            hist = s.get("historical_benchmark", {}) or {}
             h_count = hist.get("sample_count", 0)
-            if h_count > 0:
-                h_min = hist.get("min_rate", 0.0)
-                h_max = hist.get("max_rate", 0.0)
-                h_med = hist.get("median_rate", 0.0)
-                h_flag_label = hist.get("flag_label", "Aligned")
-
-                our_base = float(s.get("our_base_nightly", 0.0))
-                base_round = round(our_base)
-                med_round = round(h_med)
-
-                if med_round > base_round:
-                    h_action_text = f"↑ Increase ${base_round} → ${med_round}"
-                    h_action_style = "color:#34d399; font-weight:700;"
-                elif med_round < base_round:
-                    h_action_text = f"↓ Reduce ${base_round} → ${med_round}"
-                    h_action_style = "color:#f87171; font-weight:700;"
-                else:
-                    h_action_text = f"Keep ${base_round}"
-                    h_action_style = "color:#94a3b8; font-weight:600;"
-
-                hist_cell_html = f"""<div style="font-family:'JetBrains Mono',monospace; font-size:0.84rem; white-space:nowrap;"><strong style="color:#f8fafc;">${h_min:.0f}–${h_max:.0f}</strong> <span style="color:#94a3b8; font-size:0.75rem;">(med ${h_med:.0f})</span></div><div style="font-size:0.85rem; {h_action_style} margin-top:2px; white-space:nowrap;" title="{h_count} confirmed prior bookings within ±15 days in 2022–2026 ({h_flag_label})"><strong>{h_action_text}</strong></div>"""
+            h_med = float(hist.get("median_rate", 0.0) or 0.0)
+            h_avg = float(hist.get("avg_rate", 0.0) or h_med)
+            if h_count > 0 and h_avg > 0:
+                h_min = float(hist.get("min_rate", 0.0) or 0.0)
+                h_max = float(hist.get("max_rate", 0.0) or 0.0)
+                h_flag_label = hist.get("flag_label") or "Aligned"
+                hist_color = "#f8fafc"
+                if our_base > 0:
+                    hist_diff_ratio = round((h_avg - our_base) / our_base, 6)
+                    if hist_diff_ratio >= 0.05:
+                        hist_color = "#34d399"
+                    elif hist_diff_ratio <= -0.05:
+                        hist_color = "#f87171"
+                hist_cell_html = f'<strong style="color:{hist_color};" title="{h_count} confirmed prior bookings within ±15 days in 2022–2026 ({h_flag_label}, range: ${h_min:.0f}–${h_max:.0f}, med: ${h_med:.0f})">${h_avg:.0f}</strong>'
             else:
                 hist_cell_html = '<span style="color:#64748b; font-size:0.78rem;" title="No confirmed prior bookings within ±15 days">—</span>'
 
@@ -4072,7 +4229,7 @@ class HTMLDashboardGenerator:
                   data-checkin="{s['check_in']}"
                   data-checkout="{s['check_out']}"
                   data-segment-type="{s['segment_type'].capitalize()}"
-                  data-base-price="{s['our_base_nightly']:.0f}"
+                  data-base-price="{our_base:.0f}"
                   data-hist-count="{h_count}"
                   data-hist-med="{h_med:.0f}"
                   data-adj-tier="{tier_adj}"
@@ -4107,9 +4264,9 @@ class HTMLDashboardGenerator:
                 <td data-label="Nights">{s['nights']} nights</td>
                 <td data-label="Market Gap" id="diff-{row_id}">{diff_html_adj}</td>
                 <td data-label="Action Needed" id="action-{row_id}" style="font-size:0.85rem; {action_style_adj}"><strong>{action_adj}</strong></td>
-                <td data-label="Historical" id="track-{row_id}">{hist_cell_html}</td>
+                <td data-label="Historical AVG" id="track-{row_id}">{hist_cell_html}</td>
                 <td data-label="Comps" id="n-{row_id}">{n_html_adj}</td>
-                <td data-label="Kivoya Rate" style="font-family:'JetBrains Mono',monospace;">${s['our_base_nightly']:.0f}</td>
+                <td data-label="Kivoya Rate" style="font-family:'JetBrains Mono',monospace;">${our_base:.0f}</td>
                 <td data-label="Effective Total" id="eff-{row_id}" style="font-family:'JetBrains Mono',monospace;">{eff_cell_html}</td>
                 <td data-label="Comp Target" id="target-{row_id}" style="font-family:'JetBrains Mono',monospace; color:#60a5fa;">${target_adj:.0f} <span style="font-size:0.75rem; color:#94a3b8;">({target_pct_str})</span></td>
                 <td data-label="Recommended" id="rec-{row_id}"><span class="rec-price">${rec_adj:.0f}</span></td>
@@ -4638,7 +4795,8 @@ class HTMLDashboardGenerator:
           { feat: 'Living Area (sq ft)', vds: '5,400 sq ft', comp: sqftVal, status: (sp.sqft || 4500) >= 5000 ? '✅ Grand Scale' : '📐 Standard Footprint' },
           { feat: 'Lot Size & Compound', vds: '0.75 Acre Gated Compound', comp: lotVal, status: (sp.lot_acres || 0.4) >= 0.70 ? '🌳 Estate Grounds' : '🏡 Suburban Lot' },
           { feat: 'Asset Value Benchmark', vds: '$2,000,000 baseline', comp: valVal, status: '🏷️ ' + (comp.desirability_ratio ? comp.desirability_ratio.toFixed(2) + 'x ratio' : '1.00x') },
-          { feat: 'Swimming Pool & Spa', vds: '30,000-gal Saltwater Waterfall (Free Heat)', comp: poolVal, status: psp.has_pool ? (psp.heating === 'free' ? '✅ Free Heat' : '⚠️ Unheated/Fee') : '❌ No Pool' }
+          { feat: 'Swimming Pool & Spa', vds: '30,000-gal Saltwater Waterfall (Free Heat)', comp: poolVal, status: psp.has_pool ? (psp.heating === 'free' ? '✅ Free Heat' : '⚠️ Unheated/Fee') : '❌ No Pool' },
+          { feat: 'Guest Reputation & Badges', vds: (window.ALL_RATINGS_DATA && window.ALL_RATINGS_DATA.platforms && window.ALL_RATINGS_DATA.platforms.airbnb) ? ('★ ' + (window.ALL_RATINGS_DATA.platforms.airbnb.rating || 4.83).toFixed(2) + ' (' + (window.ALL_RATINGS_DATA.platforms.airbnb.review_count || 77) + ' reviews)') : '★ 4.83 (77 reviews)', comp: (comp.rating ? '★ ' + Number(comp.rating).toFixed(2) : 'Unrated') + (comp.is_guest_favorite ? ' • 🏅 Guest Favorite' : ''), status: comp.is_guest_favorite ? '🏅 Guest Favorite (+7 pts)' : ((comp.rating || 0) >= 4.90 ? '⭐ Excellent' : '📊 Standard') }
         ];
 
         compBody.innerHTML = rows.map(r => `
@@ -5554,7 +5712,7 @@ class HTMLDashboardGenerator:
               <div style="font-size: 3rem; margin-bottom: 12px;">⭐</div>
               <h2 style="font-size: 1.4rem; font-weight: 800; color: #f8fafc; margin-bottom: 8px;">No Reviews Data Ingested Yet</h2>
               <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 20px;">
-                Run <code style="color:#38bdf8;">.venv/bin/python -m src.cli sync-ratings</code> to scrape and synchronize live guest reviews from Airbnb, VRBO, Booking.com, and Kivoya Direct.
+                Run <code style="color:#38bdf8;">.venv/bin/python -m src.cli sync-ratings</code> to scrape and synchronize live guest reviews from Airbnb, VRBO, and Booking.com.
               </p>
             </div>
             """
@@ -5566,12 +5724,11 @@ class HTMLDashboardGenerator:
 
         # 1. Platform Scorecards
         cards_html = []
-        platform_order = ["airbnb", "vrbo", "booking", "kivoya"]
+        platform_order = ["airbnb", "vrbo", "booking"]
         badge_classes = {
             "airbnb": "badge-airbnb",
             "vrbo": "badge-vrbo",
             "booking": "badge-booking",
-            "kivoya": "badge-kivoya",
         }
 
         for p_id in platform_order:
@@ -5612,6 +5769,18 @@ class HTMLDashboardGenerator:
             else:
                 sub_block = '<div class="scorecard-subscores" style="color:#64748b; font-style:italic;">Direct guest review channel</div>'
 
+            badge_info = p.get("badge")
+            badge_html = ""
+            if badge_info and isinstance(badge_info, dict) and badge_info.get("name"):
+                b_name = html.escape(str(badge_info.get("name")), quote=True)
+                b_sub = html.escape(str(badge_info.get("subtitle", "")), quote=True)
+                sub_part = f'<span style="font-size:0.75rem; opacity:0.85; margin-left:4px;">• {b_sub}</span>' if b_sub else ""
+                badge_html = f"""
+                  <div class="scorecard-badge-pill" style="display:inline-flex; align-items:center; background:linear-gradient(135deg, rgba(245,158,11,0.15), rgba(217,119,6,0.25)); border:1px solid rgba(245,158,11,0.4); color:#fbbf24; border-radius:6px; padding:3px 8px; font-size:0.8rem; font-weight:700; margin-top:8px;">
+                    <span>🏆 {b_name}</span>{sub_part}
+                  </div>
+                """
+
             url_escaped = html.escape(str(url), quote=True)
             cards_html.append(f"""
             <div class="review-scorecard">
@@ -5623,6 +5792,7 @@ class HTMLDashboardGenerator:
                 <div class="scorecard-score-box">
                   <div class="scorecard-main-score">{rating_str} <span style="font-size: 1rem; color: #94a3b8; font-weight: 500;">{scale_str}</span></div>
                   <div class="scorecard-count">{rev_count} verified guest reviews</div>
+                  {badge_html}
                 </div>
                 {sub_block}
               </div>
@@ -5636,6 +5806,7 @@ class HTMLDashboardGenerator:
 
         # 2. Review Feed Cards
         review_cards_html = []
+        recent_in_30d_count = 0
         for r in reviews:
             p_id = r.get("platform", "other")
             raw_author = r.get("reviewer_name") or "Guest"
@@ -5643,14 +5814,17 @@ class HTMLDashboardGenerator:
             author = html.escape(str(raw_author), quote=True)
             loc = html.escape(str(raw_loc), quote=True) if raw_loc else None
             author_display = f"{author} ({loc})" if loc else author
-            r_date_str = r.get("date", "")
+            r_date_str = str(r.get("date") or "")
             try:
-                dt_obj = date.fromisoformat(r_date_str[:10])
-                date_fmt = dt_obj.strftime("%b %d, %Y")
-                is_recent = (dt_obj >= cutoff)
+                dt_obj = date.fromisoformat(r_date_str[:10]) if r_date_str else None
+                date_fmt = dt_obj.strftime("%b %d, %Y") if dt_obj else "Date Not Available"
+                is_recent = (dt_obj >= cutoff) if dt_obj else False
             except Exception:
-                date_fmt = html.escape(str(r_date_str), quote=True)
+                date_fmt = html.escape(str(r_date_str), quote=True) if r_date_str else "Date Not Available"
                 is_recent = bool(r.get("is_recent"))
+
+            if is_recent:
+                recent_in_30d_count += 1
 
             raw_score = r.get("rating")
             if raw_score is not None:
@@ -5671,15 +5845,15 @@ class HTMLDashboardGenerator:
 
             new_badge = '<span class="review-new-badge">✨ NEW</span>' if is_recent else ''
             recent_class = " recent-card" if is_recent else ""
+            initial_card_style = "" if is_recent else ' style="display: none;"'
 
             raw_title = r.get("title")
             title = html.escape(str(raw_title), quote=True) if raw_title else None
             title_html = f'<div class="review-title">{title}</div>' if title else ""
             body_escaped = html.escape(str(r.get("body") or ""), quote=True).replace("\n", "<br>")
 
-            # Host Response
+            # Host / Team Response
             resp = r.get("host_response")
-            resp_html = ""
             if resp and isinstance(resp, dict) and resp.get("body"):
                 resp_d = resp.get("date", "")
                 if resp_d:
@@ -5687,12 +5861,32 @@ class HTMLDashboardGenerator:
                         resp_d = date.fromisoformat(resp_d[:10]).strftime("%b %d, %Y")
                     except Exception:
                         resp_d = html.escape(str(resp_d), quote=True)
-                d_part = f" ({resp_d})" if resp_d else ""
+                d_part = f'<span class="review-reply-date-pill">{resp_d}</span>' if resp_d else ""
                 resp_body_escaped = html.escape(str(resp.get("body") or ""), quote=True).replace("\n", "<br>")
                 resp_html = f"""
                 <div class="review-host-reply">
-                  <div class="review-reply-header">↳ 💬 Host Response{d_part}</div>
+                  <div class="review-reply-header">
+                    <div style="display:inline-flex; align-items:center; gap:6px;">
+                      <span>💬 Team Response</span>
+                    </div>
+                    {d_part}
+                  </div>
                   <div class="review-reply-body">{resp_body_escaped}</div>
+                </div>
+                """
+            else:
+                resp_html = """
+                <div class="review-host-reply review-reply-empty">
+                  <div class="review-reply-header review-reply-header-empty">
+                    <div style="display:inline-flex; align-items:center; gap:6px;">
+                      <span style="opacity:0.6;">💬</span>
+                      <span>Team Response</span>
+                    </div>
+                    <span class="review-empty-badge">No Reply Posted</span>
+                  </div>
+                  <div class="review-reply-body-empty">
+                    No public response recorded for this guest review.
+                  </div>
                 </div>
                 """
 
@@ -5705,7 +5899,8 @@ class HTMLDashboardGenerator:
                  data-rating="{score}"
                  data-rating-max="{score_max}"
                  data-is-recent="{'true' if is_recent else 'false'}"
-                 data-search-text="{search_blob_clean}">
+                 data-date="{r_date_str[:10]}"
+                 data-search-text="{search_blob_clean}"{initial_card_style}>
               <div class="review-card-header">
                 <div class="review-author-meta">
                   <span class="scorecard-platform-badge {b_class}">{p_name}</span>
@@ -5715,9 +5910,18 @@ class HTMLDashboardGenerator:
                 </div>
                 <span class="review-score-badge">{score_str}</span>
               </div>
-              {title_html}
-              <div class="review-body">{body_escaped}</div>
-              {resp_html}
+              <div class="review-grid-2col">
+                <div class="review-guest-col">
+                  <div class="review-col-header guest">
+                    <span style="display:inline-flex; align-items:center; gap:6px;">👤 Guest Review</span>
+                  </div>
+                  {title_html}
+                  <div class="review-body">{body_escaped}</div>
+                </div>
+                <div class="review-team-col">
+                  {resp_html}
+                </div>
+              </div>
             </div>
             """)
 
@@ -5730,7 +5934,7 @@ class HTMLDashboardGenerator:
               ⭐ Cross-Platform Reviews & Guest Sentiment
             </h2>
             <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Live reputation surveillance across Airbnb, VRBO, Booking.com, and Kivoya Direct • Strict native scale fidelity
+              Live reputation surveillance across Airbnb, VRBO, and Booking.com • Strict native scale fidelity
             </p>
           </div>
 
@@ -5747,7 +5951,6 @@ class HTMLDashboardGenerator:
                 <option value="airbnb">Airbnb</option>
                 <option value="vrbo">VRBO</option>
                 <option value="booking">Booking.com</option>
-                <option value="kivoya">Kivoya Direct</option>
               </select>
 
               <select id="reviewRatingFilter" class="reviews-select" onchange="filterReviews()">
@@ -5757,9 +5960,14 @@ class HTMLDashboardGenerator:
                 <option value="low">≤3★ / &lt;7 Rating</option>
               </select>
 
-              <button type="button" id="reviewRecentToggle" class="reviews-toggle-btn" onclick="toggleRecentFilter()">
-                🔘 Recent Only (&lt;30d)
-              </button>
+              <div class="reviews-date-pills" role="group" aria-label="Review date filters">
+                <input type="hidden" id="reviewDateFilterVal" value="30">
+                <button type="button" class="filter-pill-btn" id="rev-date-all" aria-pressed="false" onclick="setReviewDateFilter('all', this)">All</button>
+                <button type="button" class="filter-pill-btn active" id="rev-date-30" aria-pressed="true" onclick="setReviewDateFilter('30', this)">Last 30d</button>
+                <button type="button" class="filter-pill-btn" id="rev-date-90" aria-pressed="false" onclick="setReviewDateFilter('90', this)">90d</button>
+                <button type="button" class="filter-pill-btn" id="rev-date-180" aria-pressed="false" onclick="setReviewDateFilter('180', this)">180d</button>
+                <button type="button" class="filter-pill-btn" id="rev-date-365" aria-pressed="false" onclick="setReviewDateFilter('365', this)">365d</button>
+              </div>
             </div>
 
             <div class="reviews-search-box">
@@ -5768,7 +5976,7 @@ class HTMLDashboardGenerator:
             </div>
 
             <span id="reviewCountBadge" class="badge badge-dark" style="font-weight: 600;">
-              Showing {len(reviews)} of {len(reviews)} reviews
+              Showing {recent_in_30d_count} of {len(reviews)} reviews
             </span>
           </div>
 
@@ -6310,7 +6518,7 @@ class HTMLDashboardGenerator:
         </div>
         """
 
-        snapshots_json = json.dumps(snapshots)
+        snapshots_json = json.dumps(snapshots).replace("</", "<\\/")
 
         js_data = f"""
     // Streamline PMS Snapshots and Dynamic Switcher
@@ -6494,7 +6702,7 @@ class HTMLDashboardGenerator:
         v_avail_pct = villa_summary.get("availability_pct", 0.0)
         v_unavail_pct = villa_summary.get("unavailability_pct", 0.0)
 
-        timeline_json_str = json.dumps(market_timeline_data)
+        timeline_json_str = json.dumps(market_timeline_data).replace("</", "<\\/")
         trajectory_script = self._render_market_trajectory_script(timeline_json_str)
 
         overall_comp_lead = comps_lead_analytics.get("overall", {})
@@ -6559,28 +6767,28 @@ class HTMLDashboardGenerator:
                 "desc": "Early booking window with high willingness-to-pay. Anchor at premium percentiles.",
                 "badge_color": "#38bdf8",
                 "badge_bg": "rgba(56,189,248,0.15)",
-                "action": "Hold firm at 65%–70% (Weekend) / 45%–50% (Midweek). Do not discount far-out inventory.",
+                "action": "Hold firm at 65%–70% (Weekend) / 45%–50% (Midweek). Strategic floor protects far-out luxury yield against early underpriced bargain hunters.",
             },
             "31–90d": {
                 "title": "Peak Booking Window (31–90 Days)",
                 "desc": "Prime conversion period for family vacations and luxury group travel.",
                 "badge_color": "#818cf8",
                 "badge_bg": "rgba(129,140,248,0.15)",
-                "action": "Target 60%–65% (Weekend) / 45%–50% (Midweek). Maintain competitive positioning.",
+                "action": "Target 60%–65% (Weekend) / 30%–35% (Midweek). Aligned with empirical comp conversion band and protected by $300 midweek floor.",
             },
             "15–30d": {
                 "title": "Near-Term Compression (15–30 Days)",
                 "desc": "Demand curve compresses and price elasticity rises rapidly.",
                 "badge_color": "#fbbf24",
                 "badge_bg": "rgba(251,191,36,0.15)",
-                "action": "Trim to 50%–55% (Weekend) / 38%–42% (Midweek) if unbooked to accelerate conversion.",
+                "action": "Trim to 50%–55% (Weekend) / 30%–32% (Midweek). Monotonic tapering prevents small-sample near-term spikes.",
             },
             "≤14d": {
                 "title": "Last-Minute Distress (≤ 14 Days)",
                 "desc": "Distress inventory liquidation window where unbooked nights risk total perishable loss.",
                 "badge_color": "#f87171",
                 "badge_bg": "rgba(248,113,113,0.15)",
-                "action": "Aggressive liquidation: 40%–45% (Weekend) / 30%–35% (Midweek) to secure occupancy.",
+                "action": "Aggressive liquidation: 40%–45% (Weekend) / 28%–32% (Midweek) to secure occupancy above $300 operational floor.",
             },
         }
 
@@ -6598,13 +6806,29 @@ class HTMLDashboardGenerator:
             w_p75 = f"{w_cell.get('empirical_p75', 75.0):.1f}%" if w_n > 0 else "—"
             w_rec = f"{w_cell.get('recommended_target', 65.0):.1f}%"
             w_is_emp = w_cell.get("is_empirical", False)
-            w_badge_style = "background:rgba(52,211,153,0.15); color:#34d399; border:1px solid rgba(52,211,153,0.3);" if w_is_emp else "background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3);"
+            if w_cell.get("is_floor_clamped"):
+                w_badge_style = "background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.3);"
+                w_badge_label = "Floor Clamped"
+            elif w_is_emp:
+                w_badge_style = "background:rgba(52,211,153,0.15); color:#34d399; border:1px solid rgba(52,211,153,0.3);"
+                w_badge_label = "Empirical"
+            else:
+                w_badge_style = "background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);"
+                w_badge_label = "Blended (k=5)"
 
             m_p50 = f"{m_cell.get('empirical_p50', 45.5):.1f}%" if m_n > 0 else "—"
             m_p75 = f"{m_cell.get('empirical_p75', 55.0):.1f}%" if m_n > 0 else "—"
             m_rec = f"{m_cell.get('recommended_target', 45.5):.1f}%"
             m_is_emp = m_cell.get("is_empirical", False)
-            m_badge_style = "background:rgba(52,211,153,0.15); color:#34d399; border:1px solid rgba(52,211,153,0.3);" if m_is_emp else "background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);"
+            if m_cell.get("is_floor_clamped"):
+                m_badge_style = "background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.3);"
+                m_badge_label = "Floor Clamped"
+            elif m_is_emp:
+                m_badge_style = "background:rgba(52,211,153,0.15); color:#34d399; border:1px solid rgba(52,211,153,0.3);"
+                m_badge_label = "Empirical"
+            else:
+                m_badge_style = "background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);"
+                m_badge_label = "Blended (k=5)"
 
             grid_rows_html += f"""
             <tr style="border-bottom: 1px solid var(--border-color);">
@@ -6620,7 +6844,7 @@ class HTMLDashboardGenerator:
               </td>
               <td style="padding: 14px 16px; text-align:center;">
                 <span class="badge" style="{w_badge_style} font-weight:700; font-size:0.88rem;">{w_rec}</span>
-                <div style="font-size:0.75rem; color:#94a3b8; margin-top:3px;">{'Empirical' if w_is_emp else 'Blended (k=3)'}</div>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:3px;">{w_badge_label}</div>
               </td>
               <td style="padding: 14px 16px; text-align:center; font-weight:600; color:{'#34d399' if m_n > 0 else '#64748b'};">
                 {m_n}
@@ -6630,7 +6854,7 @@ class HTMLDashboardGenerator:
               </td>
               <td style="padding: 14px 16px; text-align:center;">
                 <span class="badge" style="{m_badge_style} font-weight:700; font-size:0.88rem;">{m_rec}</span>
-                <div style="font-size:0.75rem; color:#94a3b8; margin-top:3px;">{'Empirical' if m_is_emp else 'Blended (k=3)'}</div>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:3px;">{m_badge_label}</div>
               </td>
               <td style="padding: 14px 16px; font-size:0.82rem; color:#cbd5e1; max-width:240px; line-height:1.4;">
                 {meta['action']}

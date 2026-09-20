@@ -502,6 +502,19 @@ class CompEvaluator:
         else:
             reputation_score = 75
 
+        # Airbnb Guest Favorite badge bonus: +7 reputation points (capped at 100)
+        is_guest_favorite = bool(
+            comp_meta.get("is_guest_favorite")
+            or enriched.get("is_guest_favorite")
+            or comp_meta.get("guest_favorite_badge")
+            or enriched.get("guest_favorite_badge")
+            or "guest favorite" in str(comp_meta.get("raw_snippet") or "").lower()
+            or "guest favorite" in str(comp_meta.get("badge") or "").lower()
+            or "guest favorite" in str(enriched.get("badge") or "").lower()
+        )
+        if is_guest_favorite:
+            reputation_score = min(100, reputation_score + 7)
+
         # Composite & Ratio
         composite = (
             self.CATEGORY_WEIGHTS["outdoor"] * outdoor_score
@@ -521,6 +534,9 @@ class CompEvaluator:
         # Rationale
         highlights = []
         shortcomings = []
+
+        if is_guest_favorite:
+            highlights.append("Airbnb Guest Favorite")
 
         if heating == "free":
             highlights.append("free heated pool")
@@ -948,6 +964,16 @@ class CompEvaluator:
         if any("sauna" in a for a in amenities): strengths.append("Private sauna / wellness feature")
         if any("theater" in a or "cinema" in a for a in amenities): strengths.append("Dedicated movie theater / cinema room")
         if rating >= 4.95 and reviews >= 20: strengths.append(f"Flawless guest track record ({rating:.2f}★ with {reviews} reviews)")
+        is_gf = bool(
+            comp_meta.get("is_guest_favorite")
+            or enriched.get("is_guest_favorite")
+            or comp_meta.get("guest_favorite_badge")
+            or enriched.get("guest_favorite_badge")
+            or "guest favorite" in str(comp_meta.get("raw_snippet") or "").lower()
+            or "guest favorite" in str(comp_meta.get("badge") or "").lower()
+            or "guest favorite" in str(enriched.get("badge") or "").lower()
+        )
+        if is_gf: strengths.append("Airbnb Guest Favorite badge (+reputation boost)")
 
         if br < 6: deficits.append(f"Fewer bedrooms ({br} BR) compared to Villa del Sol's 6BR + guest casita")
         if ba <= 3.5: deficits.append(f"Limited bathrooms ({ba} BA) creating potential morning rush congestion")
@@ -967,9 +993,10 @@ class CompEvaluator:
                 "private_swimming_pool": has_pool,
                 "guest_capacity_12_plus": capacity_ok,
                 "guest_rating_benchmark": rating_ok,
-                "corridor_drive_radius": corridor_ok
+                "corridor_drive_radius": corridor_ok,
+                "is_guest_favorite": is_gf
             },
-            "strengths": strengths[:4],
+            "strengths": strengths[:5],
             "deficits": deficits[:4],
             "justification": reason or f"Evaluated as {status.lower()} comp with {ratio:.2f}x desirability ratio."
         }

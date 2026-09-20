@@ -444,6 +444,12 @@ class AirbnbCollector:
                 reviews = int(rating_match.group(2).replace(",", "")) if rating_match.group(2) else 0
             except Exception:
                 pass
+        # Guest Favorite badge detection
+        is_guest_favorite = bool(re.search(r"\b(?:top\s+)?guest\s+favorite\b", text, re.IGNORECASE))
+        badge_label = None
+        if is_guest_favorite:
+            badge_m = re.search(r"\b(top\s+guest\s+favorite|guest\s+favorite)\b", text, re.IGNORECASE)
+            badge_label = badge_m.group(1).title() if badge_m else "Guest Favorite"
 
         return {
             "listing_id": card_id,
@@ -457,6 +463,8 @@ class AirbnbCollector:
             "effective_nightly": effective_nightly,
             "rating": rating,
             "reviews": reviews,
+            "is_guest_favorite": is_guest_favorite,
+            "guest_favorite_badge": badge_label,
             "confidence": confidence,
             "confidence_reason": confidence_reason,
             "price_snippet": price_snippet,
@@ -922,6 +930,8 @@ class AirbnbCollector:
 
                 if intercepted_price and intercepted_price > 0:
                     eff_nightly = round(intercepted_price / max(1, nights), 2)
+                    is_gf = bool(meta.get("is_guest_favorite"))
+                    gf_badge = meta.get("guest_favorite_badge") or ("Guest Favorite" if is_gf else None)
                     item = {
                         "listing_id": str(listing_id),
                         "title": title[:60],
@@ -934,6 +944,8 @@ class AirbnbCollector:
                         "effective_nightly": eff_nightly,
                         "rating": rating,
                         "reviews": reviews,
+                        "is_guest_favorite": is_gf,
+                        "guest_favorite_badge": gf_badge,
                         "confidence": "CONFIRMED",
                         "confidence_reason": "Direct single-comp checkout pricing via Airbnb API",
                         "price_snippet": f"${intercepted_price:,.0f} for {nights} nights | ${eff_nightly:,.0f}/night",

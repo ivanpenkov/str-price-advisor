@@ -403,9 +403,9 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         self.assertEqual(sales[0]["detected_date"], "2026-10-01")
         self.assertEqual(sales[0]["lead_time_days"], 50)
 
-    # 7. Bayesian Shrinkage (Tiered Priors)
+    # 7. Bayesian Shrinkage (Tiered Priors & n >= 5 Gating)
     def test_bayesian_shrinkage_tiered_priors(self):
-        """Verify cell with n < 3 blends empirical median with horizon-specific priors; n=0 returns prior directly."""
+        """Verify cell with n < 5 anchors to prior baseline; n >= 5 blends with k=5.0."""
         # Check empty grid (n = 0 for all cells)
         grid_data = self.tracker.compute_strategy_grid()
         cell_last_minute = grid_data["grid"]["≤14d"]["weekend"]
@@ -429,14 +429,36 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             conn.execute("UPDATE competitor_sales SET last_observed_percentile = 80.0 WHERE listing_id = '1001'")
             conn.commit()
 
+        # With n = 1 (< 5), should stay anchored to prior baseline (62.5%)
         grid_1 = self.tracker.compute_strategy_grid()
         cell_31_90 = grid_1["grid"]["31–90d"]["weekend"]
         self.assertEqual(cell_31_90["count"], 1)
         self.assertEqual(cell_31_90["empirical_p50"], 80.0)
-        # Prior is 62.5% for 31-90d weekend; k = 3.0
-        # Expected: (1 * 80.0 + 3 * 62.5) / 4 = (80 + 187.5) / 4 = 267.5 / 4 = 66.9%
-        self.assertEqual(cell_31_90["recommended_target"], 66.9)
+        self.assertEqual(cell_31_90["recommended_target"], 62.5)
         self.assertFalse(cell_31_90["is_empirical"])
+
+        # Insert 4 more sales (total n = 5) all with 80% percentile
+        with self.tracker._get_connection() as conn:
+            for idx in range(2, 6):
+                conn.execute("""
+                    INSERT INTO competitor_sales (
+                        listing_id, check_in, check_out, nights, segment_type,
+                        detected_date, lead_time_days, last_observed_rate, last_observed_percentile,
+                        verification_status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    f"100{idx % 3 + 1}", f"2026-11-{10+idx*2}", f"2026-11-{13+idx*2}", 3, "weekend",
+                    "2026-10-01", 45, 1500.0, 80.0, "CONFIRMED_BLOCKED"
+                ))
+            conn.commit()
+
+        grid_5 = self.tracker.compute_strategy_grid()
+        cell_5 = grid_5["grid"]["31–90d"]["weekend"]
+        self.assertEqual(cell_5["count"], 5)
+        self.assertTrue(cell_5["is_empirical"])
+        # Expected: (5 * 80.0 + 5.0 * 62.5) / 10 = (400 + 312.5) / 10 = 712.5 / 10 = 71.25 -> 71.2% or 71.3%
+        # Monotonic tapering pass clamps to >90d weekend (prior 67.5%)
+        self.assertLessEqual(cell_5["recommended_target"], grid_5["grid"][">90d"]["weekend"]["recommended_target"])
 
     # 8. Monthly Quartiles
     def test_monthly_lead_time_quartiles(self):
@@ -689,13 +711,131 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         p_far_wkd = self.tracker.get_target_percentile(lead_time_days=100, segment_type="weekend")
         self.assertEqual(p_far_wkd, 67.5)
 
-        # Near-term (15-30d) midweek prior is 38.5%
+        # Near-term (15-30d) midweek prior is 32.5%
         p_near_mid = self.tracker.get_target_percentile(lead_time_days=20, segment_type="midweek")
-        self.assertEqual(p_near_mid, 38.5)
+        self.assertEqual(p_near_mid, 32.5)
 
         # Last-minute (<=14d) weekend prior is 42.5%
         p_last_wkd = self.tracker.get_target_percentile(lead_time_days=10, segment_type="weekend")
         self.assertEqual(p_last_wkd, 42.5)
+
+    def test_compute_strategy_grid_with_floors(self):
+        """Verify far-out weekend does not drop below strategic floor 65.0% despite empirical p50 = 41.0%."""
+        # Insert 24 far-out (>90d) weekend bookings with p50 = 41.0%
+        with self.tracker._get_connection() as conn:
+            for i in range(24):
+                conn.execute("""
+                    INSERT INTO competitor_sales (
+                        listing_id, check_in, check_out, nights, segment_type,
+                        detected_date, lead_time_days, last_observed_rate, last_observed_percentile,
+                        verification_status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    f"comp_{i}", f"2027-04-{(i%20)+1:02d}", f"2027-04-{(i%20)+4:02d}", 3, "weekend",
+                    "2026-10-01", 180, 950.0, 41.0, "CONFIRMED_BLOCKED"
+                ))
+            conn.commit()
+
+        grid = self.tracker.compute_strategy_grid()
+        far_wkd = grid["grid"][">90d"]["weekend"]
+        self.assertEqual(far_wkd["count"], 24)
+        self.assertTrue(far_wkd["is_empirical"])
+        self.assertTrue(far_wkd["is_floor_clamped"])
+        # Strategic floor is 65.0%; empirical shrinkage without floor would be ~45.6%
+        self.assertEqual(far_wkd["recommended_target"], 65.0)
+
+    def test_is_floor_clamped_flag(self):
+        """Verify is_floor_clamped is True when hat_Y < floor and False when hat_Y >= floor."""
+        # 6 sales in far-out midweek with low percentile (20.0%) -> hat_Y < 45.0% floor -> is_floor_clamped True
+        with self.tracker._get_connection() as conn:
+            for i in range(6):
+                conn.execute("""
+                    INSERT INTO competitor_sales (
+                        listing_id, check_in, check_out, nights, segment_type,
+                        detected_date, lead_time_days, last_observed_rate, last_observed_percentile,
+                        verification_status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    f"mid_{i}", f"2027-05-{(i%20)+1:02d}", f"2027-05-{(i%20)+4:02d}", 3, "midweek",
+                    "2026-10-01", 200, 500.0, 20.0, "CONFIRMED_BLOCKED"
+                ))
+            conn.commit()
+
+        grid = self.tracker.compute_strategy_grid()
+        cell = grid["grid"][">90d"]["midweek"]
+        self.assertTrue(cell["is_floor_clamped"])
+        self.assertEqual(cell["recommended_target"], 45.0)
+
+    def test_monotonic_tapering_enforcement(self):
+        """Verify nearer horizon target is clamped so it never exceeds further-out horizon target."""
+        # Insert 6 high-percentile bookings in 15-30d midweek (e.g. 85th percentile)
+        # Prior is 32.5%. High empirical conversion would pull hat_Y to ~61.0% without monotonic tapering.
+        # But >90d midweek is 45.0% and 31-90d midweek is 32.5%.
+        # Monotonic tapering forces 15-30d <= 31-90d (32.5%).
+        with self.tracker._get_connection() as conn:
+            for i in range(6):
+                conn.execute("""
+                    INSERT INTO competitor_sales (
+                        listing_id, check_in, check_out, nights, segment_type,
+                        detected_date, lead_time_days, last_observed_rate, last_observed_percentile,
+                        verification_status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    f"near_mid_{i}", f"2026-10-{20+(i%5)}", f"2026-10-{23+(i%5)}", 3, "midweek",
+                    "2026-10-01", 20, 1200.0, 85.0, "CONFIRMED_BLOCKED"
+                ))
+            conn.commit()
+
+        grid = self.tracker.compute_strategy_grid()
+        target_31_90 = grid["grid"]["31–90d"]["midweek"]["recommended_target"]
+        target_15_30 = grid["grid"]["15–30d"]["midweek"]["recommended_target"]
+        self.assertLessEqual(target_15_30, target_31_90)
+
+    def test_monotonic_tapering_disabled(self):
+        """Verify enforce_monotonic_tapering=False permits nearer horizon targets to exceed further-out targets."""
+        with self.tracker._get_connection() as conn:
+            for i in range(6):
+                conn.execute("""
+                    INSERT INTO competitor_sales (
+                        listing_id, check_in, check_out, nights, segment_type,
+                        detected_date, lead_time_days, last_observed_rate, last_observed_percentile,
+                        verification_status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    f"dis_mid_{i}", f"2026-10-{20+(i%5)}", f"2026-10-{23+(i%5)}", 3, "midweek",
+                    "2026-10-01", 20, 1200.0, 85.0, "CONFIRMED_BLOCKED"
+                ))
+            conn.commit()
+
+        # When enforce_monotonic_tapering is False, 15-30d empirical target reflects raw shrinkage (>32.5%)
+        with patch("src.competitor_sales_tracker.ENFORCE_MONOTONIC_TAPERING", False):
+            grid = self.tracker.compute_strategy_grid()
+            target_31_90 = grid["grid"]["31–90d"]["midweek"]["recommended_target"]
+            target_15_30 = grid["grid"]["15–30d"]["midweek"]["recommended_target"]
+            self.assertGreater(target_15_30, target_31_90)
+
+    def test_sample_size_gating_n5(self):
+        """Verify cells with n < 5 remain non-empirical and prior-anchored."""
+        # Insert 4 sales (n=4 < 5) with extreme percentile (95.0%)
+        with self.tracker._get_connection() as conn:
+            for i in range(4):
+                conn.execute("""
+                    INSERT INTO competitor_sales (
+                        listing_id, check_in, check_out, nights, segment_type,
+                        detected_date, lead_time_days, last_observed_rate, last_observed_percentile,
+                        verification_status
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    f"gate_{i}", f"2026-10-{10+i}", f"2026-10-{13+i}", 3, "weekend",
+                    "2026-10-01", 10, 800.0, 95.0, "CONFIRMED_BLOCKED"
+                ))
+            conn.commit()
+
+        grid = self.tracker.compute_strategy_grid()
+        cell = grid["grid"]["≤14d"]["weekend"]
+        self.assertEqual(cell["count"], 4)
+        self.assertFalse(cell["is_empirical"])
+        self.assertEqual(cell["recommended_target"], 42.5)  # exact prior target
 
     # 14. Advisory Report Alerts
     def test_reporter_embeds_sales_and_surge_alerts(self):

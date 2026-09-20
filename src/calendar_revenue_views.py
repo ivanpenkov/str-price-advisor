@@ -1,7 +1,7 @@
 """
 Calendar and Cumulative Revenue Views for STR Price Advisor Dashboard.
 Renders:
-1. Streamline OwnerX Availability Calendar (6-month grid, half-day diagonal splits, clickable reservation modal)
+1. Streamline OwnerX Availability Calendar (12-month grid, half-day diagonal splits, clickable reservation modal)
 2. Cumulative Annual Owner Revenue Pace Curves (2022-2027, Chart.js, KPI cards, summary table)
 """
 
@@ -175,7 +175,7 @@ def get_calendar_revenue_css() -> str:
       padding: 14px;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
-    .cal-month-title {
+    .cal-month-title, .cal-month-header {
       text-align: center;
       font-size: 1.05rem;
       font-weight: 700;
@@ -1335,11 +1335,11 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
           <div class="cal-nav-group">
             <h2 style="font-size: 1.3rem; font-weight: 800; color: #f8fafc; margin-right: 8px;">Calendar</h2>
             <span style="font-size: 0.85rem; color: #94a3b8; font-weight: 600; margin-right: 12px;">Villa del Sol (Unit #503802)</span>
-            <button class="cal-btn" onclick="calNavigate(-6)">◀ Prev 6 Months</button>
+            <button class="cal-btn" onclick="calNavigate(-12)">◀ Prev 12 Months</button>
             <select id="calMonthSelect" class="cal-select" onchange="calJumpToMonth(this.value)">
               <!-- Options injected by JS -->
             </select>
-            <button class="cal-btn" onclick="calNavigate(6)">Next 6 Months ▶</button>
+            <button class="cal-btn" onclick="calNavigate(12)">Next 12 Months ▶</button>
             <button class="cal-btn" onclick="calJumpToToday()">Today</button>
           </div>
 
@@ -1419,7 +1419,7 @@ def render_calendar_tab(reservations: List[Dict[str, Any]], current_date: Option
         </div>
 
         <div id="calMonthsGrid" class="cal-months-grid cal-hide-rates">
-          <!-- 6 Month Grid Cards rendered via JS -->
+          <!-- 12 Month Grid Cards rendered via JS -->
         </div>
 
         <div id="calTooltip" class="cal-tooltip"></div>
@@ -1831,9 +1831,9 @@ def render_reservations_tab(
                   <th><span style="color:#818cf8; font-size:0.9rem;">●</span> Weekend Nights (Thu–Sat)</th>
                   <th><span style="color:#fb923c; font-size:0.9rem;">●</span> Midweek Nights (Sun–Wed)</th>
                   <th style="text-align:center;">Demand Distribution</th>
-                  <th><span style="color:#818cf8; font-size:0.9rem;">●</span> Realized Weekend ADR</th>
-                  <th><span style="color:#fb923c; font-size:0.9rem;">●</span> Realized Midweek ADR</th>
-                  <th>ADR Premium (%)</th>
+                  <th><span style="color:#818cf8; font-size:0.9rem;">●</span> Weekend ADR</th>
+                  <th><span style="color:#fb923c; font-size:0.9rem;">●</span> Midweek ADR</th>
+                  <th>Weekend Premium (%)</th>
                 </tr>
               </thead>
               <tbody>
@@ -2308,7 +2308,7 @@ def get_calendar_revenue_js(
     }})();
 
     // =========================================================================
-    // AVAILABILITY CALENDAR LOGIC (6-Month Rolling Grid)
+    // AVAILABILITY CALENDAR LOGIC (12-Month Rolling Grid)
     // =========================================================================
     let calCurrentYear = {today.year};
     let calCurrentMonth = {today.month}; // 1-indexed (1..12)
@@ -2419,11 +2419,11 @@ def get_calendar_revenue_js(
         sel.value = targetVal;
       }}
 
-      // Render 6 consecutive months
+      // Render 12 consecutive months
       let y = startYear;
       let m = startMonth;
 
-      for (let i = 0; i < 6; i++) {{
+      for (let i = 0; i < 12; i++) {{
         const card = document.createElement('div');
         card.className = 'cal-month-card';
 
@@ -2588,7 +2588,7 @@ def get_calendar_revenue_js(
         newYear += 1;
       }}
       if (newYear < 2022) {{ newYear = 2022; newMonth = 1; }}
-      if (newYear > 2027) {{ newYear = 2027; newMonth = 7; }}
+      if (newYear > 2027) {{ newYear = 2027; newMonth = 12; }}
       renderCalendar(newYear, newMonth);
     }}
 

@@ -1,0 +1,45 @@
+{
+  "data": {
+    "presentation": {
+      "stayProductDetailPage": {
+        "sections": {
+          "metadata": {
+            "overallRating": 4.83,
+            "reviewCount": 77
+          },
+          "reviewComponent": {
+            "reviewCategorySubscores": [
+              {"title": "Cleanliness", "rating": 4.98, "categoryType": "cleanliness"},
+              {"title": "Accuracy", "rating": 4.97, "categoryType": "accuracy"},
+              {"title": "Communication", "rating": 5.0, "categoryType": "communication"},
+              {"title": "Location", "rating": 4.93, "categoryType": "location"},
+              {"title": "Check-in", "rating": 5.0, "categoryType": "check_in"},
+              {"title": "Value", "rating": 4.88, "categoryType": "value"}
+            ],
+            "reviews": [
+              {
+                "author": {"firstName": "Sarah M.", "location": "Scottsdale, AZ"},
+                "createdAt": "2026-08-28T18:00:00Z",
+                "rating": 5.0,
+                "comments": "Villa del Sol was beyond perfection for our executive retreat! The backyard pool and patio were magnificent, and the bedrooms were spacious and spotless. We will definitely be back.",
+                "response": {
+                  "authorName": "Villa del Sol Host",
+                  "createdAt": "2026-08-29T10:00:00Z",
+                  "comments": "Thank you so much Sarah! It was our pleasure hosting your team."
+                }
+              },
+              {
+                "author": {"firstName": "Mark P.", "location": "Chicago, IL"},
+                "createdAt": "2026-07-22T14:30:00Z",
+                "rating": 5.0,
+                "comments": "We had a wonderful stay with our extended family. The kids loved the pool and games room. Front door lock buttons felt sluggish in afternoon heat, but host gave clear instructions.",
+                "response": null
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+

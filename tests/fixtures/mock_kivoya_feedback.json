@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "data": {
+    "rating": 5.0,
+    "review_count": 12,
+    "reviews": [
+      {
+        "author_name": "Michael B.",
+        "reviewer_location": "Dallas, TX",
+        "title": "Seamless booking",
+        "date": "2026-05-30",
+        "rating": 5.0,
+        "body": "Direct booking through Kivoya was seamless and we avoided excessive platform service fees. Beautiful home in Tempe!"
+      },
+      {
+        "author_name": "Jennifer L.",
+        "reviewer_location": "Seattle, WA",
+        "title": "Magnificent family pool stay",
+        "date": "2026-04-18",
+        "rating": 5.0,
+        "body": "The heated pool, outdoor gazebo, and luxury master suite made this our favorite Arizona vacation ever."
+      }
+    ]
+  }
+}
+

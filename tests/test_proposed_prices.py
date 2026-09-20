@@ -752,6 +752,90 @@ class TestProposedPrices(unittest.TestCase):
         self.assertIsNotNone(parent_reg)
         self.assertEqual(parent_reg["pname"], "Oct 26")
 
+    def test_post_churn_operational_floors(self):
+        """Verify proposed rates cannot be suppressed below $300 Midweek / $450 Weekend by 5% churn tolerance."""
+        seasonal_rates = [
+            {
+                "period_name": "Oct 26",
+                "begin_dt": date(2026, 10, 1),
+                "end_dt": date(2026, 10, 31),
+                "nightly_rate": 400.0,  # Below $450 weekend floor
+                "first_interval": "Monday-Wednesday",
+                "first_price": 250.0,   # Below $300 midweek floor
+                "second_interval": "Thursday-Sunday",
+                "second_price": 400.0,
+                "min_days": 3,
+            }
+        ]
+        # Segments producing consensus very close to base (within 5% churn tolerance)
+        evaluated_segments = [
+            {
+                "check_in": "2026-10-05",
+                "check_out": "2026-10-08",
+                "segment_type": "midweek",
+                "our_base_nightly": 250.0,
+                "recommended_base_nightly_adj": 255.0,  # +2.0% (within 5% churn window)
+                "historical_benchmark": None,
+            },
+            {
+                "check_in": "2026-10-08",
+                "check_out": "2026-10-11",
+                "segment_type": "weekend",
+                "our_base_nightly": 400.0,
+                "recommended_base_nightly_adj": 410.0,  # +2.5% (within 5% churn window)
+                "historical_benchmark": None,
+            },
+        ]
+        proposed = generate_proposed_prices(
+            seasonal_rates=seasonal_rates,
+            evaluated_segments=evaluated_segments,
+            reference_date=date(2026, 9, 1),
+            holidays_registry=[],
+        )
+        self.assertEqual(len(proposed), 1)
+        p = proposed[0]
+        # Churn threshold would have kept 250 and 400, but operational floors enforce 300 and 450
+        self.assertEqual(p["midweek_avg"], 300)
+        self.assertEqual(p["midweek_med"], 300)
+        self.assertEqual(p["weekend_avg"], 450)
+        self.assertEqual(p["weekend_med"], 450)
+
+        # Verify holiday period with low base rate is clamped to operational floor
+        holiday_rates = [
+            {
+                "period_name": "Thanksgiving 26",
+                "begin_dt": date(2026, 11, 26),
+                "end_dt": date(2026, 11, 30),
+                "nightly_rate": 350.0,  # Below $450 weekend operational floor
+                "first_interval": "Nightly Rate",
+                "first_price": 350.0,
+                "second_interval": None,
+                "second_price": None,
+                "min_days": 4,
+            }
+        ]
+        holiday_segments = [
+            {
+                "check_in": "2026-11-26",
+                "check_out": "2026-11-30",
+                "segment_type": "weekend",
+                "our_base_nightly": 350.0,
+                "recommended_base_nightly_adj": 355.0,  # within 5% churn
+                "historical_benchmark": None,
+            }
+        ]
+        h_proposed = generate_proposed_prices(
+            seasonal_rates=holiday_rates,
+            evaluated_segments=holiday_segments,
+            reference_date=date(2026, 9, 1),
+            holidays_registry=[],
+            operational_floors={"midweek": 300.0, "weekend": 450.0},
+        )
+        self.assertEqual(len(h_proposed), 1)
+        hp = h_proposed[0]
+        self.assertEqual(hp["special_avg"], 450)
+        self.assertEqual(hp["special_med"], 450)
+
 
 if __name__ == "__main__":
     unittest.main()

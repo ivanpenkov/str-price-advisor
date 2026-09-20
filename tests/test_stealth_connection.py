@@ -75,7 +75,7 @@ class TestStealthConnection(unittest.IsolatedAsyncioTestCase):
 
         with patch("socket.create_connection", return_value=mock_socket):
             ok = StealthConnectionManager.verify_socks5(
-                "los-angeles.us.socks.nordhold.net:1080",
+                "san-francisco.us.socks.nordhold.net:1080",
                 username="test_user",
                 password="test_pass",
                 timeout=1.0,
@@ -444,11 +444,11 @@ class TestCandidateServerDiscovery(unittest.TestCase):
                 "locations": [{"country": {"city": {"name": "Salt Lake City"}}}],
             },
             {
-                "hostname": "los-angeles.us.socks.nordhold.net",
+                "hostname": "san-francisco.us.socks.nordhold.net",
                 "load": 5,
                 "status": "online",
                 "technologies": [{"id": 7, "name": "Socks 5", "pivot": {"status": "online"}}],
-                "locations": [{"country": {"city": {"name": "Los Angeles"}}}],
+                "locations": [{"country": {"city": {"name": "San Francisco"}}}],
             },
         ]
 
@@ -474,7 +474,7 @@ class TestCandidateServerDiscovery(unittest.TestCase):
             self.assertNotIn("phoenix-proxy.nordvpn.com:1080", candidates)
 
             # Default hub duplicate is excluded
-            self.assertNotIn("los-angeles.us.socks.nordhold.net:1080", candidates)
+            self.assertNotIn("san-francisco.us.socks.nordhold.net:1080", candidates)
 
     def test_fetch_candidate_servers_filters_maintenance_and_overloaded(self):
         """Verify API discovery rejects maintenance, offline SOCKS5 technology, and load > 70%, and sorts by load."""

@@ -6,4 +6,5 @@ beautifulsoup4>=4.12.0
 pandas>=2.1.0
 numpy>=1.26.0
 python-dateutil>=2.8.2
+pproxy>=2.7.0
 

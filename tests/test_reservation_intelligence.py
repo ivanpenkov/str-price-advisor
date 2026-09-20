@@ -22,7 +22,8 @@ class TestReservationIntelligence(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.TemporaryDirectory()
         self.db_path = Path(self.temp_dir.name) / "reservations.db"
-        self.store = ReservationStore(db_path=self.db_path)
+        self.json_path = Path(self.temp_dir.name) / "reservations.json"
+        self.store = ReservationStore(db_path=self.db_path, json_path=self.json_path)
 
         # Populate sample historical reservations
         sample_reservations = [
@@ -219,7 +220,8 @@ class TestReservationIntelligence(unittest.TestCase):
         # Clean setup with specific stays
         temp_dir = tempfile.TemporaryDirectory()
         db_path = Path(temp_dir.name) / "test_int.db"
-        store = ReservationStore(db_path=db_path)
+        json_path = Path(temp_dir.name) / "test_int.json"
+        store = ReservationStore(db_path=db_path, json_path=json_path)
 
         stays = [
             # Sunday to Thursday (4 midweek nights: Sun, Mon, Tue, Wed)
@@ -268,7 +270,8 @@ class TestReservationIntelligence(unittest.TestCase):
         """Verify reservation crossing month boundary attributes nights and revenue strictly to each month."""
         temp_dir = tempfile.TemporaryDirectory()
         db_path = Path(temp_dir.name) / "test_boundary.db"
-        store = ReservationStore(db_path=db_path)
+        json_path = Path(temp_dir.name) / "test_boundary.json"
+        store = ReservationStore(db_path=db_path, json_path=json_path)
 
         # Stay: Oct 31, 2024 (Thu) to Nov 3, 2024 (Sun)
         # Thu Oct 31 -> Oct Weekend (1 night)
@@ -310,7 +313,8 @@ class TestReservationIntelligence(unittest.TestCase):
         """Verify holiday stay nights are excluded from regular monthly periods."""
         temp_dir = tempfile.TemporaryDirectory()
         db_path = Path(temp_dir.name) / "test_hol_excl.db"
-        store = ReservationStore(db_path=db_path)
+        json_path = Path(temp_dir.name) / "test_hol_excl.json"
+        store = ReservationStore(db_path=db_path, json_path=json_path)
 
         # In 2024, Thanksgiving was Nov 28. Stay Nov 28 to Dec 1 (3 weekend nights Thu, Fri, Sat)
         # And another stay Nov 10 to Nov 13 (3 midweek nights Sun, Mon, Tue)
@@ -368,7 +372,8 @@ class TestReservationIntelligence(unittest.TestCase):
         """Verify 1.50 weekend premium allocation formula for mixed midweek/weekend stays."""
         temp_dir = tempfile.TemporaryDirectory()
         db_path = Path(temp_dir.name) / "test_mixed.db"
-        store = ReservationStore(db_path=db_path)
+        json_path = Path(temp_dir.name) / "test_mixed.json"
+        store = ReservationStore(db_path=db_path, json_path=json_path)
 
         # Single stay: Wed Apr 10, 2024 to Mon Apr 15, 2024 (5 nights total)
         # Nights:

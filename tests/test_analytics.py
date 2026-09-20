@@ -16,19 +16,49 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         )
 
     def test_lead_time_tapering(self):
-        """Lead time curves should taper from 70% far out to 45% close in for weekends."""
-        self.assertEqual(self.engine.get_target_percentile(200), 70.0)
-        self.assertEqual(self.engine.get_target_percentile(120), 65.0)
-        self.assertEqual(self.engine.get_target_percentile(45), 55.0)
-        self.assertEqual(self.engine.get_target_percentile(10), 45.0)
+        """Lead time curves should taper across the 4 horizons for weekends."""
+        self.assertEqual(self.engine.get_target_percentile(200), 67.5)
+        self.assertEqual(self.engine.get_target_percentile(60), 62.5)
+        self.assertEqual(self.engine.get_target_percentile(20), 52.5)
+        self.assertEqual(self.engine.get_target_percentile(10), 42.5)
 
     def test_midweek_target_percentiles(self):
-        """Midweek target percentiles should be 30% lower than weekend percentiles."""
-        self.assertEqual(self.engine.get_target_percentile(200, segment_type="midweek"), 49.0)
-        self.assertEqual(self.engine.get_target_percentile(120, segment_type="midweek"), 45.5)
-        self.assertEqual(self.engine.get_target_percentile(45, segment_type="midweek"), 38.5)
-        # September / near-term midweek example: 45 * 0.70 = 31.5%
-        self.assertEqual(self.engine.get_target_percentile(10, segment_type="midweek"), 31.5)
+        """Midweek target percentiles should follow the approved 4-tier matrix curve."""
+        self.assertEqual(self.engine.get_target_percentile(200, segment_type="midweek"), 47.5)
+        self.assertEqual(self.engine.get_target_percentile(60, segment_type="midweek"), 32.5)
+        self.assertEqual(self.engine.get_target_percentile(20, segment_type="midweek"), 32.5)
+        self.assertEqual(self.engine.get_target_percentile(10, segment_type="midweek"), 30.0)
+
+    def test_operational_floors(self):
+        """Recommended base rates must enforce operational floors: >= $300 Midweek, >= $450 Weekend."""
+        # Low comp prices that would otherwise produce < $300 or < $450
+        comp_rates = [200.0, 250.0, 280.0]
+        
+        # Midweek segment: recommended base must be clamped at $300
+        mid_seg = {
+            "check_in": "2026-10-05",
+            "check_out": "2026-10-08",
+            "nights": 3,
+            "lead_time_days": 15,
+            "segment_type": "midweek",
+            "our_base_nightly": 350.0,
+            "our_effective_nightly": 517.0,
+        }
+        res_mid = self.engine.evaluate_segment(mid_seg, comp_rates)
+        self.assertGreaterEqual(res_mid["recommended_base_nightly"], 300.0)
+
+        # Weekend segment: recommended base must be clamped at $450
+        wkd_seg = {
+            "check_in": "2026-10-09",
+            "check_out": "2026-10-12",
+            "nights": 3,
+            "lead_time_days": 15,
+            "segment_type": "weekend",
+            "our_base_nightly": 500.0,
+            "our_effective_nightly": 667.0,
+        }
+        res_wkd = self.engine.evaluate_segment(wkd_seg, comp_rates)
+        self.assertGreaterEqual(res_wkd["recommended_base_nightly"], 450.0)
 
     def test_outlier_removal(self):
         """Should filter out extreme prices using IQR."""

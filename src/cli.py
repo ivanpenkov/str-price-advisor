@@ -10,11 +10,12 @@ Usage:
 
 import argparse
 import asyncio
-from datetime import date
+from datetime import date, datetime
 import json
 import logging
 import os
 from pathlib import Path
+import re
 import shutil
 import sys
 import time
@@ -436,6 +437,14 @@ async def run_weekly_advisory(
         step3_time = time.perf_counter() - step3_start
         step3_bytes = collector.total_bytes_transferred
 
+        # 3b. Weekly Comp Reputation & Badge Refresh
+        print("\n[Step 3b/5] Refreshing competitor Airbnb ratings and Guest Favorite badges...")
+        step3b_start = time.perf_counter()
+        try:
+            await sync_comp_ratings(tier="all", dry_run=False, generate_html_after=False, proxy_mgr=shared_proxy_mgr)
+        except Exception as ex:
+            print(f"  ⚠️ Warning: Comp ratings refresh encountered an issue: {ex}")
+
         # 4. Reporting
         print("\n[Step 4/5] Generating multi-format advisory reports...")
         step4_start = time.perf_counter()
@@ -707,9 +716,10 @@ def main():
     scrape_prices_parser.add_argument("--end-date", type=str, default=None, help="Filter intervals ending on or before YYYY-MM-DD")
     scrape_prices_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
 
-    track_sales_parser = subparsers.add_parser("track-competitor-sales", help="Track competitor sales & absorption velocity from daily snapshots")
+    track_sales_parser = subparsers.add_parser("track-competitor-sales", aliases=["track-sales"], help="Track competitor sales & absorption velocity from daily snapshots")
     track_sales_parser.add_argument("--backfill", action="store_true", help="Backfill historical competitor sales across all snapshots in data/")
     track_sales_parser.add_argument("--verify", action="store_true", help="Commit search disappearance diffs to sales ledger as CONFIRMED_BLOCKED (omits dropouts if unset)")
+    track_sales_parser.add_argument("--audit", "--matrix", dest="audit", action="store_true", help="Print detailed 2D Strategy Matrix with Bayesian shrinkage, floors, and monotonic status")
     track_sales_parser.add_argument("--dashboard", action="store_true", help="Re-generate HTML dashboard with updated sales velocity metrics")
     track_sales_parser.add_argument("--push", action="store_true", help="Automatically commit and push updated data/docs to GitHub")
 
@@ -746,7 +756,7 @@ def main():
     )
     sync_ratings_parser.add_argument(
         "--platform",
-        choices=["all", "airbnb", "vrbo", "booking", "kivoya"],
+        choices=["all", "airbnb", "vrbo", "booking"],
         default="all",
         help="Platform to sync (default: all)",
     )
@@ -767,9 +777,46 @@ def main():
         help="Run browser in headless mode (default: true)",
     )
     sync_ratings_parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Full preview mode: scrape and preview ratings without saving to disk or regenerating dashboard",
+    )
+    sync_ratings_parser.add_argument(
         "--no-dashboard",
         action="store_true",
         help="Do not re-generate docs/index.html after sync",
+    )
+    sync_ratings_parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Exit with non-zero exit code 1 if any platform encounters partial harvest or error",
+    )
+
+    # sync-comp-ratings
+    sync_comp_parser = subparsers.add_parser(
+        "sync-comp-ratings",
+        help="Synchronize competitor Airbnb ratings and Guest Favorite badges, updating desirability ratios",
+    )
+    sync_comp_parser.add_argument(
+        "--tier",
+        choices=["all", "tier_a", "tier_b"],
+        default="all",
+        help="Tier of comps to sync (default: all)",
+    )
+    sync_comp_parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force live scraping of all comps instead of leveraging cached search snippets",
+    )
+    sync_comp_parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Preview rating changes and ratio adjustments without saving to registry",
+    )
+    sync_comp_parser.add_argument(
+        "--generate-html",
+        action="store_true",
+        help="Regenerate docs/index.html after sync",
     )
 
     # show-ratings
@@ -1085,7 +1132,7 @@ def main():
 
         if args.push:
             push_to_github(commit_msg="Sync Streamline OwnerX reservations and update dashboard")
-    elif args.command == "track-competitor-sales":
+    elif args.command in ("track-competitor-sales", "track-sales"):
         from src.competitor_sales_tracker import CompetitorSalesTracker
         from src.html_generator import HTMLDashboardGenerator
         from src.reporter import PriceReportGenerator
@@ -1132,6 +1179,35 @@ def main():
             print(f"  - ⚡ Active Market Compression: {len(active_alerts)} interval(s) surging!")
             for a in active_alerts:
                 print(f"      • {a['check_in']} -> {a['check_out']}: {a['reason']}")
+
+        if getattr(args, "audit", False):
+            strat_cfg = tracker._load_strategy_config()
+            op_floors = strat_cfg.get("operational_floors", {})
+            print(f"\n📈 2D Strategy Matrix (Horizon x Stay Type):")
+            print(f"  Operational Dollar Floors: Midweek >= ${op_floors.get('midweek', 300.0):.0f} | Weekend >= ${op_floors.get('weekend', 450.0):.0f}")
+            print("  " + "-" * 92)
+            print(f"  {'Horizon':<12} {'Type':<8} {'N':<4} {'Emp P50':<9} {'Prior':<7} {'Floor':<7} {'Target':<8} {'Status'}")
+            print("  " + "-" * 92)
+            for h in grid.get("horizons", []):
+                for t in ("weekend", "midweek"):
+                    c = grid["grid"].get(h, {}).get(t, {})
+                    n = c.get("count", 0)
+                    emp_p50 = f"{c['empirical_p50']:.1f}%" if c.get("empirical_p50") is not None else "—"
+                    prior = f"{c.get('baseline_prior', 0.0):.1f}%"
+                    floor = f"{c.get('floor', 0.0):.1f}%"
+                    tgt = f"{c.get('recommended_target', 0.0):.1f}%"
+                    statuses = []
+                    if c.get("is_floor_clamped"):
+                        statuses.append("FLOOR CLAMPED")
+                    elif c.get("is_empirical"):
+                        statuses.append("EMPIRICAL")
+                    else:
+                        statuses.append("BLENDED (k=5)")
+                    if c.get("is_monotonic_adjusted"):
+                        statuses.append("MONOTONIC")
+                    status_str = " | ".join(statuses)
+                    print(f"  {h:<12} {t.capitalize():<8} {n:<4} {emp_p50:<9} {prior:<7} {floor:<7} {tgt:<8} {status_str}")
+            print("  " + "-" * 92)
 
         if args.dashboard:
             print("\n🎨 Re-generating dashboard with updated sales velocity metrics...")
@@ -1201,6 +1277,13 @@ def main():
         print_system_status()
     elif args.command == "sync-ratings":
         run_sync_ratings(args)
+    elif args.command == "sync-comp-ratings":
+        asyncio.run(sync_comp_ratings(
+            tier=args.tier,
+            force=args.force,
+            dry_run=args.dry_run,
+            generate_html_after=args.generate_html,
+        ))
     elif args.command == "show-ratings":
         print_ratings_summary(mobile=args.mobile, as_json=args.json)
     elif args.command == "audit-reviews":
@@ -1210,30 +1293,402 @@ def main():
 
 
 def run_sync_ratings(args):
-    """Scrape and synchronize ratings and reviews across channels."""
+    """Scrape and synchronize ratings and reviews across channels with proxy lifecycle."""
     from src.ratings_collector import RatingsCollector
+    from src.stealth_connection import StealthConnectionManager
     from src.html_generator import HTMLDashboardGenerator
 
-    collector = RatingsCollector(headless=args.headless)
-    platforms = None if args.platform == "all" else [args.platform]
+    platform = getattr(args, "platform", "all")
+    force = getattr(args, "force", False)
+    backfill = getattr(args, "backfill", False)
+    headless = getattr(args, "headless", True)
+    dry_run = getattr(args, "dry_run", False)
+    no_dashboard = getattr(args, "no_dashboard", False)
 
-    print(f"⭐ Synchronizing ratings and reviews for: {args.platform}...")
-    summary = asyncio.run(collector.sync_all(platforms=platforms, force=args.force, backfill=args.backfill))
+    requires_proxy = True
+    proxy_mgr = StealthConnectionManager(required=requires_proxy)
+    stealth_delay = float(os.getenv("STEALTH_DELAY", "0.8"))
+    collector = RatingsCollector(
+        proxy_mgr=proxy_mgr,
+        headless=headless,
+        stealth_delay=stealth_delay,
+    )
+    platforms = None if platform == "all" else [platform]
 
-    print(f"✅ Sync complete: {summary.get('successful', 0)} platforms updated, {summary.get('total_new_reviews', 0)} new reviews added.")
-    for p_id, res in summary.get("channels", {}).items():
+    print(f"⭐ Synchronizing ratings and reviews for: {platform} (backfill={backfill}, dry_run={dry_run})...")
+
+    async def _execute_sync():
+        try:
+            if requires_proxy:
+                corridors = [
+                    ("feeder-sf-1", "San Francisco, CA", "san-francisco.us.socks.nordhold.net:1080"),
+                    ("feeder-dal-1", "Dallas, TX", "dallas.us.socks.nordhold.net:1080"),
+                    ("feeder-chi-1", "Chicago, IL", "chicago.us.socks.nordhold.net:1080"),
+                ]
+                start_res = proxy_mgr.start_pool(
+                    num_workers=3,
+                    servers=corridors,
+                    wait_for_full_pool=False,
+                    min_healthy=1,
+                )
+                # Supports both async production pool initialization and synchronous test mock returns
+                if asyncio.iscoroutine(start_res) or hasattr(start_res, "__await__"):
+                    await start_res
+            return await collector.sync_all(
+                platforms=platforms,
+                force=force,
+                backfill=backfill,
+                dry_run=dry_run,
+            )
+        finally:
+            if requires_proxy and hasattr(proxy_mgr, "stop_pool"):
+                stop_res = proxy_mgr.stop_pool()
+                # Supports both async production pool teardown and synchronous test mock returns
+                if asyncio.iscoroutine(stop_res) or hasattr(stop_res, "__await__"):
+                    await stop_res
+
+    summary = asyncio.run(_execute_sync())
+
+    strict = bool(getattr(args, "strict", False))
+    channels = summary.get("channels", {})
+    all_ok = True
+    any_error = False
+
+    for p_id, res in channels.items():
+        if isinstance(res, dict):
+            status = res.get("status", "ok")
+            if status in ("stale_error", "error"):
+                any_error = True
+                all_ok = False
+            elif status in ("partial_harvest", "metadata_only"):
+                all_ok = False
+            elif status != "ok":
+                all_ok = False
+
+    if all_ok:
+        headline = "✅ Full Sync complete"
+    elif any_error:
+        headline = "❌ Sync failed"
+    else:
+        headline = "⚠️ Partial Sync complete"
+
+    print(f"\n📊 Synchronization Summary (backfill={backfill}):")
+    print(f"{headline}: {summary.get('successful', 0)} platforms verified, {summary.get('total_new_reviews', 0)} new reviews added.")
+    for p_id, res in channels.items():
         if isinstance(res, dict):
             status = res.get("status", "ok")
             rating = res.get("rating")
-            cnt = res.get("review_count", 0)
+            announced_cnt = res.get("review_count", 0)
+            harvested_cnt = res.get("harvested_count", 0)
+            harvest_ratio = res.get("harvest_ratio", 0.0)
+            if status in ("stale_error", "error") and announced_cnt == 0:
+                ratio_pct = "N/A"
+            else:
+                ratio_pct = f"{int(round(harvest_ratio * 100))}%" if announced_cnt > 0 else "100%"
             added = res.get("new_reviews_added", 0)
-            print(f"  • {p_id.title():<12}: Rating={rating} ({cnt} reviews, +{added} new) [{status}]")
 
-    if not args.no_dashboard:
+            status_tag = f"[{status}]"
+            if status == "partial_harvest":
+                missing = max(0, announced_cnt - harvested_cnt)
+                status_tag = f"[⚠️ partial_harvest: {missing} missing]"
+            elif status == "metadata_only":
+                status_tag = f"[⚠️ metadata_only: {announced_cnt} missing]"
+            elif status in ("stale_error", "error"):
+                status_tag = f"[❌ {status}]"
+
+            rating_str = f"{rating}★" if rating is not None else "None"
+            print(f"  • {p_id.title():<14}: Rating={rating} ({rating_str}) | {harvested_cnt}/{announced_cnt} reviews ({ratio_pct}) | +{added} new | {status_tag}")
+
+    # Mandatory post-scrape verification assertion
+    total_reviews = len(collector.data.get("reviews", []))
+    print(f"\n📦 Verified database volume: {total_reviews} total reviews persisted across {len(channels)} channel(s).")
+    if total_reviews == 0:
+        logger.error("Mandatory post-scrape verification failed: database contains 0 reviews!")
+        sys.exit(1)
+
+    if dry_run:
+        print("\n🔍 DRY RUN: Previewed extracted metrics and new reviews. No files written to disk. Dashboard generation skipped.")
+        new_revs = [r for r in collector.data.get("reviews", []) if r.get("id")]
+        if new_revs:
+            print("\nPreview of Most Recent Reviews in In-Memory State:")
+            print(f"{'Platform':<10} {'Author':<16} {'Date':<12} {'Rating':<8} {'Snippet'}")
+            print("-" * 75)
+            for r in new_revs[:5]:
+                plat = r.get("platform", "").title()
+                auth = (r.get("reviewer_name") or "Guest")[:15]
+                d = r.get("date") or ""
+                rat = f"{r.get('rating', '')}/{r.get('rating_max', '')}"
+                snippet = (r.get("body") or "").replace("\n", " ")[:35]
+                print(f"{plat:<10} {auth:<16} {d:<12} {rat:<8} {snippet}...")
+        if strict and not all_ok:
+            logger.error("Strict mode: incomplete harvest or platform errors detected. Exiting with code 1.")
+            sys.exit(1)
+        return
+
+    if not no_dashboard:
         print("🎨 Regenerating HTML dashboard with updated reviews...")
         html_gen = HTMLDashboardGenerator(output_path="docs/index.html")
         html_gen.generate()
         print("✅ Dashboard updated at docs/index.html")
+
+    if strict and not all_ok:
+        logger.error("Strict mode: incomplete harvest or platform errors detected. Exiting with code 1.")
+        sys.exit(1)
+
+
+async def sync_comp_ratings(
+    tier: str = "all",
+    force: bool = False,
+    dry_run: bool = False,
+    generate_html_after: bool = False,
+    proxy_mgr: Optional[Any] = None,
+) -> Dict[str, Any]:
+    """
+    Scrapes and synchronizes competitor Airbnb ratings and "Guest Favorite" badges.
+    Re-evaluates each comp's category scores, composite score, and desirability ratio,
+    persisting updates to config/comps_registry.json and config/listing_specs.json.
+    """
+    from src.comp_evaluator import CompEvaluator
+    from src.stealth_connection import StealthConnectionManager
+    from src.html_generator import HTMLDashboardGenerator
+
+    evaluator = CompEvaluator()
+    reg_path = Path("config/comps_registry.json")
+    specs_path = Path("config/listing_specs.json")
+    enriched_dir = Path("data/enriched_comps")
+
+    if not reg_path.exists():
+        print("❌ Error: config/comps_registry.json not found.")
+        return {}
+
+    registry = json.loads(reg_path.read_text(encoding="utf-8"))
+    specs = json.loads(specs_path.read_text(encoding="utf-8")) if specs_path.exists() else {}
+
+    tiers_to_process = ["tier_a", "tier_b"] if tier == "all" else [tier]
+    all_comp_ids = []
+    for t in tiers_to_process:
+        all_comp_ids.extend(list(registry.get(t, {}).keys()))
+
+    print(f"\n🔍 Synchronizing Airbnb ratings & Guest Favorite badges for {len(all_comp_ids)} active comps ({tier})...")
+
+    # 1. Harvest known ratings and badges from recent pricing search cards
+    comp_cache: Dict[str, Dict[str, Any]] = {}
+    if not force:
+        pricing_files = sorted(Path("data").glob("pricing_data_*.json"), reverse=True)
+        for pf in pricing_files[:3]:
+            try:
+                p_content = json.loads(pf.read_text(encoding="utf-8"))
+                intervals = p_content.get("urgent_intervals", []) + p_content.get("moderate_intervals", []) + p_content.get("informational_intervals", [])
+                for inv in intervals:
+                    for c in inv.get("comps_list", []) + inv.get("raw_comps", []):
+                        cid = str(c.get("listing_id"))
+                        if cid and cid in all_comp_ids and cid not in comp_cache:
+                            snippet = str(c.get("raw_snippet", ""))
+                            is_direct_sweep = snippet.startswith("Direct Room Sweep") or snippet.startswith("Single Comp Sweep")
+                            if is_direct_sweep and "is_guest_favorite" not in c:
+                                # Direct room sweeps lack search card badge awareness; do not treat as false negative
+                                continue
+                            is_gf = bool(
+                                c.get("is_guest_favorite")
+                                or "guest favorite" in snippet.lower()
+                                or "guest favorite" in str(c.get("photo_url", "")).lower()
+                            )
+                            comp_cache[cid] = {
+                                "rating": c.get("rating"),
+                                "reviews": c.get("reviews", 0),
+                                "is_guest_favorite": is_gf,
+                                "guest_favorite_badge": "Guest Favorite" if is_gf else None,
+                            }
+            except Exception:
+                continue
+
+    print(f"  ✓ Identified {len(comp_cache)} comps from recent high-fidelity search sweeps.")
+    missing_cids = [cid for cid in all_comp_ids if cid not in comp_cache]
+
+    # 2. For any remaining missing comps or forced comps, scrape live using stealth connection
+    if missing_cids:
+        print(f"  ⚡ Live scraping {len(missing_cids)} comps via stealth NordVPN proxy pool...")
+        own_proxy = False
+        active_proxy_mgr = proxy_mgr
+        if active_proxy_mgr is None:
+            active_proxy_mgr = StealthConnectionManager(required=True)
+            own_proxy = True
+
+        from playwright.async_api import async_playwright
+        launch_kwargs = {
+            "headless": True,
+            "args": ["--disable-blink-features=AutomationControlled", "--no-sandbox"],
+        }
+        try:
+            configs = active_proxy_mgr.get_proxy_configs() if hasattr(active_proxy_mgr, "get_proxy_configs") else []
+            if configs:
+                proxy_cfg = configs[0]
+            elif hasattr(active_proxy_mgr, "endpoints") and active_proxy_mgr.endpoints:
+                proxy_cfg = {"server": active_proxy_mgr.endpoints[0].url}
+            else:
+                proxy_cfg = await active_proxy_mgr.start()
+
+            if proxy_cfg:
+                launch_kwargs["proxy"] = proxy_cfg
+
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(**launch_kwargs)
+                try:
+                    ctx = await browser.new_context(
+                        viewport={"width": 1366, "height": 850},
+                        user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+                    )
+                    for cid in missing_cids:
+                        page = None
+                        try:
+                            page = await ctx.new_page()
+                            url = f"https://www.airbnb.com/rooms/{cid}"
+                            try:
+                                await page.goto(url, wait_until="domcontentloaded", timeout=15000)
+                                await page.wait_for_timeout(1500)
+                            except Exception as nav_ex:
+                                logger.warning(f"Navigation warning for comp {cid}: {nav_ex}")
+
+                            scripts = await page.query_selector_all("script[type='application/ld+json']")
+                            rating = None
+                            reviews = 0
+                            for s in scripts:
+                                try:
+                                    parsed = json.loads(await s.inner_text())
+                                    if isinstance(parsed, dict) and "aggregateRating" in parsed:
+                                        agg = parsed["aggregateRating"]
+                                        if agg.get("ratingValue"):
+                                            rating = float(agg["ratingValue"])
+                                        if agg.get("ratingCount"):
+                                            reviews = int(agg["ratingCount"])
+                                        break
+                                except Exception:
+                                    continue
+
+                            deferred_text = await page.evaluate("() => { const el = document.getElementById('data-deferred-state-0'); return el ? el.innerText : ''; }")
+                            overview_text = await page.evaluate("() => { const el = document.querySelector('[data-section-id=\"OVERVIEW_DEFAULT\"], [data-section-id=\"TITLE_DEFAULT\"]'); return el ? el.innerText : ''; }")
+                            is_gf = bool(
+                                re.search(r'"isGuestFavorite"\s*:\s*true', deferred_text)
+                                or re.search(r'\b(?:top\s+)?guest\s+favorite\b', overview_text, re.IGNORECASE)
+                            )
+                            comp_cache[cid] = {
+                                "rating": rating,
+                                "reviews": reviews,
+                                "is_guest_favorite": is_gf,
+                                "guest_favorite_badge": "Guest Favorite" if is_gf else None,
+                                "is_authoritative": True,
+                            }
+                        except Exception as ex:
+                            logger.warning(f"Failed to scrape comp {cid}: {ex}")
+                        finally:
+                            if page and not page.is_closed():
+                                try:
+                                    await page.close()
+                                except Exception:
+                                    pass
+                finally:
+                    await browser.close()
+        finally:
+            if own_proxy and active_proxy_mgr:
+                await active_proxy_mgr.stop()
+
+    # 3. Update comp registry and re-evaluate desirability ratios
+    updated_records = []
+    gf_count = 0
+
+    for t in tiers_to_process:
+        for cid, comp_data in registry.get(t, {}).items():
+            fresh_info = comp_cache.get(cid)
+            if not fresh_info:
+                continue
+
+            old_ratio = comp_data.get("desirability_ratio", 1.0)
+
+            if fresh_info.get("rating") is not None and fresh_info["rating"] > 0:
+                comp_data["rating"] = fresh_info["rating"]
+            if fresh_info.get("reviews") and fresh_info["reviews"] > 0:
+                comp_data["reviews"] = fresh_info["reviews"]
+
+            if force or fresh_info.get("is_authoritative"):
+                is_gf = bool(fresh_info.get("is_guest_favorite", False))
+            else:
+                is_gf = bool(
+                    fresh_info.get("is_guest_favorite")
+                    or comp_data.get("is_guest_favorite")
+                    or specs.get(cid, {}).get("is_guest_favorite")
+                )
+            comp_data["is_guest_favorite"] = is_gf
+            comp_data["guest_favorite_badge"] = "Guest Favorite" if is_gf else None
+            if is_gf:
+                gf_count += 1
+
+            # Load enriched cache if available to pass complete amenities
+            enriched_file = enriched_dir / f"{cid}.json"
+            enriched_data = {}
+            if enriched_file.exists():
+                try:
+                    enriched_data = json.loads(enriched_file.read_text(encoding="utf-8"))
+                    enriched_data["is_guest_favorite"] = is_gf
+                    enriched_data["guest_favorite_badge"] = "Guest Favorite" if is_gf else None
+                    if not dry_run:
+                        enriched_file.write_text(json.dumps(enriched_data, indent=2), encoding="utf-8")
+                except Exception:
+                    pass
+
+            # Re-evaluate comp
+            eval_res = evaluator.evaluate_comp(comp_data, enriched_data=enriched_data)
+            comp_data.update(eval_res)
+
+            new_ratio = comp_data.get("desirability_ratio", 1.0)
+            updated_records.append({
+                "listing_id": cid,
+                "tier": t,
+                "name": comp_data.get("name", cid),
+                "rating": comp_data.get("rating"),
+                "reviews": comp_data.get("reviews"),
+                "is_guest_favorite": is_gf,
+                "old_ratio": old_ratio,
+                "new_ratio": new_ratio,
+            })
+
+            # Also update listing_specs.json
+            if cid in specs:
+                specs[cid]["rating"] = comp_data.get("rating")
+                specs[cid]["reviews"] = comp_data.get("reviews")
+                specs[cid]["is_guest_favorite"] = is_gf
+                specs[cid]["guest_favorite_badge"] = "Guest Favorite" if is_gf else None
+
+    # 4. Save to disk if not dry_run
+    if not dry_run:
+        registry.setdefault("metadata", {})["last_ratings_sync"] = datetime.now().isoformat()
+        registry["metadata"]["total_guest_favorites"] = gf_count
+        reg_path.write_text(json.dumps(registry, indent=2, ensure_ascii=False), encoding="utf-8")
+        specs_path.write_text(json.dumps(specs, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"\n💾 Saved updated comp registry and listing specifications ({len(updated_records)} comps updated).")
+    else:
+        print(f"\n🔍 DRY RUN: Previewed updates for {len(updated_records)} comps (no files modified).")
+
+    print(f"🏅 Total Comps with Airbnb Guest Favorite Badge: {gf_count} / {len(all_comp_ids)}")
+
+    # Print summary sample table
+    print("\nSample Updated Comps:")
+    print(f"{'ID':<19} {'Name':<35} {'Rating':<7} {'GF Badge':<10} {'Old Ratio':<10} {'New Ratio'}")
+    print("-" * 92)
+    for r in updated_records[:10]:
+        gf_txt = "🏅 YES" if r["is_guest_favorite"] else "No"
+        print(f"{r['listing_id']:<19} {r['name'][:34]:<35} {str(r['rating']):<7} {gf_txt:<10} {r['old_ratio']:<10.2f} {r['new_ratio']:.2f}")
+
+    if generate_html_after and not dry_run:
+        print("\n🎨 Regenerating static HTML dashboard...")
+        html_gen = HTMLDashboardGenerator(output_path="docs/index.html")
+        html_gen.generate()
+        print("✅ Dashboard regenerated at docs/index.html")
+
+    return {
+        "total_comps": len(all_comp_ids),
+        "updated_comps": len(updated_records),
+        "guest_favorites_count": gf_count,
+    }
 
 
 def print_ratings_summary(mobile: bool = False, as_json: bool = False):
@@ -1268,7 +1723,7 @@ def print_ratings_summary(mobile: bool = False, as_json: bool = False):
         lines.append("⭐ Villa del Sol — Ratings & Recent Reviews")
         lines.append("===========================================")
         lines.append("📊 Platform Ratings (Native Scales):")
-        for p_id in ["airbnb", "vrbo", "booking", "kivoya"]:
+        for p_id in ["airbnb", "vrbo", "booking"]:
             p = platforms.get(p_id, {})
             name = p.get("display_name", p_id.title())
             scale = p.get("scale", "5.0")
@@ -1279,7 +1734,9 @@ def print_ratings_summary(mobile: bool = False, as_json: bool = False):
                 r_num = None
             r_str = f"{r_num:.2f}" if (r_num is not None and scale == "5.0") else (f"{r_num:.1f}" if r_num is not None else "N/A")
             cnt = p.get("review_count", 0)
-            lines.append(f"  • {name:<12}: {r_str} / {scale} ({cnt} reviews)")
+            badge = p.get("badge")
+            badge_str = f" [{badge['name']}]" if badge and isinstance(badge, dict) and badge.get("name") else ""
+            lines.append(f"  • {name:<12}: {r_str} / {scale} ({cnt} reviews){badge_str}")
         lines.append("")
 
         if recent_reviews:
@@ -1350,7 +1807,7 @@ def print_ratings_summary(mobile: bool = False, as_json: bool = False):
     today_str = date.today().isoformat()
     print(f"\n🏰 Villa del Sol — Cross-Platform Ratings Summary [{today_str}]")
     print("=" * 60)
-    for p_id in ["airbnb", "vrbo", "booking", "kivoya"]:
+    for p_id in ["airbnb", "vrbo", "booking"]:
         p = platforms.get(p_id, {})
         name = p.get("display_name", p_id.title())
         scale = p.get("scale", "5.0")
@@ -1362,7 +1819,12 @@ def print_ratings_summary(mobile: bool = False, as_json: bool = False):
         r_str = f"{r_num:.2f}" if (r_num is not None and scale == "5.0") else (f"{r_num:.1f}" if r_num is not None else "N/A")
         cnt = p.get("review_count", 0)
         status = p.get("status", "ok")
-        print(f"  • {name:<14}: {r_str} / {scale} ({cnt} reviews) [status: {status}]")
+        badge = p.get("badge")
+        badge_str = ""
+        if badge and isinstance(badge, dict) and badge.get("name"):
+            sub_txt = f" • {badge['subtitle']}" if badge.get("subtitle") else ""
+            badge_str = f" 🏆 [{badge['name']}{sub_txt}]"
+        print(f"  • {name:<14}: {r_str} / {scale} ({cnt} reviews) [status: {status}]{badge_str}")
         sub_scores = p.get("sub_scores", {})
         if sub_scores:
             sub_str = ", ".join(f"{k.replace('_', ' ').title()}: {v}" for k, v in list(sub_scores.items())[:4])

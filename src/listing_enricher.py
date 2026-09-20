@@ -578,29 +578,34 @@ class ListingEnricher:
         # Review snippets for pool heating, noise, and condition ground truth
         all_reviews = list(dict.fromkeys((ld_parsed.get("reviews_samples") or []) + (dom_reviews or [])))
 
-        bedrooms = deferred_parsed.get("bedrooms")
-        beds = deferred_parsed.get("beds")
-        baths = deferred_parsed.get("baths")
-        guests = deferred_parsed.get("guests")
-
+        # Prioritize authoritative DOM overview items for guest capacity and room counts
+        dom_guests = None
+        dom_bedrooms = None
+        dom_beds = None
+        dom_baths = None
         overview = dom_overview or []
         for item in overview:
-            if bedrooms is None:
-                m = re.search(r"(\d+)\s*bedrooms?\b", item, re.IGNORECASE)
-                if m:
-                    bedrooms = int(m.group(1))
-            if beds is None:
-                m = re.search(r"(\d+)\s*beds?\b(?!room)", item, re.IGNORECASE)
-                if m:
-                    beds = int(m.group(1))
-            if baths is None:
-                m = re.search(r"(\d+(?:\.\d+)?)\s*baths?\b", item, re.IGNORECASE)
-                if m:
-                    baths = float(m.group(1))
-            if guests is None:
+            if dom_guests is None:
                 m = re.search(r"(\d+\+?)\s*guests?\b", item, re.IGNORECASE)
                 if m:
-                    guests = m.group(1)
+                    dom_guests = m.group(1)
+            if dom_bedrooms is None:
+                m = re.search(r"(\d+)\s*bedrooms?\b", item, re.IGNORECASE)
+                if m:
+                    dom_bedrooms = int(m.group(1))
+            if dom_beds is None:
+                m = re.search(r"(\d+)\s*beds?\b(?!room)", item, re.IGNORECASE)
+                if m:
+                    dom_beds = int(m.group(1))
+            if dom_baths is None:
+                m = re.search(r"(\d+(?:\.\d+)?)\s*baths?\b", item, re.IGNORECASE)
+                if m:
+                    dom_baths = float(m.group(1))
+
+        bedrooms = dom_bedrooms or deferred_parsed.get("bedrooms")
+        beds = dom_beds or deferred_parsed.get("beds")
+        baths = dom_baths or deferred_parsed.get("baths")
+        guests = dom_guests or deferred_parsed.get("guests")
 
         if description:
             if bedrooms is None:
@@ -650,6 +655,14 @@ class ListingEnricher:
             guests=guest_int,
         )
 
+        is_guest_favorite = bool(
+            deferred_parsed.get("is_guest_favorite")
+            or re.search(r'"isGuestFavorite"\s*:\s*true', deferred_text)
+            or re.search(r'\b(?:top\s+)?guest\s+favorite\b', page_title or "", re.IGNORECASE)
+            or any(re.search(r'\b(?:top\s+)?guest\s+favorite\b', str(item), re.IGNORECASE) for item in (dom_overview or []))
+        )
+        badge_label = "Guest Favorite" if is_guest_favorite else None
+
         return {
             "listing_id": listing_id,
             "title": title,
@@ -663,6 +676,8 @@ class ListingEnricher:
             "overview": overview[:8],
             "rating": ld_parsed.get("rating"),
             "reviews": ld_parsed.get("reviews"),
+            "is_guest_favorite": is_guest_favorite,
+            "guest_favorite_badge": badge_label,
             "address": ld_parsed.get("address"),
             "photo_url": photo_url,
             "url": url,

@@ -19,6 +19,7 @@ from src.config import (
     URGENT_LEAD_DAYS,
     BASE_PERCENTILE,
     CLEANING_FEE,
+    OPERATIONAL_FLOORS,
 )
 
 
@@ -85,31 +86,21 @@ class PricingAnalyticsEngine:
 
     def get_target_percentile(self, lead_time_days: int, segment_type: str = "weekend") -> float:
         """
-        Dynamically adjust target percentile by lead time and segment type:
-        Weekend (Base Curve):
-        - > 180 days: 70th percentile (capture early high-intent bookers)
-        - 60 to 180 days: 65th percentile (standard booking window)
-        - 30 to 60 days: 55th percentile (tapering to encourage booking)
-        - < 30 days: 45th percentile (protect occupancy for near-term dates)
-
-        Midweek (30% Lower Target Curve):
-        - > 180 days: 49.0th percentile (70 * 0.70)
-        - 60 to 180 days: 45.5th percentile (65 * 0.70)
-        - 30 to 60 days: 38.5th percentile (55 * 0.70)
-        - < 30 days: 31.5th percentile (45 * 0.70)
+        Dynamically adjust target percentile by lead time and segment type (fallback curve):
+        - > 90 days: Weekend 67.5%, Midweek 47.5%
+        - 31 to 90 days: Weekend 62.5%, Midweek 32.5%
+        - 15 to 30 days: Weekend 52.5%, Midweek 32.5%
+        - <= 14 days: Weekend 42.5%, Midweek 30.0%
         """
-        if lead_time_days > 180:
-            base = 70.0
-        elif lead_time_days >= 60:
-            base = 65.0
-        elif lead_time_days >= 30:
-            base = 55.0
+        is_midweek = str(segment_type).lower() in ["midweek", "mid-week", "weekday"]
+        if lead_time_days > 90:
+            return 47.5 if is_midweek else 67.5
+        elif lead_time_days >= 31:
+            return 32.5 if is_midweek else 62.5
+        elif lead_time_days >= 15:
+            return 32.5 if is_midweek else 52.5
         else:
-            base = 45.0
-
-        if str(segment_type).lower() in ["midweek", "mid-week", "weekday"]:
-            return round(base * 0.7, 1)
-        return base
+            return 30.0 if is_midweek else 42.5
 
     def remove_outliers(self, prices: List[float]) -> List[float]:
         """
@@ -166,7 +157,7 @@ class PricingAnalyticsEngine:
         self,
         target_effective_nightly: float,
         nights: int,
-        floor_rate: float = 249.0,
+        floor_rate: float = 300.0,
         ceiling_rate: float = 2499.0,
         channel_factor: float = 1.0,
     ) -> float:
@@ -302,15 +293,18 @@ class PricingAnalyticsEngine:
         else:
             adj_pct_diff = 0.0
 
+        is_midweek = str(seg_type).lower() in ["midweek", "mid-week", "weekday"]
+        op_floor = float(OPERATIONAL_FLOORS.get("midweek", 300.0) if is_midweek else OPERATIONAL_FLOORS.get("weekend", 450.0))
+
         rec_base = (
-            self.translate_to_recommended_base_rate(target_eff, nights, channel_factor=channel_factor)
-            if target_eff > 0 else our_base
+            self.translate_to_recommended_base_rate(target_eff, nights, floor_rate=op_floor, channel_factor=channel_factor)
+            if target_eff > 0 else max(op_floor, our_base)
         )
         rec_diff = round(rec_base - our_base, 0)
 
         adj_rec_base = (
-            self.translate_to_recommended_base_rate(adj_target_eff, nights, channel_factor=channel_factor)
-            if adj_target_eff > 0 else our_base
+            self.translate_to_recommended_base_rate(adj_target_eff, nights, floor_rate=op_floor, channel_factor=channel_factor)
+            if adj_target_eff > 0 else max(op_floor, our_base)
         )
         adj_rec_diff = round(adj_rec_base - our_base, 0)
 

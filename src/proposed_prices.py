@@ -12,11 +12,13 @@ import re
 import statistics
 from typing import Any, Dict, List, Optional, Tuple
 
-from src.config import COMP_PRICE_WEIGHT, HISTORICAL_PRICE_WEIGHT, FALLBACK_INTERVALS
+from src.config import COMP_PRICE_WEIGHT, HISTORICAL_PRICE_WEIGHT, FALLBACK_INTERVALS, OPERATIONAL_FLOORS
 from src.reservation_intelligence import clean_holiday_name
 
 logger = logging.getLogger("proposed_prices")
 
+DEFAULT_OP_FLOOR_MIDWEEK = int(OPERATIONAL_FLOORS.get("midweek", 300))
+DEFAULT_OP_FLOOR_WEEKEND = int(OPERATIONAL_FLOORS.get("weekend", 450))
 DEFAULT_HOLIDAYS_CONFIG = Path("config/holidays.json")
 
 
@@ -338,6 +340,7 @@ def generate_proposed_prices(
     historical_weight: Optional[float] = None,
     interval_benchmarks: Optional[Dict[Tuple[str, str], Dict[str, Any]]] = None,
     res_intel: Optional[Any] = None,
+    operational_floors: Optional[Dict[str, float]] = None,
 ) -> List[Dict[str, Any]]:
     """
     Map evaluated interval consensus rates into Kivoya's seasonal rate schedule.
@@ -351,6 +354,17 @@ def generate_proposed_prices(
 
     if holidays_registry is None:
         holidays_registry = load_holidays_registry()
+
+    if operational_floors is None:
+        try:
+            from src.config import OPERATIONAL_FLOORS
+            op_floors = OPERATIONAL_FLOORS
+        except Exception:
+            op_floors = {}
+    else:
+        op_floors = operational_floors
+    op_floor_mid = int(op_floors.get("midweek", DEFAULT_OP_FLOOR_MIDWEEK))
+    op_floor_wkd = int(op_floors.get("weekend", DEFAULT_OP_FLOOR_WEEKEND))
 
     if blocked_periods is None:
         try:
@@ -766,10 +780,11 @@ def generate_proposed_prices(
                     wkd_med = max(wkd_med, wkd_floor_med)
 
                 # Apply 5% churn threshold: hold current base price if proposed change is < 5%
-                mid_avg = apply_churn_threshold(mid_avg, cur_mid, churn_threshold_pct)
-                mid_med = apply_churn_threshold(mid_med, cur_mid, churn_threshold_pct)
-                wkd_avg = apply_churn_threshold(wkd_avg, cur_wkd, churn_threshold_pct)
-                wkd_med = apply_churn_threshold(wkd_med, cur_wkd, churn_threshold_pct)
+                # Enforce post-churn holiday and operational floors
+                mid_avg = int(max(mid_floor_avg, op_floor_mid, apply_churn_threshold(mid_avg, cur_mid, churn_threshold_pct)))
+                mid_med = int(max(mid_floor_med, op_floor_mid, apply_churn_threshold(mid_med, cur_mid, churn_threshold_pct)))
+                wkd_avg = int(max(wkd_floor_avg, op_floor_wkd, apply_churn_threshold(wkd_avg, cur_wkd, churn_threshold_pct)))
+                wkd_med = int(max(wkd_floor_med, op_floor_wkd, apply_churn_threshold(wkd_med, cur_wkd, churn_threshold_pct)))
 
                 proposed_periods.append({
                     "from_date": b_dt.strftime("%m/%d/%Y"),
@@ -831,8 +846,9 @@ def generate_proposed_prices(
                 spec_med = max(calc_med, holiday_floor_med)
 
                 # Apply 5% churn threshold: hold current base price if proposed change is < 5%
-                spec_avg = apply_churn_threshold(spec_avg, cur_special, churn_threshold_pct)
-                spec_med = apply_churn_threshold(spec_med, cur_special, churn_threshold_pct)
+                # Enforce post-churn holiday and operational floors
+                spec_avg = int(max(holiday_floor_avg, op_floor_wkd, apply_churn_threshold(spec_avg, cur_special, churn_threshold_pct)))
+                spec_med = int(max(holiday_floor_med, op_floor_wkd, apply_churn_threshold(spec_med, cur_special, churn_threshold_pct)))
 
                 proposed_periods.append({
                     "from_date": b_dt.strftime("%m/%d/%Y"),
@@ -880,10 +896,11 @@ def generate_proposed_prices(
             wkd_med = round(statistics.median(wkd_rates)) if wkd_rates else cur_wkd
 
             # Apply 5% churn threshold: hold current base price if proposed change is < 5%
-            mid_avg = apply_churn_threshold(mid_avg, cur_mid, churn_threshold_pct)
-            mid_med = apply_churn_threshold(mid_med, cur_mid, churn_threshold_pct)
-            wkd_avg = apply_churn_threshold(wkd_avg, cur_wkd, churn_threshold_pct)
-            wkd_med = apply_churn_threshold(wkd_med, cur_wkd, churn_threshold_pct)
+            # Enforce absolute post-churn operational floors ($300 Midweek / $450 Weekend)
+            mid_avg = int(max(op_floor_mid, apply_churn_threshold(mid_avg, cur_mid, churn_threshold_pct)))
+            mid_med = int(max(op_floor_mid, apply_churn_threshold(mid_med, cur_mid, churn_threshold_pct)))
+            wkd_avg = int(max(op_floor_wkd, apply_churn_threshold(wkd_avg, cur_wkd, churn_threshold_pct)))
+            wkd_med = int(max(op_floor_wkd, apply_churn_threshold(wkd_med, cur_wkd, churn_threshold_pct)))
 
             orphan_reason = p.get("orphan_slot_reason")
 

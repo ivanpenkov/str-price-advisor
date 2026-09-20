@@ -10,16 +10,66 @@ property:
   min_nights_default: 2
 
 strategy:
-  base_percentile: 65          # Target 65th percentile for luxury estate standard window
-  lead_time_tiers:
-    - min_days: 180
-      percentile: 70           # High-intent early planners
-    - min_days: 60
-      percentile: 65           # Standard booking window
-    - min_days: 30
-      percentile: 55           # Approaching window
-    - min_days: 0
-      percentile: 45           # Last-minute unbooked protection
+  base_percentile: 65
+  bayesian_shrinkage_k: 5.0
+  min_empirical_sample_size: 5
+  enforce_monotonic_tapering: true
+
+  # Absolute Operational Price Floors (Dollar rates per night)
+  operational_floors:
+    weekend: 450.0
+    midweek: 300.0
+
+  # 2D Strategy Matrix (Horizon x Stay Type)
+  lead_time_matrix:
+    ">90d":
+      description: "Early booking window with high willingness-to-pay. Anchor at premium percentiles."
+      weekend:
+        target: 67.5
+        floor: 65.0
+        p75: 75.0
+      midweek:
+        target: 47.5
+        floor: 45.0
+        p75: 55.0
+      action_guidance: "Hold firm at 65%–70% (Weekend) / 45%–50% (Midweek). Strategic floor protects far-out luxury yield against early underpriced bargain hunters."
+
+    "31–90d":
+      description: "Prime conversion period for family vacations and luxury group travel."
+      weekend:
+        target: 62.5
+        floor: 60.0
+        p75: 70.0
+      midweek:
+        target: 32.5
+        floor: 30.0
+        p75: 45.0
+      action_guidance: "Target 60%–65% (Weekend) / 30%–35% (Midweek). Aligned with empirical comp conversion band and protected by $300 midweek floor."
+
+    "15–30d":
+      description: "Demand curve compresses and price elasticity rises rapidly."
+      weekend:
+        target: 52.5
+        floor: 50.0
+        p75: 60.0
+      midweek:
+        target: 32.5
+        floor: 30.0
+        p75: 40.0
+      action_guidance: "Trim to 50%–55% (Weekend) / 30%–32% (Midweek). Monotonic tapering prevents small-sample near-term spikes."
+
+    "≤14d":
+      description: "Distress inventory liquidation window where unbooked nights risk total perishable loss."
+      weekend:
+        target: 42.5
+        floor: 40.0
+        p75: 50.0
+      midweek:
+        target: 30.0
+        floor: 28.0
+        p75: 38.0
+      action_guidance: "Aggressive liquidation: 40%–45% (Weekend) / 28%–32% (Midweek) to secure occupancy above $300 operational floor."
+
   anomaly_thresholds:
     urgent_percent_diff: 25.0  # >25% discrepancy triggers weekly urgent action
     urgent_lead_days: 60       # Unbooked dates <60 days away get elevated priority

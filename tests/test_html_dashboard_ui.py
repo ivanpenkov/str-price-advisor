@@ -6,11 +6,13 @@ or undefined event handlers (e.g. switchTab, filterComps) break the user interfa
 """
 
 import asyncio
+import json
 import re
 import shutil
 import subprocess
 import tempfile
 import unittest
+from datetime import date
 from pathlib import Path
 from playwright.async_api import async_playwright
 
@@ -95,22 +97,21 @@ class TestHTMLDashboardUI(unittest.TestCase):
                 title = await page.title()
                 self.assertIn("Villa del Sol", title)
 
-                # Ensure tabs navigation is present
+                # Ensure tabs navigation is present (exactly 9 tabs)
                 tab_btns = await page.query_selector_all(".tab-btn")
-                self.assertGreaterEqual(len(tab_btns), 8, "Expected at least 8 navigation tabs in dashboard")
+                self.assertEqual(len(tab_btns), 9, f"Expected exactly 9 navigation tabs in dashboard, found {len(tab_btns)}")
 
                 # Click every tab and verify that switchTab properly activates the corresponding container
                 tab_ids = [
                     "pricing",
-                    "comparison",
+                    "reviews",
                     "streamline",
                     "comps",
                     "market-sales",
                     "calendar",
                     "reservations",
                     "revenue",
-                    "methodology",
-                    "debug",
+                    "comparison",
                 ]
 
                 for tid in tab_ids:
@@ -162,6 +163,20 @@ class TestHTMLDashboardUI(unittest.TestCase):
                     self.assertTrue(is_proposed_checked, "#filterProposedOpenCalendar should be checked by default on page load")
 
                     total_closed = await page.evaluate("() => document.querySelectorAll('.proposed-price-row[data-calendar-open=\"false\"]').length")
+                    if total_closed == 0:
+                        # Kivoya booking calendar is open across the entire 12-month horizon.
+                        # Inject a test closed row to exercise the toggle filter logic.
+                        await page.evaluate("""() => {
+                            const sampleRow = document.querySelector('.proposed-price-row');
+                            if (sampleRow && sampleRow.parentElement) {
+                                const tr = document.createElement('tr');
+                                tr.className = 'proposed-price-row';
+                                tr.setAttribute('data-calendar-open', 'false');
+                                tr.style.display = 'none';
+                                sampleRow.parentElement.appendChild(tr);
+                            }
+                        }""")
+                        total_closed = await page.evaluate("() => document.querySelectorAll('.proposed-price-row[data-calendar-open=\"false\"]').length")
                     self.assertGreater(total_closed, 0, "Expected closed calendar rows to exist in proposed prices table")
 
                     visible_closed_init = await page.evaluate("() => Array.from(document.querySelectorAll('.proposed-price-row[data-calendar-open=\"false\"]')).filter(r => r.style.display !== 'none').length")
@@ -197,13 +212,28 @@ class TestHTMLDashboardUI(unittest.TestCase):
 
     def test_reservation_intelligence_ui_elements(self):
         """Verify that newly integrated reservation intelligence elements render properly in HTML."""
-        # 1. Main table historical track record header
-        self.assertIn("<th>Historical Track Record</th>", self.html_content)
+        # 1. Main table historical average header
+        self.assertIn("<th>Historical AVG</th>", self.html_content)
+        self.assertNotIn("<th>Historical Track Record</th>", self.html_content)
 
         # 2. Reservations tab: Annual weekend vs midweek shift card and table
         self.assertIn("Annual Weekend vs. Midweek Performance &amp; Strategy Shift", self.html_content.replace("&", "&amp;").replace("&amp;amp;", "&amp;"))
         self.assertIn("res-shift-card", self.html_content)
         self.assertIn("res-shift-table", self.html_content)
+        self.assertIn("<th><span style=\"color:#818cf8; font-size:0.9rem;\">●</span> Weekend ADR</th>", self.html_content)
+        self.assertIn("<th><span style=\"color:#fb923c; font-size:0.9rem;\">●</span> Midweek ADR</th>", self.html_content)
+        self.assertIn("<th>Weekend Premium (%)</th>", self.html_content)
+        self.assertNotIn("Realized Weekend ADR", self.html_content)
+        self.assertNotIn("Realized Midweek ADR", self.html_content)
+        self.assertNotIn("<th>ADR Premium (%)</th>", self.html_content)
+
+        # 2b. Calendar 12-month navigation buttons
+        self.assertIn("onclick=\"calNavigate(-12)\"", self.html_content)
+        self.assertIn("onclick=\"calNavigate(12)\"", self.html_content)
+        self.assertIn("◀ Prev 12 Months", self.html_content)
+        self.assertIn("Next 12 Months ▶", self.html_content)
+        self.assertNotIn("Prev 6 Months", self.html_content)
+        self.assertNotIn("Next 6 Months", self.html_content)
 
         # 3. Reservations tab & Market demand tab: Monthly Advance Booking Horizons (Villa del Sol & Comps)
         self.assertIn("Monthly Advance Booking Horizons (Villa del Sol Empirical Pace)", self.html_content)
@@ -225,6 +255,202 @@ class TestHTMLDashboardUI(unittest.TestCase):
         self.assertIn('id="btnSuggestMed"', self.html_content)
         self.assertIn('id="btnCopyProposed"', self.html_content)
         self.assertIn("copyProposedPrices", self.html_content)
+
+    def test_render_table_rows_empty_and_populated_historical_benchmarks(self):
+        """Verify that _render_table_rows handles segments with empty/None historical benchmarks without error and scopes data-hist-med correctly."""
+        gen = HTMLDashboardGenerator()
+        sample_segments = [
+            {
+                "check_in": "2026-10-01",
+                "check_out": "2026-10-04",
+                "segment_type": "weekend",
+                "nights": 3,
+                "price_diff_percent": 0.0,
+                "recommended_base_nightly": 500.0,
+                "comp_p50_eff": 500.0,
+                "comp_target_eff": 500.0,
+                "our_base_nightly": 500.0,
+                "historical_benchmark": None,  # Row 0 with None
+            },
+            {
+                "check_in": "2026-10-04",
+                "check_out": "2026-10-08",
+                "segment_type": "midweek",
+                "nights": 4,
+                "price_diff_percent": 0.0,
+                "recommended_base_nightly": 400.0,
+                "comp_p50_eff": 400.0,
+                "comp_target_eff": 400.0,
+                "our_base_nightly": 400.0,
+                "historical_benchmark": {
+                    "sample_count": 3,
+                    "min_rate": 350.0,
+                    "max_rate": 450.0,
+                    "median_rate": 400.0,
+                    "avg_rate": 395.0,
+                    "flag_label": "Aligned",
+                },  # Row 1 with data
+            },
+            {
+                "check_in": "2026-10-08",
+                "check_out": "2026-10-11",
+                "segment_type": "weekend",
+                "nights": 3,
+                "price_diff_percent": 0.0,
+                "recommended_base_nightly": 550.0,
+                "comp_p50_eff": 550.0,
+                "comp_target_eff": 550.0,
+                "our_base_nightly": 550.0,
+                "historical_benchmark": {},  # Row 2 with empty dict (must not leak row 1's median 400)
+            },
+        ]
+        html_rows = gen._render_table_rows(sample_segments, prefix="test-row")
+        # Row 0: empty
+        self.assertIn('id="parent-test-row-0"', html_rows)
+        self.assertIn('data-hist-count="0"', html_rows)
+        self.assertIn('data-hist-med="0"', html_rows)
+        # Row 1: populated
+        self.assertIn('id="parent-test-row-1"', html_rows)
+        self.assertIn('data-hist-count="3"', html_rows)
+        self.assertIn('data-hist-med="400"', html_rows)
+        self.assertIn('title="3 confirmed prior bookings', html_rows)
+        self.assertIn('>$395</strong>', html_rows)
+        # Row 2: empty (verifies no cross-row leakage from row 1)
+        self.assertIn('id="parent-test-row-2"', html_rows)
+        self.assertIn('data-hist-count="0"', html_rows)
+        self.assertIn('data-hist-med="0"', html_rows)
+
+    def test_historical_avg_color_thresholds(self):
+        """
+        Verify that the value in the "Historical AVG" column is colored:
+        - Green (#34d399) if >= 5% higher than Kivoya base rate
+        - Red (#f87171) if <= 5% lower than Kivoya base rate
+        - White (#f8fafc) if within +/- 5%
+        And that "Effective Total" remains clean white (#f1f5f9).
+        """
+        gen = HTMLDashboardGenerator()
+        sample_segments = [
+            {
+                "check_in": "2029-10-01",
+                "check_out": "2029-10-04",
+                "segment_type": "weekend",
+                "nights": 3,
+                "price_diff_percent": 0.0,
+                "recommended_base_nightly": 500.0,
+                "comp_p50_eff": 500.0,
+                "comp_target_eff": 500.0,
+                "our_base_nightly": 500.0,
+                "our_effective_nightly": 600.0,
+                "historical_benchmark": {
+                    "sample_count": 3,
+                    "avg_rate": 600.0,  # +20% -> Green #34d399
+                    "median_rate": 600.0,
+                    "min_rate": 550.0,
+                    "max_rate": 650.0,
+                },
+            },
+            {
+                "check_in": "2029-10-04",
+                "check_out": "2029-10-08",
+                "segment_type": "midweek",
+                "nights": 4,
+                "price_diff_percent": 0.0,
+                "recommended_base_nightly": 500.0,
+                "comp_p50_eff": 500.0,
+                "comp_target_eff": 500.0,
+                "our_base_nightly": 500.0,
+                "our_effective_nightly": 450.0,
+                "historical_benchmark": {
+                    "sample_count": 4,
+                    "avg_rate": 450.0,  # -10% -> Red #f87171
+                    "median_rate": 450.0,
+                    "min_rate": 400.0,
+                    "max_rate": 500.0,
+                },
+            },
+            {
+                "check_in": "2029-10-08",
+                "check_out": "2029-10-11",
+                "segment_type": "weekend",
+                "nights": 3,
+                "price_diff_percent": 0.0,
+                "recommended_base_nightly": 500.0,
+                "comp_p50_eff": 500.0,
+                "comp_target_eff": 500.0,
+                "our_base_nightly": 500.0,
+                "our_effective_nightly": 510.0,
+                "historical_benchmark": {
+                    "sample_count": 2,
+                    "avg_rate": 510.0,  # +2% -> White #f8fafc
+                    "median_rate": 510.0,
+                    "min_rate": 500.0,
+                    "max_rate": 520.0,
+                },
+            },
+            {
+                "check_in": "2029-10-11",
+                "check_out": "2029-10-15",
+                "segment_type": "midweek",
+                "nights": 4,
+                "price_diff_percent": 0.0,
+                "recommended_base_nightly": 500.0,
+                "comp_p50_eff": 500.0,
+                "comp_target_eff": 500.0,
+                "our_base_nightly": 500.0,
+                "our_effective_nightly": 525.0,
+                "historical_benchmark": {
+                    "sample_count": 5,
+                    "avg_rate": 525.0,  # Exactly +5% -> Green #34d399
+                    "median_rate": 525.0,
+                    "min_rate": 500.0,
+                    "max_rate": 550.0,
+                },
+            },
+            {
+                "check_in": "2029-10-15",
+                "check_out": "2029-10-18",
+                "segment_type": "weekend",
+                "nights": 3,
+                "price_diff_percent": 0.0,
+                "recommended_base_nightly": 500.0,
+                "comp_p50_eff": 500.0,
+                "comp_target_eff": 500.0,
+                "our_base_nightly": 500.0,
+                "our_effective_nightly": 475.0,
+                "historical_benchmark": {
+                    "sample_count": 3,
+                    "avg_rate": 475.0,  # Exactly -5% -> Red #f87171
+                    "median_rate": 475.0,
+                    "min_rate": 450.0,
+                    "max_rate": 500.0,
+                },
+            },
+        ]
+        html_rows = gen._render_table_rows(sample_segments, prefix="color-row")
+        
+        # Row 0: +20% -> Green #34d399 in Historical AVG
+        self.assertIn('id="track-color-row-0"', html_rows)
+        self.assertIn('<strong style="color:#34d399;" title="3 confirmed prior bookings within ±15 days in 2022–2026 (Aligned, range: $550–$650, med: $600)">$600</strong>', html_rows)
+        
+        # Row 1: -10% -> Red #f87171 in Historical AVG
+        self.assertIn('id="track-color-row-1"', html_rows)
+        self.assertIn('<strong style="color:#f87171;" title="4 confirmed prior bookings within ±15 days in 2022–2026 (Aligned, range: $400–$500, med: $450)">$450</strong>', html_rows)
+        
+        # Row 2: +2% -> White #f8fafc in Historical AVG
+        self.assertIn('id="track-color-row-2"', html_rows)
+        self.assertIn('<strong style="color:#f8fafc;" title="2 confirmed prior bookings within ±15 days in 2022–2026 (Aligned, range: $500–$520, med: $510)">$510</strong>', html_rows)
+        
+        # Row 3: Exactly +5% -> Green #34d399 in Historical AVG
+        self.assertIn('id="track-color-row-3"', html_rows)
+        self.assertIn('<strong style="color:#34d399;" title="5 confirmed prior bookings within ±15 days in 2022–2026 (Aligned, range: $500–$550, med: $525)">$525</strong>', html_rows)
+        
+        # Row 4: Exactly -5% -> Red #f87171 in Historical AVG
+        self.assertIn('id="track-color-row-4"', html_rows)
+        self.assertIn('<strong style="color:#f87171;" title="3 confirmed prior bookings within ±15 days in 2022–2026 (Aligned, range: $450–$500, med: $475)">$475</strong>', html_rows)
+
+        # Effective Total values must be white #f1f5f9
+        self.assertIn('id="eff-color-row-0"', html_rows)
+        self.assertIn('<strong style="color:#f1f5f9;">$600</strong>', html_rows)
 
     def test_competitor_policy_benchmarks_ui(self):
         """Verify that Competitor Policy & House Rules Benchmarks render properly in Comps tab."""
@@ -282,6 +508,18 @@ class TestHTMLDashboardUI(unittest.TestCase):
         self.assertIn("Streamline PMS Calendar Blackouts &amp; Confirmed Bookings", self.html_content.replace("&", "&amp;").replace("&amp;amp;", "&amp;"))
         self.assertIn("Confirmed Stay", self.html_content)
         self.assertIn("Reservation #", self.html_content)
+
+    def test_removed_methodology_and_debug_tabs(self):
+        """Verify that methodology and debug tabs and buttons are completely removed from HTML."""
+        self.assertNotIn("switchTab('methodology')", self.html_content)
+        self.assertNotIn("switchTab('debug')", self.html_content)
+        self.assertNotIn('id="tab-methodology"', self.html_content)
+        self.assertNotIn('id="tab-debug"', self.html_content)
+        self.assertNotIn("methodology-grid", self.html_content)
+        self.assertNotIn(".method-card", self.html_content)
+        self.assertNotIn(".formula-box", self.html_content)
+        self.assertNotIn("'methodology'", self.html_content)
+        self.assertNotIn("'debug'", self.html_content)
 
     def test_mobile_responsive_viewport_playwright(self):
         """Verify that dashboard renders properly on mobile viewport (390x844) without horizontal overflow."""
@@ -681,6 +919,392 @@ class TestHTMLDashboardUI(unittest.TestCase):
             html_out = gen.generate(evaluated_segments=[])
             self.assertEqual(gen.recent_rev_count, 0)
             self.assertNotIn('review-bell-badge', html_out)
+
+    def test_channels_tab_positioned_after_revenue(self):
+        """Verify that the Channels tab is positioned immediately after Revenue in both navigation and DOM."""
+        nav_pos_revenue = self.html_content.find("switchTab('revenue')")
+        nav_pos_channels = self.html_content.find("switchTab('comparison')")
+        self.assertNotEqual(nav_pos_revenue, -1)
+        self.assertNotEqual(nav_pos_channels, -1)
+        self.assertLess(nav_pos_revenue, nav_pos_channels, "Channels tab button must appear after Revenue button in navigation")
+
+        dom_pos_revenue = self.html_content.find('id="tab-revenue"')
+        dom_pos_channels = self.html_content.find('id="tab-comparison"')
+        self.assertNotEqual(dom_pos_revenue, -1)
+        self.assertNotEqual(dom_pos_channels, -1)
+        self.assertLess(dom_pos_revenue, dom_pos_channels, "Channels tab-content section must appear after Revenue tab-content")
+
+    def test_reviews_date_filters_and_defaults(self):
+        """Verify presence of multi-interval date filter pills with Last 30d active by default."""
+        self.assertIn('id="rev-date-all"', self.html_content)
+        self.assertIn('id="rev-date-30"', self.html_content)
+        self.assertIn('id="rev-date-90"', self.html_content)
+        self.assertIn('id="rev-date-180"', self.html_content)
+        self.assertIn('id="rev-date-365"', self.html_content)
+        self.assertIn('onclick="setReviewDateFilter(\'30\', this)">Last 30d</button>', self.html_content)
+        self.assertIn('id="rev-date-30" aria-pressed="true"', self.html_content)
+        self.assertIn('id="reviewDateFilterVal" value="30"', self.html_content)
+        self.assertIn('data-date="', self.html_content)
+
+    def test_reviews_side_by_side_grid_and_empty_state(self):
+        """Verify 2-column side-by-side grid, guest/team column headers, empty state placeholders, and mobile styles."""
+        self.assertIn('.review-grid-2col', self.html_content)
+        self.assertIn('class="review-grid-2col"', self.html_content)
+        self.assertIn('class="review-guest-col"', self.html_content)
+        self.assertIn('class="review-team-col"', self.html_content)
+        self.assertIn('👤 Guest Review', self.html_content)
+        self.assertIn('💬 Team Response', self.html_content)
+        self.assertIn('review-reply-empty', self.html_content)
+        self.assertIn('No Reply Posted', self.html_content)
+        self.assertIn('No public response recorded for this guest review.', self.html_content)
+        # Mobile stacking CSS
+        self.assertIn('@media (max-width: 768px)', self.html_content)
+        self.assertIn('grid-template-columns: 1fr;', self.html_content)
+
+    def test_reviews_tab_handles_null_date_safely(self):
+        """Verify that HTMLDashboardGenerator handles reviews with null or missing dates without crashing."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_p = Path(tmpdir) / "index.html"
+            sample_ratings = {
+                "platforms": {"airbnb": {"display_name": "Airbnb", "rating": 5.0, "scale": "5.0"}},
+                "reviews": [
+                    {
+                        "id": "rev_null_date",
+                        "platform": "airbnb",
+                        "reviewer_name": "Test Guest",
+                        "date": None,
+                        "rating": 5.0,
+                        "body": "Null date review text.",
+                        "host_response": None,
+                    }
+                ],
+                "recent_window_days": 30,
+            }
+            gen = HTMLDashboardGenerator(
+                output_path=str(out_p),
+                ratings_data=sample_ratings,
+            )
+            gen.generate(evaluated_segments=[])
+            html_content = out_p.read_text(encoding="utf-8")
+            self.assertIn("Null date review text.", html_content)
+            self.assertIn('data-date=""', html_content)
+            self.assertIn("Date Not Available", html_content)
+
+    def test_reviews_filter_interactions_playwright(self):
+        """Verify interactive date filtering and mobile layout stacking using Playwright (time-invariant)."""
+        today = date.today()
+        ratings_json = json.loads(Path("data/ratings_reviews.json").read_text(encoding="utf-8"))
+        reviews = ratings_json.get("reviews", [])
+        expected_30 = sum(
+            1 for r in reviews
+            if r.get("date") and 0 <= (today - date.fromisoformat(str(r["date"])[:10])).days <= 30
+        )
+        expected_90 = sum(
+            1 for r in reviews
+            if r.get("date") and 0 <= (today - date.fromisoformat(str(r["date"])[:10])).days <= 90
+        )
+        total_reviews = len(reviews)
+
+        async def run_reviews_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                # Desktop viewport
+                page = await browser.new_page(viewport={"width": 1280, "height": 900})
+                await page.goto(f"file://{self.html_path.resolve()}")
+
+                # 1. Switch to Reviews tab
+                await page.click('#tab-btn-reviews')
+                await page.wait_for_timeout(100)
+
+                # 2. Verify initial state: Last 30d active (dynamically calculated)
+                visible_cards = await page.locator('.review-card:visible').count()
+                self.assertEqual(visible_cards, expected_30, f"Expected {expected_30} visible cards for Last 30d default, found {visible_cards}")
+                badge_text = await page.locator('#reviewCountBadge').text_content()
+                self.assertIn(f"Showing {expected_30} of {total_reviews} reviews", badge_text)
+                self.assertEqual(await page.locator('#rev-date-30').get_attribute('aria-pressed'), 'true')
+
+                # 3. Click "All" pill -> all reviews visible
+                await page.click('#rev-date-all')
+                await page.wait_for_timeout(100)
+                visible_cards_all = await page.locator('.review-card:visible').count()
+                self.assertEqual(visible_cards_all, total_reviews, f"Expected {total_reviews} visible cards for All filter, found {visible_cards_all}")
+                badge_text_all = await page.locator('#reviewCountBadge').text_content()
+                self.assertIn(f"Showing {total_reviews} of {total_reviews} reviews", badge_text_all)
+                self.assertEqual(await page.locator('#rev-date-all').get_attribute('aria-pressed'), 'true')
+                self.assertEqual(await page.locator('#rev-date-30').get_attribute('aria-pressed'), 'false')
+
+                # 4. Click "90d" pill -> expected_90 reviews visible
+                await page.click('#rev-date-90')
+                await page.wait_for_timeout(100)
+                visible_cards_90 = await page.locator('.review-card:visible').count()
+                self.assertEqual(visible_cards_90, expected_90, f"Expected {expected_90} visible cards for 90d filter, found {visible_cards_90}")
+                self.assertEqual(await page.locator('#rev-date-90').get_attribute('aria-pressed'), 'true')
+
+                # 5. Programmatic call without btn argument (tests ID fallback)
+                await page.evaluate("setReviewDateFilter('180')")
+                await page.wait_for_timeout(100)
+                self.assertEqual(await page.locator('#rev-date-180').get_attribute('aria-pressed'), 'true')
+
+                # 6. Mobile viewport test: verify vertical stacking of columns
+                mobile_page = await browser.new_page(viewport={"width": 375, "height": 812})
+                await mobile_page.goto(f"file://{self.html_path.resolve()}")
+                await mobile_page.click('#tab-btn-reviews')
+                await mobile_page.wait_for_timeout(100)
+                # Verify grid-template-columns evaluates to a single column on mobile
+                first_grid = mobile_page.locator('.review-grid-2col:visible').first
+                grid_cols = await first_grid.evaluate("el => window.getComputedStyle(el).gridTemplateColumns")
+                # On mobile (width 375), single column will be one pixel value e.g. "301px", not two columns "150px 150px"
+                self.assertEqual(len(grid_cols.split()), 1, f"Expected 1 column on mobile viewport, got {grid_cols}")
+
+                await browser.close()
+
+        asyncio.run(run_reviews_test())
+
+    def test_tab_persistence_and_scroll_restoration_on_reload(self):
+        """
+        Verify that reloading the dashboard preserves the currently active tab
+        and restores the user's approximate vertical scroll position.
+        """
+        async def run_persistence_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page(viewport={"width": 1280, "height": 800})
+                file_uri = f"file://{self.html_path.resolve()}"
+                await page.goto(file_uri)
+                await page.wait_for_load_state("domcontentloaded")
+
+                # Initially, pricing tab is active
+                active_tab = await page.evaluate("() => document.querySelector('.tab-content.active')?.id")
+                self.assertEqual(active_tab, "tab-pricing")
+
+                # Switch to comps tab
+                comps_btn = await page.query_selector("button.tab-btn[onclick*=\"'comps'\"]")
+                self.assertIsNotNone(comps_btn)
+                await comps_btn.click()
+                await page.wait_for_timeout(100)
+
+                # Verify tab and hash
+                active_tab = await page.evaluate("() => document.querySelector('.tab-content.active')?.id")
+                self.assertEqual(active_tab, "tab-comps")
+                curr_hash = await page.evaluate("() => window.location.hash")
+                self.assertEqual(curr_hash, "#comps")
+
+                # Scroll down 800px on comps tab
+                await page.evaluate("() => window.scrollTo(0, 800)")
+                await page.wait_for_timeout(150)
+                await page.evaluate("() => saveCurrentTabScroll()")
+
+                # Verify sessionStorage has scroll value
+                saved_scroll = await page.evaluate("() => sessionStorage.getItem('str_advisor_scroll_comps')")
+                self.assertIsNotNone(saved_scroll)
+                self.assertGreater(int(saved_scroll), 600)
+
+                # Reload page
+                await page.reload()
+                await page.wait_for_load_state("domcontentloaded")
+                await page.wait_for_timeout(200)
+
+                # Verify active tab is still tab-comps
+                active_after_reload = await page.evaluate("() => document.querySelector('.tab-content.active')?.id")
+                self.assertEqual(active_after_reload, "tab-comps")
+                active_btn = await page.evaluate("() => document.querySelector('.tab-btn.active')?.textContent")
+                self.assertIn("Comps", active_btn)
+
+                # Verify scroll position is approximately restored (~800px)
+                scroll_y = await page.evaluate("() => window.scrollY")
+                self.assertGreater(scroll_y, 600, f"Expected scroll restoration near 800px, got {scroll_y}")
+
+                await browser.close()
+
+        asyncio.run(run_persistence_test())
+
+    def test_browser_back_forward_navigation(self):
+        """
+        Verify that browser Back and Forward history buttons step through
+        previously viewed tabs and update active tab state seamlessly.
+        """
+        async def run_history_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page(viewport={"width": 1280, "height": 800})
+                file_uri = f"file://{self.html_path.resolve()}"
+                await page.goto(file_uri)
+                await page.wait_for_load_state("domcontentloaded")
+
+                # 1. Click reviews tab
+                rev_btn = await page.query_selector("button.tab-btn[onclick*=\"'reviews'\"]")
+                await rev_btn.click()
+                await page.wait_for_timeout(80)
+                self.assertEqual(await page.evaluate("() => window.location.hash"), "#reviews")
+                self.assertEqual(await page.evaluate("() => document.querySelector('.tab-content.active')?.id"), "tab-reviews")
+
+                # 2. Click calendar tab
+                cal_btn = await page.query_selector("button.tab-btn[onclick*=\"'calendar'\"]")
+                await cal_btn.click()
+                await page.wait_for_timeout(80)
+                self.assertEqual(await page.evaluate("() => window.location.hash"), "#calendar")
+                self.assertEqual(await page.evaluate("() => document.querySelector('.tab-content.active')?.id"), "tab-calendar")
+
+                # 3. Press browser back -> returns to reviews
+                await page.go_back()
+                await page.wait_for_timeout(80)
+                self.assertEqual(await page.evaluate("() => window.location.hash"), "#reviews")
+                self.assertEqual(await page.evaluate("() => document.querySelector('.tab-content.active')?.id"), "tab-reviews")
+
+                # 4. Press browser forward -> returns to calendar
+                await page.go_forward()
+                await page.wait_for_timeout(80)
+                self.assertEqual(await page.evaluate("() => window.location.hash"), "#calendar")
+                self.assertEqual(await page.evaluate("() => document.querySelector('.tab-content.active')?.id"), "tab-calendar")
+
+                await browser.close()
+
+        asyncio.run(run_history_test())
+
+    def test_direct_hash_link_and_fallback(self):
+        """
+        Verify that loading URL with direct hash opens specified tab,
+        invalid hashes fall back to pricing, and localStorage restores
+        the last active tab when URL has no hash.
+        """
+        async def run_hash_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page()
+
+                # Direct hash link #revenue
+                await page.goto(f"file://{self.html_path.resolve()}#revenue")
+                await page.wait_for_load_state("domcontentloaded")
+                await page.wait_for_timeout(100)
+                active_tab = await page.evaluate("() => document.querySelector('.tab-content.active')?.id")
+                self.assertEqual(active_tab, "tab-revenue")
+
+                # Invalid hash link #invalid-tab with pre-populated localStorage -> strictly defaults to pricing, NOT calendar
+                page_inv = await browser.new_page()
+                await page_inv.add_init_script("localStorage.setItem('str_advisor_active_tab', 'calendar');")
+                await page_inv.goto(f"file://{self.html_path.resolve()}#invalid-tab")
+                await page_inv.wait_for_load_state("domcontentloaded")
+                await page_inv.wait_for_timeout(100)
+                active_tab_invalid = await page_inv.evaluate("() => document.querySelector('.tab-content.active')?.id")
+                self.assertEqual(active_tab_invalid, "tab-pricing")
+                await page_inv.close()
+
+                # LocalStorage fallback when URL has no hash
+                page_ls = await browser.new_page()
+                await page_ls.add_init_script("localStorage.setItem('str_advisor_active_tab', 'calendar');")
+                await page_ls.goto(f"file://{self.html_path.resolve()}")
+                await page_ls.wait_for_load_state("domcontentloaded")
+                await page_ls.wait_for_timeout(100)
+                active_tab_ls = await page_ls.evaluate("() => document.querySelector('.tab-content.active')?.id")
+                self.assertEqual(active_tab_ls, "tab-calendar")
+                await page_ls.close()
+
+                await browser.close()
+
+        asyncio.run(run_hash_test())
+
+    def test_clicking_active_tab_scrolls_to_top(self):
+        """
+        Verify that clicking the currently active tab smoothly scrolls to top.
+        """
+        async def run_scroll_top_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page(viewport={"width": 1280, "height": 800})
+                await page.goto(f"file://{self.html_path.resolve()}")
+                await page.wait_for_load_state("domcontentloaded")
+
+                # Scroll down 600px on pricing
+                await page.evaluate("() => window.scrollTo(0, 600)")
+                await page.wait_for_timeout(100)
+                self.assertGreater(await page.evaluate("() => window.scrollY"), 400)
+
+                # Click pricing tab button
+                pricing_btn = await page.query_selector("button.tab-btn[onclick*=\"'pricing'\"]")
+                await pricing_btn.click()
+                await page.wait_for_timeout(150)
+
+                # Should be scrolled back to top
+                scroll_after = await page.evaluate("() => window.scrollY")
+                self.assertEqual(scroll_after, 0)
+
+                await browser.close()
+
+        asyncio.run(run_scroll_top_test())
+
+    def test_calendar_12_months_and_navigation(self):
+        """Verify that the calendar tab renders 12 consecutive months and navigates by 12 months."""
+        async def run_calendar_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page(viewport={"width": 1280, "height": 800})
+                file_uri = f"file://{self.html_path.resolve()}"
+                await page.goto(file_uri)
+                await page.wait_for_load_state("domcontentloaded")
+
+                # Switch to Calendar tab
+                cal_btn = await page.query_selector("button.tab-btn[onclick*=\"'calendar'\"]")
+                self.assertIsNotNone(cal_btn)
+                await cal_btn.click()
+                await page.wait_for_timeout(100)
+
+                # Verify 12 month cards are rendered
+                cards = await page.query_selector_all("#calMonthsGrid .cal-month-card")
+                self.assertEqual(len(cards), 12, f"Expected exactly 12 month cards in calendar grid, got {len(cards)}")
+
+                # Get initial first month header
+                first_header = await page.evaluate("() => document.querySelector('#calMonthsGrid .cal-month-header')?.textContent")
+
+                # Click "Next 12 Months ▶"
+                next_btn = await page.query_selector("button.cal-btn[onclick*='calNavigate(12)']")
+                self.assertIsNotNone(next_btn)
+                await next_btn.click()
+                await page.wait_for_timeout(100)
+
+                # Verify first month header advanced by 1 year (12 months)
+                new_first_header = await page.evaluate("() => document.querySelector('#calMonthsGrid .cal-month-header')?.textContent")
+                self.assertNotEqual(first_header, new_first_header)
+
+                # Still exactly 12 month cards
+                cards_after = await page.query_selector_all("#calMonthsGrid .cal-month-card")
+                self.assertEqual(len(cards_after), 12)
+
+    def test_historical_avg_color_in_browser(self):
+        """Verify that Historical AVG values are rendered with conditional colors in the browser DOM, and Effective Total is uncolored."""
+        async def run_color_browser_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page(viewport={"width": 1280, "height": 800})
+                file_uri = f"file://{self.html_path.resolve()}"
+                await page.goto(file_uri)
+                await page.wait_for_load_state("domcontentloaded")
+                await page.wait_for_timeout(100)
+
+                # Locate all Historical AVG strong elements in the main pricing table
+                hist_colors = await page.evaluate("""() => {
+                    const cells = document.querySelectorAll('td[data-label="Historical AVG"] strong');
+                    return Array.from(cells).map(el => window.getComputedStyle(el).color);
+                }""")
+                self.assertGreater(len(hist_colors), 0, "Expected at least one Historical AVG cell in pricing table")
+
+                # Verify presence of green (rgb(52, 211, 153)) and red (rgb(248, 113, 113))
+                green_found = any("52, 211, 153" in c for c in hist_colors)
+                red_found = any("248, 113, 113" in c for c in hist_colors)
+                self.assertTrue(green_found, f"Expected at least one green historical AVG cell, found: {set(hist_colors)}")
+                self.assertTrue(red_found, f"Expected at least one red historical AVG cell, found: {set(hist_colors)}")
+
+                # Verify Effective Total cells are white (rgb(241, 245, 249)), not dynamically colored
+                eff_colors = await page.evaluate("""() => {
+                    const cells = document.querySelectorAll('td[data-label="Effective Total"] strong');
+                    return Array.from(cells).map(el => window.getComputedStyle(el).color);
+                }""")
+                self.assertGreater(len(eff_colors), 0, "Expected at least one Effective Total cell in pricing table")
+                for c in eff_colors:
+                    self.assertIn("241, 245, 249", c)
+
+                await browser.close()
+
+        asyncio.run(run_color_browser_test())
 
 
 if __name__ == "__main__":

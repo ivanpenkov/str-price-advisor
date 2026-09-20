@@ -113,7 +113,7 @@ class PriceReportGenerator:
             f"# 🏷️ STR Competitive Pricing Advisory Report",
             f"**Property**: {property_name} (920 E Carver Rd, Tempe, AZ)",
             f"**Report Date**: {report_date}",
-            f"**Strategy**: Dynamic Luxury Benchmark (75th–80th Percentile with Lead-Time Tapering)",
+            f"**Strategy**: Dynamic 2D Strategy Matrix with Bayesian Shrinkage & Operational Price Floors",
             f"",
             f"---",
             f"",

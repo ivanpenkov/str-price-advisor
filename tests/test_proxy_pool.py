@@ -28,7 +28,7 @@ class TestStealthConnectionPool(unittest.TestCase):
         self.patcher_env = patch.dict("os.environ", {
             "NORDVPN_USER": "test_user",
             "NORDVPN_PASS": "test_pass",
-            "NORDVPN_SERVER": "los-angeles.us.socks.nordhold.net:1080",
+            "NORDVPN_SERVER": "san-francisco.us.socks.nordhold.net:1080",
             "STEALTH_STARTUP_DELAY": "0.0",
         })
         self.patcher_env.start()
@@ -63,7 +63,7 @@ class TestStealthConnectionPool(unittest.TestCase):
 
     def test_feeder_servers_major_travel_markets(self):
         """Verify that default stealth hubs correspond to major out-of-state travel hubs."""
-        expected_hubs = ["los-angeles", "san-francisco", "dallas", "chicago"]
+        expected_hubs = ["san-francisco", "dallas", "chicago", "new-york"]
         for hub in expected_hubs:
             self.assertTrue(
                 any(hub in item[2] for item in DEFAULT_STEALTH_HUBS),
@@ -103,7 +103,7 @@ class TestStealthConnectionPool(unittest.TestCase):
     @patch("src.stealth_connection.asyncio.create_subprocess_exec")
     @patch("src.stealth_connection.get_free_port")
     def test_start_pool_redirects_phoenix_server(self, mock_port, mock_subproc):
-        """Verify that if a Phoenix server is explicitly passed to start_pool, it is redirected to Los Angeles."""
+        """Verify that if a Phoenix server is explicitly passed to start_pool, it is redirected to fallback out-of-state server."""
         port_gen = itertools.count(56100)
         mock_port.side_effect = lambda *args, **kwargs: next(port_gen)
 
@@ -128,7 +128,7 @@ class TestStealthConnectionPool(unittest.TestCase):
         self.assertEqual(len(mgr.endpoints), 2)
         endpoint_hosts = [ep.remote_host for ep in mgr.endpoints]
         self.assertNotIn("phoenix.us.socks.nordhold.net:1080", endpoint_hosts)
-        self.assertIn("los-angeles.us.socks.nordhold.net:1080", endpoint_hosts)
+        self.assertIn("us.socks.nordhold.net:1080", endpoint_hosts)
         self.assertIn("dallas.us.socks.nordhold.net:1080", endpoint_hosts)
 
         asyncio.run(mgr.stop_pool())
@@ -245,7 +245,7 @@ class TestStealthConnectionPool(unittest.TestCase):
         # Only 1 endpoint should remain
         self.assertEqual(len(configs), 1)
         self.assertEqual(len(mgr.endpoints), 1)
-        self.assertEqual(mgr.endpoints[0].name, "feeder-sf-1")
+        self.assertEqual(mgr.endpoints[0].name, "feeder-dal-1")
 
         asyncio.run(mgr.stop_pool())
 
@@ -292,11 +292,11 @@ class TestStealthConnectionPool(unittest.TestCase):
         self.assertIsNotNone(cfg)
         self.assertEqual(cfg["server"], "http://127.0.0.1:56700")
 
-        # Verify command line redirected phoenix to los-angeles
+        # Verify command line redirected phoenix to fallback server
         args, kwargs = mock_subproc.call_args
         cmd_str = " ".join(args)
         self.assertNotIn("phoenix.us.socks.nordhold.net:1080", cmd_str)
-        self.assertIn("los-angeles.us.socks.nordhold.net:1080", cmd_str)
+        self.assertIn("us.socks.nordhold.net:1080", cmd_str)
 
         # Cleanup
         asyncio.run(mgr.stop())
@@ -367,12 +367,12 @@ class TestStealthConnectionPool(unittest.TestCase):
         mock_proc.wait = AsyncMock()
         mock_subproc.return_value = mock_proc
 
-        # Suppose los-angeles works, but san-francisco and dallas fail auth.
-        # Candidate socks-us51 (SF) and socks-us74 (Dallas) work.
+        # Suppose new-york works, but san-francisco and dallas fail auth.
+        # Candidate socks-us51 (SF) and socks-us52 (Dallas) work.
         def mock_verify_impl(host, *args, **kwargs):
-            if "los-angeles.us.socks.nordhold.net" in host:
+            if "new-york.us.socks.nordhold.net" in host:
                 return True
-            elif "socks-us51.nordvpn.com" in host or "socks-us74.nordvpn.com" in host:
+            elif "socks-us51.nordvpn.com" in host or "socks-us52.nordvpn.com" in host:
                 return True
             return False
 
@@ -380,7 +380,7 @@ class TestStealthConnectionPool(unittest.TestCase):
 
         mgr = StealthConnectionManager(required=True)
         custom_targets = [
-            ("feeder-la", "los-angeles.us.socks.nordhold.net:1080"),
+            ("feeder-ny", "new-york.us.socks.nordhold.net:1080"),
             ("feeder-sf", "san-francisco.us.socks.nordhold.net:1080"),
             ("feeder-dal", "dallas.us.socks.nordhold.net:1080"),
         ]
@@ -392,12 +392,12 @@ class TestStealthConnectionPool(unittest.TestCase):
         self.assertEqual(len(configs), 3)
 
         remote_hosts = [ep.remote_host for ep in mgr.endpoints]
-        # feeder-la kept healthy server
-        self.assertEqual(remote_hosts[0], "los-angeles.us.socks.nordhold.net:1080")
+        # feeder-ny kept healthy server
+        self.assertEqual(remote_hosts[0], "new-york.us.socks.nordhold.net:1080")
         # feeder-sf routed to candidate
         self.assertIn("socks-us51.nordvpn.com:1080", remote_hosts)
         # feeder-dal routed to candidate
-        self.assertIn("socks-us74.nordvpn.com:1080", remote_hosts)
+        self.assertIn("socks-us52.nordvpn.com:1080", remote_hosts)
 
         asyncio.run(mgr.stop_pool())
 
@@ -422,7 +422,7 @@ class TestStealthConnectionPool(unittest.TestCase):
 
         with patch.object(mgr, "verify_socks5", side_effect=mock_verify_transient):
             custom_targets = [
-                ("feeder-la", "los-angeles.us.socks.nordhold.net:1080"),
+                ("feeder-sf", "san-francisco.us.socks.nordhold.net:1080"),
                 ("feeder-dal", "dallas.us.socks.nordhold.net:1080"),
             ]
             async def run():
@@ -555,8 +555,11 @@ class TestStealthConnectionVerifySocks5(unittest.TestCase):
             "NORDVPN_PASS": "test_pass",
         })
         self.patcher_env.start()
+        self.patcher_dns = patch("socket.gethostbyname", return_value="149.248.55.1")
+        self.patcher_dns.start()
 
     def tearDown(self):
+        self.patcher_dns.stop()
         self.patcher_env.stop()
 
     @patch("socket.create_connection")

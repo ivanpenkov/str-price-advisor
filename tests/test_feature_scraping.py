@@ -273,12 +273,39 @@ class TestFeatureScraping(unittest.TestCase):
         # Scenario 3: og:title used when dom_h1 is absent
         profile3 = self.enricher.parse_page_content(
             deferred_text="",
-            ld_data={"name": "Home in Mesa"},
             og_title="Game Time - 6 Bedroom Elite Vacation Paradise",
             page_title="Home in Mesa - Airbnb",
             listing_id="1143202699620728397",
         )
         self.assertEqual(profile3["title"], "Game Time - 6 Bedroom Elite Vacation Paradise")
+
+    def test_parse_page_content_dom_overview_capacity_precedence(self):
+        """
+        Verify that authoritative DOM overview items ('16+ guests', '· 6 bedrooms', '· 9 beds', '· 5.5 baths')
+        take precedence over unanchored token matches in deferred state (e.g. spurious '10 guests').
+        """
+        # deferred state with unrelated '10 guests' in query/filter text
+        deferred_with_spurious_guests = json.dumps({
+            "searchQuery": {"adults": 10, "label": "10 guests"},
+            "description": "Luxurious estate."
+        })
+        dom_overview = [
+            "16+ guests",
+            "· 6 bedrooms",
+            "· 9 beds",
+            "· 5.5 baths",
+            "Superhost",
+        ]
+        profile = self.enricher.parse_page_content(
+            deferred_text=deferred_with_spurious_guests,
+            ld_data={"name": "Scottsdale Luxury Villa Pool, Hot Tub, & Games"},
+            dom_overview=dom_overview,
+            listing_id="1021082928475791155",
+        )
+        self.assertEqual(profile["guests"], "16+")
+        self.assertEqual(profile["bedrooms"], 6)
+        self.assertEqual(profile["beds"], 9)
+        self.assertEqual(profile["baths"], 5.5)
 
 
 if __name__ == "__main__":

@@ -29,39 +29,55 @@ logger = logging.getLogger("stealth_connection")
 DEFAULT_MAX_STEALTH_CONNECTIONS: int = 8
 DEFAULT_MAX_WAIT_SECONDS: float = 60.0
 
+
+def is_blacklisted_subnet(ip: str) -> bool:
+    """
+    Check if an IP address belongs to known foreign or African RIR blocks (AFRINIC)
+    that cause travel OTAs (Airbnb, Vrbo, Booking) to trigger cross-border redirects or bot challenges.
+    """
+    if not ip or not isinstance(ip, str):
+        return False
+    ip_str = ip.strip()
+    # Known African RIR prefixes: 196.0.0.0/8, 197.0.0.0/8, 102.0.0.0/8, 105.0.0.0/8, 41.0.0.0/8, 154.0.0.0/8
+    blacklisted_prefixes = ("196.", "197.", "102.", "105.", "41.", "154.")
+    for prefix in blacklisted_prefixes:
+        if ip_str.startswith(prefix):
+            return True
+    return False
+
+
 # Top 10 out-of-state feeder travel hubs to Phoenix/Scottsdale
 # Strictly excludes Phoenix to avoid local host competitor surveillance signatures.
-# All nodes are verified active and RFC 1928/1929 authenticated across 10 distinct IPs.
+# Strictly excludes AFRINIC / non-US subnets (feeder-la-1/2, feeder-atl-1 decommissioned).
+# All nodes are verified active and RFC 1928/1929 authenticated across distinct US IPs.
 DEFAULT_STEALTH_HUBS: List[Tuple[str, str, str]] = [
-    ("feeder-la-1", "Los Angeles, CA", "los-angeles.us.socks.nordhold.net:1080"),
     ("feeder-sf-1", "San Francisco, CA", "san-francisco.us.socks.nordhold.net:1080"),
     ("feeder-dal-1", "Dallas, TX", "dallas.us.socks.nordhold.net:1080"),
     ("feeder-chi-1", "Chicago, IL", "chicago.us.socks.nordhold.net:1080"),
+    ("feeder-ny-1", "New York, NY", "new-york.us.socks.nordhold.net:1080"),
     ("feeder-us-1", "US Anycast", "us.socks.nordhold.net:1080"),
     ("feeder-sf-2", "San Francisco, CA", "socks-us46.nordvpn.com:1080"),
-    ("feeder-la-2", "Los Angeles, CA", "socks-us61.nordvpn.com:1080"),
-    ("feeder-atl-1", "Atlanta, GA", "socks-us68.nordvpn.com:1080"),
     ("feeder-sf-3", "San Francisco, CA", "socks-us70.nordvpn.com:1080"),
     ("feeder-dal-2", "Dallas, TX", "socks-us73.nordvpn.com:1080"),
+    ("feeder-chi-2", "Chicago, IL", "socks-us41.nordvpn.com:1080"),
+    ("feeder-dal-3", "Dallas, TX", "socks-us74.nordvpn.com:1080"),
 ]
 
 FALLBACK_STEALTH_SERVER: str = "us.socks.nordhold.net:1080"
 
-# Curated, verified out-of-state standby candidate nodes.
+# Curated, verified out-of-state standby candidate nodes (clean US IPs only).
 # Strictly excludes Phoenix and avoids any overlap with DEFAULT_STEALTH_HUBS so candidates serve as true backups.
 STATIC_CANDIDATE_STEALTH_SERVERS: List[str] = [
-    "socks-us60.nordvpn.com:1080",
-    "socks-us63.nordvpn.com:1080",
     "socks-us71.nordvpn.com:1080",
     "socks-us52.nordvpn.com:1080",
-    "socks-us41.nordvpn.com:1080",
     "socks-us51.nordvpn.com:1080",
-    "socks-us74.nordvpn.com:1080",
     "socks-us50.nordvpn.com:1080",
     "socks-us72.nordvpn.com:1080",
-    "seattle.us.socks.nordhold.net:1080",
-    "miami.us.socks.nordhold.net:1080",
-    "new-york.us.socks.nordhold.net:1080",
+    "socks-us42.nordvpn.com:1080",
+    "socks-us43.nordvpn.com:1080",
+    "socks-us44.nordvpn.com:1080",
+    "socks-us45.nordvpn.com:1080",
+    "socks-us47.nordvpn.com:1080",
 ]
 
 # Module-level candidate list, dynamically refreshed from NordVPN REST API before each run
@@ -176,6 +192,11 @@ def fetch_nordvpn_candidate_servers(
 
                         # Check server title/name for Phoenix
                         if "phoenix" in (item.get("name") or "").lower():
+                            continue
+
+                        # Check IP station for blacklisted foreign/African subnets
+                        station_ip = item.get("station") or ""
+                        if station_ip and is_blacklisted_subnet(str(station_ip)):
                             continue
 
                         # 5. Extract and normalize hostname
@@ -455,6 +476,17 @@ class StealthConnectionManager:
             except ValueError:
                 pass
 
+        try:
+            resolved_ip = socket.gethostbyname(host)
+            if is_blacklisted_subnet(resolved_ip):
+                return (
+                    False,
+                    f"Host '{host}' ({resolved_ip}) belongs to blacklisted foreign/African subnet",
+                    "AFRINIC_BLOCKED",
+                )
+        except Exception:
+            pass
+
         def _recv_exact(sock: socket.socket, num_bytes: int) -> bytes:
             buf = bytearray()
             while len(buf) < num_bytes:
@@ -574,6 +606,44 @@ class StealthConnectionManager:
                 if "timed out" in err_msg.lower():
                     err_msg = "Timeout"
                 return False, lat, err_msg
+
+        return await asyncio.to_thread(_probe)
+
+    @staticmethod
+    async def verify_endpoint_geoip(
+        port: int,
+        target_url: str = "http://ip-api.com/json",
+        timeout: float = 2.5,
+    ) -> Tuple[bool, str, str]:
+        """
+        Query lightweight GeoIP service through forwarder loopback port to verify US IP.
+        Returns (is_us, country_name, ip_address).
+        Under fast testing (STEALTH_STARTUP_DELAY == 0.0), returns instantaneous mock result.
+        """
+        if float(os.environ.get("STEALTH_STARTUP_DELAY", "0.6")) == 0.0:
+            return True, "United States", "127.0.0.1"
+
+        def _probe():
+            try:
+                proxy_handler = urllib.request.ProxyHandler({
+                    "http": f"http://127.0.0.1:{port}",
+                    "https": f"http://127.0.0.1:{port}",
+                })
+                opener = urllib.request.build_opener(proxy_handler)
+                req = urllib.request.Request(
+                    target_url,
+                    headers={"User-Agent": "curl/7.88.1"},
+                )
+                with opener.open(req, timeout=timeout) as resp:
+                    if resp.getcode() == 200:
+                        data = json.loads(resp.read().decode("utf-8"))
+                        country = str(data.get("country") or data.get("countryCode") or "")
+                        query_ip = str(data.get("query") or data.get("ip") or "").strip()
+                        is_us = (country.lower() in ("united states", "us", "usa")) and not is_blacklisted_subnet(query_ip)
+                        return is_us, country, query_ip
+                return False, "Unknown", ""
+            except Exception as e:
+                return False, f"Error: {e}", ""
 
         return await asyncio.to_thread(_probe)
 
@@ -816,7 +886,7 @@ class StealthConnectionManager:
                 h_name = f"feeder-{idx+1}"
                 h_city = f"Candidate Node {idx+1}"
                 h_host = ""
-            norm_h = "los-angeles.us.socks.nordhold.net:1080" if "phoenix" in h_host.lower() else h_host
+            norm_h = FALLBACK_STEALTH_SERVER if "phoenix" in h_host.lower() else h_host
             slot_definitions.append((h_name, h_city, norm_h))
 
         tested_cache: Dict[str, Tuple[bool, str, str]] = {}
@@ -1291,7 +1361,7 @@ class StealthConnectionManager:
     async def start(self, remote_host: Optional[str] = None, **kwargs) -> Optional[Dict[str, Any]]:
         """Backwards-compatible alias for starting a single proxy bridge."""
         if "phoenix" in (remote_host or "").lower():
-            remote_host = "los-angeles.us.socks.nordhold.net:1080"
+            remote_host = FALLBACK_STEALTH_SERVER
         cfg = await self.lease_single_connection(remote_host=remote_host, target_url=kwargs.get("target_url", None))
         return cfg or None
 

@@ -8,6 +8,9 @@ data/cache/
 scratch/
 .env
 .env.*
+!.env.example
 config/secrets.yaml
 docs/*.pdf
 *.db
+*.db-*
+*.sqlite*

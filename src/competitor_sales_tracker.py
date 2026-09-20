@@ -25,32 +25,37 @@ DEFAULT_DB_PATH = Path("data/reservations.db")
 DEFAULT_DATA_DIR = Path("data")
 DEFAULT_REGISTRY_PATH = Path("config/comps_registry.json")
 
-# Strategy Baseline Priors (used in Bayesian shrinkage when empirical sample size < 3)
-# Tiered Horizon-Specific Baseline Priors per Design Doc §3.4
-HORIZON_PRIORS = {
+# Strategy Baseline Priors (used in Bayesian shrinkage and strategic floor clamping)
+# 2D Strategy Matrix per docs/nightly_rate_targets_requirements.md and docs/nightly_rate_targets_design.md
+DEFAULT_HORIZON_PRIORS = {
     ">90d": {
-        "weekend": {"target": 67.5, "p75": 75.0},
-        "midweek": {"target": 47.5, "p75": 55.0},
+        "weekend": {"target": 67.5, "floor": 65.0, "p75": 75.0},
+        "midweek": {"target": 47.5, "floor": 45.0, "p75": 55.0},
     },
     "31–90d": {
-        "weekend": {"target": 62.5, "p75": 70.0},
-        "midweek": {"target": 45.5, "p75": 52.5},
+        "weekend": {"target": 62.5, "floor": 60.0, "p75": 70.0},
+        "midweek": {"target": 32.5, "floor": 30.0, "p75": 45.0},
     },
     "15–30d": {
-        "weekend": {"target": 52.5, "p75": 60.0},
-        "midweek": {"target": 38.5, "p75": 45.0},
+        "weekend": {"target": 52.5, "floor": 50.0, "p75": 60.0},
+        "midweek": {"target": 32.5, "floor": 30.0, "p75": 40.0},
     },
     "≤14d": {
-        "weekend": {"target": 42.5, "p75": 50.0},
-        "midweek": {"target": 31.5, "p75": 38.0},
+        "weekend": {"target": 42.5, "floor": 40.0, "p75": 50.0},
+        "midweek": {"target": 30.0, "floor": 28.0, "p75": 38.0},
     },
 }
+# Keep HORIZON_PRIORS referencing DEFAULT_HORIZON_PRIORS for backward compatibility
+HORIZON_PRIORS = DEFAULT_HORIZON_PRIORS
 
 PRIOR_WEEKEND_TARGET_PCT = 65.0
 PRIOR_WEEKEND_P75_PCT = 75.0
 PRIOR_MIDWEEK_TARGET_PCT = 45.5
 PRIOR_MIDWEEK_P75_PCT = 55.0
-BAYESIAN_SHRINKAGE_K = 3.0  # Equivalent pseudo-observations of prior weight
+BAYESIAN_SHRINKAGE_K = 5.0  # Equivalent pseudo-observations of prior weight
+MIN_SAMPLE_SIZE = 5         # Minimum verified comp bookings to qualify as empirical
+OPERATIONAL_FLOORS = {"weekend": 450.0, "midweek": 300.0}
+ENFORCE_MONOTONIC_TAPERING = True
 
 
 def format_comp_sales_line(label: str, sales: List[Dict[str, Any]]) -> str:
@@ -1148,12 +1153,56 @@ class CompetitorSalesTracker:
             return "weekend"
         return "midweek"
 
+    def _load_strategy_config(self) -> Dict[str, Any]:
+        """
+        Load 2D strategy matrix, shrinkage parameters, and operational floors from settings.yaml,
+        falling back cleanly to embedded constants.
+        """
+        try:
+            from src.config import get_settings
+            settings = get_settings()
+            strat = settings.get("strategy", {})
+        except Exception:
+            strat = {}
+
+        k = float(strat.get("bayesian_shrinkage_k", BAYESIAN_SHRINKAGE_K))
+        min_n = int(strat.get("min_empirical_sample_size", MIN_SAMPLE_SIZE))
+        monotonic = bool(strat.get("enforce_monotonic_tapering", True)) and ENFORCE_MONOTONIC_TAPERING
+        op_floors = dict(strat.get("operational_floors") or OPERATIONAL_FLOORS)
+
+        raw_matrix = strat.get("lead_time_matrix") or {}
+        matrix = {}
+        for h, default_data in DEFAULT_HORIZON_PRIORS.items():
+            matrix[h] = {}
+            cfg_h = raw_matrix.get(h) or {}
+            for t, default_t in default_data.items():
+                cfg_t = cfg_h.get(t) or {}
+                matrix[h][t] = {
+                    "target": float(cfg_t.get("target") or default_t["target"]),
+                    "floor": float(cfg_t.get("floor") or default_t["floor"]),
+                    "p75": float(cfg_t.get("p75") or default_t["p75"]),
+                }
+
+        return {
+            "matrix": matrix,
+            "k": k,
+            "min_sample_size": min_n,
+            "enforce_monotonic_tapering": monotonic,
+            "operational_floors": op_floors,
+        }
+
     def compute_strategy_grid(self) -> Dict[str, Any]:
         """
         Aggregate recorded sales into the 2D Strategy Matrix (Horizon x Stay Type)
-        and compute empirical percentiles with Bayesian shrinkage.
+        and compute empirical percentiles with Bayesian shrinkage, strategic floor clamping,
+        and monotonic tapering.
         """
         sales = self.get_all_sales(verification_filter="CONFIRMED_BLOCKED")
+        strat_cfg = self._load_strategy_config()
+        matrix = strat_cfg["matrix"]
+        k = strat_cfg["k"]
+        min_sample_size = strat_cfg["min_sample_size"]
+        enforce_monotonic = strat_cfg["enforce_monotonic_tapering"]
         
         # Horizons ordered from far-out to last-minute
         horizons = [">90d", "31–90d", "15–30d", "≤14d"]
@@ -1185,9 +1234,10 @@ class CompetitorSalesTracker:
                 cell_sales = buckets[(h, t)]
                 n = len(cell_sales)
 
-                # Determine baseline prior from horizon-specific matrix (Design Doc §3.4)
-                h_priors = HORIZON_PRIORS.get(h, {}).get(t, {})
+                # Determine baseline prior and floor from horizon-specific matrix
+                h_priors = matrix.get(h, {}).get(t, {})
                 prior_target = h_priors.get("target", PRIOR_WEEKEND_TARGET_PCT if t == "weekend" else PRIOR_MIDWEEK_TARGET_PCT)
+                prior_floor = h_priors.get("floor", 40.0 if t == "weekend" else 28.0)
                 prior_p75 = h_priors.get("p75", PRIOR_WEEKEND_P75_PCT if t == "weekend" else PRIOR_MIDWEEK_P75_PCT)
 
                 if n > 0:
@@ -1211,23 +1261,34 @@ class CompetitorSalesTracker:
                     p75_idx = int(math.ceil(0.75 * n)) - 1
                     p75 = pcts[max(0, min(p75_idx, n - 1))]
 
-                    # Bayesian shrinkage target
-                    # hat_Y = (n * p50 + k * prior) / (n + k)
-                    recommended_target = round((n * p50 + BAYESIAN_SHRINKAGE_K * prior_target) / (n + BAYESIAN_SHRINKAGE_K), 1)
-                    recommended_aggressive = round((n * p75 + BAYESIAN_SHRINKAGE_K * prior_p75) / (n + BAYESIAN_SHRINKAGE_K), 1)
                     avg_rate = round(sum(rates) / n, 2)
                     min_rate = min(rates)
                     max_rate = max(rates)
                     emp_p50 = round(p50, 1)
                     emp_p75 = round(p75, 1)
+
+                    if n >= min_sample_size:
+                        is_empirical = True
+                        hat_y = (n * p50 + k * prior_target) / (n + k)
+                        hat_y_p75 = (n * p75 + k * prior_p75) / (n + k)
+                    else:
+                        is_empirical = False
+                        hat_y = prior_target
+                        hat_y_p75 = prior_p75
                 else:
                     emp_p50 = None
                     emp_p75 = None
-                    recommended_target = prior_target
-                    recommended_aggressive = prior_p75
                     avg_rate = 0.0
                     min_rate = 0.0
                     max_rate = 0.0
+                    is_empirical = False
+                    hat_y = prior_target
+                    hat_y_p75 = prior_p75
+
+                # Strategic Floor Clamping: tag is_floor_clamped if shrinkage result < floor
+                is_floor_clamped = bool(round(hat_y, 1) < prior_floor or hat_y < prior_floor)
+                recommended_target = round(max(prior_floor, hat_y), 1)
+                recommended_aggressive = round(max(prior_floor, hat_y_p75), 1)
 
                 grid[h][t] = {
                     "count": n,
@@ -1236,11 +1297,25 @@ class CompetitorSalesTracker:
                     "recommended_target": recommended_target,
                     "recommended_aggressive": recommended_aggressive,
                     "baseline_prior": prior_target,
+                    "floor": prior_floor,
+                    "is_empirical": is_empirical,
+                    "is_floor_clamped": is_floor_clamped,
+                    "is_monotonic_adjusted": False,
                     "avg_rate": avg_rate,
                     "min_rate": min_rate,
                     "max_rate": max_rate,
-                    "is_empirical": n >= 3,
                 }
+
+        # Monotonic Tapering Pass across ordered horizons (>90d >= 31–90d >= 15–30d >= ≤14d)
+        if enforce_monotonic:
+            for t in stay_types:
+                prev_target = None
+                for h in horizons:
+                    curr_rec = grid[h][t]["recommended_target"]
+                    if prev_target is not None and curr_rec > prev_target:
+                        grid[h][t]["recommended_target"] = prev_target
+                        grid[h][t]["is_monotonic_adjusted"] = True
+                    prev_target = grid[h][t]["recommended_target"]
 
         # Overall summary KPIs
         total_sales_count = len(sales)
@@ -1270,7 +1345,7 @@ class CompetitorSalesTracker:
     def get_target_percentile(self, lead_time_days: int, segment_type: str = "weekend") -> float:
         """
         Retrieve empirical Bayesian-shrunk target percentile for a lead-time horizon.
-        Smoothly falls back to horizon-specific priors (k = 3.0) if sample size n < 3.
+        Smoothly falls back to horizon-specific priors (k = 5.0) if sample size n < 5.
         Caches the 2D strategy grid in memory to prevent redundant SQLite queries across segments.
         """
         if self._cached_strategy_grid is None:
@@ -1279,8 +1354,11 @@ class CompetitorSalesTracker:
         horizon = self._categorize_lead_horizon(lead_time_days)
         norm_seg = self._normalize_segment_type(segment_type)
         cell = self._cached_strategy_grid["grid"].get(horizon, {}).get(norm_seg, {})
-        fallback = HORIZON_PRIORS.get(horizon, {}).get(norm_seg, {}).get("target", 65.0)
-        return float(cell.get("recommended_target", fallback))
+        if "recommended_target" in cell and cell["recommended_target"] is not None:
+            return float(cell["recommended_target"])
+        strat_cfg = self._load_strategy_config()
+        fallback = strat_cfg["matrix"].get(horizon, {}).get(norm_seg, {}).get("target", 65.0)
+        return float(fallback)
 
     def detect_market_compression(
         self,

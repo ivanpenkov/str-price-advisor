@@ -92,18 +92,17 @@ python -m src.cli generate-html
 
 ## 📁 Output Reports & Static Dashboard
 
-Every run updates both static reporting documents and a responsive 10-tab web dashboard:
+Every run updates both static reporting documents and a responsive 9-tab web dashboard:
 - **Interactive Web Dashboard (`docs/index.html`)**:
   - **Tab 1 (📊 Pricing)**: 🚨 Urgent Actions (Weekly) &rarr; ⚠️ Moderate Adjustments (Monthly) &rarr; ℹ️ Full 12-Month Calendar with lead-time percentiles and historical realized benchmarks.
-  - **Tab 2 (🌐 Channels)**: Real-time price parity comparison matrix across Airbnb, VRBO, Booking.com, and Kivoya Direct with full fee and tax itemization.
+  - **Tab 2 (⭐ Reviews)**: Cross-platform reputation surveillance across Airbnb, VRBO, Booking.com, and Kivoya Direct with multi-interval date filters and side-by-side team responses.
   - **Tab 3 (⚙️ Streamline PMS)**: Rate management diagnostics, published base rates, and direct channel markup auditing.
   - **Tab 4 (🏡 Comps)**: 109 curated competitors (97 active valid comps + 12 disqualified) with search, tier filter pills, and direct **"Open on Airbnb ↗"** links.
   - **Tab 5 (🎯 Comps Sales)**: 2D empirical strategy matrix (Lead Horizon $\times$ Stay Type), absorption velocity KPIs, and live competitor booking transaction feed.
-  - **Tab 6 (📅 Calendar)**: 6-month interactive rolling calendar grid with dual color modes (Status vs. Channel) and modal reservation inspection.
+  - **Tab 6 (📅 Calendar)**: 12-month interactive rolling calendar grid with dual color modes (Status vs. Channel) and modal reservation inspection.
   - **Tab 7 (📑 Reservations)**: Complete 2022–2027 historical and advance reservation ledger with search, filtering, and sorting.
   - **Tab 8 (📈 Revenue)**: Cumulative annual revenue pacing curves (2022–2027) with YoY comparisons and executive KPIs.
-  - **Tab 9 (📐 Methodology & PMS Guide)**: Complete pricing engine documentation, fee formulas, and operational communication guide for Kivoya.
-  - **Tab 10 (🛠️ Live Data & Debug)**: Downloadable CSV spreadsheets, Markdown reports, raw JSON data inspect, and proxy pool health telemetry.
+  - **Tab 9 (🌐 Channels)**: Real-time price parity comparison matrix across Airbnb, VRBO, Booking.com, and Kivoya Direct with full fee and tax itemization.
 - **`data/latest_report.md`**: Executive markdown summary with warning badges.
 - **`data/latest_sheet.csv`**: Structured spreadsheet for importing directly into Google Sheets or Kivoya.
 
@@ -120,4 +119,18 @@ The dashboard is generated into `docs/index.html` and is designed for direct Git
    - Click **Save**.
 4. GitHub Pages will publish your dashboard at your personal GitHub URL!
 5. You can also view it locally anytime by opening `docs/index.html` on your Mac.
+
+---
+
+## 🤝 Contributing & Multi-Device Setup
+
+Setting up a new development machine or collaborating with another developer?
+Check out our comprehensive **[Contributing & Multi-Device Setup Guide](CONTRIBUTING.md)**, which covers:
+- **System Architecture & Machine Roles**: Understanding the boundary between the 24/7 production host (Mac Mini running automated `launchd` daemons) and contributor laptops.
+- **Initial Device Setup**: Step-by-step repository cloning, Python virtual environment configuration, and Playwright Chromium installation.
+- **Secure Secret Bootstrapping**: Safely transferring `.env` credentials (NordVPN & Streamline OwnerX PMS) peer-to-peer via AirDrop, SCP, or password managers using the tracked [`.env.example`](.env.example) template.
+- **Local Database Initialization**: Initializing `data/reservations.db` from Streamline PMS (and our roadmap toward a centralized cloud database).
+- **Smoke Testing & Verification**: Inner-loop unit tests, stealth proxy fleet audits, and dry run checks.
+- **Two-Contributor Git Workflow**: Short-lived feature branches, rebasing against automated Mac Mini commits, solo merge protocols, and merge conflict resolution recipes for generated artifacts (`docs/index.html`).
+
 

@@ -634,7 +634,48 @@ class TestCompEvaluationAndAdjustment(unittest.TestCase):
         self.assertGreaterEqual(res["winter_ratio"], 1.15)
         self.assertIn("heated pool", res["winter_rationale"].lower())
 
+    def test_guest_favorite_reputation_boost(self):
+        """Airbnb Guest Favorite badge awards +7 reputation points and increases desirability ratio."""
+        base_comp = {
+            "listing_id": "888888",
+            "name": "Standard Tempe Villa",
+            "location": "Tempe",
+            "bedrooms": 6,
+            "beds": 8,
+            "baths": 5.0,
+            "rating": 4.88,
+            "reviews": 18,
+            "is_guest_favorite": False,
+        }
+        enriched = {
+            "title": "Standard Tempe Villa",
+            "description": "6BR home with heated pool and patio.",
+            "amenities": ["Pool", "Wifi"],
+            "rating": 4.88,
+            "reviews": 18,
+        }
+
+        # 1. Without Guest Favorite
+        eval_standard = self.evaluator.evaluate_comp(base_comp, enriched_data=enriched)
+        rep_standard = eval_standard["category_scores"]["reputation"]
+        ratio_standard = eval_standard["desirability_ratio"]
+
+        # 2. With Guest Favorite
+        comp_gf = dict(base_comp)
+        comp_gf["is_guest_favorite"] = True
+        eval_gf = self.evaluator.evaluate_comp(comp_gf, enriched_data=enriched)
+        rep_gf = eval_gf["category_scores"]["reputation"]
+        ratio_gf = eval_gf["desirability_ratio"]
+
+        # Assert +7 reputation bonus
+        self.assertEqual(rep_gf, rep_standard + 7)
+        self.assertGreater(ratio_gf, ratio_standard)
+        self.assertIn("Airbnb Guest Favorite", eval_gf["rationale"])
+        self.assertIn("Airbnb Guest Favorite badge (+reputation boost)", eval_gf["validity_details"]["strengths"])
+        self.assertTrue(eval_gf["validity_details"]["criteria_checklist"]["is_guest_favorite"])
+
 
 if __name__ == "__main__":
     unittest.main()
+
 

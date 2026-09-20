@@ -201,6 +201,7 @@ class CompManager:
         rating = enriched.get("rating") or specs_lookup.get("rating") or 4.9
         reviews = enriched.get("reviews") or specs_lookup.get("reviews") or 10
 
+        is_gf = bool(enriched.get("is_guest_favorite") or specs_lookup.get("is_guest_favorite"))
         raw_meta = {
             "listing_id": listing_id,
             "name": title,
@@ -210,6 +211,8 @@ class CompManager:
             "baths": baths,
             "rating": rating,
             "reviews": reviews,
+            "is_guest_favorite": is_gf,
+            "guest_favorite_badge": "Guest Favorite" if is_gf else None,
             "url": f"https://www.airbnb.com/rooms/{listing_id}",
             "photo_url": enriched.get("photo_url") or specs_lookup.get("photo_url"),
             "amenities_count": enriched.get("amenities_count", 0),
@@ -273,6 +276,8 @@ class CompManager:
             "baths": comp_record.get("baths"),
             "rating": comp_record.get("rating"),
             "reviews": comp_record.get("reviews"),
+            "is_guest_favorite": comp_record.get("is_guest_favorite", False),
+            "guest_favorite_badge": comp_record.get("guest_favorite_badge"),
             "photo_url": comp_record.get("photo_url"),
         }
         self._save_specs(specs)
@@ -816,6 +821,8 @@ class CompManager:
                             "effective_nightly": eff_nightly,
                             "rating": comp_meta.get("rating"),
                             "reviews": comp_meta.get("reviews"),
+                            "is_guest_favorite": bool(comp_meta.get("is_guest_favorite")),
+                            "guest_favorite_badge": comp_meta.get("guest_favorite_badge"),
                             "confidence": "CONFIRMED",
                             "confidence_reason": "Direct single-comp checkout pricing via Airbnb API",
                             "price_snippet": f"${intercepted_price:,.0f} for {nights} nights | ${eff_nightly:,.0f}/night",

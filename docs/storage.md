@@ -69,7 +69,8 @@ flowchart TD
     CACHE & ENRICH -->|"evaluate-comps"| REG
     REG & SPECS & CACHE & DB & REV -->|"generate-html / run"| HTML & MD_CSV
     SNAPS -->|"track-competitor-sales"| DB
-    HTML & SNAPS & REG & SPECS & REV -->|"git add & push"| GIT
+    HTML & SNAPS & REV -->|"automated git push (docs/ & data/)"| GIT
+    REG & SPECS -.->|"manual git add (config/)"| GIT
     GIT --> GHP
 ```
 
@@ -85,7 +86,7 @@ flowchart TD
 
 #### Schema & Data Contents:
 1. **`reservations`** (209 rows): Ground-truth booking ledger for Villa del Sol scraped from Streamline OwnerX PMS.
-   - *Columns*: `id` (PK), `confirmation_id`, `creation_date`, `start_date`, `end_date`, `days_number`, `type_id`, `type_name`, `status_name`, `occupants`, `owner_payout`, `management_fee`, `gross_rent`, `is_future`, `last_scraped_at`, `raw_json`.
+   - *Columns*: `id` (PK), `confirmation_id`, `creation_date`, `start_date`, `end_date`, `days_number`, `type_id`, `type_name`, `type_description`, `status_name`, `occupants`, `occupants_small`, `pets`, `unit_id`, `unit_name`, `owner_payout`, `management_fee`, `gross_rent`, `is_future`, `last_scraped_at`, `raw_json`.
    - *Indexes*: `idx_res_dates` (`start_date`, `end_date`), `idx_res_status` (`status_name`), `idx_res_future` (`is_future`).
 2. **`sync_history`** (31 rows): Audit log of all automated and manual PMS ingestion syncs.
    - *Columns*: `id` (PK auto), `synced_at`, `sync_mode`, `records_fetched`, `records_upserted`, `records_future`, `records_past`.
@@ -95,7 +96,7 @@ flowchart TD
    - *Indexes*: `idx_comp_sales_lead` (`lead_time_days`), `idx_comp_sales_seg` (`segment_type`), `idx_comp_sales_detected` (`detected_date`).
 4. **`property_rate_snapshots`** (4,224 rows): Daily historical ledger of Kivoya's published rates across calendar intervals for Villa del Sol.
    - *Columns*: `id` (PK auto), `snapshot_date`, `calendar_date`, `nightly_rate`, `interval_type`, `season_name`, `period_name`, `created_at`.
-   - *Constraint & Index*: `UNIQUE INDEX idx_rate_snap_unique (calendar_date, snapshot_date)`.
+   - *Constraint & Indexes*: `UNIQUE INDEX idx_rate_snap_unique (calendar_date, snapshot_date)`, `INDEX idx_rate_snap_lookup (calendar_date, snapshot_date)`.
 
 #### Accessing Commands & Scripts:
 - **Readers**:
@@ -109,7 +110,9 @@ flowchart TD
   - `src.cli sync-reservations` (upserts PMS reservations into `reservations` and records `sync_history`).
   - `src.cli track-competitor-sales` / `track-sales` (inserts verified sales into `competitor_sales`).
   - `src.cli snapshot-rates` (inserts published calendar rates into `property_rate_snapshots`).
-  - `src.cli disqualify-comp` & `src.cli remove-comp` (purges rows for excluded comps).
+  - `src.cli run` (snapshots current rates and reconciles/purges obsolete sales).
+  - `src.cli scrape-comp-prices` (records confirmed direct sales via `tracker.record_direct_sale()`).
+  - `src.cli disqualify-comp` (purges historical rows from `competitor_sales` for disqualified comps; `remove-comp` blacklists comps in registry/specs without touching SQLite).
   - `scripts/launchd/run_pms_sync.sh` (executes `sync-reservations` and `snapshot-rates` daily at 6:00 AM).
 
 ---
@@ -144,6 +147,9 @@ flowchart TD
   - `src.cli disqualify-comp` (moves comp to `disqualified` section with explanation).
   - `src.cli requalify-comp` (restores comp to active tier).
   - `src.cli enrich-comps` (updates verified specs in `listing_specs.json`).
+  - `src.cli bootstrap-comps` (bootstraps and curates initial registry entries).
+  - `src.cli sync-comp-ratings` (harvests ratings and Guest Favorite badges, updates `comps_registry.json` and `listing_specs.json`).
+  - `src.cli run` (via Step 3b `sync_comp_ratings` updates badges and ratings in registries).
   - Manual text editor modifications for `settings.yaml` and `holidays.json`.
 
 ---
@@ -169,7 +175,6 @@ flowchart TD
   - `scripts/mobile_ntfy_bridge.py` (executes on `rating` / `ratings` shortcuts).
 - **Writers**:
   - `src.cli sync-ratings` (scrapes live reviews from Airbnb, VRBO, Booking, Kivoya; deduplicates by `review_id`; performs in-place host response updates; sorts newest-first).
-  - `src.cli sync-comp-ratings` (updates comp benchmark ratings).
   - `scripts/launchd/run_daily_quickscan.sh` (runs `sync-ratings --no-dashboard` every morning).
 
 ---
@@ -183,21 +188,33 @@ flowchart TD
 - **Concurrency & Locking**: Write-once daily based on filename date stem.
 
 #### Schema & Data Contents:
-- Metadata: `created_at`, `scan_date`, `total_intervals`, `property_name`.
-- Array of evaluated intervals (`evaluated_segments`):
-  - `check_in`, `check_out`, `nights`, `day_of_week`, `season`, `is_holiday`, `lead_time_days`.
-  - `our_pms_nightly`, `our_pms_total`, `our_pms_status` (booked, held, open).
-  - `recommended_nightly`, `recommended_total`, `price_gap_pct`, `action_category` (`ON TARGET`, `REVIEW`, `URGENT ACTION`).
-  - `market_percentile_rates` (10th, 25th, 50th, 65th, 75th, 90th).
-  - `active_comps`: Complete array of scraped competitor quotes for this interval (listing ID, title, base nightly rate, cleaning fee, total checkout price, quality tier, desirability ratio, quality-adjusted rate).
+- Top-Level Metadata (`PriceReportGenerator.generate_all()`):
+  - `property`: Property name (`"Villa del Sol"`).
+  - `report_date`: ISO date string (`YYYY-MM-DD`).
+  - `generated_at`: ISO timestamp with time.
+  - `summary`: High-level counts (`total_open_intervals`, `urgent_count`, `moderate_count`, `competitive_count`).
+- Partition Arrays:
+  - `urgent_intervals`, `moderate_intervals`, `informational_intervals`: Grouped arrays of segment dictionaries.
+  - Segment object fields:
+    - `check_in`, `check_out`, `nights`, `day_of_week`, `season`, `is_holiday`, `lead_time_days`, `is_calendar_open`.
+    - `our_base_nightly`, `our_total_price`, `recommended_base_nightly`, `recommended_total_price`, `price_diff_percent`, `priority_tier` (`URGENT ACTION`, `REVIEW`, `ON TARGET`).
+    - `market_percentiles`: Dictionary of percentile benchmarks (`10th`, `25th`, `50th`, `65th`, `75th`, `90th`).
+    - `comps_list`: Complete array of scraped competitor quotes for this interval (listing ID, name, base nightly rate, cleaning fee, total checkout price, quality tier, desirability ratio, quality-adjusted rate).
 
 #### Accessing Commands & Scripts:
 - **Readers**:
   - `src.cli track-competitor-sales` (chronologically diffs predecessor $T-1$ and successor $T$ snapshots to identify booked listings).
   - `src.cli generate-html` (uses snapshot data when passed into reporter).
   - `src.cli run` (scans previous snapshots for historical price trend weighting).
+  - `src.cli sync-comp-ratings` (reads search snippets if `--force` is omitted).
 - **Writers**:
   - `src.cli run` (via `PriceReportGenerator.generate_all()` saves snapshot for the current execution date).
+  - `src.cli generate-html` (calls `reporter.generate_all()`).
+  - `src.cli compare-platforms` (calls `reporter.generate_all()`).
+  - `src.cli sync-reservations --dashboard` (calls `reporter.generate_all()`).
+  - `src.cli track-competitor-sales --dashboard` (calls `reporter.generate_all()`).
+  - `src.cli remove-comp` (scrubs removed listing ID from all historical `data/pricing_data_*.json` files).
+  - `src.cli add-comp`, `disqualify-comp`, `requalify-comp`, `scrape-comp-prices` (via internal `_regenerate_dashboard()` which calls `reporter.generate_all()`).
   - `scripts/launchd/run_daily_quickscan.sh` (daily 6:15 AM).
   - `scripts/launchd/run_weekly_fullscan.sh` (Sunday 2:00 AM).
 
@@ -224,6 +241,7 @@ flowchart TD
 - **Writers**:
   - `src.cli enrich-comps` (fetches listing PDP via Playwright and writes JSON).
   - `src.cli add-comp` (scrapes and caches newly registered comp profile).
+  - `src.cli sync-comp-ratings` (updates cached profile with guest satisfaction ratings and badges).
   - `src.cli remove-comp` (deletes cache file).
 
 ---
@@ -281,7 +299,7 @@ flowchart TD
 - **Writers**:
   - `src.cli generate-html` (builds `docs/index.html`).
   - `src.cli run` (builds `docs/index.html`, `latest_report.md`, `latest_sheet.csv`, and dated archives).
-  - `src.cli audit-reviews` (generates `data/reviews_analysis.md`).
+  - Antigravity `analyze-reviews` agent skill (generates `data/reviews_analysis.md`; `src.cli audit-reviews` acts as operational terminal viewer).
   - `scripts/launchd/run_daily_quickscan.sh` and `run_weekly_fullscan.sh`.
 
 ---
@@ -304,7 +322,7 @@ flowchart TD
 #### Accessing Commands & Scripts:
 - **Readers**:
   - `src/stealth_connection.py` (authenticates 10-worker parallel proxy pool).
-  - `src/ownerx_client.py` and `src/kivoya_client.py` (authenticates PMS scraping sessions).
+  - `src/ownerx_client.py` (authenticates Streamline OwnerX PMS sessions; `src/kivoya_client.py` queries public PMS endpoints without authentication credentials).
   - `scripts/mobile_ntfy_bridge.py` and `~/.gemini/config/scripts/notify_mobile.sh` (publishes push notifications).
 - **Writers**: Manual setup per machine (copied via AirDrop, SCP, or 1Password).
 
@@ -349,7 +367,8 @@ def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports")
 ### Store 10: OS-Level State, Locks & Scheduled Daemons
 
 - **Filesystem Paths**:
-  - `/tmp/villasol_market_scan.lock`: Kernel file lock (using `lockf`) preventing concurrent market scans.
+  - `/tmp/villasol_market_scan.lock`: Kernel file lock (using `lockf` on fd 9) preventing concurrent market scans (`run_daily_quickscan.sh` and `run_weekly_fullscan.sh`).
+  - `/tmp/villasol_pms_sync.lock`: Kernel file lock (using `lockf` on fd 9) preventing concurrent PMS sync runs (`run_pms_sync.sh`).
   - `~/Library/Logs/str-price-advisor/*.log`: Runtime stdout/stderr logs (`daily_quickscan.log`, `weekly_fullscan.log`, `pms_sync.log`, `mobile_bridge.log`).
   - `~/Library/LaunchAgents/*.plist`: User-level macOS `launchd` daemons (`com.villasol.daily-quickscan`, `com.villasol.weekly-fullscan`, `com.villasol.pms-sync`, `com.villasol.mobile-ntfy-bridge`).
 - **Technology**: POSIX file locks, syslog/flat text files, macOS launchd property lists.
@@ -357,7 +376,8 @@ def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports")
 
 #### Accessing Commands & Scripts:
 - **Readers/Writers**:
-  - `scripts/launchd/run_daily_quickscan.sh` & `run_weekly_fullscan.sh` acquire lock on fd 9 before scraping.
+  - `scripts/launchd/run_daily_quickscan.sh` & `run_weekly_fullscan.sh` acquire lock on `/tmp/villasol_market_scan.lock`.
+  - `scripts/launchd/run_pms_sync.sh` acquires lock on `/tmp/villasol_pms_sync.lock`.
   - `scripts/mobile_ntfy_bridge.py` runs as persistent background service.
 
 ---
@@ -383,34 +403,35 @@ The following cross-reference maps every CLI sub-command and operational script 
 
 | CLI Command / Script | Store 1: `reservations.db` | Store 2: `config/*.json` | Store 3: `ratings_reviews.json` | Store 4: `pricing_data_*.json` | Store 5: `enriched_comps/` | Store 6: `data/cache/` | Store 7: `docs/index.html` | Store 8: `.env` | Store 9: Git Remote |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **`run`** | `[R]` | `[R]` | `[R]` | `[W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
-| **`generate-html`** | `[R]` | `[R]` | `[R]` | `[-]` | `[R]` | `[R]` | `[W]` | `[-]` | `[W]`* |
-| **`sync-reservations`** | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[W]`* | `[R]` | `[W]`* |
-| **`snapshot-rates`** | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[R]` | `[-]` |
-| **`track-competitor-sales`** | `[R/W]` | `[R]` | `[-]` | `[R]` | `[-]` | `[-]` | `[W]`* | `[-]` | `[W]`* |
+| **`run`** | `[R/W]` | `[R/W]` | `[R]` | `[R/W]` | `[R/W]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
+| **`generate-html`** | `[R]` | `[R]` | `[R]` | `[W]` | `[R]` | `[R]` | `[W]` | `[-]` | `[W]`* |
+| **`sync-reservations`** | `[R/W]` | `[-]` | `[-]` | `[W]`* | `[-]` | `[R/W]` | `[W]`* | `[R]` | `[W]`* |
+| **`snapshot-rates`** | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` |
+| **`track-competitor-sales`** | `[R/W]` | `[R]` | `[-]` | `[R/W]`* | `[-]` | `[-]` | `[W]`* | `[R]`* | `[W]`* |
 | **`sync-ratings`** | `[-]` | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[W]`* | `[R]` | `[-]` |
+| **`sync-comp-ratings`** | `[-]` | `[R/W]` | `[-]` | `[R]` | `[R/W]` | `[-]` | `[W]`* | `[R]` | `[-]` |
 | **`show-ratings`** | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` |
-| **`audit-reviews`** | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` |
-| **`compare-platforms`** | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
+| **`audit-reviews`** | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` |
+| **`compare-platforms`** | `[R/W]`* | `[R]` | `[-]` | `[W]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
 | **`enrich-comps`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[-]` | `[R]` | `[-]` |
 | **`evaluate-comps`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` |
 | **`audit-comps`** | `[-]` | `[R]` | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` |
-| **`add-comp`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[R/W]` | `[W]` | `[W]` | `[R]` | `[W]`* |
-| **`remove-comp`** | `[W]` | `[R/W]` | `[-]` | `[W]` | `[W]` | `[W]` | `[W]` | `[-]` | `[W]`* |
-| **`disqualify-comp`** | `[W]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[W]` | `[W]` | `[-]` | `[W]`* |
-| **`requalify-comp`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[W]` | `[-]` | `[W]`* |
+| **`add-comp`** | `[R]` | `[R/W]` | `[R]` | `[W]` | `[R/W]` | `[R/W]`* | `[W]` | `[R]` | `[W]`* |
+| **`remove-comp`** | `[R]` | `[R/W]` | `[R]` | `[W]` | `[W]` | `[W]` | `[W]` | `[-]` | `[W]`* |
+| **`disqualify-comp`** | `[R/W]` | `[R/W]` | `[R]` | `[W]` | `[-]` | `[W]` | `[W]` | `[-]` | `[W]`* |
+| **`requalify-comp`** | `[R]` | `[R/W]` | `[R]` | `[W]` | `[-]` | `[R]` | `[W]` | `[-]` | `[W]`* |
 | **`discover-comps`** | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[R]` | `[-]` |
-| **`scrape-comp-prices`** | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
+| **`scrape-comp-prices`** | `[R/W]` | `[R]` | `[R]` | `[W]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
 | **`bootstrap-comps`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[R]` | `[-]` |
-| **`test-kivoya`** | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R]` | `[-]` |
+| **`test-kivoya`** | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` |
 | **`test-stealth`** | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R]` | `[-]` |
-| **`status`** | `[R]` | `[R]` | `[R]` | `[R]` | `[R]` | `[R]` | `[-]` | `[-]` | `[-]` |
-| **`mobile_ntfy_bridge.py`** | `[R]` | `[R]` | `[R]` | `[R]` | `[-]` | `[-]` | `[R]` | `[R]` | `[-]` |
-| **`run_daily_quickscan.sh`** | `[R/W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
-| **`run_weekly_fullscan.sh`** | `[R/W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
-| **`run_pms_sync.sh`** | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
+| **`status`** | `[R]` | `[R]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` |
+| **`mobile_ntfy_bridge.py`** | `[R]` | `[R]` | `[R]` | `[R]` | `[-]` | `[-]` | `[-]` | `[R]` | `[-]` |
+| **`run_daily_quickscan.sh`** | `[R/W]` | `[R/W]` | `[R/W]` | `[W]` | `[R/W]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
+| **`run_weekly_fullscan.sh`** | `[R/W]` | `[R/W]` | `[R]` | `[W]` | `[R/W]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
+| **`run_pms_sync.sh`** | `[R/W]` | `[R]` | `[-]` | `[W]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
 
-*\*Note: Marked with asterisk when action is conditioned upon `--push` or `--dashboard` flags.*
+*\*Note: Marked with asterisk when action is conditioned upon specific flags (e.g. `--push`, `--dashboard`, `--verify`, or `--scrape-prices`).*
 
 ---
 
@@ -435,7 +456,7 @@ Because `data/reservations.db` is stored locally:
 Under the current automated schedule:
 - Mac Mini auto-commits and pushes to `origin/main` daily at 6:00 AM, 6:15 AM, and Sundays at 2:00 AM.
 - If a developer on Laptop A creates a branch `feat/pricing-logic`, edits code, and attempts to rebase on `origin/main`:
-  - They will hit severe text merge conflicts on `docs/index.html` (a 21.9 MB file with 7,000+ lines).
+  - They will hit severe text merge conflicts on `docs/index.html` (a 21.9 MB file with 200,000+ lines).
   - They may hit conflicts on `data/pricing_data_*.json` snapshots.
 - Even worse: If a developer accidentally runs `run --push` on Laptop A while the Mac Mini is pushing, Git pushes will fail due to non-fast-forward ref locks.
 
@@ -444,6 +465,12 @@ The project relies on a 10-worker NordVPN SOCKS5 proxy pool configured in `.env`
 - NordVPN accounts enforce concurrent session limits.
 - Airbnb and VRBO aggressively monitor request signatures.
 - If two laptops and the Mac Mini initiate simultaneous scrapes, proxy connection limits may be exceeded, triggering connection dropouts (`proxy forwarder failed`) and potential cloudflare/perimeter blocks.
+
+### 4.5 Critical Cross-Machine Concurrency Risks & Race Conditions
+1. **Unpushed Configuration Desynchronization**: In `src/cli.py:612`, `push_to_github()` strictly executes `git add docs/ data/`. If a contributor on a laptop runs `add-comp --push` or `disqualify-comp --push`, the mutations made to `config/comps_registry.json` and `config/listing_specs.json` are **never staged or committed**. The laptop believes changes are pushed, but the production Mac Mini continues scraping with outdated competitor definitions.
+2. **Local POSIX Host Locks vs. Cross-Machine Collisions**: The lockfiles `/tmp/villasol_market_scan.lock` and `/tmp/villasol_pms_sync.lock` rely on macOS kernel file descriptor locks (`lockf`). They operate strictly on the local operating system and provide zero cross-machine coordination. If a laptop runs a manual interval scrape while the Mac Mini executes its scheduled scan, concurrent proxy forwarders collide and risk OTA perimeter rate-limiting.
+3. **Non-Rebasing Push Failures (`[rejected - non-fast-forward]`)**: `push_to_github()` calls `git push origin main` directly without performing a preceding `git pull --rebase`. If the Mac Mini pushes an automated scan while a laptop CLI command is running with `--push`, the laptop's push fails with an unhandled Git rejection error.
+4. **`data/reservations.json` Git Merge Conflicts**: Because `data/reservations.json` is tracked in Git and updated on every `sync-reservations` or automated scan, interleaved commits from different machines produce multi-thousand-line JSON merge conflicts.
 
 ---
 
@@ -480,7 +507,7 @@ flowchart LR
 ### Path A: Consume from Static Web Distribution (GitHub Pages / Object CDN)
 - **Mechanism**: The Mac Mini generates `docs/index.html` (or separate lightweight JSON payloads like `docs/api/latest_summary.json`) and pushes them to GitHub. The mobile app makes standard HTTP GET requests to `https://ivanpenkov.github.io/str-price-advisor/api/latest_summary.json`.
 - **Pros**: Zero backend infrastructure costs; highly resilient; free CDN edge caching via GitHub Pages; no inbound network ports or tunnels needed on the Mac Mini.
-- **Cons**: Read-only; updates only as fast as Mac Mini git pushes (daily); mobile app cannot trigger actions or write overrides.
+- **Cons**: Read-only; updates only as fast as Mac Mini git pushes (daily); mobile app cannot trigger actions or write overrides; subject to 1–3 minute GitHub Actions build/deployment latency; CDN edge caching headers require mobile clients to pass cache-busting timestamps (`?t=<timestamp>`) to guarantee freshness.
 
 ### Path B: Interface Directly with Mac Mini (Local API Relay)
 - **Mechanism**: The Mac Mini runs a lightweight Python REST server (FastAPI or extended `mobile_ntfy_bridge.py`) exposed securely via Tailscale, Cloudflare Tunnels, or `ntfy.sh`.
@@ -549,7 +576,7 @@ When selecting a central service to replace `data/reservations.db` and support 3
 | Criterion | **Turso (Cloud SQLite / LibSQL)** | **Supabase (Managed PostgreSQL)** | **Firebase Firestore (NoSQL Document DB)** |
 | :--- | :--- | :--- | :--- |
 | **Architecture Fit** | ⭐⭐⭐⭐⭐ Drop-in replacement for existing Python `sqlite3` queries. | ⭐⭐⭐⭐ Powerful relational engine; requires porting SQL dialects. | ⭐⭐⭐ Requires complete schema redesign from relational to documents. |
-| **Python Integration** | Native `libsql_experimental` client; exact same syntax as `sqlite3`. | `psycopg2` or `asyncpg` or Supabase Python SDK. | `firebase-admin` Python SDK. |
+| **Python Integration** | Native `libsql-experimental` / `libsql-client` package; exact same syntax as `sqlite3`. | `psycopg2` or `asyncpg` or Supabase Python SDK. | `firebase-admin` Python SDK. |
 | **Local Offline Replica** | **Exceptional** (Embedded replica allows instant zero-latency local queries with automatic background sync). | Requires direct internet connection or complex local Postgres container. | Excellent built-in offline caching on mobile SDKs. |
 | **Mobile App Support** | Swift/Kotlin/React Native SDKs available. | First-class REST, GraphQL, and client SDKs with built-in Auth. | Industry standard mobile SDKs with real-time listeners. |
 | **Cost / Free Tier** | Generous free tier (500 databases, 9 GB storage, 1B row reads/mo). | Generous free tier (500 MB DB, 50,000 monthly active users). | Generous free tier (50,000 reads, 20,000 writes/day). |
@@ -566,10 +593,13 @@ Before initiating any external cloud migrations, we can immediately achieve the 
 - **Immediate Fix**: Enhance `_load_cached_comps_by_key()` to inspect the latest tracked `data/pricing_data_YYYY-MM-DD.json` snapshot whenever `data/cache/` is empty. Because `pricing_data_*.json` is tracked in Git, any laptop that runs `git pull` will instantly have full competitive data to build the entire dashboard without scraping.
 
 ### Gap 2: Dashboard Generator Relies on Local `data/reservations.db`
-- **Current Defect**: `ReservationStore` and `CompetitorSalesTracker` connect only to `data/reservations.db`, which is `.gitignore`d.
-- **Immediate Fix**: Enhance `ReservationStore` to automatically fall back to reading `data/reservations.json` (which is tracked in Git) if `data/reservations.db` does not exist on disk, or auto-seed the SQLite database from `reservations.json` on first run.
+- **Current Defect**: `ReservationStore` and `CompetitorSalesTracker` connect only to `data/reservations.db`, which is `.gitignore`d. If absent, reservation pacing, competitor sales, and published rate snapshots fail to load.
+- **Immediate Fix**: Implement a complete local database auto-bootstrap mechanism:
+  1. **`reservations` Table**: Enhance `ReservationStore` to automatically seed `reservations` and `sync_history` from `data/reservations.json` (tracked in Git) if `data/reservations.db` does not exist on disk.
+  2. **`competitor_sales` Table**: Trigger `CompetitorSalesTracker.backfill_all_snapshots()` on first initialization if the database is fresh. This automatically parses all version-controlled `data/pricing_data_*.json` files to fully reconstitute the 82+ verified sales records and absorption history with zero live scraping.
+  3. **`property_rate_snapshots` Table**: Reconstitute daily rate snapshots from cached seasonal rate tables or maintain a version-controlled companion export (`data/rate_snapshots.json`).
 
-With these two targeted changes:
+With these targeted changes:
 1. Every Mac can clone or pull from GitHub.
 2. Every Mac can immediately run `python -m src.cli generate-html` and compile the complete 21.9 MB dashboard with 100% data fidelity.
 3. Feature branches can be developed and verified on laptops without requiring manual file transfers or external network calls.

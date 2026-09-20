@@ -605,3 +605,12 @@ With these targeted changes:
 3. Feature branches can be developed and verified on laptops without requiring manual file transfers or external network calls.
 4. The groundwork is cleanly established for the subsequent phase of migrating relational stores to a central cloud service.
 
+---
+
+## 9. Cloud Database Migration Specifications
+
+For the comprehensive technical specification, requirements, and system design detailing the cloud migration to Turso (LibSQL), refer to the companion engineering documents:
+- **Requirements Specification**: [docs/migrating_sqlite_to_cloud_requirements.md](file:///Users/ivanpe/str-price-advisor/docs/migrating_sqlite_to_cloud_requirements.md)
+- **Technical Design Document**: [docs/migrating_sqlite_to_cloud_design.md](file:///Users/ivanpe/str-price-advisor/docs/migrating_sqlite_to_cloud_design.md)
+
+

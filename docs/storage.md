@@ -1,0 +1,577 @@
+# STR Price Advisor: Data Storage Architecture & Multi-Device Concurrency Analysis
+
+This document provides a comprehensive technical audit of all data storage mechanisms, files, databases, registries, and caches in the **STR Competitive Price Advisor** system for **Villa del Sol** (Tempe, AZ). 
+
+It catalogues what data is stored in each location, which CLI commands and background scripts read and write there, how data flows across the system today, and analyzes the architectural requirements for enabling parallel, multi-device operation across **at least three Mac computers** (one dedicated Mac Mini + two contributor laptops) and a **mobile application**.
+
+---
+
+## 1. Executive Summary & Problem Context
+
+### 1.1 The Multi-Device Operational Challenge
+The STR Price Advisor currently operates primarily on a **single dedicated host** (an Apple Silicon Mac Mini) that runs automated `launchd` background daemons to sync PMS reservations, scrape OTA competitor rates, compile an interactive 9-tab HTML dashboard (`docs/index.html`), and commit/push updates to GitHub.
+
+As development expands to **multiple active contributor workstations** (two laptops + the Mac Mini) and plans for a **mobile client**, the current storage architecture exhibits critical pain points:
+1. **Unversioned Local State**: Key state stores—such as the SQLite database (`data/reservations.db`, 1.1 MB) and the scraping cache (`data/cache/`, 6,300+ JSON files)—are `.gitignore`d. Fresh clones on secondary laptops lack these files, preventing local compilation of the full dashboard without performing manual file transfers or redundant network scrapes.
+2. **Split-Brain Risk**: Because SQLite operates as a single-writer file on local disk, changes made on one machine (e.g., historical sales detections, reservation syncs, or manual rate snapshots) are isolated to that machine unless manually copied over SCP or AirDrop.
+3. **Repository Bloat & Merge Collisions**: The automated production Mac Mini commits daily snapshots (`data/pricing_data_*.json`, up to 7.5 MB each) and the monolithic compiled dashboard (`docs/index.html`, 21.9 MB) directly to `origin/main`. Human contributors working on laptops frequently encounter complex git rebase conflicts against these auto-generated artifacts.
+4. **Mobile Client Disconnection**: A mobile app cannot easily query a local SQLite file residing on a desktop Mac Mini without either reading published static artifacts from GitHub Pages, querying a local API daemon running on the Mac Mini, or connecting to a shared central cloud database.
+
+### 1.2 Non-Negotiable Core Invariants
+Per operational requirements, any evolution of the storage architecture must preserve these workflows:
+- **Universal Git Workflow**: Every Mac computer must be able to pull latest from GitHub, merge local feature branches, and push changes back to GitHub.
+- **Universal Dashboard Generation**: Every Mac computer must be able to compile and build the complete `docs/index.html` page containing the latest market data (after pulling from GitHub or querying a shared store).
+- **Flexible Mobile Access**: Mobile apps must be able to consume data via one of three validated paths: (a) static web pages/endpoints pushed to GitHub Pages, (b) a lightweight relay/API hosted on the Mac Mini, or (c) a shared cloud database.
+
+---
+
+## 2. Complete Data Storage Taxonomy & Technical Inventory
+
+The system employs **11 distinct storage mechanisms** spanning relational databases, structured JSON documents, configuration catalogs, flat CSVs, compiled HTML, local kernel locks, and remote cloud services.
+
+```mermaid
+flowchart TD
+    subgraph ExternalSources ["External Ingestion Sources"]
+        PMS["Streamline OwnerX / Kivoya API"]
+        OTAs["OTAs (Airbnb, VRBO, Booking.com)"]
+        NTFY["ntfy.sh (Push Service)"]
+    end
+
+    subgraph RelationalStore ["Relational Database (Local File)"]
+        DB[("data/reservations.db<br/>(SQLite 3 - Gitignored)")]
+    end
+
+    subgraph FileStorage ["Structured JSON & File Storage"]
+        REG["config/comps_registry.json<br/>(Curated Comps Registry)"]
+        SPECS["config/listing_specs.json<br/>(Specs & Amenities)"]
+        REV["data/ratings_reviews.json<br/>(Cross-Platform Reviews)"]
+        SNAPS["data/pricing_data_*.json<br/>(Daily Market Snapshots)"]
+        ENRICH["data/enriched_comps/*.json<br/>(285 Deep Scraped Profiles)"]
+        CACHE["data/cache/**<br/>(6,300+ Ephemeral Scraping Files)"]
+        ENV[(".env (API & Proxy Secrets)")]
+    end
+
+    subgraph GeneratedArtifacts ["Compiled Artifacts & Reports"]
+        HTML["docs/index.html<br/>(21.9 MB Monolithic Dashboard)"]
+        MD_CSV["data/*.md, data/*.csv<br/>(Pacing Reports & Sheets)"]
+    end
+
+    subgraph GitRemote ["Version Control & Web Distribution"]
+        GIT[("Git Repository (.git/)")]
+        GHP["GitHub Pages (docs/index.html)"]
+    end
+
+    PMS -->|"sync-reservations"| DB
+    PMS -->|"snapshot-rates"| DB
+    DB -->|"export_to_json"| RES_JSON["data/reservations.json"]
+    OTAs -->|"run / enrich-comps"| CACHE & ENRICH
+    OTAs -->|"sync-ratings"| REV
+    CACHE & ENRICH -->|"evaluate-comps"| REG
+    REG & SPECS & CACHE & DB & REV -->|"generate-html / run"| HTML & MD_CSV
+    SNAPS -->|"track-competitor-sales"| DB
+    HTML & SNAPS & REG & SPECS & REV -->|"git add & push"| GIT
+    GIT --> GHP
+```
+
+---
+
+### Store 1: Relational SQLite Database (`data/reservations.db`)
+
+- **Filesystem Path**: `data/reservations.db` (and temporary SQLite rollbacks `data/reservations.db-journal` or WAL `data/reservations.db-wal`)
+- **Technology**: SQLite 3 (C-extension / Python standard library `sqlite3`)
+- **Git Tracking Status**: **Strictly Ignored** in `.gitignore` (`*.db`, `*.db-*`, `*.sqlite*`).
+- **Current Size & Scale**: ~1.1 MB; 4 indexed tables; ~4,500 total rows.
+- **Concurrency & Locking**: File-level exclusive lock. Only one process can write at a time. Concurrent multi-process writes result in `sqlite3.OperationalError: database is locked`.
+
+#### Schema & Data Contents:
+1. **`reservations`** (209 rows): Ground-truth booking ledger for Villa del Sol scraped from Streamline OwnerX PMS.
+   - *Columns*: `id` (PK), `confirmation_id`, `creation_date`, `start_date`, `end_date`, `days_number`, `type_id`, `type_name`, `status_name`, `occupants`, `owner_payout`, `management_fee`, `gross_rent`, `is_future`, `last_scraped_at`, `raw_json`.
+   - *Indexes*: `idx_res_dates` (`start_date`, `end_date`), `idx_res_status` (`status_name`), `idx_res_future` (`is_future`).
+2. **`sync_history`** (31 rows): Audit log of all automated and manual PMS ingestion syncs.
+   - *Columns*: `id` (PK auto), `synced_at`, `sync_mode`, `records_fetched`, `records_upserted`, `records_future`, `records_past`.
+3. **`competitor_sales`** (82 rows): Empirical market sales velocity detections derived from diffing consecutive daily pricing snapshots.
+   - *Columns*: `id` (PK auto), `listing_id`, `listing_name`, `tier`, `location`, `check_in`, `check_out`, `nights`, `segment_type`, `detected_date`, `lead_time_days`, `last_observed_rate`, `last_observed_adj_rate`, `last_observed_percentile`, `composite_score`, `desirability_ratio`, `verification_status`, `raw_snippet`, `created_at`.
+   - *Constraint*: `UNIQUE(listing_id, check_in, check_out)`.
+   - *Indexes*: `idx_comp_sales_lead` (`lead_time_days`), `idx_comp_sales_seg` (`segment_type`), `idx_comp_sales_detected` (`detected_date`).
+4. **`property_rate_snapshots`** (4,224 rows): Daily historical ledger of Kivoya's published rates across calendar intervals for Villa del Sol.
+   - *Columns*: `id` (PK auto), `snapshot_date`, `calendar_date`, `nightly_rate`, `interval_type`, `season_name`, `period_name`, `created_at`.
+   - *Constraint & Index*: `UNIQUE INDEX idx_rate_snap_unique (calendar_date, snapshot_date)`.
+
+#### Accessing Commands & Scripts:
+- **Readers**:
+  - `src.cli generate-html` (via `ReservationStore`, `ReservationIntelligence`, and `CompetitorSalesTracker` to generate tabs for Villa del Sol bookings, revenue pacing, rate evolution, and competitor absorption).
+  - `src.cli run` (reads reservations and competitor sales for dynamic target calculations).
+  - `src.cli track-competitor-sales` / `track-sales` (reads past detections and unique constraints).
+  - `src.cli snapshot-rates` (queries existing daily rate snapshots).
+  - `src.cli status` (summarizes reservation counts, pacing totals, and sales detections).
+  - `scripts/mobile_ntfy_bridge.py` (reads for `status` and `sales` push responses).
+- **Writers**:
+  - `src.cli sync-reservations` (upserts PMS reservations into `reservations` and records `sync_history`).
+  - `src.cli track-competitor-sales` / `track-sales` (inserts verified sales into `competitor_sales`).
+  - `src.cli snapshot-rates` (inserts published calendar rates into `property_rate_snapshots`).
+  - `src.cli disqualify-comp` & `src.cli remove-comp` (purges rows for excluded comps).
+  - `scripts/launchd/run_pms_sync.sh` (executes `sync-reservations` and `snapshot-rates` daily at 6:00 AM).
+
+---
+
+### Store 2: Curated Registries & Configuration Catalogs (`config/*.json`, `config/*.yaml`)
+
+- **Filesystem Path**: `config/comps_registry.json`, `config/listing_specs.json`, `config/settings.yaml`, `config/holidays.json`, `config/fallback_intervals.yaml`, `config/mobile_bridge.json`
+- **Technology**: Structured UTF-8 JSON and YAML files.
+- **Git Tracking Status**: **Tracked in Git** (except `config/secrets.yaml` which is ignored).
+- **Current Size & Scale**:
+  - `config/comps_registry.json`: ~388 KB (109 curated luxury competitor listings).
+  - `config/listing_specs.json`: ~121 KB (detailed property specs for 200+ properties).
+  - `config/settings.yaml`: ~3.2 KB (strategy hyperparameters and market thresholds).
+  - `config/holidays.json`: ~1.9 KB (holiday pricing rules and calendar overrides).
+  - `config/fallback_intervals.yaml`: ~1.3 KB (offline calendar interval catalog).
+  - `config/mobile_bridge.json`: ~2.2 KB (ntfy push topic and command shortcuts).
+- **Concurrency & Locking**: File replacement / atomic writes (`Path.write_text()`). Git handles versioning; concurrent edits on separate branches require standard text merging.
+
+#### Schema & Data Contents:
+- **`comps_registry.json`**: Primary competitive universe dictionary organized into `tier_a` (16+ guests), `tier_b` (12–15 guests), `disqualified` (disqualified homes with audit trails), and `excluded_comps`. Each entry stores listing title, URL, location corridor, bedrooms, bathrooms, guest capacity, pool features, 6-factor luxury rubric scores, quality tier, and derived desirability ratio.
+- **`listing_specs.json`**: Granular architectural specifications (exact bed arrangements, bedroom counts, bathroom counts, square footage, pool heating type, amenities like pickleball/putting green, coordinates, and primary photo URLs).
+- **`settings.yaml`**: Core business logic parameters: `urgent_percent_diff` (25%), `moderate_percent_diff` (10%), `urgent_lead_days` (60), `base_percentile` (65%), `cleaning_fee` ($500), `comp_weight` (0.67), `historical_weight` (0.33), `weekend_premium_factor` (1.50), Bayesian shrinkage $k$ (5.0), and operational rate floors ($450 weekend / $300 midweek).
+- **`holidays.json`**: Peak demand period definitions (Thanksgiving, Christmas/New Year, WM Phoenix Open, Super Bowl, Spring Break, etc.) specifying rate floor minimums, length-of-stay minimums, and premium markup multipliers.
+
+#### Accessing Commands & Scripts:
+- **Readers**:
+  - All pricing, scraping, evaluation, and reporting CLI commands (`run`, `generate-html`, `evaluate-comps`, `audit-comps`, `enrich-comps`, `add-comp`, `remove-comp`, `discover-comps`, `compare-platforms`, `track-competitor-sales`).
+- **Writers**:
+  - `src.cli evaluate-comps` (updates factor scores and desirability ratios in `comps_registry.json`).
+  - `src.cli add-comp` (registers new comp in `comps_registry.json` and `listing_specs.json`).
+  - `src.cli remove-comp` (deletes comp from both registries).
+  - `src.cli disqualify-comp` (moves comp to `disqualified` section with explanation).
+  - `src.cli requalify-comp` (restores comp to active tier).
+  - `src.cli enrich-comps` (updates verified specs in `listing_specs.json`).
+  - Manual text editor modifications for `settings.yaml` and `holidays.json`.
+
+---
+
+### Store 3: Canonical Guest Reviews & Sentiment Store (`data/ratings_reviews.json`)
+
+- **Filesystem Path**: `data/ratings_reviews.json`
+- **Technology**: Structured UTF-8 JSON.
+- **Git Tracking Status**: **Tracked in Git**.
+- **Current Size & Scale**: ~88 KB; contains overall scorecard and ~107 deduplicated guest review objects.
+- **Concurrency & Locking**: Atomic write with temporary file replacement.
+
+#### Schema & Data Contents:
+- Top-level channels: `airbnb`, `vrbo`, `booking`, `kivoya`.
+- Channel metrics: `star_rating`, `review_count`, `sub_scores` (cleanliness, accuracy, communication, location, check-in, value).
+- Review objects: `review_id`, `author_name`, `date` (ISO `YYYY-MM-DD`), `rating`, `language`, `text`, `host_response` (text and date), `stay_date`, `is_recent` (boolean), `sentiment_flags`.
+
+#### Accessing Commands & Scripts:
+- **Readers**:
+  - `src.cli generate-html` (renders the ratings scorecard, 4-channel breakdown, sentiment alerts, and interactive review feed tab).
+  - `src.cli show-ratings` (outputs terminal summary or mobile-formatted push text).
+  - `src.cli audit-reviews` / Agent review skill (parses reviews for open vs resolved maintenance issues).
+  - `scripts/mobile_ntfy_bridge.py` (executes on `rating` / `ratings` shortcuts).
+- **Writers**:
+  - `src.cli sync-ratings` (scrapes live reviews from Airbnb, VRBO, Booking, Kivoya; deduplicates by `review_id`; performs in-place host response updates; sorts newest-first).
+  - `src.cli sync-comp-ratings` (updates comp benchmark ratings).
+  - `scripts/launchd/run_daily_quickscan.sh` (runs `sync-ratings --no-dashboard` every morning).
+
+---
+
+### Store 4: Daily Market Pricing Snapshots (`data/pricing_data_YYYY-MM-DD.json`)
+
+- **Filesystem Path**: `data/pricing_data_YYYY-MM-DD.json` (e.g. `data/pricing_data_2026-09-19.json`)
+- **Technology**: Large structured JSON documents.
+- **Git Tracking Status**: **Tracked in Git**.
+- **Current Size & Scale**: 17 historical snapshot files currently in repository; sizes range from **250 KB** (quick 3-interval scans) to **7.5 MB** (full 82-interval 12-month scans). Total tracked volume is ~45 MB and growing by up to 7.5 MB weekly.
+- **Concurrency & Locking**: Write-once daily based on filename date stem.
+
+#### Schema & Data Contents:
+- Metadata: `created_at`, `scan_date`, `total_intervals`, `property_name`.
+- Array of evaluated intervals (`evaluated_segments`):
+  - `check_in`, `check_out`, `nights`, `day_of_week`, `season`, `is_holiday`, `lead_time_days`.
+  - `our_pms_nightly`, `our_pms_total`, `our_pms_status` (booked, held, open).
+  - `recommended_nightly`, `recommended_total`, `price_gap_pct`, `action_category` (`ON TARGET`, `REVIEW`, `URGENT ACTION`).
+  - `market_percentile_rates` (10th, 25th, 50th, 65th, 75th, 90th).
+  - `active_comps`: Complete array of scraped competitor quotes for this interval (listing ID, title, base nightly rate, cleaning fee, total checkout price, quality tier, desirability ratio, quality-adjusted rate).
+
+#### Accessing Commands & Scripts:
+- **Readers**:
+  - `src.cli track-competitor-sales` (chronologically diffs predecessor $T-1$ and successor $T$ snapshots to identify booked listings).
+  - `src.cli generate-html` (uses snapshot data when passed into reporter).
+  - `src.cli run` (scans previous snapshots for historical price trend weighting).
+- **Writers**:
+  - `src.cli run` (via `PriceReportGenerator.generate_all()` saves snapshot for the current execution date).
+  - `scripts/launchd/run_daily_quickscan.sh` (daily 6:15 AM).
+  - `scripts/launchd/run_weekly_fullscan.sh` (Sunday 2:00 AM).
+
+---
+
+### Store 5: Competitor Enrichment Cache (`data/enriched_comps/*.json`) & Our Property Profile
+
+- **Filesystem Path**: `data/enriched_comps/<listing_id>.json` (285 files) and `data/our_property_profile.json`
+- **Technology**: Individual JSON files named by Airbnb numeric listing ID.
+- **Git Tracking Status**: **Tracked in Git**.
+- **Current Size & Scale**: 285 files; ~2 KB to 42 KB each; ~1.6 MB total.
+- **Concurrency & Locking**: Independent per-file writes.
+
+#### Schema & Data Contents:
+- `data/our_property_profile.json`: Definitive ground-truth specifications for Villa del Sol (6 bedrooms, 4 full baths, sleeps 16, heated lagoon pool, hot tub, rock grotto, half-court basketball, 4-hole putting green, 3,800 sq ft, 80A EV charger).
+- `data/enriched_comps/<listing_id>.json`: Deep-scraped competitor profiles containing listing title, host name/badge, exact bed configuration per room, full bathroom inventory, amenities checklist, cancellation policy text, GPS coordinates, and high-resolution photo gallery URLs.
+
+#### Accessing Commands & Scripts:
+- **Readers**:
+  - `src.cli evaluate-comps` (evaluates comp against Villa del Sol baseline).
+  - `src.cli audit-comps` (checks capacity caps, bathroom ratios, host presence).
+  - `src.cli enrich-comps` (skips scraping if profile is already cached).
+  - `src.cli generate-html` (displays photos and specs in competitor detail modals).
+- **Writers**:
+  - `src.cli enrich-comps` (fetches listing PDP via Playwright and writes JSON).
+  - `src.cli add-comp` (scrapes and caches newly registered comp profile).
+  - `src.cli remove-comp` (deletes cache file).
+
+---
+
+### Store 6: Ephemeral OTA Scraping Cache (`data/cache/**`)
+
+- **Filesystem Path**: `data/cache/` (and subdirectories like `data/cache/platform_comparison/`)
+- **Technology**: Unversioned transient JSON cache files.
+- **Git Tracking Status**: **Strictly Ignored** in `.gitignore` (`data/cache/`).
+- **Current Size & Scale**: **6,306 files** totaling ~35 MB on disk.
+- **Concurrency & Locking**: Process-local file writes.
+
+#### File Types & Contents:
+1. `search_YYYY-MM-DD_YYYY-MM-DD_<Corridor>_tier_<tier>_<hash>.json`: Raw results from Airbnb corridor searches (top 20 listings per corridor).
+2. `search_YYYY-MM-DD_YYYY-MM-DD_comp_<listing_id>.json`: Direct checkout pricing quotes for specific registered comps.
+3. `unavailable_YYYY-MM-DD_YYYY-MM-DD_comp_<listing_id>.json`: Negative cache markers indicating a competitor is unavailable/blocked for a specific date window.
+4. `our_property_YYYY-MM-DD_YYYY-MM-DD.json`: Villa del Sol's own live Airbnb checkout rate.
+5. `kivoya_seasonal_rates.json`: Cached Kivoya PMS rate calendar.
+6. `calendar_cutoff.json`: Timestamp marker of PMS booking horizon.
+7. `platform_comparison/*.json`: Multi-platform price check responses (VRBO, Booking, Kivoya).
+
+#### Accessing Commands & Scripts:
+- **Readers**:
+  - `src.cli run` (reuses cached OTA pricing within TTL to prevent redundant scraping).
+  - `src.cli generate-html` (via `_load_cached_comps_by_key()` reads cached prices to build interval comparisons).
+  - `src.cli compare-platforms` (reads platform comparison cache).
+- **Writers**:
+  - `src.cli run`, `src.cli scrape-comp-prices`, `src.cli compare-platforms`.
+  - Purged via `--force` flag, or explicitly by `remove-comp` and `disqualify-comp`.
+
+---
+
+### Store 7: Compiled Dashboard & Analytical Reports (`docs/` & `data/`)
+
+- **Filesystem Path**:
+  - `docs/index.html` (Primary production dashboard)
+  - `data/latest_report.md` and `docs/latest_report.md`
+  - `data/latest_sheet.csv` and `docs/latest_sheet.csv`
+  - `data/pricing_report_YYYY-MM-DD.md` and `data/pricing_sheet_YYYY-MM-DD.csv`
+  - `data/reviews_analysis.md`
+  - `data/audit_sales_results.json`
+- **Technology**: Monolithic HTML/CSS/JS (embedded data), Markdown, Flat CSV.
+- **Git Tracking Status**: **Tracked in Git** (`docs/*.pdf` are ignored).
+- **Current Size & Scale**:
+  - `docs/index.html`: **21.9 MB** (contains full inline JSON databases for all 9 tabs: market rates, pacing, competitor directory, review feed, sales tracking, calendar matrix, sensitivity curves).
+  - `latest_report.md`: ~17 KB.
+  - `latest_sheet.csv`: ~3.1 KB.
+- **Concurrency & Locking**: Overwritten on each pipeline execution.
+
+#### Accessing Commands & Scripts:
+- **Readers**:
+  - Human end-users & property managers via GitHub Pages (`https://ivanpenkov.github.io/str-price-advisor/`).
+  - Mobile devices opening the GitHub Pages URL.
+  - Excel / Google Sheets importing `latest_sheet.csv`.
+- **Writers**:
+  - `src.cli generate-html` (builds `docs/index.html`).
+  - `src.cli run` (builds `docs/index.html`, `latest_report.md`, `latest_sheet.csv`, and dated archives).
+  - `src.cli audit-reviews` (generates `data/reviews_analysis.md`).
+  - `scripts/launchd/run_daily_quickscan.sh` and `run_weekly_fullscan.sh`.
+
+---
+
+### Store 8: Secrets & Environment Credentials (`.env`)
+
+- **Filesystem Path**: `.env` (Template: `.env.example`)
+- **Technology**: Key-value plaintext dotfile.
+- **Git Tracking Status**: **Strictly Ignored** in `.gitignore` (`.env`, `.env.*`).
+- **Current Size & Scale**: ~270 bytes (7 environment keys).
+- **Concurrency & Locking**: Read-only at application startup.
+
+#### Schema & Variables:
+- `NORDVPN_USER`, `NORDVPN_PASS`: SOCKS5 service credentials for proxy rotation pool.
+- `NORDVPN_SERVER`: Primary proxy gateway fallback (`us8245.nordvpn.com:89`).
+- `STREAMLINE_OWNER_USERNAME`, `STREAMLINE_OWNER_PASSWORD`: Streamline OwnerX PMS login.
+- `NTFY_TOPIC`: Mobile push topic on `ntfy.sh` (default: `ivan-str-advisor-xyz`).
+- `STEALTH_STARTUP_DELAY`: Floating-point delay (seconds) for local proxy forwarder startup.
+
+#### Accessing Commands & Scripts:
+- **Readers**:
+  - `src/stealth_connection.py` (authenticates 10-worker parallel proxy pool).
+  - `src/ownerx_client.py` and `src/kivoya_client.py` (authenticates PMS scraping sessions).
+  - `scripts/mobile_ntfy_bridge.py` and `~/.gemini/config/scripts/notify_mobile.sh` (publishes push notifications).
+- **Writers**: Manual setup per machine (copied via AirDrop, SCP, or 1Password).
+
+---
+
+### Store 9: Git Repository & GitHub Upstream (`.git/` & GitHub Pages)
+
+- **Remote URL**: `https://github.com/ivanpenkov/str-price-advisor.git`
+- **Default Branch**: `main`
+- **Technology**: Distributed Git object graph + GitHub Pages hosting.
+- **Git Tracking Status**: Repository infrastructure.
+- **Concurrency & Locking**: Git commit/rebase/push mechanics. GitHub enforces linear or merge history; simultaneous pushes trigger rejection requiring `git pull --rebase`.
+
+#### Automated Push Mechanism:
+In `src/cli.py`, the helper function `push_to_github()` runs whenever commands are invoked with `--push`:
+```python
+def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports"):
+    subprocess.run(["git", "add", "docs/", "data/"], check=True)
+    res = subprocess.run(["git", "diff", "--staged", "--quiet"])
+    if res.returncode != 0:
+        subprocess.run(["git", "commit", "-m", commit_msg], check=True)
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+```
+> [!IMPORTANT]
+> Notice that `push_to_github()` strictly stages `docs/` and `data/`. If `config/comps_registry.json` is modified by `add-comp` or `disqualify-comp` with `--push`, `config/` is currently **not staged** by `push_to_github()`.
+
+#### Accessing Commands & Scripts:
+- **Writers (Push to origin/main)**:
+  - `src.cli run --push`
+  - `src.cli generate-html --push`
+  - `src.cli sync-reservations --push`
+  - `src.cli track-competitor-sales --push`
+  - `scripts/launchd/run_daily_quickscan.sh`
+  - `scripts/launchd/run_weekly_fullscan.sh`
+  - `scripts/launchd/run_pms_sync.sh`
+- **Readers (Pull/Fetch from origin/main)**:
+  - Contributor laptops executing `git pull --rebase origin main`.
+  - GitHub Pages deployment runner (automatically serves `docs/index.html`).
+
+---
+
+### Store 10: OS-Level State, Locks & Scheduled Daemons
+
+- **Filesystem Paths**:
+  - `/tmp/villasol_market_scan.lock`: Kernel file lock (using `lockf`) preventing concurrent market scans.
+  - `~/Library/Logs/str-price-advisor/*.log`: Runtime stdout/stderr logs (`daily_quickscan.log`, `weekly_fullscan.log`, `pms_sync.log`, `mobile_bridge.log`).
+  - `~/Library/LaunchAgents/*.plist`: User-level macOS `launchd` daemons (`com.villasol.daily-quickscan`, `com.villasol.weekly-fullscan`, `com.villasol.pms-sync`, `com.villasol.mobile-ntfy-bridge`).
+- **Technology**: POSIX file locks, syslog/flat text files, macOS launchd property lists.
+- **Git Tracking Status**: Ignored / System-level. (Daemon templates are tracked under `scripts/launchd/`).
+
+#### Accessing Commands & Scripts:
+- **Readers/Writers**:
+  - `scripts/launchd/run_daily_quickscan.sh` & `run_weekly_fullscan.sh` acquire lock on fd 9 before scraping.
+  - `scripts/mobile_ntfy_bridge.py` runs as persistent background service.
+
+---
+
+### Store 11: External Remote Systems (Ground Truth Source APIs)
+
+While external to the local disk, these remote systems represent the authoritative upstream data stores:
+1. **Streamline OwnerX PMS / Kivoya API**: Source of actual monetary transactions, guest counts, reservation dates, and published calendar rates.
+2. **NordVPN SOCKS5 Infrastructure**: Distributed IP egress network preventing localized rate-limiting.
+3. **OTA Listing Portals (Airbnb, VRBO, Booking.com)**: Target live marketplaces scraped for competitor checkout pricing, calendar availability, and reviews.
+4. **ntfy.sh Pub/Sub Server**: Hosted notification broker facilitating two-way mobile app command execution and push notifications.
+
+---
+
+## 3. Master Matrix: Data Stores vs. CLI Commands & Scripts
+
+The following cross-reference maps every CLI sub-command and operational script to its exact data store interactions:
+
+- `[R]` = Reads from store
+- `[W]` = Writes / Updates store
+- `[R/W]` = Reads and Modifies store
+- `[-]` = No direct interaction
+
+| CLI Command / Script | Store 1: `reservations.db` | Store 2: `config/*.json` | Store 3: `ratings_reviews.json` | Store 4: `pricing_data_*.json` | Store 5: `enriched_comps/` | Store 6: `data/cache/` | Store 7: `docs/index.html` | Store 8: `.env` | Store 9: Git Remote |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **`run`** | `[R]` | `[R]` | `[R]` | `[W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
+| **`generate-html`** | `[R]` | `[R]` | `[R]` | `[-]` | `[R]` | `[R]` | `[W]` | `[-]` | `[W]`* |
+| **`sync-reservations`** | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[W]`* | `[R]` | `[W]`* |
+| **`snapshot-rates`** | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[R]` | `[-]` |
+| **`track-competitor-sales`** | `[R/W]` | `[R]` | `[-]` | `[R]` | `[-]` | `[-]` | `[W]`* | `[-]` | `[W]`* |
+| **`sync-ratings`** | `[-]` | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[W]`* | `[R]` | `[-]` |
+| **`show-ratings`** | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` |
+| **`audit-reviews`** | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` |
+| **`compare-platforms`** | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
+| **`enrich-comps`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[-]` | `[R]` | `[-]` |
+| **`evaluate-comps`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` |
+| **`audit-comps`** | `[-]` | `[R]` | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` |
+| **`add-comp`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[R/W]` | `[W]` | `[W]` | `[R]` | `[W]`* |
+| **`remove-comp`** | `[W]` | `[R/W]` | `[-]` | `[W]` | `[W]` | `[W]` | `[W]` | `[-]` | `[W]`* |
+| **`disqualify-comp`** | `[W]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[W]` | `[W]` | `[-]` | `[W]`* |
+| **`requalify-comp`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[W]` | `[-]` | `[W]`* |
+| **`discover-comps`** | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[R]` | `[-]` |
+| **`scrape-comp-prices`** | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
+| **`bootstrap-comps`** | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[R]` | `[-]` |
+| **`test-kivoya`** | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R]` | `[-]` |
+| **`test-stealth`** | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R]` | `[-]` |
+| **`status`** | `[R]` | `[R]` | `[R]` | `[R]` | `[R]` | `[R]` | `[-]` | `[-]` | `[-]` |
+| **`mobile_ntfy_bridge.py`** | `[R]` | `[R]` | `[R]` | `[R]` | `[-]` | `[-]` | `[R]` | `[R]` | `[-]` |
+| **`run_daily_quickscan.sh`** | `[R/W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
+| **`run_weekly_fullscan.sh`** | `[R/W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
+| **`run_pms_sync.sh`** | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
+
+*\*Note: Marked with asterisk when action is conditioned upon `--push` or `--dashboard` flags.*
+
+---
+
+## 4. Multi-Device Operational Analysis (Today's Reality)
+
+When evaluating how 3 Macs (Mac Mini + Laptop A + Laptop B) and a mobile app operate today, several critical structural bottlenecks emerge:
+
+### 4.1 The Fresh-Clone Breakdown on Secondary Laptops
+If a developer clones `ivanpenkov/str-price-advisor` on Laptop A or Laptop B:
+1. **Missing Reservations & Financial History**: Because `data/reservations.db` is `.gitignore`d, the database does not exist on the laptop. Running `generate-html` will either fail or render blank reservation pacing tables and empty competitor sales absorption metrics.
+   - *Current Workaround*: The developer must run `python -m src.cli sync-reservations --days-back 60` (hitting Streamline PMS credentials) or manually copy `reservations.db` over AirDrop/SCP.
+2. **Empty Scraping Cache (`data/cache/`)**: `data/cache/` is also `.gitignore`d. When running `generate-html` locally, `HTMLDashboardGenerator._load_cached_comps_by_key()` searches `data/cache/search_*.json`. On a fresh clone, it finds 0 cached files. Consequently, it cannot build interval pricing tables from cached comp checkouts; it is forced to fall back to synthetic seasonal baseline approximations.
+   - *Current Workaround*: The user must either scrape fresh live rates (consuming proxy bandwidth) or copy the entire 6,300-file cache folder from the Mac Mini.
+
+### 4.2 Database Split-Brain & Divergence
+Because `data/reservations.db` is stored locally:
+- If the Mac Mini detects 5 new competitor sales during its automated Sunday scan, those rows are inserted into `competitor_sales` on the Mac Mini.
+- If a developer runs an audit or manual scrape on Laptop A, Laptop A's local SQLite database knows nothing of those 5 sales.
+- Any manual rate snapshots (`snapshot-rates`) taken on a laptop do not propagate to the Mac Mini.
+
+### 4.3 Git Push Racing & Merge Collisions
+Under the current automated schedule:
+- Mac Mini auto-commits and pushes to `origin/main` daily at 6:00 AM, 6:15 AM, and Sundays at 2:00 AM.
+- If a developer on Laptop A creates a branch `feat/pricing-logic`, edits code, and attempts to rebase on `origin/main`:
+  - They will hit severe text merge conflicts on `docs/index.html` (a 21.9 MB file with 7,000+ lines).
+  - They may hit conflicts on `data/pricing_data_*.json` snapshots.
+- Even worse: If a developer accidentally runs `run --push` on Laptop A while the Mac Mini is pushing, Git pushes will fail due to non-fast-forward ref locks.
+
+### 4.4 Proxy Quota & IP Protection Contention
+The project relies on a 10-worker NordVPN SOCKS5 proxy pool configured in `.env`.
+- NordVPN accounts enforce concurrent session limits.
+- Airbnb and VRBO aggressively monitor request signatures.
+- If two laptops and the Mac Mini initiate simultaneous scrapes, proxy connection limits may be exceeded, triggering connection dropouts (`proxy forwarder failed`) and potential cloudflare/perimeter blocks.
+
+---
+
+## 5. Mobile App Data Access Paths
+
+For a mobile app (iOS or Android) used to monitor Villa del Sol rates, view reservation pacing, and check competitor sales, there are **three viable integration paths**:
+
+```mermaid
+flowchart LR
+    subgraph PathA ["Path A: Static Cloud Distribution"]
+        GHPages["GitHub Pages<br/>(docs/index.html & JSON endpoints)"]
+        MobileA["Mobile App"]
+        GHPages -->|"HTTP GET (CDN Cached)"| MobileA
+    end
+
+    subgraph PathB ["Path B: Mac Mini Direct Relay"]
+        MM["Mac Mini (Daemon)"]
+        Tunnel["Tailscale / Cloudflare Tunnel / ntfy"]
+        MobileB["Mobile App"]
+        MM --> Tunnel -->|"REST / WebSocket"| MobileB
+    end
+
+    subgraph PathC ["Path C: Shared Central Cloud DB"]
+        CloudDB[("Central Cloud DB<br/>(Turso / Supabase / Firestore)")]
+        MM3["Mac Mini (Scraper)"]
+        Laptops["Laptops A & B"]
+        MobileC["Mobile App"]
+        MM3 -->|"Writes"| CloudDB
+        Laptops <-->|"Reads/Writes"| CloudDB
+        CloudDB -->|"SDK / Direct Queries"| MobileC
+    end
+```
+
+### Path A: Consume from Static Web Distribution (GitHub Pages / Object CDN)
+- **Mechanism**: The Mac Mini generates `docs/index.html` (or separate lightweight JSON payloads like `docs/api/latest_summary.json`) and pushes them to GitHub. The mobile app makes standard HTTP GET requests to `https://ivanpenkov.github.io/str-price-advisor/api/latest_summary.json`.
+- **Pros**: Zero backend infrastructure costs; highly resilient; free CDN edge caching via GitHub Pages; no inbound network ports or tunnels needed on the Mac Mini.
+- **Cons**: Read-only; updates only as fast as Mac Mini git pushes (daily); mobile app cannot trigger actions or write overrides.
+
+### Path B: Interface Directly with Mac Mini (Local API Relay)
+- **Mechanism**: The Mac Mini runs a lightweight Python REST server (FastAPI or extended `mobile_ntfy_bridge.py`) exposed securely via Tailscale, Cloudflare Tunnels, or `ntfy.sh`.
+- **Pros**: Direct access to local files; can execute CLI commands (`add-comp`, `run --quick`); real-time status.
+- **Cons**: Requires Mac Mini to remain powered on and connected 24/7; single point of failure; exposes local machine to network tunnel management.
+
+### Path C: Query a Central Shared Cloud Database
+- **Mechanism**: All relational and canonical state (`reservations`, `sales`, `comp registry`, `ratings`) resides in a managed cloud database (e.g., Supabase PostgreSQL, Turso Cloud SQLite, or Firebase Firestore).
+- **Pros**: Real-time read/write for all 3 Macs AND mobile; mobile can update notes, change comp overrides, or flag reviews; eliminates SQLite file synchronization; offline sync support (with Firestore or Turso embedded replicas).
+- **Cons**: Introduces cloud provider dependency; requires authentication/authorization rules; requires code refactor in `src/reservation_store.py` and `src/competitor_sales_tracker.py`.
+
+---
+
+## 6. Central Service Migration Assessment & Strategic Tiers
+
+To transition to a parallel multi-device environment without premature complexity, we evaluate each storage component across **four migration priority tiers**:
+
+### Tier 1: Mandatory for Multi-Device (Move to Central Cloud Database)
+*Components that cannot function correctly across multiple machines using local files.*
+
+| Component | Current Store | Problem in Multi-Mac | Target Solution | Migration Complexity |
+| :--- | :--- | :--- | :--- | :--- |
+| **Reservations Ledger** | `data/reservations.db` (`reservations`, `sync_history`) | Unversioned local file; secondary laptops have empty database; manual sync required. | Shared Cloud Database (Supabase Postgres or Turso Cloud SQLite). | **Medium** (Refactor `ReservationStore` connection). |
+| **Competitor Sales Tracker** | `data/reservations.db` (`competitor_sales`) | Isolated local detection records; split-brain sales history across machines. | Shared Cloud Database table (`competitor_sales`). | **Medium** (Refactor `CompetitorSalesTracker` queries). |
+| **Property Rate Snapshots** | `data/reservations.db` (`property_rate_snapshots`) | Rate history fragmented across machines. | Shared Cloud Database table (`property_rate_snapshots`). | **Low** (Simple upsert interface). |
+
+---
+
+### Tier 2: High Value for Repository Decoupling (Move out of Git into Cloud Storage)
+*Components that currently work via Git, but cause severe repo bloat and rebase collisions.*
+
+| Component | Current Store | Problem in Multi-Mac | Target Solution | Migration Complexity |
+| :--- | :--- | :--- | :--- | :--- |
+| **Daily Pricing Snapshots** | `data/pricing_data_*.json` (17 files, ~45 MB) | Git repository bloat (+7.5 MB/week); git rebase merge conflicts. | Cloud Object Storage (Cloudflare R2 or AWS S3) or DB JSONB column. | **Low** (Upload JSON on save, download by date). |
+| **Compiled Monolithic Dashboard** | `docs/index.html` (21.9 MB) | Massive merge conflicts during git rebase on laptops; bloats `.git` packfiles. | Build HTML on demand, or publish build artifacts directly to Cloudflare Pages/S3 without committing to git history. | **Medium** (Decouple Git tracking from dashboard distribution). |
+
+---
+
+### Tier 3: Business Configuration (Retain in Git vs. Move to Database)
+*Components that represent human-curated business rules and registries.*
+
+| Component | Current Store | Multi-Mac Evaluation | Recommendation |
+| :--- | :--- | :--- | :--- |
+| **Comps Registry** | `config/comps_registry.json` | Works well in Git for human review via PRs, but CLI commands (`add-comp`, `disqualify-comp`) edit it programmatically. | **Hybrid**: Retain in Git initially for full auditability; optionally mirror active comps to central DB for mobile app querying. |
+| **Listing Specs** | `config/listing_specs.json` | 120 KB JSON file. Low change frequency. | **Keep in Git** or migrate alongside comp registry. |
+| **Strategy Settings** | `config/settings.yaml` | Hyperparameters (`urgent_percent_diff`, weights). | **Keep in Git**. Fits version-controlled configuration-as-code. |
+| **Holidays Catalog** | `config/holidays.json` | Holiday rules and dates. | **Keep in Git**. |
+| **Ratings & Reviews** | `data/ratings_reviews.json` | Scraped reviews and host responses. 88 KB. | **Keep in Git** or move to Cloud DB table for instant mobile updates. |
+
+---
+
+### Tier 4: Ephemeral Scraper Cache (Keep Local to Scraping Node)
+*Components that are strictly transient.*
+
+| Component | Current Store | Multi-Mac Evaluation | Recommendation |
+| :--- | :--- | :--- | :--- |
+| **Scraping Cache** | `data/cache/**` (6,306 files) | Ephemeral request responses. High churn. | **Retain on local disk of scraping host (Mac Mini)**. Add a fallback in `html_generator.py` so secondary laptops read from the latest pricing snapshot instead of requiring raw scrape cache. |
+| **Stealth Proxy Locks** | `/tmp/*.lock` | OS-specific process mutex. | **Keep local**. Enforces single-process scraping per machine. |
+
+---
+
+## 7. Comparative Evaluation of Candidate Central Database Services
+
+When selecting a central service to replace `data/reservations.db` and support 3 Macs + mobile:
+
+| Criterion | **Turso (Cloud SQLite / LibSQL)** | **Supabase (Managed PostgreSQL)** | **Firebase Firestore (NoSQL Document DB)** |
+| :--- | :--- | :--- | :--- |
+| **Architecture Fit** | ⭐⭐⭐⭐⭐ Drop-in replacement for existing Python `sqlite3` queries. | ⭐⭐⭐⭐ Powerful relational engine; requires porting SQL dialects. | ⭐⭐⭐ Requires complete schema redesign from relational to documents. |
+| **Python Integration** | Native `libsql_experimental` client; exact same syntax as `sqlite3`. | `psycopg2` or `asyncpg` or Supabase Python SDK. | `firebase-admin` Python SDK. |
+| **Local Offline Replica** | **Exceptional** (Embedded replica allows instant zero-latency local queries with automatic background sync). | Requires direct internet connection or complex local Postgres container. | Excellent built-in offline caching on mobile SDKs. |
+| **Mobile App Support** | Swift/Kotlin/React Native SDKs available. | First-class REST, GraphQL, and client SDKs with built-in Auth. | Industry standard mobile SDKs with real-time listeners. |
+| **Cost / Free Tier** | Generous free tier (500 databases, 9 GB storage, 1B row reads/mo). | Generous free tier (500 MB DB, 50,000 monthly active users). | Generous free tier (50,000 reads, 20,000 writes/day). |
+| **Recommendation** | **Top Choice for Python CLI Simplicity** (maintains existing SQL schemas with zero rewrite). | **Top Choice for Full Web/Mobile Backend** (includes instant REST APIs and Auth). | Suitable only if mobile app demands real-time NoSQL synchronization. |
+
+---
+
+## 8. Immediate Action Plan: Restoring Universal Laptop Capabilities
+
+Before initiating any external cloud migrations, we can immediately achieve the user's hard requirement—**allowing any of the three Macs to pull from GitHub and build the full `docs/index.html` page**—by implementing two zero-dependency code fallbacks:
+
+### Gap 1: Dashboard Generator Relies on Ephemeral `data/cache/`
+- **Current Defect**: `HTMLDashboardGenerator._load_cached_comps_by_key()` only checks `data/cache/search_*.json`, which is `.gitignore`d and absent on fresh laptop clones.
+- **Immediate Fix**: Enhance `_load_cached_comps_by_key()` to inspect the latest tracked `data/pricing_data_YYYY-MM-DD.json` snapshot whenever `data/cache/` is empty. Because `pricing_data_*.json` is tracked in Git, any laptop that runs `git pull` will instantly have full competitive data to build the entire dashboard without scraping.
+
+### Gap 2: Dashboard Generator Relies on Local `data/reservations.db`
+- **Current Defect**: `ReservationStore` and `CompetitorSalesTracker` connect only to `data/reservations.db`, which is `.gitignore`d.
+- **Immediate Fix**: Enhance `ReservationStore` to automatically fall back to reading `data/reservations.json` (which is tracked in Git) if `data/reservations.db` does not exist on disk, or auto-seed the SQLite database from `reservations.json` on first run.
+
+With these two targeted changes:
+1. Every Mac can clone or pull from GitHub.
+2. Every Mac can immediately run `python -m src.cli generate-html` and compile the complete 21.9 MB dashboard with 100% data fidelity.
+3. Feature branches can be developed and verified on laptops without requiring manual file transfers or external network calls.
+4. The groundwork is cleanly established for the subsequent phase of migrating relational stores to a central cloud service.
+

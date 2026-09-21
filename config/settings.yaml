@@ -78,6 +78,7 @@ strategy:
     comp_weight: 0.67          # Double weight for comp-derived price (target percentile)
     historical_weight: 0.33    # Single weight for historical benchmark price
     weekend_premium_factor: 1.50 # Allocation factor for mixed stays
+    min_price_change_pct: 0.05 # 5% deadband threshold: hold current price if proposed change is < 5% to prevent PMS churn
 
 market:
   location: "Tempe, AZ"

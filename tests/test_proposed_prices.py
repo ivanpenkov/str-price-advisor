@@ -836,6 +836,239 @@ class TestProposedPrices(unittest.TestCase):
         self.assertEqual(hp["special_avg"], 450)
         self.assertEqual(hp["special_med"], 450)
 
+    def test_holiday_churn_threshold_suppresses_minor_change(self):
+        """Verify holiday rate holds current price when proposed change is < 5% (e.g. Christmas $1060 -> $1081)."""
+        seasonal_rates = [
+            {
+                "period_name": "Dec 26",
+                "begin_dt": date(2026, 12, 1),
+                "end_dt": date(2026, 12, 22),
+                "first_interval": "Monday-Wednesday",
+                "first_price": 500.0,
+                "second_interval": "Thursday-Sunday",
+                "second_price": 983.0,
+                "min_days": 3,
+            },
+            {
+                "period_name": "Christmas & New Year 2026",
+                "begin_dt": date(2026, 12, 23),
+                "end_dt": date(2027, 1, 3),
+                "nightly_rate": 1060.0,
+                "first_interval": "All Days",
+                "first_price": 1060.0,
+                "first_days": {0, 1, 2, 3, 4, 5, 6},
+                "second_interval": None,
+                "second_price": None,
+                "min_days": 3,
+            }
+        ]
+        # Regular weekend is $983, +10% premium = $1,081 (+1.98% over current base $1,060)
+        holiday_segments = [
+            {
+                "check_in": "2026-12-24",
+                "check_out": "2026-12-28",
+                "segment_type": "weekend",
+                "our_base_nightly": 1060.0,
+                "recommended_base_nightly_adj": 1081.0,  # +1.98% (within 5% churn tolerance)
+                "historical_benchmark": None,
+            }
+        ]
+        holidays_registry = [
+            {
+                "holiday_name": "Christmas & New Year",
+                "kivoya_period_name": "Christmas & New Year 2026",
+                "premium_pct": 10,
+                "floor_rate": 499,
+                "min_nights": 3,
+            }
+        ]
+        proposed = generate_proposed_prices(
+            seasonal_rates=seasonal_rates,
+            evaluated_segments=holiday_segments,
+            reference_date=date(2026, 9, 1),
+            holidays_registry=holidays_registry,
+            operational_floors={"midweek": 300.0, "weekend": 450.0},
+        )
+        self.assertEqual(len(proposed), 2)
+        xmas_prop = [p for p in proposed if "Christmas" in p["period_name"]][0]
+        # Should hold at base price 1060 to avoid PMS churn, NOT bump to 1081
+        self.assertEqual(xmas_prop["special_base"], 1060)
+        self.assertEqual(xmas_prop["special_avg"], 1060)
+        self.assertEqual(xmas_prop["special_med"], 1060)
+
+    def test_holiday_churn_threshold_allows_significant_change(self):
+        """Verify holiday rate updates when proposed change is >= 5% (e.g. $1060 -> $1150)."""
+        seasonal_rates = [
+            {
+                "period_name": "Dec 26",
+                "begin_dt": date(2026, 12, 1),
+                "end_dt": date(2026, 12, 22),
+                "first_interval": "Monday-Wednesday",
+                "first_price": 500.0,
+                "second_interval": "Thursday-Sunday",
+                "second_price": 983.0,
+                "min_days": 3,
+            },
+            {
+                "period_name": "Christmas & New Year 2026",
+                "begin_dt": date(2026, 12, 23),
+                "end_dt": date(2027, 1, 3),
+                "nightly_rate": 1060.0,
+                "first_interval": "All Days",
+                "first_price": 1060.0,
+                "first_days": {0, 1, 2, 3, 4, 5, 6},
+                "second_interval": None,
+                "second_price": None,
+                "min_days": 3,
+            }
+        ]
+        holiday_segments = [
+            {
+                "check_in": "2026-12-24",
+                "check_out": "2026-12-28",
+                "segment_type": "weekend",
+                "our_base_nightly": 1060.0,
+                "recommended_base_nightly_adj": 1150.0,  # +8.49% (exceeds 5% churn tolerance)
+                "historical_benchmark": None,
+            }
+        ]
+        holidays_registry = [
+            {
+                "holiday_name": "Christmas & New Year",
+                "kivoya_period_name": "Christmas & New Year 2026",
+                "premium_pct": 10,
+                "floor_rate": 499,
+                "min_nights": 3,
+            }
+        ]
+        proposed = generate_proposed_prices(
+            seasonal_rates=seasonal_rates,
+            evaluated_segments=holiday_segments,
+            reference_date=date(2026, 9, 1),
+            holidays_registry=holidays_registry,
+            operational_floors={"midweek": 300.0, "weekend": 450.0},
+        )
+        self.assertEqual(len(proposed), 2)
+        xmas_prop = [p for p in proposed if "Christmas" in p["period_name"]][0]
+        self.assertEqual(xmas_prop["special_base"], 1060)
+        self.assertEqual(xmas_prop["special_avg"], 1150)
+        self.assertEqual(xmas_prop["special_med"], 1150)
+
+    def test_config_settings_min_price_change_pct(self):
+        """Verify MIN_PRICE_CHANGE_PCT is exposed in src.config and src.proposed_prices and loaded from settings.yaml."""
+        from src.config import MIN_PRICE_CHANGE_PCT as CONFIG_MIN_PCT, reload_settings
+        from src.proposed_prices import MIN_PRICE_CHANGE_PCT as PROPOSED_MIN_PCT, apply_churn_threshold
+        settings = reload_settings()
+        cfg_pct = settings.get("strategy", {}).get("proposed_pricing", {}).get("min_price_change_pct", 0.05)
+        self.assertEqual(CONFIG_MIN_PCT, cfg_pct)
+        self.assertEqual(PROPOSED_MIN_PCT, cfg_pct)
+        self.assertEqual(cfg_pct, 0.05)
+        # Verify apply_churn_threshold resolves dynamic threshold without shadowing
+        self.assertEqual(apply_churn_threshold(520, 500), 500)  # +4% -> held
+        self.assertEqual(apply_churn_threshold(530, 500), 530)  # +6% -> proposed
+
+    def test_holiday_split_pricing_churn_threshold(self):
+        """Verify split-pricing holidays hold rate when change < 5% and update when >= 5%."""
+        seasonal_rates = [
+            {
+                "period_name": "Holy Week 27",
+                "begin_dt": date(2027, 3, 19),
+                "end_dt": date(2027, 3, 28),
+                "first_price": 750.0,   # Midweek base: 750
+                "second_price": 1100.0, # Weekend base: 1100
+                "min_days": 3,
+            }
+        ]
+        # Midweek recommended: 765 (+2.0% < 5%) -> should hold at 750
+        # Weekend recommended: 1200 (+9.1% >= 5%) -> should update to 1200
+        holiday_segments = [
+            {
+                "check_in": "2027-03-22",
+                "check_out": "2027-03-25",
+                "segment_type": "midweek",
+                "our_base_nightly": 750.0,
+                "recommended_base_nightly_adj": 765.0,  # +2.0% (within 5% churn)
+                "historical_benchmark": None,
+            },
+            {
+                "check_in": "2027-03-25",
+                "check_out": "2027-03-28",
+                "segment_type": "weekend",
+                "our_base_nightly": 1100.0,
+                "recommended_base_nightly_adj": 1200.0,  # +9.09% (exceeds 5% churn)
+                "historical_benchmark": None,
+            },
+        ]
+        holidays_registry = [
+            {
+                "holiday_name": "Holy Week",
+                "kivoya_period_name": "Holy Week 27",
+                "split_pricing": True,
+                "floor_midweek": 699,
+                "floor_weekend": 1049,
+                "floor_rate": 699,
+                "min_nights": 3,
+            }
+        ]
+        proposed = generate_proposed_prices(
+            seasonal_rates=seasonal_rates,
+            evaluated_segments=holiday_segments,
+            reference_date=date(2026, 9, 1),
+            holidays_registry=holidays_registry,
+            operational_floors={"midweek": 300.0, "weekend": 450.0},
+        )
+        self.assertEqual(len(proposed), 1)
+        p = proposed[0]
+        # Midweek: held at 750 (not bumped to 765)
+        self.assertEqual(p["midweek_base"], 750)
+        self.assertEqual(p["midweek_avg"], 750)
+        self.assertEqual(p["midweek_med"], 750)
+        # Weekend: updated to 1200 (exceeds 5%)
+        self.assertEqual(p["weekend_base"], 1100)
+        self.assertEqual(p["weekend_avg"], 1200)
+        self.assertEqual(p["weekend_med"], 1200)
+
+    def test_custom_churn_threshold_parameter(self):
+        """Verify custom churn_threshold_pct (e.g. 0.10) suppresses changes up to 10%."""
+        seasonal_rates = [
+            {
+                "period_name": "Oct 26",
+                "begin_dt": date(2026, 10, 1),
+                "end_dt": date(2026, 10, 31),
+                "first_price": 500.0,
+                "second_price": 800.0,
+                "min_days": 3,
+            }
+        ]
+        evaluated_segments = [
+            {
+                "check_in": "2026-10-05",
+                "check_out": "2026-10-08",
+                "segment_type": "midweek",
+                "our_base_nightly": 500.0,
+                "recommended_base_nightly_adj": 535.0,  # +7.0% (between 5% and 10%)
+                "historical_benchmark": None,
+            },
+        ]
+        # With default 5% threshold: +7% triggers update to 535
+        p_default = generate_proposed_prices(
+            seasonal_rates=seasonal_rates,
+            evaluated_segments=evaluated_segments,
+            reference_date=date(2026, 9, 1),
+            holidays_registry=[],
+        )
+        self.assertEqual(p_default[0]["midweek_avg"], 535)
+
+        # With custom 10% threshold: +7% is suppressed and held at 500
+        p_10pct = generate_proposed_prices(
+            seasonal_rates=seasonal_rates,
+            evaluated_segments=evaluated_segments,
+            reference_date=date(2026, 9, 1),
+            holidays_registry=[],
+            churn_threshold_pct=0.10,
+        )
+        self.assertEqual(p_10pct[0]["midweek_avg"], 500)
+
 
 if __name__ == "__main__":
     unittest.main()

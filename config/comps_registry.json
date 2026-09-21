@@ -2575,7 +2575,7 @@
       "beds": 13,
       "baths": 4.0,
       "rating": 4.8,
-      "reviews": 84,
+      "reviews": 85,
       "url": "https://www.airbnb.com/rooms/52595140",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-52595140/original/b08e512b-0027-46fd-ba33-ab416e2bb79c.jpeg",
@@ -4325,7 +4325,7 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.86,
-      "reviews": 185,
+      "reviews": 186,
       "url": "https://www.airbnb.com/rooms/49429064",
       "photo_url": "https://a0.muscache.com/im/pictures/3820697b-d907-43c8-8148-60d7dab511ff.jpg",
       "amenities_count": 57,
@@ -4601,7 +4601,7 @@
       "beds": 9,
       "baths": 5.5,
       "rating": 4.97,
-      "reviews": 109,
+      "reviews": 108,
       "is_guest_favorite": true,
       "guest_favorite_badge": "Guest Favorite",
       "url": "https://www.airbnb.com/rooms/858613170601453396",
@@ -4621,7 +4621,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.97★ with 109 reviews)",
+          "Flawless guest track record (4.97★ with 108 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -6624,7 +6624,7 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.97,
-      "reviews": 31,
+      "reviews": 32,
       "url": "https://www.airbnb.com/rooms/1283513903441928107",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI4MzUxMzkwMzQ0MTkyODEwNw%3D%3D/original/5ff0879e-d2c1-4142-a011-cd9308758d99.jpeg",
@@ -6694,7 +6694,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.97★ with 31 reviews)",
+          "Flawless guest track record (4.97★ with 32 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -9373,7 +9373,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-09-20T19:38:59.032212",
+    "last_ratings_sync": "2026-09-20T20:46:26.809960",
     "total_guest_favorites": 82
   },
   "excluded_comps": {

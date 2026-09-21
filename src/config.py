@@ -56,7 +56,7 @@ def get_settings() -> Dict[str, Any]:
 def reload_settings(path: Path | str = DEFAULT_SETTINGS_PATH) -> Dict[str, Any]:
     """Force reload settings from disk and update cached constants."""
     global _SETTINGS, URGENT_PCT_DIFF, MODERATE_PCT_DIFF, URGENT_LEAD_DAYS, BASE_PERCENTILE, CLEANING_FEE
-    global COMP_PRICE_WEIGHT, HISTORICAL_PRICE_WEIGHT, WEEKEND_PREMIUM_FACTOR
+    global COMP_PRICE_WEIGHT, HISTORICAL_PRICE_WEIGHT, WEEKEND_PREMIUM_FACTOR, MIN_PRICE_CHANGE_PCT
     global BAYESIAN_SHRINKAGE_K, MIN_SAMPLE_SIZE, ENFORCE_MONOTONIC_TAPERING, OPERATIONAL_FLOORS, LEAD_TIME_MATRIX
     _SETTINGS = load_settings(path)
     FALLBACK_INTERVALS.clear()
@@ -73,6 +73,7 @@ def reload_settings(path: Path | str = DEFAULT_SETTINGS_PATH) -> Dict[str, Any]:
     COMP_PRICE_WEIGHT = float(_pricing_cfg.get("comp_weight", 0.67))
     HISTORICAL_PRICE_WEIGHT = float(_pricing_cfg.get("historical_weight", 0.33))
     WEEKEND_PREMIUM_FACTOR = float(_pricing_cfg.get("weekend_premium_factor", 1.50))
+    MIN_PRICE_CHANGE_PCT = float(_pricing_cfg.get("min_price_change_pct", 0.05))
     BAYESIAN_SHRINKAGE_K = float(_strat.get("bayesian_shrinkage_k", 5.0))
     MIN_SAMPLE_SIZE = int(_strat.get("min_empirical_sample_size", 5))
     ENFORCE_MONOTONIC_TAPERING = bool(_strat.get("enforce_monotonic_tapering", True))
@@ -102,6 +103,7 @@ _pricing_config = _strat_config.get("proposed_pricing") or {}
 COMP_PRICE_WEIGHT: float = float(_pricing_config.get("comp_weight", 0.67))
 HISTORICAL_PRICE_WEIGHT: float = float(_pricing_config.get("historical_weight", 0.33))
 WEEKEND_PREMIUM_FACTOR: float = float(_pricing_config.get("weekend_premium_factor", 1.50))
+MIN_PRICE_CHANGE_PCT: float = float(_pricing_config.get("min_price_change_pct", 0.05))
 
 # Dynamic 2D Strategy Matrix and Bayesian Shrinkage constants
 BAYESIAN_SHRINKAGE_K: float = float(_strat_config.get("bayesian_shrinkage_k", 5.0))

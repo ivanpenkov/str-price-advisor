@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS competitor_sales (
     desirability_ratio REAL,
     verification_status TEXT DEFAULT 'verified',
     raw_snippet TEXT,
-    created_at TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(listing_id, check_in, check_out)
 );
 

@@ -1185,6 +1185,54 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         cache_file = self.data_dir / "cache" / f"search_{cin}_{cout}_comp_1001.json"
         self.assertTrue(cache_file.exists())
 
+    def test_record_direct_sale_populates_created_at(self):
+        """Verify record_direct_sale populates created_at with valid ISO timestamp."""
+        success = self.tracker.record_direct_sale(
+            listing_id="1001",
+            check_in="2026-10-01",
+            check_out="2026-10-04",
+            nights=3,
+            last_observed_rate=1200.0,
+            detected_date="2026-09-20",
+            segment_type="midweek",
+            verification_status="CONFIRMED_BLOCKED",
+            raw_snippet="Direct test",
+        )
+        self.assertTrue(success)
+
+        with self.tracker._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT created_at FROM competitor_sales WHERE listing_id = '1001'")
+            row = cursor.fetchone()
+            self.assertIsNotNone(row)
+            created_at = row[0] if isinstance(row, tuple) else row["created_at"]
+            self.assertIsNotNone(created_at)
+            self.assertTrue(len(str(created_at)) >= 10)
+            self.assertRegex(str(created_at), r"^\d{4}-\d{2}-\d{2}")
+
+    def test_competitor_sales_created_at_schema_default(self):
+        """Verify competitor_sales schema default CURRENT_TIMESTAMP populates when omitted."""
+        with self.tracker._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO competitor_sales (
+                    listing_id, check_in, check_out, nights, segment_type,
+                    detected_date, lead_time_days, last_observed_rate, verification_status
+                ) VALUES (
+                    '8888', '2026-11-01', '2026-11-04', 3, 'midweek',
+                    '2026-09-20', 42, 950.0, 'CONFIRMED_BLOCKED'
+                )
+            """)
+            conn.commit()
+
+            cursor.execute("SELECT created_at FROM competitor_sales WHERE listing_id = '8888'")
+            row = cursor.fetchone()
+            self.assertIsNotNone(row)
+            created_at = row[0] if isinstance(row, tuple) else row["created_at"]
+            self.assertIsNotNone(created_at)
+            self.assertTrue(len(str(created_at)) >= 10)
+            self.assertRegex(str(created_at), r"^\d{4}-\d{2}-\d{2}")
+
 
 if __name__ == "__main__":
     unittest.main()

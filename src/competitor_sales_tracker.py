@@ -565,6 +565,7 @@ class CompetitorSalesTracker:
                     "desirability_ratio": desirability_ratio,
                     "verification_status": verification_status,
                     "raw_snippet": cinfo.get("raw_snippet") or cinfo.get("price_snippet") or "",
+                    "created_at": datetime.now().isoformat(),
                 }
 
                 # Check if already recorded and upsert into SQLite in an isolated write transaction
@@ -583,13 +584,15 @@ class CompetitorSalesTracker:
                             check_in, check_out, nights, segment_type,
                             detected_date, lead_time_days,
                             last_observed_rate, last_observed_adj_rate, last_observed_percentile,
-                            composite_score, desirability_ratio, verification_status, raw_snippet
+                            composite_score, desirability_ratio, verification_status, raw_snippet,
+                            created_at
                         ) VALUES (
                             :listing_id, :listing_name, :tier, :location,
                             :check_in, :check_out, :nights, :segment_type,
                             :detected_date, :lead_time_days,
                             :last_observed_rate, :last_observed_adj_rate, :last_observed_percentile,
-                            :composite_score, :desirability_ratio, :verification_status, :raw_snippet
+                            :composite_score, :desirability_ratio, :verification_status, :raw_snippet,
+                            COALESCE(:created_at, CURRENT_TIMESTAMP)
                         )
                         ON CONFLICT(listing_id, check_in, check_out) DO UPDATE SET
                             detected_date = CASE 
@@ -673,13 +676,15 @@ class CompetitorSalesTracker:
                     check_in, check_out, nights, segment_type,
                     detected_date, lead_time_days,
                     last_observed_rate, last_observed_adj_rate, last_observed_percentile,
-                    composite_score, desirability_ratio, verification_status, raw_snippet
+                    composite_score, desirability_ratio, verification_status, raw_snippet,
+                    created_at
                 ) VALUES (
                     :listing_id, :listing_name, :tier, :location,
                     :check_in, :check_out, :nights, :segment_type,
                     :detected_date, :lead_time_days,
                     :last_observed_rate, :last_observed_adj_rate, :last_observed_percentile,
-                    :composite_score, :desirability_ratio, :verification_status, :raw_snippet
+                    :composite_score, :desirability_ratio, :verification_status, :raw_snippet,
+                    COALESCE(:created_at, CURRENT_TIMESTAMP)
                 )
                 ON CONFLICT(listing_id, check_in, check_out) DO UPDATE SET
                     detected_date = CASE 
@@ -715,7 +720,9 @@ class CompetitorSalesTracker:
                 "desirability_ratio": desirability_ratio,
                 "verification_status": verification_status,
                 "raw_snippet": raw_snippet or f"Direct Verified Checkout Booking | {listing_name}",
+                "created_at": datetime.now().isoformat(),
             })
+
             conn.commit()
             self._cached_strategy_grid = None
             return cursor.rowcount > 0
@@ -1685,6 +1692,7 @@ class CompetitorSalesTracker:
                     "desirability_ratio": desirability_ratio,
                     "verification_status": "CONFIRMED_BLOCKED",
                     "raw_snippet": cinfo.get("raw_snippet") or cinfo.get("price_snippet") or "Verified via Inline Playwright Bridge Sweep",
+                    "created_at": datetime.now().isoformat(),
                 }
 
                 with self._get_connection() as conn:
@@ -1702,13 +1710,15 @@ class CompetitorSalesTracker:
                             check_in, check_out, nights, segment_type,
                             detected_date, lead_time_days,
                             last_observed_rate, last_observed_adj_rate, last_observed_percentile,
-                            composite_score, desirability_ratio, verification_status, raw_snippet
+                            composite_score, desirability_ratio, verification_status, raw_snippet,
+                            created_at
                         ) VALUES (
                             :listing_id, :listing_name, :tier, :location,
                             :check_in, :check_out, :nights, :segment_type,
                             :detected_date, :lead_time_days,
                             :last_observed_rate, :last_observed_adj_rate, :last_observed_percentile,
-                            :composite_score, :desirability_ratio, :verification_status, :raw_snippet
+                            :composite_score, :desirability_ratio, :verification_status, :raw_snippet,
+                            COALESCE(:created_at, CURRENT_TIMESTAMP)
                         )
                         ON CONFLICT(listing_id, check_in, check_out) DO UPDATE SET
                             detected_date = CASE 
@@ -2044,6 +2054,7 @@ class CompetitorSalesTracker:
                     "desirability_ratio": desirability_ratio,
                     "verification_status": "CONFIRMED_BLOCKED",
                     "raw_snippet": cinfo.get("raw_snippet") or cinfo.get("price_snippet") or "Verified via Playwright Bridge Sweep",
+                    "created_at": datetime.now().isoformat(),
                 }
 
                 with self._get_connection() as conn:
@@ -2061,13 +2072,15 @@ class CompetitorSalesTracker:
                             check_in, check_out, nights, segment_type,
                             detected_date, lead_time_days,
                             last_observed_rate, last_observed_adj_rate, last_observed_percentile,
-                            composite_score, desirability_ratio, verification_status, raw_snippet
+                            composite_score, desirability_ratio, verification_status, raw_snippet,
+                            created_at
                         ) VALUES (
                             :listing_id, :listing_name, :tier, :location,
                             :check_in, :check_out, :nights, :segment_type,
                             :detected_date, :lead_time_days,
                             :last_observed_rate, :last_observed_adj_rate, :last_observed_percentile,
-                            :composite_score, :desirability_ratio, :verification_status, :raw_snippet
+                            :composite_score, :desirability_ratio, :verification_status, :raw_snippet,
+                            COALESCE(:created_at, CURRENT_TIMESTAMP)
                         )
                         ON CONFLICT(listing_id, check_in, check_out) DO UPDATE SET
                             detected_date = CASE 

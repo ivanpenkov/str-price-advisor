@@ -78,7 +78,7 @@ TABLE_SCHEMAS = {
             desirability_ratio REAL,
             verification_status TEXT DEFAULT 'verified',
             raw_snippet TEXT,
-            created_at TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             UNIQUE(listing_id, check_in, check_out)
         );
         CREATE INDEX IF NOT EXISTS idx_comp_sales_lead ON competitor_sales (lead_time_days);

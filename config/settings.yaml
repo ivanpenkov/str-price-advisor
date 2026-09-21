@@ -75,8 +75,8 @@ strategy:
     urgent_lead_days: 60       # Unbooked dates <60 days away get elevated priority
     moderate_percent_diff: 10.0 # 10-25% discrepancy for monthly adjustment
   proposed_pricing:
-    comp_weight: 0.67          # Double weight for comp-derived price (target percentile)
-    historical_weight: 0.33    # Single weight for historical benchmark price
+    comp_weight: 0.75          # Double weight for comp-derived price (target percentile)
+    historical_weight: 0.25    # Single weight for historical benchmark price
     weekend_premium_factor: 1.50 # Allocation factor for mixed stays
 
 market:

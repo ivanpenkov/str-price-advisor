@@ -828,7 +828,7 @@
       "beds": 12,
       "baths": 6.0,
       "rating": 4.87,
-      "reviews": 38,
+      "reviews": 39,
       "url": "https://www.airbnb.com/rooms/1136293547142522527",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1136293547142522527/original/ec5886d0-9184-416e-8870-ebdc1a83d636.jpeg",
@@ -9373,7 +9373,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-09-20T19:17:32.832958",
+    "last_ratings_sync": "2026-09-20T19:38:59.032212",
     "total_guest_favorites": 82
   },
   "excluded_comps": {

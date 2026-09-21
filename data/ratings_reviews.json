@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "last_updated": "2026-09-21T06:25:22.965200-07:00",
+  "last_updated": "2026-09-21T10:37:59.474833-07:00",
   "recent_window_days": 30,
   "recent_reviews_count": 3,
   "platforms": {
@@ -19,7 +19,7 @@
         "check_in": 4.92,
         "value": 4.73
       },
-      "last_scraped": "2026-09-21T06:25:22.930459-07:00",
+      "last_scraped": "2026-09-21T10:37:59.439679-07:00",
       "status": "ok",
       "harvested_count": 80,
       "harvest_ratio": 1.039
@@ -43,7 +43,7 @@
         "communication": 9.6,
         "location": 9.8
       },
-      "last_scraped": "2026-09-21T06:25:21.793498-07:00",
+      "last_scraped": "2026-09-21T10:37:57.239156-07:00",
       "status": "ok",
       "harvested_count": 24,
       "harvest_ratio": 1.0
@@ -64,7 +64,7 @@
         "location": 9.3,
         "free_wifi": 10.0
       },
-      "last_scraped": "2026-09-21T06:25:18.601048-07:00",
+      "last_scraped": "2026-09-21T10:37:53.971010-07:00",
       "status": "ok",
       "harvested_count": 3,
       "harvest_ratio": 1.0

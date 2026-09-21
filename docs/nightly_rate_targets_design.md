@@ -12,14 +12,14 @@
 
 ## 1. System Architecture & Data Flow
 
-The Dynamic Nightly Rate Percentile Engine bridges recorded empirical competitor sales with luxury revenue management policies. It consumes verified competitor disappearance events from SQLite, computes a Bayesian-shrunk 2D Strategy Matrix, applies strategic luxury floors and monotonic tapering, and serves dynamic target percentiles to `PricingAnalyticsEngine` and `ProposedPricesEngine`.
+The Dynamic Nightly Rate Percentile Engine bridges recorded empirical competitor sales with luxury revenue management policies. It consumes verified competitor disappearance events from central Turso Cloud (`competitor_sales` table; local SQLite for testing), computes a Bayesian-shrunk 2D Strategy Matrix, applies strategic luxury floors and monotonic tapering, and serves dynamic target percentiles to `PricingAnalyticsEngine` and `ProposedPricesEngine`.
 
 ### 1.1 End-to-End Architectural Pipeline
 
 ```mermaid
 flowchart TD
     subgraph Storage ["1. Data & Configuration Layer"]
-        DB[("SQLite: competitor_sales<br/>(data/reservations.db)")]
+        DB[("Turso Cloud: competitor_sales<br/>[SQLite: Testing Only]")]
         YAML["YAML Settings<br/>(config/settings.yaml:<br/>strategy.lead_time_matrix & operational_floors<br/>*lead_time_tiers deprecated*)"]
     end
 
@@ -240,7 +240,7 @@ Reads `config/settings.yaml` to initialize `HORIZON_PRIORS`, `BAYESIAN_SHRINKAGE
 
 #### Method: `compute_strategy_grid()`
 Executes the aggregation and calibration pipeline:
-1. Fetch all `CONFIRMED_BLOCKED` sales from `data/reservations.db`.
+1. Fetch all `CONFIRMED_BLOCKED` sales from Turso Cloud (`competitor_sales` table; local SQLite for testing).
 2. Partition into cell buckets $(h, t)$.
 3. Compute sample statistics ($p_{50}$, $p_{75}$, $n$, $\text{rates}$).
 4. Compute Bayesian target:

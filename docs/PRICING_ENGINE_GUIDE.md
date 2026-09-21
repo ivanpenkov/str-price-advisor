@@ -33,7 +33,7 @@ flowchart TD
     end
 
     subgraph HistoryPillar ["Pillar 2: Historical Track Record"]
-        F[("reservations.db 2022-Present")] --> G["50% Weekend Apportionment"]
+        F[("Turso Cloud: reservations<br/>(2022-Present) [SQLite Test]")] --> G["50% Weekend Apportionment"]
         G --> H["Rolling ±15 Day Window Matching"]
         H --> I["Historical Median Target H"]
     end
@@ -96,7 +96,7 @@ Booking pace in Phoenix is heavily front-loaded in winter and last-minute in sum
 ## 4. Core Pillar 2: Historical Track Record Intelligence
 
 ### A. Empirical Reservations Database (2022–Present)
-All confirmed bookings for Villa del Sol are stored in [`data/reservations.db`](file:///Users/ivanpe/str-price-advisor/data/reservations.db). This provides empirical ground truth on what guests have *actually paid* across different seasons.
+All confirmed bookings for Villa del Sol are stored centrally in **Turso Cloud (LibSQL)** under the `reservations` table (with local SQLite strictly reserved for hermetic testing). This provides empirical ground truth on what guests have *actually paid* across different seasons.
 
 ### B. The 50% Weekend Weighting Rule ($R_w = 1.50 \times R_m$)
 When a guest books a 5-night stay spanning Sunday to Friday, generic systems divide total rent by 5, which artificially inflates midweek rates and deflates weekend pricing.

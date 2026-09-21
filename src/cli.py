@@ -21,8 +21,21 @@ import sys
 import time
 from typing import List, Dict, Any, Optional, Tuple
 
-logger = logging.getLogger(__name__)
+# Auto-switch to repository virtual environment if run directly with system Python
+repo_root = Path(__file__).resolve().parent.parent
+if str(repo_root) not in sys.path:
+    sys.path.insert(0, str(repo_root))
 
+if __name__ == "__main__" and sys.prefix == sys.base_prefix:
+    venv_python = repo_root / ".venv" / "bin" / "python"
+    if venv_python.exists() and sys.executable != str(venv_python):
+        os.environ["VIRTUAL_ENV"] = str(repo_root / ".venv")
+        os.environ["PATH"] = f"{venv_python.parent}:{os.environ.get('PATH', '')}"
+        os.environ["PYTHONPATH"] = str(repo_root) + (f":{os.environ['PYTHONPATH']}" if "PYTHONPATH" in os.environ else "")
+        os.execv(str(venv_python), [str(venv_python)] + sys.argv)
+
+
+logger = logging.getLogger(__name__)
 
 from src.config import load_settings, URGENT_PCT_DIFF, MODERATE_PCT_DIFF
 from src.kivoya_client import KivoyaClient
@@ -38,7 +51,7 @@ def load_config(config_path: str = "config/settings.yaml") -> Dict[str, Any]:
 
 
 def snapshot_kivoya_rates(store: Optional[Any] = None, snapshot_date: Optional[str] = None) -> int:
-    """Snapshot current Kivoya seasonal rates into SQLite."""
+    """Snapshot current Kivoya seasonal rates into cloud database (Turso)."""
     from src.reservation_store import ReservationStore
     from src.kivoya_client import KivoyaClient
     from datetime import date, timedelta
@@ -321,6 +334,16 @@ async def run_interval_evaluations(
     return evaluated_results, interval_metrics
 
 
+def is_primary_node() -> bool:
+    """Return True if this host is configured as the primary scraping host."""
+    from src.database import _load_env_file
+    _load_env_file()
+    if "IS_PRIMARY_SCRAPER" in os.environ:
+        return os.getenv("IS_PRIMARY_SCRAPER", "0").strip().lower() in ("1", "true", "yes")
+    node_role = os.getenv("STR_NODE_ROLE", "primary").strip().lower()
+    return node_role in ("primary", "scraper", "master")
+
+
 async def run_weekly_advisory(
     quick: bool = False,
     max_segments: int = 12,
@@ -343,6 +366,24 @@ async def run_weekly_advisory(
     """
     total_start = time.perf_counter()
     config = load_config()
+
+    if not is_primary_node() and not force:
+        print("\n" + "=" * 78)
+        print("⚠️  OPERATIONAL ROLE SEPARATION: WORKSTATION MODE ACTIVE")
+        print("=" * 78)
+        print("This machine is configured as a Contributor Workstation (STR_NODE_ROLE=workstation).")
+        print("Full market scrapes are reserved for the dedicated Mac Mini to prevent")
+        print("NordVPN proxy session contention and concurrent OTA rate limits.\n")
+        print("• To compile the latest dashboard using live Turso Cloud data (zero scraping):")
+        print("    .venv/bin/python -m src.cli generate-html\n")
+        print("• To evaluate comps or check database health:")
+        print("    .venv/bin/python -m src.cli evaluate-comps")
+        print("    .venv/bin/python -m src.cli check-db\n")
+        print("• To override and run a full market scrape on this workstation anyway:")
+        print("    .venv/bin/python -m src.cli run --force")
+        print("=" * 78 + "\n")
+        return
+
     print("=" * 70)
     print(f"🏠 STR Competitive Price Advisor: {config['property']['name']}")
     print(f"📍 Location: {config['property']['address']}")
@@ -361,7 +402,7 @@ async def run_weekly_advisory(
     res_store = ReservationStore()
     snap_count = snapshot_kivoya_rates(res_store)
     if snap_count > 0:
-        print(f"  ✓ Snapshotted {snap_count} daily published rates in SQLite.")
+        print(f"  ✓ Snapshotted {snap_count} daily published rates in database.")
     step1_time = time.perf_counter() - step1_start
 
     # 2. Date Segmentation
@@ -576,7 +617,7 @@ async def run_weekly_advisory(
     print(f"Scrape Architecture: {mode_str}")
     print(f"{'Step / Sub-Interval':<48} {'Duration':>12} {'Network Transfer':>16}")
     print("-" * 78)
-    print(f"{'[Step 1] Kivoya & SQLite Ingestion':<48} {_format_time(step1_time):>12} {_format_mb(0):>16}")
+    print(f"{'[Step 1] Kivoya & Database Ingestion':<48} {_format_time(step1_time):>12} {_format_mb(0):>16}")
     print(f"{'[Step 2] Calendar Segmentation':<48} {_format_time(step2_time):>12} {_format_mb(0):>16}")
     print(f"{f'[Step 3] Luxury Comp Scraping ({len(active_segments)} intervals)':<48} {_format_time(step3_time):>12} {_format_mb(step3_bytes):>16}")
     for im in interval_metrics:
@@ -605,18 +646,54 @@ async def run_weekly_advisory(
 
 
 def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports"):
-    """Stage docs/ and data/, commit, and push to origin/main."""
+    """Stage docs/, data/, and config/, commit, rebase, and push to origin/main."""
     import subprocess
     print("\n🚀 Pushing updates to GitHub (GitHub Pages)...")
+
     try:
-        subprocess.run(["git", "add", "docs/", "data/"], check=True)
-        res = subprocess.run(["git", "diff", "--staged", "--quiet"])
+        curr_branch = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            capture_output=True,
+            text=True,
+            cwd=str(repo_root),
+        ).stdout.strip()
+
+        if curr_branch != "main":
+            print(f"  ℹ️ Active branch is '{curr_branch}' (not 'main'). Skipping automated push to origin/main.")
+            return
+
+        def _rebase_and_push():
+            try:
+                subprocess.run(
+                    ["git", "pull", "--rebase", "--autostash", "origin", "main"],
+                    check=True,
+                    cwd=str(repo_root),
+                )
+            except subprocess.CalledProcessError:
+                subprocess.run(["git", "rebase", "--abort"], check=False, cwd=str(repo_root))
+                print("  ⚠️ Rebase conflict encountered with remote origin/main. Rebase aborted; local commit preserved.")
+                raise
+            subprocess.run(["git", "push", "origin", "main"], check=True, cwd=str(repo_root))
+
+        subprocess.run(["git", "add", "docs/", "data/", "config/"], check=True, cwd=str(repo_root))
+        res = subprocess.run(["git", "diff", "--staged", "--quiet"], cwd=str(repo_root))
         if res.returncode != 0:
-            subprocess.run(["git", "commit", "-m", commit_msg], check=True)
-            subprocess.run(["git", "push", "origin", "main"], check=True)
+            subprocess.run(["git", "commit", "-m", commit_msg], check=True, cwd=str(repo_root))
+            _rebase_and_push()
             print("  ✓ Successfully pushed to origin/main! Live dashboard will update in ~30–60 seconds.")
         else:
-            print("  ✓ No new changes to push (already up to date with remote).")
+            # Check if there are any unpushed commits ahead of origin/main
+            ahead_check = subprocess.run(
+                ["git", "rev-list", "origin/main..HEAD"],
+                capture_output=True,
+                text=True,
+                cwd=str(repo_root),
+            )
+            if ahead_check.returncode == 0 and ahead_check.stdout.strip():
+                _rebase_and_push()
+                print("  ✓ Successfully pushed pending commits to origin/main! Live dashboard will update in ~30–60 seconds.")
+            else:
+                print("  ✓ No new changes to push (already up to date with remote).")
     except Exception as e:
         print(f"  ❌ Git push error: {e}")
 
@@ -650,7 +727,7 @@ def main():
     run_parser.add_argument("--push", action="store_true", help="Automatically commit and push updated docs and data to GitHub")
     run_parser.add_argument("--compare-platforms", action="store_true", help="Scrape and compare prices across Airbnb, VRBO, Booking.com, and Kivoya")
     run_parser.add_argument("--no-compare-platforms", action="store_true", help="Explicitly skip platform comparison in quick mode even if recent Streamline rate changes occurred")
-    run_parser.add_argument("--force", action="store_true", help="Force fresh live scraping from Airbnb even if cached")
+    run_parser.add_argument("--force", action="store_true", help="Force fresh live scraping even if cached, and bypass workstation role guard")
     run_parser.add_argument("--max-cache-age", type=float, default=20.0, help="Max cache age in hours before refreshing (default: 20h)")
     run_parser.add_argument("--sequential", action="store_true", help="Scrape corridors sequentially instead of concurrently across feeder proxy pool")
 
@@ -699,7 +776,7 @@ def main():
     add_comp_parser.add_argument("--force", action="store_true", help="Force refresh listing profile even if cached")
     add_comp_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
 
-    sync_res_parser = subparsers.add_parser("sync-reservations", help="Scrape and sync Streamline OwnerX reservations to SQLite and JSON")
+    sync_res_parser = subparsers.add_parser("sync-reservations", help="Scrape and sync Streamline OwnerX reservations to database and JSON")
     sync_res_parser.add_argument("--full", action="store_true", help="Sync complete historical reservations since 2022")
     sync_res_parser.add_argument("--days-back", type=int, default=60, help="Days of past reservations to include in incremental sync (default: 60)")
     sync_res_parser.add_argument("--dashboard", action="store_true", help="Re-generate HTML dashboard after syncing")
@@ -723,7 +800,7 @@ def main():
     track_sales_parser.add_argument("--dashboard", action="store_true", help="Re-generate HTML dashboard with updated sales velocity metrics")
     track_sales_parser.add_argument("--push", action="store_true", help="Automatically commit and push updated data/docs to GitHub")
 
-    snapshot_rates_parser = subparsers.add_parser("snapshot-rates", help="Record snapshot of current Kivoya published nightly rates into SQLite")
+    snapshot_rates_parser = subparsers.add_parser("snapshot-rates", help="Record snapshot of current Kivoya published nightly rates into database")
     snapshot_rates_parser.add_argument("--date", type=str, default=None, help="Snapshot date (YYYY-MM-DD), defaults to today")
     snapshot_rates_parser.add_argument("--backfill", action="store_true", help="Backfill baseline snapshot to 2026-02-01")
 
@@ -842,6 +919,11 @@ def main():
     )
 
     subparsers.add_parser("status", help="Show system, comps, sales, and reservations status summary")
+
+    subparsers.add_parser("check-db", help="Test database connectivity, latency, and table integrity")
+
+    bak_p = subparsers.add_parser("backup-cloud-db", help="Dump and compress cloud database with 30-day rotation")
+    bak_p.add_argument("--retention-days", type=int, default=30, help="Days of backup history to retain (default: 30)")
 
     args = parser.parse_args()
 
@@ -1097,7 +1179,7 @@ def main():
         normalized = [OwnerXClient.normalize_reservation(r) for r in raw_res]
         store = ReservationStore()
         stats = store.upsert_reservations(normalized, sync_mode=mode)
-        print(f"  ✓ Upserted into SQLite: {stats['upserted']} records ({stats['future']} future, {stats['past']} past).")
+        print(f"  ✓ Upserted into database: {stats['upserted']} records ({stats['future']} future, {stats['past']} past).")
         print(f"  ✓ Synced JSON database at: {store.json_path}")
 
         # Snapshot current Kivoya published nightly rates
@@ -1275,6 +1357,12 @@ def main():
         ))
     elif args.command == "status":
         print_system_status()
+    elif args.command == "check-db":
+        from src.db_admin import check_database_health
+        check_database_health()
+    elif args.command == "backup-cloud-db":
+        from src.db_admin import backup_cloud_database
+        backup_cloud_database(retention_days=args.retention_days)
     elif args.command == "sync-ratings":
         run_sync_ratings(args)
     elif args.command == "sync-comp-ratings":
@@ -1879,6 +1967,21 @@ def print_system_status():
     lines.append(f"🏰 Villa del Sol — STR Advisor Status [{today}]")
     lines.append("=" * 55)
 
+    from src.database import is_cloud_enabled
+    backend_label = "Turso Cloud (LibSQL)" if is_cloud_enabled() else "Local SQLite (data/reservations.db)"
+    lines.append(f"💾 Storage Backend: {backend_label}")
+
+    is_primary = is_primary_node()
+    node_role = os.getenv("STR_NODE_ROLE", "primary").strip().lower()
+    role_label = "Dedicated Primary Scraper" if is_primary else "Contributor Workstation"
+    if "IS_PRIMARY_SCRAPER" in os.environ:
+        governing = f"IS_PRIMARY_SCRAPER={os.getenv('IS_PRIMARY_SCRAPER')}"
+    else:
+        governing = f"STR_NODE_ROLE={node_role}"
+    lines.append(f"🖥️  Node Role:       {role_label} ({governing})")
+
+
+
     # 1. Comps Registry
     try:
         import json
@@ -1937,12 +2040,5 @@ def print_system_status():
 
 
 if __name__ == "__main__":
-    if sys.prefix == sys.base_prefix:
-        repo_root = Path(__file__).resolve().parent.parent
-        venv_python = repo_root / ".venv" / "bin" / "python"
-        if venv_python.exists():
-            os.environ["VIRTUAL_ENV"] = str(repo_root / ".venv")
-            os.environ["PATH"] = f"{venv_python.parent}:{os.environ.get('PATH', '')}"
-            os.environ["PYTHONPATH"] = str(repo_root) + (f":{os.environ['PYTHONPATH']}" if "PYTHONPATH" in os.environ else "")
-            os.execv(str(venv_python), [str(venv_python), "-m", "src.cli"] + sys.argv[1:])
     main()
+

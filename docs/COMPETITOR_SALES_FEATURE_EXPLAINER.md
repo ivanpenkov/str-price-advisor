@@ -45,7 +45,7 @@ flowchart TD
         Verify -- Unverified / Available --> Omit["Omit Dropout from Sales Ledger"]
     end
 
-    subgraph Persistence ["3. SQLite Ledger (data/reservations.db)"]
+    subgraph Persistence ["3. Central Cloud Ledger (Turso Cloud: competitor_sales) [SQLite: Test]"]
         Table[("TABLE: competitor_sales<br/>• listing_id, check_in, check_out<br/>• lead_time_days, last_observed_rate<br/>• last_observed_percentile<br/>• verification_status")]
         Confirmed --> Table
     end
@@ -125,7 +125,7 @@ $$\Delta_{\text{sales}} = \{ c \in \mathcal{C}_{\text{prev}} \cap \mathcal{R} \m
 * `reconcile_with_latest_snapshot()` removes false sales if a listing reappears in a subsequent scan.
 * However, daily quick scans (`--quick`) only scan **12 near-term intervals**.
 * Far-out intervals (82–362 days out) are only scanned weekly, and when scanned, they query the same Page 1 search or reuse search cache files.
-* Because listings relegated to Page 2 never appear on Page 1, they **never reappear in the snapshot**, permanently trapping false sales in the SQLite database.
+* Because listings relegated to Page 2 never appear on Page 1, they **never reappear in the snapshot**, permanently trapping false sales in the central database.
 
 ---
 

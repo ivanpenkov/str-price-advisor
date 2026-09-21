@@ -38,7 +38,7 @@ graph TD
     end
 
     subgraph TargetLayer ["5. Local Data & Domain Layer"]
-        SQLiteDB[("SQLite Database<br/>data/reservations.db")]
+        SQLiteDB[("Turso Cloud (LibSQL)<br/>str-price-advisor (AWS us-west-2)<br/>[SQLite: Testing Only]")]
         CompsRegistry[("Curated Comps<br/>config/comps_registry.json")]
         Snapshots[("Daily Snapshots<br/>data/pricing_data_*.json")]
         NordPool["NordVPN Stealth SOCKS5 Pool"]

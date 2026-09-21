@@ -77,7 +77,7 @@ flowchart TD
             AgyAgent["Autonomous Antigravity Agent<br/>(agy -c -p '...')"]
         end
         
-        DataStore[("SQLite & Registries<br/>reservations.db | comps_registry.json")]
+        DataStore[("Turso Cloud (LibSQL) & Registries<br/>str-price-advisor | comps_registry.json<br/>[SQLite: Testing Only]")]
     end
 
     User -->|Type or Dictate| NtfyApp

@@ -22,8 +22,8 @@ flowchart TD
         S3 -->|"Direct API"| Kivoya["Kivoya Direct Engine<br/>(Unit 503802 Rates & Blocks)"]
     end
 
-    subgraph Local_Storage ["Local Databases & Cache"]
-        PMS --> SQL[("SQLite & JSON Ledger<br/>data/reservations.db")]
+    subgraph Storage_Layer ["Storage & Central Cloud Database"]
+        PMS --> SQL[("Turso Cloud (LibSQL)<br/>str-price-advisor (AWS us-west-2)<br/>[SQLite: Testing Only]")]
         OTAs --> Comps[("Comp Registry & Cache<br/>config/comps_registry.json")]
         Kivoya --> Snapshots[("Pricing Snapshots<br/>data/pricing_data_*.json")]
     end
@@ -153,7 +153,7 @@ Below is the complete inventory of all features supported by the system. For eac
 ---
 
 ### Feature 5: Reservations & Booking Ledger
-- **Description**: Synchronizes confirmed historical and upcoming reservations from Streamline OwnerX PMS into SQLite (`data/reservations.db`) and JSON (`data/reservations_history.json`). Tracks:
+- **Description**: Synchronizes confirmed historical and upcoming reservations from Streamline OwnerX PMS into the central Turso Cloud database (`reservations` and `sync_history` tables) and local JSON export (`data/reservations.json`). SQLite is strictly reserved for hermetic unit testing. Tracks:
   - Dates, nights, stay classification (weekend, midweek, mix).
   - Channel attribution (Airbnb, VRBO, Kivoya Direct, Owner Stay, Maintenance).
   - Gross rent, platform service fees, management commission, and owner net payout.
@@ -222,7 +222,7 @@ Below is the complete inventory of all features supported by the system. For eac
 ---
 
 ### Feature 9: Reservation Intelligence, Advance Booking Windows & Historical Rate Benchmarking
-- **Description**: Extracts operational intelligence from 88+ confirmed reservations (2022–present) in `data/reservations.db`:
+- **Description**: Extracts operational intelligence from 88+ confirmed reservations (2022–present) stored centrally in Turso Cloud (`reservations` table):
   - *Seasonal Booking Windows*: Computes interquartile range (IQR, 25th–75th percentiles) of booking lead times (Peak Feb–Apr: 20–147 days, Summer Jun–Aug: 6–28 days, Fall: 12–134 days) to categorize upcoming dates into `Pre-Window`, `Active Booking Window`, or `Last-Minute Distress`.
   - *Weekend vs. Midweek Strategy Shift*: Breaks down year-by-year booked nights, % share, and realized ADR for Weekends (Thu–Sat) vs. Midweeks (Sun–Wed), proving that lowering midweek rates surged midweek capture from 27.9% in 2024 to 43.1% in 2025 and 42.0% in 2026.
   - *Historical Rate Benchmarking*: Computes rolling $\pm 15$ days historical rate ranges and median ADR matching stay type (weekend to weekend, midweek to midweek) to anchor recommended prices and flag deviations ($>+25\%$ Aggressive Premium or $<-25\%$ Deep Discount).
@@ -529,7 +529,7 @@ In [`src/segmentation.py`](file:///Users/ivanpe/str-price-advisor/src/segmentati
 | Aspect | Mandatory? | Rationale |
 | :--- | :---: | :--- |
 | **Pricing Audit & Open Intervals** | **NO** | Both daily and weekly scripts query the Kivoya / Streamline VRS API live on the fly ([`KivoyaClient.get_blocked_periods()`](file:///Users/ivanpe/str-price-advisor/src/cli.py#L112-L118)). It fetches live blocked dates in real time to calculate unbooked segments, so market price recommendations are always accurate even without running PMS sync. |
-| **Dashboard Historical & Revenue Tab** | **Recommended** | The interactive HTML dashboard's "Reservations" tab, past revenue KPI cards, and lead-time absorption charts read from the local database (`data/reservations.db`). If PMS sync has not run recently, newly confirmed reservations or cancellations will not appear in that specific table until synced. |
+| **Dashboard Historical & Revenue Tab** | **Recommended** | The interactive HTML dashboard's "Reservations" tab, past revenue KPI cards, and lead-time absorption charts read directly from Turso Cloud. If PMS sync has not run recently, newly confirmed reservations or cancellations will not appear in that specific table until synced. |
 
 **Automated Sequencing:** The launchd daemons are intentionally timed so that `run_pms_sync.sh` executes at **6:00 AM** (taking ~10 seconds), and `run_daily_quickscan.sh` fires at **6:15 AM** to immediately incorporate fresh reservation data into the dashboard.
 
@@ -547,7 +547,7 @@ In [`src/segmentation.py`](file:///Users/ivanpe/str-price-advisor/src/segmentati
 **Recommended Interim Routine:**
 Run `run_pms_sync.sh` once right before your weekly full scan (takes only ~5–10 seconds):
 ```bash
-# 1. Sync new reservations & financial payouts into SQLite (~10 sec)
+# 1. Sync new reservations & financial payouts into Turso Cloud (~10 sec)
 bash scripts/launchd/run_pms_sync.sh
 
 # 2. Run weekly 12-month market scan & platform parity check (~15–25 min)

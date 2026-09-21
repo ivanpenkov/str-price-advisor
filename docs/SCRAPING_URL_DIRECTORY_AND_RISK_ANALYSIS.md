@@ -278,7 +278,7 @@ https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?chec
 * **Reservation Contract Retrieval**: `POST https://ownerx.streamlinevrs.com/api/streamline`
 
 * **Where in Code**: `src/ownerx_client.py:OwnerXClient`
-* **Purpose**: Authenticates against Streamline PMS to ingest confirmed guest reservation details, gross rents, owner net payouts, and historical bookings into `data/reservations.db`.
+* **Purpose**: Authenticates against Streamline PMS to ingest confirmed guest reservation details, gross rents, owner net payouts, and historical bookings into Turso Cloud (`reservations` table; local SQLite for testing).
 
 #### Usage Frequencies
 * **Daily Quick Scan**: **3 HTTP calls** executed during pre-scan PMS synchronization (`scripts/launchd/run_pms_sync.sh` or `cli.py sync-pms`).

@@ -735,8 +735,8 @@
       "bedrooms": 6,
       "beds": 9,
       "baths": 3.0,
-      "rating": 4.93,
-      "reviews": 14,
+      "rating": 4.92,
+      "reviews": 13,
       "url": "https://www.airbnb.com/rooms/1628548270397523375",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1628548270397523375/original/ad8e466f-d256-42b9-ae0f-0879789ef3d1.jpeg",
@@ -1283,8 +1283,8 @@
       "bedrooms": 7,
       "beds": 12,
       "baths": 3.5,
-      "rating": 4.95,
-      "reviews": 61,
+      "rating": 4.94,
+      "reviews": 62,
       "url": "https://www.airbnb.com/rooms/1257280665542111508",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1257280665542111508/original/022d8542-8b44-4aaa-8392-34a3714b66bd.jpeg",
@@ -1355,7 +1355,6 @@
         "strengths": [
           "High bedroom count (7 bedrooms) accommodating large travel groups",
           "Expansive floor plan (~6,500 sq ft)",
-          "Flawless guest track record (4.95★ with 61 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -9281,7 +9280,7 @@
       "beds": 10,
       "baths": 3.0,
       "rating": 5.0,
-      "reviews": 45,
+      "reviews": 46,
       "is_guest_favorite": true,
       "guest_favorite_badge": "Guest Favorite",
       "url": "https://www.airbnb.com/rooms/1336951030658572186",
@@ -9302,7 +9301,7 @@
         },
         "strengths": [
           "Prime Scottsdale corridor commanding high regional demand",
-          "Flawless guest track record (5.00★ with 45 reviews)",
+          "Flawless guest track record (5.00★ with 46 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -9374,7 +9373,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-09-19T12:31:45.365242",
+    "last_ratings_sync": "2026-09-20T18:53:09.096847",
     "total_guest_favorites": 82
   },
   "excluded_comps": {

@@ -9,19 +9,17 @@ It catalogues what data is stored in each location, which CLI commands and backg
 ## 1. Executive Summary & Problem Context
 
 ### 1.1 The Multi-Device Operational Challenge
-The STR Price Advisor currently operates primarily on a **single dedicated host** (an Apple Silicon Mac Mini) that runs automated `launchd` background daemons to sync PMS reservations, scrape OTA competitor rates, compile an interactive 9-tab HTML dashboard (`docs/index.html`), and commit/push updates to GitHub.
+The STR Price Advisor originally operated on a **single dedicated host** (an Apple Silicon Mac Mini) with unversioned local SQLite files (`data/reservations.db`). 
 
-As development expands to **multiple active contributor workstations** (two laptops + the Mac Mini) and plans for a **mobile client**, the current storage architecture exhibits critical pain points:
-1. **Unversioned Local State**: Key state stores—such as the SQLite database (`data/reservations.db`, 1.1 MB) and the scraping cache (`data/cache/`, 6,300+ JSON files)—are `.gitignore`d. Fresh clones on secondary laptops lack these files, preventing local compilation of the full dashboard without performing manual file transfers or redundant network scrapes.
-2. **Split-Brain Risk**: Because SQLite operates as a single-writer file on local disk, changes made on one machine (e.g., historical sales detections, reservation syncs, or manual rate snapshots) are isolated to that machine unless manually copied over SCP or AirDrop.
-3. **Repository Bloat & Merge Collisions**: The automated production Mac Mini commits daily snapshots (`data/pricing_data_*.json`, up to 7.5 MB each) and the monolithic compiled dashboard (`docs/index.html`, 21.9 MB) directly to `origin/main`. Human contributors working on laptops frequently encounter complex git rebase conflicts against these auto-generated artifacts.
-4. **Mobile Client Disconnection**: A mobile app cannot easily query a local SQLite file residing on a desktop Mac Mini without either reading published static artifacts from GitHub Pages, querying a local API daemon running on the Mac Mini, or connecting to a shared central cloud database.
+To support **multiple active contributor workstations** (two laptops + the Mac Mini) and a **mobile client**, the relational data store has been **fully migrated to Turso Cloud (LibSQL)**. Production data—including historical reservations, competitor sales detections, sync logs, and published rate snapshots—now resides centrally in the cloud on AWS us-west-2 (`libsql://str-price-advisor-ivanpenkov.aws-us-west-2.turso.io`). 
+
+**SQLite is now strictly reserved for hermetic unit testing and offline development** (via `USE_LOCAL_SQLITE=1`). Any Mac computer with repository credentials can immediately read and write to the central database, eliminating database split-brain, missing data on fresh clones, and manual database copying.
 
 ### 1.2 Non-Negotiable Core Invariants
 Per operational requirements, any evolution of the storage architecture must preserve these workflows:
 - **Universal Git Workflow**: Every Mac computer must be able to pull latest from GitHub, merge local feature branches, and push changes back to GitHub.
-- **Universal Dashboard Generation**: Every Mac computer must be able to compile and build the complete `docs/index.html` page containing the latest market data (after pulling from GitHub or querying a shared store).
-- **Flexible Mobile Access**: Mobile apps must be able to consume data via one of three validated paths: (a) static web pages/endpoints pushed to GitHub Pages, (b) a lightweight relay/API hosted on the Mac Mini, or (c) a shared cloud database.
+- **Universal Dashboard Generation**: Every Mac computer must be able to compile and build the complete `docs/index.html` page containing the latest market data (querying the central Turso database or falling back to local SQLite for tests).
+- **Flexible Mobile Access**: Mobile apps can consume data directly from Turso Cloud via LibSQL SDKs, from static web pages/endpoints pushed to GitHub Pages, or through the mobile ntfy bridge.
 
 ---
 
@@ -37,8 +35,8 @@ flowchart TD
         NTFY["ntfy.sh (Push Service)"]
     end
 
-    subgraph RelationalStore ["Relational Database (Local File)"]
-        DB[("data/reservations.db<br/>(SQLite 3 - Gitignored)")]
+    subgraph RelationalStore ["Central Cloud Relational Store (Production)"]
+        TURSO[("Turso Cloud (LibSQL)<br/>str-price-advisor (AWS us-west-2)<br/>[Local SQLite: Testing Only]")]
     end
 
     subgraph FileStorage ["Structured JSON & File Storage"]
@@ -48,7 +46,7 @@ flowchart TD
         SNAPS["data/pricing_data_*.json<br/>(Daily Market Snapshots)"]
         ENRICH["data/enriched_comps/*.json<br/>(285 Deep Scraped Profiles)"]
         CACHE["data/cache/**<br/>(6,300+ Ephemeral Scraping Files)"]
-        ENV[(".env (API & Proxy Secrets)")]
+        ENV[(".env (API, Proxy & Turso Secrets)")]
     end
 
     subgraph GeneratedArtifacts ["Compiled Artifacts & Reports"]
@@ -61,40 +59,46 @@ flowchart TD
         GHP["GitHub Pages (docs/index.html)"]
     end
 
-    PMS -->|"sync-reservations"| DB
-    PMS -->|"snapshot-rates"| DB
-    DB -->|"export_to_json"| RES_JSON["data/reservations.json"]
+    PMS -->|"sync-reservations"| TURSO
+    PMS -->|"snapshot-rates"| TURSO
+    TURSO -->|"export_to_json"| RES_JSON["data/reservations.json"]
     OTAs -->|"run / enrich-comps"| CACHE & ENRICH
     OTAs -->|"sync-ratings"| REV
     CACHE & ENRICH -->|"evaluate-comps"| REG
-    REG & SPECS & CACHE & DB & REV -->|"generate-html / run"| HTML & MD_CSV
-    SNAPS -->|"track-competitor-sales"| DB
-    HTML & SNAPS & REV -->|"automated git push (docs/ & data/)"| GIT
-    REG & SPECS -.->|"manual git add (config/)"| GIT
+    REG & SPECS & CACHE & TURSO & REV -->|"generate-html / run"| HTML & MD_CSV
+    HTML & SNAPS & REV & REG & SPECS -->|"automated git push (docs/, data/, config/)"| GIT
     GIT --> GHP
 ```
 
 ---
 
-### Store 1: Relational SQLite Database (`data/reservations.db`)
+### Store 1: Central Cloud Relational Database — Turso Cloud (LibSQL) [Production] & SQLite [Testing Only]
 
-- **Filesystem Path**: `data/reservations.db` (and temporary SQLite rollbacks `data/reservations.db-journal` or WAL `data/reservations.db-wal`)
-- **Technology**: SQLite 3 (C-extension / Python standard library `sqlite3`)
-- **Git Tracking Status**: **Strictly Ignored** in `.gitignore` (`*.db`, `*.db-*`, `*.sqlite*`).
-- **Current Size & Scale**: ~1.1 MB; 4 indexed tables; ~4,500 total rows.
-- **Concurrency & Locking**: File-level exclusive lock. Only one process can write at a time. Concurrent multi-process writes result in `sqlite3.OperationalError: database is locked`.
+- **Hosting & Infrastructure**: **Turso Cloud (LibSQL)** serverless database (`str-price-advisor`), hosted on AWS us-west-2:
+  - **Database URL**: `libsql://str-price-advisor-ivanpenkov.aws-us-west-2.turso.io`
+  - **Transport Protocol**: HTTPS `/v2/pipeline` via `src/database.py` (`TursoRemoteConnection`)
+  - **Live Web Console**: [https://app.turso.tech/ivanpenkov/databases/str-price-advisor](https://app.turso.tech/ivanpenkov/databases/str-price-advisor)
+- **Local Testing & Offline Mode**: **SQLite 3** (`data/reservations.db` or `:memory:`)
+  - **Strictly Reserved for Testing**: Unit tests automatically route to in-memory or temporary SQLite instances, guaranteeing zero production data leakage.
+  - **Offline Override**: Setting `USE_LOCAL_SQLITE=1` in `.env` directs queries to local `data/reservations.db` without network access.
+- **Git Tracking Status**: Local `.db` files and backups are **strictly ignored** in `.gitignore` (`*.db`, `*.db-*`, `*.sqlite*`, `data/backups/`). Cloud credentials are managed via `.env` (`TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`).
+- **Current Size & Scale**: 4 relational tables; 4,904 total rows; ~130ms average ping roundtrip.
+- **Concurrency & Locking**: **Serverless multi-client concurrency**. Turso handles concurrent transactions safely in the cloud across any number of Mac workstations (Mac Mini, contributor laptops) and mobile clients. No file locks, no `database is locked` errors, and no split-brain divergence.
+- **Ongoing Administration & Disaster Recovery** (`src/db_admin.py`):
+  - `check-db`: Verifies cloud connectivity, ping latency, table record counts, and index health.
+  - `backup-cloud-db`: Dumps and streams all 4 tables directly into `gzip.open` compressed SQL archives (`data/backups/turso_backup_*.sql.gz`) with 30-day automated rotation.
 
 #### Schema & Data Contents:
 1. **`reservations`** (209 rows): Ground-truth booking ledger for Villa del Sol scraped from Streamline OwnerX PMS.
    - *Columns*: `id` (PK), `confirmation_id`, `creation_date`, `start_date`, `end_date`, `days_number`, `type_id`, `type_name`, `type_description`, `status_name`, `occupants`, `occupants_small`, `pets`, `unit_id`, `unit_name`, `owner_payout`, `management_fee`, `gross_rent`, `is_future`, `last_scraped_at`, `raw_json`.
    - *Indexes*: `idx_res_dates` (`start_date`, `end_date`), `idx_res_status` (`status_name`), `idx_res_future` (`is_future`).
-2. **`sync_history`** (31 rows): Audit log of all automated and manual PMS ingestion syncs.
+2. **`sync_history`** (32 rows): Audit log of all automated and manual PMS ingestion syncs.
    - *Columns*: `id` (PK auto), `synced_at`, `sync_mode`, `records_fetched`, `records_upserted`, `records_future`, `records_past`.
-3. **`competitor_sales`** (82 rows): Empirical market sales velocity detections derived from diffing consecutive daily pricing snapshots.
+3. **`competitor_sales`** (81 rows): Empirical market sales velocity detections derived from diffing consecutive daily pricing snapshots.
    - *Columns*: `id` (PK auto), `listing_id`, `listing_name`, `tier`, `location`, `check_in`, `check_out`, `nights`, `segment_type`, `detected_date`, `lead_time_days`, `last_observed_rate`, `last_observed_adj_rate`, `last_observed_percentile`, `composite_score`, `desirability_ratio`, `verification_status`, `raw_snippet`, `created_at`.
    - *Constraint*: `UNIQUE(listing_id, check_in, check_out)`.
    - *Indexes*: `idx_comp_sales_lead` (`lead_time_days`), `idx_comp_sales_seg` (`segment_type`), `idx_comp_sales_detected` (`detected_date`).
-4. **`property_rate_snapshots`** (4,224 rows): Daily historical ledger of Kivoya's published rates across calendar intervals for Villa del Sol.
+4. **`property_rate_snapshots`** (4,582 rows): Daily historical ledger of Kivoya's published rates across calendar intervals for Villa del Sol.
    - *Columns*: `id` (PK auto), `snapshot_date`, `calendar_date`, `nightly_rate`, `interval_type`, `season_name`, `period_name`, `created_at`.
    - *Constraint & Indexes*: `UNIQUE INDEX idx_rate_snap_unique (calendar_date, snapshot_date)`, `INDEX idx_rate_snap_lookup (calendar_date, snapshot_date)`.
 
@@ -105,6 +109,8 @@ flowchart TD
   - `src.cli track-competitor-sales` / `track-sales` (reads past detections and unique constraints).
   - `src.cli snapshot-rates` (queries existing daily rate snapshots).
   - `src.cli status` (summarizes reservation counts, pacing totals, and sales detections).
+  - `src.cli check-db` (measures connectivity, ping latency, and verifies table row parity).
+  - `src.cli backup-cloud-db` (streams compressed disaster-recovery SQL dumps).
   - `scripts/mobile_ntfy_bridge.py` (reads for `status` and `sales` push responses).
 - **Writers**:
   - `src.cli sync-reservations` (upserts PMS reservations into `reservations` and records `sync_history`).
@@ -340,14 +346,19 @@ flowchart TD
 In `src/cli.py`, the helper function `push_to_github()` runs whenever commands are invoked with `--push`:
 ```python
 def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports"):
-    subprocess.run(["git", "add", "docs/", "data/"], check=True)
-    res = subprocess.run(["git", "diff", "--staged", "--quiet"])
+    subprocess.run(["git", "add", "docs/", "data/", "config/"], check=True, cwd=str(repo_root))
+    res = subprocess.run(["git", "diff", "--staged", "--quiet"], cwd=str(repo_root))
     if res.returncode != 0:
-        subprocess.run(["git", "commit", "-m", commit_msg], check=True)
-        subprocess.run(["git", "push", "origin", "main"], check=True)
+        subprocess.run(["git", "commit", "-m", commit_msg], check=True, cwd=str(repo_root))
+        try:
+            subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", "main"], check=True, cwd=str(repo_root))
+        except subprocess.CalledProcessError:
+            subprocess.run(["git", "rebase", "--abort"], check=False, cwd=str(repo_root))
+            raise
+        subprocess.run(["git", "push", "origin", "HEAD:main"], check=True, cwd=str(repo_root))
 ```
-> [!IMPORTANT]
-> Notice that `push_to_github()` strictly stages `docs/` and `data/`. If `config/comps_registry.json` is modified by `add-comp` or `disqualify-comp` with `--push`, `config/` is currently **not staged** by `push_to_github()`.
+> [!NOTE]
+> `push_to_github()` stages `docs/`, `data/`, and `config/` together. It performs an atomic `git pull --rebase --autostash origin main` prior to pushing, automatically aborting the rebase (`git rebase --abort`) if merge conflicts arise so that automated daemon runs on the Mac Mini are never left in a halted or corrupted state.
 
 #### Accessing Commands & Scripts:
 - **Writers (Push to origin/main)**:
@@ -401,13 +412,15 @@ The following cross-reference maps every CLI sub-command and operational script 
 - `[R/W]` = Reads and Modifies store
 - `[-]` = No direct interaction
 
-| CLI Command / Script | Store 1: `reservations.db` | Store 2: `config/*.json` | Store 3: `ratings_reviews.json` | Store 4: `pricing_data_*.json` | Store 5: `enriched_comps/` | Store 6: `data/cache/` | Store 7: `docs/index.html` | Store 8: `.env` | Store 9: Git Remote |
+| CLI Command / Script | Store 1: Turso Cloud (LibSQL) | Store 2: `config/*.json` | Store 3: `ratings_reviews.json` | Store 4: `pricing_data_*.json` | Store 5: `enriched_comps/` | Store 6: `data/cache/` | Store 7: `docs/index.html` | Store 8: `.env` | Store 9: Git Remote |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **`run`** | `[R/W]` | `[R/W]` | `[R]` | `[R/W]` | `[R/W]` | `[R/W]` | `[W]` | `[R]` | `[W]`* |
 | **`generate-html`** | `[R]` | `[R]` | `[R]` | `[W]` | `[R]` | `[R]` | `[W]` | `[-]` | `[W]`* |
 | **`sync-reservations`** | `[R/W]` | `[-]` | `[-]` | `[W]`* | `[-]` | `[R/W]` | `[W]`* | `[R]` | `[W]`* |
 | **`snapshot-rates`** | `[R/W]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` |
 | **`track-competitor-sales`** | `[R/W]` | `[R]` | `[-]` | `[R/W]`* | `[-]` | `[-]` | `[W]`* | `[R]`* | `[W]`* |
+| **`check-db`** | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R]` | `[-]` |
+| **`backup-cloud-db`** | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[R]` | `[-]` |
 | **`sync-ratings`** | `[-]` | `[-]` | `[R/W]` | `[-]` | `[-]` | `[-]` | `[W]`* | `[R]` | `[-]` |
 | **`sync-comp-ratings`** | `[-]` | `[R/W]` | `[-]` | `[R]` | `[R/W]` | `[-]` | `[W]`* | `[R]` | `[-]` |
 | **`show-ratings`** | `[-]` | `[-]` | `[R]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` | `[-]` |
@@ -431,46 +444,51 @@ The following cross-reference maps every CLI sub-command and operational script 
 | **`run_weekly_fullscan.sh`** | `[R/W]` | `[R/W]` | `[R]` | `[W]` | `[R/W]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
 | **`run_pms_sync.sh`** | `[R/W]` | `[R]` | `[-]` | `[W]` | `[-]` | `[R/W]` | `[W]` | `[R]` | `[W]` |
 
-*\*Note: Marked with asterisk when action is conditioned upon specific flags (e.g. `--push`, `--dashboard`, `--verify`, or `--scrape-prices`).*
+*\*Note: Marked with asterisk when action is conditioned upon specific flags (e.g. `--push`, `--dashboard`, `--verify`, or `--scrape-prices).*
 
 ---
 
-## 4. Multi-Device Operational Analysis (Today's Reality)
+## 4. Multi-Device Operational Analysis
 
-When evaluating how 3 Macs (Mac Mini + Laptop A + Laptop B) and a mobile app operate today, several critical structural bottlenecks emerge:
+### 4.1 Fresh-Clone Experience on Secondary Laptops
+When a developer clones `ivanpenkov/str-price-advisor` on a contributor laptop:
+1. **Reservations & Financial History**: **[SOLVED BY TURSO CLOUD]**. With relational data migrated to Turso Cloud, any secondary laptop with `.env` configured connects directly to Turso. Running `generate-html` immediately renders the full reservation pacing, past revenue, and competitor absorption analytics with 100% data parity. Local SQLite is not used for production data and is strictly reserved for hermetic testing.
+2. **Empty Scraping Cache (`data/cache/`)**: `data/cache/` remains local/ephemeral on the scraping host. In `html_generator.py`, `_load_cached_comps_by_key()` automatically inspects the latest tracked `data/pricing_data_YYYY-MM-DD.json` snapshot whenever `data/cache/` is empty, allowing fresh clones to build complete dashboards immediately without running redundant web scrapes.
 
-### 4.1 The Fresh-Clone Breakdown on Secondary Laptops
-If a developer clones `ivanpenkov/str-price-advisor` on Laptop A or Laptop B:
-1. **Missing Reservations & Financial History**: Because `data/reservations.db` is `.gitignore`d, the database does not exist on the laptop. Running `generate-html` will either fail or render blank reservation pacing tables and empty competitor sales absorption metrics.
-   - *Current Workaround*: The developer must run `python -m src.cli sync-reservations --days-back 60` (hitting Streamline PMS credentials) or manually copy `reservations.db` over AirDrop/SCP.
-2. **Empty Scraping Cache (`data/cache/`)**: `data/cache/` is also `.gitignore`d. When running `generate-html` locally, `HTMLDashboardGenerator._load_cached_comps_by_key()` searches `data/cache/search_*.json`. On a fresh clone, it finds 0 cached files. Consequently, it cannot build interval pricing tables from cached comp checkouts; it is forced to fall back to synthetic seasonal baseline approximations.
-   - *Current Workaround*: The user must either scrape fresh live rates (consuming proxy bandwidth) or copy the entire 6,300-file cache folder from the Mac Mini.
+### 4.2 Database Split-Brain & Divergence: [SOLVED BY TURSO CLOUD]
+Because production state is hosted centrally on Turso Cloud:
+- When the Mac Mini detects competitor sales or syncs Streamline reservations, rows are committed directly to Turso Cloud.
+- Contributor laptops immediately see those new sales and bookings on subsequent queries.
+- Rate snapshots and manual syncs made from any authorized machine update the shared cloud database in real time.
+- Local SQLite divergence is eliminated because SQLite is only used during automated unit testing or explicit offline mode (`USE_LOCAL_SQLITE=1`).
 
-### 4.2 Database Split-Brain & Divergence
-Because `data/reservations.db` is stored locally:
-- If the Mac Mini detects 5 new competitor sales during its automated Sunday scan, those rows are inserted into `competitor_sales` on the Mac Mini.
-- If a developer runs an audit or manual scrape on Laptop A, Laptop A's local SQLite database knows nothing of those 5 sales.
-- Any manual rate snapshots (`snapshot-rates`) taken on a laptop do not propagate to the Mac Mini.
+### 4.3 Operational Role Separation (Enforced via `STR_NODE_ROLE`)
+To eliminate the risk of distributed lock deadlocks while completely preventing proxy connection contention and OTA perimeter blocks across machines, the system enforces **Operational Role Separation**:
 
-### 4.3 Git Push Racing & Merge Collisions
-Under the current automated schedule:
-- Mac Mini auto-commits and pushes to `origin/main` daily at 6:00 AM, 6:15 AM, and Sundays at 2:00 AM.
-- If a developer on Laptop A creates a branch `feat/pricing-logic`, edits code, and attempts to rebase on `origin/main`:
-  - They will hit severe text merge conflicts on `docs/index.html` (a 21.9 MB file with 200,000+ lines).
-  - They may hit conflicts on `data/pricing_data_*.json` snapshots.
-- Even worse: If a developer accidentally runs `run --push` on Laptop A while the Mac Mini is pushing, Git pushes will fail due to non-fast-forward ref locks.
+| Dimension | Dedicated Scraper Host (Mac Mini) | Contributor Workstations (Laptops) |
+| :--- | :--- | :--- |
+| **Node Role Setting** | `STR_NODE_ROLE=primary` in `.env` | `STR_NODE_ROLE=workstation` in `.env` (default) |
+| **Scheduled Market Scrapes** | **Active**: Runs automated `launchd` daemons (`run_daily_quickscan.sh`, `run_weekly_fullscan.sh`). | **Guarded**: `src.cli run` automatically halts with a warning. Use `run --force` to override. |
+| **PMS Reservations Sync** | **Active**: Daily `run_pms_sync.sh` commits to Turso Cloud. | Available for manual sync; reads live from Turso Cloud. |
+| **Dashboard Compilation** | Compiles & commits to GitHub Pages on schedule. | **Instant**: `generate-html` queries Turso Cloud in ~5s with zero scraping. |
+| **Comp Curation & Audit** | Full access. | **Primary Workstation Workflow**: `evaluate-comps`, `audit-comps`, `status`. |
+| **Single-Comp Scrapes** | Full access. | **Permitted**: `add-comp` and `scrape-comp-prices` (scrapes 1 listing; zero proxy exhaustion). |
 
-### 4.4 Proxy Quota & IP Protection Contention
+#### Why Operational Role Separation is Superior to Distributed Locking:
+1. **Zero Deadlock / Lock Leakage Risk**: Distributed cloud locks carry severe hazards if a laptop sleeps, drops WiFi, or terminates abruptly. With role separation, there is **no cloud lock row that can leak** or halt the automated morning scrape.
+2. **Safe Automated Git Pushes**: `push_to_github()` in `src/cli.py` executes `git pull --rebase origin main` before pushing and stages `config/` alongside `docs/` and `data/`, guaranteeing zero non-fast-forward push rejections.
+3. **NordVPN Proxy Conservation**: Only the primary host maintains long-lived stealth forwarder pools. Workstations perform instant cloud reads, preventing session limit exhaustion.
+
+### 4.4 Proxy Quota & IP Protection
 The project relies on a 10-worker NordVPN SOCKS5 proxy pool configured in `.env`.
-- NordVPN accounts enforce concurrent session limits.
-- Airbnb and VRBO aggressively monitor request signatures.
-- If two laptops and the Mac Mini initiate simultaneous scrapes, proxy connection limits may be exceeded, triggering connection dropouts (`proxy forwarder failed`) and potential cloudflare/perimeter blocks.
+- NordVPN accounts enforce concurrent session limits (typically 6–10 active connections).
+- Under Operational Role Separation, only the primary scraper host activates the 10-worker pool during scheduled sweeps.
+- Contributor laptops execute read-only queries against Turso Cloud or brief single-comp scrapes (`add-comp`), eliminating proxy exhaustion.
 
-### 4.5 Critical Cross-Machine Concurrency Risks & Race Conditions
-1. **Unpushed Configuration Desynchronization**: In `src/cli.py:612`, `push_to_github()` strictly executes `git add docs/ data/`. If a contributor on a laptop runs `add-comp --push` or `disqualify-comp --push`, the mutations made to `config/comps_registry.json` and `config/listing_specs.json` are **never staged or committed**. The laptop believes changes are pushed, but the production Mac Mini continues scraping with outdated competitor definitions.
-2. **Local POSIX Host Locks vs. Cross-Machine Collisions**: The lockfiles `/tmp/villasol_market_scan.lock` and `/tmp/villasol_pms_sync.lock` rely on macOS kernel file descriptor locks (`lockf`). They operate strictly on the local operating system and provide zero cross-machine coordination. If a laptop runs a manual interval scrape while the Mac Mini executes its scheduled scan, concurrent proxy forwarders collide and risk OTA perimeter rate-limiting.
-3. **Non-Rebasing Push Failures (`[rejected - non-fast-forward]`)**: `push_to_github()` calls `git push origin main` directly without performing a preceding `git pull --rebase`. If the Mac Mini pushes an automated scan while a laptop CLI command is running with `--push`, the laptop's push fails with an unhandled Git rejection error.
-4. **`data/reservations.json` Git Merge Conflicts**: Because `data/reservations.json` is tracked in Git and updated on every `sync-reservations` or automated scan, interleaved commits from different machines produce multi-thousand-line JSON merge conflicts.
+### 4.5 Multi-Machine Concurrency Controls
+1. **Guarded Scrape Entry**: In `src/cli.py`, `run_weekly_advisory()` checks `STR_NODE_ROLE`. If set to `workstation`, it safely aborts and advises the developer to run `generate-html` or pass `--force`.
+2. **Auto-Rebasing Push**: In `src/cli.py`, `push_to_github()` stages `docs/`, `data/`, and `config/`, executes `git pull --rebase origin main`, and pushes cleanly.
+3. **Local Kernel Mutex**: On the Mac Mini, `/tmp/villasol_market_scan.lock` and `/tmp/villasol_pms_sync.lock` prevent overlapping local daemons.
 
 ---
 
@@ -523,93 +541,107 @@ flowchart LR
 
 ## 6. Central Service Migration Assessment & Strategic Tiers
 
-To transition to a parallel multi-device environment without premature complexity, we evaluate each storage component across **four migration priority tiers**:
+To transition to a parallel multi-device environment without premature complexity, storage components are managed across **four priority tiers**:
 
-### Tier 1: Mandatory for Multi-Device (Move to Central Cloud Database)
-*Components that cannot function correctly across multiple machines using local files.*
+### Tier 1: Relational Stores — COMPLETED (Turso Cloud LibSQL)
+*Production relational state has been fully migrated to Turso Cloud (AWS us-west-2). Local SQLite is strictly retained for hermetic unit testing and offline development.*
 
-| Component | Current Store | Problem in Multi-Mac | Target Solution | Migration Complexity |
-| :--- | :--- | :--- | :--- | :--- |
-| **Reservations Ledger** | `data/reservations.db` (`reservations`, `sync_history`) | Unversioned local file; secondary laptops have empty database; manual sync required. | Shared Cloud Database (Supabase Postgres or Turso Cloud SQLite). | **Medium** (Refactor `ReservationStore` connection). |
-| **Competitor Sales Tracker** | `data/reservations.db` (`competitor_sales`) | Isolated local detection records; split-brain sales history across machines. | Shared Cloud Database table (`competitor_sales`). | **Medium** (Refactor `CompetitorSalesTracker` queries). |
-| **Property Rate Snapshots** | `data/reservations.db` (`property_rate_snapshots`) | Rate history fragmented across machines. | Shared Cloud Database table (`property_rate_snapshots`). | **Low** (Simple upsert interface). |
-
----
-
-### Tier 2: High Value for Repository Decoupling (Move out of Git into Cloud Storage)
-*Components that currently work via Git, but cause severe repo bloat and rebase collisions.*
-
-| Component | Current Store | Problem in Multi-Mac | Target Solution | Migration Complexity |
-| :--- | :--- | :--- | :--- | :--- |
-| **Daily Pricing Snapshots** | `data/pricing_data_*.json` (17 files, ~45 MB) | Git repository bloat (+7.5 MB/week); git rebase merge conflicts. | Cloud Object Storage (Cloudflare R2 or AWS S3) or DB JSONB column. | **Low** (Upload JSON on save, download by date). |
-| **Compiled Monolithic Dashboard** | `docs/index.html` (21.9 MB) | Massive merge conflicts during git rebase on laptops; bloats `.git` packfiles. | Build HTML on demand, or publish build artifacts directly to Cloudflare Pages/S3 without committing to git history. | **Medium** (Decouple Git tracking from dashboard distribution). |
+| Component | Production Cloud Table | Status | Records & Integrity | Local Fallback Role |
+| :--- | :--- | :---: | :--- | :--- |
+| **Reservations Ledger** | `reservations`, `sync_history` | **COMPLETED** | 209 reservations, 32 sync logs; 100% parity; SHA256 financial checksum verified. | Hermetic testing (`sqlite3` in-memory / tempfile). |
+| **Competitor Sales Tracker** | `competitor_sales` | **COMPLETED** | 81 verified competitor sales records. | Hermetic testing (`sqlite3` in-memory / tempfile). |
+| **Property Rate Snapshots** | `property_rate_snapshots` | **COMPLETED** | 4,582 published calendar rate snapshots. | Hermetic testing (`sqlite3` in-memory / tempfile). |
 
 ---
 
-### Tier 3: Business Configuration (Retain in Git vs. Move to Database)
+### Tier 2: High Value for Repository Decoupling (Candidate for Cloud Storage)
+*Components that currently work via Git, but cause repo bloat and rebase collisions.*
+
+| Component | Current Store | Problem in Multi-Mac | Target Solution | Migration Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **Daily Pricing Snapshots** | `data/pricing_data_*.json` (17 files, ~45 MB) | Git repository bloat (+7.5 MB/week); git rebase merge conflicts. | Cloud Object Storage (Cloudflare R2 or AWS S3) or DB JSONB column. | Next Priority (Candidate for Tier 2). |
+| **Compiled Monolithic Dashboard** | `docs/index.html` (21.9 MB) | Massive merge conflicts during git rebase on laptops; bloats `.git` packfiles. | Decouple from git commits; deploy via GitHub Actions build workflow or Cloudflare Pages. | Next Priority (Candidate for Tier 2). |
+
+---
+
+### Tier 3: Business Configuration (Retained in Git)
 *Components that represent human-curated business rules and registries.*
 
-| Component | Current Store | Multi-Mac Evaluation | Recommendation |
-| :--- | :--- | :--- | :--- |
-| **Comps Registry** | `config/comps_registry.json` | Works well in Git for human review via PRs, but CLI commands (`add-comp`, `disqualify-comp`) edit it programmatically. | **Hybrid**: Retain in Git initially for full auditability; optionally mirror active comps to central DB for mobile app querying. |
-| **Listing Specs** | `config/listing_specs.json` | 120 KB JSON file. Low change frequency. | **Keep in Git** or migrate alongside comp registry. |
-| **Strategy Settings** | `config/settings.yaml` | Hyperparameters (`urgent_percent_diff`, weights). | **Keep in Git**. Fits version-controlled configuration-as-code. |
-| **Holidays Catalog** | `config/holidays.json` | Holiday rules and dates. | **Keep in Git**. |
-| **Ratings & Reviews** | `data/ratings_reviews.json` | Scraped reviews and host responses. 88 KB. | **Keep in Git** or move to Cloud DB table for instant mobile updates. |
+| Component | Current Store | Multi-Mac Operational Rule |
+| :--- | :--- | :--- |
+| **Comps Registry** | `config/comps_registry.json` | **Tracked in Git**. CLI mutations (`add-comp`, `disqualify-comp`) require explicit git commit & push. |
+| **Listing Specs** | `config/listing_specs.json` | **Tracked in Git**. Granular specs and coordinates for curated comps. |
+| **Strategy Settings** | `config/settings.yaml` | **Tracked in Git**. Strategic weights, floors, and Bayesian hyperparameters. |
+| **Holidays Catalog** | `config/holidays.json` | **Tracked in Git**. Event calendars and minimum stay requirements. |
+| **Ratings & Reviews** | `data/ratings_reviews.json` | **Tracked in Git**. Host responses and cross-platform rating digests. |
 
 ---
 
-### Tier 4: Ephemeral Scraper Cache (Keep Local to Scraping Node)
+### Tier 4: Ephemeral Scraper Cache (Local to Scraping Host)
 *Components that are strictly transient.*
 
-| Component | Current Store | Multi-Mac Evaluation | Recommendation |
-| :--- | :--- | :--- | :--- |
-| **Scraping Cache** | `data/cache/**` (6,306 files) | Ephemeral request responses. High churn. | **Retain on local disk of scraping host (Mac Mini)**. Add a fallback in `html_generator.py` so secondary laptops read from the latest pricing snapshot instead of requiring raw scrape cache. |
-| **Stealth Proxy Locks** | `/tmp/*.lock` | OS-specific process mutex. | **Keep local**. Enforces single-process scraping per machine. |
+| Component | Current Store | Multi-Mac Operational Rule |
+| :--- | :--- | :--- |
+| **Scraping Cache** | `data/cache/**` (6,306 files) | **Retained on local disk of primary scraping host (Mac Mini)**. Secondary laptops transparently read from latest `data/pricing_data_*.json` snapshot when local cache is empty. |
+| **Stealth Proxy Locks** | `/tmp/*.lock` | Local process mutex. Prevents overlapping scrapes on the same machine. |
 
 ---
 
-## 7. Comparative Evaluation of Candidate Central Database Services
+## 7. Central Database Architecture: Turso Cloud (LibSQL)
 
-When selecting a central service to replace `data/reservations.db` and support 3 Macs + mobile:
-
-| Criterion | **Turso (Cloud SQLite / LibSQL)** | **Supabase (Managed PostgreSQL)** | **Firebase Firestore (NoSQL Document DB)** |
-| :--- | :--- | :--- | :--- |
-| **Architecture Fit** | ⭐⭐⭐⭐⭐ Drop-in replacement for existing Python `sqlite3` queries. | ⭐⭐⭐⭐ Powerful relational engine; requires porting SQL dialects. | ⭐⭐⭐ Requires complete schema redesign from relational to documents. |
-| **Python Integration** | Native `libsql-experimental` / `libsql-client` package; exact same syntax as `sqlite3`. | `psycopg2` or `asyncpg` or Supabase Python SDK. | `firebase-admin` Python SDK. |
-| **Local Offline Replica** | **Exceptional** (Embedded replica allows instant zero-latency local queries with automatic background sync). | Requires direct internet connection or complex local Postgres container. | Excellent built-in offline caching on mobile SDKs. |
-| **Mobile App Support** | Swift/Kotlin/React Native SDKs available. | First-class REST, GraphQL, and client SDKs with built-in Auth. | Industry standard mobile SDKs with real-time listeners. |
-| **Cost / Free Tier** | Generous free tier (500 databases, 9 GB storage, 1B row reads/mo). | Generous free tier (500 MB DB, 50,000 monthly active users). | Generous free tier (50,000 reads, 20,000 writes/day). |
-| **Recommendation** | **Top Choice for Python CLI Simplicity** (maintains existing SQL schemas with zero rewrite). | **Top Choice for Full Web/Mobile Backend** (includes instant REST APIs and Auth). | Suitable only if mobile app demands real-time NoSQL synchronization. |
+The relational database layer uses **Turso Cloud (LibSQL)**:
+- **Serverless Cloud Engine**: Managed LibSQL database on AWS us-west-2 (`libsql://str-price-advisor-ivanpenkov.aws-us-west-2.turso.io`).
+- **Unified DB-API 2.0 Adapter** (`src/database.py`): Drop-in replacement for standard `sqlite3`, providing `TursoRemoteConnection`, `LibSQLCursor`, and `LibSQLRow` over HTTPS `/v2/pipeline`.
+- **Hermetic Testing Invariant**: Local `sqlite3` is automatically used when database path is `:memory:`, a temporary file, or when `USE_LOCAL_SQLITE=1` is set. Unit tests run 100% isolated without network calls.
+- **Disaster Recovery** (`src/db_admin.py`): Daily automated compressed backups (`backup-cloud-db`) with 30-day rotation, and real-time connectivity diagnostics (`check-db`).
 
 ---
 
-## 8. Immediate Action Plan: Restoring Universal Laptop Capabilities
+## 8. Multi-Mac Onboarding & Environment Setup
 
-Before initiating any external cloud migrations, we can immediately achieve the user's hard requirement—**allowing any of the three Macs to pull from GitHub and build the full `docs/index.html` page**—by implementing two zero-dependency code fallbacks:
+To configure a new contributor laptop or secondary Mac computer for parallel development:
 
-### Gap 1: Dashboard Generator Relies on Ephemeral `data/cache/`
-- **Current Defect**: `HTMLDashboardGenerator._load_cached_comps_by_key()` only checks `data/cache/search_*.json`, which is `.gitignore`d and absent on fresh laptop clones.
-- **Immediate Fix**: Enhance `_load_cached_comps_by_key()` to inspect the latest tracked `data/pricing_data_YYYY-MM-DD.json` snapshot whenever `data/cache/` is empty. Because `pricing_data_*.json` is tracked in Git, any laptop that runs `git pull` will instantly have full competitive data to build the entire dashboard without scraping.
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/ivanpenkov/str-price-advisor.git
+   cd str-price-advisor
+   ```
 
-### Gap 2: Dashboard Generator Relies on Local `data/reservations.db`
-- **Current Defect**: `ReservationStore` and `CompetitorSalesTracker` connect only to `data/reservations.db`, which is `.gitignore`d. If absent, reservation pacing, competitor sales, and published rate snapshots fail to load.
-- **Immediate Fix**: Implement a complete local database auto-bootstrap mechanism:
-  1. **`reservations` Table**: Enhance `ReservationStore` to automatically seed `reservations` and `sync_history` from `data/reservations.json` (tracked in Git) if `data/reservations.db` does not exist on disk.
-  2. **`competitor_sales` Table**: Trigger `CompetitorSalesTracker.backfill_all_snapshots()` on first initialization if the database is fresh. This automatically parses all version-controlled `data/pricing_data_*.json` files to fully reconstitute the 82+ verified sales records and absorption history with zero live scraping.
-  3. **`property_rate_snapshots` Table**: Reconstitute daily rate snapshots from cached seasonal rate tables or maintain a version-controlled companion export (`data/rate_snapshots.json`).
+2. **Configure Cloud Credentials (`.env`)**:
+   Create a local `.env` file containing:
+   ```bash
+   # Central Database (Turso Cloud)
+   TURSO_DATABASE_URL=libsql://str-price-advisor-ivanpenkov.aws-us-west-2.turso.io
+   TURSO_AUTH_TOKEN=<your-turso-jwt-auth-token>
 
-With these targeted changes:
-1. Every Mac can clone or pull from GitHub.
-2. Every Mac can immediately run `python -m src.cli generate-html` and compile the complete 21.9 MB dashboard with 100% data fidelity.
-3. Feature branches can be developed and verified on laptops without requiring manual file transfers or external network calls.
-4. The groundwork is cleanly established for the subsequent phase of migrating relational stores to a central cloud service.
+   # Proxy Credentials (NordVPN SOCKS5)
+   NORD_USER=<nordvpn-service-username>
+   NORD_PASS=<nordvpn-service-password>
+   ```
+
+3. **Verify Central Cloud Connectivity**:
+   ```bash
+   .venv/bin/python -m src.cli check-db
+   ```
+   Expected output: `Status: ONLINE (Connected & Authenticated)`, with verified row counts across `reservations`, `sync_history`, `competitor_sales`, and `property_rate_snapshots`.
+
+4. **Run Hermetic Unit Tests (Zero Network / Zero Cloud Leakage)**:
+   ```bash
+   .venv/bin/python -m unittest tests/test_database_adapter.py
+   USE_LOCAL_SQLITE=1 .venv/bin/python -m unittest discover tests
+   ```
+
+5. **Generate Full Dashboard Locally**:
+   ```bash
+   .venv/bin/python -m src.cli generate-html
+   ```
+   Instantly compiles `docs/index.html` reading live reservations and rate snapshots directly from Turso Cloud.
 
 ---
 
 ## 9. Cloud Database Migration Specifications
 
-For the comprehensive technical specification, requirements, and system design detailing the cloud migration to Turso (LibSQL), refer to the companion engineering documents:
+For the comprehensive technical specification, requirements, and system design detailing the completed cloud migration to Turso (LibSQL), refer to:
 - **Requirements Specification**: [docs/migrating_sqlite_to_cloud_requirements.md](file:///Users/ivanpe/str-price-advisor/docs/migrating_sqlite_to_cloud_requirements.md)
 - **Technical Design Document**: [docs/migrating_sqlite_to_cloud_design.md](file:///Users/ivanpe/str-price-advisor/docs/migrating_sqlite_to_cloud_design.md)
 

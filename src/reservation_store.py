@@ -8,7 +8,6 @@ revenue models for cumulative pace curves and availability calendar data.
 from datetime import datetime, date, timedelta
 import json
 from pathlib import Path
-import sqlite3
 from contextlib import contextmanager
 from typing import Dict, List, Optional, Any, Tuple, Union, Set
 
@@ -32,8 +31,8 @@ class ReservationStore:
 
     @contextmanager
     def _get_connection(self):
-        conn = sqlite3.connect(str(self.db_path))
-        conn.row_factory = sqlite3.Row
+        from src.database import get_db_connection
+        conn = get_db_connection(self.db_path)
         try:
             yield conn
         finally:
@@ -213,8 +212,8 @@ class ReservationStore:
             """, (now_iso, sync_mode, len(reservations), upserted_count, future_count, past_count))
             conn.commit()
 
-        # Auto-sync JSON
-        self.export_to_json(today=today)
+        if self.json_path:
+            self.export_to_json(today=today)
 
         return {
             "fetched": len(reservations),

@@ -15,7 +15,6 @@ import logging
 import math
 from pathlib import Path
 import re
-import sqlite3
 import statistics
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -134,8 +133,8 @@ class ReservationIntelligence:
 
     @contextmanager
     def _get_connection(self):
-        conn = sqlite3.connect(str(self.db_path))
-        conn.row_factory = sqlite3.Row
+        from src.database import get_db_connection
+        conn = get_db_connection(self.db_path)
         try:
             yield conn
         finally:

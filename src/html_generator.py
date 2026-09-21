@@ -25,6 +25,7 @@ from src.segmentation import CalendarSegmenter
 from src.analytics import PricingAnalyticsEngine
 from src.config import URGENT_PCT_DIFF, MODERATE_PCT_DIFF
 from src.proposed_prices import generate_proposed_prices
+from src.database import is_cloud_enabled
 
 
 def _is_spec_or_generic_title(s: str) -> bool:
@@ -6012,133 +6013,142 @@ class HTMLDashboardGenerator:
         live_date_str = live_date.isoformat()
         live_label_date = live_date.strftime("%b %d, %Y")
 
-        # 2. Historical Snapshots from SQLite
-        db_file = Path("data/reservations.db")
-        if db_file.exists():
-            try:
-                import sqlite3
-                with sqlite3.connect(str(db_file)) as conn:
-                    cursor = conn.cursor()
-                    if seasonal_rates:
-                        cursor.execute("""
-                            SELECT snapshot_date, MAX(created_at)
-                            FROM property_rate_snapshots
-                            WHERE snapshot_date != ?
-                            GROUP BY snapshot_date
-                            ORDER BY snapshot_date ASC
-                        """, (live_date_str,))
+        # 2. Historical Snapshots from Database
+        conn = None
+        try:
+            from src.database import get_db_connection
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            where_clause = "WHERE snapshot_date != ?" if seasonal_rates else ""
+            params = (live_date_str,) if seasonal_rates else ()
+            cursor.execute(f"""
+                SELECT snapshot_date, calendar_date, nightly_rate, interval_type, season_name, period_name, created_at
+                FROM property_rate_snapshots
+                {where_clause}
+                ORDER BY snapshot_date ASC, calendar_date ASC
+            """, params)
+            all_rows = cursor.fetchall()
+
+            rows_by_snapshot = {}
+            max_created_by_snapshot = {}
+            for r in all_rows:
+                s_date = r[0] if isinstance(r, (list, tuple)) else r["snapshot_date"]
+                c_date = r[1] if isinstance(r, (list, tuple)) else r["calendar_date"]
+                rate = r[2] if isinstance(r, (list, tuple)) else r["nightly_rate"]
+                itype = r[3] if isinstance(r, (list, tuple)) else r["interval_type"]
+                season = r[4] if isinstance(r, (list, tuple)) else r["season_name"]
+                period = r[5] if isinstance(r, (list, tuple)) else r["period_name"]
+                created_at = r[6] if isinstance(r, (list, tuple)) else r["created_at"]
+
+                if s_date not in rows_by_snapshot:
+                    rows_by_snapshot[s_date] = []
+                    max_created_by_snapshot[s_date] = created_at
+                elif created_at and (not max_created_by_snapshot[s_date] or created_at > max_created_by_snapshot[s_date]):
+                    max_created_by_snapshot[s_date] = created_at
+
+                rows_by_snapshot[s_date].append((c_date, rate, itype, season, period))
+
+            for s_date, rows in rows_by_snapshot.items():
+                max_created = max_created_by_snapshot.get(s_date)
+                snap_dt = None
+                if max_created:
+                    try:
+                        snap_dt = datetime.fromisoformat(max_created)
+                        if latest_api_dt is None or snap_dt > latest_api_dt:
+                            latest_api_dt = snap_dt
+                    except Exception:
+                        pass
+
+                if snap_dt:
+                    time_str = snap_dt.strftime("%b %d, %Y at ") + snap_dt.strftime("%I:%M %p").lstrip("0")
+                else:
+                    time_str = s_date
+
+                # Consolidate into seasonal periods
+                periods = []
+                current_period = None
+                for r in rows:
+                    c_date, rate, itype, season, period = r
+                    is_hol = 'holiday' in (season or '').lower() or any(w in (period or '').lower() for w in ['memorial', 'july 4', 'labor', 'columbus', 'thanksgiving', 'christmas', 'holi'])
+                    if 'summer' in (season or '').lower():
+                        group_key = ('Summer 2026', 'Summer 2026')
                     else:
-                        cursor.execute("""
-                            SELECT snapshot_date, MAX(created_at)
-                            FROM property_rate_snapshots
-                            GROUP BY snapshot_date
-                            ORDER BY snapshot_date ASC
-                        """)
-                    snap_rows = cursor.fetchall()
-                    for s_date, max_created in snap_rows:
-                        snap_dt = None
-                        if max_created:
-                            try:
-                                snap_dt = datetime.fromisoformat(max_created)
-                                if latest_api_dt is None or snap_dt > latest_api_dt:
-                                    latest_api_dt = snap_dt
-                            except Exception:
-                                pass
+                        group_key = (season, period)
 
-                        if snap_dt:
-                            time_str = snap_dt.strftime("%b %d, %Y at ") + snap_dt.strftime("%I:%M %p").lstrip("0")
-                        else:
-                            time_str = s_date
-
-                        cursor.execute("""
-                            SELECT calendar_date, nightly_rate, interval_type, season_name, period_name
-                            FROM property_rate_snapshots
-                            WHERE snapshot_date = ?
-                            ORDER BY calendar_date ASC
-                        """, (s_date,))
-                        rows = cursor.fetchall()
-
-                        # Consolidate into seasonal periods
-                        periods = []
-                        current_period = None
-                        for r in rows:
-                            c_date, rate, itype, season, period = r
-                            is_hol = 'holiday' in (season or '').lower() or any(w in (period or '').lower() for w in ['memorial', 'july 4', 'labor', 'columbus', 'thanksgiving', 'christmas', 'holi'])
-                            if 'summer' in (season or '').lower():
-                                group_key = ('Summer 2026', 'Summer 2026')
-                            else:
-                                group_key = (season, period)
-
-                            if current_period is None or current_period['group_key'] != group_key:
-                                if current_period:
-                                    periods.append(current_period)
-                                current_period = {
-                                    'group_key': group_key,
-                                    'season_name': season or '',
-                                    'period_name': period if 'summer' not in (season or '').lower() else 'Summer 2026',
-                                    'from_date': c_date,
-                                    'to_date': c_date,
-                                    'mid_rates': [],
-                                    'wkd_rates': [],
-                                    'spec_rates': [],
-                                    'is_holiday': is_hol,
-                                }
-                            current_period['to_date'] = c_date
-                            if itype == 'midweek':
-                                current_period['mid_rates'].append(rate)
-                            elif itype == 'weekend':
-                                current_period['wkd_rates'].append(rate)
-                            else:
-                                current_period['spec_rates'].append(rate)
+                    if current_period is None or current_period['group_key'] != group_key:
                         if current_period:
                             periods.append(current_period)
-
-                        formatted_periods = []
-                        for p in periods:
-                            mid = round(sum(p['mid_rates'])/len(p['mid_rates'])) if p['mid_rates'] else None
-                            wkd = round(sum(p['wkd_rates'])/len(p['wkd_rates'])) if p['wkd_rates'] else None
-                            spec = round(sum(p['spec_rates'])/len(p['spec_rates'])) if p['spec_rates'] else None
-                            if mid and wkd and mid == wkd:
-                                spec = mid
-                                mid = None
-                                wkd = None
-                            min_n = 3 if p['is_holiday'] else (2 if 'summer' in (p['season_name'] or '').lower() else 3)
-                            if '06' in p['from_date'] and 'summer' in (p['season_name'] or '').lower():
-                                min_n = 3
-                            formatted_periods.append({
-                                'period_name': p['period_name'],
-                                'season_name': p['season_name'],
-                                'from_date': p['from_date'],
-                                'to_date': p['to_date'],
-                                'midweek': mid,
-                                'weekend': wkd,
-                                'special': spec,
-                                'min_nights': min_n,
-                                'is_holiday': p['is_holiday'],
-                                'notes': 'Historical catalog baseline backfilled for rate shortfall audit' if s_date == '2026-02-01' else 'Rate snapshot archived from Streamline API',
-                            })
-
-                        if s_date == '2026-02-01':
-                            label_text = f"{s_date} (Historical Baseline)"
-                            desc_text = f"Historical rate catalog baseline backfilled for rate shortfall audit calculations (recorded {time_str})."
-                        else:
-                            try:
-                                dt_obj = datetime.strptime(s_date, "%Y-%m-%d").date()
-                                f_date = dt_obj.strftime("%b %d, %Y")
-                            except Exception:
-                                f_date = s_date
-                            label_text = f"{f_date} (Archived Snapshot)"
-                            desc_text = f"Rate snapshot archived on {f_date} at {time_str} from Streamline API."
-
-                        snapshots[s_date] = {
-                            'date': s_date,
-                            'label': label_text,
-                            'description': desc_text,
-                            'updated_at_str': time_str,
-                            'periods': formatted_periods,
+                        current_period = {
+                            'group_key': group_key,
+                            'season_name': season or '',
+                            'period_name': period if 'summer' not in (season or '').lower() else 'Summer 2026',
+                            'from_date': c_date,
+                            'to_date': c_date,
+                            'mid_rates': [],
+                            'wkd_rates': [],
+                            'spec_rates': [],
+                            'is_holiday': is_hol,
                         }
-            except Exception:
-                pass
+                    current_period['to_date'] = c_date
+                    if itype == 'midweek':
+                        current_period['mid_rates'].append(rate)
+                    elif itype == 'weekend':
+                        current_period['wkd_rates'].append(rate)
+                    else:
+                        current_period['spec_rates'].append(rate)
+                if current_period:
+                    periods.append(current_period)
+
+                formatted_periods = []
+                for p in periods:
+                    mid = round(sum(p['mid_rates'])/len(p['mid_rates'])) if p['mid_rates'] else None
+                    wkd = round(sum(p['wkd_rates'])/len(p['wkd_rates'])) if p['wkd_rates'] else None
+                    spec = round(sum(p['spec_rates'])/len(p['spec_rates'])) if p['spec_rates'] else None
+                    if mid and wkd and mid == wkd:
+                        spec = mid
+                        mid = None
+                        wkd = None
+                    min_n = 3 if p['is_holiday'] else (2 if 'summer' in (p['season_name'] or '').lower() else 3)
+                    if '06' in p['from_date'] and 'summer' in (p['season_name'] or '').lower():
+                        min_n = 3
+                    formatted_periods.append({
+                        'period_name': p['period_name'],
+                        'season_name': p['season_name'],
+                        'from_date': p['from_date'],
+                        'to_date': p['to_date'],
+                        'midweek': mid,
+                        'weekend': wkd,
+                        'special': spec,
+                        'min_nights': min_n,
+                        'is_holiday': p['is_holiday'],
+                        'notes': 'Historical catalog baseline backfilled for rate shortfall audit' if s_date == '2026-02-01' else 'Rate snapshot archived from Streamline API',
+                    })
+
+                if s_date == '2026-02-01':
+                    label_text = f"{s_date} (Historical Baseline)"
+                    desc_text = f"Historical rate catalog baseline backfilled for rate shortfall audit calculations (recorded {time_str})."
+                else:
+                    try:
+                        dt_obj = datetime.strptime(s_date, "%Y-%m-%d").date()
+                        f_date = dt_obj.strftime("%b %d, %Y")
+                    except Exception:
+                        f_date = s_date
+                    label_text = f"{f_date} (Archived Snapshot)"
+                    desc_text = f"Rate snapshot archived on {f_date} at {time_str} from Streamline API."
+
+                snapshots[s_date] = {
+                    'date': s_date,
+                    'label': label_text,
+                    'description': desc_text,
+                    'updated_at_str': time_str,
+                    'periods': formatted_periods,
+                }
+        except Exception:
+            pass
+        finally:
+            if conn is not None:
+                conn.close()
+
 
         if latest_api_dt is None:
             latest_api_dt = datetime.now()
@@ -6511,7 +6521,7 @@ class HTMLDashboardGenerator:
 
             <div style="background: rgba(15,23,42,0.6); border: 1px solid #334155; border-radius: 8px; padding: 14px 16px;">
               <div style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Historical Snapshot Store</div>
-              <div style="font-size: 0.95rem; font-weight: 700; color: #fbbf24; font-family: 'JetBrains Mono', monospace; margin-top: 4px;">SQLite: data/reservations.db</div>
+              <div style="font-size: 0.95rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; margin-top: 4px;">{'<span style="color: #4ade80;">Cloud: Turso (LibSQL)</span>' if is_cloud_enabled() else '<span style="color: #fbbf24;">Local: SQLite (data/reservations.db)</span>'}</div>
               <div style="font-size: 0.75rem; color: #cbd5e1; margin-top: 4px;">{len(snapshot_dates)} archived snapshots recorded</div>
             </div>
           </div>

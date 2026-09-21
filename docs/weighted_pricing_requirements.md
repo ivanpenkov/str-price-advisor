@@ -102,7 +102,7 @@ All pricing calculations, historical aggregations, and recommendations must stri
 - **Weekend Nights**: Thursday, Friday, Saturday nights (checkout Fri, Sat, Sun).
 
 ### FR-5: Historical Interval Average Price Formulation
-1. **Matched Reservations**: For each Streamline or fallback interval, query all historical confirmed guest bookings (`status_name IN ('Booked', 'Checked Out')` with `gross_rent > 0`) from `data/reservations.db` (2022–present).
+1. **Matched Reservations**: For each Streamline or fallback interval, query all historical confirmed guest bookings (`status_name IN ('Booked', 'Checked Out')` with `gross_rent > 0`) from Turso Cloud (`reservations` table; local SQLite for testing) (2022–present).
 2. **Exact Night-Level Attribution**:
    - For multi-day bookings crossing calendar month or interval boundaries (e.g. October 29 to November 3), each night stayed and its allocated nightly revenue must be attributed strictly to the specific calendar month or holiday interval in which that night occurred.
    - For regular non-holiday monthly periods, match historical stay nights occurring in that calendar month across prior years, strictly excluding nights that fall into identified holiday periods.
@@ -174,7 +174,7 @@ Legacy status codes (`AGREED_INCREASE`, `AGREED_DECREASE`, `CONFLICT_HOLD`, `NO_
 ## 5. Statistical Significance & Competitor Sales Strategy
 
 ### 5.1 Comp Sales Analysis ($N = 26$)
-The property tracking database (`data/reservations.db`) records 26 confirmed competitor bookings across lead-time horizons:
+The central tracking database in Turso Cloud (`competitor_sales` table; local SQLite for testing) records 26 confirmed competitor bookings across lead-time horizons:
 
 | Horizon | Stay Type | Prior Target | Sales ($n$) | Empirical Median ($p_{50}$) | Bayesian Target ($\hat{Y}$) | Variance / Analysis |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |

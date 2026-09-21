@@ -15,7 +15,7 @@
 
 Villa del Sol is an 8-bedroom, 5-bathroom premier luxury vacation rental estate in Tempe, Arizona, featuring private heated resort pool, spa, putting green, billiards, and multi-game entertainment amenities. The property uses the `str-price-advisor` platform to monitor competitive market pricing, track competitor booking absorption events, and synthesize nightly rate recommendations aligned with Kivoya PMS / Streamline seasonal rate periods.
 
-In September 2026, an audit of the competitor sales tracking database (`data/reservations.db:competitor_sales`) was conducted across 75 verified competitor bookings. The audit revealed that competitor bookings exhibited distinct percentile distributions across lead-time horizons, highlighting an urgent need to re-align the pricing engine's target percentiles.
+In September 2026, an audit of the competitor sales tracking database in Turso Cloud (`competitor_sales` table; local SQLite for testing) was conducted across 75 verified competitor bookings. The audit revealed that competitor bookings exhibited distinct percentile distributions across lead-time horizons, highlighting an urgent need to re-align the pricing engine's target percentiles.
 
 Specifically, unconstrained Bayesian shrinkage had begun pulling far-out weekend targets down to **43.9%**, directly contradicting luxury revenue management principles ("Hold firm at 65%–70%"), while peak midweek bookings converted only when deeply discounted ($P_{21}$–$P_{33}$).
 

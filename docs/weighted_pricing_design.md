@@ -41,7 +41,7 @@ flowchart TD
     end
 
     subgraph ResIntel["Historical Interval Benchmark Engine (src/reservation_intelligence.py)"]
-        DB[(data/reservations.db<br/>Confirmed Stays: Booked + Checked Out)]
+        DB[(Turso Cloud: reservations<br/>Confirmed Stays: Booked + Checked Out<br/>[SQLite: Testing Only])]
         HOL_RESOLV["Hybrid Holiday Resolver<br/>(Gregorian Computus + US Floating Rules incl. Columbus Day)"]
         AGG_SRV["compute_interval_historical_benchmarks()<br/>Midweek: Sun-Wed | Weekend: Thu-Sat<br/>Night-level boundary attribution<br/>Weighted Nightly Avg: sum(Rent) / sum(Nights)<br/>Holiday exclusion in regular months"]
         DB --> AGG_SRV

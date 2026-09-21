@@ -71,8 +71,8 @@ flowchart TD
         DirectPDP -- Network / Proxy Timeout --> OmitUnverified["Omit Candidate (Preserve Purity)"]
     end
 
-    subgraph Persistence ["3. SQLite Transaction Ledger"]
-        CommitSale --> SQL[("data/reservations.db<br/>TABLE: competitor_sales<br/>UNIQUE(listing_id, check_in, check_out)")]
+    subgraph Persistence ["3. Central Cloud Ledger (Turso Cloud LibSQL) [SQLite: Test]"]
+        CommitSale --> SQL[("Turso Cloud: str-price-advisor<br/>TABLE: competitor_sales<br/>UNIQUE(listing_id, check_in, check_out)")]
         ReconcilePurge --> SQL
     end
 
@@ -359,7 +359,7 @@ tracker.record_direct_sale(
 
 ## 6. Database Schema & Storage Specifications
 
-### 6.1 SQLite DDL (`data/reservations.db`)
+### 6.1 Database Schema (Turso Cloud `competitor_sales`, SQLite Testing Fallback)
 ```sql
 CREATE TABLE IF NOT EXISTS competitor_sales (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

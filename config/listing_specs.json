@@ -97,8 +97,8 @@
     "bedrooms": 6,
     "beds": 9,
     "baths": 3.0,
-    "rating": 4.93,
-    "reviews": 14,
+    "rating": 4.92,
+    "reviews": 13,
     "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1628548270397523375/original/ad8e466f-d256-42b9-ae0f-0879789ef3d1.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -201,8 +201,8 @@
     "bedrooms": 7,
     "beds": 12,
     "baths": 3.5,
-    "rating": 4.95,
-    "reviews": 61,
+    "rating": 4.94,
+    "reviews": 62,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1257280665542111508/original/022d8542-8b44-4aaa-8392-34a3714b66bd.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -3342,7 +3342,7 @@
     "beds": 10,
     "baths": 3.0,
     "rating": 5.0,
-    "reviews": 45,
+    "reviews": 46,
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite",
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1336951030658572186/original/fbec253d-437d-464f-8102-4e37acbfe6a0.png"

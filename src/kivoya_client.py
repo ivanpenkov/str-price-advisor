@@ -378,23 +378,36 @@ class KivoyaClient:
                     return r["first_price"]
                 return r["nightly_rate"]
 
-        # Check if rate exists in SQLite rate snapshots (for backfilled historical dates)
+        # Check if rate exists in rate snapshots (for backfilled historical dates)
         try:
-            import sqlite3
-            db_file = Path("data/reservations.db")
-            if db_file.exists():
-                with sqlite3.connect(str(db_file)) as conn:
+            if not hasattr(self, "_snapshot_rates_cache") or self._snapshot_rates_cache is None:
+                from src.database import get_db_connection
+                conn = get_db_connection()
+                try:
                     cursor = conn.cursor()
                     cursor.execute("""
-                        SELECT nightly_rate FROM property_rate_snapshots
-                        WHERE calendar_date = ?
-                        ORDER BY snapshot_date DESC LIMIT 1
-                    """, (target_date.strftime("%Y-%m-%d"),))
-                    row = cursor.fetchone()
-                    if row and row[0] is not None:
-                        return float(row[0])
+                        SELECT calendar_date, nightly_rate, MAX(snapshot_date)
+                        FROM property_rate_snapshots
+                        GROUP BY calendar_date
+                    """)
+                    cache = {}
+                    for row in cursor.fetchall():
+                        c_date = row[0] if isinstance(row, (list, tuple)) else row["calendar_date"]
+                        n_rate = row[1] if isinstance(row, (list, tuple)) else row["nightly_rate"]
+                        if c_date and n_rate is not None:
+                            cache[str(c_date)] = float(n_rate)
+                    self._snapshot_rates_cache = cache
+                finally:
+                    conn.close()
+
+            if getattr(self, "_snapshot_rates_cache", None):
+                t_str = target_date.strftime("%Y-%m-%d")
+                if t_str in self._snapshot_rates_cache:
+                    return self._snapshot_rates_cache[t_str]
         except Exception:
             pass
+
+
 
         # Default fallback if outside defined periods and not in snapshots
         return 599.0

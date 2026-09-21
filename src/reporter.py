@@ -153,7 +153,7 @@ class PriceReportGenerator:
                     lines.append(
                         f"> ⚡ **Market Compression Alert for `{a['check_in']} -> {a['check_out']}`**: "
                         f"{detail}. "
-                        f"Scarcity surge directive applied (+30% rate adjustment)."
+                        f"Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand."
                     )
             else:
                 lines.append("*(No active market compression alerts detected across upcoming intervals.)*")

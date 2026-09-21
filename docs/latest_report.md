@@ -7,8 +7,8 @@
 
 ## 📊 Executive Summary
 - **Total Open Calendar Intervals**: 80
-- 🚨 **Urgent Adjustments (This Week)**: **29** intervals
-- ⚠️ **Moderate Adjustments (Monthly Review)**: **30** intervals
+- 🚨 **Urgent Adjustments (This Week)**: **30** intervals
+- ⚠️ **Moderate Adjustments (Monthly Review)**: **29** intervals
 - ✅ **Competitive / On Target**: **21** intervals
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
@@ -44,6 +44,7 @@ The following dates have major pricing anomalies that require immediate update i
 | `2027-03-25 -> 2027-03-28` | Weekend | 3 | ↑ Increase $1564 → $2211 | 45 | $1564 | $1731 (60%) | $1868 | $2916 (80%) | 🔵 **-27.2%** | **$2211** | $773–$1878 (med $1138, Aligned With Track Record) |
 | `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↑ Increase $998 → $1433 | 58 | $998 | $1165 (62%) | $1220 | $1951 (80%) | 🔵 **-27.2%** | **$1433** | $467–$1451 (med $846, Aligned With Track Record) |
 | `2027-04-25 -> 2027-04-29` | Midweek | 4 | ↓ Reduce $749 → $564 | 73 | $749 | $874 (66%) | $845 | $841 (49.3%) | 🔴 **+26.8%** | **$564** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $450 • High compression | 19 | $549 | $716 (68%) | $633 | $633 (50%) | 🔴 **+26.6%** | **$450** | $513–$831 (med $655, Aligned With Track Record) |
 | `2027-07-22 -> 2027-07-25` | Weekend | 3 | ↑ Increase $851 → $1218 | 51 | $851 | $1018 (67%) | $870 | $1685 (80%) | 🔵 **-26.5%** | **$1218** | $350–$875 (med $596, Aligned With Track Record) |
 | `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $554 → $415 | 48 | $554 | $679 (52%) | $808 | $656 (30%) | 🔴 **+25.6%** | **$415** | $353–$888 (med $424, Aligned With Track Record) |
 | `2027-08-22 -> 2027-08-26` | Midweek | 4 | ↓ Reduce $578 → $436 | 67 | $578 | $703 (67%) | $683 | $682 (49.3%) | 🔴 **+25.3%** | **$436** | $324–$569 (med $426, Aligned With Track Record) |
@@ -77,7 +78,6 @@ The following dates are 10%–25% off the target percentile for future dates:
 | `2027-02-04 -> 2027-02-07` | Weekend | 3 | ↑ Increase $1099 → $1368 | 52 | $1099 | $1266 (50%) | $1568 | $1873 (65%) | 🟡 -17.5% | **$1368** | $525–$2131 (med $1006, Aligned With Track Record) |
 | `2027-07-18 -> 2027-07-22` | Midweek | 4 | ↓ Reduce $599 → $493 | 66 | $599 | $724 (62%) | $755 | $751 (49.3%) | 🟡 +17.1% | **$493** | $300–$583 (med $501, Aligned With Track Record) |
 | `2027-02-07 -> 2027-02-10` | Midweek | 3 | ↑ Increase $749 → $923 | 45 | $749 | $916 (27%) | $1348 | $1323 (47.3%) | 🟡 -15.9% | **$923** | $501–$1421 (med $616, Aligned With Track Record) |
-| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $454 • High compression | 19 | $549 | $716 (68%) | $633 | $695 (57.5%) | 🟡 +15.3% | **$454** | $513–$831 (med $655, Aligned With Track Record) |
 | `2027-03-11 -> 2027-03-14` | Weekend | 3 | ↑ Increase $1492 → $1773 | 49 | $1492 | $1659 (53%) | $1944 | $2378 (65%) | 🟡 -14.5% | **$1773** | $861–$1730 (med $1368, Aligned With Track Record) |
 | `2027-03-07 -> 2027-03-11` | Midweek | 4 | ↓ Reduce $984 → $844 | 64 | $984 | $1109 (58%) | $1202 | $1187 (47.3%) | 🟡 +14.4% | **$844** | $574–$1153 (med $1017, Aligned With Track Record) |
 | `2027-08-12 -> 2027-08-15` | Weekend | 3 | ↑ Increase $869 → $1038 | 51 | $869 | $1036 (69%) | $845 | $1466 (80%) | 🟡 -14.0% | **$1038** | $418–$854 (med $599, Aligned With Track Record) |
@@ -119,6 +119,7 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 | `2027-03-25 -> 2027-03-28` | Weekend | 3 | ↑ Increase $1564 → $2211 | 45 | $1564 | $1731 (60%) | $1868 | $2916 (80%) | 🔵 **-27.2%** | **$2211** | $773–$1878 (med $1138, Aligned With Track Record) |
 | `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↑ Increase $998 → $1433 | 58 | $998 | $1165 (62%) | $1220 | $1951 (80%) | 🔵 **-27.2%** | **$1433** | $467–$1451 (med $846, Aligned With Track Record) |
 | `2027-04-25 -> 2027-04-29` | Midweek | 4 | ↓ Reduce $749 → $564 | 73 | $749 | $874 (66%) | $845 | $841 (49.3%) | 🔴 **+26.8%** | **$564** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $450 • High compression | 19 | $549 | $716 (68%) | $633 | $633 (50%) | 🔴 **+26.6%** | **$450** | $513–$831 (med $655, Aligned With Track Record) |
 | `2027-07-22 -> 2027-07-25` | Weekend | 3 | ↑ Increase $851 → $1218 | 51 | $851 | $1018 (67%) | $870 | $1685 (80%) | 🔵 **-26.5%** | **$1218** | $350–$875 (med $596, Aligned With Track Record) |
 | `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $554 → $415 | 48 | $554 | $679 (52%) | $808 | $656 (30%) | 🔴 **+25.6%** | **$415** | $353–$888 (med $424, Aligned With Track Record) |
 | `2027-08-22 -> 2027-08-26` | Midweek | 4 | ↓ Reduce $578 → $436 | 67 | $578 | $703 (67%) | $683 | $682 (49.3%) | 🔴 **+25.3%** | **$436** | $324–$569 (med $426, Aligned With Track Record) |
@@ -144,7 +145,6 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 | `2027-02-04 -> 2027-02-07` | Weekend | 3 | ↑ Increase $1099 → $1368 | 52 | $1099 | $1266 (50%) | $1568 | $1873 (65%) | 🟡 -17.5% | **$1368** | $525–$2131 (med $1006, Aligned With Track Record) |
 | `2027-07-18 -> 2027-07-22` | Midweek | 4 | ↓ Reduce $599 → $493 | 66 | $599 | $724 (62%) | $755 | $751 (49.3%) | 🟡 +17.1% | **$493** | $300–$583 (med $501, Aligned With Track Record) |
 | `2027-02-07 -> 2027-02-10` | Midweek | 3 | ↑ Increase $749 → $923 | 45 | $749 | $916 (27%) | $1348 | $1323 (47.3%) | 🟡 -15.9% | **$923** | $501–$1421 (med $616, Aligned With Track Record) |
-| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $454 • High compression | 19 | $549 | $716 (68%) | $633 | $695 (57.5%) | 🟡 +15.3% | **$454** | $513–$831 (med $655, Aligned With Track Record) |
 | `2027-03-11 -> 2027-03-14` | Weekend | 3 | ↑ Increase $1492 → $1773 | 49 | $1492 | $1659 (53%) | $1944 | $2378 (65%) | 🟡 -14.5% | **$1773** | $861–$1730 (med $1368, Aligned With Track Record) |
 | `2027-03-07 -> 2027-03-11` | Midweek | 4 | ↓ Reduce $984 → $844 | 64 | $984 | $1109 (58%) | $1202 | $1187 (47.3%) | 🟡 +14.4% | **$844** | $574–$1153 (med $1017, Aligned With Track Record) |
 | `2027-08-12 -> 2027-08-15` | Weekend | 3 | ↑ Increase $869 → $1038 | 51 | $869 | $1036 (69%) | $845 | $1466 (80%) | 🟡 -14.0% | **$1038** | $418–$854 (med $599, Aligned With Track Record) |

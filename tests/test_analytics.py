@@ -22,6 +22,11 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.assertEqual(self.engine.get_target_percentile(60), 62.5)   # 31–90d
         self.assertEqual(self.engine.get_target_percentile(20), 42.5)   # ≤30d
         self.assertEqual(self.engine.get_target_percentile(10), 42.5)   # ≤30d
+        # Aggressive percentiles
+        self.assertEqual(self.engine.get_target_percentile(200, aggressive=True), 90.0)
+        self.assertEqual(self.engine.get_target_percentile(120, aggressive=True), 75.0)
+        self.assertEqual(self.engine.get_target_percentile(60, aggressive=True), 70.0)
+        self.assertEqual(self.engine.get_target_percentile(20, aggressive=True), 50.0)
 
     def test_midweek_target_percentiles(self):
         """Midweek target percentiles should follow the approved 4-tier matrix curve."""
@@ -30,6 +35,11 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.assertEqual(self.engine.get_target_percentile(60, segment_type="midweek"), 32.5)   # 31–90d
         self.assertEqual(self.engine.get_target_percentile(20, segment_type="midweek"), 30.0)   # ≤30d
         self.assertEqual(self.engine.get_target_percentile(10, segment_type="midweek"), 30.0)   # ≤30d
+        # Aggressive percentiles
+        self.assertEqual(self.engine.get_target_percentile(200, segment_type="midweek", aggressive=True), 60.0)
+        self.assertEqual(self.engine.get_target_percentile(120, segment_type="midweek", aggressive=True), 55.0)
+        self.assertEqual(self.engine.get_target_percentile(60, segment_type="midweek", aggressive=True), 45.0)
+        self.assertEqual(self.engine.get_target_percentile(20, segment_type="midweek", aggressive=True), 38.0)
 
     def test_operational_floors(self):
         """Recommended base rates must enforce operational floors: >= $300 Midweek, >= $450 Weekend."""
@@ -231,8 +241,8 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
     def test_evaluate_segment_market_compression_boost(self):
         """When market compression triggers (scarcity or velocity), target_pct should be boosted by +15% (capped at 90%)."""
         class MockSalesTracker:
-            def get_target_percentile(self, lead_days, segment_type="weekend"):
-                return 65.0
+            def get_target_percentile(self, lead_days, segment_type="weekend", aggressive=False):
+                return 80.0 if aggressive else 65.0
 
             def load_registered_comps(self):
                 return {f"comp_{i}": {} for i in range(100)}
@@ -244,7 +254,6 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
                     "available_count": current_available_count,
                     "total_cohort_count": total_cohort_count,
                     "available_ratio": (current_available_count / total_cohort_count) if total_cohort_count else 1.0,
-                    "surge_multiplier": 1.30 if is_comp else 1.0,
                     "reason": "High scarcity compression" if is_comp else "Normal availability",
                 }
 
@@ -269,10 +278,10 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.assertIn("High compression", eval_res["action_summary"])
 
     def test_compression_surge_midweek_last_minute_with_sales_tracker(self):
-        """Last-minute midweek interval (baseline 30%) surges +15% to 45% when compressed."""
+        """Last-minute midweek interval (baseline 30%) retrieves aggressive p75 target 38% when compressed."""
         class MockSalesTracker:
-            def get_target_percentile(self, lead_time_days, segment_type="weekend"):
-                return 30.0
+            def get_target_percentile(self, lead_time_days, segment_type="weekend", aggressive=False):
+                return 38.0 if aggressive else 30.0
 
             def load_registered_comps(self):
                 return {f"comp_{i}": {} for i in range(100)}
@@ -283,7 +292,6 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
                     "available_count": 10,
                     "total_cohort_count": 100,
                     "available_ratio": 0.10,
-                    "surge_multiplier": 1.30,
                     "reason": "High scarcity compression: only 10/100 comps available",
                 }
 
@@ -303,10 +311,10 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         rates = [500.0 + i * 15 for i in range(10)]
         eval_res = self.engine.evaluate_segment(segment, rates)
         self.assertTrue(eval_res["is_compression_surge"])
-        self.assertEqual(eval_res["target_percentile"], 45.0)
+        self.assertEqual(eval_res["target_percentile"], 38.0)
 
     def test_compression_surge_midweek_last_minute_without_sales_tracker(self):
-        """Scarcity fallback surges last-minute midweek target from 30% to 45% even when sales_tracker is None."""
+        """Scarcity fallback uses last-minute midweek aggressive p75 target 38% even when sales_tracker is None."""
         self.engine.sales_tracker = None
         segment = {
             "check_in": "2026-09-20",
@@ -325,11 +333,11 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         rates = [c["effective_nightly"] for c in comps_meta]
         eval_res = self.engine.evaluate_segment(segment, rates, comp_metadata=comps_meta)
         self.assertTrue(eval_res["is_compression_surge"])
-        self.assertEqual(eval_res["target_percentile"], 45.0)
+        self.assertEqual(eval_res["target_percentile"], 38.0)
         self.assertEqual(eval_res["compression_details"]["available_count"], 10)
 
     def test_compression_surge_standard_two_arg_invocation_without_sales_tracker(self):
-        """Standard evaluate_segment(segment, rates) without sales_tracker or comp_metadata triggers scarcity fallback."""
+        """Standard evaluate_segment(segment, rates) without sales_tracker or comp_metadata triggers scarcity fallback to aggressive p75 target 38%."""
         self.engine.sales_tracker = None
         segment = {
             "check_in": "2026-09-20",
@@ -345,7 +353,7 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         rates = [500.0 + i * 15 for i in range(10)]
         eval_res = self.engine.evaluate_segment(segment, rates)
         self.assertTrue(eval_res["is_compression_surge"])
-        self.assertEqual(eval_res["target_percentile"], 45.0)
+        self.assertEqual(eval_res["target_percentile"], 38.0)
         self.assertEqual(eval_res["compression_details"]["available_count"], 10)
 
     def test_compression_boundary_at_20_comps(self):

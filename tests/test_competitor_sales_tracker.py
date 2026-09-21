@@ -629,7 +629,6 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             check_in=cin, check_out=cout, total_cohort_count=10, current_available_count=5
         )
         self.assertFalse(comp_normal["is_compressed"])
-        self.assertEqual(comp_normal["surge_multiplier"], 1.0)
         self.assertEqual(comp_normal["available_count"], 5)
         self.assertIn("Normal availability", comp_normal["reason"])
 
@@ -638,7 +637,6 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             check_in=cin, check_out=cout, total_cohort_count=10, current_available_count=1
         )
         self.assertTrue(comp_scarcity["is_compressed"])
-        self.assertEqual(comp_scarcity["surge_multiplier"], 1.30)
         self.assertEqual(comp_scarcity["available_count"], 1)
         self.assertIn("High scarcity compression", comp_scarcity["reason"])
 
@@ -648,13 +646,11 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             check_in=cin, check_out=cout, total_cohort_count=97, current_available_count=19
         )
         self.assertTrue(all_comp["is_compressed"])
-        self.assertEqual(all_comp["surge_multiplier"], 1.30)
         # 20 comps available -> normal
         all_normal = self.tracker.detect_market_compression(
             check_in=cin, check_out=cout, total_cohort_count=97, current_available_count=20
         )
         self.assertFalse(all_normal["is_compressed"])
-        self.assertEqual(all_normal["surge_multiplier"], 1.0)
 
         # Cohort Invariant 2: Tier A (N=49)
         # <= 9 comps available -> compressed
@@ -680,8 +676,8 @@ class TestCompetitorSalesTracker(unittest.TestCase):
 
     # 12. Consensus Policy Surge Override
     def test_consensus_policy_surge_override(self):
-        """Verify compute_interval_consensus overrides CONFLICT_HOLD and NO_HISTORY_HOLD when is_compression_surge=True."""
-        # Standard conflict segment: Kivoya base $1000, Market Rec $800, Historical $1200 -> CONFLICT_HOLD
+        """Verify compute_interval_consensus follows 2:1 weighted consensus without hardcoded 1.30x surge."""
+        # Standard segment: Kivoya base $1000, Market Rec $800, Historical $1200 -> DECREASE ($932)
         seg_conflict = {
             "check_in": "2026-12-18",
             "check_out": "2026-12-21",
@@ -694,34 +690,47 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         self.assertEqual(res_normal["status"], "DECREASE")
         self.assertEqual(res_normal["consensus_rate"], 932)
 
-        # Scarcity surge override active: overrides conflict hold and applies +30% surge rate
+        # Scarcity compression active: follows weighted consensus (0.67*1250 + 0.33*1200 = 1234)
         seg_surge = dict(seg_conflict)
         seg_surge["is_compression_surge"] = True
         seg_surge["recommended_base_nightly"] = 1250.0  # Elevated market recommendation
         res_surge = compute_interval_consensus(seg_surge)
-        self.assertEqual(res_surge["status"], "SURGE_INCREASE")
-        # max(round(1000 * 1.30), 1250) = max(1300, 1250) = 1300
-        self.assertEqual(res_surge["consensus_rate"], 1300)
+        self.assertEqual(res_surge["status"], "INCREASE")
+        self.assertEqual(res_surge["consensus_rate"], 1234)
         self.assertTrue(res_surge["is_compression_surge"])
 
     # 13. Dynamic Target Lookup
     def test_get_target_percentile_empirical_lookup(self):
         """Verify get_target_percentile() maps lead days to horizons, uses cached grid, and returns Bayesian targets."""
-        # Ultra-advance (>180d) weekend prior is 85.0%
+        # Ultra-advance (>180d) weekend prior is 85.0% (aggressive p75 is 90.0%)
         p_ultra_wkd = self.tracker.get_target_percentile(lead_time_days=200, segment_type="weekend")
         self.assertEqual(p_ultra_wkd, 85.0)
+        p_ultra_aggr = self.tracker.get_target_percentile(lead_time_days=200, segment_type="weekend", aggressive=True)
+        self.assertEqual(p_ultra_aggr, 90.0)
 
-        # Early booking (91–180d) weekend prior is 67.5%
+        # Early booking (91–180d) weekend prior is 67.5% (aggressive p75 is 75.0%)
         p_far_wkd = self.tracker.get_target_percentile(lead_time_days=100, segment_type="weekend")
         self.assertEqual(p_far_wkd, 67.5)
+        p_far_aggr = self.tracker.get_target_percentile(lead_time_days=100, segment_type="weekend", aggressive=True)
+        self.assertEqual(p_far_aggr, 75.0)
 
-        # Near-term / distress (<=30d) midweek prior is 30.0%
+        # Peak booking (31–90d) weekend prior is 62.5% (aggressive p75 is 70.0%)
+        p_peak_wkd = self.tracker.get_target_percentile(lead_time_days=60, segment_type="weekend")
+        self.assertEqual(p_peak_wkd, 62.5)
+        p_peak_aggr = self.tracker.get_target_percentile(lead_time_days=60, segment_type="weekend", aggressive=True)
+        self.assertEqual(p_peak_aggr, 70.0)
+
+        # Near-term / distress (<=30d) midweek prior is 30.0% (aggressive p75 is 38.0%)
         p_near_mid = self.tracker.get_target_percentile(lead_time_days=20, segment_type="midweek")
         self.assertEqual(p_near_mid, 30.0)
+        p_near_mid_aggr = self.tracker.get_target_percentile(lead_time_days=20, segment_type="midweek", aggressive=True)
+        self.assertEqual(p_near_mid_aggr, 38.0)
 
-        # Last-minute (<=30d) weekend prior is 42.5%
+        # Last-minute (<=30d) weekend prior is 42.5% (aggressive p75 is 50.0%)
         p_last_wkd = self.tracker.get_target_percentile(lead_time_days=10, segment_type="weekend")
         self.assertEqual(p_last_wkd, 42.5)
+        p_last_aggr = self.tracker.get_target_percentile(lead_time_days=10, segment_type="weekend", aggressive=True)
+        self.assertEqual(p_last_aggr, 50.0)
 
     def test_compute_strategy_grid_with_floors(self):
         """Verify early booking weekend does not drop below strategic floor 65.0% despite empirical p50 = 41.0%."""
@@ -878,7 +887,6 @@ class TestCompetitorSalesTracker(unittest.TestCase):
                     "available_count": 1,
                     "total_cohort_count": 10,
                     "available_ratio": 0.10,
-                    "surge_multiplier": 1.30,
                     "reason": f"High scarcity compression: only 1/10 (10.0%) comps available for check-in {cin}",
                 },
                 "our_base_nightly": 1000.0,

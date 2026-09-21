@@ -255,7 +255,6 @@ def compute_interval_consensus(
     - Historical interval benchmark H (avg_rate or median_rate from historical_benchmark)
 
     Policy:
-    - Compression surge override: if is_compression_surge=True -> max(round(B * 1.30), round(M)), SURGE_INCREASE
     - Standard synthesis: if M > 0 and hist_cnt > 0 and H > 0:
         W_comp = cw / (cw + hw), W_hist = hw / (cw + hw)
         consensus = round(W_comp * M + W_hist * H)
@@ -266,7 +265,7 @@ def compute_interval_consensus(
     - Missing both:
         consensus = round(B), status = "HOLD"
 
-    Status classification (non-surge):
+    Status classification:
     - INCREASE if consensus > B
     - DECREASE if consensus < B
     - HOLD if consensus == B
@@ -301,10 +300,7 @@ def compute_interval_consensus(
 
     is_surge = bool(segment.get("is_compression_surge"))
 
-    if is_surge:
-        consensus = max(round(base_r * 1.30), rec_r)
-        status = "SURGE_INCREASE"
-    elif rec_r > 0 and hist_cnt > 0 and hist_r > 0:
+    if rec_r > 0 and hist_cnt > 0 and hist_r > 0:
         consensus = round(w_comp * rec_r + w_hist * hist_r)
     elif rec_r > 0:
         consensus = rec_r
@@ -313,13 +309,12 @@ def compute_interval_consensus(
     else:
         consensus = base_r
 
-    if not is_surge:
-        if consensus > base_r:
-            status = "INCREASE"
-        elif consensus < base_r:
-            status = "DECREASE"
-        else:
-            status = "HOLD"
+    if consensus > base_r:
+        status = "INCREASE"
+    elif consensus < base_r:
+        status = "DECREASE"
+    else:
+        status = "HOLD"
 
     res = {
         "check_in": segment.get("check_in"),

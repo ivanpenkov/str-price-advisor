@@ -1069,6 +1069,66 @@ class TestProposedPrices(unittest.TestCase):
         )
         self.assertEqual(p_10pct[0]["midweek_avg"], 500)
 
+    def test_consensus_pricing_under_scarcity_compression(self):
+        """Verify is_compression_surge=True does not force hardcoded 1.30x surge, but uses 2:1 weighted consensus."""
+        segment = {
+            "check_in": "2026-10-15",
+            "check_out": "2026-10-18",
+            "segment_type": "weekend",
+            "our_base_nightly": 500.0,
+            "recommended_base_nightly_adj": 600.0,
+            "is_compression_surge": True,
+            "compression_details": {"is_compressed": True, "available_count": 5},
+            "historical_benchmark": {
+                "sample_count": 4,
+                "median_rate": 550.0,
+            },
+        }
+        res = compute_interval_consensus(segment)
+        self.assertEqual(res["base_rate"], 500)
+        # round(0.67*600 + 0.33*550) = 402 + 181.5 = 583.5 -> 584 (NOT 500 * 1.30 = 650!)
+        self.assertEqual(res["consensus_rate"], 584)
+        self.assertEqual(res["status"], "INCREASE")
+        self.assertTrue(res["is_compression_surge"])
+
+    def test_september_distress_consensus_no_rate_increase(self):
+        """Verify September weekend segment with base $549, comp rec $461, and history $691 holds at $549 without rate hike."""
+        segment = {
+            "check_in": "2026-09-24",
+            "check_out": "2026-09-27",
+            "segment_type": "weekend",
+            "our_base_nightly": 549.0,
+            "recommended_base_nightly_adj": 461.0,
+            "is_compression_surge": True,
+            "compression_details": {"is_compressed": True, "available_count": 19},
+            "historical_benchmark": {
+                "sample_count": 12,
+                "avg_rate": 691.4,
+                "median_rate": 655.0,
+            },
+        }
+        res = compute_interval_consensus(segment)
+        self.assertEqual(res["base_rate"], 549)
+        # round(0.67*461 + 0.33*691) = 308.87 + 228.03 = 536.9 -> 537
+        self.assertEqual(res["consensus_rate"], 537)
+        self.assertEqual(res["status"], "DECREASE")
+        self.assertTrue(res["is_compression_surge"])
+
+        # In seasonal rates aggregation, 537 is within 5% churn deadband of 549 (2.18%), so it holds at 549
+        seasonal_rates = [
+            {
+                "period_name": "Sep. 26",
+                "begin_dt": date(2026, 9, 8),
+                "end_dt": date(2026, 9, 30),
+                "first_price": 399.0,
+                "second_price": 549.0,
+                "min_days": 2,
+            }
+        ]
+        proposed = generate_proposed_prices(seasonal_rates, [segment], reference_date=date(2026, 9, 21), holidays_registry=[])
+        self.assertEqual(proposed[0]["weekend_base"], 549)
+        self.assertEqual(proposed[0]["weekend_avg"], 549)  # HELD at 549, NOT 714!
+
 
 if __name__ == "__main__":
     unittest.main()

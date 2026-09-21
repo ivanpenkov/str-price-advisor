@@ -1307,6 +1307,7 @@ class CompetitorSalesTracker:
                     "is_empirical": is_empirical,
                     "is_floor_clamped": is_floor_clamped,
                     "is_monotonic_adjusted": False,
+                    "is_aggressive_monotonic_adjusted": False,
                     "avg_rate": avg_rate,
                     "min_rate": min_rate,
                     "max_rate": max_rate,
@@ -1316,12 +1317,19 @@ class CompetitorSalesTracker:
         if enforce_monotonic:
             for t in stay_types:
                 prev_target = None
+                prev_aggr = None
                 for h in horizons:
                     curr_rec = grid[h][t]["recommended_target"]
                     if prev_target is not None and curr_rec > prev_target:
                         grid[h][t]["recommended_target"] = prev_target
                         grid[h][t]["is_monotonic_adjusted"] = True
                     prev_target = grid[h][t]["recommended_target"]
+
+                    curr_aggr = grid[h][t]["recommended_aggressive"]
+                    if prev_aggr is not None and curr_aggr > prev_aggr:
+                        grid[h][t]["recommended_aggressive"] = prev_aggr
+                        grid[h][t]["is_aggressive_monotonic_adjusted"] = True
+                    prev_aggr = grid[h][t]["recommended_aggressive"]
 
         # Overall summary KPIs
         total_sales_count = len(sales)
@@ -1348,9 +1356,11 @@ class CompetitorSalesTracker:
         self._cached_strategy_grid = res_grid
         return res_grid
 
-    def get_target_percentile(self, lead_time_days: int, segment_type: str = "weekend") -> float:
+    def get_target_percentile(self, lead_time_days: int, segment_type: str = "weekend", aggressive: bool = False) -> float:
         """
         Retrieve empirical Bayesian-shrunk target percentile for a lead-time horizon.
+        If aggressive=True (e.g. during market scarcity compression), retrieves the
+        Bayesian-shrunk p75 aggressive clearing target from the strategy matrix.
         Smoothly falls back to horizon-specific priors (k = 5.0) if sample size n < 5.
         Caches the 2D strategy grid in memory to prevent redundant SQLite queries across segments.
         """
@@ -1360,10 +1370,12 @@ class CompetitorSalesTracker:
         horizon = self._categorize_lead_horizon(lead_time_days)
         norm_seg = self._normalize_segment_type(segment_type)
         cell = self._cached_strategy_grid["grid"].get(horizon, {}).get(norm_seg, {})
-        if "recommended_target" in cell and cell["recommended_target"] is not None:
-            return float(cell["recommended_target"])
+        target_key = "recommended_aggressive" if aggressive else "recommended_target"
+        if target_key in cell and cell[target_key] is not None:
+            return float(cell[target_key])
         strat_cfg = self._load_strategy_config()
-        fallback = strat_cfg["matrix"].get(horizon, {}).get(norm_seg, {}).get("target", 65.0)
+        fallback_key = "p75" if aggressive else "target"
+        fallback = strat_cfg["matrix"].get(horizon, {}).get(norm_seg, {}).get(fallback_key, 65.0)
         return float(fallback)
 
     def detect_market_compression(
@@ -1386,7 +1398,6 @@ class CompetitorSalesTracker:
             'available_count': int,
             'total_cohort_count': int,
             'available_ratio': float,
-            'surge_multiplier': 1.30,
             'reason': str
           }
         """
@@ -1424,7 +1435,6 @@ class CompetitorSalesTracker:
             "available_count": avail_count,
             "total_cohort_count": reg_total,
             "available_ratio": avail_ratio,
-            "surge_multiplier": 1.30 if is_compressed else 1.0,
             "reason": reason,
         }
 

@@ -8,9 +8,10 @@ Implements:
 - 3-tier priority classification (Urgent weekly, Moderate monthly, Informational)
 """
 
+from datetime import datetime, date, timedelta
 import json
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional, Tuple, Union
 import numpy as np
 
 from src.config import (
@@ -20,7 +21,42 @@ from src.config import (
     BASE_PERCENTILE,
     CLEANING_FEE,
     OPERATIONAL_FLOORS,
+    MIN_PRICE_CHANGE_PCT,
 )
+
+
+def _to_date(val: Any) -> Optional[date]:
+    """Coerce string, date, or datetime into a date object."""
+    if val is None:
+        return None
+    if isinstance(val, datetime):
+        return val.date()
+    if isinstance(val, date):
+        return val
+    if isinstance(val, str) and val.strip():
+        raw = val.strip()[:10]
+        fmt = "%m/%d/%Y" if "/" in raw else "%Y-%m-%d"
+        try:
+            return datetime.strptime(raw, fmt).date()
+        except ValueError:
+            return None
+def _get_easter(year: int) -> date:
+    """Calculate Western Easter Sunday using Anonymous Gregorian algorithm."""
+    a = year % 19
+    b = year // 100
+    c = year % 100
+    d = b // 4
+    e = b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i = c // 4
+    k = c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    month = (h + l - 7 * m + 114) // 31
+    day = ((h + l - 7 * m + 114) % 31) + 1
+    return date(year, month, day)
 
 
 class PricingAnalyticsEngine:
@@ -34,8 +70,10 @@ class PricingAnalyticsEngine:
         urgent_lead_days: int = URGENT_LEAD_DAYS,
         moderate_pct_diff: float = MODERATE_PCT_DIFF,
         registry_path: str = "config/comps_registry.json",
+        holidays_config_path: str = "config/holidays.json",
         res_intel: Optional[Any] = None,
         sales_tracker: Optional[Any] = None,
+        min_price_change_pct: Optional[float] = None,
     ):
         self.base_percentile = base_percentile
         self.cleaning_fee = cleaning_fee
@@ -43,9 +81,12 @@ class PricingAnalyticsEngine:
         self.urgent_lead_days = urgent_lead_days
         self.moderate_pct_diff = moderate_pct_diff
         self.registry_path = Path(registry_path)
+        self.holidays_config_path = Path(holidays_config_path)
         self.sales_tracker = sales_tracker
         self.comp_registry: Dict[str, Dict[str, Any]] = self._load_registry()
         self.excluded_comps: set = self._load_excluded_comps()
+        self.holidays_registry: List[Dict[str, Any]] = self._load_holidays(self.holidays_config_path)
+        self.min_price_change_pct: float = float(MIN_PRICE_CHANGE_PCT if min_price_change_pct is None else min_price_change_pct)
         if res_intel is not None:
             self.res_intel = res_intel
         else:
@@ -83,6 +124,139 @@ class PricingAnalyticsEngine:
             except Exception:
                 pass
         return comps
+
+    def _load_holidays(self, config_path: Union[Path, str]) -> List[Dict[str, Any]]:
+        """Load holiday rules from config/holidays.json."""
+        p = Path(config_path)
+        if p.exists():
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+        return []
+
+    def _match_holiday(
+        self,
+        check_in_dt: date,
+        check_out_dt: date,
+        period_name: str = "",
+    ) -> Optional[Dict[str, Any]]:
+        """Match an interval against the holidays registry."""
+        p_clean = (period_name or "").strip().lower()
+        for item in self.holidays_registry:
+            # 1. Match by Kivoya period name, holiday name, or synonyms
+            k_pname = (item.get("kivoya_period_name") or "").strip().lower()
+            h_name = (item.get("holiday_name") or "").strip().lower()
+            if p_clean:
+                if k_pname and p_clean == k_pname:
+                    return item
+                if h_name and (h_name in p_clean or p_clean in h_name):
+                    return item
+                for syn in item.get("synonyms", []):
+                    if syn.lower() in p_clean:
+                        return item
+
+            # 2. Match by explicit from_date / to_date
+            f_raw = item.get("from_date")
+            t_raw = item.get("to_date")
+            if f_raw and t_raw:
+                f_dt = _to_date(f_raw)
+                t_dt = _to_date(t_raw)
+                if f_dt and t_dt and not (t_dt < check_in_dt or f_dt > (check_out_dt - timedelta(days=1))):
+                    return item
+
+            # 3. Match by standard calendar holiday dates
+            year = check_in_dt.year
+            # Christmas & New Year: Dec 23 -> Jan 2 night (checkout Jan 3)
+            if "christmas" in h_name or "new year" in h_name:
+                c_start = date(year if check_in_dt.month == 12 else year - 1, 12, 23)
+                c_end = date(year + 1 if check_in_dt.month == 12 else year, 1, 2)
+                if not (c_end < check_in_dt or c_start > (check_out_dt - timedelta(days=1))):
+                    return item
+
+            # Thanksgiving: 4th Thursday of November -> Sunday night (checkout Monday)
+            elif "thanksgiving" in h_name:
+                thursdays = [d for d in (date(year, 11, day) for day in range(1, 31)) if d.weekday() == 3]
+                if len(thursdays) >= 4:
+                    tg_start = thursdays[3]
+                    tg_end = tg_start + timedelta(days=3)  # Sunday night
+                    if not (tg_end < check_in_dt or tg_start > (check_out_dt - timedelta(days=1))):
+                        return item
+
+            # Memorial Day: Friday -> Monday night (checkout Tuesday)
+            elif "memorial" in h_name:
+                mondays = [d for d in (date(year, 5, day) for day in range(1, 32)) if d.weekday() == 0]
+                if mondays:
+                    mem_mon = mondays[-1]
+                    mem_start = mem_mon - timedelta(days=3)
+                    mem_end = mem_mon  # Monday night
+                    if not (mem_end < check_in_dt or mem_start > (check_out_dt - timedelta(days=1))):
+                        return item
+
+            # Labor Day: Friday -> Monday night (checkout Tuesday)
+            elif "labor" in h_name:
+                mondays = [d for d in (date(year, 9, day) for day in range(1, 31)) if d.weekday() == 0]
+                if mondays:
+                    lab_mon = mondays[0]
+                    lab_start = lab_mon - timedelta(days=3)
+                    lab_end = lab_mon  # Monday night
+                    if not (lab_end < check_in_dt or lab_start > (check_out_dt - timedelta(days=1))):
+                        return item
+
+            # Columbus Day: Friday -> Monday night (checkout Tuesday)
+            elif "columbus" in h_name:
+                mondays = [d for d in (date(year, 10, day) for day in range(1, 32)) if d.weekday() == 0]
+                if len(mondays) >= 2:
+                    col_mon = mondays[1]
+                    col_start = col_mon - timedelta(days=3)
+                    col_end = col_mon  # Monday night
+                    if not (col_end < check_in_dt or col_start > (check_out_dt - timedelta(days=1))):
+                        return item
+
+            # Holy Week: Friday before Palm Sunday -> Easter Sunday night
+            elif "holy week" in h_name or "easter" in h_name:
+                easter = _get_easter(year)
+                hw_start = easter - timedelta(days=9)  # Friday before Palm Sunday
+                hw_end = easter                        # Easter Sunday night
+                if not (hw_end < check_in_dt or hw_start > (check_out_dt - timedelta(days=1))):
+                    return item
+
+        return None
+
+    def get_floor_for_interval(
+        self,
+        check_in: Any,
+        check_out: Any,
+        segment_type: str,
+        period_name: Optional[str] = None,
+    ) -> float:
+        """
+        Compute the effective minimum base nightly rate floor for an interval:
+        - Base operational floors: $300 Midweek / $450 Weekend (from OPERATIONAL_FLOORS)
+        - Overriding holiday floors: if interval overlaps any holiday in config/holidays.json,
+          takes max(operational_floor, holiday_floor).
+        """
+        is_midweek = str(segment_type).lower() in ["midweek", "mid-week", "weekday"]
+        op_floor = float(OPERATIONAL_FLOORS.get("midweek", 300.0) if is_midweek else OPERATIONAL_FLOORS.get("weekend", 450.0))
+
+        c_in = _to_date(check_in)
+        c_out = _to_date(check_out)
+        if not c_in or not c_out:
+            return op_floor
+
+        h_match = self._match_holiday(c_in, c_out, period_name=period_name or "")
+        if h_match:
+            if h_match.get("split_pricing"):
+                if is_midweek:
+                    h_floor = float(h_match.get("floor_midweek") or h_match.get("floor_rate") or op_floor)
+                else:
+                    h_floor = float(h_match.get("floor_weekend") or h_match.get("floor_rate") or op_floor)
+            else:
+                h_floor = float(h_match.get("floor_rate") or op_floor)
+            return max(op_floor, h_floor)
+
+        return op_floor
 
     def get_target_percentile(self, lead_time_days: int, segment_type: str = "weekend") -> float:
         """
@@ -293,19 +467,29 @@ class PricingAnalyticsEngine:
         else:
             adj_pct_diff = 0.0
 
-        is_midweek = str(seg_type).lower() in ["midweek", "mid-week", "weekday"]
-        op_floor = float(OPERATIONAL_FLOORS.get("midweek", 300.0) if is_midweek else OPERATIONAL_FLOORS.get("weekend", 450.0))
+        cin = segment.get("check_in", "")
+        cout = segment.get("check_out", "")
+        pname = segment.get("period_name", "")
+        floor_rate = self.get_floor_for_interval(cin, cout, seg_type, period_name=pname)
 
         rec_base = (
-            self.translate_to_recommended_base_rate(target_eff, nights, floor_rate=op_floor, channel_factor=channel_factor)
-            if target_eff > 0 else max(op_floor, our_base)
+            self.translate_to_recommended_base_rate(target_eff, nights, floor_rate=floor_rate, channel_factor=channel_factor)
+            if target_eff > 0 else max(floor_rate, our_base)
         )
+        # Apply 5% churn threshold: hold current base price if proposed change is < 5%
+        if our_base > 0 and abs(rec_base - our_base) / our_base < self.min_price_change_pct:
+            rec_base = our_base
+        rec_base = max(floor_rate, rec_base)
         rec_diff = round(rec_base - our_base, 0)
 
         adj_rec_base = (
-            self.translate_to_recommended_base_rate(adj_target_eff, nights, floor_rate=op_floor, channel_factor=channel_factor)
-            if adj_target_eff > 0 else max(op_floor, our_base)
+            self.translate_to_recommended_base_rate(adj_target_eff, nights, floor_rate=floor_rate, channel_factor=channel_factor)
+            if adj_target_eff > 0 else max(floor_rate, our_base)
         )
+        # Apply 5% churn threshold on adjusted recommendation as well
+        if our_base > 0 and abs(adj_rec_base - our_base) / our_base < self.min_price_change_pct:
+            adj_rec_base = our_base
+        adj_rec_base = max(floor_rate, adj_rec_base)
         adj_rec_diff = round(adj_rec_base - our_base, 0)
 
         # Priority classification: Normal (<10%), Review (10-35%), Urgent (>35%)
@@ -362,7 +546,8 @@ class PricingAnalyticsEngine:
             adj_tier_label = "✅ Competitive / Long Range"
             adj_status = "ON TARGET"
 
-        if abs_diff < 10.0 or rec_diff == 0:
+        show_action = (abs_diff >= self.moderate_pct_diff or our_base < floor_rate) and rec_diff != 0
+        if not show_action:
             action_summary = ""
         else:
             if rec_diff < 0:
@@ -370,10 +555,11 @@ class PricingAnalyticsEngine:
             else:
                 action_summary = f"↑ Increase ${our_base:.0f} → ${rec_base:.0f}"
 
-        if action_summary and segment.get("is_compression_surge"):
+        if action_summary and segment.get("is_compression_surge") and len(clean_comps) > 0:
             action_summary += " • High compression"
 
-        if adj_abs_diff < 10.0 or adj_rec_diff == 0:
+        adj_show_action = (adj_abs_diff >= self.moderate_pct_diff or our_base < floor_rate) and adj_rec_diff != 0
+        if not adj_show_action:
             adj_action_summary = ""
         else:
             if adj_rec_diff < 0:
@@ -429,6 +615,7 @@ class PricingAnalyticsEngine:
             "comp_min_eff": pct_stats["min"],
             "comp_max_eff": pct_stats["max"],
             "price_diff_percent": pct_diff,
+            "floor_rate": floor_rate,
             "recommended_base_nightly": rec_base,
             "base_diff": rec_diff,
             "priority_tier": tier,

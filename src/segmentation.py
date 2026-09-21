@@ -128,9 +128,24 @@ class CalendarSegmenter:
         # Compute average nightly rate across the stay dates
         total_base = 0.0
         cur = check_in
+        all_periods: List[str] = []
         while cur < check_out:
             total_base += self.client.get_rate_for_date(cur, rates)
+            if rates:
+                for r in rates:
+                    if r.get("begin_dt") and r.get("end_dt") and r["begin_dt"] <= cur <= r["end_dt"]:
+                        p_name = r.get("period_name")
+                        if p_name and p_name not in all_periods:
+                            all_periods.append(p_name)
             cur += timedelta(days=1)
+
+        # Prioritize holiday period names if any night matched a holiday
+        matched_period = all_periods[0] if all_periods else ""
+        holiday_keywords = ("holiday", "thanksgiving", "christmas", "new year", "holy week", "easter", "memorial", "labor", "columbus", "phoenix open")
+        for p in all_periods:
+            if any(kw in p.lower() for kw in holiday_keywords):
+                matched_period = p
+                break
 
         avg_base_rate = round(total_base / nights, 2)
         total_guest_price = round(total_base + self.cleaning_fee, 2)
@@ -152,6 +167,7 @@ class CalendarSegmenter:
             "our_cleaning_fee": self.cleaning_fee,
             "our_total_price": total_guest_price,
             "our_effective_nightly": effective_nightly,
+            "period_name": matched_period,
             "is_calendar_open": is_cal_open,
             "calendar_open_end_date": cal_end_str,
         }

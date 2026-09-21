@@ -266,6 +266,182 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.assertIn("compression_details", eval_res)
         self.assertIn("High compression", eval_res["action_summary"])
 
+    def test_get_floor_for_interval_regular(self):
+        """Regular midweek and weekend intervals should return $300 and $450 operational floors."""
+        floor_mid = self.engine.get_floor_for_interval("2026-09-21", "2026-09-24", "midweek")
+        self.assertEqual(floor_mid, 300.0)
+
+        floor_wkd = self.engine.get_floor_for_interval("2026-09-24", "2026-09-27", "weekend")
+        self.assertEqual(floor_wkd, 450.0)
+
+    def test_get_floor_for_interval_holidays(self):
+        """Holiday intervals should enforce holiday floors over standard operational floors."""
+        # Thanksgiving 2026 (floor_rate 499)
+        floor_tg = self.engine.get_floor_for_interval("2026-11-26", "2026-11-29", "weekend", period_name="Thanksgiving 26")
+        self.assertEqual(floor_tg, 499.0)
+
+        # Christmas & New Year 2026 (floor_rate 499)
+        floor_xmas = self.engine.get_floor_for_interval("2026-12-24", "2026-12-28", "midweek", period_name="Christmas & New Year 2026")
+        self.assertEqual(floor_xmas, 499.0)
+
+        # Holy Week 2027 (split pricing: midweek 699, weekend 1049)
+        floor_hw_mid = self.engine.get_floor_for_interval("2027-03-22", "2027-03-25", "midweek", period_name="Holy Week 27")
+        self.assertEqual(floor_hw_mid, 699.0)
+
+        floor_hw_wkd = self.engine.get_floor_for_interval("2027-03-25", "2027-03-28", "weekend", period_name="Holy Week 27")
+        self.assertEqual(floor_hw_wkd, 1049.0)
+
+        # Memorial Day 2027 (floor_rate 699)
+        floor_mem = self.engine.get_floor_for_interval("2027-05-28", "2027-05-31", "weekend", period_name="Memorial Day 27")
+        self.assertEqual(floor_mem, 699.0)
+
+    def test_evaluate_segment_clamps_to_floor(self):
+        """Interval recommendation must be clamped to effective floor when target is below floor."""
+        # September midweek interval with low comps that would result in ~$177 base
+        low_comps = [250.0, 260.0, 270.0, 280.0]
+        segment = {
+            "check_in": "2026-09-21",
+            "check_out": "2026-09-24",
+            "nights": 3,
+            "lead_time_days": 1,
+            "segment_type": "midweek",
+            "our_base_nightly": 399.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 1697.0,
+            "our_effective_nightly": 565.67,
+        }
+        res = self.engine.evaluate_segment(segment, low_comps)
+        self.assertEqual(res["floor_rate"], 300.0)
+        self.assertEqual(res["recommended_base_nightly"], 300.0)
+        self.assertIn("↓ Reduce $399 → $300", res["action_summary"])
+
+    def test_evaluate_segment_churn_threshold(self):
+        """Interval recommendation should hold current base if proposed change is < 5%."""
+        # Our base $400 (above $300 midweek floor), comp prices calculate rec base of ~$403 (+0.75% < 5%)
+        comps = [560.0, 565.0, 570.0, 575.0]
+        segment = {
+            "check_in": "2026-10-15",
+            "check_out": "2026-10-18",
+            "nights": 3,
+            "lead_time_days": 25,
+            "segment_type": "midweek",
+            "our_base_nightly": 400.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 1700.0,
+            "our_effective_nightly": 566.67,
+        }
+        res = self.engine.evaluate_segment(segment, comps)
+        # Should hold at $400 rather than proposing a minor churn change
+        self.assertEqual(res["recommended_base_nightly"], 400.0)
+
+    def test_get_floor_for_interval_calendar_fallback(self):
+        """Calendar date fallback should match holidays even when period_name is omitted."""
+        # Christmas & New Year in December (from_date/period_name empty)
+        floor_xmas_dec = self.engine.get_floor_for_interval("2026-12-24", "2026-12-28", "midweek", period_name="")
+        self.assertEqual(floor_xmas_dec, 499.0)
+
+        # Christmas & New Year spanning into January
+        floor_xmas_jan = self.engine.get_floor_for_interval("2027-01-01", "2027-01-03", "weekend", period_name="")
+        self.assertEqual(floor_xmas_jan, 499.0)
+
+        # Thanksgiving in late November
+        floor_tg = self.engine.get_floor_for_interval("2026-11-26", "2026-11-29", "weekend", period_name="")
+        self.assertEqual(floor_tg, 499.0)
+
+    def test_get_floor_for_interval_datetime_instances(self):
+        """Datetime and date objects should be normalized without raising TypeError."""
+        from datetime import datetime, date
+        dt_in = datetime(2026, 11, 26, 15, 0)
+        dt_out = datetime(2026, 11, 29, 11, 0)
+        floor_dt = self.engine.get_floor_for_interval(dt_in, dt_out, "weekend")
+        self.assertEqual(floor_dt, 499.0)
+
+        d_in = date(2026, 9, 21)
+        d_out = date(2026, 9, 24)
+        floor_d = self.engine.get_floor_for_interval(d_in, d_out, "midweek")
+        self.assertEqual(floor_d, 300.0)
+
+    def test_evaluate_segment_sub_floor_shows_action(self):
+        """When our base is below floor, action to reach the floor is displayed even if abs_diff < 10%."""
+        # Our base $280 (< $300 floor), comp prices suggest target eff around $433 (base $266 -> clamped to $300)
+        comps = [430.0, 435.0, 440.0]
+        segment = {
+            "check_in": "2026-09-21",
+            "check_out": "2026-09-24",
+            "nights": 3,
+            "lead_time_days": 1,
+            "segment_type": "midweek",
+            "our_base_nightly": 280.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 1340.0,
+            "our_effective_nightly": 446.67,
+        }
+        res = self.engine.evaluate_segment(segment, comps)
+        self.assertEqual(res["floor_rate"], 300.0)
+        self.assertEqual(res["recommended_base_nightly"], 300.0)
+        self.assertIn("↑ Increase $280 → $300", res["action_summary"])
+
+    def test_evaluate_segment_churn_deadband_post_floor_clamping(self):
+        """Churn deadband must evaluate against the floor-clamped target rate."""
+        # Our base $310, floor $300. Comps crash to $200.
+        # Clamped target is $300. Change from $310 to $300 is 3.22% (< 5%), so holds at $310.
+        crash_comps = [200.0, 205.0, 210.0]
+        segment = {
+            "check_in": "2026-09-21",
+            "check_out": "2026-09-24",
+            "nights": 3,
+            "lead_time_days": 1,
+            "segment_type": "midweek",
+            "our_base_nightly": 310.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 1430.0,
+            "our_effective_nightly": 476.67,
+        }
+        res = self.engine.evaluate_segment(segment, crash_comps)
+        self.assertEqual(res["floor_rate"], 300.0)
+        # Clamped rec base before deadband is 300.0; diff is 10/310 = 3.22% < 5%, so holds at 310.0
+        self.assertEqual(res["recommended_base_nightly"], 310.0)
+
+    def test_get_floor_for_interval_post_holiday_drop(self):
+        """Post-holiday midweek intervals must drop back to the $300 operational floor."""
+        # Tuesday after Memorial Day 2027 (June 1 - June 3)
+        self.assertEqual(self.engine.get_floor_for_interval("2027-06-01", "2027-06-03", "midweek"), 300.0)
+        # Tuesday after Labor Day 2026 (Sept 8 - Sept 11)
+        self.assertEqual(self.engine.get_floor_for_interval("2026-09-08", "2026-09-11", "midweek"), 300.0)
+        # Monday after Thanksgiving 2026 (Nov 30 - Dec 3)
+        self.assertEqual(self.engine.get_floor_for_interval("2026-11-30", "2026-12-03", "midweek"), 300.0)
+        # Tuesday after Columbus Day 2026 (Oct 13 - Oct 16)
+        self.assertEqual(self.engine.get_floor_for_interval("2026-10-13", "2026-10-16", "midweek"), 300.0)
+        # April standard intervals in 2027 (not Holy Week)
+        self.assertEqual(self.engine.get_floor_for_interval("2027-04-01", "2027-04-04", "weekend"), 450.0)
+        self.assertEqual(self.engine.get_floor_for_interval("2027-04-04", "2027-04-08", "midweek"), 300.0)
+
+    def test_get_easter_calculation(self):
+        """Verify Western Easter Sunday algorithm matches verified calendar dates."""
+        from src.analytics import _get_easter
+        from datetime import date
+        self.assertEqual(_get_easter(2026), date(2026, 4, 5))
+        self.assertEqual(_get_easter(2027), date(2027, 3, 28))
+        self.assertEqual(_get_easter(2028), date(2028, 4, 16))
+
+    def test_evaluate_segment_zero_comps_sub_floor(self):
+        """Zero-comp fallback must raise sub-floor rates to effective floor."""
+        segment = {
+            "check_in": "2026-09-21",
+            "check_out": "2026-09-24",
+            "nights": 3,
+            "lead_time_days": 1,
+            "segment_type": "midweek",
+            "our_base_nightly": 280.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 1340.0,
+            "our_effective_nightly": 446.67,
+        }
+        res = self.engine.evaluate_segment(segment, [])
+        self.assertEqual(res["floor_rate"], 300.0)
+        self.assertEqual(res["recommended_base_nightly"], 300.0)
+        self.assertIn("↑ Increase $280 → $300", res["action_summary"])
+
 
 if __name__ == "__main__":
     unittest.main()

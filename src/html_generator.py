@@ -23,7 +23,7 @@ from typing import List, Dict, Any, Optional, Tuple
 from src.kivoya_client import KivoyaClient
 from src.segmentation import CalendarSegmenter
 from src.analytics import PricingAnalyticsEngine
-from src.config import URGENT_PCT_DIFF, MODERATE_PCT_DIFF
+from src.config import URGENT_PCT_DIFF, MODERATE_PCT_DIFF, MIN_PRICE_CHANGE_PCT
 from src.proposed_prices import generate_proposed_prices
 from src.database import is_cloud_enabled
 
@@ -98,6 +98,7 @@ class HTMLDashboardGenerator:
         comps_registry_path: str = "config/comps_registry.json",
         urgent_pct_diff: float = URGENT_PCT_DIFF,
         moderate_pct_diff: float = MODERATE_PCT_DIFF,
+        min_price_change_pct: float = MIN_PRICE_CHANGE_PCT,
         ratings_data: Optional[Dict[str, Any]] = None,
     ):
         self.output_path = Path(output_path)
@@ -105,6 +106,7 @@ class HTMLDashboardGenerator:
         self.comps_path = Path(comps_registry_path)
         self.urgent_pct_diff = urgent_pct_diff
         self.moderate_pct_diff = moderate_pct_diff
+        self.min_price_change_pct = float(min_price_change_pct)
         self._injected_ratings_data = ratings_data
         self.comps_data = self.load_comps()
         self.comps_dict: Dict[str, Dict[str, Any]] = {}
@@ -2795,13 +2797,15 @@ class HTMLDashboardGenerator:
         const recPrice = isAdj ? (row.dataset.adjRec || basePrice) : (row.dataset.rawRec || basePrice);
         const actionHtml = isAdj ? (row.dataset.adjActionHtml || '') : (row.dataset.rawActionHtml || '');
 
+        const rVal = parseInt(recPrice, 10);
+        const bVal = parseInt(basePrice, 10);
         let actionText = '';
-        if (actionHtml.includes('Increase') || (parseInt(recPrice, 10) > parseInt(basePrice, 10) && !actionHtml.includes('Reduce'))) {{
-          actionText = `Increase price from $${{basePrice}} to $${{recPrice}}`;
-        }} else if (actionHtml.includes('Reduce') || (parseInt(recPrice, 10) < parseInt(basePrice, 10) && !actionHtml.includes('Increase'))) {{
-          actionText = `Reduce price from $${{basePrice}} to $${{recPrice}}`;
-        }} else {{
+        if (rVal === bVal) {{
           actionText = `Keep price at $${{basePrice}}`;
+        }} else if (rVal > bVal) {{
+          actionText = `Increase price from $${{basePrice}} to $${{recPrice}}`;
+        }} else {{
+          actionText = `Reduce price from $${{basePrice}} to $${{recPrice}}`;
         }}
 
         const histCount = parseInt(row.dataset.histCount || '0', 10);
@@ -3466,7 +3470,19 @@ class HTMLDashboardGenerator:
           const diff = pTarget > 0 ? (((ourEff - pTarget) / pTarget) * 100) : 0;
           const targetStayTotal = pTarget * nights;
           const targetKivoyaTotal = targetStayTotal / Math.max(0.5, channelFactor);
-          const recBase = Math.max(249, Math.min(2499, Math.round((Math.max(0, targetKivoyaTotal - 500)) / nights)));
+
+          const segType = (container.dataset.segmentType || '').toLowerCase();
+          const defaultFloor = (segType === 'midweek') ? 300 : 450;
+          const floorRate = parseFloat(container.dataset.floor) || defaultFloor;
+
+          let recBase = Math.max(floorRate, Math.min(2499, Math.round((Math.max(0, targetKivoyaTotal - 500)) / nights)));
+          // 5% deadband churn threshold: hold current base price if proposed change is < 5%
+          const churnPct = {self.min_price_change_pct:.4f};
+          if (ourBase > 0 && Math.abs(recBase - ourBase) / ourBase < churnPct) {{
+            recBase = Math.round(ourBase);
+          }}
+          // Strictly enforce operational and holiday nightly rate floors
+          recBase = Math.max(floorRate, recBase);
           const baseDiff = Math.round(recBase - ourBase);
 
           const absDiff = Math.abs(diff);
@@ -3517,10 +3533,18 @@ class HTMLDashboardGenerator:
 
           const recEl = document.getElementById('rec-' + rowId);
           if (recEl) recEl.innerHTML = '<span class="rec-price">$' + recBase + '</span>';
+          if (parentRow) {{
+            if (isAdj) {{
+              parentRow.dataset.adjRec = recBase;
+            }} else {{
+              parentRow.dataset.rawRec = recBase;
+            }}
+          }}
 
           const actionEl = document.getElementById('action-' + rowId);
           if (actionEl) {{
-            if (absDiff < {self.moderate_pct_diff} || baseDiff === 0) {{
+            const showAction = (absDiff >= {self.moderate_pct_diff} || ourBase < floorRate) && (baseDiff !== 0);
+            if (!showAction) {{
               actionEl.innerHTML = '';
               actionEl.style.color = '';
             }} else if (baseDiff < 0) {{
@@ -3538,8 +3562,21 @@ class HTMLDashboardGenerator:
               actionEl.style.color = '#34d399';
               actionEl.innerHTML = '<strong>' + actionText + '</strong>';
             }}
+            if (parentRow) {{
+              const actHtml = actionEl ? actionEl.innerHTML : '';
+              if (isAdj) {{
+                parentRow.dataset.adjActionHtml = actHtml;
+              }} else {{
+                parentRow.dataset.rawActionHtml = actHtml;
+              }}
+            }}
           }}
         }} else {{
+          const segType = (container.dataset.segmentType || '').toLowerCase();
+          const defaultFloor = (segType === 'midweek') ? 300 : 450;
+          const floorRate = parseFloat(container.dataset.floor) || defaultFloor;
+          const clampedBase = Math.max(floorRate, Math.round(ourBase));
+
           const statusEl = document.getElementById('status-' + rowId);
           if (statusEl) {{
             statusEl.innerHTML = '<span class="badge" style="background:rgba(148,163,184,0.15); color:#94a3b8; border:1px solid rgba(148,163,184,0.3);">⚪ No Comps</span>';
@@ -3548,15 +3585,36 @@ class HTMLDashboardGenerator:
           if (parentRow) {{
             parentRow.dataset.tier = 'none';
             parentRow.style.borderLeft = '4px solid transparent';
+            if (isAdj) {{
+              parentRow.dataset.adjRec = clampedBase;
+            }} else {{
+              parentRow.dataset.rawRec = clampedBase;
+            }}
           }}
           const targetEl = document.getElementById('target-' + rowId);
           if (targetEl) targetEl.textContent = 'N/A';
           const diffEl = document.getElementById('diff-' + rowId);
           if (diffEl) diffEl.innerHTML = '<span style="color:#94a3b8;">N/A</span>';
           const recEl = document.getElementById('rec-' + rowId);
-          if (recEl) recEl.innerHTML = '<span class="rec-price">$' + Math.round(ourBase) + '</span>';
+          if (recEl) recEl.innerHTML = '<span class="rec-price">$' + clampedBase + '</span>';
           const actionEl = document.getElementById('action-' + rowId);
-          if (actionEl) actionEl.innerHTML = '<strong style="color:#cbd5e1;">No comps meet filter</strong>';
+          if (actionEl) {{
+            if (ourBase < floorRate) {{
+              actionEl.style.color = '#34d399';
+              actionEl.innerHTML = '<strong>↑ Increase $' + Math.round(ourBase) + ' → $' + clampedBase + ' (Floor)</strong>';
+            }} else {{
+              actionEl.innerHTML = '<strong style="color:#cbd5e1;">No comps meet filter</strong>';
+              actionEl.style.color = '';
+            }}
+            if (parentRow) {{
+              const actHtml = actionEl ? actionEl.innerHTML : '';
+              if (isAdj) {{
+                parentRow.dataset.adjActionHtml = actHtml;
+              }} else {{
+                parentRow.dataset.rawActionHtml = actHtml;
+              }}
+            }}
+          }}
         }}
       }});
 
@@ -4072,7 +4130,9 @@ class HTMLDashboardGenerator:
                data-target-pct="{s.get('target_percentile', 65.0)}"
                data-calendar-open="{str(s.get('is_calendar_open', True)).lower()}"
                data-is-live-scan="{str(is_live).lower()}"
-               data-channel-factor="{channel_factor:.4f}">
+               data-channel-factor="{channel_factor:.4f}"
+               data-segment-type="{str(s.get('segment_type', 'weekend')).lower()}"
+               data-floor="{float(s.get('floor_rate') or (300.0 if str(s.get('segment_type', '')).lower() == 'midweek' else 450.0)):.0f}">
             {intel_banner_html}
             <div class="subtable-scroll">
               <table class="subtable">
@@ -4182,6 +4242,7 @@ class HTMLDashboardGenerator:
             action_style_adj = get_action_style(action_adj)
 
             our_base = float(s.get("our_base_nightly") or 0.0)
+            floor_rate = float(s.get("floor_rate") or (300.0 if str(s.get("segment_type", "")).lower() == "midweek" else 450.0))
 
             if total_comps > 0:
                 if is_our_live:
@@ -4231,6 +4292,7 @@ class HTMLDashboardGenerator:
                   data-checkout="{s['check_out']}"
                   data-segment-type="{s['segment_type'].capitalize()}"
                   data-base-price="{our_base:.0f}"
+                  data-floor="{floor_rate:.0f}"
                   data-hist-count="{h_count}"
                   data-hist-med="{h_med:.0f}"
                   data-adj-tier="{tier_adj}"

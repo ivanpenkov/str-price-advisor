@@ -7,9 +7,9 @@
 
 ## 📊 Executive Summary
 - **Total Open Calendar Intervals**: 81
-- 🚨 **Urgent Adjustments (This Week)**: **22** intervals
+- 🚨 **Urgent Adjustments (This Week)**: **21** intervals
 - ⚠️ **Moderate Adjustments (Monthly Review)**: **27** intervals
-- ✅ **Competitive / On Target**: **32** intervals
+- ✅ **Competitive / On Target**: **33** intervals
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
 > Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
@@ -21,7 +21,6 @@ The following dates have major pricing anomalies that require immediate update i
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $752 → $499 | 65 | $752 | $876 (77%) | $756 | $578 (32.5%) | 🔴 **+85.2%** | **$499** | $627–$627 (med $627, Aligned With Track Record) |
-| `2026-09-21 -> 2026-09-24` | Midweek | 3 | ↓ Reduce $399 → $300 | 50 | $399 | $566 (74%) | $495 | $412 (30%) | 🔴 **+64.6%** | **$300** | $347–$554 (med $427, Aligned With Track Record) |
 | `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $399 → $300 | 46 | $399 | $566 (67%) | $520 | $465 (30%) | 🔴 **+54.6%** | **$300** | $347–$554 (med $427, Aligned With Track Record) |
 | `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $532 → $499 | 40 | $532 | $699 (88%) | $615 | $559 (32.5%) | 🔴 **+44.9%** | **$499** | $433–$433 (med $433, Aligned With Track Record) |
 | `2027-09-02 -> 2027-09-05` | Weekend | 3 | ↑ Increase $599 → $1222 | 45 | $599 | $766 (22%) | $944 | $1389 (67.5%) | 🔵 **-44.9%** | **$1222** | $432–$854 (med $613, +89% vs Track Record) |
@@ -86,7 +85,6 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $752 → $499 | 65 | $752 | $876 (77%) | $756 | $578 (32.5%) | 🔴 **+85.2%** | **$499** | $627–$627 (med $627, Aligned With Track Record) |
-| `2026-09-21 -> 2026-09-24` | Midweek | 3 | ↓ Reduce $399 → $300 | 50 | $399 | $566 (74%) | $495 | $412 (30%) | 🔴 **+64.6%** | **$300** | $347–$554 (med $427, Aligned With Track Record) |
 | `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $399 → $300 | 46 | $399 | $566 (67%) | $520 | $465 (30%) | 🔴 **+54.6%** | **$300** | $347–$554 (med $427, Aligned With Track Record) |
 | `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $532 → $499 | 40 | $532 | $699 (88%) | $615 | $559 (32.5%) | 🔴 **+44.9%** | **$499** | $433–$433 (med $433, Aligned With Track Record) |
 | `2027-09-02 -> 2027-09-05` | Weekend | 3 | ↑ Increase $599 → $1222 | 45 | $599 | $766 (22%) | $944 | $1389 (67.5%) | 🔵 **-44.9%** | **$1222** | $432–$854 (med $613, +89% vs Track Record) |
@@ -134,6 +132,7 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 | `2026-10-29 -> 2026-11-01` | Weekend | 3 | ↑ Increase $599 → $700 | 58 | $599 | $766 (57%) | $819 | $1005 (62.5%) | 🟡 -11.6% | **$700** | $520–$1485 (med $674, Aligned With Track Record) |
 | `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↑ Increase $998 → $1143 | 58 | $998 | $1165 (62%) | $1220 | $1597 (67.5%) | 🟡 -11.1% | **$1143** | $467–$1451 (med $846, Aligned With Track Record) |
 | `2027-09-19 -> 2027-09-23` | Midweek | 4 | ↓ Reduce $599 → $530 | 24 | $599 | $724 (58%) | $656 | $655 (47.5%) | 🟡 +10.6% | **$530** | $347–$554 (med $427, +32% vs Track Record) |
+| `2026-09-20 -> 2026-09-24` | Midweek | 4 | - | 10 | $399 | $524 (60%) | $518 | $491 (30%) | +6.6% | **$366** | $347–$554 (med $427, Aligned With Track Record) |
 | `2026-12-03 -> 2026-12-06` | Weekend | 3 | - | 45 | $714 | $881 (60%) | $967 | $1134 (62.5%) | -5.8% | **$768** | $530–$908 (med $623, Aligned With Track Record) |
 | `2027-01-04 -> 2027-01-07` | Midweek | 3 | - | 71 | $578 | $745 (46%) | $943 | $916 (47.5%) | -1.7% | **$578** | $313–$699 (med $478, Aligned With Track Record) |
 | `2027-01-07 -> 2027-01-10` | Weekend | 3 | - | 67 | $964 | $1131 (66%) | $1062 | $1461 (67.5%) | -5.7% | **$1032** | $650–$933 (med $834, Aligned With Track Record) |

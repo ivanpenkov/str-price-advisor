@@ -158,6 +158,11 @@ Per architectural agreement, the following stores remain in their current form:
 - **FR11.3 (Idempotence)**: Running the migration command multiple times MUST be safe and idempotent, utilizing UPSERT logic (`INSERT OR REPLACE` / `ON CONFLICT DO UPDATE`) to prevent duplicate row creation.
 - **FR11.4 (Pre-Migration Snapshot)**: The migration tool MUST create a local backup of `data/reservations.db` (`data/reservations_pre_turso_YYYYMMDD.db`) before modifying data.
 
+### FR12: Cloud Web Console Access & Provisioning Standards
+- **FR12.1 (Naming Standards)**: The Turso database MUST be named `str-price-advisor` under the GitHub-authenticated organization account `ivanpenkov` (`libsql://str-price-advisor-ivanpenkov.turso.io`).
+- **FR12.2 (Regional Deployment)**: The database MUST be provisioned in the closest automatic region (with `phx` Phoenix, AZ as the preferred primary region for <5ms latency to Tempe, AZ).
+- **FR12.3 (Web Console Access)**: Operators MUST be able to view, query, and inspect live database tables in real time via Turso's official hosted Web Console at `https://app.turso.tech/ivanpenkov/databases/str-price-advisor`.
+
 ---
 
 ## 5. Non-Functional Requirements
@@ -187,16 +192,17 @@ Per architectural agreement, the following stores remain in their current form:
 
 | Requirement | Addressed In Architecture & Design | Verification Plan |
 | :--- | :--- | :--- |
-| **FR1 (Central Cloud Store)** | `docs/migrating_sqlite_to_cloud_design.md#2-cloud-database-schema-specification` | Connect to Turso Cloud and execute DDL; inspect table schemas. |
-| **FR2 (Multi-Device Parity)** | `docs/migrating_sqlite_to_cloud_design.md#3-unified-database-adapter-design` | Clone to fresh temp dir; run `generate-html` using Turso env vars. |
-| **FR3 (Direct Remote Mode)** | `docs/migrating_sqlite_to_cloud_design.md#3-unified-database-adapter-design` | Verify zero local `.db` files generated in `data/` on fresh run. |
-| **FR4 (sqlite3 Adapter Parity)**| `docs/migrating_sqlite_to_cloud_design.md#3-unified-database-adapter-design` | Verify `conn.cursor()`, `cursor.description`, and `with conn:` on Turso. |
-| **FR5 (Mobile App Access)** | `docs/migrating_sqlite_to_cloud_design.md#6-mobile-client-integration-architecture` | Test direct HTTPS queries using scoped read-only bearer token. |
-| **FR6 (Hermetic Testing)** | `docs/migrating_sqlite_to_cloud_design.md#7-test-isolation-and-fast-development-protocol-compliance` | Run unit tests with no env vars; verify <0.2s pass. |
-| **FR7 (JSON Deprecation)** | `docs/migrating_sqlite_to_cloud_design.md#4-component-refactoring-specification` | Confirm `data/reservations.json` is not modified or pushed on sync. |
+| **FR1 (Central Cloud Store)** | `docs/migrating_sqlite_to_cloud_design.md#3-cloud-database-schema-specification` | Connect to Turso Cloud and execute DDL; inspect table schemas. |
+| **FR2 (Multi-Device Parity)** | `docs/migrating_sqlite_to_cloud_design.md#4-unified-database-adapter-design` | Clone to fresh temp dir; run `generate-html` using Turso env vars. |
+| **FR3 (Direct Remote Mode)** | `docs/migrating_sqlite_to_cloud_design.md#4-unified-database-adapter-design` | Verify zero local `.db` files generated in `data/` on fresh run. |
+| **FR4 (sqlite3 Adapter Parity)**| `docs/migrating_sqlite_to_cloud_design.md#4-unified-database-adapter-design` | Verify `conn.cursor()`, `cursor.description`, and `with conn:` on Turso. |
+| **FR5 (Mobile App Access)** | `docs/migrating_sqlite_to_cloud_design.md#7-mobile-client-integration-architecture` | Test direct HTTPS queries using scoped read-only bearer token. |
+| **FR6 (Hermetic Testing)** | `docs/migrating_sqlite_to_cloud_design.md#8-test-isolation-and-fast-development-protocol-compliance` | Run unit tests with no env vars; verify <0.2s pass. |
+| **FR7 (JSON Deprecation)** | `docs/migrating_sqlite_to_cloud_design.md#5-component-refactoring-specification` | Confirm `data/reservations.json` is not modified or pushed on sync. |
 | **FR8 (Automated Backups)** | `docs/migrating_sqlite_to_cloud_design.md#9-automated-backup-and-disaster-recovery-plan` | Run `python -m src.cli backup-cloud-db`; verify archive created and rotated. |
-| **FR9 (Configuration & Override)**| `docs/migrating_sqlite_to_cloud_design.md#3-unified-database-adapter-design` | Verify `USE_LOCAL_SQLITE=1` routes to `data/reservations.db`. |
-| **FR10 (Diagnostics & UI)** | `docs/migrating_sqlite_to_cloud_design.md#5-migration-and-diagnostic-tooling` | Run `python -m src.cli check-db`; verify dashboard badge. |
-| **FR11 (Migration Tooling)** | `docs/migrating_sqlite_to_cloud_design.md#5-migration-and-diagnostic-tooling` | Run `python -m src.cli migrate-to-turso`; verify checksum and row counts. |
-| **NFR1 (Performance)** | `docs/migrating_sqlite_to_cloud_design.md#3-unified-database-adapter-design` | Benchmark query execution time in `generate-html`. |
-| **NFR3 (Security)** | `docs/migrating_sqlite_to_cloud_design.md#6-mobile-client-integration-architecture` | Verify read-only token rejects `INSERT` and `DELETE` queries. |
+| **FR9 (Configuration & Override)**| `docs/migrating_sqlite_to_cloud_design.md#4-unified-database-adapter-design` | Verify `USE_LOCAL_SQLITE=1` routes to `data/reservations.db`. |
+| **FR10 (Diagnostics & UI)** | `docs/migrating_sqlite_to_cloud_design.md#6-migration-and-diagnostic-tooling` | Run `python -m src.cli check-db`; verify dashboard badge. |
+| **FR11 (Migration Tooling)** | `docs/migrating_sqlite_to_cloud_design.md#6-migration-and-diagnostic-tooling` | Run `python -m src.cli migrate-to-turso`; verify checksum and row counts. |
+| **FR12 (Web Console & Provisioning)**| `docs/migrating_sqlite_to_cloud_design.md#2-turso-account-setup-database-provisioning-and-web-console-guide` | Navigate to app.turso.tech/ivanpenkov/databases/str-price-advisor; verify tables. |
+| **NFR1 (Performance)** | `docs/migrating_sqlite_to_cloud_design.md#4-unified-database-adapter-design` | Benchmark query execution time in `generate-html`. |
+| **NFR3 (Security)** | `docs/migrating_sqlite_to_cloud_design.md#7-mobile-client-integration-architecture` | Verify read-only token rejects `INSERT` and `DELETE` queries. |

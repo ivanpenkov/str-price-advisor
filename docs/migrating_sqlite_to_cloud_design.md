@@ -70,7 +70,104 @@ flowchart TD
 
 ---
 
-## 2. Cloud Database Schema Specification
+## 2. Turso Account Setup, Database Provisioning, and Web Console Guide
+
+This section provides the end-to-end operational playbook for setting up the Turso account, provisioning the production database, configuring authentication secrets, and inspecting live data in real time via the Turso Web Console.
+
+### 2.1 Step 1: Install the Turso CLI
+Install the official Turso command-line tool on macOS:
+```bash
+curl -sSfL https://get.tur.so/install.sh | bash
+```
+Add Turso to your shell path (if not added automatically by the installer) and verify:
+```bash
+export PATH="$HOME/.turso:$PATH"
+turso --version
+```
+
+### 2.2 Step 2: Authenticate via GitHub (`ivanpenkov`)
+Log in or sign up using your GitHub credentials (`ivanpenkov`):
+```bash
+# For first-time registration:
+turso auth signup
+
+# Or to authenticate an existing account:
+turso auth login
+```
+This opens a browser window prompting authorization with GitHub. Once authorized, your default Turso organization/account name matches your GitHub handle: **`ivanpenkov`**.
+
+### 2.3 Step 3: Provision the Cloud Database (`str-price-advisor`)
+Create the primary cloud database named `str-price-advisor`. Turso automatically provisions in the closest region (or explicitly specify Phoenix, AZ `--location phx` for <5ms roundtrip latency to the Villa del Sol host in Tempe):
+```bash
+turso db create str-price-advisor
+```
+
+### 2.4 Step 4: Obtain Connection URL & Database Metadata
+Inspect the newly provisioned database:
+```bash
+turso db show str-price-advisor
+```
+Extract the database URL:
+```bash
+turso db show str-price-advisor --url
+# Outputs: libsql://str-price-advisor-ivanpenkov.turso.io
+```
+
+### 2.5 Step 5: Issue Authentication Tokens
+Generate tokens following the principle of least privilege:
+
+1. **Admin / Full Read-Write Token** (for Mac Mini daemons and developer workstations):
+   ```bash
+   turso db tokens create str-price-advisor
+   ```
+2. **Scoped Read-Only Bearer Token** (for mobile application and public dashboards):
+   ```bash
+   turso db tokens create str-price-advisor --read-only
+   ```
+
+### 2.6 Step 6: Configure Environment Secrets (`.env`)
+Add the Turso connection settings to your local `.env` file on each workstation and the Mac Mini:
+```bash
+# .env (Never commit to Git)
+TURSO_DATABASE_URL="libsql://str-price-advisor-ivanpenkov.turso.io"
+TURSO_AUTH_TOKEN="<ADMIN_BEARER_TOKEN_HERE>"
+
+# Optional: Set to 1 to temporarily bypass Turso and force local SQLite
+USE_LOCAL_SQLITE=0
+```
+Update `.env.example` as a template for other contributors:
+```bash
+TURSO_DATABASE_URL="libsql://str-price-advisor-ivanpenkov.turso.io"
+TURSO_AUTH_TOKEN="your-turso-auth-token"
+USE_LOCAL_SQLITE=0
+```
+
+### 2.7 Step 7: Real-Time Data Inspection via Turso Web Console
+Turso provides an official, hosted real-time Web Console for browsing tables, inspecting schema definitions, viewing raw rows, and executing arbitrary SQL queries without local tooling:
+
+- **Web Console URL**: [https://app.turso.tech/ivanpenkov/databases/str-price-advisor](https://app.turso.tech/ivanpenkov/databases/str-price-advisor)
+- **Features**:
+  - **Interactive SQL Shell**: Execute queries (e.g. `SELECT * FROM reservations WHERE is_future=1;`) directly in the browser.
+  - **Schema Explorer**: View all 4 tables, column types, primary keys, and B-tree indexes.
+  - **Metrics Dashboard**: Track live row read/write operations, storage consumption, and replica health.
+  - **Token Management**: Issue or revoke read-only and admin tokens visually.
+
+### 2.8 Step 8: Execute Data Migration & Parity Verification
+With credentials configured in `.env`, run the migration utility:
+```bash
+# 1. Preview migration (dry run)
+python -m src.cli migrate-to-turso --dry-run
+
+# 2. Execute migration from local data/reservations.db to Turso
+python -m src.cli migrate-to-turso
+
+# 3. Verify health, latency, and row counts
+python -m src.cli check-db
+```
+
+---
+
+## 3. Cloud Database Schema Specification
 
 The Turso database maintains 100% dialect and type compatibility with the existing SQLite schema. All tables utilize native SQLite types (`INTEGER`, `TEXT`, `REAL`) with explicit primary keys, unique constraints, and optimized B-tree indexes.
 
@@ -178,7 +275,7 @@ CREATE INDEX IF NOT EXISTS idx_rate_snap_date ON property_rate_snapshots (snapsh
 
 ---
 
-## 3. Unified Database Adapter Design
+## 4. Unified Database Adapter Design
 
 To eliminate code duplication, provide 100% DB-API 2.0 / `sqlite3` interface compatibility, and maintain seamless backward compatibility with unit tests, all database interactions are routed through `src/database.py`.
 
@@ -512,11 +609,11 @@ def get_db_connection(db_path: Optional[Union[Path, str]] = None):
 
 ---
 
-## 4. Component Refactoring Specification
+## 5. Component Refactoring Specification
 
 The following modules currently execute direct `sqlite3.connect()` calls to `data/reservations.db`. Each requires targeted refactoring to utilize `get_db_connection()`:
 
-### 4.1 `src/reservation_store.py`
+### 5.1 `src/reservation_store.py`
 - **Current State**: Hardcodes `sqlite3.connect(str(self.db_path))` and exports `data/reservations.json` on sync.
 - **Refactoring Steps**:
   1. Replace `self._get_connection()`:
@@ -529,7 +626,7 @@ The following modules currently execute direct `sqlite3.connect()` calls to `dat
   3. Mark `export_to_json()` as deprecated or no-op to eliminate Git merge conflicts.
   4. Ensure `_init_db()` executes idempotent DDL (`CREATE TABLE IF NOT EXISTS`) on fresh Turso databases upon first initialization.
 
-### 4.2 `src/competitor_sales_tracker.py`
+### 5.2 `src/competitor_sales_tracker.py`
 - **Current State**: Hardcodes `sqlite3.connect(str(self.db_path))` in `_get_connection()`. Calls `cursor = conn.cursor()` in 15+ analytical methods.
 - **Refactoring Steps**:
   1. Replace `_get_connection()`:
@@ -540,13 +637,13 @@ The following modules currently execute direct `sqlite3.connect()` calls to `dat
      ```
   2. Because `TursoRemoteConnection` fully implements `conn.cursor()`, `cursor.description`, and `ON CONFLICT (...) DO UPDATE`, all 2,000+ lines of sales detection logic work unmodified.
 
-### 4.3 `src/reservation_intelligence.py`
+### 5.3 `src/reservation_intelligence.py`
 - **Current State**: Hardcodes `sqlite3.connect(str(self.db_path))` in `_get_connection()`.
 - **Refactoring Steps**:
   1. Replace `_get_connection()` to delegate to `get_db_connection(self.db_path)`.
   2. Lead-time distributions, revenue pacing benchmarks, and seasonal pace metrics execute transparently over Turso Cloud.
 
-### 4.4 `src/kivoya_client.py`
+### 5.4 `src/kivoya_client.py`
 - **Current State**: In `record_published_rates()` (lines 383–387), opens `sqlite3.connect("data/reservations.db")`.
 - **Refactoring Steps**:
   1. Replace direct SQLite call with:
@@ -558,12 +655,12 @@ The following modules currently execute direct `sqlite3.connect()` calls to `dat
      ```
   2. Enables published rate snapshots captured on any machine to stream directly into Turso.
 
-### 4.5 `src/comp_manager.py`
+### 5.5 `src/comp_manager.py`
 - **Current State**: Line 536 opens SQLite to purge competitor sales for disqualified comps.
 - **Refactoring Steps**:
   1. Replace direct SQLite connection with `get_db_connection()`. Purges cascade to the cloud database.
 
-### 4.6 `src/html_generator.py`
+### 5.6 `src/html_generator.py`
 - **Current State**:
   - Connects to local `data/reservations.db` to render Villa del Sol reservations and competitor absorption tabs.
   - Line 6514 displays hardcoded HTML: `<div ...>SQLite: data/reservations.db</div>`.
@@ -579,7 +676,7 @@ The following modules currently execute direct `sqlite3.connect()` calls to `dat
      )
      ```
 
-### 4.7 `src/cli.py`
+### 5.7 `src/cli.py`
 - **Refactoring Steps**:
   1. In `push_to_github()`, ensure `data/reservations.json` is not staged or pushed.
   2. In `cmd_status()`, query `is_cloud_enabled()` and display active storage backend and ping latency.
@@ -590,9 +687,9 @@ The following modules currently execute direct `sqlite3.connect()` calls to `dat
 
 ---
 
-## 5. Migration and Diagnostic Tooling
+## 6. Migration and Diagnostic Tooling
 
-### 5.1 Migration Utility: `src/migration/turso_migrator.py`
+### 6.1 Migration Utility: `src/migration/turso_migrator.py`
 A dedicated migration module facilitates safe, idempotent data cutover from local `data/reservations.db` to Turso Cloud:
 
 ```bash
@@ -615,7 +712,7 @@ python -m src.cli migrate-to-turso --verify-only
    - For `reservations`, computes SHA256 checksum across `confirmation_id + start_date + gross_rent` on both databases and validates exact match.
 5. **Summary Reporting**: Prints structured terminal table detailing records transferred, checksum status, and elapsed time.
 
-### 5.2 Diagnostic Command: `check-db`
+### 6.2 Diagnostic Command: `check-db`
 Enables instant verification of Turso connectivity, network latency, and table integrity:
 
 ```bash
@@ -628,7 +725,7 @@ python -m src.cli check-db
   STR Price Advisor - Database Connectivity & Health Diagnostics
 ================================================================================
   Backend Type:       Turso Cloud (LibSQL)
-  Database URL:       libsql://str-advisor-prod-ivanpenkov.turso.io
+  Database URL:       libsql://str-price-advisor-ivanpenkov.turso.io
   Network Latency:    34.2 ms (roundtrip ping)
   Status:             ONLINE (Connected & Authenticated)
 
@@ -647,7 +744,7 @@ python -m src.cli check-db
 
 ---
 
-## 6. Mobile Client Integration Architecture
+## 7. Mobile Client Integration Architecture
 
 Property managers will access the STR Price Advisor via a lightweight mobile application (iOS / Android) to review live bookings, rate pacing, and market absorption.
 
@@ -674,17 +771,17 @@ sequenceDiagram
     end
 ```
 
-### 6.1 Scoped Read-Only Token Provisioning
+### 7.1 Scoped Read-Only Token Provisioning
 The mobile client authenticates using a cryptographic read-only token generated via the Turso CLI:
 ```bash
-turso db tokens create str-advisor-prod --read-only
+turso db tokens create str-price-advisor --read-only
 ```
 - **Security Enforcement**: The token is cryptographically restricted by Turso's edge gateway. Any `INSERT`, `UPDATE`, `DELETE`, or `DROP` query is rejected with HTTP 403 Forbidden.
 - **Independence**: The mobile app functions 24/7 without requiring the Mac Mini to be turned on or running any local tunnel.
 
 ---
 
-## 7. Test Isolation & Fast-Development Protocol Compliance
+## 8. Test Isolation & Fast-Development Protocol Compliance
 
 Adhering to the project's [fast_development_and_testing.md](file:///Users/ivanpe/str-price-advisor/.gemini/config/rules/fast_development_and_testing.md) protocol is a mandatory system invariant:
 
@@ -700,18 +797,18 @@ Adhering to the project's [fast_development_and_testing.md](file:///Users/ivanpe
 
 ---
 
-## 8. Automated Backup and Disaster Recovery Plan
+## 9. Automated Backup and Disaster Recovery Plan
 
 Because Turso Cloud serves as the authoritative single source of truth and `data/reservations.json` is deprecated, robust automated backups are essential.
 
-### 8.1 Daily Backup Utility: `backup-cloud-db`
+### 9.1 Daily Backup Utility: `backup-cloud-db`
 A new CLI command `python -m src.cli backup-cloud-db` performs an automated backup:
 1. Connects to Turso Cloud via `get_db_connection()`.
 2. Queries table schemas and all rows for `reservations`, `sync_history`, `competitor_sales`, and `property_rate_snapshots`.
 3. Generates a compressed SQL dump: `data/backups/turso_backup_YYYY-MM-DD.sql.gz`.
 4. Prunes backups older than 30 days.
 
-### 8.2 Mac Mini Daemon Integration
+### 9.2 Mac Mini Daemon Integration
 The daily PMS sync daemon script (`scripts/launchd/run_pms_sync.sh`) is updated to trigger `backup-cloud-db` immediately following the 6:00 AM sync:
 ```bash
 # In scripts/launchd/run_pms_sync.sh
@@ -719,13 +816,13 @@ The daily PMS sync daemon script (`scripts/launchd/run_pms_sync.sh`) is updated 
 "$VENV_PYTHON" -m src.cli backup-cloud-db --retention-days 30
 ```
 
-### 8.3 On-Demand Cloud Snapshots
+### 9.3 On-Demand Cloud Snapshots
 Before applying major schema migrations or structural updates, administrators can trigger an on-demand Turso CLI database snapshot:
 ```bash
-turso db dump str-advisor-prod > data/backups/pre_migration_dump.sql
+turso db dump str-price-advisor > data/backups/pre_migration_dump.sql
 ```
 
-### 8.4 Disaster Recovery & Rollback Procedure
+### 9.4 Disaster Recovery & Rollback Procedure
 If Turso encounters an outage:
 1. Set `USE_LOCAL_SQLITE=1` in `.env`.
 2. To restore data from the latest compressed backup:

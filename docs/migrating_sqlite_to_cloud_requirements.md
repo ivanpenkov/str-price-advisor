@@ -152,11 +152,11 @@ Per architectural agreement, the following stores remain in their current form:
   - Cloud: `<span class="badge bg-green">Cloud: Turso (LibSQL)</span>`
   - Local: `<span class="badge bg-yellow">Local: SQLite (data/reservations.db)</span>`
 
-### FR11: Migration Tooling & Verification
-- **FR11.1 (Automated Seeding)**: A dedicated CLI command (`python -m src.cli migrate-to-turso`) MUST extract all historical records from local `data/reservations.db` and upload them to Turso in batch transactions.
-- **FR11.2 (Integrity Verification)**: The migration tool MUST compute and report row-count parity and column-level checksums between the source SQLite database and target Turso database before declaring migration success.
-- **FR11.3 (Idempotence)**: Running the migration command multiple times MUST be safe and idempotent, utilizing UPSERT logic (`INSERT OR REPLACE` / `ON CONFLICT DO UPDATE`) to prevent duplicate row creation.
-- **FR11.4 (Pre-Migration Snapshot)**: The migration tool MUST create a local backup of `data/reservations.db` (`data/reservations_pre_turso_YYYYMMDD.db`) before modifying data.
+### FR11: Migration Tooling & Verification [COMPLETED & RETIRED]
+- **FR11.1 (Automated Seeding)**: [COMPLETED] Historical records from local `data/reservations.db` were uploaded to Turso in batch transactions. The one-time command was subsequently retired to prevent accidental data corruption across cloned repositories.
+- **FR11.2 (Integrity Verification)**: [COMPLETED] Verified 100% row-count parity across all 4 tables and verified exact SHA256 checksum parity (`b43f2d240d3bc5315cdc6a11f1cee9a687b302969db278bda43218b8fa9419ac`).
+- **FR11.3 (Idempotence)**: [COMPLETED] Schema creation and batch upsert logic were executed idempotently.
+- **FR11.4 (Pre-Migration Snapshot)**: [COMPLETED] Created standalone local pre-migration snapshots in `data/reservations_pre_turso_*.db`.
 
 ### FR12: Cloud Web Console Access & Provisioning Standards
 - **FR12.1 (Naming Standards)**: The Turso database MUST be named `str-price-advisor` under the GitHub-authenticated organization account `ivanpenkov` (`libsql://str-price-advisor-ivanpenkov.turso.io`).
@@ -202,7 +202,7 @@ Per architectural agreement, the following stores remain in their current form:
 | **FR8 (Automated Backups)** | `docs/migrating_sqlite_to_cloud_design.md#9-automated-backup-and-disaster-recovery-plan` | Run `python -m src.cli backup-cloud-db`; verify archive created and rotated. |
 | **FR9 (Configuration & Override)**| `docs/migrating_sqlite_to_cloud_design.md#4-unified-database-adapter-design` | Verify `USE_LOCAL_SQLITE=1` routes to `data/reservations.db`. |
 | **FR10 (Diagnostics & UI)** | `docs/migrating_sqlite_to_cloud_design.md#6-migration-and-diagnostic-tooling` | Run `python -m src.cli check-db`; verify dashboard badge. |
-| **FR11 (Migration Tooling)** | `docs/migrating_sqlite_to_cloud_design.md#6-migration-and-diagnostic-tooling` | Run `python -m src.cli migrate-to-turso`; verify checksum and row counts. |
+| **FR11 (Migration Tooling)** | `docs/migrating_sqlite_to_cloud_design.md#6-database-administration-and-diagnostic-tooling` | Initial migration completed & verified; command retired. |
 | **FR12 (Web Console & Provisioning)**| `docs/migrating_sqlite_to_cloud_design.md#2-turso-account-setup-database-provisioning-and-web-console-guide` | Navigate to app.turso.tech/ivanpenkov/databases/str-price-advisor; verify tables. |
 | **NFR1 (Performance)** | `docs/migrating_sqlite_to_cloud_design.md#4-unified-database-adapter-design` | Benchmark query execution time in `generate-html`. |
 | **NFR3 (Security)** | `docs/migrating_sqlite_to_cloud_design.md#7-mobile-client-integration-architecture` | Verify read-only token rejects `INSERT` and `DELETE` queries. |

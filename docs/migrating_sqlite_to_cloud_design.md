@@ -152,17 +152,17 @@ Turso provides an official, hosted real-time Web Console for browsing tables, in
   - **Metrics Dashboard**: Track live row read/write operations, storage consumption, and replica health.
   - **Token Management**: Issue or revoke read-only and admin tokens visually.
 
-### 2.8 Step 8: Execute Data Migration & Parity Verification
-With credentials configured in `.env`, run the migration utility:
+### 2.8 Step 8: Execute Data Migration & Parity Verification [COMPLETED]
+> [!NOTE]
+> **Migration Completed & CLI Retired**:
+> The one-time migration was executed and verified with 100% row-count parity and matching SHA256 financial integrity checksums. To prevent accidental overwrite or data pollution across new machines, the one-time `migrate-to-turso` command was retired. Ongoing health check and backup commands remain available:
+
 ```bash
-# 1. Preview migration (dry run)
-python -m src.cli migrate-to-turso --dry-run
-
-# 2. Execute migration from local data/reservations.db to Turso
-python -m src.cli migrate-to-turso
-
-# 3. Verify health, latency, and row counts
+# 1. Verify health, latency, and row counts on Turso Cloud
 python -m src.cli check-db
+
+# 2. Dump and compress cloud database with 30-day rotation
+python -m src.cli backup-cloud-db
 ```
 
 ---
@@ -681,36 +681,22 @@ The following modules currently execute direct `sqlite3.connect()` calls to `dat
   1. In `push_to_github()`, ensure `data/reservations.json` is not staged or pushed.
   2. In `cmd_status()`, query `is_cloud_enabled()` and display active storage backend and ping latency.
   3. Register new CLI sub-commands:
-     - `migrate-to-turso` (migration & parity audit)
      - `check-db` (diagnostic health check)
      - `backup-cloud-db` (automated compressed backup rotation)
 
 ---
 
-## 6. Migration and Diagnostic Tooling
+## 6. Database Administration and Diagnostic Tooling
 
-### 6.1 Migration Utility: `src/migration/turso_migrator.py`
-A dedicated migration module facilitates safe, idempotent data cutover from local `data/reservations.db` to Turso Cloud:
+### 6.1 Database Maintenance: `src/db_admin.py`
+With the one-time data cutover completed with 100% parity, ongoing cloud administration and disaster recovery tooling is centralized in [src/db_admin.py](file:///Users/ivanpe/str-price-advisor/src/db_admin.py):
 
-```bash
-# Preview migration without modifying data
-python -m src.cli migrate-to-turso --dry-run
+- **Authoritative DDL Schema**: `TABLE_SCHEMAS` defines tables and indexes for `reservations`, `sync_history`, `competitor_sales`, and `property_rate_snapshots`.
+- **Diagnostic Connectivity**: `check_database_health()` provides latency measurements, connection verification, and row counts.
+- **Disaster Recovery Backup**: `backup_cloud_database()` streams data directly to `.sql.gz` archives with 30-day rotation.
 
-# Execute migration with automatic pre-migration backup and checksum verification
-python -m src.cli migrate-to-turso
-
-# Verify row counts and checksum parity between local SQLite and Turso
-python -m src.cli migrate-to-turso --verify-only
-```
-
-#### Migration Workflow:
-1. **Pre-Migration Safety Backup**: Copies `data/reservations.db` to `data/reservations_pre_turso_YYYYMMDD_HHMMSS.db`.
-2. **Schema Provisioning**: Connects to Turso Cloud and executes idempotent DDL (`CREATE TABLE IF NOT EXISTS` and indexes) for all 4 tables.
-3. **Chunked Transactional Copy**: Reads rows in batches of 250 from local SQLite and executes parameterized batch UPSERTs (`INSERT OR REPLACE` / `ON CONFLICT DO UPDATE`) on Turso.
-4. **Parity & Checksum Validation**:
-   - Compares exact `SELECT COUNT(*)` for all 4 tables.
-   - For `reservations`, computes SHA256 checksum across `confirmation_id + start_date + gross_rent` on both databases and validates exact match.
-5. **Summary Reporting**: Prints structured terminal table detailing records transferred, checksum status, and elapsed time.
+> [!NOTE]
+> The initial one-time migration command (`migrate-to-turso`) was retired from the CLI following successful cutover to eliminate the risk of accidental overwrite when cloning the repository on new devices.
 
 ### 6.2 Diagnostic Command: `check-db`
 Enables instant verification of Turso connectivity, network latency, and table integrity:

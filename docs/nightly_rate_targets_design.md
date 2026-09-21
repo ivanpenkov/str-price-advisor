@@ -85,10 +85,10 @@ flowchart TD
 Given a booking lead time $L$ in calendar days ($L = \text{check\_in\_date} - \text{detected\_date}$):
 
 $$H(L) = \begin{cases} 
-\text{">90d"} & \text{if } L > 90 \\
+\text{">180d"} & \text{if } L > 180 \\
+\text{"91–180d"} & \text{if } 91 \le L \le 180 \\
 \text{"31–90d"} & \text{if } 31 \le L \le 90 \\
-\text{"15–30d"} & \text{if } 15 \le L \le 30 \\
-\text{"}\le14\text{d"} & \text{if } L \le 14 
+\text{"}\le30\text{d"} & \text{if } L \le 30 
 \end{cases}$$
 
 Stay type $T$ is segmented into:
@@ -119,15 +119,15 @@ $$\text{is\_floor\_clamped}(h, t) = \begin{cases}
 \text{False} & \text{if } \hat{Y}(h, t) \ge \text{floor}(h, t)
 \end{cases}$$
 
-*Example*: For Far-Out (>90d) Weekend:
+*Example*: For Early Booking (91–180d) Weekend:
 - $n = 24$, $p_{50} = 41.0\%$, $\text{prior} = 67.5\%$, $\text{floor} = 65.0\%$.
 - Raw shrinkage: $\hat{Y} = \frac{24 \times 41.0 + 5 \times 67.5}{29} = \frac{984.0 + 337.5}{29} = 45.57\%$.
 - Because $\hat{Y} (45.57\%) < \text{floor} (65.0\%)$:
-  $$\text{Target}_{\text{clamped}}(>90\text{d}, \text{weekend}) = 65.0\%, \quad \text{is\_floor\_clamped} = \text{True}$$
+  $$\text{Target}_{\text{clamped}}(91\text{--}180\text{d}, \text{weekend}) = 65.0\%, \quad \text{is\_floor\_clamped} = \text{True}$$
 
 ### 2.4 Monotonic Tapering Invariant
 Target percentiles must never increase as the stay date approaches. After floor clamping, the system iterates sequentially across ordered horizons:
-$$H_{\text{ordered}} = [">90\text{d}", "31\text{--}90\text{d}", "15\text{--}30\text{d}", "\le14\text{d}"]$$
+$$H_{\text{ordered}} = [">180\text{d}", "91\text{--}180\text{d}", "31\text{--}90\text{d}", "\le30\text{d}"]$$
 
 For each stay type $t \in \{\text{weekend}, \text{midweek}\}$:
 $$\text{Target}_{\text{monotonic}}(h_i, t) = \min\left(\text{Target}_{\text{clamped}}(h_i, t),\, \text{Target}_{\text{monotonic}}(h_{i-1}, t)\right) \quad \text{for } i \ge 1$$
@@ -171,8 +171,20 @@ strategy:
 
   # 2D Strategy Matrix (Horizon x Stay Type)
   lead_time_matrix:
-    ">90d":
-      description: "Early booking window with high willingness-to-pay. Anchor at premium percentiles."
+    ">180d":
+      description: "Ultra-advance booking window (>180d). Captures high-value planners and prevents early luxury bargain hunting."
+      weekend:
+        target: 85.0
+        floor: 80.0
+        p75: 90.0
+      midweek:
+        target: 50.0
+        floor: 45.0
+        p75: 60.0
+      action_guidance: "Hold firm at 85% (Weekend) / 50% (Midweek). Premium anchor protects far-out luxury yield against early underpriced bargain hunters."
+
+    "91–180d":
+      description: "Early booking window (91–180d) with high willingness-to-pay. Anchor at premium percentiles."
       weekend:
         target: 67.5
         floor: 65.0
@@ -195,20 +207,8 @@ strategy:
         p75: 45.0
       action_guidance: "Target 60%–65% (Weekend) / 30%–35% (Midweek). Aligned with empirical comp conversion band and protected by $300 midweek floor."
 
-    "15–30d":
-      description: "Demand curve compresses and price elasticity rises rapidly."
-      weekend:
-        target: 52.5
-        floor: 50.0
-        p75: 60.0
-      midweek:
-        target: 32.5
-        floor: 30.0
-        p75: 40.0
-      action_guidance: "Trim to 50%–55% (Weekend) / 30%–32% (Midweek). Monotonic tapering prevents small-sample near-term spikes."
-
-    "≤14d":
-      description: "Distress inventory liquidation window where unbooked nights risk total perishable loss."
+    "≤30d":
+      description: "Near-term and distress inventory liquidation window where unbooked nights risk perishable loss."
       weekend:
         target: 42.5
         floor: 40.0
@@ -327,10 +327,10 @@ Update `_render_market_sales_tab()`:
      `badge_style = "background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);"`
      `badge_label = "Blended (k=5)"`
 2. **Synchronize Guidance Copy**:
-   - `>90d`: "Hold firm at 65%–70% (Weekend) / 45%–50% (Midweek). Strategic floor protects far-out luxury yield against early underpriced bargain hunters."
+   - `>180d`: "Hold firm at 85% (Weekend) / 50% (Midweek). Premium anchor protects far-out luxury yield against early underpriced bargain hunters."
+   - `91–180d`: "Hold firm at 65%–70% (Weekend) / 45%–50% (Midweek). Strategic floor protects far-out luxury yield against early underpriced bargain hunters."
    - `31–90d`: "Target 60%–65% (Weekend) / 30%–35% (Midweek). Aligned with empirical comp conversion band and protected by $300 midweek floor."
-   - `15–30d`: "Trim to 50%–55% (Weekend) / 30%–32% (Midweek). Monotonic tapering prevents small-sample near-term spikes."
-   - `≤14d`: "Aggressive liquidation: 40%–45% (Weekend) / 28%–32% (Midweek) to secure occupancy above $300 operational floor."
+   - `≤30d`: "Aggressive liquidation: 40%–45% (Weekend) / 28%–32% (Midweek) to secure occupancy above $300 operational floor."
 
 ---
 
@@ -354,7 +354,7 @@ Update `_render_market_sales_tab()`:
 - `tests/test_competitor_sales_tracker.py`:
   - `test_compute_strategy_grid_with_floors`: Verifies far-out weekend does not drop below 65% despite $p_{50} = 41.0\%$.
   - `test_is_floor_clamped_flag`: Verifies $\hat{Y} < \text{floor}$ sets `is_floor_clamped = True`.
-  - `test_monotonic_tapering_enforcement`: Verifies 15–30d target is clamped to $\le$ 31–90d target.
+  - `test_monotonic_tapering_enforcement`: Verifies ≤30d target is clamped to $\le$ 31–90d target.
   - `test_sample_size_gating_n5`: Verifies $n < 5$ cells remain non-empirical.
 - `tests/test_analytics.py`:
   - `test_operational_floors`: Verifies midweek recommended rates never dip below $300/night and weekend rates never dip below $450/night.

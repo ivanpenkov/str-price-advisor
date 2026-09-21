@@ -17,17 +17,19 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
 
     def test_lead_time_tapering(self):
         """Lead time curves should taper across the 4 horizons for weekends."""
-        self.assertEqual(self.engine.get_target_percentile(200), 67.5)
-        self.assertEqual(self.engine.get_target_percentile(60), 62.5)
-        self.assertEqual(self.engine.get_target_percentile(20), 52.5)
-        self.assertEqual(self.engine.get_target_percentile(10), 42.5)
+        self.assertEqual(self.engine.get_target_percentile(200), 85.0)  # >180d
+        self.assertEqual(self.engine.get_target_percentile(120), 67.5)  # 91–180d
+        self.assertEqual(self.engine.get_target_percentile(60), 62.5)   # 31–90d
+        self.assertEqual(self.engine.get_target_percentile(20), 42.5)   # ≤30d
+        self.assertEqual(self.engine.get_target_percentile(10), 42.5)   # ≤30d
 
     def test_midweek_target_percentiles(self):
         """Midweek target percentiles should follow the approved 4-tier matrix curve."""
-        self.assertEqual(self.engine.get_target_percentile(200, segment_type="midweek"), 47.5)
-        self.assertEqual(self.engine.get_target_percentile(60, segment_type="midweek"), 32.5)
-        self.assertEqual(self.engine.get_target_percentile(20, segment_type="midweek"), 32.5)
-        self.assertEqual(self.engine.get_target_percentile(10, segment_type="midweek"), 30.0)
+        self.assertEqual(self.engine.get_target_percentile(200, segment_type="midweek"), 50.0)  # >180d
+        self.assertEqual(self.engine.get_target_percentile(120, segment_type="midweek"), 47.5)  # 91–180d
+        self.assertEqual(self.engine.get_target_percentile(60, segment_type="midweek"), 32.5)   # 31–90d
+        self.assertEqual(self.engine.get_target_percentile(20, segment_type="midweek"), 30.0)   # ≤30d
+        self.assertEqual(self.engine.get_target_percentile(10, segment_type="midweek"), 30.0)   # ≤30d
 
     def test_operational_floors(self):
         """Recommended base rates must enforce operational floors: >= $300 Midweek, >= $450 Weekend."""
@@ -265,6 +267,105 @@ class TestPricingAnalyticsEngine(unittest.TestCase):
         self.assertEqual(eval_res["target_percentile"], 80.0)
         self.assertIn("compression_details", eval_res)
         self.assertIn("High compression", eval_res["action_summary"])
+
+    def test_compression_surge_midweek_last_minute_with_sales_tracker(self):
+        """Last-minute midweek interval (baseline 30%) surges +15% to 45% when compressed."""
+        class MockSalesTracker:
+            def get_target_percentile(self, lead_time_days, segment_type="weekend"):
+                return 30.0
+
+            def load_registered_comps(self):
+                return {f"comp_{i}": {} for i in range(100)}
+
+            def detect_market_compression(self, check_in, check_out=None, total_cohort_count=None, current_available_count=None):
+                return {
+                    "is_compressed": True,
+                    "available_count": 10,
+                    "total_cohort_count": 100,
+                    "available_ratio": 0.10,
+                    "surge_multiplier": 1.30,
+                    "reason": "High scarcity compression: only 10/100 comps available",
+                }
+
+        self.engine.sales_tracker = MockSalesTracker()
+        segment = {
+            "check_in": "2026-09-20",
+            "check_out": "2026-09-24",
+            "nights": 4,
+            "lead_time_days": 0,
+            "segment_type": "midweek",
+            "our_base_nightly": 399.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 2096.0,
+            "our_effective_nightly": 524.0,
+            "is_live_scan": True,
+        }
+        rates = [500.0 + i * 15 for i in range(10)]
+        eval_res = self.engine.evaluate_segment(segment, rates)
+        self.assertTrue(eval_res["is_compression_surge"])
+        self.assertEqual(eval_res["target_percentile"], 45.0)
+
+    def test_compression_surge_midweek_last_minute_without_sales_tracker(self):
+        """Scarcity fallback surges last-minute midweek target from 30% to 45% even when sales_tracker is None."""
+        self.engine.sales_tracker = None
+        segment = {
+            "check_in": "2026-09-20",
+            "check_out": "2026-09-24",
+            "nights": 4,
+            "lead_time_days": 0,
+            "segment_type": "midweek",
+            "our_base_nightly": 399.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 2096.0,
+            "our_effective_nightly": 524.0,
+            "is_live_scan": True,
+        }
+        # 10 comps available (<20 comps threshold)
+        comps_meta = [{"listing_id": f"comp_{i}", "effective_nightly": 500.0 + i * 15, "is_valid_comp": True} for i in range(10)]
+        rates = [c["effective_nightly"] for c in comps_meta]
+        eval_res = self.engine.evaluate_segment(segment, rates, comp_metadata=comps_meta)
+        self.assertTrue(eval_res["is_compression_surge"])
+        self.assertEqual(eval_res["target_percentile"], 45.0)
+        self.assertEqual(eval_res["compression_details"]["available_count"], 10)
+
+    def test_compression_surge_standard_two_arg_invocation_without_sales_tracker(self):
+        """Standard evaluate_segment(segment, rates) without sales_tracker or comp_metadata triggers scarcity fallback."""
+        self.engine.sales_tracker = None
+        segment = {
+            "check_in": "2026-09-20",
+            "check_out": "2026-09-24",
+            "nights": 4,
+            "lead_time_days": 0,
+            "segment_type": "midweek",
+            "our_base_nightly": 399.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 2096.0,
+            "our_effective_nightly": 524.0,
+        }
+        rates = [500.0 + i * 15 for i in range(10)]
+        eval_res = self.engine.evaluate_segment(segment, rates)
+        self.assertTrue(eval_res["is_compression_surge"])
+        self.assertEqual(eval_res["target_percentile"], 45.0)
+        self.assertEqual(eval_res["compression_details"]["available_count"], 10)
+
+    def test_compression_boundary_at_20_comps(self):
+        """Boundary at 20 comps: 20 available comps is NOT compressed (<20 comps required)."""
+        self.engine.sales_tracker = None
+        segment = {
+            "check_in": "2026-09-20",
+            "check_out": "2026-09-24",
+            "nights": 4,
+            "lead_time_days": 0,
+            "segment_type": "midweek",
+            "our_base_nightly": 399.0,
+            "our_cleaning_fee": 500.0,
+            "our_total_price": 2096.0,
+            "our_effective_nightly": 524.0,
+        }
+        rates = [500.0 + i * 10 for i in range(20)]
+        eval_res = self.engine.evaluate_segment(segment, rates)
+        self.assertFalse(eval_res["is_compression_surge"])
+        self.assertEqual(eval_res["target_percentile"], 30.0)
 
     def test_get_floor_for_interval_regular(self):
         """Regular midweek and weekend intervals should return $300 and $450 operational floors."""

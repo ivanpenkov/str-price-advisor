@@ -100,6 +100,7 @@ class HTMLDashboardGenerator:
         moderate_pct_diff: float = MODERATE_PCT_DIFF,
         min_price_change_pct: float = MIN_PRICE_CHANGE_PCT,
         ratings_data: Optional[Dict[str, Any]] = None,
+        sales_tracker: Optional[Any] = None,
     ):
         self.output_path = Path(output_path)
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -107,6 +108,7 @@ class HTMLDashboardGenerator:
         self.urgent_pct_diff = urgent_pct_diff
         self.moderate_pct_diff = moderate_pct_diff
         self.min_price_change_pct = float(min_price_change_pct)
+        self.sales_tracker = sales_tracker
         self._injected_ratings_data = ratings_data
         self.comps_data = self.load_comps()
         self.comps_dict: Dict[str, Dict[str, Any]] = {}
@@ -250,12 +252,21 @@ class HTMLDashboardGenerator:
         segmenter = CalendarSegmenter(kivoya_client=kivoya, cleaning_fee=500.0)
         segments = segmenter.generate_unbooked_segments()
 
+        from src.competitor_sales_tracker import CompetitorSalesTracker
+        sales_tracker = getattr(self, "sales_tracker", None)
+        if sales_tracker is None:
+            try:
+                sales_tracker = CompetitorSalesTracker()
+            except Exception:
+                sales_tracker = None
+
         analytics = PricingAnalyticsEngine(
             base_percentile=65.0,
             cleaning_fee=500.0,
             urgent_pct_diff=self.urgent_pct_diff,
             urgent_lead_days=60,
             moderate_pct_diff=self.moderate_pct_diff,
+            sales_tracker=sales_tracker,
         )
 
         cached_comps = self._load_cached_comps_by_key()
@@ -293,6 +304,7 @@ class HTMLDashboardGenerator:
                 rates = []
                 is_live = False
 
+            seg["is_live_scan"] = is_live
             eval_seg = analytics.evaluate_segment(seg, rates, comp_metadata=comps_list)
             eval_seg["is_live_scan"] = is_live
             evaluated.append(eval_seg)
@@ -6831,11 +6843,18 @@ class HTMLDashboardGenerator:
         comps_monthly_lead_rows_html = "\n".join(monthly_rows)
 
         grid = sales_data.get("grid", {})
-        horizons = sales_data.get("horizons", [">90d", "31–90d", "15–30d", "≤14d"])
+        horizons = sales_data.get("horizons", [">180d", "91–180d", "31–90d", "≤30d"])
         
         horizon_meta = {
-            ">90d": {
-                "title": "Far-Out Horizon (> 90 Days)",
+            ">180d": {
+                "title": "Ultra-Advance Booking (> 180 Days)",
+                "desc": "Ultra-advance booking window (>180d). Captures high-value planners and prevents early luxury bargain hunting.",
+                "badge_color": "#06b6d4",
+                "badge_bg": "rgba(6,182,212,0.15)",
+                "action": "Hold firm at 85% (Weekend) / 50% (Midweek). Premium anchor protects far-out luxury yield against early underpriced bargain hunters.",
+            },
+            "91–180d": {
+                "title": "Early Booking Window (91–180 Days)",
                 "desc": "Early booking window with high willingness-to-pay. Anchor at premium percentiles.",
                 "badge_color": "#38bdf8",
                 "badge_bg": "rgba(56,189,248,0.15)",
@@ -6848,16 +6867,9 @@ class HTMLDashboardGenerator:
                 "badge_bg": "rgba(129,140,248,0.15)",
                 "action": "Target 60%–65% (Weekend) / 30%–35% (Midweek). Aligned with empirical comp conversion band and protected by $300 midweek floor.",
             },
-            "15–30d": {
-                "title": "Near-Term Compression (15–30 Days)",
-                "desc": "Demand curve compresses and price elasticity rises rapidly.",
-                "badge_color": "#fbbf24",
-                "badge_bg": "rgba(251,191,36,0.15)",
-                "action": "Trim to 50%–55% (Weekend) / 30%–32% (Midweek). Monotonic tapering prevents small-sample near-term spikes.",
-            },
-            "≤14d": {
-                "title": "Last-Minute Distress (≤ 14 Days)",
-                "desc": "Distress inventory liquidation window where unbooked nights risk total perishable loss.",
+            "≤30d": {
+                "title": "Near-Term & Distress (≤ 30 Days)",
+                "desc": "Near-term and distress inventory liquidation window where unbooked nights risk perishable loss.",
                 "badge_color": "#f87171",
                 "badge_bg": "rgba(248,113,113,0.15)",
                 "action": "Aggressive liquidation: 40%–45% (Weekend) / 28%–32% (Midweek) to secure occupancy above $300 operational floor.",
@@ -6874,9 +6886,10 @@ class HTMLDashboardGenerator:
             w_n = w_cell.get("count", 0)
             m_n = m_cell.get("count", 0)
 
-            w_p50 = f"{w_cell.get('empirical_p50', 65.0):.1f}%" if w_n > 0 else "—"
-            w_p75 = f"{w_cell.get('empirical_p75', 75.0):.1f}%" if w_n > 0 else "—"
-            w_rec = f"{w_cell.get('recommended_target', 65.0):.1f}%"
+            w_prior = float(w_cell.get("baseline_prior", 65.0))
+            w_p50 = f"{w_cell.get('empirical_p50', w_prior):.1f}%" if w_n > 0 else "—"
+            w_p75 = f"{w_cell.get('empirical_p75', w_cell.get('recommended_aggressive', 75.0)):.1f}%" if w_n > 0 else "—"
+            w_rec = f"{w_cell.get('recommended_target', w_prior):.1f}%"
             w_is_emp = w_cell.get("is_empirical", False)
             if w_cell.get("is_floor_clamped"):
                 w_badge_style = "background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.3);"
@@ -6888,9 +6901,10 @@ class HTMLDashboardGenerator:
                 w_badge_style = "background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);"
                 w_badge_label = "Blended (k=5)"
 
-            m_p50 = f"{m_cell.get('empirical_p50', 45.5):.1f}%" if m_n > 0 else "—"
-            m_p75 = f"{m_cell.get('empirical_p75', 55.0):.1f}%" if m_n > 0 else "—"
-            m_rec = f"{m_cell.get('recommended_target', 45.5):.1f}%"
+            m_prior = float(m_cell.get("baseline_prior", 45.0))
+            m_p50 = f"{m_cell.get('empirical_p50', m_prior):.1f}%" if m_n > 0 else "—"
+            m_p75 = f"{m_cell.get('empirical_p75', m_cell.get('recommended_aggressive', 55.0)):.1f}%" if m_n > 0 else "—"
+            m_rec = f"{m_cell.get('recommended_target', m_prior):.1f}%"
             m_is_emp = m_cell.get("is_empirical", False)
             if m_cell.get("is_floor_clamped"):
                 m_badge_style = "background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.3);"
@@ -7211,7 +7225,7 @@ class HTMLDashboardGenerator:
                 🎯 2D Empirical Strategy Matrix (Lead Horizon × Stay Type)
               </div>
               <p class="section-desc" style="margin-top: 4px; margin-bottom: 0;">
-                Calculates empirical median absorption percentiles (P₅₀) and aggressive clearing rates (P₇₅) across 4 strategic lead-time horizons. When historical observations are scarce (n &lt; 3), recommendations smoothly blend with our baseline strategy via Bayesian shrinkage (k = 3).
+                Calculates empirical median absorption percentiles (P₅₀) and aggressive clearing rates (P₇₅) across 4 strategic lead-time horizons. When historical observations are scarce (n &lt; 5), recommendations smoothly blend with our baseline strategy via Bayesian shrinkage (k = 5).
               </p>
             </div>
           </div>

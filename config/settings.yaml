@@ -22,8 +22,20 @@ strategy:
 
   # 2D Strategy Matrix (Horizon x Stay Type)
   lead_time_matrix:
-    ">90d":
-      description: "Early booking window with high willingness-to-pay. Anchor at premium percentiles."
+    ">180d":
+      description: "Ultra-advance booking window (>180d). Captures high-value planners and prevents early luxury bargain hunting."
+      weekend:
+        target: 85.0
+        floor: 80.0
+        p75: 90.0
+      midweek:
+        target: 50.0
+        floor: 45.0
+        p75: 60.0
+      action_guidance: "Hold firm at 85% (Weekend) / 50% (Midweek). Premium anchor protects far-out luxury yield against early underpriced bargain hunters."
+
+    "91–180d":
+      description: "Early booking window (91–180d) with high willingness-to-pay. Anchor at premium percentiles."
       weekend:
         target: 67.5
         floor: 65.0
@@ -46,20 +58,8 @@ strategy:
         p75: 45.0
       action_guidance: "Target 60%–65% (Weekend) / 30%–35% (Midweek). Aligned with empirical comp conversion band and protected by $300 midweek floor."
 
-    "15–30d":
-      description: "Demand curve compresses and price elasticity rises rapidly."
-      weekend:
-        target: 52.5
-        floor: 50.0
-        p75: 60.0
-      midweek:
-        target: 32.5
-        floor: 30.0
-        p75: 40.0
-      action_guidance: "Trim to 50%–55% (Weekend) / 30%–32% (Midweek). Monotonic tapering prevents small-sample near-term spikes."
-
-    "≤14d":
-      description: "Distress inventory liquidation window where unbooked nights risk total perishable loss."
+    "≤30d":
+      description: "Near-term and distress inventory liquidation window where unbooked nights risk perishable loss."
       weekend:
         target: 42.5
         floor: 40.0

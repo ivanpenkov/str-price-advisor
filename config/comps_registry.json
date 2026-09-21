@@ -284,7 +284,7 @@
       "beds": 10,
       "baths": 4.0,
       "rating": 4.83,
-      "reviews": 23,
+      "reviews": 24,
       "url": "https://www.airbnb.com/rooms/1558065119520691944",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1558065119520691944/original/2cdac939-8462-4f0c-b1d9-5b310b5a6b6d.jpeg",
@@ -735,8 +735,8 @@
       "bedrooms": 6,
       "beds": 9,
       "baths": 3.0,
-      "rating": 4.92,
-      "reviews": 13,
+      "rating": 4.93,
+      "reviews": 14,
       "url": "https://www.airbnb.com/rooms/1628548270397523375",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1628548270397523375/original/ad8e466f-d256-42b9-ae0f-0879789ef3d1.jpeg",
@@ -1283,8 +1283,8 @@
       "bedrooms": 7,
       "beds": 12,
       "baths": 3.5,
-      "rating": 4.95,
-      "reviews": 61,
+      "rating": 4.94,
+      "reviews": 62,
       "url": "https://www.airbnb.com/rooms/1257280665542111508",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1257280665542111508/original/022d8542-8b44-4aaa-8392-34a3714b66bd.jpeg",
@@ -1355,7 +1355,6 @@
         "strengths": [
           "High bedroom count (7 bedrooms) accommodating large travel groups",
           "Expansive floor plan (~6,500 sq ft)",
-          "Flawless guest track record (4.95★ with 61 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -4602,7 +4601,7 @@
       "beds": 9,
       "baths": 5.5,
       "rating": 4.97,
-      "reviews": 109,
+      "reviews": 108,
       "is_guest_favorite": true,
       "guest_favorite_badge": "Guest Favorite",
       "url": "https://www.airbnb.com/rooms/858613170601453396",
@@ -4622,7 +4621,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.97★ with 109 reviews)",
+          "Flawless guest track record (4.97★ with 108 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -9007,7 +9006,7 @@
       "beds": 8,
       "baths": 4.5,
       "rating": 5.0,
-      "reviews": 6,
+      "reviews": 7,
       "url": "https://www.airbnb.com/rooms/816204349600160886",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-816204349600160886/original/1e90850d-3f3f-4499-bc76-3a27dd97c60a.jpeg",
@@ -9374,7 +9373,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-09-21T10:43:06.650619",
+    "last_ratings_sync": "2026-09-21T11:18:02.377245",
     "total_guest_favorites": 82
   },
   "excluded_comps": {

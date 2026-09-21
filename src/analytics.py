@@ -261,18 +261,18 @@ class PricingAnalyticsEngine:
     def get_target_percentile(self, lead_time_days: int, segment_type: str = "weekend") -> float:
         """
         Dynamically adjust target percentile by lead time and segment type (fallback curve):
-        - > 90 days: Weekend 67.5%, Midweek 47.5%
+        - > 180 days: Weekend 85.0%, Midweek 50.0%
+        - 91 to 180 days: Weekend 67.5%, Midweek 47.5%
         - 31 to 90 days: Weekend 62.5%, Midweek 32.5%
-        - 15 to 30 days: Weekend 52.5%, Midweek 32.5%
-        - <= 14 days: Weekend 42.5%, Midweek 30.0%
+        - <= 30 days: Weekend 42.5%, Midweek 30.0%
         """
         is_midweek = str(segment_type).lower() in ["midweek", "mid-week", "weekday"]
-        if lead_time_days > 90:
+        if lead_time_days > 180:
+            return 50.0 if is_midweek else 85.0
+        elif lead_time_days >= 91:
             return 47.5 if is_midweek else 67.5
         elif lead_time_days >= 31:
             return 32.5 if is_midweek else 62.5
-        elif lead_time_days >= 15:
-            return 32.5 if is_midweek else 52.5
         else:
             return 30.0 if is_midweek else 42.5
 
@@ -425,16 +425,25 @@ class PricingAnalyticsEngine:
         effective_rates_to_use = valid_comp_effective_rates if comp_metadata is not None else comp_effective_rates
         clean_comps = self.remove_outliers(effective_rates_to_use)
         seg_type = segment.get("segment_type", "weekend")
+        is_live_flag = segment.get("is_live_scan")
+        if is_live_flag is None:
+            is_live = bool(effective_rates_to_use) or (comp_metadata is not None and len(comp_metadata) > 0)
+        else:
+            is_live = bool(is_live_flag)
+
         if self.sales_tracker:
             target_pct = self.sales_tracker.get_target_percentile(lead_days, segment_type=seg_type)
             reg_comps = self.sales_tracker.load_registered_comps()
-            tot_reg = len(reg_comps) if reg_comps else (len(self.comp_registry) if self.comp_registry else 97)
-            compression = self.sales_tracker.detect_market_compression(
-                check_in=segment.get("check_in", ""),
-                check_out=segment.get("check_out"),
-                total_cohort_count=tot_reg,
-                current_available_count=len(effective_rates_to_use),
-            )
+            tot_reg = len(reg_comps) if reg_comps else (sum(1 for c in self.comp_registry.values() if c.get("is_valid_comp", True)) if self.comp_registry else 97)
+            if is_live:
+                compression = self.sales_tracker.detect_market_compression(
+                    check_in=segment.get("check_in", ""),
+                    check_out=segment.get("check_out"),
+                    total_cohort_count=tot_reg,
+                    current_available_count=len(effective_rates_to_use),
+                )
+            else:
+                compression = {"is_compressed": False}
             if compression.get("is_compressed"):
                 target_pct = min(90.0, target_pct + 15.0)
                 segment["is_compression_surge"] = True
@@ -444,6 +453,22 @@ class PricingAnalyticsEngine:
                 segment.pop("compression_details", None)
         else:
             target_pct = self.get_target_percentile(lead_days, segment_type=seg_type)
+            tot_reg = sum(1 for c in self.comp_registry.values() if c.get("is_valid_comp", True)) if self.comp_registry else 97
+            n_avail = len(effective_rates_to_use)
+            if is_live and n_avail < 20 and tot_reg > 0 and (n_avail / tot_reg) < 0.20:
+                target_pct = min(90.0, target_pct + 15.0)
+                segment["is_compression_surge"] = True
+                segment["compression_details"] = {
+                    "is_compressed": True,
+                    "available_count": n_avail,
+                    "total_cohort_count": tot_reg,
+                    "available_ratio": round(n_avail / tot_reg, 3),
+                    "surge_multiplier": 1.30,
+                    "reason": f"High scarcity compression: only {n_avail}/{tot_reg} ({(n_avail/tot_reg)*100:.1f}%) comps available for check-in {segment.get('check_in', '')}",
+                }
+            else:
+                segment["is_compression_surge"] = False
+                segment.pop("compression_details", None)
         pct_stats = self.calculate_percentiles(clean_comps, target_pct)
         target_eff = pct_stats["target_val"]
 

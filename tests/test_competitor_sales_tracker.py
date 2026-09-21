@@ -408,10 +408,10 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         """Verify cell with n < 5 anchors to prior baseline; n >= 5 blends with k=5.0."""
         # Check empty grid (n = 0 for all cells)
         grid_data = self.tracker.compute_strategy_grid()
-        cell_last_minute = grid_data["grid"]["≤14d"]["weekend"]
+        cell_last_minute = grid_data["grid"]["≤30d"]["weekend"]
         self.assertEqual(cell_last_minute["count"], 0)
         self.assertIsNone(cell_last_minute["empirical_p50"])
-        # Design Doc §3.4: ≤14d weekend target prior is 42.5%, p75 prior is 50.0%
+        # Design Doc §3.4: ≤30d weekend target prior is 42.5%, p75 prior is 50.0%
         self.assertEqual(cell_last_minute["recommended_target"], 42.5)
         self.assertEqual(cell_last_minute["recommended_aggressive"], 50.0)
 
@@ -457,8 +457,8 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         self.assertEqual(cell_5["count"], 5)
         self.assertTrue(cell_5["is_empirical"])
         # Expected: (5 * 80.0 + 5.0 * 62.5) / 10 = (400 + 312.5) / 10 = 712.5 / 10 = 71.25 -> 71.2% or 71.3%
-        # Monotonic tapering pass clamps to >90d weekend (prior 67.5%)
-        self.assertLessEqual(cell_5["recommended_target"], grid_5["grid"][">90d"]["weekend"]["recommended_target"])
+        # Monotonic tapering pass clamps to 91–180d weekend (prior 67.5%)
+        self.assertLessEqual(cell_5["recommended_target"], grid_5["grid"]["91–180d"]["weekend"]["recommended_target"])
 
     # 8. Monthly Quartiles
     def test_monthly_lead_time_quartiles(self):
@@ -707,21 +707,25 @@ class TestCompetitorSalesTracker(unittest.TestCase):
     # 13. Dynamic Target Lookup
     def test_get_target_percentile_empirical_lookup(self):
         """Verify get_target_percentile() maps lead days to horizons, uses cached grid, and returns Bayesian targets."""
-        # Far-out (>90d) weekend prior is 67.5%
+        # Ultra-advance (>180d) weekend prior is 85.0%
+        p_ultra_wkd = self.tracker.get_target_percentile(lead_time_days=200, segment_type="weekend")
+        self.assertEqual(p_ultra_wkd, 85.0)
+
+        # Early booking (91–180d) weekend prior is 67.5%
         p_far_wkd = self.tracker.get_target_percentile(lead_time_days=100, segment_type="weekend")
         self.assertEqual(p_far_wkd, 67.5)
 
-        # Near-term (15-30d) midweek prior is 32.5%
+        # Near-term / distress (<=30d) midweek prior is 30.0%
         p_near_mid = self.tracker.get_target_percentile(lead_time_days=20, segment_type="midweek")
-        self.assertEqual(p_near_mid, 32.5)
+        self.assertEqual(p_near_mid, 30.0)
 
-        # Last-minute (<=14d) weekend prior is 42.5%
+        # Last-minute (<=30d) weekend prior is 42.5%
         p_last_wkd = self.tracker.get_target_percentile(lead_time_days=10, segment_type="weekend")
         self.assertEqual(p_last_wkd, 42.5)
 
     def test_compute_strategy_grid_with_floors(self):
-        """Verify far-out weekend does not drop below strategic floor 65.0% despite empirical p50 = 41.0%."""
-        # Insert 24 far-out (>90d) weekend bookings with p50 = 41.0%
+        """Verify early booking weekend does not drop below strategic floor 65.0% despite empirical p50 = 41.0%."""
+        # Insert 24 early booking (91–180d) weekend bookings with p50 = 41.0%
         with self.tracker._get_connection() as conn:
             for i in range(24):
                 conn.execute("""
@@ -732,12 +736,12 @@ class TestCompetitorSalesTracker(unittest.TestCase):
                     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     f"comp_{i}", f"2027-04-{(i%20)+1:02d}", f"2027-04-{(i%20)+4:02d}", 3, "weekend",
-                    "2026-10-01", 180, 950.0, 41.0, "CONFIRMED_BLOCKED"
+                    "2026-10-01", 120, 950.0, 41.0, "CONFIRMED_BLOCKED"
                 ))
             conn.commit()
 
         grid = self.tracker.compute_strategy_grid()
-        far_wkd = grid["grid"][">90d"]["weekend"]
+        far_wkd = grid["grid"]["91–180d"]["weekend"]
         self.assertEqual(far_wkd["count"], 24)
         self.assertTrue(far_wkd["is_empirical"])
         self.assertTrue(far_wkd["is_floor_clamped"])
@@ -746,7 +750,7 @@ class TestCompetitorSalesTracker(unittest.TestCase):
 
     def test_is_floor_clamped_flag(self):
         """Verify is_floor_clamped is True when hat_Y < floor and False when hat_Y >= floor."""
-        # 6 sales in far-out midweek with low percentile (20.0%) -> hat_Y < 45.0% floor -> is_floor_clamped True
+        # 6 sales in ultra-advance midweek (>180d) with low percentile (20.0%) -> hat_Y < 45.0% floor -> is_floor_clamped True
         with self.tracker._get_connection() as conn:
             for i in range(6):
                 conn.execute("""
@@ -762,16 +766,16 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             conn.commit()
 
         grid = self.tracker.compute_strategy_grid()
-        cell = grid["grid"][">90d"]["midweek"]
+        cell = grid["grid"][">180d"]["midweek"]
         self.assertTrue(cell["is_floor_clamped"])
         self.assertEqual(cell["recommended_target"], 45.0)
 
     def test_monotonic_tapering_enforcement(self):
         """Verify nearer horizon target is clamped so it never exceeds further-out horizon target."""
-        # Insert 6 high-percentile bookings in 15-30d midweek (e.g. 85th percentile)
-        # Prior is 32.5%. High empirical conversion would pull hat_Y to ~61.0% without monotonic tapering.
-        # But >90d midweek is 45.0% and 31-90d midweek is 32.5%.
-        # Monotonic tapering forces 15-30d <= 31-90d (32.5%).
+        # Insert 6 high-percentile bookings in <=30d midweek (e.g. 85th percentile)
+        # Prior is 30.0%. High empirical conversion would pull hat_Y to ~60.0% without monotonic tapering.
+        # But 31-90d midweek is 32.5%.
+        # Monotonic tapering forces <=30d <= 31-90d (32.5%).
         with self.tracker._get_connection() as conn:
             for i in range(6):
                 conn.execute("""
@@ -788,8 +792,8 @@ class TestCompetitorSalesTracker(unittest.TestCase):
 
         grid = self.tracker.compute_strategy_grid()
         target_31_90 = grid["grid"]["31–90d"]["midweek"]["recommended_target"]
-        target_15_30 = grid["grid"]["15–30d"]["midweek"]["recommended_target"]
-        self.assertLessEqual(target_15_30, target_31_90)
+        target_30 = grid["grid"]["≤30d"]["midweek"]["recommended_target"]
+        self.assertLessEqual(target_30, target_31_90)
 
     def test_monotonic_tapering_disabled(self):
         """Verify enforce_monotonic_tapering=False permits nearer horizon targets to exceed further-out targets."""
@@ -807,12 +811,12 @@ class TestCompetitorSalesTracker(unittest.TestCase):
                 ))
             conn.commit()
 
-        # When enforce_monotonic_tapering is False, 15-30d empirical target reflects raw shrinkage (>32.5%)
+        # When enforce_monotonic_tapering is False, <=30d empirical target reflects raw shrinkage (>32.5%)
         with patch("src.competitor_sales_tracker.ENFORCE_MONOTONIC_TAPERING", False):
             grid = self.tracker.compute_strategy_grid()
             target_31_90 = grid["grid"]["31–90d"]["midweek"]["recommended_target"]
-            target_15_30 = grid["grid"]["15–30d"]["midweek"]["recommended_target"]
-            self.assertGreater(target_15_30, target_31_90)
+            target_30 = grid["grid"]["≤30d"]["midweek"]["recommended_target"]
+            self.assertGreater(target_30, target_31_90)
 
     def test_sample_size_gating_n5(self):
         """Verify cells with n < 5 remain non-empirical and prior-anchored."""
@@ -832,7 +836,7 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             conn.commit()
 
         grid = self.tracker.compute_strategy_grid()
-        cell = grid["grid"]["≤14d"]["weekend"]
+        cell = grid["grid"]["≤30d"]["weekend"]
         self.assertEqual(cell["count"], 4)
         self.assertFalse(cell["is_empirical"])
         self.assertEqual(cell["recommended_target"], 42.5)  # exact prior target
@@ -918,8 +922,8 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         grid = self.tracker.compute_strategy_grid()
         self.assertIsNotNone(grid)
         self.assertIn("grid", grid)
-        self.assertIn("15–30d", grid["grid"])
-        weekend_cell = grid["grid"]["15–30d"]["weekend"]
+        self.assertIn("≤30d", grid["grid"])
+        weekend_cell = grid["grid"]["≤30d"]["weekend"]
         self.assertEqual(weekend_cell["count"], 1)
         self.assertEqual(weekend_cell["empirical_p50"], 50.0)
 

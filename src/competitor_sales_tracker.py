@@ -27,7 +27,11 @@ DEFAULT_REGISTRY_PATH = Path("config/comps_registry.json")
 # Strategy Baseline Priors (used in Bayesian shrinkage and strategic floor clamping)
 # 2D Strategy Matrix per docs/nightly_rate_targets_requirements.md and docs/nightly_rate_targets_design.md
 DEFAULT_HORIZON_PRIORS = {
-    ">90d": {
+    ">180d": {
+        "weekend": {"target": 85.0, "floor": 80.0, "p75": 90.0},
+        "midweek": {"target": 50.0, "floor": 45.0, "p75": 60.0},
+    },
+    "91–180d": {
         "weekend": {"target": 67.5, "floor": 65.0, "p75": 75.0},
         "midweek": {"target": 47.5, "floor": 45.0, "p75": 55.0},
     },
@@ -35,11 +39,7 @@ DEFAULT_HORIZON_PRIORS = {
         "weekend": {"target": 62.5, "floor": 60.0, "p75": 70.0},
         "midweek": {"target": 32.5, "floor": 30.0, "p75": 45.0},
     },
-    "15–30d": {
-        "weekend": {"target": 52.5, "floor": 50.0, "p75": 60.0},
-        "midweek": {"target": 32.5, "floor": 30.0, "p75": 40.0},
-    },
-    "≤14d": {
+    "≤30d": {
         "weekend": {"target": 42.5, "floor": 40.0, "p75": 50.0},
         "midweek": {"target": 30.0, "floor": 28.0, "p75": 38.0},
     },
@@ -1142,14 +1142,14 @@ class CompetitorSalesTracker:
     @staticmethod
     def _categorize_lead_horizon(days: int) -> str:
         """Categorize lead time days into strategic horizons."""
-        if days > 90:
-            return ">90d"
+        if days > 180:
+            return ">180d"
+        elif days >= 91:
+            return "91–180d"
         elif days >= 31:
             return "31–90d"
-        elif days >= 15:
-            return "15–30d"
         else:
-            return "≤14d"
+            return "≤30d"
 
     @staticmethod
     def _normalize_segment_type(seg: str) -> str:
@@ -1184,9 +1184,9 @@ class CompetitorSalesTracker:
             for t, default_t in default_data.items():
                 cfg_t = cfg_h.get(t) or {}
                 matrix[h][t] = {
-                    "target": float(cfg_t.get("target") or default_t["target"]),
-                    "floor": float(cfg_t.get("floor") or default_t["floor"]),
-                    "p75": float(cfg_t.get("p75") or default_t["p75"]),
+                    "target": float(cfg_t.get("target") if cfg_t.get("target") is not None else default_t["target"]),
+                    "floor": float(cfg_t.get("floor") if cfg_t.get("floor") is not None else default_t["floor"]),
+                    "p75": float(cfg_t.get("p75") if cfg_t.get("p75") is not None else default_t["p75"]),
                 }
 
         return {
@@ -1211,7 +1211,7 @@ class CompetitorSalesTracker:
         enforce_monotonic = strat_cfg["enforce_monotonic_tapering"]
         
         # Horizons ordered from far-out to last-minute
-        horizons = [">90d", "31–90d", "15–30d", "≤14d"]
+        horizons = [">180d", "91–180d", "31–90d", "≤30d"]
         stay_types = ["weekend", "midweek"]
 
         # Cell buckets: (horizon, stay_type) -> list of sales
@@ -1312,7 +1312,7 @@ class CompetitorSalesTracker:
                     "max_rate": max_rate,
                 }
 
-        # Monotonic Tapering Pass across ordered horizons (>90d >= 31–90d >= 15–30d >= ≤14d)
+        # Monotonic Tapering Pass across ordered horizons (>180d >= 91–180d >= 31–90d >= ≤30d)
         if enforce_monotonic:
             for t in stay_types:
                 prev_target = None
@@ -1412,7 +1412,7 @@ class CompetitorSalesTracker:
             avail_count = reg_total
 
         avail_ratio = round(avail_count / reg_total, 3) if reg_total > 0 else 1.0
-        is_compressed = bool(avail_ratio < 0.20)
+        is_compressed = bool(avail_count < 20 and avail_ratio < 0.20)
 
         if is_compressed:
             reason = f"High scarcity compression: only {avail_count}/{reg_total} ({avail_ratio * 100:.1f}%) comps available for check-in {check_in}"

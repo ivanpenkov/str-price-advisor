@@ -85,25 +85,25 @@ During the `/grill-me` alignment interviews, the property owner made 9 authorita
 
 ### FR-1: 2D Strategy Matrix Definition & Baseline Priors
 1. The pricing system must define a 4-tier lead time horizon segmentation for both Weekend (Thu–Sat) and Midweek (Sun–Wed) stays:
-   - **Far-Out Horizon (> 90 Days)**
+   - **Ultra-Advance Booking (> 180 Days)**
+   - **Early Booking Window (91–180 Days)**
    - **Peak Booking Window (31–90 Days)**
-   - **Near-Term Compression (15–30 Days)**
-   - **Last-Minute Distress ($\le 14$ Days)**
+   - **Near-Term & Distress ($\le 30$ Days)**
 2. Each cell in the matrix must define:
    - `target`: The baseline Bayesian prior percentile.
    - `floor`: The mandatory minimum percentile floor.
    - `p75`: The aggressive/upper quartile reference target.
 3. The baseline matrix parameters must be:
-   - `>90d`:
+   - `>180d`:
+     - Weekend: `target = 85.0`, `floor = 80.0`, `p75 = 90.0`
+     - Midweek: `target = 50.0`, `floor = 45.0`, `p75 = 60.0`
+   - `91–180d`:
      - Weekend: `target = 67.5`, `floor = 65.0`, `p75 = 75.0`
      - Midweek: `target = 47.5`, `floor = 45.0`, `p75 = 55.0`
    - `31–90d`:
      - Weekend: `target = 62.5`, `floor = 60.0`, `p75 = 70.0`
      - Midweek: `target = 32.5`, `floor = 30.0`, `p75 = 45.0`
-   - `15–30d`:
-     - Weekend: `target = 52.5`, `floor = 50.0`, `p75 = 60.0`
-     - Midweek: `target = 32.5`, `floor = 30.0`, `p75 = 40.0`
-   - `≤14d`:
+   - `≤30d`:
      - Weekend: `target = 42.5`, `floor = 40.0`, `p75 = 50.0`
      - Midweek: `target = 30.0`, `floor = 28.0`, `p75 = 38.0`
 
@@ -120,17 +120,17 @@ During the `/grill-me` alignment interviews, the property owner made 9 authorita
 ### FR-3: Strategic Floor Clamping
 1. Regardless of sample size $n$, the recommended target for any cell $(h, t)$ must never fall below the configured strategic floor:
    $$\text{Target}_{\text{clamped}}(h, t) = \max\left(\text{floor}(h, t),\, \hat{Y}(h, t)\right)$$
-2. Specifically, for Far-Out (>90d) Weekends, the target must never drop below **65.0%**, even if empirical bookings occur at 41.0%.
-3. For Far-Out (>90d) Midweek, the target must never drop below **45.0%**.
+2. Specifically, for Ultra-Advance (>180d) stays, the target must never drop below **80.0%** (Weekend) or **45.0%** (Midweek), preventing early underpriced bargain hunters.
+3. For Early Booking (91–180d) stays, the target must never drop below **65.0%** (Weekend) or **45.0%** (Midweek).
 4. **Floor Clamping Status**: A cell is explicitly flagged as `is_floor_clamped = True` if and only if $\hat{Y}(h, t) < \text{floor}(h, t)$.
 
 ### FR-4: Monotonic Tapering Invariant
 1. Target percentiles must decrease monotonically as check-in nears. A nearer horizon can never recommend a higher target percentile than a further-out horizon for the same stay type:
-   $$\text{Target}(h_i, t) \le \text{Target}(h_{i-1}, t) \quad \text{for } h \in [>90\text{d}, 31\text{--}90\text{d}, 15\text{--}30\text{d}, \le14\text{d}]$$
+   $$\text{Target}(h_i, t) \le \text{Target}(h_{i-1}, t) \quad \text{for } h \in [>180\text{d}, 91\text{--}180\text{d}, 31\text{--}90\text{d}, \le30\text{d}]$$
 2. After floor clamping, the system must execute a monotonic smoothing pass:
-   - $\text{Target}(\text{31–90d}, t) = \min\left(\text{Target}(\text{31–90d}, t),\, \text{Target}(>90\text{d}, t)\right)$
-   - $\text{Target}(\text{15–30d}, t) = \min\left(\text{Target}(\text{15–30d}, t),\, \text{Target}(\text{31–90d}, t)\right)$
-   - $\text{Target}(\le14\text{d}, t) = \min\left(\text{Target}(\le14\text{d}, t),\, \text{Target}(\text{15–30d}, t)\right)$
+   - $\text{Target}(\text{91–180d}, t) = \min\left(\text{Target}(\text{91–180d}, t),\, \text{Target}(>180\text{d}, t)\right)$
+   - $\text{Target}(\text{31–90d}, t) = \min\left(\text{Target}(\text{31–90d}, t),\, \text{Target}(\text{91–180d}, t)\right)$
+   - $\text{Target}(\le30\text{d}, t) = \min\left(\text{Target}(\le30\text{d}, t),\, \text{Target}(\text{31–90d}, t)\right)$
 3. **Mathematical Safety**: Because the configured floors are monotonically non-increasing across all horizons ($\text{floor}(h_i, t) \le \text{floor}(h_{i-1}, t)$), monotonic smoothing is guaranteed never to breach a horizon's own configured floor.
 
 ### FR-5: Operational Rate Floors ($300 Midweek / $450 Weekend)
@@ -154,7 +154,7 @@ During the `/grill-me` alignment interviews, the property owner made 9 authorita
 1. All parameters (horizons, priors, floors, sample size threshold $n=5$, monotonic tapering toggle, and dollar rate floors) must reside in `config/settings.yaml` under `strategy.lead_time_matrix` and `strategy.operational_floors`.
 2. **Clean Deprecation**: The legacy 1D `strategy.lead_time_tiers` ladder is completely removed from `config/settings.yaml`.
 3. All pricing and analytics modules (`CompetitorSalesTracker`, `PricingAnalyticsEngine`, `ProposedPricesEngine`) must read exclusively from `strategy.lead_time_matrix`.
-4. In-code fallbacks in `PricingAnalyticsEngine` and `CompetitorSalesTracker` must map cleanly to the 4 horizons (`>90d`, `31–90d`, `15–30d`, `≤14d`) without relying on the old 1D `lead_time_tiers` ladder.
+4. In-code fallbacks in `PricingAnalyticsEngine` and `CompetitorSalesTracker` must map cleanly to the 4 horizons (`>180d`, `91–180d`, `31–90d`, `≤30d`) without relying on the old 1D `lead_time_tiers` ladder.
 
 ### FR-8: Dashboard Presentation Alignment
 1. The HTML dashboard (`src/html_generator.py`) must display:

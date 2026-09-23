@@ -1,8 +1,26 @@
 {
   "version": "1.0",
-  "last_updated": "2026-09-23T13:01:05.903705Z",
+  "last_updated": "2026-09-23T13:47:54.186481Z",
   "active_host": "mac-mini",
   "runs": [
+    {
+      "run_id": "2026-09-23_131730_daily-quickscan",
+      "job_type": "daily-quickscan",
+      "job_title": "Daily 90-Day Quick Market Scan",
+      "trigger": "launchd",
+      "status": "FAILED",
+      "start_time": "2026-09-23T13:17:30.992203Z",
+      "end_time": "2026-09-23T13:47:54.166407Z",
+      "duration_sec": 1823.2,
+      "duration_formatted": "30m 23s",
+      "exit_code": 1,
+      "git_commit": "f89a0ed",
+      "log_file": "logs/2026-09-23_131730_daily-quickscan.txt",
+      "summary": {
+        "message": "Aborted due to error: The read operation timed out"
+      },
+      "error_excerpt": "    return self._sslobj.read(len, buffer)\n           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\nTimeoutError: The read operation timed out"
+    },
     {
       "run_id": "2026-09-23_130059_pms-sync",
       "job_type": "pms-sync",

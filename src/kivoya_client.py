@@ -6,11 +6,19 @@ for Villa del Sol directly from Kivoya's property management endpoint.
 
 from datetime import datetime, date, timedelta
 import json
+import logging
+import os
 from pathlib import Path
+import socket
 import ssl
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
+import http.client
 from typing import Dict, List, Optional, Any
+
+logger = logging.getLogger(__name__)
 
 try:
     SSL_CONTEXT = ssl._create_unverified_context()
@@ -68,36 +76,110 @@ class KivoyaClient:
             method="POST",
         )
 
-        with urllib.request.urlopen(req, timeout=20, context=SSL_CONTEXT) as response:
-            body = response.read().decode("utf-8")
-            data = json.loads(body)
-            return data.get("data", {})
+        retry_delay = float(os.getenv("KIVOYA_RETRY_DELAY", "2.0"))
+        last_error: Optional[Exception] = None
+
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(req, timeout=30, context=SSL_CONTEXT) as response:
+                    body = response.read().decode("utf-8")
+                    data = json.loads(body)
+                    res = data.get("data")
+                    return res if isinstance(res, dict) else {}
+            except (urllib.error.URLError, TimeoutError, socket.timeout, http.client.HTTPException, ConnectionResetError, OSError) as e:
+                last_error = e
+                if attempt < 2:
+                    sleep_time = retry_delay * (attempt + 1)
+                    logger.warning(
+                        f"Kivoya API {method_name} error: {e} (attempt {attempt + 1}/3). "
+                        f"Retrying in {sleep_time:.1f}s..."
+                    )
+                    if sleep_time > 0:
+                        time.sleep(sleep_time)
+
+        if last_error:
+            raise last_error
+        return {}
 
     def get_blocked_periods(self, force_refresh: bool = False) -> List[Dict[str, Any]]:
         """
         Fetch all blocked dates and reservations.
-        Returns a list of dicts:
-        [
-            {
-                "startdate": "09/03/2026",
-                "enddate": "09/05/2026",
-                "reason": "Reservation #19130",
-                "start_dt": datetime.date(2026, 9, 3),
-                "end_dt": datetime.date(2026, 9, 5)
-            },
-            ...
-        ]
+        Falls back to local cache (data/cache/kivoya_blocked_periods.json) or
+        synced reservations store (data/reservations.json) if the API call fails.
         """
         if not force_refresh and KivoyaClient._cache_blocked_periods is not None:
             return KivoyaClient._cache_blocked_periods
 
-        raw_data = self._call_api(
-            "GetPropertyAvailabilityCalendarRawData",
-            {"unit_id": self.unit_id}
-        )
-        blocked = raw_data.get("blocked_period", [])
-        if isinstance(blocked, dict):
-            blocked = [blocked]
+        cache_path = Path("data/cache/kivoya_blocked_periods.json")
+        blocked = []
+        try:
+            raw_data = self._call_api(
+                "GetPropertyAvailabilityCalendarRawData",
+                {"unit_id": self.unit_id}
+            )
+            raw_blocked = raw_data.get("blocked_period") if isinstance(raw_data, dict) else []
+            if isinstance(raw_blocked, dict):
+                blocked = [raw_blocked]
+            elif isinstance(raw_blocked, list):
+                blocked = raw_blocked
+            else:
+                blocked = []
+        except Exception as e:
+            logger.warning(f"Failed to fetch blocked periods from Kivoya API: {e}. Attempting fallback...")
+            blocked = []
+
+        # If API call returned no blocked periods or failed, attempt fallbacks
+        if not blocked:
+            # Fallback 1: Local cache file
+            if cache_path.exists():
+                try:
+                    cached_items = json.loads(cache_path.read_text(encoding="utf-8"))
+                    reconstituted = []
+                    for item in cached_items:
+                        r = dict(item)
+                        r["start_dt"] = datetime.strptime(r["startdate"], "%m/%d/%Y").date()
+                        r["end_dt"] = datetime.strptime(r["enddate"], "%m/%d/%Y").date()
+                        reconstituted.append(r)
+                    if reconstituted:
+                        sorted_reconstituted = sorted(reconstituted, key=lambda x: x["start_dt"])
+                        KivoyaClient._cache_blocked_periods = sorted_reconstituted
+                        logger.info(f"Reconstituted {len(sorted_reconstituted)} blocked periods from local cache file.")
+                        return sorted_reconstituted
+                except Exception:
+                    pass
+
+            # Fallback 2: Streamline reservations store (data/reservations.json)
+            res_json_path = Path("data/reservations.json")
+            if res_json_path.exists():
+                try:
+                    res_data = json.loads(res_json_path.read_text(encoding="utf-8"))
+                    reservations = res_data.get("reservations", [])
+                    reconstituted = []
+                    for res in reservations:
+                        if str(res.get("status_name", "")).strip().lower() in ("cancelled", "canceled"):
+                            continue
+                        s_iso = res.get("start_date")
+                        e_iso = res.get("end_date")
+                        if s_iso and e_iso:
+                            s_dt = datetime.strptime(s_iso, "%Y-%m-%d").date()
+                            e_dt = datetime.strptime(e_iso, "%Y-%m-%d").date()
+                            # Streamline end_date is checkout day; end_dt is the last occupied night
+                            last_night = max(s_dt, e_dt - timedelta(days=1))
+                            conf_id = res.get("confirmation_id") or res.get("id") or ""
+                            reconstituted.append({
+                                "startdate": s_dt.strftime("%m/%d/%Y"),
+                                "enddate": last_night.strftime("%m/%d/%Y"),
+                                "reason": f"Reservation #{conf_id}" if conf_id else "Reservation",
+                                "start_dt": s_dt,
+                                "end_dt": last_night,
+                            })
+                    if reconstituted:
+                        sorted_reconstituted = sorted(reconstituted, key=lambda x: x["start_dt"])
+                        KivoyaClient._cache_blocked_periods = sorted_reconstituted
+                        logger.info(f"Reconstituted {len(sorted_reconstituted)} blocked periods from reservations store.")
+                        return sorted_reconstituted
+                except Exception:
+                    pass
 
         parsed = []
         for period in blocked:
@@ -119,6 +201,23 @@ class KivoyaClient:
                     continue
         sorted_blocked = sorted(parsed, key=lambda x: x["start_dt"])
         KivoyaClient._cache_blocked_periods = sorted_blocked
+
+        # Cache valid blocked periods to disk for future resilient fallbacks
+        if sorted_blocked:
+            try:
+                cache_path.parent.mkdir(parents=True, exist_ok=True)
+                serializable = [
+                    {
+                        "startdate": p["startdate"],
+                        "enddate": p["enddate"],
+                        "reason": p["reason"],
+                    }
+                    for p in sorted_blocked
+                ]
+                cache_path.write_text(json.dumps(serializable, indent=2), encoding="utf-8")
+            except Exception:
+                pass
+
         return sorted_blocked
 
     def get_daily_availability(self, force_refresh: bool = False) -> Dict[date, Dict[str, Any]]:
@@ -129,18 +228,24 @@ class KivoyaClient:
         if not force_refresh and KivoyaClient._cache_daily_availability is not None:
             return KivoyaClient._cache_daily_availability
 
-        raw_data = self._call_api(
-            "GetPropertyAvailabilityRawData",
-            {"unit_id": self.unit_id}
-        )
-        range_info = raw_data.get("range", {})
-        begin_str = range_info.get("beginDate")
-        avail_str = raw_data.get("availability", "")
-        change_str = raw_data.get("changeOver", "")
-
+        raw_data = {}
+        begin_str = None
+        avail_str = ""
+        change_str = ""
         result: Dict[date, Dict[str, Any]] = {}
-        if begin_str and avail_str:
-            try:
+        try:
+            raw_data = self._call_api(
+                "GetPropertyAvailabilityRawData",
+                {"unit_id": self.unit_id}
+            ) or {}
+            if isinstance(raw_data, dict):
+                range_info = raw_data.get("range") or {}
+                if isinstance(range_info, dict):
+                    begin_str = range_info.get("beginDate")
+                avail_str = raw_data.get("availability") or ""
+                change_str = raw_data.get("changeOver") or ""
+
+            if begin_str and avail_str:
                 begin_dt = datetime.strptime(begin_str, "%m/%d/%Y").date()
                 for idx, char in enumerate(avail_str):
                     cur_dt = begin_dt + timedelta(days=idx)
@@ -149,8 +254,29 @@ class KivoyaClient:
                         "available": (char == "Y"),
                         "change_over": co,
                     }
+        except Exception as e:
+            logger.warning(f"Failed to fetch daily availability from Kivoya API: {e}. Reconstructing from blocked periods...")
+
+        # Fallback: if raw_data was empty or failed, construct from get_blocked_periods
+        if not result:
+            try:
+                blocked_periods = self.get_blocked_periods()
+                booked_dates = set()
+                for bp in blocked_periods:
+                    cur = bp["start_dt"]
+                    while cur <= bp["end_dt"]:
+                        booked_dates.add(cur)
+                        cur += timedelta(days=1)
+                today = date.today()
+                for i in range(365):
+                    cur_dt = today + timedelta(days=i)
+                    result[cur_dt] = {
+                        "available": (cur_dt not in booked_dates),
+                        "change_over": "",
+                    }
             except Exception:
                 pass
+
         KivoyaClient._cache_daily_availability = result
         return result
 

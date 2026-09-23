@@ -33,10 +33,21 @@ if ! /usr/bin/lockf -s -t 0 9; then
 fi
 echo "$$" > "$LOCK_FILE"
 
-# Ensure stale child processes or forwarders from previous completed sessions are cleanly reaped
+# Reap stale child processes or forwarders from previous sessions before starting caffeinate
+pkill -f "pproxy" 2>/dev/null || true
+pkill -f "chrome-headless-shell" 2>/dev/null || true
+
+# Keep system awake against both idle sleep and DarkWake/Maintenance sleep on AC power (-sim)
+caffeinate -sim -w $$ &
+CAFFEINATE_PID=$!
+
+# Ensure child processes and caffeinate daemon are cleanly reaped on exit
 cleanup() {
     pkill -f "pproxy" 2>/dev/null || true
     pkill -f "chrome-headless-shell" 2>/dev/null || true
+    if [ -n "${CAFFEINATE_PID:-}" ] && kill -0 "$CAFFEINATE_PID" 2>/dev/null; then
+        kill "$CAFFEINATE_PID" 2>/dev/null || true
+    fi
 }
 
 # Surgical Emergency Failure Handler
@@ -77,7 +88,6 @@ emergency_push_on_failure() {
 trap 'cleanup; exec 9>&- 2>/dev/null || true; exit 130' INT
 trap 'cleanup; exec 9>&- 2>/dev/null || true; exit 143' TERM
 trap cleanup EXIT
-cleanup
 
 # Ingest fresh guest reviews and platform scores (non-blocking)
 echo "⭐ Syncing guest reviews and ratings..." >> "$LOG_FILE"
@@ -86,7 +96,7 @@ echo "⭐ Syncing guest reviews and ratings..." >> "$LOG_FILE"
 # Prevent system sleep during scraping using caffeinate
 START_TS=$(date +%s)
 EXIT_CODE=0
-caffeinate -i "$PROJECT_ROOT/.venv/bin/python" -u -m src.cli run --quick --limit 12 --force --push --trigger launchd >> "$LOG_FILE" 2>&1 || EXIT_CODE=$?
+caffeinate -sim "$PROJECT_ROOT/.venv/bin/python" -u -m src.cli run --quick --limit 12 --force --push --trigger launchd >> "$LOG_FILE" 2>&1 || EXIT_CODE=$?
 END_TS=$(date +%s)
 DURATION_SEC=$((END_TS - START_TS))
 HOURS=$((DURATION_SEC / 3600))

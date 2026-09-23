@@ -31,6 +31,16 @@ if ! /usr/bin/lockf -s -t 0 9; then
 fi
 echo "$$" > "$LOCK_FILE"
 
+# Keep system awake against both idle sleep and DarkWake/Maintenance sleep on AC power (-sim)
+caffeinate -sim -w $$ &
+CAFFEINATE_PID=$!
+
+cleanup() {
+    if [ -n "${CAFFEINATE_PID:-}" ] && kill -0 "$CAFFEINATE_PID" 2>/dev/null; then
+        kill "$CAFFEINATE_PID" 2>/dev/null || true
+    fi
+}
+
 # Surgical Emergency Failure Handler
 emergency_push_on_failure() {
     local exit_code="${1:-${EXIT_CODE:-1}}"
@@ -61,17 +71,19 @@ emergency_push_on_failure() {
         fi
     fi
 
+    cleanup
     exec 9>&- 2>/dev/null || true
     exit "$exit_code"
 }
 
-trap 'exec 9>&- 2>/dev/null || true; exit 130' INT
-trap 'exec 9>&- 2>/dev/null || true; exit 143' TERM
+trap 'cleanup; exec 9>&- 2>/dev/null || true; exit 130' INT
+trap 'cleanup; exec 9>&- 2>/dev/null || true; exit 143' TERM
+trap cleanup EXIT
 
 # Prevent system sleep during execution using caffeinate
 START_TS=$(date +%s)
 EXIT_CODE=0
-caffeinate -i "$PROJECT_ROOT/.venv/bin/python" -u -m src.cli sync-reservations --days-back 60 --dashboard --push --trigger launchd >> "$LOG_FILE" 2>&1 || EXIT_CODE=$?
+caffeinate -sim "$PROJECT_ROOT/.venv/bin/python" -u -m src.cli sync-reservations --days-back 60 --dashboard --push --trigger launchd >> "$LOG_FILE" 2>&1 || EXIT_CODE=$?
 END_TS=$(date +%s)
 DURATION_SEC=$((END_TS - START_TS))
 HOURS=$((DURATION_SEC / 3600))

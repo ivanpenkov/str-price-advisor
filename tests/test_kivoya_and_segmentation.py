@@ -1,7 +1,10 @@
-"""Unit and integration tests for KivoyaClient and CalendarSegmenter."""
-
+import json
+import os
 import unittest
 from datetime import date
+from pathlib import Path
+from unittest.mock import MagicMock, patch
+
 from src.kivoya_client import KivoyaClient
 from src.segmentation import CalendarSegmenter
 
@@ -112,6 +115,159 @@ class TestKivoyaAndSegmentation(unittest.TestCase):
         self.assertTrue(all(s["check_out"] <= cutoff_str for s in open_segments))
         if closed_segments:
             self.assertTrue(all(s["check_out"] > cutoff_str for s in closed_segments))
+
+    def test_kivoya_api_retry_and_backoff(self):
+        """Verify _call_api retries on transient network errors with configurable backoff."""
+        client = KivoyaClient()
+        with patch.dict(os.environ, {"KIVOYA_RETRY_DELAY": "1.0"}):
+            # Test case 1: Fails twice with TimeoutError, succeeds on 3rd attempt with backoff
+            mock_resp = MagicMock()
+            mock_resp.read.return_value = json.dumps({"data": {"result": "success"}}).encode("utf-8")
+            mock_resp.__enter__.return_value = mock_resp
+            mock_resp.__exit__.return_value = None
+
+            with patch("urllib.request.urlopen", side_effect=[TimeoutError("Read timed out"), ConnectionResetError("Reset"), mock_resp]) as mock_urlopen:
+                with patch("time.sleep") as mock_sleep:
+                    res = client._call_api("DummyMethod", {})
+                    self.assertEqual(res, {"result": "success"})
+                    self.assertEqual(mock_urlopen.call_count, 3)
+                    self.assertEqual(mock_sleep.call_count, 2)
+                    mock_sleep.assert_any_call(1.0)
+                    mock_sleep.assert_any_call(2.0)
+
+            # Test case 2: Fails 3 times, raises last error
+            with patch("urllib.request.urlopen", side_effect=TimeoutError("Persistent timeout")) as mock_urlopen:
+                with patch("time.sleep"):
+                    with self.assertRaises(TimeoutError):
+                        client._call_api("DummyMethod", {})
+                    self.assertEqual(mock_urlopen.call_count, 3)
+
+        # Test case 3: Zero-sleep bypass when KIVOYA_RETRY_DELAY=0.0
+        with patch.dict(os.environ, {"KIVOYA_RETRY_DELAY": "0.0"}):
+            with patch("urllib.request.urlopen", side_effect=[TimeoutError("Timeout"), mock_resp]):
+                with patch("time.sleep") as mock_sleep:
+                    res = client._call_api("DummyMethod", {})
+                    self.assertEqual(res, {"result": "success"})
+                    self.assertEqual(mock_sleep.call_count, 0)
+
+    def test_kivoya_blocked_periods_cache_fallback(self):
+        """Verify get_blocked_periods falls back to local cache file when API fails."""
+        client = KivoyaClient()
+        cached_data = [
+            {"startdate": "10/01/2026", "enddate": "10/05/2026", "reason": "Cached Res #1"}
+        ]
+        KivoyaClient._cache_blocked_periods = None
+        try:
+            with patch.object(client, "_call_api", side_effect=Exception("API offline")), \
+                 patch.object(Path, "exists", return_value=True), \
+                 patch.object(Path, "read_text", return_value=json.dumps(cached_data)):
+                blocked = client.get_blocked_periods(force_refresh=True)
+                self.assertEqual(len(blocked), 1)
+                self.assertEqual(blocked[0]["reason"], "Cached Res #1")
+                self.assertEqual(blocked[0]["start_dt"], date(2026, 10, 1))
+                self.assertEqual(blocked[0]["end_dt"], date(2026, 10, 5))
+        finally:
+            KivoyaClient._cache_blocked_periods = self.blocked
+
+    def test_kivoya_blocked_periods_reservations_store_fallback(self):
+        """Verify get_blocked_periods falls back to reservations.json if cache is missing and API fails."""
+        client = KivoyaClient()
+        res_store = {
+            "reservations": [
+                {
+                    "confirmation_id": "RES_CANCELLED",
+                    "start_date": "2026-10-10",
+                    "end_date": "2026-10-15",
+                    "status_name": "Cancelled",
+                },
+                {
+                    "confirmation_id": "RES999",
+                    "start_date": "2026-11-10",
+                    "end_date": "2026-11-15",
+                    "status_name": "Confirmed",
+                }
+            ]
+        }
+        KivoyaClient._cache_blocked_periods = None
+        try:
+            def fake_exists(path_obj):
+                return "reservations.json" in str(path_obj)
+
+            def fake_read_text(path_obj, encoding="utf-8"):
+                if "reservations.json" in str(path_obj):
+                    return json.dumps(res_store)
+                raise FileNotFoundError()
+
+            with patch.object(client, "_call_api", side_effect=Exception("API offline")), \
+                 patch.object(Path, "exists", fake_exists), \
+                 patch.object(Path, "read_text", fake_read_text):
+                blocked = client.get_blocked_periods(force_refresh=True)
+                self.assertEqual(len(blocked), 1)
+                self.assertEqual(blocked[0]["reason"], "Reservation #RES999")
+                self.assertEqual(blocked[0]["start_dt"], date(2026, 11, 10))
+                # Streamline checkout date is 2026-11-15; last occupied night is 2026-11-14
+                self.assertEqual(blocked[0]["end_dt"], date(2026, 11, 14))
+                self.assertEqual(blocked[0]["enddate"], "11/14/2026")
+        finally:
+            KivoyaClient._cache_blocked_periods = self.blocked
+
+    def test_kivoya_daily_availability_reconstruction_fallback(self):
+        """Verify get_daily_availability reconstructs from blocked periods when raw API fails."""
+        client = KivoyaClient()
+        KivoyaClient._cache_daily_availability = None
+        fake_blocked = [
+            {
+                "startdate": "10/01/2026",
+                "enddate": "10/03/2026",
+                "reason": "Test Block",
+                "start_dt": date(2026, 10, 1),
+                "end_dt": date(2026, 10, 3),
+            }
+        ]
+        try:
+            with patch.object(client, "_call_api", side_effect=Exception("API down")), \
+                 patch.object(client, "get_blocked_periods", return_value=fake_blocked):
+                avail = client.get_daily_availability(force_refresh=True)
+                self.assertIn(date(2026, 10, 1), avail)
+                self.assertFalse(avail[date(2026, 10, 1)]["available"])
+                self.assertFalse(avail[date(2026, 10, 2)]["available"])
+                self.assertFalse(avail[date(2026, 10, 3)]["available"])
+                self.assertTrue(avail[date(2026, 10, 4)]["available"])
+        finally:
+            KivoyaClient._cache_daily_availability = None
+
+    def test_kivoya_api_null_safety(self):
+        """Verify _call_api, get_blocked_periods, and get_daily_availability handle null/malformed payloads safely."""
+        client = KivoyaClient()
+        # 1. _call_api returns {} when "data" is null
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = json.dumps({"data": None}).encode("utf-8")
+        mock_resp.__enter__.return_value = mock_resp
+        mock_resp.__exit__.return_value = None
+        with patch("urllib.request.urlopen", return_value=mock_resp):
+            res = client._call_api("TestNull", {})
+            self.assertEqual(res, {})
+
+        # 2. get_blocked_periods handles {"blocked_period": None} without TypeError
+        KivoyaClient._cache_blocked_periods = None
+        try:
+            with patch.object(client, "_call_api", return_value={"blocked_period": None}), \
+                 patch.object(Path, "exists", return_value=False):
+                res = client.get_blocked_periods(force_refresh=True)
+                self.assertEqual(res, [])
+        finally:
+            KivoyaClient._cache_blocked_periods = self.blocked
+
+        # 3. get_daily_availability handles {"range": None} or None response without AttributeError
+        KivoyaClient._cache_daily_availability = None
+        try:
+            with patch.object(client, "_call_api", return_value={"range": None, "availability": None}), \
+                 patch.object(client, "get_blocked_periods", return_value=[]):
+                avail = client.get_daily_availability(force_refresh=True)
+                self.assertIsInstance(avail, dict)
+                self.assertGreater(len(avail), 300)
+        finally:
+            KivoyaClient._cache_daily_availability = None
 
 
 if __name__ == "__main__":

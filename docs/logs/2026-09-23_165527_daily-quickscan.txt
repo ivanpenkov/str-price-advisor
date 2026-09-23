@@ -1,0 +1,96 @@
+======================================================================
+🏠 STR Competitive Price Advisor: Villa del Sol
+📍 Location: 920 E Carver Rd, Tempe, AZ 85284
+======================================================================
+
+[Step 1/5] Querying Kivoya / Streamline VRS API...
+  ✓ Found 18 active reservations / blocked periods.
+  ✓ Found 19 seasonal rate periods configured in Kivoya.
+  ✓ Snapshotted 358 daily published rates in database.
+
+[Step 2/5] Segmenting open calendar over next 12 months...
+  ✓ Generated 80 unbooked intervals (weekends & midweeks).
+  ⚡ Quick mode: Evaluating first 2 upcoming intervals.
+
+[Step 3/5] Collecting luxury competitive listings from Airbnb...
+🛡️  Stealth Feeder Pool: Initializing 8 parallel proxy bridges across out-of-state travel hubs...
+  🛡️ Stealth Multi-IP Feeder Pool Online (8 endpoints): feeder-sf-1 (San Francisco port 55193, 325ms), feeder-dal-1 (Dallas port 55194, 437ms), feeder-chi-1 (Chicago port 55195, 535ms), feeder-ny-1 (New York port 55196, 565ms), feeder-us-1 (US Anycast port 55197, 331ms), feeder-sf-2 (San Francisco port 55198, 337ms), feeder-sf-3 (San Francisco port 55199, 330ms), feeder-dal-2 (Dallas port 55200, 449ms)
+  [1/2] Scanning 2026-09-24 -> 2026-09-27 (weekend, 3n, lead=1d)... ✓ [OK] 18 comps available (84 booked) in 44.8s (401.51 MB)
+  [2/2] Scanning 2026-09-27 -> 2026-09-30 (midweek, 3n, lead=4d)... ✓ [OK] 38 comps available (64 booked) in 46.8s (320.89 MB)
+
+  ✓ Competitor Sales Engine: Recorded 0 new sales, erased 0 sales (Total active sales in ledger: 99).
+
+[Step 3b/5] Refreshing competitor Airbnb ratings and Guest Favorite badges...
+
+🔍 Synchronizing Airbnb ratings & Guest Favorite badges for 102 active comps (all)...
+  ✓ Identified 101 comps from recent high-fidelity search sweeps.
+  ⚡ Live scraping 1 comps via stealth NordVPN proxy pool...
+
+💾 Saved updated comp registry and listing specifications (102 comps updated).
+🏅 Total Comps with Airbnb Guest Favorite Badge: 82 / 102
+
+Sample Updated Comps:
+ID                  Name                                Rating  GF Badge   Old Ratio  New Ratio
+--------------------------------------------------------------------------------------------
+1077813310260513265 Desert Diamond HTD Pool/Hot Tub/Te  4.97    🏅 YES      1.25       1.25
+628534576871518102  The Mulberry | Lux Pool/Hot Tub Mi  4.96    🏅 YES      1.01       1.01
+1452623425630736376 Family Resort: Pool, Outdoor Theat  4.88    🏅 YES      1.05       1.05
+1558065119520691944 Mega Mesa Retreat: Heated Pool, Sp  4.83    🏅 YES      1.07       1.07
+746927337513825183  HÓZHÓ |Mountain View Home| Pool, H  5.0     No         1.25       1.25
+1143202699620728397 Game Time - 6 Bedroom Elite Vacati  4.8     No         1.00       1.00
+1442997693061036066 Scottsdale Jetsetter - Modern Dese  5.0     🏅 YES      1.09       1.09
+1329097682770073862 Resort-Style Escape: Pool, Courts,  4.87    🏅 YES      1.16       1.16
+1628548270397523375 Fun-Filled Oasis • Pool, Picklebal  4.93    🏅 YES      1.18       1.18
+1136293547142522527 Private Desert Compound w/ pickle-  4.87    No         1.21       1.21
+
+[Step 4/5] Generating multi-format advisory reports...
+
+[Step 4b] ⚡ Detected Streamline price changes in the last 7 days affecting 1 quick-scan interval(s).
+   • 2026-09-27 -> 2026-09-30 (3n): rates modified for ['2026-09-27', '2026-09-28', '2026-09-29']
+  Scraping live cross-platform prices across Airbnb, VRBO, Booking.com, and Kivoya for affected intervals...
+
+🌐 [PlatformComparator] Comparing 4 channels across 1 intervals...
+  [1/1] 2026-09-27 -> 2026-09-30 (3n)... ✓ [OK] Airbnb: $2,293 | VRBO: $2,519 | Booking: $2,416 | Kivoya: $2,134 (Max Div: 12.0%) in 32.1s
+🎨 Refreshed dashboard (docs/index.html) with latest platform comparisons.
+
+[Step 4c] Empirical Absorption Velocity Summary...
+  - Total Confirmed Sales:        99
+  - Overall Median Percentile:    44.4%
+  - Average Lead Time at Sale:    128.9 days
+  - Average Realized Nightly:     $1,018.13
+  - ⚡ Active Market Compression: 1 interval(s) surging!
+      • 2026-09-24 -> 2026-09-27: High scarcity compression: only 18/102 (17.6%) comps available for check-in 2026-09-24
+
+[Step 5/5] Generating interactive static HTML dashboard in docs/...
+
+======================================================================
+🎉 ADVISORY REPORT GENERATION COMPLETE
+======================================================================
+  🚨 Urgent Adjustments Required (This Week): 2
+  ⚠️  Moderate Adjustments (Monthly Review):   0
+  ✅  Competitive / On Target:                 0
+
+📁 Output Files:
+  - Markdown Summary: data/pricing_report_2026-09-23.md
+  - Google Sheets CSV: data/pricing_sheet_2026-09-23.csv
+  - Raw JSON Archive:  data/pricing_data_2026-09-23.json
+======================================================================
+
+==============================================================================
+📊 RUNTIME & DATA TRANSFER PERFORMANCE AUDIT
+==============================================================================
+Scrape Architecture: Stealth Multi-IP Feeder Pool (up to 8 hubs)
+Step / Sub-Interval                                  Duration Network Transfer
+------------------------------------------------------------------------------
+[Step 1] Kivoya & Database Ingestion                     1.3s          0.00 MB
+[Step 2] Calendar Segmentation                           1.3s          0.00 MB
+[Step 3] Luxury Comp Scraping (2 intervals)             49.3s        722.40 MB
+  • 2026-09-24 -> 2026-09-27 (weekend, 3n)              44.8s        401.51 MB
+  • 2026-09-27 -> 2026-09-30 (midweek, 3n)              46.8s        320.89 MB
+[Step 4] Advisory & Anomaly Analytics                    0.1s          0.00 MB
+[Step 4b] Cross-Platform Comparison                     40.9s          3.79 MB
+[Step 4c] Sales Detection & Absorption                   1.0s          0.00 MB
+[Step 5] HTML Dashboard & Asset Sync                     8.9s          0.00 MB
+------------------------------------------------------------------------------
+Total End-to-End Execution                           1m 46.7s        726.19 MB
+==============================================================================

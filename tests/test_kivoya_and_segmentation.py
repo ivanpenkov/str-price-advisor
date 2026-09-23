@@ -74,11 +74,11 @@ class TestKivoyaAndSegmentation(unittest.TestCase):
         self.assertEqual(oct_seg["nights"], 3)
 
     def test_weekday_weekend_rate_intervals(self):
-        """Verify that KivoyaClient distinguishes weekday vs weekend rates (e.g. Dec 4 Friday is $714, Dec 2 Wed is $554)."""
+        """Verify that KivoyaClient distinguishes weekday vs weekend rates (e.g. Dec 4 Friday is $714, Dec 2 Wed is $494)."""
         dec_fri = date(2026, 12, 4)  # Friday (Thursday-Sunday interval: $714)
-        dec_wed = date(2026, 12, 2)  # Wednesday (Monday-Wednesday interval: $554)
+        dec_wed = date(2026, 12, 2)  # Wednesday (Monday-Wednesday interval: $494)
         self.assertEqual(self.client.get_rate_for_date(dec_fri), 714.0)
-        self.assertEqual(self.client.get_rate_for_date(dec_wed), 554.0)
+        self.assertEqual(self.client.get_rate_for_date(dec_wed), 494.0)
 
         jan_fri = date(2027, 1, 8)   # Friday ($964)
         jan_tue = date(2027, 1, 5)   # Tuesday ($578)

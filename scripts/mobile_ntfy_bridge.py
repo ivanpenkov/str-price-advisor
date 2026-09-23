@@ -78,12 +78,16 @@ class MobileBridgeConfig:
         self.outbound_topic: str = os.getenv("NTFY_OUTBOUND_TOPIC", data.get("outbound_topic", "ivan-str-advisor-xyz"))
 
         # Executable and tool paths
-        self.python_path = Path(data.get("python_path", str(self.workspace_dir / ".venv" / "bin" / "python")))
+        raw_py = data.get("python_path", ".venv/bin/python")
+        self.python_path = Path(os.path.expanduser(raw_py))
         if not self.python_path.is_absolute():
             self.python_path = (self.workspace_dir / self.python_path).resolve()
 
-        self.agy_path = Path(data.get("agy_path", "/Users/ivanpe/.local/bin/agy"))
-        self.notify_script = Path(data.get("notify_script", str(Path.home() / ".gemini" / "config" / "scripts" / "notify_mobile.sh")))
+        raw_agy = data.get("agy_path", "~/.local/bin/agy")
+        self.agy_path = Path(os.path.expanduser(raw_agy))
+
+        raw_notify = data.get("notify_script", "~/.gemini/config/scripts/notify_mobile.sh")
+        self.notify_script = Path(os.path.expanduser(raw_notify))
 
         # Delays and limits
         self.reconnect_delay: float = float(data.get("reconnect_delay", 3.0))

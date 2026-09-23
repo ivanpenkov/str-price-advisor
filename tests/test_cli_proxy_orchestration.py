@@ -22,6 +22,7 @@ class TestCliProxyOrchestration(unittest.TestCase):
             "NORDVPN_USER": "test_user",
             "NORDVPN_PASS": "test_pass",
             "STEALTH_STARTUP_DELAY": "0.0",
+            "IS_PRIMARY_SCRAPER": "1",
         })
         self.patcher_env.start()
 

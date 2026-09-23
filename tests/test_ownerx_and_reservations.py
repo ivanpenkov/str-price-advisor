@@ -552,6 +552,16 @@ class TestOwnerXAndReservations(unittest.TestCase):
             "2026-11-01": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
             "2026-11-02": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
             "2026-11-03": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-10-23": [{"snapshot_date": "2026-02-01", "nightly_rate": 532.33}],
+            "2026-10-24": [{"snapshot_date": "2026-02-01", "nightly_rate": 532.33}],
+            "2026-10-25": [{"snapshot_date": "2026-02-01", "nightly_rate": 532.34}],
+            "2026-10-04": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-10-05": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-10-06": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-10-07": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-10-08": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-10-09": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
+            "2026-10-10": [{"snapshot_date": "2026-02-01", "nightly_rate": 500.0}],
         }
         # 3 nights * $500 = $1,500 expected gross -> expected owner (82%) = $1,230.00
 

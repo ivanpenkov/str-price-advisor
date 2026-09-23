@@ -1,8 +1,52 @@
 {
   "version": "1.0",
-  "last_updated": "2026-09-23T07:28:22.892721Z",
+  "last_updated": "2026-09-23T07:41:41.967025Z",
   "active_host": "mac-mini",
   "runs": [
+    {
+      "run_id": "2026-09-23_074137_pms-sync",
+      "job_type": "pms-sync",
+      "job_title": "Daily Streamline PMS Sync",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-23T07:41:37.729728Z",
+      "end_time": "2026-09-23T07:41:41.965310Z",
+      "duration_sec": 4.2,
+      "duration_formatted": "4s",
+      "exit_code": 0,
+      "git_commit": "b7dd083",
+      "log_file": "logs/2026-09-23_074137_pms-sync.txt",
+      "summary": {
+        "total_reservations": 209,
+        "new_reservations": 0,
+        "shifted_reservations": 0,
+        "next_arrival": "2026-09-30 (Guest)",
+        "message": "Synced 209 reservations from Streamline; 28 records updated."
+      },
+      "error_excerpt": null
+    },
+    {
+      "run_id": "2026-09-23_073435_pms-sync",
+      "job_type": "pms-sync",
+      "job_title": "Daily Streamline PMS Sync",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-23T07:34:35.702109Z",
+      "end_time": "2026-09-23T07:34:39.557338Z",
+      "duration_sec": 3.9,
+      "duration_formatted": "4s",
+      "exit_code": 0,
+      "git_commit": "b7dd083",
+      "log_file": "logs/2026-09-23_073435_pms-sync.txt",
+      "summary": {
+        "total_reservations": 209,
+        "new_reservations": 0,
+        "shifted_reservations": 0,
+        "next_arrival": "2026-09-30 (Guest)",
+        "message": "Synced 209 reservations from Streamline; 28 records updated."
+      },
+      "error_excerpt": null
+    },
     {
       "run_id": "2026-09-23_072808_pms-sync",
       "job_type": "pms-sync",

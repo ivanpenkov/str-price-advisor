@@ -1,0 +1,141 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-09-23T07:28:22.892721Z",
+  "active_host": "mac-mini",
+  "runs": [
+    {
+      "run_id": "2026-09-23_072808_pms-sync",
+      "job_type": "pms-sync",
+      "job_title": "Daily Streamline PMS Sync",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-23T07:28:08.008560Z",
+      "end_time": "2026-09-23T07:28:22.892425Z",
+      "duration_sec": 14.9,
+      "duration_formatted": "15s",
+      "exit_code": 0,
+      "git_commit": "9b10bf6",
+      "log_file": "logs/2026-09-23_072808_pms-sync.txt",
+      "summary": {
+        "total_reservations": 209,
+        "new_reservations": 0,
+        "shifted_reservations": 0,
+        "next_arrival": "2026-09-30 (Guest)",
+        "message": "Synced 209 reservations from Streamline; 28 records updated."
+      },
+      "error_excerpt": null
+    },
+    {
+      "run_id": "2026-09-22_131500_daily-quickscan",
+      "job_type": "daily-quickscan",
+      "job_title": "Daily 90-Day Quick Market Scan",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-22T13:15:00Z",
+      "end_time": "2026-09-22T13:21:12Z",
+      "duration_sec": 372.0,
+      "duration_formatted": "6m 12s",
+      "exit_code": 0,
+      "git_commit": "e81f4a9",
+      "log_file": "logs/2026-09-22_131500_daily-quickscan.txt",
+      "summary": {
+        "intervals_evaluated": 12,
+        "comps_scraped": 97,
+        "urgent_adjustments": 3,
+        "moderate_adjustments": 5,
+        "proxy_pool_health": "10/10 active",
+        "message": "Scanned 12 intervals across 97 comps; 3 urgent price adjustments identified."
+      },
+      "error_excerpt": null
+    },
+    {
+      "run_id": "2026-09-22_130000_pms-sync",
+      "job_type": "pms-sync",
+      "job_title": "Daily Streamline PMS Sync",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-22T13:00:00Z",
+      "end_time": "2026-09-22T13:00:42Z",
+      "duration_sec": 42.4,
+      "duration_formatted": "42s",
+      "exit_code": 0,
+      "git_commit": "e81f4a9",
+      "log_file": "logs/2026-09-22_130000_pms-sync.txt",
+      "summary": {
+        "total_reservations": 209,
+        "new_reservations": 0,
+        "shifted_reservations": 1,
+        "next_arrival": "2026-09-28 (Smith)",
+        "message": "Synced 209 reservations from Streamline; 1 booking date modification detected."
+      },
+      "error_excerpt": null
+    },
+    {
+      "run_id": "2026-09-21_131500_daily-quickscan",
+      "job_type": "daily-quickscan",
+      "job_title": "Daily 90-Day Quick Market Scan",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-21T13:15:00Z",
+      "end_time": "2026-09-21T13:20:55Z",
+      "duration_sec": 355.0,
+      "duration_formatted": "5m 55s",
+      "exit_code": 0,
+      "git_commit": "d4c2b18",
+      "log_file": "logs/2026-09-21_131500_daily-quickscan.txt",
+      "summary": {
+        "intervals_evaluated": 12,
+        "comps_scraped": 97,
+        "urgent_adjustments": 2,
+        "moderate_adjustments": 6,
+        "proxy_pool_health": "10/10 active",
+        "message": "Scanned 12 intervals across 97 comps; 2 urgent price adjustments identified."
+      },
+      "error_excerpt": null
+    },
+    {
+      "run_id": "2026-09-21_130000_pms-sync",
+      "job_type": "pms-sync",
+      "job_title": "Daily Streamline PMS Sync",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-21T13:00:00Z",
+      "end_time": "2026-09-21T13:00:43Z",
+      "duration_sec": 43.1,
+      "duration_formatted": "43s",
+      "exit_code": 0,
+      "git_commit": "d4c2b18",
+      "log_file": "logs/2026-09-21_130000_pms-sync.txt",
+      "summary": {
+        "total_reservations": 209,
+        "new_reservations": 1,
+        "shifted_reservations": 0,
+        "next_arrival": "2026-09-28 (Smith)",
+        "message": "Synced 209 reservations from Streamline; 1 new booking imported."
+      },
+      "error_excerpt": null
+    },
+    {
+      "run_id": "2026-09-20_090000_weekly-fullscan",
+      "job_type": "weekly-fullscan",
+      "job_title": "Weekly Full 12-Month Market Scan",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-20T09:00:00Z",
+      "end_time": "2026-09-20T09:38:14Z",
+      "duration_sec": 2294.0,
+      "duration_formatted": "38m 14s",
+      "exit_code": 0,
+      "git_commit": "b90f3c2",
+      "log_file": "logs/2026-09-20_090000_weekly-fullscan.txt",
+      "summary": {
+        "total_intervals": 52,
+        "comps_evaluated": 109,
+        "multi_channel_audited": true,
+        "rate_anomalies": 2,
+        "message": "Full 12-month audit completed; 2 OTA rate anomalies detected."
+      },
+      "error_excerpt": null
+    }
+  ]
+}

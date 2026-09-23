@@ -1,0 +1,20 @@
+=================================================================
+⏰ [2026-09-22 06:00:00 PDT] Starting Daily PMS Reservation Sync...
+=================================================================
+💾 Storage Backend: Turso Cloud (LibSQL)
+🔐 Authenticating with Streamline OwnerX API...
+✓ Streamline API session authenticated.
+📥 Querying reservations with 60 days lookback...
+  • Total reservations in Streamline: 209
+  • Historical reservations reconciled: 208
+  • Date shifts detected: 1 (Res #1940: moved checkout from 2026-10-18 to 2026-10-19)
+  • New bookings detected: 0
+  • Blocked owner dates: 4 periods
+📅 Next Upcoming Arrival: 2026-09-28 (Smith - 4 nights, $3,850.00 gross)
+💾 Updated local reservations database & Turso cloud sync complete.
+🎨 Regenerating static HTML dashboard...
+✓ Dashboard regenerated at docs/index.html
+🚀 Committing and pushing reservations update to GitHub...
+✓ Pushed to origin/main (commit e81f4a9)
+✅ [2026-09-22 06:00:42 PDT] Daily PMS Sync completed successfully in 42s.
+

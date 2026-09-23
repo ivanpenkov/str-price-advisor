@@ -1,6 +1,6 @@
 # 🏷️ STR Competitive Pricing Advisory Report
 **Property**: Villa del Sol (920 E Carver Rd, Tempe, AZ)
-**Report Date**: 2026-09-22
+**Report Date**: 2026-09-23
 **Strategy**: Dynamic 2D Strategy Matrix with Bayesian Shrinkage & Operational Price Floors
 
 ---

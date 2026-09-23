@@ -1,0 +1,24 @@
+=================================================================
+⏰ [2026-09-20 02:00:00 PDT] Starting Weekly Full 12-Month Market & Multi-Platform Scan...
+=================================================================
+🔍 Node Role: Dedicated Primary Scraper (mac-mini)
+💾 Storage Backend: Turso Cloud (LibSQL)
+🛡️ Initializing NordVPN stealth proxy feeder pool (10 forwarders)...
+✓ 10/10 stealth forwarders active and verified.
+⭐ Ingesting guest reviews & multi-channel ratings...
+  • Airbnb: 4.96★ (128 reviews)
+  • VRBO: 9.8/10 (42 reviews)
+  • Booking.com: 9.6/10 (19 reviews)
+📋 Auditing 52 intervals across 12-month forward horizon...
+  • Total active comp listings evaluated: 109
+  • Cross-channel comparisons completed: Airbnb vs VRBO vs Booking.com vs Kivoya
+  • Channel price parity discrepancies identified: 2
+    - [2026-11-20 to 2026-11-23]: Booking.com markup exceeds Kivoya base rate by 18.2% (threshold: 15%)
+    - [2027-02-12 to 2027-02-16]: Super Bowl weekend VRBO rate lagging market median by 22.4%
+📊 Re-calculated 12-month pacing benchmarks and strategy matrix.
+🎨 Regenerating full static HTML dashboard (docs/index.html)...
+✓ HTML dashboard regenerated successfully.
+🚀 Committing and pushing full 12-month update to origin/main...
+✓ Pushed to origin/main (commit b90f3c2).
+✅ [2026-09-20 02:38:14 PDT] Weekly Full Scan completed successfully in 38m 14s.
+

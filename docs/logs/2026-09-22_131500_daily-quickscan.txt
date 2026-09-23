@@ -1,0 +1,71 @@
+=================================================================
+⏰ [2026-09-22 06:15:00 PDT] Starting Daily 90-Day Quick Market Scan...
+=================================================================
+🔍 Node Role: Dedicated Primary Scraper (mac-mini)
+💾 Storage Backend: Turso Cloud (LibSQL)
+🛡️ Initializing NordVPN stealth proxy feeder pool...
+  • Proxy node 1 (us-west-1): 45ms latency [HEALTHY]
+  • Proxy node 2 (us-west-2): 52ms latency [HEALTHY]
+  • Proxy node 3 (us-west-3): 48ms latency [HEALTHY]
+  • Proxy node 4 (us-central-1): 61ms latency [HEALTHY]
+  • Proxy node 5 (us-east-1): 74ms latency [HEALTHY]
+  • Proxy node 6 (us-east-2): 78ms latency [HEALTHY]
+  • Proxy node 7 (us-south-1): 58ms latency [HEALTHY]
+  • Proxy node 8 (us-south-2): 64ms latency [HEALTHY]
+  • Proxy node 9 (us-mountain-1): 39ms latency [HEALTHY]
+  • Proxy node 10 (us-mountain-2): 41ms latency [HEALTHY]
+✓ 10/10 stealth forwarders active and verified.
+
+⭐ Syncing guest reviews and ratings...
+  • Airbnb: 4.96★ (128 reviews) [Guest Favorite]
+  • VRBO: 9.8/10 (42 reviews) [Premier Host]
+  • Booking.com: 9.6/10 (19 reviews) [Superb]
+
+🎯 Evaluating next 12 open intervals (90-day window):
+  [1/12] 2026-10-02 to 2026-10-05 (Weekend, 3 nights):
+         Retrieved 97 comp rates across Airbnb, VRBO, Booking.com.
+         Current Kivoya: $945/night | Recommended: $1,050/night (+11.1%) [MODERATE_INCREASE]
+  [2/12] 2026-10-08 to 2026-10-12 (Columbus Day / Fall Break, 4 nights):
+         Retrieved 97 comp rates. Market median $1,280/night.
+         Current Kivoya: $899/night | Recommended: $1,150/night (+27.9%) [URGENT_UNDERPRICED]
+  [3/12] 2026-10-15 to 2026-10-19 (Midweek/Weekend, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $850/night | Recommended: $875/night (+2.9%) [KEEP]
+  [4/12] 2026-10-22 to 2026-10-26 (Weekend, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $899/night | Recommended: $925/night (+2.9%) [KEEP]
+  [5/12] 2026-10-29 to 2026-11-02 (Halloween Weekend, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $899/night | Recommended: $1,095/night (+21.8%) [URGENT_UNDERPRICED]
+  [6/12] 2026-11-05 to 2026-11-09 (Weekend, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $799/night | Recommended: $825/night (+3.3%) [KEEP]
+  [7/12] 2026-11-12 to 2026-11-16 (Weekend, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $799/night | Recommended: $825/night (+3.3%) [KEEP]
+  [8/12] 2026-11-19 to 2026-11-23 (Thanksgiving Pacing, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $950/night | Recommended: $1,195/night (+25.8%) [URGENT_UNDERPRICED]
+  [9/12] 2026-11-24 to 2026-11-29 (Thanksgiving Week, 5 nights):
+         Already booked (Reservation #1892). Skipping.
+  [10/12] 2026-12-03 to 2026-12-07 (Weekend, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $799/night | Recommended: $849/night (+6.3%) [MODERATE_INCREASE]
+  [11/12] 2026-12-10 to 2026-12-14 (Weekend, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $799/night | Recommended: $849/night (+6.3%) [MODERATE_INCREASE]
+  [12/12] 2026-12-17 to 2026-12-21 (Holiday Pacing, 4 nights):
+         Retrieved 97 comp rates.
+         Current Kivoya: $899/night | Recommended: $975/night (+8.5%) [MODERATE_INCREASE]
+
+📊 Summary of Price Recommendations:
+  • Scanned: 12 intervals across 97 competitor listings
+  • Urgent Adjustments Identified: 3
+  • Moderate Adjustments Identified: 5
+  • Unchanged / Within Target: 4
+
+🎨 Regenerating static HTML dashboard (docs/index.html)...
+✓ HTML dashboard regenerated successfully.
+🚀 Pushed updates to origin/main.
+✅ [2026-09-22 06:21:12 PDT] Daily 90-Day Quick Market Scan completed successfully in 6m 12s.
+

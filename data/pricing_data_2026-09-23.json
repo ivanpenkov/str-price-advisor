@@ -1,7 +1,7 @@
 {
   "property": "Villa del Sol",
-  "report_date": "2026-09-22",
-  "generated_at": "2026-09-22T23:29:04.209886",
+  "report_date": "2026-09-23",
+  "generated_at": "2026-09-23T00:28:22.890291",
   "summary": {
     "total_open_intervals": 80,
     "urgent_count": 0,
@@ -18,7 +18,7 @@
       "check_out_dt": "2026-09-27",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 2,
+      "lead_time_days": 1,
       "our_base_nightly": 549.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2147.0,
@@ -170,13 +170,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 2,
+        "lead_days": 1,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "LAST_MINUTE",
-        "label": "Last-Minute Distress (2d out \u2022 Normal: 54\u2013155d)",
+        "label": "Last-Minute Distress (1d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#f87171",
         "badge_bg": "rgba(248,113,113,0.15)",
         "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
@@ -189,7 +189,7 @@
       "check_out_dt": "2026-09-30",
       "segment_type": "midweek",
       "nights": 3,
-      "lead_time_days": 5,
+      "lead_time_days": 4,
       "our_base_nightly": 351.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 1553.0,
@@ -292,13 +292,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 5,
+        "lead_days": 4,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "LAST_MINUTE",
-        "label": "Last-Minute Distress (5d out \u2022 Normal: 54\u2013155d)",
+        "label": "Last-Minute Distress (4d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#f87171",
         "badge_bg": "rgba(248,113,113,0.15)",
         "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
@@ -311,7 +311,7 @@
       "check_out_dt": "2026-10-14",
       "segment_type": "midweek",
       "nights": 3,
-      "lead_time_days": 19,
+      "lead_time_days": 18,
       "our_base_nightly": 595.67,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2287.0,
@@ -379,13 +379,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 19,
+        "lead_days": 18,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "LAST_MINUTE",
-        "label": "Last-Minute Distress (19d out \u2022 Normal: 54\u2013155d)",
+        "label": "Last-Minute Distress (18d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#f87171",
         "badge_bg": "rgba(248,113,113,0.15)",
         "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
@@ -398,7 +398,7 @@
       "check_out_dt": "2026-10-29",
       "segment_type": "midweek",
       "nights": 3,
-      "lead_time_days": 34,
+      "lead_time_days": 33,
       "our_base_nightly": 399.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 1697.0,
@@ -557,13 +557,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 34,
+        "lead_days": 33,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "LAST_MINUTE",
-        "label": "Last-Minute Distress (34d out \u2022 Normal: 54\u2013155d)",
+        "label": "Last-Minute Distress (33d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#f87171",
         "badge_bg": "rgba(248,113,113,0.15)",
         "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
@@ -576,7 +576,7 @@
       "check_out_dt": "2026-11-01",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 37,
+      "lead_time_days": 36,
       "our_base_nightly": 694.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2582.0,
@@ -756,13 +756,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 37,
+        "lead_days": 36,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "LAST_MINUTE",
-        "label": "Last-Minute Distress (37d out \u2022 Normal: 54\u2013155d)",
+        "label": "Last-Minute Distress (36d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#f87171",
         "badge_bg": "rgba(248,113,113,0.15)",
         "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
@@ -775,7 +775,7 @@
       "check_out_dt": "2026-11-11",
       "segment_type": "midweek",
       "nights": 3,
-      "lead_time_days": 47,
+      "lead_time_days": 46,
       "our_base_nightly": 424.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 1772.0,
@@ -955,13 +955,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 47,
+        "lead_days": 46,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "LAST_MINUTE",
-        "label": "Last-Minute Distress (47d out \u2022 Normal: 54\u2013155d)",
+        "label": "Last-Minute Distress (46d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#f87171",
         "badge_bg": "rgba(248,113,113,0.15)",
         "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
@@ -974,7 +974,7 @@
       "check_out_dt": "2026-11-19",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 54,
+      "lead_time_days": 53,
       "our_base_nightly": 424.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2196.0,
@@ -1154,16 +1154,16 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 54,
+        "lead_days": 53,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
-        "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (54d out \u2022 Normal: 54\u2013155d)",
-        "badge_color": "#34d399",
-        "badge_bg": "rgba(52,211,153,0.15)",
-        "action": "Peak Conversion Window: Price competitively near median/65th percentile."
+        "status": "LAST_MINUTE",
+        "label": "Last-Minute Distress (53d out \u2022 Normal: 54\u2013155d)",
+        "badge_color": "#f87171",
+        "badge_bg": "rgba(248,113,113,0.15)",
+        "action": "Distress Horizon: Apply urgency discounting to prevent perishable loss."
       }
     },
     {
@@ -1173,7 +1173,7 @@
       "check_out_dt": "2026-12-03",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 68,
+      "lead_time_days": 67,
       "our_base_nightly": 721.5,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3386.0,
@@ -1241,13 +1241,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 68,
+        "lead_days": 67,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (68d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (67d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -1260,7 +1260,7 @@
       "check_out_dt": "2026-12-06",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 72,
+      "lead_time_days": 71,
       "our_base_nightly": 714.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2642.0,
@@ -1363,13 +1363,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 72,
+        "lead_days": 71,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (72d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (71d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -1382,7 +1382,7 @@
       "check_out_dt": "2026-12-10",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 75,
+      "lead_time_days": 74,
       "our_base_nightly": 494.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2476.0,
@@ -1492,13 +1492,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 75,
+        "lead_days": 74,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (75d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (74d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -1511,7 +1511,7 @@
       "check_out_dt": "2026-12-31",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 96,
+      "lead_time_days": 95,
       "our_base_nightly": 1060.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4740.0,
@@ -1593,13 +1593,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 96,
+        "lead_days": 95,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (96d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (95d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -1612,7 +1612,7 @@
       "check_out_dt": "2027-01-07",
       "segment_type": "midweek",
       "nights": 3,
-      "lead_time_days": 104,
+      "lead_time_days": 103,
       "our_base_nightly": 578.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2234.0,
@@ -1743,13 +1743,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 104,
+        "lead_days": 103,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (104d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (103d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -1762,7 +1762,7 @@
       "check_out_dt": "2027-01-10",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 107,
+      "lead_time_days": 106,
       "our_base_nightly": 964.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3392.0,
@@ -1886,13 +1886,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 107,
+        "lead_days": 106,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (107d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (106d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -1905,7 +1905,7 @@
       "check_out_dt": "2027-01-14",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 110,
+      "lead_time_days": 109,
       "our_base_nightly": 578.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2812.0,
@@ -2036,13 +2036,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 110,
+        "lead_days": 109,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (110d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (109d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -2055,7 +2055,7 @@
       "check_out_dt": "2027-01-21",
       "segment_type": "midweek",
       "nights": 2,
-      "lead_time_days": 119,
+      "lead_time_days": 118,
       "our_base_nightly": 578.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 1656.0,
@@ -2186,13 +2186,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 119,
+        "lead_days": 118,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (119d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (118d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -2205,7 +2205,7 @@
       "check_out_dt": "2027-01-24",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 121,
+      "lead_time_days": 120,
       "our_base_nightly": 964.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3392.0,
@@ -2329,13 +2329,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 121,
+        "lead_days": 120,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (121d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (120d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -2348,7 +2348,7 @@
       "check_out_dt": "2027-01-28",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 124,
+      "lead_time_days": 123,
       "our_base_nightly": 578.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2812.0,
@@ -2479,13 +2479,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 124,
+        "lead_days": 123,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (124d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (123d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -2498,7 +2498,7 @@
       "check_out_dt": "2027-01-31",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 128,
+      "lead_time_days": 127,
       "our_base_nightly": 964.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3392.0,
@@ -2622,13 +2622,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 128,
+        "lead_days": 127,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (128d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (127d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -2641,7 +2641,7 @@
       "check_out_dt": "2027-02-04",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 131,
+      "lead_time_days": 130,
       "our_base_nightly": 750.5,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3502.0,
@@ -2772,13 +2772,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 131,
+        "lead_days": 130,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (131d out \u2022 Normal: 54\u2013155d)",
+        "label": "Active Booking Window (130d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -2791,7 +2791,7 @@
       "check_out_dt": "2027-02-07",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 135,
+      "lead_time_days": 134,
       "our_base_nightly": 1272.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4316.0,
@@ -2985,13 +2985,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 135,
+        "lead_days": 134,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (135d out \u2022 Normal: 24\u2013154d)",
+        "label": "Active Booking Window (134d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -3004,7 +3004,7 @@
       "check_out_dt": "2027-02-10",
       "segment_type": "midweek",
       "nights": 3,
-      "lead_time_days": 138,
+      "lead_time_days": 137,
       "our_base_nightly": 808.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2924.0,
@@ -3142,13 +3142,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 138,
+        "lead_days": 137,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (138d out \u2022 Normal: 24\u2013154d)",
+        "label": "Active Booking Window (137d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -3161,7 +3161,7 @@
       "check_out_dt": "2027-02-25",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 152,
+      "lead_time_days": 151,
       "our_base_nightly": 808.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3732.0,
@@ -3299,13 +3299,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 152,
+        "lead_days": 151,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "NORMAL_WINDOW",
-        "label": "Active Booking Window (152d out \u2022 Normal: 24\u2013154d)",
+        "label": "Active Booking Window (151d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#34d399",
         "badge_bg": "rgba(52,211,153,0.15)",
         "action": "Peak Conversion Window: Price competitively near median/65th percentile."
@@ -3318,7 +3318,7 @@
       "check_out_dt": "2027-03-04",
       "segment_type": "midweek",
       "nights": 3,
-      "lead_time_days": 160,
+      "lead_time_days": 159,
       "our_base_nightly": 1001.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3503.0,
@@ -3463,13 +3463,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 160,
+        "lead_days": 159,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (160d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (159d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -3482,7 +3482,7 @@
       "check_out_dt": "2027-03-07",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 163,
+      "lead_time_days": 162,
       "our_base_nightly": 1492.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4976.0,
@@ -3718,13 +3718,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 163,
+        "lead_days": 162,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (163d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (162d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -3737,7 +3737,7 @@
       "check_out_dt": "2027-03-11",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 166,
+      "lead_time_days": 165,
       "our_base_nightly": 1001.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4504.0,
@@ -3882,13 +3882,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 166,
+        "lead_days": 165,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (166d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (165d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -3901,7 +3901,7 @@
       "check_out_dt": "2027-03-14",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 170,
+      "lead_time_days": 169,
       "our_base_nightly": 1492.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4976.0,
@@ -4137,13 +4137,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 170,
+        "lead_days": 169,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (170d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (169d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -4156,7 +4156,7 @@
       "check_out_dt": "2027-03-17",
       "segment_type": "midweek",
       "nights": 3,
-      "lead_time_days": 173,
+      "lead_time_days": 172,
       "our_base_nightly": 1001.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3503.0,
@@ -4301,13 +4301,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 173,
+        "lead_days": 172,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (173d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (172d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -4320,7 +4320,7 @@
       "check_out_dt": "2027-03-25",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 180,
+      "lead_time_days": 179,
       "our_base_nightly": 1099.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4896.0,
@@ -4409,13 +4409,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 180,
+        "lead_days": 179,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (180d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (179d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -4428,7 +4428,7 @@
       "check_out_dt": "2027-03-28",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 184,
+      "lead_time_days": 183,
       "our_base_nightly": 1564.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 5192.0,
@@ -4552,13 +4552,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 184,
+        "lead_days": 183,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (184d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (183d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -4571,7 +4571,7 @@
       "check_out_dt": "2027-04-01",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 187,
+      "lead_time_days": 186,
       "our_base_nightly": 1025.5,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4602.0,
@@ -4660,13 +4660,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 187,
+        "lead_days": 186,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (187d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (186d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -4679,7 +4679,7 @@
       "check_out_dt": "2027-04-04",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 191,
+      "lead_time_days": 190,
       "our_base_nightly": 1554.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 5162.0,
@@ -4831,13 +4831,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 191,
+        "lead_days": 190,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (191d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (190d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -4850,7 +4850,7 @@
       "check_out_dt": "2027-04-08",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 194,
+      "lead_time_days": 193,
       "our_base_nightly": 749.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3496.0,
@@ -4967,13 +4967,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 194,
+        "lead_days": 193,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (194d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (193d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -4986,7 +4986,7 @@
       "check_out_dt": "2027-04-11",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 198,
+      "lead_time_days": 197,
       "our_base_nightly": 1554.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 5162.0,
@@ -5138,13 +5138,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 198,
+        "lead_days": 197,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (198d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (197d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -5157,7 +5157,7 @@
       "check_out_dt": "2027-04-15",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 201,
+      "lead_time_days": 200,
       "our_base_nightly": 749.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3496.0,
@@ -5274,13 +5274,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 201,
+        "lead_days": 200,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (201d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (200d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -5293,7 +5293,7 @@
       "check_out_dt": "2027-04-18",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 205,
+      "lead_time_days": 204,
       "our_base_nightly": 1554.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 5162.0,
@@ -5445,13 +5445,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 205,
+        "lead_days": 204,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (205d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (204d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -5464,7 +5464,7 @@
       "check_out_dt": "2027-04-22",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 208,
+      "lead_time_days": 207,
       "our_base_nightly": 749.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3496.0,
@@ -5581,13 +5581,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 208,
+        "lead_days": 207,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (208d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (207d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -5600,7 +5600,7 @@
       "check_out_dt": "2027-04-25",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 212,
+      "lead_time_days": 211,
       "our_base_nightly": 1554.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 5162.0,
@@ -5752,13 +5752,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 212,
+        "lead_days": 211,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (212d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (211d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -5771,7 +5771,7 @@
       "check_out_dt": "2027-04-29",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 215,
+      "lead_time_days": 214,
       "our_base_nightly": 749.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3496.0,
@@ -5888,13 +5888,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 215,
+        "lead_days": 214,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (215d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (214d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -5907,7 +5907,7 @@
       "check_out_dt": "2027-05-02",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 219,
+      "lead_time_days": 218,
       "our_base_nightly": 1464.67,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4894.0,
@@ -6059,13 +6059,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 219,
+        "lead_days": 218,
         "season": "Peak Winter / Spring (Feb\u2013Apr)",
         "normal_window_str": "24\u2013154 days",
         "p25": 24,
         "p75": 154,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (219d out \u2022 Normal: 24\u2013154d)",
+        "label": "Pre-Window (218d out \u2022 Normal: 24\u2013154d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -6078,7 +6078,7 @@
       "check_out_dt": "2027-05-06",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 222,
+      "lead_time_days": 221,
       "our_base_nightly": 595.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2880.0,
@@ -6202,13 +6202,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 222,
+        "lead_days": 221,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (222d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (221d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -6221,7 +6221,7 @@
       "check_out_dt": "2027-05-09",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 226,
+      "lead_time_days": 225,
       "our_base_nightly": 1286.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4358.0,
@@ -6408,13 +6408,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 226,
+        "lead_days": 225,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (226d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (225d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -6427,7 +6427,7 @@
       "check_out_dt": "2027-05-13",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 229,
+      "lead_time_days": 228,
       "our_base_nightly": 595.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2880.0,
@@ -6551,13 +6551,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 229,
+        "lead_days": 228,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (229d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (228d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -6570,7 +6570,7 @@
       "check_out_dt": "2027-05-16",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 233,
+      "lead_time_days": 232,
       "our_base_nightly": 1286.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4358.0,
@@ -6757,13 +6757,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 233,
+        "lead_days": 232,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (233d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (232d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -6776,7 +6776,7 @@
       "check_out_dt": "2027-05-20",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 236,
+      "lead_time_days": 235,
       "our_base_nightly": 595.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2880.0,
@@ -6900,13 +6900,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 236,
+        "lead_days": 235,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (236d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (235d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -6919,7 +6919,7 @@
       "check_out_dt": "2027-05-23",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 240,
+      "lead_time_days": 239,
       "our_base_nightly": 1286.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4358.0,
@@ -7106,13 +7106,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 240,
+        "lead_days": 239,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (240d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (239d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -7125,7 +7125,7 @@
       "check_out_dt": "2027-05-27",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 243,
+      "lead_time_days": 242,
       "our_base_nightly": 595.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2880.0,
@@ -7249,13 +7249,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 243,
+        "lead_days": 242,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (243d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (242d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -7268,7 +7268,7 @@
       "check_out_dt": "2027-05-30",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 247,
+      "lead_time_days": 246,
       "our_base_nightly": 1286.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4358.0,
@@ -7455,13 +7455,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 247,
+        "lead_days": 246,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (247d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (246d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -7474,7 +7474,7 @@
       "check_out_dt": "2027-06-03",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 250,
+      "lead_time_days": 249,
       "our_base_nightly": 901.5,
       "our_cleaning_fee": 500.0,
       "our_total_price": 4106.0,
@@ -7549,13 +7549,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 250,
+        "lead_days": 249,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (250d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (249d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -7568,7 +7568,7 @@
       "check_out_dt": "2027-06-06",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 254,
+      "lead_time_days": 253,
       "our_base_nightly": 1009.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3527.0,
@@ -7713,13 +7713,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 254,
+        "lead_days": 253,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (254d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (253d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -7732,7 +7732,7 @@
       "check_out_dt": "2027-06-10",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 257,
+      "lead_time_days": 256,
       "our_base_nightly": 517.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2568.0,
@@ -7856,13 +7856,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 257,
+        "lead_days": 256,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (257d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (256d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -7875,7 +7875,7 @@
       "check_out_dt": "2027-06-13",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 261,
+      "lead_time_days": 260,
       "our_base_nightly": 1009.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3527.0,
@@ -8020,13 +8020,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 261,
+        "lead_days": 260,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (261d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (260d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -8039,7 +8039,7 @@
       "check_out_dt": "2027-06-17",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 264,
+      "lead_time_days": 263,
       "our_base_nightly": 517.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2568.0,
@@ -8163,13 +8163,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 264,
+        "lead_days": 263,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (264d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (263d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -8182,7 +8182,7 @@
       "check_out_dt": "2027-06-20",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 268,
+      "lead_time_days": 267,
       "our_base_nightly": 1009.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3527.0,
@@ -8327,13 +8327,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 268,
+        "lead_days": 267,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (268d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (267d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -8346,7 +8346,7 @@
       "check_out_dt": "2027-06-24",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 271,
+      "lead_time_days": 270,
       "our_base_nightly": 517.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2568.0,
@@ -8470,13 +8470,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 271,
+        "lead_days": 270,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (271d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (270d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -8489,7 +8489,7 @@
       "check_out_dt": "2027-06-27",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 275,
+      "lead_time_days": 274,
       "our_base_nightly": 1009.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3527.0,
@@ -8634,13 +8634,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 275,
+        "lead_days": 274,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (275d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (274d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -8653,7 +8653,7 @@
       "check_out_dt": "2027-07-01",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 278,
+      "lead_time_days": 277,
       "our_base_nightly": 517.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2568.0,
@@ -8777,13 +8777,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 278,
+        "lead_days": 277,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (278d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (277d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -8796,7 +8796,7 @@
       "check_out_dt": "2027-07-04",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 282,
+      "lead_time_days": 281,
       "our_base_nightly": 851.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3053.0,
@@ -8955,13 +8955,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 282,
+        "lead_days": 281,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (282d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (281d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -8974,7 +8974,7 @@
       "check_out_dt": "2027-07-08",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 285,
+      "lead_time_days": 284,
       "our_base_nightly": 504.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2516.0,
@@ -9070,13 +9070,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 285,
+        "lead_days": 284,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (285d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (284d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -9089,7 +9089,7 @@
       "check_out_dt": "2027-07-11",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 289,
+      "lead_time_days": 288,
       "our_base_nightly": 851.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3053.0,
@@ -9248,13 +9248,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 289,
+        "lead_days": 288,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (289d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (288d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -9267,7 +9267,7 @@
       "check_out_dt": "2027-07-15",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 292,
+      "lead_time_days": 291,
       "our_base_nightly": 504.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2516.0,
@@ -9363,13 +9363,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 292,
+        "lead_days": 291,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (292d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (291d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -9382,7 +9382,7 @@
       "check_out_dt": "2027-07-18",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 296,
+      "lead_time_days": 295,
       "our_base_nightly": 851.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3053.0,
@@ -9541,13 +9541,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 296,
+        "lead_days": 295,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (296d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (295d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -9560,7 +9560,7 @@
       "check_out_dt": "2027-07-22",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 299,
+      "lead_time_days": 298,
       "our_base_nightly": 504.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2516.0,
@@ -9656,13 +9656,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 299,
+        "lead_days": 298,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (299d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (298d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -9675,7 +9675,7 @@
       "check_out_dt": "2027-07-25",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 303,
+      "lead_time_days": 302,
       "our_base_nightly": 851.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3053.0,
@@ -9834,13 +9834,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 303,
+        "lead_days": 302,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (303d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (302d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -9853,7 +9853,7 @@
       "check_out_dt": "2027-07-29",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 306,
+      "lead_time_days": 305,
       "our_base_nightly": 504.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2516.0,
@@ -9949,13 +9949,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 306,
+        "lead_days": 305,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (306d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (305d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -9968,7 +9968,7 @@
       "check_out_dt": "2027-08-01",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 310,
+      "lead_time_days": 309,
       "our_base_nightly": 851.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3053.0,
@@ -10127,13 +10127,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 310,
+        "lead_days": 309,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (310d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (309d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -10146,7 +10146,7 @@
       "check_out_dt": "2027-08-05",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 313,
+      "lead_time_days": 312,
       "our_base_nightly": 457.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2328.0,
@@ -10263,13 +10263,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 313,
+        "lead_days": 312,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (313d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (312d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -10282,7 +10282,7 @@
       "check_out_dt": "2027-08-08",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 317,
+      "lead_time_days": 316,
       "our_base_nightly": 869.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3107.0,
@@ -10434,13 +10434,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 317,
+        "lead_days": 316,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (317d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (316d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -10453,7 +10453,7 @@
       "check_out_dt": "2027-08-12",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 320,
+      "lead_time_days": 319,
       "our_base_nightly": 457.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2328.0,
@@ -10570,13 +10570,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 320,
+        "lead_days": 319,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (320d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (319d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -10589,7 +10589,7 @@
       "check_out_dt": "2027-08-15",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 324,
+      "lead_time_days": 323,
       "our_base_nightly": 869.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3107.0,
@@ -10741,13 +10741,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 324,
+        "lead_days": 323,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (324d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (323d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -10760,7 +10760,7 @@
       "check_out_dt": "2027-08-19",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 327,
+      "lead_time_days": 326,
       "our_base_nightly": 457.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2328.0,
@@ -10877,13 +10877,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 327,
+        "lead_days": 326,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (327d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (326d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -10896,7 +10896,7 @@
       "check_out_dt": "2027-08-22",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 331,
+      "lead_time_days": 330,
       "our_base_nightly": 869.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3107.0,
@@ -11048,13 +11048,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 331,
+        "lead_days": 330,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (331d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (330d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -11067,7 +11067,7 @@
       "check_out_dt": "2027-08-26",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 334,
+      "lead_time_days": 333,
       "our_base_nightly": 457.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2328.0,
@@ -11184,13 +11184,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 334,
+        "lead_days": 333,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (334d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (333d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -11203,7 +11203,7 @@
       "check_out_dt": "2027-08-29",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 338,
+      "lead_time_days": 337,
       "our_base_nightly": 869.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 3107.0,
@@ -11355,13 +11355,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 338,
+        "lead_days": 337,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (338d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (337d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -11374,7 +11374,7 @@
       "check_out_dt": "2027-09-02",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 341,
+      "lead_time_days": 340,
       "our_base_nightly": 492.5,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2470.0,
@@ -11491,13 +11491,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 341,
+        "lead_days": 340,
         "season": "Summer Value Season (Jun\u2013Aug)",
         "normal_window_str": "10\u2013102 days",
         "p25": 10,
         "p75": 102,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (341d out \u2022 Normal: 10\u2013102d)",
+        "label": "Pre-Window (340d out \u2022 Normal: 10\u2013102d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -11510,7 +11510,7 @@
       "check_out_dt": "2027-09-05",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 345,
+      "lead_time_days": 344,
       "our_base_nightly": 599.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2297.0,
@@ -11697,13 +11697,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 345,
+        "lead_days": 344,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (345d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (344d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -11716,7 +11716,7 @@
       "check_out_dt": "2027-09-09",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 348,
+      "lead_time_days": 347,
       "our_base_nightly": 599.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2896.0,
@@ -11823,13 +11823,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 348,
+        "lead_days": 347,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (348d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (347d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -11842,7 +11842,7 @@
       "check_out_dt": "2027-09-12",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 352,
+      "lead_time_days": 351,
       "our_base_nightly": 599.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2297.0,
@@ -12021,13 +12021,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 352,
+        "lead_days": 351,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (352d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (351d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -12040,7 +12040,7 @@
       "check_out_dt": "2027-09-16",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 355,
+      "lead_time_days": 354,
       "our_base_nightly": 599.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2896.0,
@@ -12139,13 +12139,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 355,
+        "lead_days": 354,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (355d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (354d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -12158,7 +12158,7 @@
       "check_out_dt": "2027-09-19",
       "segment_type": "weekend",
       "nights": 3,
-      "lead_time_days": 359,
+      "lead_time_days": 358,
       "our_base_nightly": 599.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2297.0,
@@ -12329,13 +12329,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 359,
+        "lead_days": 358,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (359d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (358d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."
@@ -12348,7 +12348,7 @@
       "check_out_dt": "2027-09-23",
       "segment_type": "midweek",
       "nights": 4,
-      "lead_time_days": 362,
+      "lead_time_days": 361,
       "our_base_nightly": 599.0,
       "our_cleaning_fee": 500.0,
       "our_total_price": 2896.0,
@@ -12471,13 +12471,13 @@
         ]
       },
       "lead_time_status": {
-        "lead_days": 362,
+        "lead_days": 361,
         "season": "Fall / Shoulder Season (Sep\u2013Jan, May)",
         "normal_window_str": "54\u2013155 days",
         "p25": 54,
         "p75": 155,
         "status": "PRE_WINDOW",
-        "label": "Pre-Window (362d out \u2022 Normal: 54\u2013155d)",
+        "label": "Pre-Window (361d out \u2022 Normal: 54\u2013155d)",
         "badge_color": "#38bdf8",
         "badge_bg": "rgba(56,189,248,0.15)",
         "action": "Early Planner Horizon: Hold rates firm at premium percentiles."

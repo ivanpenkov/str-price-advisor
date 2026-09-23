@@ -1327,20 +1327,20 @@ class TestHTMLDashboardUI(unittest.TestCase):
         self.assertIn('id="card-daily-quickscan"', self.html_content)
         self.assertIn('id="card-weekly-fullscan"', self.html_content)
 
-        # Execution ledger table and filters
+        # Execution ledger table and wrapper (filters/search removed for minimalism)
+        self.assertIn('class="system-ledger-table-wrap"', self.html_content)
+        self.assertIn('class="system-scroll-hint"', self.html_content)
         self.assertIn('id="system-ledger-tbody"', self.html_content)
-        self.assertIn('id="system-ledger-search"', self.html_content)
-        self.assertIn('id="btn-trig-all"', self.html_content)
-        self.assertIn('id="btn-trig-launchd"', self.html_content)
-        self.assertIn('id="btn-trig-manual"', self.html_content)
-        self.assertIn('id="btn-status-all"', self.html_content)
-        self.assertIn('id="btn-status-success"', self.html_content)
-        self.assertIn('id="btn-status-failed"', self.html_content)
+        self.assertNotIn('id="system-ledger-search"', self.html_content)
+        self.assertNotIn('id="btn-trig-all"', self.html_content)
+        self.assertNotIn('id="btn-status-all"', self.html_content)
 
         # Modal
         self.assertIn('id="system-log-modal"', self.html_content)
         self.assertIn('id="system-log-content"', self.html_content)
         self.assertIn('id="system-log-search"', self.html_content)
+        self.assertIn('id="btn-copy-log"', self.html_content)
+        self.assertIn('id="btn-download-log"', self.html_content)
 
     def test_system_monitoring_interactions_playwright(self):
         """Verify interacting with header status pill switches to system tab, and log modal opens and closes with Escape."""
@@ -1382,6 +1382,64 @@ class TestHTMLDashboardUI(unittest.TestCase):
                 await browser.close()
 
         asyncio.run(run_system_interaction_test())
+
+    def test_system_monitoring_mobile_responsiveness_playwright(self):
+        """Verify System tab layout on mobile screen (390x844), checking table scrollability, stacking cards, and drawer width."""
+        async def run_mobile_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page(viewport={"width": 390, "height": 844})
+                file_uri = f"file://{self.html_path.resolve()}"
+                await page.goto(file_uri)
+                await page.wait_for_load_state("domcontentloaded")
+                await page.wait_for_timeout(50)
+
+                # Switch to system tab
+                await page.click("#tab-btn-system")
+                await page.wait_for_timeout(50)
+
+                # 1. Verify ledger table wrap fits inside mobile viewport and is horizontally scrollable
+                table_wrap = await page.query_selector(".system-ledger-table-wrap")
+                self.assertIsNotNone(table_wrap, ".system-ledger-table-wrap element must exist")
+                client_width = await table_wrap.evaluate("el => el.clientWidth")
+                scroll_width = await table_wrap.evaluate("el => el.scrollWidth")
+
+                self.assertLessEqual(client_width, 390, "Table container clientWidth must fit inside mobile viewport")
+                self.assertGreater(scroll_width, client_width, "Table container scrollWidth must exceed clientWidth for horizontal touch scrolling")
+
+                # 2. Verify service cards stack within mobile viewport
+                cards = await page.query_selector_all(".system-card")
+                self.assertGreaterEqual(len(cards), 3, "Expected at least 3 system health cards")
+                for card in cards:
+                    card_w = await card.evaluate("el => el.clientWidth")
+                    self.assertLessEqual(card_w, 390, f"System card clientWidth {card_w} must fit within mobile viewport")
+
+                # 3. Verify scroll hint is visible on mobile
+                scroll_hint = await page.query_selector(".system-scroll-hint")
+                self.assertIsNotNone(scroll_hint)
+                hint_display = await scroll_hint.evaluate("el => window.getComputedStyle(el).display")
+                self.assertIn(hint_display, ["flex", "inline-flex"], "Scroll hint must be displayed on mobile")
+
+                # 4. Open log modal on mobile and verify full width (100vw = 390px)
+                log_btn = await page.query_selector(".system-btn-log:not([disabled])")
+                self.assertIsNotNone(log_btn, "Expected at least one enabled log button in system tab")
+                await log_btn.click()
+                await page.wait_for_timeout(50)
+                drawer = await page.query_selector(".system-log-drawer")
+                drawer_w = await drawer.evaluate("el => el.clientWidth")
+                self.assertEqual(drawer_w, 390, "System log drawer must expand to 100vw (390px) on mobile")
+
+                # Close modal via mobile close button
+                close_btn = await page.query_selector(".system-btn-close-mobile")
+                await close_btn.click()
+                await page.wait_for_timeout(50)
+                modal = await page.query_selector("#system-log-modal")
+                display_after = await modal.evaluate("el => window.getComputedStyle(el).display")
+                self.assertEqual(display_after, "none", "Clicking mobile close button must close the system log modal")
+
+                await browser.close()
+
+        asyncio.run(run_mobile_test())
 
 
 if __name__ == "__main__":

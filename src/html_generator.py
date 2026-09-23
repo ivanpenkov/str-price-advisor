@@ -7723,7 +7723,7 @@ window.trajectoryData = __TIMELINE_JSON__;
     /* --- Remote System Run Monitoring & Diagnostics --- */
     .system-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 20px;
       margin-bottom: 24px;
     }
@@ -7862,8 +7862,68 @@ window.trajectoryData = __TIMELINE_JSON__;
       border-color: #64748b;
     }
 
+    .system-ledger-card {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .system-ledger-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      width: 100%;
+    }
+
+    .system-scroll-hint {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      background: rgba(148, 163, 184, 0.1);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .system-ledger-table-wrap {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0; /* CRITICAL: allows flex child to shrink within container on mobile */
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      scrollbar-color: #475569 #1e293b;
+    }
+    .system-ledger-table-wrap::-webkit-scrollbar {
+      height: 6px;
+    }
+    .system-ledger-table-wrap::-webkit-scrollbar-track {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    .system-ledger-table-wrap::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 4px;
+    }
+    .system-ledger-table-wrap::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+
     .system-ledger-table {
       width: 100%;
+      min-width: 720px;
       border-collapse: collapse;
       font-size: 0.85rem;
     }
@@ -7943,6 +8003,22 @@ window.trajectoryData = __TIMELINE_JSON__;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
+    }
+
+    .system-log-header-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .system-btn-close-mobile {
+      display: none;
+    }
+
+    .system-btn-close-desktop {
+      display: inline-block;
     }
 
     .system-log-actions {
@@ -8084,6 +8160,86 @@ window.trajectoryData = __TIMELINE_JSON__;
     @keyframes pulse-amber {
       0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
       50% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+    }
+
+    /* --- System Monitoring Mobile Responsiveness (< 768px) --- */
+    @media (max-width: 768px) {
+      .system-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .system-card {
+        padding: 16px 14px;
+      }
+
+      .system-card-header {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .system-card-title {
+        font-size: 1rem;
+      }
+
+      .system-scroll-hint {
+        display: inline-flex;
+      }
+
+      .system-ledger-table th,
+      .system-ledger-table td {
+        padding: 10px 10px;
+        font-size: 0.8rem;
+      }
+
+      .system-log-drawer {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        border-left: none;
+        border-radius: 0;
+      }
+
+      .system-log-header {
+        padding: 12px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .system-log-header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .system-btn-close-mobile {
+        display: inline-block;
+      }
+
+      .system-btn-close-desktop {
+        display: none;
+      }
+
+      .system-log-actions {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .system-log-search-input {
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+      }
+
+      .system-log-terminal {
+        padding: 12px;
+        font-size: 0.78rem;
+      }
     }
     """
 
@@ -8234,28 +8390,18 @@ window.trajectoryData = __TIMELINE_JSON__;
     </div>
 
     <!-- Historical Run Ledger Card -->
-    <div class="filter-card" style="margin-bottom: 24px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+    <div class="filter-card system-ledger-card" style="margin-bottom: 24px;">
+      <div class="system-ledger-header">
         <div style="display: flex; align-items: center; gap: 10px;">
           <span style="font-size: 1.25rem;">📜</span>
           <h3 style="margin: 0; font-size: 1.1rem; color: #f8fafc; font-weight: 700;">30-Day Execution History & Diagnostics</h3>
         </div>
-        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-          <input type="text" id="system-ledger-search" placeholder="Search history..." oninput="filterSystemLedger()" style="background: #0f172a; border: 1px solid #334155; color: #f8fafc; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; width: 180px;">
-          <div style="display: flex; gap: 4px;">
-            <button class="filter-pill-btn active" id="btn-trig-all" onclick="setSystemTriggerFilter('all')">All Triggers</button>
-            <button class="filter-pill-btn" id="btn-trig-launchd" onclick="setSystemTriggerFilter('launchd')">Scheduled</button>
-            <button class="filter-pill-btn" id="btn-trig-manual" onclick="setSystemTriggerFilter('manual')">Manual</button>
-          </div>
-          <div style="display: flex; gap: 4px;">
-            <button class="filter-pill-btn active" id="btn-status-all" onclick="setSystemStatusFilter('all')">All Status</button>
-            <button class="filter-pill-btn" id="btn-status-success" onclick="setSystemStatusFilter('SUCCESS')">Success</button>
-            <button class="filter-pill-btn" id="btn-status-failed" onclick="setSystemStatusFilter('FAILED')">Failed</button>
-          </div>
+        <div class="system-scroll-hint">
+          <span>Swipe horizontally</span> ➔
         </div>
       </div>
 
-      <div style="overflow-x: auto; border: 1px solid #334155; border-radius: 8px;">
+      <div class="system-ledger-table-wrap">
         <table class="system-ledger-table">
           <thead>
             <tr>
@@ -8281,18 +8427,21 @@ window.trajectoryData = __TIMELINE_JSON__;
   <div id="system-log-modal" class="system-log-modal-overlay" onclick="closeSystemLogModal(event)" style="display: none;">
     <div class="system-log-drawer" onclick="event.stopPropagation()">
       <div class="system-log-header">
-        <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
-          <span style="font-size: 1.5rem;">📄</span>
-          <div style="min-width: 0;">
-            <h3 id="system-log-title" style="margin: 0; font-size: 1.05rem; color: #f8fafc; font-weight: 700;">Execution Log</h3>
-            <p id="system-log-subtitle" style="margin: 2px 0 0 0; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></p>
+        <div class="system-log-header-top">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1;">
+            <span style="font-size: 1.5rem;">📄</span>
+            <div style="min-width: 0; flex: 1;">
+              <h3 id="system-log-title" style="margin: 0; font-size: 1.05rem; color: #f8fafc; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Execution Log</h3>
+              <p id="system-log-subtitle" style="margin: 2px 0 0 0; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></p>
+            </div>
           </div>
+          <button class="system-btn-close system-btn-close-mobile" onclick="closeSystemLogModal()" title="Close viewer (Esc)">✕</button>
         </div>
         <div class="system-log-actions">
           <input type="text" id="system-log-search" placeholder="Search log..." oninput="searchInLog(this.value)" class="system-log-search-input">
-          <button class="system-btn-action" onclick="copySystemLog()" title="Copy entire log to clipboard">📋 Copy</button>
-          <button class="system-btn-action" onclick="downloadSystemLog()" title="Download raw log .txt">⬇️ Download</button>
-          <button class="system-btn-close" onclick="closeSystemLogModal()" title="Close viewer (Esc)">✕</button>
+          <button id="btn-copy-log" class="system-btn-action" onclick="copySystemLog()" title="Copy entire log to clipboard">📋 Copy</button>
+          <button id="btn-download-log" class="system-btn-action" onclick="downloadSystemLog()" title="Download raw log .txt">⬇️ Download</button>
+          <button class="system-btn-close system-btn-close-desktop" onclick="closeSystemLogModal()" title="Close viewer (Esc)">✕</button>
         </div>
       </div>
       <div class="system-log-body">
@@ -8311,8 +8460,6 @@ window.trajectoryData = __TIMELINE_JSON__;
 // BEGIN_SYSTEM_STORE_JSON
 let currentSystemHistory = __STORE_JSON__;
 // END_SYSTEM_STORE_JSON
-let currentTriggerFilter = 'all';
-let currentStatusFilter = 'all';
 let rawLogText = "";
 
 function evaluateJobSLA(jobType, lastRunRecord) {
@@ -8552,24 +8699,12 @@ function renderSystemLedgerTable(runs) {
   const tbody = document.getElementById('system-ledger-tbody');
   if (!tbody) return;
 
-  const query = (document.getElementById('system-ledger-search')?.value || '').toLowerCase().trim();
-
-  const filtered = runs.filter(r => {
-    if (currentTriggerFilter !== 'all' && r.trigger !== currentTriggerFilter) return false;
-    if (currentStatusFilter !== 'all' && r.status !== currentStatusFilter) return false;
-    if (query) {
-      const text = `${r.job_title || ''} ${r.trigger || ''} ${r.status || ''} ${r.summary?.message || ''} ${r.error_excerpt || ''}`.toLowerCase();
-      if (!text.includes(query)) return false;
-    }
-    return true;
-  });
-
-  if (filtered.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #94a3b8; padding: 24px;">No matching execution records found.</td></tr>';
+  if (!runs || runs.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #94a3b8; padding: 24px;">No execution records found.</td></tr>';
     return;
   }
 
-  tbody.innerHTML = filtered.map(r => {
+  tbody.innerHTML = runs.map(r => {
     const triggerBadge = r.trigger === 'launchd'
       ? '<span class="badge-trigger-launchd">Schedule</span>'
       : '<span class="badge-trigger-manual">Manual</span>';
@@ -8602,33 +8737,6 @@ function renderSystemLedgerTable(runs) {
   }).join('');
 }
 
-function setSystemTriggerFilter(val) {
-  currentTriggerFilter = val;
-  document.querySelectorAll('#btn-trig-all, #btn-trig-launchd, #btn-trig-manual').forEach(b => b.classList.remove('active'));
-  const activeBtn = document.getElementById(`btn-trig-${val}`);
-  if (activeBtn) activeBtn.classList.add('active');
-  if (currentSystemHistory?.runs) {
-    renderSystemLedgerTable(currentSystemHistory.runs);
-  }
-}
-
-function setSystemStatusFilter(val) {
-  currentStatusFilter = val;
-  document.querySelectorAll('#btn-status-all, #btn-status-success, #btn-status-failed').forEach(b => b.classList.remove('active'));
-  const btnId = val === 'all' ? 'btn-status-all' : (val === 'SUCCESS' ? 'btn-status-success' : 'btn-status-failed');
-  const activeBtn = document.getElementById(btnId);
-  if (activeBtn) activeBtn.classList.add('active');
-  if (currentSystemHistory?.runs) {
-    renderSystemLedgerTable(currentSystemHistory.runs);
-  }
-}
-
-function filterSystemLedger() {
-  if (currentSystemHistory?.runs) {
-    renderSystemLedgerTable(currentSystemHistory.runs);
-  }
-}
-
 async function openSystemLog(logPath, jobTitle, status) {
   const modal = document.getElementById("system-log-modal");
   const contentEl = document.getElementById("system-log-content");
@@ -8641,6 +8749,7 @@ async function openSystemLog(logPath, jobTitle, status) {
   titleEl.textContent = jobTitle || "Execution Log";
   subEl.textContent = logPath;
   contentEl.innerHTML = "";
+  rawLogText = "";
   loadingEl.style.display = "block";
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
@@ -8704,7 +8813,7 @@ function closeSystemLogModal(e) {
 function copySystemLog() {
   if (rawLogText) {
     navigator.clipboard.writeText(rawLogText).then(() => {
-      const btn = document.querySelector(".system-log-actions .system-btn-action");
+      const btn = document.getElementById("btn-copy-log") || document.querySelector(".system-log-actions .system-btn-action");
       if (btn) {
         const orig = btn.textContent;
         btn.textContent = "✓ Copied!";

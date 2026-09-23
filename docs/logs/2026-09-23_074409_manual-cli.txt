@@ -1,0 +1,1 @@
+✅ Dashboard generated successfully at: docs/index.html

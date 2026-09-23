@@ -1,8 +1,27 @@
 {
   "version": "1.0",
-  "last_updated": "2026-09-23T07:41:41.967025Z",
+  "last_updated": "2026-09-23T07:44:21.187287Z",
   "active_host": "mac-mini",
   "runs": [
+    {
+      "run_id": "2026-09-23_074409_manual-cli",
+      "job_type": "manual-cli",
+      "job_title": "HTML Dashboard Generation",
+      "trigger": "manual",
+      "status": "SUCCESS",
+      "start_time": "2026-09-23T07:44:09.731040Z",
+      "end_time": "2026-09-23T07:44:21.186971Z",
+      "duration_sec": 11.5,
+      "duration_formatted": "12s",
+      "exit_code": 0,
+      "git_commit": "71643de",
+      "log_file": "logs/2026-09-23_074409_manual-cli.txt",
+      "summary": {
+        "action": "generate-html",
+        "message": "HTML dashboard and reports generated."
+      },
+      "error_excerpt": null
+    },
     {
       "run_id": "2026-09-23_074137_pms-sync",
       "job_type": "pms-sync",

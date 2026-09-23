@@ -10,7 +10,7 @@ Usage:
 
 import argparse
 import asyncio
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import json
 import logging
 import os
@@ -736,6 +736,8 @@ def test_kivoya_only():
 
 
 def main():
+    from datetime import date, datetime, timedelta
+
     tracking_parent = argparse.ArgumentParser(add_help=False)
     tracking_parent.add_argument(
         "--trigger",
@@ -1239,7 +1241,6 @@ def main():
         ) as tracker:
             from src.ownerx_client import OwnerXClient
             from src.reservation_store import ReservationStore
-            from datetime import date, timedelta
             import shutil
 
             print("=" * 70)
@@ -1427,7 +1428,6 @@ def main():
             push_to_github(commit_msg="Update competitor sales tracking and absorption velocity metrics")
     elif args.command == "snapshot-rates":
         from src.reservation_store import ReservationStore
-        from datetime import date
         snap_d = "2026-02-01" if args.backfill else (args.date or date.today().strftime("%Y-%m-%d"))
         store = ReservationStore()
         count = snapshot_kivoya_rates(store, snapshot_date=snap_d)

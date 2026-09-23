@@ -97,9 +97,9 @@ class TestHTMLDashboardUI(unittest.TestCase):
                 title = await page.title()
                 self.assertIn("Villa del Sol", title)
 
-                # Ensure tabs navigation is present (exactly 9 tabs)
+                # Ensure tabs navigation is present (exactly 10 tabs)
                 tab_btns = await page.query_selector_all(".tab-btn")
-                self.assertEqual(len(tab_btns), 9, f"Expected exactly 9 navigation tabs in dashboard, found {len(tab_btns)}")
+                self.assertEqual(len(tab_btns), 10, f"Expected exactly 10 navigation tabs in dashboard, found {len(tab_btns)}")
 
                 # Click every tab and verify that switchTab properly activates the corresponding container
                 tab_ids = [
@@ -112,6 +112,7 @@ class TestHTMLDashboardUI(unittest.TestCase):
                     "reservations",
                     "revenue",
                     "comparison",
+                    "system",
                 ]
 
                 for tid in tab_ids:
@@ -1305,6 +1306,82 @@ class TestHTMLDashboardUI(unittest.TestCase):
                 await browser.close()
 
         asyncio.run(run_color_browser_test())
+
+    def test_system_monitoring_tab_elements(self):
+        """Verify presence of System tab navigation, header pill, status cards, ledger table, and log modal."""
+        # Header status pill
+        self.assertIn('id="header-status-pill"', self.html_content)
+        self.assertIn('id="header-status-text"', self.html_content)
+        self.assertIn("switchTab('system')", self.html_content)
+
+        # Tab button
+        self.assertIn('id="tab-btn-system"', self.html_content)
+        self.assertIn('id="system-tab-badge"', self.html_content)
+
+        # Tab content container
+        self.assertIn('id="tab-system"', self.html_content)
+        self.assertIn('class="system-cards-grid"', self.html_content)
+
+        # Health cards
+        self.assertIn('id="card-pms-sync"', self.html_content)
+        self.assertIn('id="card-daily-quickscan"', self.html_content)
+        self.assertIn('id="card-weekly-fullscan"', self.html_content)
+
+        # Execution ledger table and filters
+        self.assertIn('id="system-ledger-tbody"', self.html_content)
+        self.assertIn('id="system-ledger-search"', self.html_content)
+        self.assertIn('id="btn-trig-all"', self.html_content)
+        self.assertIn('id="btn-trig-launchd"', self.html_content)
+        self.assertIn('id="btn-trig-manual"', self.html_content)
+        self.assertIn('id="btn-status-all"', self.html_content)
+        self.assertIn('id="btn-status-success"', self.html_content)
+        self.assertIn('id="btn-status-failed"', self.html_content)
+
+        # Modal
+        self.assertIn('id="system-log-modal"', self.html_content)
+        self.assertIn('id="system-log-content"', self.html_content)
+        self.assertIn('id="system-log-search"', self.html_content)
+
+    def test_system_monitoring_interactions_playwright(self):
+        """Verify interacting with header status pill switches to system tab, and log modal opens and closes with Escape."""
+        async def run_system_interaction_test():
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=True)
+                page = await browser.new_page(viewport={"width": 1280, "height": 800})
+                file_uri = f"file://{self.html_path.resolve()}"
+                await page.goto(file_uri)
+                await page.wait_for_load_state("domcontentloaded")
+                await page.wait_for_timeout(50)
+
+                # 1. Click header status pill and verify it activates #tab-system
+                pill = await page.query_selector("#header-status-pill")
+                self.assertIsNotNone(pill, "#header-status-pill button must exist")
+                await pill.click()
+                await page.wait_for_timeout(50)
+
+                system_tab = await page.query_selector("#tab-system")
+                is_active = await system_tab.evaluate("el => el.classList.contains('active')")
+                self.assertTrue(is_active, "Clicking header status pill must switch to and activate #tab-system")
+
+                # 2. Click a view log button in one of the cards
+                log_btn = await page.query_selector(".system-btn-log")
+                if log_btn and not await log_btn.is_disabled():
+                    await log_btn.click()
+                    await page.wait_for_timeout(50)
+
+                    modal = await page.query_selector("#system-log-modal")
+                    display_val = await modal.evaluate("el => window.getComputedStyle(el).display")
+                    self.assertIn(display_val, ["flex", "block"], "Log modal should be visible after clicking log button")
+
+                    # 3. Press Escape to close the modal
+                    await page.keyboard.press("Escape")
+                    await page.wait_for_timeout(50)
+                    display_after = await modal.evaluate("el => window.getComputedStyle(el).display")
+                    self.assertEqual(display_after, "none", "Pressing Escape must close the system log modal")
+
+                await browser.close()
+
+        asyncio.run(run_system_interaction_test())
 
 
 if __name__ == "__main__":

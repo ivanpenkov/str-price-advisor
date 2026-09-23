@@ -15,10 +15,12 @@ featuring:
 
 import html
 import json
+import os
 import re
+import tempfile
 from datetime import date, datetime, timedelta
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional, Tuple, Union
 
 from src.kivoya_client import KivoyaClient
 from src.segmentation import CalendarSegmenter
@@ -454,6 +456,27 @@ class HTMLDashboardGenerator:
         )
 
         blocked_periods = kivoya_client.get_blocked_periods()
+        if not blocked_periods and reservations_list:
+            fallback_blocks = []
+            for r in reservations_list:
+                s_val = r.get("start_date")
+                e_val = r.get("end_date")
+                if not s_val or not e_val:
+                    continue
+                try:
+                    s_dt = datetime.strptime(s_val, "%Y-%m-%d").date() if isinstance(s_val, str) else s_val
+                    e_dt = datetime.strptime(e_val, "%Y-%m-%d").date() if isinstance(e_val, str) else e_val
+                    fallback_blocks.append({
+                        "startdate": s_dt.strftime("%m/%d/%Y"),
+                        "enddate": e_dt.strftime("%m/%d/%Y"),
+                        "reason": f"Reservation #{r.get('confirmation_id', '')}",
+                        "start_dt": s_dt,
+                        "end_dt": e_dt,
+                    })
+                except Exception:
+                    continue
+            if fallback_blocks:
+                blocked_periods = sorted(fallback_blocks, key=lambda x: x["start_dt"])
         open_end_date = kivoya_client.get_calendar_open_end_date()
         proposed_prices_data = generate_proposed_prices(
             seasonal_rates,
@@ -489,6 +512,12 @@ class HTMLDashboardGenerator:
         self.recent_rev_count = recent_rev_count
         bell_badge_html = f' <span class="review-bell-badge" id="reviewBellBadge">🔔 {recent_rev_count}</span>' if recent_rev_count > 0 else ""
 
+        # System Run Monitoring & Diagnostics Tab
+        system_tab_html, system_store_json = self._render_system_tab()
+        system_log_modal_html = self._render_system_log_modal()
+        system_monitoring_css = self._get_system_monitoring_css()
+        system_monitoring_js = self._render_system_script(system_store_json)
+
         html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -501,6 +530,7 @@ class HTMLDashboardGenerator:
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     {calendar_revenue_css}
+    {system_monitoring_css}
 
     :root {{
       --primary: #2563eb;
@@ -2119,6 +2149,9 @@ class HTMLDashboardGenerator:
       <div class="header-badges">
         <span class="badge badge-primary">Dynamic Luxury Model (45th–70th %ile)</span>
         <span class="badge badge-dark">Updated: {now_str}</span>
+        <button id="header-status-pill" class="badge badge-status-healthy" onclick="switchTab('system')" title="Click to view System Run Monitoring & Diagnostics" style="cursor: pointer; border: none; font-family: inherit;">
+          <span id="header-status-text">● All Systems Healthy</span>
+        </button>
       </div>
     </header>
 
@@ -2133,6 +2166,7 @@ class HTMLDashboardGenerator:
       <button class="tab-btn" onclick="switchTab('reservations')" role="tab" aria-selected="false">📑 Reservations ({len(reservations_list)})</button>
       <button class="tab-btn" onclick="switchTab('revenue')" role="tab" aria-selected="false">📈 Revenue</button>
       <button class="tab-btn" onclick="switchTab('comparison')" role="tab" aria-selected="false">🌐 Channels</button>
+      <button class="tab-btn" onclick="switchTab('system')" role="tab" id="tab-btn-system" aria-selected="false">🖥️ System <span id="system-tab-badge" class="system-nav-badge" style="display:none; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 6px; border-radius: 9999px; margin-left: 4px;"></span></button>
     </nav>
 
     <!-- TAB 1: PRICING RECOMMENDATIONS -->
@@ -2346,6 +2380,13 @@ class HTMLDashboardGenerator:
       {self._render_comparison_tab(all_sorted)}
     </div>
 
+    <!-- TAB 7: SYSTEM RUN MONITORING & DIAGNOSTICS -->
+    <div id="tab-system" class="tab-content">
+      <!-- BEGIN_SYSTEM_TAB -->
+      {system_tab_html}
+      <!-- END_SYSTEM_TAB -->
+    </div>
+
     <!-- Footer -->
     <footer>
       <p>STR Competitive Price Advisor for Villa del Sol • Automated Analysis Engine</p>
@@ -2355,9 +2396,10 @@ class HTMLDashboardGenerator:
 
   {reservation_modal_html}
   {validity_modal_html}
+  {system_log_modal_html}
 
   <script>
-    const VALID_TABS = ['pricing', 'reviews', 'streamline', 'comps', 'market-sales', 'calendar', 'reservations', 'revenue', 'comparison'];
+    const VALID_TABS = ['pricing', 'reviews', 'streamline', 'comps', 'market-sales', 'calendar', 'reservations', 'revenue', 'comparison', 'system'];
     let currentActiveTabId = 'pricing';
     let isInitialTabLoad = true;
 
@@ -2469,6 +2511,9 @@ class HTMLDashboardGenerator:
       }}
       if (tabId === 'reviews' && typeof filterReviews === 'function') {{
         setTimeout(filterReviews, 30);
+      }}
+      if (tabId === 'system' && typeof refreshRunHistory === 'function') {{
+        refreshRunHistory();
       }}
 
       if (restoreScroll) {{
@@ -3691,6 +3736,7 @@ class HTMLDashboardGenerator:
 
     {calendar_revenue_js}
   </script>
+  {system_monitoring_js}
 </body>
 </html>"""
 
@@ -5099,7 +5145,7 @@ class HTMLDashboardGenerator:
                     pretax = comp["airbnb"].get("total_price") or 0.0
                     if pretax > 0:
                         tax = round(pretax * 0.1252, 2)
-                        clean = comp["airbnb"].get("cleaning_fee", 550.0)
+                        clean = comp["airbnb"].get("cleaning_fee") or 550.0
                         base_plus_clean = round(pretax / 1.1415, 2)
                         base = round(max(0.0, base_plus_clean - clean), 2)
                         svc = round(pretax - base - clean, 2)
@@ -7672,6 +7718,1154 @@ window.trajectoryData = __TIMELINE_JSON__;
 """
         return js_template.replace("__TIMELINE_JSON__", timeline_json)
 
+    def _get_system_monitoring_css(self) -> str:
+        return """
+    /* --- Remote System Run Monitoring & Diagnostics --- */
+    .system-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
 
+    .system-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .system-card:hover {
+      border-color: #475569;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
 
+    .system-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
 
+    .system-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .system-card-schedule {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    .system-card-body {
+      margin-bottom: 18px;
+    }
+
+    .system-metric-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+    }
+
+    .status-badge-healthy {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .status-badge-failed {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .status-badge-running {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .status-badge-overdue {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .system-overdue-alert {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .system-btn-log {
+      background: #273549;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      padding: 7px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .system-btn-log:hover {
+      background: #334155;
+      border-color: #64748b;
+    }
+
+    .system-ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .system-ledger-table th {
+      background: #162032;
+      color: #94a3b8;
+      font-weight: 600;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+    .system-ledger-table td {
+      padding: 14px;
+      border-bottom: 1px solid #243247;
+      vertical-align: middle;
+    }
+    .system-ledger-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge-trigger-launchd {
+      background: rgba(148, 163, 184, 0.12);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: monospace;
+    }
+    .badge-trigger-manual {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: monospace;
+    }
+
+    .system-log-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .system-log-drawer {
+      width: min(880px, 95vw);
+      height: 100vh;
+      background: #0d1117;
+      border-left: 1px solid #30363d;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -12px 0 36px rgba(0, 0, 0, 0.6);
+      animation: slideLeft 0.25s ease-out;
+    }
+
+    @keyframes slideLeft {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .system-log-header {
+      padding: 16px 20px;
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .system-log-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .system-log-search-input {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      color: #c9d1d9;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      width: 180px;
+    }
+    .system-log-search-input:focus {
+      outline: none;
+      border-color: #58a6ff;
+    }
+
+    .system-btn-action {
+      background: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .system-btn-action:hover {
+      background: #30363d;
+      color: #ffffff;
+    }
+
+    .system-btn-close {
+      background: transparent;
+      color: #8b949e;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .system-btn-close:hover {
+      color: #f85149;
+      background: rgba(248, 81, 73, 0.15);
+    }
+
+    .system-log-body {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .system-log-terminal {
+      flex: 1;
+      margin: 0;
+      padding: 18px;
+      background: #0d1117;
+      color: #c9d1d9;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .log-line-error {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+      font-weight: 600;
+      display: block;
+      padding: 1px 4px;
+      border-radius: 2px;
+    }
+
+    .log-search-match {
+      background: #f59e0b;
+      color: #000;
+      font-weight: 700;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    .system-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #30363d;
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto;
+    }
+
+    .badge-status-healthy {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      font-weight: 600;
+    }
+    .badge-status-healthy:hover {
+      background: rgba(16, 185, 129, 0.25);
+    }
+    .badge-status-failed {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      font-weight: 700;
+      animation: pulse-red 2s infinite;
+    }
+    .badge-status-overdue {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      font-weight: 700;
+      animation: pulse-amber 2s infinite;
+    }
+    .badge-status-running {
+      background: rgba(59, 130, 246, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      font-weight: 600;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse-red {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+    }
+    @keyframes pulse-amber {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+    }
+    """
+
+    def _render_system_tab(self) -> Tuple[str, str]:
+        import json
+        from pathlib import Path
+        from datetime import datetime, timezone
+        from zoneinfo import ZoneInfo
+
+        pt_tz = ZoneInfo("America/Los_Angeles")
+
+        hist_file = self.output_path.parent / "data" / "run_history.json"
+        if not hist_file.exists():
+            hist_file = Path("docs/data/run_history.json")
+        if not hist_file.exists():
+            hist_file = Path("data/run_history.json")
+
+        store = {"runs": [], "last_updated": None, "active_host": "mac-mini"}
+        if hist_file.exists():
+            try:
+                store = json.loads(hist_file.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        runs = store.get("runs") or []
+        if not isinstance(runs, list):
+            runs = []
+        active_host = store.get("active_host", "mac-mini")
+
+        latest_pms = next((r for r in runs if r.get("job_type") == "pms-sync"), None)
+        latest_quick = next((r for r in runs if r.get("job_type") == "daily-quickscan"), None)
+        latest_weekly = next((r for r in runs if r.get("job_type") == "weekly-fullscan"), None)
+
+        def _format_time_pt(iso_str: Optional[str]) -> str:
+            if not iso_str:
+                return "Never"
+            try:
+                clean_iso = iso_str.replace("Z", "+00:00")
+                dt = datetime.fromisoformat(clean_iso).astimezone(pt_tz)
+                return dt.strftime("%b %d, %I:%M %p PT")
+            except Exception:
+                return str(iso_str)
+
+        def _card_html(job_key: str, title: str, schedule: str, icon: str, record: Optional[Dict[str, Any]]) -> str:
+            status = record.get("status", "OVERDUE") if record else "OVERDUE"
+            badge_cls = {
+                "SUCCESS": "status-badge-healthy",
+                "FAILED": "status-badge-failed",
+                "RUNNING": "status-badge-running",
+            }.get(status, "status-badge-overdue")
+            status_text = "🟢 HEALTHY" if status == "SUCCESS" else ("🔴 FAILED" if status == "FAILED" else ("🟡 RUNNING" if status == "RUNNING" else "🟠 OVERDUE"))
+
+            last_run = _format_time_pt(record.get("start_time")) if record else "No runs recorded"
+            dur = record.get("duration_formatted") if record and record.get("duration_formatted") else "N/A"
+            summary_msg = record.get("summary", {}).get("message", "No summary recorded.") if record else "Pending execution."
+            commit = record.get("git_commit", "unknown") if record else "N/A"
+            log_file = record.get("log_file") if record else None
+
+            safe_title = html.escape(str(title).replace("'", "\\'"))
+            log_btn = f'<button id="card-btn-log-{job_key}" class="system-btn-log" onclick="openSystemLog(\'{log_file}\', \'{safe_title}\', \'{status}\')">📄 View Latest Log</button>' if log_file else f'<button id="card-btn-log-{job_key}" class="system-btn-log" disabled style="opacity: 0.5; cursor: not-allowed;">📄 No Log</button>'
+
+            return f"""
+      <div class="system-card" id="card-{job_key}">
+        <div>
+          <div class="system-card-header">
+            <div>
+              <div class="system-card-title">{icon} {title}</div>
+              <div class="system-card-schedule">Scheduled: {schedule}</div>
+            </div>
+            <span id="card-status-{job_key}" class="{badge_cls}">{status_text}</span>
+          </div>
+          <div class="system-card-body">
+            <div class="system-metric-row">
+              <span style="color: #94a3b8;">Last Run:</span>
+              <strong id="card-last-run-{job_key}" style="color: #f8fafc;">{last_run} ({dur})</strong>
+            </div>
+            <div class="system-metric-row" style="flex-direction: column; gap: 4px;">
+              <span style="color: #94a3b8;">Summary:</span>
+              <span id="card-summary-{job_key}" style="color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">{summary_msg}</span>
+            </div>
+            <div style="font-size: 0.75rem; color: #64748b; font-family: monospace; margin-top: 8px;">
+              Host: <span id="card-host-{job_key}">{active_host}</span> • Commit: <span id="card-commit-{job_key}">{commit}</span>
+            </div>
+          </div>
+        </div>
+        <div style="border-top: 1px solid #334155; padding-top: 14px; display: flex; justify-content: flex-end;">
+          {log_btn}
+        </div>
+      </div>"""
+
+        card_pms = _card_html("pms-sync", "Daily PMS Reservation Sync", "Daily at 6:00 AM PT", "⚙️", latest_pms)
+        card_quick = _card_html("daily-quickscan", "Daily 90-Day Quick Market Scan", "Daily at 6:15 AM PT", "⚡", latest_quick)
+        card_weekly = _card_html("weekly-fullscan", "Weekly Full 12-Month Market Scan", "Sundays at 2:00 AM PT", "📅", latest_weekly)
+
+        table_rows = []
+        for r in runs:
+            r_id = r.get("run_id", "")
+            j_title = r.get("job_title", r.get("job_type", "Job"))
+            trigger = r.get("trigger", "manual")
+            trig_badge = '<span class="badge-trigger-launchd">Schedule</span>' if trigger == "launchd" else '<span class="badge-trigger-manual">Manual</span>'
+            status = r.get("status", "UNKNOWN")
+            st_cls = {
+                "SUCCESS": "status-badge-healthy",
+                "FAILED": "status-badge-failed",
+                "RUNNING": "status-badge-running",
+            }.get(status, "status-badge-overdue")
+            dur = r.get("duration_formatted", "N/A")
+            log_file = r.get("log_file")
+            msg = r.get("summary", {}).get("message", "")
+            err = r.get("error_excerpt")
+            summary_html = f'<span style="color: #cbd5e1;">{html.escape(msg)}</span>'
+            if err:
+                summary_html += f'<div style="color: #ef4444; font-family: monospace; font-size: 0.75rem; margin-top: 4px; max-height: 48px; overflow: hidden;">{html.escape(err)}</div>'
+
+            safe_j_title = html.escape(str(j_title).replace("'", "\\'"))
+            btn_html = f'<button class="system-btn-log" onclick="openSystemLog(\'{log_file}\', \'{safe_j_title}\', \'{status}\')">📄 Log</button>' if log_file else '<span style="color: #64748b; font-size: 0.75rem;">None</span>'
+
+            table_rows.append(f"""
+        <tr data-run-id="{r_id}" data-job-type="{r.get('job_type')}" data-trigger="{trigger}" data-status="{status}">
+          <td style="white-space: nowrap; font-family: monospace; color: #94a3b8;">{_format_time_pt(r.get('start_time'))}</td>
+          <td><strong style="color: #f8fafc;">{html.escape(j_title)}</strong></td>
+          <td>{trig_badge}</td>
+          <td><span class="{st_cls}">{status}</span></td>
+          <td style="font-family: monospace; color: #cbd5e1;">{dur}</td>
+          <td>{summary_html}</td>
+          <td>{btn_html}</td>
+        </tr>""")
+
+        rows_joined = "\n".join(table_rows) if table_rows else '<tr><td colspan="7" style="text-align: center; color: #94a3b8; padding: 24px;">No execution records found.</td></tr>'
+
+        return (f"""
+    <!-- Service Health Cards -->
+    <div class="system-cards-grid">
+      {card_pms}
+      {card_quick}
+      {card_weekly}
+    </div>
+
+    <!-- Overdue Schedule Warning Banner -->
+    <div id="system-overdue-alert" class="system-overdue-alert" style="display: none;">
+      <div style="display: flex; align-items: flex-start; gap: 14px;">
+        <span style="font-size: 1.75rem; line-height: 1;">⚠️</span>
+        <div style="flex: 1;">
+          <strong id="system-overdue-title" style="font-size: 1rem; color: #f59e0b; display: block;">Overdue Execution Warning</strong>
+          <p id="system-overdue-desc" style="font-size: 0.875rem; color: #cbd5e1; margin-top: 4px; line-height: 1.4;"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Historical Run Ledger Card -->
+    <div class="filter-card" style="margin-bottom: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.25rem;">📜</span>
+          <h3 style="margin: 0; font-size: 1.1rem; color: #f8fafc; font-weight: 700;">30-Day Execution History & Diagnostics</h3>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <input type="text" id="system-ledger-search" placeholder="Search history..." oninput="filterSystemLedger()" style="background: #0f172a; border: 1px solid #334155; color: #f8fafc; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; width: 180px;">
+          <div style="display: flex; gap: 4px;">
+            <button class="filter-pill-btn active" id="btn-trig-all" onclick="setSystemTriggerFilter('all')">All Triggers</button>
+            <button class="filter-pill-btn" id="btn-trig-launchd" onclick="setSystemTriggerFilter('launchd')">Scheduled</button>
+            <button class="filter-pill-btn" id="btn-trig-manual" onclick="setSystemTriggerFilter('manual')">Manual</button>
+          </div>
+          <div style="display: flex; gap: 4px;">
+            <button class="filter-pill-btn active" id="btn-status-all" onclick="setSystemStatusFilter('all')">All Status</button>
+            <button class="filter-pill-btn" id="btn-status-success" onclick="setSystemStatusFilter('SUCCESS')">Success</button>
+            <button class="filter-pill-btn" id="btn-status-failed" onclick="setSystemStatusFilter('FAILED')">Failed</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto; border: 1px solid #334155; border-radius: 8px;">
+        <table class="system-ledger-table">
+          <thead>
+            <tr>
+              <th>Timestamp (PT)</th>
+              <th>Job Name</th>
+              <th>Trigger</th>
+              <th>Status</th>
+              <th>Duration</th>
+              <th>Summary / Details</th>
+              <th>Log</th>
+            </tr>
+          </thead>
+          <tbody id="system-ledger-tbody">
+            {rows_joined}
+          </tbody>
+        </table>
+      </div>
+    </div>""", json.dumps(store))
+
+    def _render_system_log_modal(self) -> str:
+        return """
+  <!-- Asynchronous Log Viewer Drawer Modal -->
+  <div id="system-log-modal" class="system-log-modal-overlay" onclick="closeSystemLogModal(event)" style="display: none;">
+    <div class="system-log-drawer" onclick="event.stopPropagation()">
+      <div class="system-log-header">
+        <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+          <span style="font-size: 1.5rem;">📄</span>
+          <div style="min-width: 0;">
+            <h3 id="system-log-title" style="margin: 0; font-size: 1.05rem; color: #f8fafc; font-weight: 700;">Execution Log</h3>
+            <p id="system-log-subtitle" style="margin: 2px 0 0 0; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></p>
+          </div>
+        </div>
+        <div class="system-log-actions">
+          <input type="text" id="system-log-search" placeholder="Search log..." oninput="searchInLog(this.value)" class="system-log-search-input">
+          <button class="system-btn-action" onclick="copySystemLog()" title="Copy entire log to clipboard">📋 Copy</button>
+          <button class="system-btn-action" onclick="downloadSystemLog()" title="Download raw log .txt">⬇️ Download</button>
+          <button class="system-btn-close" onclick="closeSystemLogModal()" title="Close viewer (Esc)">✕</button>
+        </div>
+      </div>
+      <div class="system-log-body">
+        <div id="system-log-loading" style="display: none; padding: 60px 20px; text-align: center; color: #94a3b8;">
+          <div class="system-spinner"></div>
+          <p style="margin-top: 16px; font-size: 0.95rem; font-weight: 500;">Fetching sanitized execution log...</p>
+        </div>
+        <pre id="system-log-content" class="system-log-terminal"></pre>
+      </div>
+    </div>
+  </div>"""
+
+    def _render_system_script(self, store_json: str = "null") -> str:
+        js = """<script>
+// --- Remote System Run Monitoring & Diagnostics ---
+// BEGIN_SYSTEM_STORE_JSON
+let currentSystemHistory = __STORE_JSON__;
+// END_SYSTEM_STORE_JSON
+let currentTriggerFilter = 'all';
+let currentStatusFilter = 'all';
+let rawLogText = "";
+
+function evaluateJobSLA(jobType, lastRunRecord) {
+  const now = new Date();
+  const ptParts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    hour: "numeric",
+    minute: "numeric",
+    weekday: "short",
+    hourCycle: "h23"
+  }).formatToParts(now);
+
+  let currentHour = 0, currentMin = 0, weekday = "";
+  for (const p of ptParts) {
+    if (p.type === "hour") currentHour = parseInt(p.value, 10);
+    if (p.type === "minute") currentMin = parseInt(p.value, 10);
+    if (p.type === "weekday") weekday = p.value;
+  }
+  const weekdayMap = { "Sun": 0, "Mon": 1, "Tue": 2, "Wed": 3, "Thu": 4, "Fri": 5, "Sat": 6 };
+  const currentDay = weekdayMap[weekday] ?? 1;
+
+  const SLA_CONFIG = {
+    'pms-sync': { hour: 6, min: 20, isDaily: true },
+    'daily-quickscan': { hour: 6, min: 45, isDaily: true },
+    'weekly-fullscan': { hour: 4, min: 0, isWeekly: true, day: 0 }
+  };
+
+  const cfg = SLA_CONFIG[jobType];
+  if (!cfg) return 'UNKNOWN';
+
+  if (!lastRunRecord) {
+    return 'OVERDUE';
+  }
+
+  if (lastRunRecord.status === 'RUNNING') {
+    return 'RUNNING';
+  }
+
+  if (lastRunRecord.status === 'FAILED') {
+    return 'FAILED';
+  }
+
+  const lastRunDate = new Date(lastRunRecord.start_time);
+  const isToday = lastRunDate.toLocaleDateString("en-US", { timeZone: "America/Los_Angeles" }) === 
+                  now.toLocaleDateString("en-US", { timeZone: "America/Los_Angeles" });
+
+  const msInHour = 3600000;
+  const hoursSinceLastRun = (now.getTime() - lastRunDate.getTime()) / msInHour;
+
+  if (cfg.isDaily) {
+    const isPastDeadline = (currentHour > cfg.hour) || (currentHour === cfg.hour && currentMin >= cfg.min);
+    if (hoursSinceLastRun > 30 || (isPastDeadline && !isToday)) {
+      return 'OVERDUE';
+    }
+  } else if (cfg.isWeekly) {
+    const isSundayPastDeadline = (currentDay === 0 && ((currentHour > cfg.hour) || (currentHour === cfg.hour && currentMin >= cfg.min)));
+    if (isSundayPastDeadline && !isToday) {
+      return 'OVERDUE';
+    }
+    const daysSinceLastRun = hoursSinceLastRun / 24;
+    const allowedDriftDays = 7 + (currentDay === 0 ? 1 : currentDay);
+    if (daysSinceLastRun > allowedDriftDays) {
+      return 'OVERDUE';
+    }
+  }
+
+  return 'HEALTHY';
+}
+
+function formatPTDateTime(isoStr) {
+  if (!isoStr) return 'Never';
+  try {
+    const d = new Date(isoStr);
+    return d.toLocaleString("en-US", {
+      timeZone: "America/Los_Angeles",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }) + " PT";
+  } catch (e) {
+    return isoStr;
+  }
+}
+
+async function refreshRunHistory() {
+  if (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:') {
+    // In local file:// viewing, browser security prohibits Fetch API.
+    // Update UI dynamically using embedded run history.
+    if (typeof currentSystemHistory !== 'undefined' && currentSystemHistory && currentSystemHistory.runs) {
+      updateSystemDashboard(currentSystemHistory);
+    }
+    return;
+  }
+  try {
+    const res = await fetch(`data/run_history.json?t=${Date.now()}`);
+    if (res.ok) {
+      const data = await res.json();
+      currentSystemHistory = data;
+      updateSystemDashboard(data);
+    }
+  } catch (err) {
+    console.warn("Could not fetch latest run_history.json:", err);
+  }
+}
+
+function updateSystemDashboard(data) {
+  if (!data || !data.runs) return;
+  const runs = data.runs;
+  const host = data.active_host || 'mac-mini';
+
+  const latestPms = runs.find(r => r.job_type === 'pms-sync');
+  const latestQuick = runs.find(r => r.job_type === 'daily-quickscan');
+  const latestWeekly = runs.find(r => r.job_type === 'weekly-fullscan');
+
+  const slaPms = evaluateJobSLA('pms-sync', latestPms);
+  const slaQuick = evaluateJobSLA('daily-quickscan', latestQuick);
+  const slaWeekly = evaluateJobSLA('weekly-fullscan', latestWeekly);
+
+  // Update Cards
+  updateCardUI('pms-sync', 'Daily PMS Reservation Sync', latestPms, slaPms, host);
+  updateCardUI('daily-quickscan', 'Daily 90-Day Quick Market Scan', latestQuick, slaQuick, host);
+  updateCardUI('weekly-fullscan', 'Weekly Full 12-Month Market Scan', latestWeekly, slaWeekly, host);
+
+  // Overall Health Assessment
+  const allSlas = [slaPms, slaQuick, slaWeekly];
+  const failedCount = allSlas.filter(s => s === 'FAILED').length;
+  const overdueCount = allSlas.filter(s => s === 'OVERDUE').length;
+  const runningCount = allSlas.filter(s => s === 'RUNNING').length;
+
+  const headerPill = document.getElementById('header-status-pill');
+  const headerText = document.getElementById('header-status-text');
+  const tabBadge = document.getElementById('system-tab-badge');
+
+  if (headerPill && headerText) {
+    headerPill.className = 'badge';
+    if (failedCount > 0) {
+      headerPill.classList.add('badge-status-failed');
+      headerText.textContent = `⚠️ ${failedCount} Job${failedCount > 1 ? 's' : ''} Failed`;
+      if (tabBadge) {
+        tabBadge.textContent = 'FAILED';
+        tabBadge.style.background = '#ef4444';
+        tabBadge.style.display = 'inline-block';
+      }
+    } else if (overdueCount > 0) {
+      headerPill.classList.add('badge-status-overdue');
+      headerText.textContent = `⚠️ Job Overdue`;
+      if (tabBadge) {
+        tabBadge.textContent = 'OVERDUE';
+        tabBadge.style.background = '#f59e0b';
+        tabBadge.style.display = 'inline-block';
+      }
+    } else if (runningCount > 0) {
+      headerPill.classList.add('badge-status-running');
+      headerText.textContent = `● Job Running`;
+      if (tabBadge) {
+        tabBadge.textContent = 'RUNNING';
+        tabBadge.style.background = '#3b82f6';
+        tabBadge.style.display = 'inline-block';
+      }
+    } else {
+      headerPill.classList.add('badge-status-healthy');
+      headerText.textContent = `● All Systems Healthy`;
+      if (tabBadge) {
+        tabBadge.textContent = '';
+        tabBadge.style.display = 'none';
+      }
+    }
+  }
+
+  // Overdue Alert Banner
+  const alertBanner = document.getElementById('system-overdue-alert');
+  const alertDesc = document.getElementById('system-overdue-desc');
+  if (alertBanner && alertDesc) {
+    if (overdueCount > 0) {
+      const overdueJobs = [];
+      if (slaPms === 'OVERDUE') overdueJobs.push('Daily PMS Sync (6:00 AM PT)');
+      if (slaQuick === 'OVERDUE') overdueJobs.push('Daily Quickscan (6:15 AM PT)');
+      if (slaWeekly === 'OVERDUE') overdueJobs.push('Weekly Fullscan (Sun 2:00 AM PT)');
+      alertDesc.innerHTML = `<strong>${overdueJobs.join(' & ')}</strong> did not execute during the expected completion window. The host Mac Mini may be offline, asleep, or experienced an unhandled outage.`;
+      alertBanner.style.display = 'block';
+    } else {
+      alertBanner.style.display = 'none';
+    }
+  }
+
+  // Re-render ledger table
+  renderSystemLedgerTable(runs);
+}
+
+function updateCardUI(jobKey, jobTitle, record, slaStatus, host) {
+  const statusEl = document.getElementById(`card-status-${jobKey}`);
+  const lastRunEl = document.getElementById(`card-last-run-${jobKey}`);
+  const summaryEl = document.getElementById(`card-summary-${jobKey}`);
+  const hostEl = document.getElementById(`card-host-${jobKey}`);
+  const commitEl = document.getElementById(`card-commit-${jobKey}`);
+  const btnEl = document.getElementById(`card-btn-log-${jobKey}`);
+
+  if (statusEl) {
+    statusEl.className = '';
+    if (slaStatus === 'HEALTHY') {
+      statusEl.className = 'status-badge-healthy';
+      statusEl.textContent = '🟢 HEALTHY';
+    } else if (slaStatus === 'FAILED') {
+      statusEl.className = 'status-badge-failed';
+      statusEl.textContent = '🔴 FAILED';
+    } else if (slaStatus === 'RUNNING') {
+      statusEl.className = 'status-badge-running';
+      statusEl.textContent = '🟡 RUNNING';
+    } else {
+      statusEl.className = 'status-badge-overdue';
+      statusEl.textContent = '🟠 OVERDUE';
+    }
+  }
+
+  if (record) {
+    if (lastRunEl) {
+      const dur = record.duration_formatted ? ` (${record.duration_formatted})` : '';
+      lastRunEl.textContent = `${formatPTDateTime(record.start_time)}${dur}`;
+    }
+    if (summaryEl) {
+      summaryEl.textContent = (record.summary && record.summary.message) ? record.summary.message : 'No summary provided.';
+    }
+    if (hostEl) hostEl.textContent = host;
+    if (commitEl) commitEl.textContent = record.git_commit || 'unknown';
+    if (btnEl && record.log_file) {
+      btnEl.disabled = false;
+      btnEl.style.opacity = '1';
+      btnEl.style.cursor = 'pointer';
+      btnEl.onclick = () => openSystemLog(record.log_file, jobTitle, record.status);
+    }
+  }
+}
+
+function renderSystemLedgerTable(runs) {
+  const tbody = document.getElementById('system-ledger-tbody');
+  if (!tbody) return;
+
+  const query = (document.getElementById('system-ledger-search')?.value || '').toLowerCase().trim();
+
+  const filtered = runs.filter(r => {
+    if (currentTriggerFilter !== 'all' && r.trigger !== currentTriggerFilter) return false;
+    if (currentStatusFilter !== 'all' && r.status !== currentStatusFilter) return false;
+    if (query) {
+      const text = `${r.job_title || ''} ${r.trigger || ''} ${r.status || ''} ${r.summary?.message || ''} ${r.error_excerpt || ''}`.toLowerCase();
+      if (!text.includes(query)) return false;
+    }
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #94a3b8; padding: 24px;">No matching execution records found.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(r => {
+    const triggerBadge = r.trigger === 'launchd'
+      ? '<span class="badge-trigger-launchd">Schedule</span>'
+      : '<span class="badge-trigger-manual">Manual</span>';
+
+    const statusBadgeClass = r.status === 'SUCCESS'
+      ? 'status-badge-healthy'
+      : (r.status === 'FAILED' ? 'status-badge-failed' : 'status-badge-running');
+
+    const dur = r.duration_formatted || 'N/A';
+    const logBtn = r.log_file
+      ? `<button class="system-btn-log" onclick="openSystemLog('${r.log_file}', '${(r.job_title || '').replace(/'/g, "\\\\\'")}', '${r.status}')">📄 Log</button>`
+      : '<span style="color: #64748b; font-size: 0.75rem;">None</span>';
+
+    let summaryHtml = `<span style="color: #cbd5e1;">${systemEscapeHtml(r.summary?.message || '')}</span>`;
+    if (r.error_excerpt) {
+      summaryHtml += `<div style="color: #ef4444; font-family: monospace; font-size: 0.75rem; margin-top: 4px; max-height: 48px; overflow: hidden;">${systemEscapeHtml(r.error_excerpt)}</div>`;
+    }
+
+    return `
+      <tr data-run-id="${r.run_id}">
+        <td style="white-space: nowrap; font-family: monospace; color: #94a3b8;">${formatPTDateTime(r.start_time)}</td>
+        <td><strong style="color: #f8fafc;">${systemEscapeHtml(r.job_title || r.job_type)}</strong></td>
+        <td>${triggerBadge}</td>
+        <td><span class="${statusBadgeClass}">${r.status}</span></td>
+        <td style="font-family: monospace; color: #cbd5e1;">${dur}</td>
+        <td>${summaryHtml}</td>
+        <td>${logBtn}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function setSystemTriggerFilter(val) {
+  currentTriggerFilter = val;
+  document.querySelectorAll('#btn-trig-all, #btn-trig-launchd, #btn-trig-manual').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.getElementById(`btn-trig-${val}`);
+  if (activeBtn) activeBtn.classList.add('active');
+  if (currentSystemHistory?.runs) {
+    renderSystemLedgerTable(currentSystemHistory.runs);
+  }
+}
+
+function setSystemStatusFilter(val) {
+  currentStatusFilter = val;
+  document.querySelectorAll('#btn-status-all, #btn-status-success, #btn-status-failed').forEach(b => b.classList.remove('active'));
+  const btnId = val === 'all' ? 'btn-status-all' : (val === 'SUCCESS' ? 'btn-status-success' : 'btn-status-failed');
+  const activeBtn = document.getElementById(btnId);
+  if (activeBtn) activeBtn.classList.add('active');
+  if (currentSystemHistory?.runs) {
+    renderSystemLedgerTable(currentSystemHistory.runs);
+  }
+}
+
+function filterSystemLedger() {
+  if (currentSystemHistory?.runs) {
+    renderSystemLedgerTable(currentSystemHistory.runs);
+  }
+}
+
+async function openSystemLog(logPath, jobTitle, status) {
+  const modal = document.getElementById("system-log-modal");
+  const contentEl = document.getElementById("system-log-content");
+  const loadingEl = document.getElementById("system-log-loading");
+  const titleEl = document.getElementById("system-log-title");
+  const subEl = document.getElementById("system-log-subtitle");
+
+  if (!modal || !contentEl) return;
+
+  titleEl.textContent = jobTitle || "Execution Log";
+  subEl.textContent = logPath;
+  contentEl.innerHTML = "";
+  loadingEl.style.display = "block";
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+
+  try {
+    const res = await fetch(logPath + "?t=" + Date.now());
+    if (!res.ok) throw new Error("HTTP " + res.status + " " + res.statusText);
+    rawLogText = await res.text();
+    renderLogContent(rawLogText, status);
+  } catch (err) {
+    loadingEl.style.display = "none";
+    contentEl.innerHTML = `<span style="color: #ef4444;">Failed to load log file: ${systemEscapeHtml(err.message)}</span>`;
+  }
+}
+
+function renderLogContent(text, status) {
+  const loadingEl = document.getElementById("system-log-loading");
+  const contentEl = document.getElementById("system-log-content");
+  if (!loadingEl || !contentEl) return;
+  loadingEl.style.display = "none";
+
+  const escaped = systemEscapeHtml(text);
+  const lines = escaped.split("\\n");
+  let tbIndex = -1;
+
+  const renderedLines = lines.map((line, idx) => {
+    if (line.includes("Traceback (most recent call last)") || line.includes("Error:") || line.includes("Exception:")) {
+      if (tbIndex === -1) tbIndex = idx;
+      return `<span class="log-line-error">${line}</span>`;
+    }
+    if (line.startsWith("✅")) return `<span style="color: #10b981;">${line}</span>`;
+    if (line.startsWith("❌")) return `<span style="color: #ef4444;">${line}</span>`;
+    if (line.startsWith("⚠️")) return `<span style="color: #f59e0b;">${line}</span>`;
+    if (line.startsWith("⏰") || line.startsWith("========")) return `<span style="color: #38bdf8;">${line}</span>`;
+    return line;
+  });
+
+  contentEl.innerHTML = renderedLines.join("\\n");
+
+  if (status === "FAILED" && tbIndex !== -1) {
+    setTimeout(() => {
+      const errorEls = contentEl.querySelectorAll(".log-line-error");
+      if (errorEls.length > 0) {
+        errorEls[0].scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 100);
+  } else {
+    contentEl.scrollTop = 0;
+  }
+}
+
+function closeSystemLogModal(e) {
+  if (e && e.target && e.target.closest && e.target.closest(".system-log-drawer") && !e.target.classList.contains("system-btn-close")) {
+    return;
+  }
+  const modal = document.getElementById("system-log-modal");
+  if (modal) modal.style.display = "none";
+  document.body.style.overflow = "";
+}
+
+function copySystemLog() {
+  if (rawLogText) {
+    navigator.clipboard.writeText(rawLogText).then(() => {
+      const btn = document.querySelector(".system-log-actions .system-btn-action");
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = "✓ Copied!";
+        setTimeout(() => { btn.textContent = orig; }, 1500);
+      }
+    });
+  }
+}
+
+function downloadSystemLog() {
+  if (rawLogText) {
+    const subEl = document.getElementById("system-log-subtitle");
+    const filename = (subEl.textContent || "log.txt").split("/").pop() || "log.txt";
+    const blob = new Blob([rawLogText], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+}
+
+function searchInLog(query) {
+  if (!rawLogText) return;
+  if (!query || !query.trim()) {
+    renderLogContent(rawLogText);
+    return;
+  }
+  const contentEl = document.getElementById("system-log-content");
+  if (!contentEl) return;
+  const escapedQuery = query.trim().replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&");
+  const rx = new RegExp(`(${escapedQuery})`, "gi");
+
+  const escaped = systemEscapeHtml(rawLogText);
+  const lines = escaped.split("\\n");
+
+  const rendered = lines.map(line => {
+    if (rx.test(line)) {
+      return line.replace(rx, '<mark class="log-search-match">$1</mark>');
+    }
+    return line;
+  }).join("\\n");
+
+  contentEl.innerHTML = rendered;
+  const firstMatch = contentEl.querySelector(".log-search-match");
+  if (firstMatch) {
+    firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+function systemEscapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+window.addEventListener("keydown", (e) => {
+  const modal = document.getElementById("system-log-modal");
+  if (modal && modal.style.display !== "none") {
+    if (e.key === "Escape") {
+      closeSystemLogModal();
+    } else if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "f") {
+      const searchInput = document.getElementById("system-log-search");
+      if (searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      }
+    }
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof refreshRunHistory === 'function') {
+    refreshRunHistory();
+  }
+});
+window.addEventListener("focus", () => {
+  if (typeof refreshRunHistory === 'function') {
+    refreshRunHistory();
+  }
+});
+</script>"""
+        return js.replace("__STORE_JSON__", store_json)
+
+    @classmethod
+    def patch_system_tab(cls, html_path: Union[str, Path] = "docs/index.html") -> bool:
+        """
+        Quickly update the System tab and embedded history JSON in an existing docs/index.html
+        without re-evaluating the entire 12-month calendar. Executes in < 10ms.
+        """
+        target = Path(html_path)
+        if not target.exists():
+            return False
+
+        try:
+            content = target.read_text(encoding="utf-8")
+            gen = cls(output_path=str(target))
+            system_tab_html, system_store_json = gen._render_system_tab()
+
+            # 1. Replace <!-- BEGIN_SYSTEM_TAB --> ... <!-- END_SYSTEM_TAB -->
+            tab_pattern = re.compile(
+                r"<!-- BEGIN_SYSTEM_TAB -->.*?<!-- END_SYSTEM_TAB -->",
+                re.DOTALL,
+            )
+            if tab_pattern.search(content):
+                content = tab_pattern.sub(
+                    lambda _: f"<!-- BEGIN_SYSTEM_TAB -->\n      {system_tab_html}\n      <!-- END_SYSTEM_TAB -->",
+                    content,
+                )
+            else:
+                fallback_pattern = re.compile(
+                    r'(<div id="tab-system" class="tab-content">).*?(</div>\s*<!-- Footer -->)',
+                    re.DOTALL,
+                )
+                if fallback_pattern.search(content):
+                    content = fallback_pattern.sub(
+                        lambda m: f"{m.group(1)}\n      <!-- BEGIN_SYSTEM_TAB -->\n      {system_tab_html}\n      <!-- END_SYSTEM_TAB -->\n    {m.group(2)}",
+                        content,
+                    )
+
+            # 2. Replace // BEGIN_SYSTEM_STORE_JSON ... // END_SYSTEM_STORE_JSON
+            hist_pattern = re.compile(
+                r"// BEGIN_SYSTEM_STORE_JSON.*?// END_SYSTEM_STORE_JSON",
+                re.DOTALL,
+            )
+            if hist_pattern.search(content):
+                content = hist_pattern.sub(
+                    lambda _: f"// BEGIN_SYSTEM_STORE_JSON\nlet currentSystemHistory = {system_store_json};\n// END_SYSTEM_STORE_JSON",
+                    content,
+                )
+            else:
+                hist_fallback = re.compile(r"let currentSystemHistory = \{.*?\};", re.DOTALL)
+                content = hist_fallback.sub(
+                    lambda _: f"// BEGIN_SYSTEM_STORE_JSON\nlet currentSystemHistory = {system_store_json};\n// END_SYSTEM_STORE_JSON",
+                    content,
+                )
+
+            temp_fd, temp_path_str = tempfile.mkstemp(
+                dir=target.parent,
+                prefix=".index_patch_",
+                suffix=".tmp",
+            )
+            try:
+                with open(temp_fd, "w", encoding="utf-8") as f:
+                    f.write(content)
+                os.replace(temp_path_str, target)
+            finally:
+                if os.path.exists(temp_path_str):
+                    try:
+                        os.unlink(temp_path_str)
+                    except OSError:
+                        pass
+
+            return True
+        except Exception:
+            return False

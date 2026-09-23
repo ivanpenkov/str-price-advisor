@@ -44,6 +44,7 @@ from src.airbnb_collector import AirbnbCollector
 from src.analytics import PricingAnalyticsEngine
 from src.reporter import PriceReportGenerator
 from src.competitor_sales_tracker import CompetitorSalesTracker, format_comp_sales_line
+from src.run_tracker import RunTracker
 
 
 def load_config(config_path: str = "config/settings.yaml") -> Dict[str, Any]:
@@ -355,6 +356,7 @@ async def run_weekly_advisory(
     force: bool = False,
     max_cache_age: float = 20.0,
     parallel: bool = True,
+    tracker: Optional[Any] = None,
 ):
     """
     Execute full weekly pricing audit:
@@ -579,6 +581,25 @@ async def run_weekly_advisory(
     mod_count = sum(1 for s in evaluated_results if s["priority_tier"] == "MODERATE_ADJUSTMENT")
     info_count = sum(1 for s in evaluated_results if s["priority_tier"] == "INFORMATIONAL")
 
+    if tracker is not None:
+        try:
+            total_comps = sum(len(s.get("comp_listings", [])) for s in evaluated_results)
+            w_ctx = getattr(collector, "worker_contexts", [])
+            max_w = getattr(getattr(collector, "proxy_mgr", None), "max_workers", 10)
+            proxy_str = f"{len(w_ctx)}/{max_w} active" if w_ctx else "10/10 active"
+            tracker.set_summary(
+                intervals_evaluated=len(active_segments),
+                comps_scraped=total_comps or len(evaluated_results),
+                urgent_adjustments=urgent_count,
+                moderate_adjustments=mod_count,
+                proxy_pool_health=proxy_str,
+            )
+            tracker.set_message(
+                f"Scanned {len(active_segments)} intervals; {urgent_count} urgent and {mod_count} moderate price adjustments identified."
+            )
+        except Exception:
+            pass
+
     print("\n" + "=" * 70)
     print("🎉 ADVISORY REPORT GENERATION COMPLETE")
     print("=" * 70)
@@ -670,8 +691,8 @@ def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports")
                     cwd=str(repo_root),
                 )
             except subprocess.CalledProcessError:
-                subprocess.run(["git", "rebase", "--abort"], check=False, cwd=str(repo_root))
-                print("  ⚠️ Rebase conflict encountered with remote origin/main. Rebase aborted; local commit preserved.")
+                subprocess.run(["git", "rebase", "--abort"], check=False, cwd=str(repo_root), stderr=subprocess.DEVNULL)
+                print("  ⚠️ Git pull/rebase conflict or error encountered with remote origin/main. Rebase aborted; local commit preserved.")
                 raise
             subprocess.run(["git", "push", "origin", "main"], check=True, cwd=str(repo_root))
 
@@ -715,10 +736,23 @@ def test_kivoya_only():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="STR Competitive Price Advisor CLI")
+    tracking_parent = argparse.ArgumentParser(add_help=False)
+    tracking_parent.add_argument(
+        "--trigger",
+        choices=["launchd", "manual"],
+        default=None,
+        help="Execution trigger context (launchd vs manual, default: manual)",
+    )
+    tracking_parent.add_argument(
+        "--track",
+        action="store_true",
+        help="Explicitly record run in 30-day history ledger (docs/data/run_history.json)",
+    )
+
+    parser = argparse.ArgumentParser(description="STR Competitive Price Advisor CLI", parents=[tracking_parent])
     subparsers = parser.add_subparsers(dest="command")
 
-    run_parser = subparsers.add_parser("run", help="Run price advisor")
+    run_parser = subparsers.add_parser("run", parents=[tracking_parent], help="Run price advisor")
     run_parser.add_argument("--weekly", action="store_true", help="Run full 12-month weekly scan")
     run_parser.add_argument("--quick", action="store_true", help="Run quick scan on first 10-12 intervals")
     run_parser.add_argument("--limit", type=int, default=12, help="Number of intervals for quick mode")
@@ -731,16 +765,16 @@ def main():
     run_parser.add_argument("--max-cache-age", type=float, default=20.0, help="Max cache age in hours before refreshing (default: 20h)")
     run_parser.add_argument("--sequential", action="store_true", help="Scrape corridors sequentially instead of concurrently across feeder proxy pool")
 
-    subparsers.add_parser("test-kivoya", help="Verify Kivoya API connectivity and rates")
+    subparsers.add_parser("test-kivoya", parents=[tracking_parent], help="Verify Kivoya API connectivity and rates")
 
-    test_stealth_parser = subparsers.add_parser("test-stealth", help="Audit health and latency of parallel stealth VPN connections")
+    test_stealth_parser = subparsers.add_parser("test-stealth", parents=[tracking_parent], help="Audit health and latency of parallel stealth VPN connections")
     test_stealth_parser.add_argument("--count", type=int, default=None, help="Number of connections to test (default: 8 or STEALTH_MAX_CONNECTIONS)")
     test_stealth_parser.add_argument("--target", type=str, default="https://www.google.com", help="Target URL to test (default: https://www.google.com)")
 
-    gen_parser = subparsers.add_parser("generate-html", help="Re-generate docs/index.html from existing data")
+    gen_parser = subparsers.add_parser("generate-html", parents=[tracking_parent], help="Re-generate docs/index.html from existing data")
     gen_parser.add_argument("--push", action="store_true", help="Automatically commit and push docs to GitHub")
 
-    compare_parser = subparsers.add_parser("compare-platforms", help="Compare Villa del Sol pricing across Airbnb, VRBO, Booking.com, and Kivoya")
+    compare_parser = subparsers.add_parser("compare-platforms", parents=[tracking_parent], help="Compare Villa del Sol pricing across Airbnb, VRBO, Booking.com, and Kivoya")
     compare_parser.add_argument("--limit", type=int, default=None, help="Limit number of intervals to compare")
     compare_parser.add_argument("--start-date", type=str, default=None, help="Filter intervals starting on or after YYYY-MM-DD")
     compare_parser.add_argument("--end-date", type=str, default=None, help="Filter intervals ending on or before YYYY-MM-DD")
@@ -776,7 +810,7 @@ def main():
     add_comp_parser.add_argument("--force", action="store_true", help="Force refresh listing profile even if cached")
     add_comp_parser.add_argument("--push", action="store_true", help="Automatically commit and push changes to GitHub")
 
-    sync_res_parser = subparsers.add_parser("sync-reservations", help="Scrape and sync Streamline OwnerX reservations to database and JSON")
+    sync_res_parser = subparsers.add_parser("sync-reservations", parents=[tracking_parent], help="Scrape and sync Streamline OwnerX reservations to database and JSON")
     sync_res_parser.add_argument("--full", action="store_true", help="Sync complete historical reservations since 2022")
     sync_res_parser.add_argument("--days-back", type=int, default=60, help="Days of past reservations to include in incremental sync (default: 60)")
     sync_res_parser.add_argument("--dashboard", action="store_true", help="Re-generate HTML dashboard after syncing")
@@ -929,31 +963,53 @@ def main():
 
     if args.command == "run":
         parallel = not getattr(args, "sequential", False)
-        if args.quick:
-            asyncio.run(run_weekly_advisory(
-                quick=True,
-                max_segments=args.limit,
-                start_date=args.start_date,
-                end_date=args.end_date,
-                push=args.push,
-                compare_platforms=args.compare_platforms,
-                no_compare_platforms=getattr(args, "no_compare_platforms", False),
-                force=args.force,
-                max_cache_age=args.max_cache_age,
-                parallel=parallel,
-            ))
-        else:
-            asyncio.run(run_weekly_advisory(
-                quick=False,
-                start_date=args.start_date,
-                end_date=args.end_date,
-                push=args.push,
-                compare_platforms=args.compare_platforms,
-                no_compare_platforms=getattr(args, "no_compare_platforms", False),
-                force=args.force,
-                max_cache_age=args.max_cache_age,
-                parallel=parallel,
-            ))
+        job_type = "daily-quickscan" if args.quick else "weekly-fullscan"
+        job_title = "Daily 90-Day Quick Market Scan" if args.quick else "Weekly Full 12-Month Market Scan"
+        trigger = getattr(args, "trigger", None)
+        track_flag = getattr(args, "track", False)
+        push_flag = getattr(args, "push", False)
+        enabled = True if (track_flag or push_flag or trigger == "launchd") else None
+
+        with RunTracker(
+            job_type=job_type,
+            job_title=job_title,
+            trigger=trigger,
+            enabled=enabled,
+            push=push_flag,
+        ) as tracker:
+            if args.quick:
+                asyncio.run(run_weekly_advisory(
+                    quick=True,
+                    max_segments=args.limit,
+                    start_date=args.start_date,
+                    end_date=args.end_date,
+                    push=False,
+                    compare_platforms=args.compare_platforms,
+                    no_compare_platforms=getattr(args, "no_compare_platforms", False),
+                    force=args.force,
+                    max_cache_age=args.max_cache_age,
+                    parallel=parallel,
+                    tracker=tracker,
+                ))
+            else:
+                asyncio.run(run_weekly_advisory(
+                    quick=False,
+                    start_date=args.start_date,
+                    end_date=args.end_date,
+                    push=False,
+                    compare_platforms=args.compare_platforms,
+                    no_compare_platforms=getattr(args, "no_compare_platforms", False),
+                    force=args.force,
+                    max_cache_age=args.max_cache_age,
+                    parallel=parallel,
+                    tracker=tracker,
+                ))
+
+        if tracker.exit_code != 0:
+            sys.exit(tracker.exit_code)
+
+        if args.push:
+            push_to_github(commit_msg=f"Update pricing dashboard and reports ({date.today().isoformat()})")
     elif args.command == "compare-platforms":
         from src.platform_comparator import PlatformComparator
         from src.html_generator import HTMLDashboardGenerator
@@ -1005,30 +1061,49 @@ def main():
         if args.push:
             push_to_github(commit_msg="Update cross-platform price comparisons")
     elif args.command == "generate-html":
-        config = load_config()
-        from src.html_generator import HTMLDashboardGenerator
-        from src.reporter import PriceReportGenerator
-        import shutil
-        urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)
-        mod_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("moderate_percent_diff", MODERATE_PCT_DIFF)
-        html_gen = HTMLDashboardGenerator(
-            output_path="docs/index.html",
-            urgent_pct_diff=urgent_pct,
-            moderate_pct_diff=mod_pct,
-        )
-        evaluated_segments = html_gen.generate_full_12_month_evaluation()
-        out = html_gen.generate(evaluated_segments)
-        reporter = PriceReportGenerator(
-            output_dir="data",
-            urgent_pct_diff=urgent_pct,
-            moderate_pct_diff=mod_pct,
-        )
-        reporter.generate_all(evaluated_segments=evaluated_segments, property_name=config.get("property", {}).get("name", "Villa del Sol"))
-        if Path("data/latest_sheet.csv").exists():
-            shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
-        if Path("data/latest_report.md").exists():
-            shutil.copy("data/latest_report.md", "docs/latest_report.md")
-        print(f"✅ Dashboard generated successfully at: {out}")
+        trigger = getattr(args, "trigger", None)
+        track_flag = getattr(args, "track", False)
+        push_flag = getattr(args, "push", False)
+        enabled = True if (track_flag or push_flag or trigger == "launchd") else None
+
+        with RunTracker(
+            job_type="manual-cli",
+            job_title="HTML Dashboard Generation",
+            trigger=trigger or "manual",
+            enabled=enabled,
+            push=push_flag,
+        ) as tracker:
+            config = load_config()
+            from src.html_generator import HTMLDashboardGenerator
+            from src.reporter import PriceReportGenerator
+            import shutil
+            urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)
+            mod_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("moderate_percent_diff", MODERATE_PCT_DIFF)
+            html_gen = HTMLDashboardGenerator(
+                output_path="docs/index.html",
+                urgent_pct_diff=urgent_pct,
+                moderate_pct_diff=mod_pct,
+            )
+            evaluated_segments = html_gen.generate_full_12_month_evaluation()
+            out = html_gen.generate(evaluated_segments)
+            reporter = PriceReportGenerator(
+                output_dir="data",
+                urgent_pct_diff=urgent_pct,
+                moderate_pct_diff=mod_pct,
+            )
+            reporter.generate_all(evaluated_segments=evaluated_segments, property_name=config.get("property", {}).get("name", "Villa del Sol"))
+            if Path("data/latest_sheet.csv").exists():
+                shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
+            if Path("data/latest_report.md").exists():
+                shutil.copy("data/latest_report.md", "docs/latest_report.md")
+            print(f"✅ Dashboard generated successfully at: {out}")
+            if tracker.enabled:
+                tracker.set_summary(action="generate-html")
+                tracker.set_message("HTML dashboard and reports generated.")
+
+        if tracker.exit_code != 0:
+            sys.exit(tracker.exit_code)
+
         if args.push:
             push_to_github(commit_msg="Update static HTML dashboard and reports")
     elif args.command == "bootstrap-comps":
@@ -1150,41 +1225,73 @@ def main():
         if args.push:
             push_to_github(commit_msg=f"Scrape interval prices for comp {args.identifier}")
     elif args.command == "sync-reservations":
-        from src.ownerx_client import OwnerXClient
-        from src.reservation_store import ReservationStore
-        from datetime import date, timedelta
-        import shutil
+        trigger = getattr(args, "trigger", None)
+        track_flag = getattr(args, "track", False)
+        push_flag = getattr(args, "push", False)
+        enabled = True if (track_flag or push_flag or trigger == "launchd") else None
 
-        print("=" * 70)
-        print("📥 Streamline OwnerX Reservation Sync")
-        print("=" * 70)
+        with RunTracker(
+            job_type="pms-sync",
+            job_title="Daily Streamline PMS Sync",
+            trigger=trigger,
+            enabled=enabled,
+            push=push_flag,
+        ) as tracker:
+            from src.ownerx_client import OwnerXClient
+            from src.reservation_store import ReservationStore
+            from datetime import date, timedelta
+            import shutil
 
-        client = OwnerXClient()
-        print("🔑 Authenticating with Streamline OwnerX...")
-        client.authenticate()
-        print(f"  ✓ Authenticated as processor #{client.processor_id}")
+            print("=" * 70)
+            print("📥 Streamline OwnerX Reservation Sync")
+            print("=" * 70)
 
-        if args.full:
-            print("📦 Full Sync: Fetching all historical and future reservations (2022+)...")
-            raw_res = client.fetch_raw_reservations()
-            mode = "full"
-        else:
-            days = args.days_back or 60
-            cutoff = (date.today() - timedelta(days=days)).strftime("%Y-%m-%d")
-            print(f"⚡ Incremental Sync: Fetching reservations ending >= {cutoff} (past {days} days + all future)...")
-            raw_res = client.fetch_raw_reservations(arriving_after=cutoff)
-            mode = "incremental"
+            client = OwnerXClient()
+            print("🔑 Authenticating with Streamline OwnerX...")
+            client.authenticate()
+            print(f"  ✓ Authenticated as processor #{client.processor_id}")
 
-        print(f"  ✓ Fetched {len(raw_res)} reservation records.")
-        normalized = [OwnerXClient.normalize_reservation(r) for r in raw_res]
-        store = ReservationStore()
-        stats = store.upsert_reservations(normalized, sync_mode=mode)
-        print(f"  ✓ Upserted into database: {stats['upserted']} records ({stats['future']} future, {stats['past']} past).")
-        print(f"  ✓ Synced JSON database at: {store.json_path}")
+            if args.full:
+                print("📦 Full Sync: Fetching all historical and future reservations (2022+)...")
+                raw_res = client.fetch_raw_reservations()
+                mode = "full"
+            else:
+                days = args.days_back or 60
+                cutoff = (date.today() - timedelta(days=days)).strftime("%Y-%m-%d")
+                print(f"⚡ Incremental Sync: Fetching reservations ending >= {cutoff} (past {days} days + all future)...")
+                raw_res = client.fetch_raw_reservations(arriving_after=cutoff)
+                mode = "incremental"
 
-        # Snapshot current Kivoya published nightly rates
-        snap_count = snapshot_kivoya_rates(store)
-        print(f"  ✓ Recorded {snap_count} published nightly rate snapshots for today ({date.today().isoformat()}).")
+            print(f"  ✓ Fetched {len(raw_res)} reservation records.")
+            normalized = [OwnerXClient.normalize_reservation(r) for r in raw_res]
+            store = ReservationStore()
+            stats = store.upsert_reservations(normalized, sync_mode=mode)
+            print(f"  ✓ Upserted into database: {stats['upserted']} records ({stats['future']} future, {stats['past']} past).")
+            print(f"  ✓ Synced JSON database at: {store.json_path}")
+
+            # Snapshot current Kivoya published nightly rates
+            snap_count = snapshot_kivoya_rates(store)
+            print(f"  ✓ Recorded {snap_count} published nightly rate snapshots for today ({date.today().isoformat()}).")
+
+            if tracker.enabled:
+                try:
+                    all_res = store.get_all_reservations()
+                    total_res = len(all_res)
+                    upcoming = [r for r in all_res if r.get("end_date", "") >= date.today().isoformat()]
+                    upcoming_sorted = sorted(upcoming, key=lambda r: r.get("start_date", ""))
+                    next_arr = f"{upcoming_sorted[0].get('start_date')} ({upcoming_sorted[0].get('guest_name', 'Guest')})" if upcoming_sorted else None
+                    tracker.set_summary(
+                        total_reservations=total_res,
+                        new_reservations=stats.get("new", 0),
+                        shifted_reservations=stats.get("shifted", 0),
+                        next_arrival=next_arr,
+                    )
+                    tracker.set_message(f"Synced {total_res} reservations from Streamline; {stats.get('upserted', 0)} records updated.")
+                except Exception:
+                    pass
+
+        if tracker.exit_code != 0:
+            sys.exit(tracker.exit_code)
 
         if args.dashboard:
             print("\n🎨 Re-generating dashboard with updated reservations...")

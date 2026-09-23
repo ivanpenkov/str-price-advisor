@@ -2,6 +2,7 @@
 # ==============================================================================
 # Job 1: Daily Streamline OwnerX PMS Reservation Sync (6:00 AM)
 # Ingests recent reservations, updates SQLite & JSON databases, and refreshes dashboard.
+# Headless operation: completely silent background daemon with automated emergency git push.
 # ==============================================================================
 
 set -uo pipefail
@@ -10,6 +11,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LOG_DIR="$HOME/Library/Logs/str-price-advisor"
 LOG_FILE="$LOG_DIR/pms_sync.log"
+JOB_NAME="pms-sync"
 
 mkdir -p "$LOG_DIR"
 
@@ -20,7 +22,6 @@ cd "$PROJECT_ROOT" || exit 1
 
 # Prevent concurrent execution of PMS reservation sync
 # Uses kernel-level file descriptor lock (lockf/flock) to guarantee instant release on termination/crash.
-# Note: exec 9>> is deliberately used instead of 9> to avoid truncating the lockfile before lock acquisition.
 LOCK_FILE="/tmp/villasol_pms_sync.lock"
 exec 9>>"$LOCK_FILE"
 if ! /usr/bin/lockf -s -t 0 9; then
@@ -30,10 +31,47 @@ if ! /usr/bin/lockf -s -t 0 9; then
 fi
 echo "$$" > "$LOCK_FILE"
 
+# Surgical Emergency Failure Handler
+emergency_push_on_failure() {
+    local exit_code="${1:-${EXIT_CODE:-1}}"
+    if [ "$exit_code" -eq 0 ]; then
+        exit_code=1
+    fi
+    local ts_pt
+    ts_pt=$(TZ="America/Los_Angeles" date '+%Y-%m-%d %H:%M:%S %Z')
+    echo "❌ [${ts_pt}] Emergency trap: ${JOB_NAME} failed with exit code ${exit_code}." >> "$LOG_FILE"
+
+    # Surgical staging: ONLY run history and logs
+    if [ -f "docs/data/run_history.json" ]; then
+        git add docs/data/run_history.json >> "$LOG_FILE" 2>&1 || true
+    fi
+    if [ -d "docs/logs" ]; then
+        git add docs/logs/*.txt >> "$LOG_FILE" 2>&1 || true
+    fi
+
+    # Check if run tracker or script staged changes
+    if ! git diff --cached --quiet; then
+        echo "🚨 Committing and pushing emergency failure record to GitHub Pages..." >> "$LOG_FILE"
+        git commit -m "🚨 Automated Alert: ${JOB_NAME} failed with exit code ${exit_code} (${ts_pt})" >> "$LOG_FILE" 2>&1 || true
+        if ! git pull --rebase --autostash origin main >> "$LOG_FILE" 2>&1; then
+            echo "⚠️ Rebase conflict encountered during emergency push. Aborting rebase to preserve clean tree." >> "$LOG_FILE"
+            git rebase --abort >> "$LOG_FILE" 2>&1 || true
+        else
+            git push origin main >> "$LOG_FILE" 2>&1 || true
+        fi
+    fi
+
+    exec 9>&- 2>/dev/null || true
+    exit "$exit_code"
+}
+
+trap 'exec 9>&- 2>/dev/null || true; exit 130' INT
+trap 'exec 9>&- 2>/dev/null || true; exit 143' TERM
+
 # Prevent system sleep during execution using caffeinate
 START_TS=$(date +%s)
-caffeinate -i "$PROJECT_ROOT/.venv/bin/python" -u -m src.cli sync-reservations --days-back 60 --dashboard --push >> "$LOG_FILE" 2>&1
-EXIT_CODE=$?
+EXIT_CODE=0
+caffeinate -i "$PROJECT_ROOT/.venv/bin/python" -u -m src.cli sync-reservations --days-back 60 --dashboard --push --trigger launchd >> "$LOG_FILE" 2>&1 || EXIT_CODE=$?
 END_TS=$(date +%s)
 DURATION_SEC=$((END_TS - START_TS))
 HOURS=$((DURATION_SEC / 3600))
@@ -45,42 +83,15 @@ else
     ELAPSED_FMT="${MINUTES}m ${SECONDS}s (${DURATION_SEC}s total)"
 fi
 
-NOTIFY_MOBILE="$HOME/.gemini/config/scripts/notify_mobile.sh"
-
 if [ $EXIT_CODE -eq 0 ]; then
     echo "✅ [$(date '+%Y-%m-%d %H:%M:%S')] Daily PMS Sync completed successfully in $ELAPSED_FMT." >> "$LOG_FILE"
-    osascript -e 'display notification "Villa del Sol reservations synced & pushed to GitHub." with title "✅ PMS Sync Complete" sound name "Glass"' 2>/dev/null || true
-    if [ -x "$NOTIFY_MOBILE" ]; then
-        "$NOTIFY_MOBILE" \
-            --title "✅ Daily PMS Sync Complete" \
-            --message "Villa del Sol reservations synced & pushed to GitHub in $ELAPSED_FMT." \
-            --tags "white_check_mark" 2>/dev/null || true
-    fi
 else
-    # Extract actual error detail before writing the failure banner (exclude script banner lines)
     ERR_DETAIL=$(tail -n 20 "$LOG_FILE" | grep -v "❌" | grep -E "Error|Exception|failed" | tail -n 2 | sed 's/^[[:blank:]]*//' | tr '\n' ' ' | sed 's/ $//' || true)
-    echo "❌ [$(date '+%Y-%m-%d %H:%M:%S')] Daily PMS Sync failed after $ELAPSED_FMT with exit code $EXIT_CODE." >> "$LOG_FILE"
-
-    # Send mobile push alert immediately
-    if [ -x "$NOTIFY_MOBILE" ]; then
-        MSG="Daily PMS Sync failed after $ELAPSED_FMT (exit code $EXIT_CODE)."
-        if [ -n "$ERR_DETAIL" ]; then
-            MSG="$MSG Cause: $ERR_DETAIL"
-        fi
-        "$NOTIFY_MOBILE" \
-            --title "❌ Daily PMS Sync Failed" \
-            --message "$MSG" \
-            --priority high \
-            --tags "warning,x" 2>/dev/null || true
-    fi
-
-    # Display persistent desktop alert asynchronously in background.
-    # CRITICAL: 9>&- explicitly closes FD 9 so the background UI process does not hold the kernel lock for up to 24h!
-    ( osascript -e "display alert \"❌ PMS Sync Failed\" message \"Error syncing Villa del Sol reservations after $ELAPSED_FMT with exit code $EXIT_CODE. Check pms_sync.log.\" as critical giving up after 86400" 2>/dev/null || true ) 9>&- &
+    echo "❌ [$(date '+%Y-%m-%d %H:%M:%S')] Daily PMS Sync failed after $ELAPSED_FMT with exit code $EXIT_CODE. Detail: ${ERR_DETAIL}" >> "$LOG_FILE"
+    emergency_push_on_failure "$EXIT_CODE"
 fi
 
 # Release lock descriptor explicitly before script termination
 exec 9>&- 2>/dev/null || true
 
 exit $EXIT_CODE
-

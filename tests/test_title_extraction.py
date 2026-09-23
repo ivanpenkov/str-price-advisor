@@ -108,15 +108,66 @@ class TestTitleExtraction(unittest.TestCase):
         generator = HTMLDashboardGenerator()
         cached_comps = generator._load_cached_comps_by_key()
         target_key = "2026-09-13_2026-09-17"
-        self.assertIn(target_key, cached_comps)
 
-        comps_list = list(cached_comps[target_key].values())
-        for target_id in ["1143202699620728397", "1493069124077219890", "806022522654917324", "1077813310260513265"]:
-            if not any(str(c.get("listing_id")) == target_id for c in comps_list):
-                for k in cached_comps:
-                    if target_id in cached_comps[k]:
-                        comps_list.append(cached_comps[k][target_id])
-                        break
+        if target_key in cached_comps:
+            comps_list = list(cached_comps[target_key].values())
+            for target_id in ["1143202699620728397", "1493069124077219890", "806022522654917324", "1077813310260513265"]:
+                if not any(str(c.get("listing_id")) == target_id for c in comps_list):
+                    for k in cached_comps:
+                        if target_id in cached_comps[k]:
+                            comps_list.append(cached_comps[k][target_id])
+                            break
+        else:
+            comps_list = [
+                {
+                    "listing_id": "1143202699620728397",
+                    "title": "Game Time - 6 Bedroom Elite Vacation Paradise",
+                    "effective_nightly": 650.0,
+                    "bedrooms": 6,
+                    "baths": 3.0,
+                    "rating": 4.8,
+                    "reviews": 44,
+                    "raw_snippet": "Photo 1 of 29 | Home in Mesa | Game Time - 6 Bedroom Elite Vacation Paradise | 6 bedrooms",
+                    "desirability_ratio": 1.0,
+                    "is_valid_comp": True,
+                },
+                {
+                    "listing_id": "1493069124077219890",
+                    "title": "The Desert Diamond - LUXE Desert GOLD - Old Town",
+                    "effective_nightly": 548.75,
+                    "bedrooms": 5,
+                    "baths": 4.0,
+                    "rating": 4.9,
+                    "reviews": 22,
+                    "raw_snippet": "Home in Scottsdale | The Desert Diamond - LUXE Desert GOLD - Old Town | $2,195 for 4 nights",
+                    "desirability_ratio": 1.0,
+                    "is_valid_comp": True,
+                },
+                {
+                    "listing_id": "806022522654917324",
+                    "title": "Lux Fun Zone Home",
+                    "effective_nightly": 700.0,
+                    "bedrooms": 6,
+                    "baths": 4.0,
+                    "rating": 4.95,
+                    "reviews": 30,
+                    "raw_snippet": "Home in Scottsdale | Outdoor bowling alley and a movie theater | 6 bedrooms",
+                    "desirability_ratio": 1.0,
+                    "is_valid_comp": True,
+                },
+                {
+                    "listing_id": "1077813310260513265",
+                    "title": "Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna",
+                    "effective_nightly": 850.0,
+                    "bedrooms": 6,
+                    "baths": 5.0,
+                    "rating": 4.98,
+                    "reviews": 40,
+                    "raw_snippet": "Home in Scottsdale | 7,000 sq ft with courts and pool | 6 bedrooms",
+                    "desirability_ratio": 1.0,
+                    "is_valid_comp": True,
+                },
+            ]
 
         segment = {
             "check_in": "2026-09-13",

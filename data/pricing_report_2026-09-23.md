@@ -6,96 +6,17 @@
 ---
 
 ## 📊 Executive Summary
-- **Total Open Calendar Intervals**: 2
-- 🚨 **Urgent Adjustments (This Week)**: **2** intervals
-- ⚠️ **Moderate Adjustments (Monthly Review)**: **0** intervals
-- ✅ **Competitive / On Target**: **0** intervals
+- **Total Open Calendar Intervals**: 12
+- 🚨 **Urgent Adjustments (This Week)**: **6** intervals
+- ⚠️ **Moderate Adjustments (Monthly Review)**: **3** intervals
+- ✅ **Competitive / On Target**: **3** intervals
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
 > Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
 ---
 
 ## ⚡ Market Compression & Scarcity Alerts
-> ⚡ **Market Compression Alert for `2026-09-24 -> 2026-09-27`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-09-24. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-09-27 -> 2026-09-30`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-09-27. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-10-11 -> 2026-10-14`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-10-11. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-10-26 -> 2026-10-29`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-10-26. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-10-29 -> 2026-11-01`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-10-29. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-11-08 -> 2026-11-11`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-11-08. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-11-15 -> 2026-11-19`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-11-15. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-11-29 -> 2026-12-03`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-11-29. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-12-03 -> 2026-12-06`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-12-03. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-12-06 -> 2026-12-10`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-12-06. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-12-27 -> 2026-12-31`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2026-12-27. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-04 -> 2027-01-07`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-07 -> 2027-01-10`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-07. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-10 -> 2027-01-14`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-10. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-19 -> 2027-01-21`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-19. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-21 -> 2027-01-24`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-21. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-24 -> 2027-01-28`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-24. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-28 -> 2027-01-31`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-28. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-31 -> 2027-02-04`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-31. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-02-04 -> 2027-02-07`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-02-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-02-07 -> 2027-02-10`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-02-07. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-02-21 -> 2027-02-25`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-02-21. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-01 -> 2027-03-04`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-01. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-04 -> 2027-03-07`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-07 -> 2027-03-11`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-07. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-11 -> 2027-03-14`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-11. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-14 -> 2027-03-17`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-14. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-21 -> 2027-03-25`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-21. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-25 -> 2027-03-28`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-25. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-28 -> 2027-04-01`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-28. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-01 -> 2027-04-04`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-01. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-04 -> 2027-04-08`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-08 -> 2027-04-11`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-08. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-11 -> 2027-04-15`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-11. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-15 -> 2027-04-18`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-15. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-18 -> 2027-04-22`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-18. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-22 -> 2027-04-25`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-22. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-25 -> 2027-04-29`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-25. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-29 -> 2027-05-02`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-29. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-02 -> 2027-05-06`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-02. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-06 -> 2027-05-09`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-06. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-09 -> 2027-05-13`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-09. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-13 -> 2027-05-16`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-13. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-16 -> 2027-05-20`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-16. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-20 -> 2027-05-23`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-20. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-23 -> 2027-05-27`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-23. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-27 -> 2027-05-30`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-27. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-30 -> 2027-06-03`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-30. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-03 -> 2027-06-06`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-03. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-06 -> 2027-06-10`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-06. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-10 -> 2027-06-13`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-10. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-13 -> 2027-06-17`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-13. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-17 -> 2027-06-20`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-17. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-20 -> 2027-06-24`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-20. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-24 -> 2027-06-27`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-24. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-27 -> 2027-07-01`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-27. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-01 -> 2027-07-04`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-01. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-04 -> 2027-07-08`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-08 -> 2027-07-11`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-08. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-11 -> 2027-07-15`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-11. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-15 -> 2027-07-18`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-15. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-18 -> 2027-07-22`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-18. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-22 -> 2027-07-25`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-22. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-25 -> 2027-07-29`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-25. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-29 -> 2027-08-01`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-29. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-01 -> 2027-08-05`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-01. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-05 -> 2027-08-08`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-05. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-08 -> 2027-08-12`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-08. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-12 -> 2027-08-15`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-12. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-15 -> 2027-08-19`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-15. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-19 -> 2027-08-22`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-19. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-22 -> 2027-08-26`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-22. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-26 -> 2027-08-29`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-26. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-29 -> 2027-09-02`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-29. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-02 -> 2027-09-05`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-02. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-05 -> 2027-09-09`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-05. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-09 -> 2027-09-12`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-09. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-12 -> 2027-09-16`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-12. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-16 -> 2027-09-19`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-16. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-19 -> 2027-09-23`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-19. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
+> ⚡ **Market Compression Alert for `2026-09-24 -> 2026-09-27`**: High scarcity compression: only 18/102 (17.6%) comps available for check-in 2026-09-24. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
 
 ## 🎯 Recent Confirmed Competitor Sales Ledger (Past 7 Days)
 | Property Name | Stay Dates | Nights | Lead Days | Realized Rate | Quality-Adjusted Rate | Market Percentile | Status |
@@ -164,13 +85,23 @@ The following dates have major pricing anomalies that require immediate update i
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $351 → $300 | 38 | $351 | $518 (66%) | $520 | $451 (30%) | 🔴 **+50.7%** | **$300** | $347–$554 (med $427, -30% vs Track Record) |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 44 | $722 | $846 (70%) | $820 | $594 (30%) | 🔴 **+73.8%** | **$499** | $353–$920 (med $505, Aligned With Track Record) |
+| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 35 | $596 | $762 (94%) | $599 | $520 (30%) | 🔴 **+70.2%** | **$499** | $333–$554 (med $447, Aligned With Track Record) |
+| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $351 → $300 | 36 | $351 | $518 (69%) | $520 | $432 (30%) | 🔴 **+57.1%** | **$300** | $347–$554 (med $427, -30% vs Track Record) |
+| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $728 | 22 | $1060 | $1185 (68%) | $1073 | $1044 (47.3%) | 🔴 **+39.0%** | **$728** | $313–$1574 (med $605, +42% vs Track Record) |
 | `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $450 • High compression | 18 | $549 | $716 (67%) | $615 | $615 (50%) | 🔴 **+30.2%** | **$450** | $520–$1485 (med $648, -30% vs Track Record) |
+| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 40 | $399 | $566 (58%) | $601 | $511 (30%) | 🔴 **+27.8%** | **$300** | $333–$969 (med $472, -36% vs Track Record) |
 
 ---
 
 ## ⚠️ Section 2: Moderate Adjustments (Review Within 30 Days)
-*(No moderate price adjustments needed at this time.)*
+The following dates are 10%–25% off the target percentile for future dates:
+
+| Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $321 | 35 | $424 | $549 (49%) | $649 | $518 (30%) | 🟡 +23.0% | **$321** | $365–$969 (med $523, -32% vs Track Record) |
+| `2026-12-03 -> 2026-12-06` | Weekend | 3 | ↑ Increase $714 → $835 | 27 | $714 | $881 (52%) | $1016 | $1215 (60.7%) | 🟡 -12.0% | **$835** | $530–$1379 (med $657, Aligned With Track Record) |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $437 | 38 | $494 | $619 (37%) | $963 | $680 (30%) | 🟡 +10.2% | **$437** | $353–$760 (med $535, Aligned With Track Record) |
 
 ---
 
@@ -179,8 +110,18 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $351 → $300 | 38 | $351 | $518 (66%) | $520 | $451 (30%) | 🔴 **+50.7%** | **$300** | $347–$554 (med $427, -30% vs Track Record) |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 44 | $722 | $846 (70%) | $820 | $594 (30%) | 🔴 **+73.8%** | **$499** | $353–$920 (med $505, Aligned With Track Record) |
+| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 35 | $596 | $762 (94%) | $599 | $520 (30%) | 🔴 **+70.2%** | **$499** | $333–$554 (med $447, Aligned With Track Record) |
+| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $351 → $300 | 36 | $351 | $518 (69%) | $520 | $432 (30%) | 🔴 **+57.1%** | **$300** | $347–$554 (med $427, -30% vs Track Record) |
+| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $728 | 22 | $1060 | $1185 (68%) | $1073 | $1044 (47.3%) | 🔴 **+39.0%** | **$728** | $313–$1574 (med $605, +42% vs Track Record) |
 | `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $450 • High compression | 18 | $549 | $716 (67%) | $615 | $615 (50%) | 🔴 **+30.2%** | **$450** | $520–$1485 (med $648, -30% vs Track Record) |
+| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 40 | $399 | $566 (58%) | $601 | $511 (30%) | 🔴 **+27.8%** | **$300** | $333–$969 (med $472, -36% vs Track Record) |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $321 | 35 | $424 | $549 (49%) | $649 | $518 (30%) | 🟡 +23.0% | **$321** | $365–$969 (med $523, -32% vs Track Record) |
+| `2026-12-03 -> 2026-12-06` | Weekend | 3 | ↑ Increase $714 → $835 | 27 | $714 | $881 (52%) | $1016 | $1215 (60.7%) | 🟡 -12.0% | **$835** | $530–$1379 (med $657, Aligned With Track Record) |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $437 | 38 | $494 | $619 (37%) | $963 | $680 (30%) | 🟡 +10.2% | **$437** | $353–$760 (med $535, Aligned With Track Record) |
+| `2026-10-29 -> 2026-11-01` | Weekend | 3 | - | 42 | $694 | $861 (62%) | $896 | $987 (60.7%) | +1.4% | **$694** | $541–$1453 (med $679, Aligned With Track Record) |
+| `2026-11-08 -> 2026-11-11` | Midweek | 3 | - | 23 | $424 | $591 (30%) | $834 | $682 (30%) | +0.2% | **$424** | $365–$969 (med $503, Aligned With Track Record) |
+| `2027-01-04 -> 2027-01-07` | Midweek | 3 | - | 50 | $578 | $745 (40%) | $1000 | $959 (47.3%) | -6.1% | **$626** | $313–$1574 (med $567, Aligned With Track Record) |
 
 ---
 *Generated autonomously by STR Price Advisor Agent.*

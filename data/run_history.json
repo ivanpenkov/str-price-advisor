@@ -1,8 +1,54 @@
 {
   "version": "1.0",
-  "last_updated": "2026-09-23T16:57:13.790186Z",
+  "last_updated": "2026-09-23T17:09:05.713486Z",
   "active_host": "mac-mini",
   "runs": [
+    {
+      "run_id": "2026-09-23_170519_daily-quickscan",
+      "job_type": "daily-quickscan",
+      "job_title": "Daily 90-Day Quick Market Scan",
+      "trigger": "manual",
+      "status": "SUCCESS",
+      "start_time": "2026-09-23T17:05:19.114971Z",
+      "end_time": "2026-09-23T17:09:05.712219Z",
+      "duration_sec": 226.6,
+      "duration_formatted": "3m 47s",
+      "exit_code": 0,
+      "git_commit": "3558332",
+      "log_file": "logs/2026-09-23_170519_daily-quickscan.txt",
+      "summary": {
+        "intervals_evaluated": 12,
+        "comps_scraped": 12,
+        "urgent_adjustments": 6,
+        "moderate_adjustments": 3,
+        "proxy_pool_health": "10/10 active",
+        "message": "Scanned 12 intervals; 6 urgent and 3 moderate price adjustments identified."
+      },
+      "error_excerpt": null
+    },
+    {
+      "run_id": "2026-09-23_165846_daily-quickscan",
+      "job_type": "daily-quickscan",
+      "job_title": "Daily 90-Day Quick Market Scan",
+      "trigger": "manual",
+      "status": "SUCCESS",
+      "start_time": "2026-09-23T16:58:46.006593Z",
+      "end_time": "2026-09-23T17:03:35.525287Z",
+      "duration_sec": 289.5,
+      "duration_formatted": "4m 50s",
+      "exit_code": 0,
+      "git_commit": "29fc399",
+      "log_file": "logs/2026-09-23_165846_daily-quickscan.txt",
+      "summary": {
+        "intervals_evaluated": 12,
+        "comps_scraped": 12,
+        "urgent_adjustments": 7,
+        "moderate_adjustments": 1,
+        "proxy_pool_health": "10/10 active",
+        "message": "Scanned 12 intervals; 7 urgent and 1 moderate price adjustments identified."
+      },
+      "error_excerpt": null
+    },
     {
       "run_id": "2026-09-23_165527_daily-quickscan",
       "job_type": "daily-quickscan",

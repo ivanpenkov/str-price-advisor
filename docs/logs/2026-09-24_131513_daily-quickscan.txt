@@ -1,0 +1,142 @@
+======================================================================
+🏠 STR Competitive Price Advisor: Villa del Sol
+📍 Location: 920 E Carver Rd, Tempe, AZ 85284
+======================================================================
+
+[Step 1/5] Querying Kivoya / Streamline VRS API...
+  ✓ Found 18 active reservations / blocked periods.
+  ✓ Found 19 seasonal rate periods configured in Kivoya.
+  ✓ Snapshotted 358 daily published rates in database.
+
+[Step 2/5] Segmenting open calendar over next 12 months...
+  ✓ Generated 81 unbooked intervals (weekends & midweeks).
+  ⚡ Quick mode: Evaluating first 12 upcoming intervals.
+
+[Step 3/5] Collecting luxury competitive listings from Airbnb...
+🛡️  Stealth Feeder Pool: Initializing 8 parallel proxy bridges across out-of-state travel hubs...
+  🛡️ Stealth Multi-IP Feeder Pool Online (8 endpoints): feeder-sf-1 (San Francisco port 64222, 331ms), feeder-dal-1 (Dallas port 64223, 438ms), feeder-chi-1 (Chicago port 64224, 502ms), feeder-ny-1 (New York port 64225, 559ms), feeder-us-1 (US Anycast port 64226, 388ms), feeder-sf-2 (San Francisco port 64227, 327ms), feeder-sf-3 (San Francisco port 64228, 330ms), feeder-dal-2 (Dallas port 64229, 438ms)
+  [1/12] Scanning 2026-09-27 -> 2026-09-30 (midweek, 3n, lead=3d)... ✓ [OK] 44 comps available (58 booked) in 59.3s (486.03 MB)
+   - Comp sales recorded: $345 (16.2%)
+  [2/12] Scanning 2026-09-24 -> 2026-09-27 (weekend, 3n, lead=0d)... ✓ [OK] 17 comps available (85 booked) in 60.0s (562.13 MB)
+  [3/12] Scanning 2026-10-11 -> 2026-10-14 (midweek, 3n, lead=17d)... ✓ [OK] 33 comps available (69 booked) in 27.6s (241.63 MB)
+   - Comp sales recorded: $599 (42.9%)
+  [4/12] Scanning 2026-10-26 -> 2026-10-29 (midweek, 3n, lead=32d)... ✓ [OK] 39 comps available (63 booked) in 30.1s (173.06 MB)
+  [5/12] Scanning 2026-10-29 -> 2026-11-01 (weekend, 3n, lead=35d)... ✓ [OK] 43 comps available (59 booked) in 23.4s (171.81 MB)
+  [6/12] Scanning 2026-11-08 -> 2026-11-11 (midweek, 3n, lead=45d)... ✓ [OK] 31 comps available (71 booked) in 37.3s (158.34 MB)
+  [7/12] Scanning 2026-11-15 -> 2026-11-19 (midweek, 4n, lead=52d)... ✓ [OK] 46 comps available (56 booked) in 23.5s (194.13 MB)
+   - Comp sales recorded: $342 (2.4%)
+  [8/12] Scanning 2026-11-29 -> 2026-12-03 (midweek, 4n, lead=66d)... ✓ [OK] 52 comps available (50 booked) in 27.8s (208.47 MB)
+  [9/12] Scanning 2026-12-03 -> 2026-12-06 (weekend, 3n, lead=70d)... ✓ [OK] 36 comps available (66 booked) in 23.8s (170.49 MB)
+  [10/12] Scanning 2026-12-06 -> 2026-12-10 (midweek, 4n, lead=73d)... ✓ [OK] 43 comps available (59 booked) in 25.2s (214.66 MB)
+  [11/12] Scanning 2026-12-27 -> 2026-12-31 (midweek, 4n, lead=94d)... ✓ [OK] 19 comps available (83 booked) in 35.9s (181.87 MB)
+  [12/12] Scanning 2027-01-04 -> 2027-01-07 (midweek, 3n, lead=102d)... ✓ [OK] 46 comps available (56 booked) in 20.7s (212.66 MB)
+
+  ✓ Competitor Sales Engine: Recorded 3 new sales, erased 0 sales (Total active sales in ledger: 102).
+
+[Step 3b/5] Refreshing competitor Airbnb ratings and Guest Favorite badges...
+
+🔍 Synchronizing Airbnb ratings & Guest Favorite badges for 102 active comps (all)...
+  ✓ Identified 99 comps from recent high-fidelity search sweeps.
+  ⚡ Live scraping 3 comps via stealth NordVPN proxy pool...
+
+💾 Saved updated comp registry and listing specifications (102 comps updated).
+🏅 Total Comps with Airbnb Guest Favorite Badge: 82 / 102
+
+Sample Updated Comps:
+ID                  Name                                Rating  GF Badge   Old Ratio  New Ratio
+--------------------------------------------------------------------------------------------
+1077813310260513265 Desert Diamond HTD Pool/Hot Tub/Te  4.97    🏅 YES      1.25       1.25
+628534576871518102  The Mulberry | Lux Pool/Hot Tub Mi  4.96    🏅 YES      1.01       1.01
+1452623425630736376 Family Resort: Pool, Outdoor Theat  4.88    🏅 YES      1.05       1.05
+1558065119520691944 Mega Mesa Retreat: Heated Pool, Sp  4.83    🏅 YES      1.07       1.07
+746927337513825183  HÓZHÓ |Mountain View Home| Pool, H  5.0     No         1.25       1.25
+1143202699620728397 Game Time - 6 Bedroom Elite Vacati  4.8     No         1.00       1.00
+1442997693061036066 Scottsdale Jetsetter - Modern Dese  5.0     🏅 YES      1.09       1.09
+1329097682770073862 Resort-Style Escape: Pool, Courts,  4.87    🏅 YES      1.16       1.16
+1628548270397523375 Fun-Filled Oasis • Pool, Picklebal  4.93    🏅 YES      1.18       1.18
+1136293547142522527 Private Desert Compound w/ pickle-  4.87    No         1.21       1.21
+
+[Step 4/5] Generating multi-format advisory reports...
+
+[Step 4b] ⚡ Detected Streamline price changes in the last 7 days affecting 7 quick-scan interval(s).
+   • 2026-09-27 -> 2026-09-30 (3n): rates modified for ['2026-09-27', '2026-09-28', '2026-09-29']
+   • 2026-10-11 -> 2026-10-14 (3n): rates modified for ['2026-10-11', '2026-10-12']
+   • 2026-10-29 -> 2026-11-01 (3n): rates modified for ['2026-10-29', '2026-10-30', '2026-10-31']
+   • 2026-11-08 -> 2026-11-11 (3n): rates modified for ['2026-11-08', '2026-11-09', '2026-11-10']
+   • 2026-11-15 -> 2026-11-19 (4n): rates modified for ['2026-11-15', '2026-11-16', '2026-11-17', '2026-11-18']
+   • 2026-11-29 -> 2026-12-03 (4n): rates modified for ['2026-12-01', '2026-12-02']
+   • 2026-12-06 -> 2026-12-10 (4n): rates modified for ['2026-12-06', '2026-12-07', '2026-12-08', '2026-12-09']
+  Scraping live cross-platform prices across Airbnb, VRBO, Booking.com, and Kivoya for affected intervals...
+
+🌐 [PlatformComparator] Comparing 4 channels across 7 intervals...
+Booking.com scrape warning for 2026-10-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-10-11&checkout=2026-10-14&group_adults=16&no_rooms=1
+VRBO scrape warning for 2026-09-27: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-09-27&chkout=2026-09-30&adults=16
+  [1/7] 2026-10-11 -> 2026-10-14 (3n)... ✓ [OK] Airbnb: $2,986 | VRBO: $3,397 | Booking: $3,217 | Kivoya: $2,861 (Max Div: 13.2%) in 10.2s
+Airbnb scrape warning for 2026-10-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-10-29&check_out=2026-11-01&adults=16&locale=en&currency=USD
+  [2/7] 2026-09-27 -> 2026-09-30 (3n)... ✓ [OK] Airbnb: $2,293 | VRBO: $2,519 | Booking: $2,416 | Kivoya: $2,134 (Max Div: 12.0%) in 18.0s
+Airbnb scrape warning for 2026-10-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-10-29&check_out=2026-11-01&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2026-11-08: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-11-08&check_out=2026-11-11&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2026-10-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-10-29&check_out=2026-11-01&adults=16&locale=en&currency=USD
+  [3/7] 2026-10-29 -> 2026-11-01 (3n)... ✓ [OK] Airbnb: $3,377 | VRBO: $3,839 | Booking: $3,631 | Kivoya: $3,228 (Max Div: 13.6%) in 16.4s
+  [4/7] 2026-11-08 -> 2026-11-11 (3n)... ✓ [OK] Airbnb: $2,307 | VRBO: $2,626 | Booking: $2,515 | Kivoya: $2,222 (Max Div: 12.2%) in 10.7s
+VRBO scrape warning for 2026-11-15: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-11-15&chkout=2026-11-19&adults=16
+VRBO scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-11-29&chkout=2026-12-03&adults=16
+Booking.com scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-11-29&checkout=2026-12-03&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-11-29&check_out=2026-12-03&adults=16&locale=en&currency=USD
+  [5/7] 2026-11-15 -> 2026-11-19 (4n)... ✓ [OK] Airbnb: $2,868 | VRBO: $3,261 | Booking: $3,115 | Kivoya: $2,749 (Max Div: 13.0%) in 18.8s
+Airbnb scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-11-29&check_out=2026-12-03&adults=16&locale=en&currency=USD
+  [6/7] 2026-11-29 -> 2026-12-03 (4n)... ✓ [OK] Airbnb: $4,645 | VRBO: $5,044 | Booking: $4,796 | Kivoya: $4,225 (Max Div: 14.3%) in 21.6s
+  [7/7] 2026-12-06 -> 2026-12-10 (4n)... ✓ [OK] Airbnb: $3,373 | VRBO: $3,681 | Booking: $3,510 | Kivoya: $3,096 (Max Div: 13.4%) in 15.4s
+🎨 Refreshed dashboard (docs/index.html) with latest platform comparisons.
+
+[Step 4c] Empirical Absorption Velocity Summary...
+  - Total Confirmed Sales:        102
+  - Overall Median Percentile:    43.6%
+  - Average Lead Time at Sale:    125.8 days
+  - Average Realized Nightly:     $1,000.79
+  - ⚡ Active Market Compression: 1 interval(s) surging!
+      • 2026-09-24 -> 2026-09-27: High scarcity compression: only 17/102 (16.7%) comps available for check-in 2026-09-24
+
+[Step 5/5] Generating interactive static HTML dashboard in docs/...
+
+======================================================================
+🎉 ADVISORY REPORT GENERATION COMPLETE
+======================================================================
+  🚨 Urgent Adjustments Required (This Week): 5
+  ⚠️  Moderate Adjustments (Monthly Review):   3
+  ✅  Competitive / On Target:                 4
+
+📁 Output Files:
+  - Markdown Summary: data/pricing_report_2026-09-24.md
+  - Google Sheets CSV: data/pricing_sheet_2026-09-24.csv
+  - Raw JSON Archive:  data/pricing_data_2026-09-24.json
+======================================================================
+
+==============================================================================
+📊 RUNTIME & DATA TRANSFER PERFORMANCE AUDIT
+==============================================================================
+Scrape Architecture: Stealth Multi-IP Feeder Pool (up to 8 hubs)
+Step / Sub-Interval                                  Duration Network Transfer
+------------------------------------------------------------------------------
+[Step 1] Kivoya & Database Ingestion                     2.9s          0.00 MB
+[Step 2] Calendar Segmentation                           1.0s          0.00 MB
+[Step 3] Luxury Comp Scraping (12 intervals)         3m 24.5s       2975.35 MB
+  • 2026-09-24 -> 2026-09-27 (weekend, 3n)           1m 00.0s        562.13 MB
+  • 2026-09-27 -> 2026-09-30 (midweek, 3n)              59.3s        486.03 MB
+  • 2026-10-11 -> 2026-10-14 (midweek, 3n)              27.6s        241.63 MB
+  • 2026-10-26 -> 2026-10-29 (midweek, 3n)              30.1s        173.06 MB
+  • 2026-10-29 -> 2026-11-01 (weekend, 3n)              23.4s        171.81 MB
+  • 2026-11-08 -> 2026-11-11 (midweek, 3n)              37.3s        158.34 MB
+  • 2026-11-15 -> 2026-11-19 (midweek, 4n)              23.5s        194.13 MB
+  • 2026-11-29 -> 2026-12-03 (midweek, 4n)              27.8s        208.47 MB
+  • 2026-12-03 -> 2026-12-06 (weekend, 3n)              23.8s        170.49 MB
+  • 2026-12-06 -> 2026-12-10 (midweek, 4n)              25.2s        214.66 MB
+  • 2026-12-27 -> 2026-12-31 (midweek, 4n)              35.9s        181.87 MB
+  • 2027-01-04 -> 2027-01-07 (midweek, 3n)              20.7s        212.66 MB
+[Step 4] Advisory & Anomaly Analytics                    0.1s          0.00 MB
+[Step 4b] Cross-Platform Comparison                  1m 10.7s         51.41 MB
+[Step 4c] Sales Detection & Absorption                   0.0s          0.00 MB
+[Step 5] HTML Dashboard & Asset Sync                     9.3s          0.00 MB
+------------------------------------------------------------------------------
+Total End-to-End Execution                           4m 56.1s       3026.76 MB
+==============================================================================

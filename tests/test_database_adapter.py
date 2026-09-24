@@ -408,7 +408,8 @@ class TestOperationalRoleSeparation(unittest.TestCase):
         from src.cli import push_to_github
         with patch("builtins.print") as mock_print, patch("subprocess.run") as mock_run:
             mock_run.return_value = MagicMock(returncode=0, stdout="feature-branch\n")
-            push_to_github()
+            result = push_to_github()
+            self.assertTrue(result)
             call_cmds = [c[0][0] for c in mock_run.call_args_list]
             self.assertEqual(call_cmds, [["git", "rev-parse", "--abbrev-ref", "HEAD"]])
             printed_text = " ".join(str(call) for call in mock_print.call_args_list)
@@ -426,12 +427,13 @@ class TestOperationalRoleSeparation(unittest.TestCase):
                 MagicMock(returncode=0), # git pull --rebase
                 MagicMock(returncode=0), # git push
             ]
-            push_to_github()
+            result = push_to_github()
+            self.assertTrue(result)
             call_cmds = [c[0][0] for c in mock_run.call_args_list]
             self.assertEqual(call_cmds[0], ["git", "rev-parse", "--abbrev-ref", "HEAD"])
             self.assertEqual(call_cmds[1], ["git", "add", "docs/", "data/", "config/"])
             self.assertEqual(call_cmds[2], ["git", "diff", "--staged", "--quiet"])
-            self.assertEqual(call_cmds[4], ["git", "pull", "--rebase", "--autostash", "origin", "main"])
+            self.assertEqual(call_cmds[4], ["git", "pull", "--rebase", "-X", "theirs", "--autostash", "origin", "main"])
             self.assertEqual(call_cmds[5], ["git", "push", "origin", "main"])
             # Verify cwd was specified
             for call in mock_run.call_args_list:
@@ -449,9 +451,10 @@ class TestOperationalRoleSeparation(unittest.TestCase):
                 subprocess.CalledProcessError(1, ["git", "pull", "--rebase"]), # rebase conflict
                 MagicMock(returncode=0), # git rebase --abort
             ]
-            push_to_github()
+            result = push_to_github()
+            self.assertFalse(result)
             call_cmds = [c[0][0] for c in mock_run.call_args_list]
-            self.assertEqual(call_cmds[4], ["git", "pull", "--rebase", "--autostash", "origin", "main"])
+            self.assertEqual(call_cmds[4], ["git", "pull", "--rebase", "-X", "theirs", "--autostash", "origin", "main"])
             self.assertEqual(call_cmds[5], ["git", "rebase", "--abort"])
 
     def test_push_to_github_pushes_ahead_commits_when_clean_stage(self):
@@ -465,14 +468,34 @@ class TestOperationalRoleSeparation(unittest.TestCase):
                 MagicMock(returncode=0), # git pull --rebase
                 MagicMock(returncode=0), # git push
             ]
-            push_to_github()
+            result = push_to_github()
+            self.assertTrue(result)
             call_cmds = [c[0][0] for c in mock_run.call_args_list]
             self.assertEqual(call_cmds[0], ["git", "rev-parse", "--abbrev-ref", "HEAD"])
             self.assertEqual(call_cmds[1], ["git", "add", "docs/", "data/", "config/"])
             self.assertEqual(call_cmds[2], ["git", "diff", "--staged", "--quiet"])
             self.assertEqual(call_cmds[3], ["git", "rev-list", "origin/main..HEAD"])
-            self.assertEqual(call_cmds[4], ["git", "pull", "--rebase", "--autostash", "origin", "main"])
+            self.assertEqual(call_cmds[4], ["git", "pull", "--rebase", "-X", "theirs", "--autostash", "origin", "main"])
             self.assertEqual(call_cmds[5], ["git", "push", "origin", "main"])
+
+    def test_push_to_github_clean_noop(self):
+        from src.cli import push_to_github
+        with patch("builtins.print"), patch("subprocess.run") as mock_run:
+            mock_run.side_effect = [
+                MagicMock(returncode=0, stdout="main\n"), # rev-parse branch
+                MagicMock(returncode=0), # git add
+                MagicMock(returncode=0), # git diff --staged (clean)
+                MagicMock(returncode=0, stdout="\n"), # git rev-list origin/main..HEAD (empty, not ahead)
+            ]
+            result = push_to_github()
+            self.assertTrue(result)
+            call_cmds = [c[0][0] for c in mock_run.call_args_list]
+            self.assertEqual(call_cmds[0], ["git", "rev-parse", "--abbrev-ref", "HEAD"])
+            self.assertEqual(call_cmds[1], ["git", "add", "docs/", "data/", "config/"])
+            self.assertEqual(call_cmds[2], ["git", "diff", "--staged", "--quiet"])
+            self.assertEqual(call_cmds[3], ["git", "rev-list", "origin/main..HEAD"])
+            # Should not call git pull or git push
+            self.assertEqual(len(call_cmds), 4)
 
 
 if __name__ == "__main__":

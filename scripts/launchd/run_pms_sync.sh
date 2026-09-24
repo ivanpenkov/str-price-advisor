@@ -63,7 +63,7 @@ emergency_push_on_failure() {
     if ! git diff --cached --quiet; then
         echo "🚨 Committing and pushing emergency failure record to GitHub Pages..." >> "$LOG_FILE"
         git commit -m "🚨 Automated Alert: ${JOB_NAME} failed with exit code ${exit_code} (${ts_pt})" >> "$LOG_FILE" 2>&1 || true
-        if ! git pull --rebase --autostash origin main >> "$LOG_FILE" 2>&1; then
+        if ! git pull --rebase -X theirs --autostash origin main >> "$LOG_FILE" 2>&1; then
             echo "⚠️ Rebase conflict encountered during emergency push. Aborting rebase to preserve clean tree." >> "$LOG_FILE"
             git rebase --abort >> "$LOG_FILE" 2>&1 || true
         else
@@ -79,6 +79,13 @@ emergency_push_on_failure() {
 trap 'cleanup; exec 9>&- 2>/dev/null || true; exit 130' INT
 trap 'cleanup; exec 9>&- 2>/dev/null || true; exit 143' TERM
 trap cleanup EXIT
+
+# Pre-flight repository sync: ensure local checkout has latest code and commits from origin/main
+echo "🔄 Pre-flight repository sync with origin/main..." >> "$LOG_FILE"
+if ! git pull --rebase -X theirs --autostash origin main >> "$LOG_FILE" 2>&1; then
+    echo "⚠️ Pre-flight git pull encountered an issue. Aborting rebase to preserve clean tree." >> "$LOG_FILE"
+    git rebase --abort >> "$LOG_FILE" 2>&1 || true
+fi
 
 # Prevent system sleep during execution using caffeinate
 START_TS=$(date +%s)

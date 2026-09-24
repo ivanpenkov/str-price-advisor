@@ -598,7 +598,7 @@ class RunTracker:
             # Rebase & Push
             try:
                 subprocess.run(
-                    ["git", "pull", "--rebase", "--autostash", "origin", "main"],
+                    ["git", "pull", "--rebase", "-X", "theirs", "--autostash", "origin", "main"],
                     check=True,
                     cwd=str(REPO_ROOT),
                     timeout=30,

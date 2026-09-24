@@ -666,7 +666,7 @@ async def run_weekly_advisory(
         push_to_github(commit_msg=f"Update pricing dashboard and reports ({date.today().isoformat()})")
 
 
-def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports"):
+def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports") -> bool:
     """Stage docs/, data/, and config/, commit, rebase, and push to origin/main."""
     import subprocess
     print("\n🚀 Pushing updates to GitHub (GitHub Pages)...")
@@ -681,12 +681,12 @@ def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports")
 
         if curr_branch != "main":
             print(f"  ℹ️ Active branch is '{curr_branch}' (not 'main'). Skipping automated push to origin/main.")
-            return
+            return True
 
         def _rebase_and_push():
             try:
                 subprocess.run(
-                    ["git", "pull", "--rebase", "--autostash", "origin", "main"],
+                    ["git", "pull", "--rebase", "-X", "theirs", "--autostash", "origin", "main"],
                     check=True,
                     cwd=str(repo_root),
                 )
@@ -702,6 +702,7 @@ def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports")
             subprocess.run(["git", "commit", "-m", commit_msg], check=True, cwd=str(repo_root))
             _rebase_and_push()
             print("  ✓ Successfully pushed to origin/main! Live dashboard will update in ~30–60 seconds.")
+            return True
         else:
             # Check if there are any unpushed commits ahead of origin/main
             ahead_check = subprocess.run(
@@ -713,10 +714,13 @@ def push_to_github(commit_msg: str = "Update STR pricing dashboard and reports")
             if ahead_check.returncode == 0 and ahead_check.stdout.strip():
                 _rebase_and_push()
                 print("  ✓ Successfully pushed pending commits to origin/main! Live dashboard will update in ~30–60 seconds.")
+                return True
             else:
                 print("  ✓ No new changes to push (already up to date with remote).")
+                return True
     except Exception as e:
         print(f"  ❌ Git push error: {e}")
+        return False
 
 
 def test_kivoya_only():

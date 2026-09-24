@@ -6,150 +6,13 @@
 ---
 
 ## 📊 Executive Summary
-- **Total Open Calendar Intervals**: 12
-- 🚨 **Urgent Adjustments (This Week)**: **5** intervals
-- ⚠️ **Moderate Adjustments (Monthly Review)**: **3** intervals
-- ✅ **Competitive / On Target**: **4** intervals
+- **Total Open Calendar Intervals**: 81
+- 🚨 **Urgent Adjustments (This Week)**: **6** intervals
+- ⚠️ **Moderate Adjustments (Monthly Review)**: **2** intervals
+- ✅ **Competitive / On Target**: **73** intervals
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
 > Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
----
-
-## ⚡ Market Compression & Scarcity Alerts
-> ⚡ **Market Compression Alert for `2026-09-24 -> 2026-09-27`**: High scarcity compression: only 18/102 (17.6%) comps available for check-in 2026-09-24. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-07 -> 2027-01-10`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-07. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-10 -> 2027-01-14`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-10. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-19 -> 2027-01-21`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-19. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-21 -> 2027-01-24`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-21. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-24 -> 2027-01-28`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-24. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-28 -> 2027-01-31`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-28. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-01-31 -> 2027-02-04`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-01-31. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-02-04 -> 2027-02-07`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-02-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-02-07 -> 2027-02-10`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-02-07. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-02-21 -> 2027-02-25`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-02-21. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-01 -> 2027-03-04`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-01. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-04 -> 2027-03-07`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-07 -> 2027-03-11`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-07. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-11 -> 2027-03-14`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-11. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-14 -> 2027-03-17`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-14. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-21 -> 2027-03-25`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-21. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-25 -> 2027-03-28`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-25. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-03-28 -> 2027-04-01`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-03-28. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-01 -> 2027-04-04`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-01. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-04 -> 2027-04-08`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-08 -> 2027-04-11`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-08. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-11 -> 2027-04-15`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-11. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-15 -> 2027-04-18`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-15. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-18 -> 2027-04-22`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-18. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-22 -> 2027-04-25`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-22. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-25 -> 2027-04-29`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-25. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-04-29 -> 2027-05-02`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-04-29. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-02 -> 2027-05-06`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-02. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-06 -> 2027-05-09`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-06. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-09 -> 2027-05-13`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-09. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-13 -> 2027-05-16`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-13. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-16 -> 2027-05-20`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-16. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-20 -> 2027-05-23`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-20. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-23 -> 2027-05-27`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-23. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-27 -> 2027-05-30`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-27. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-05-30 -> 2027-06-03`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-05-30. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-03 -> 2027-06-06`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-03. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-06 -> 2027-06-10`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-06. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-10 -> 2027-06-13`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-10. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-13 -> 2027-06-17`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-13. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-17 -> 2027-06-20`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-17. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-20 -> 2027-06-24`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-20. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-24 -> 2027-06-27`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-24. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-06-27 -> 2027-07-01`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-06-27. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-01 -> 2027-07-04`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-01. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-04 -> 2027-07-08`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-04. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-08 -> 2027-07-11`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-08. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-11 -> 2027-07-15`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-11. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-15 -> 2027-07-18`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-15. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-18 -> 2027-07-22`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-18. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-22 -> 2027-07-25`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-22. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-25 -> 2027-07-29`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-25. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-29 -> 2027-08-01`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-07-29. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-01 -> 2027-08-05`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-01. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-05 -> 2027-08-08`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-05. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-08 -> 2027-08-12`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-08. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-12 -> 2027-08-15`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-12. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-15 -> 2027-08-19`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-15. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-19 -> 2027-08-22`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-19. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-22 -> 2027-08-26`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-22. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-26 -> 2027-08-29`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-26. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-29 -> 2027-09-02`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-08-29. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-02 -> 2027-09-05`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-02. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-05 -> 2027-09-09`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-05. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-09 -> 2027-09-12`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-09. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-12 -> 2027-09-16`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-12. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-16 -> 2027-09-19`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-16. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-19 -> 2027-09-23`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-19. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-23 -> 2027-09-26`**: High scarcity compression: only 0/102 (0.0%) comps available for check-in 2027-09-23. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-
-## 🎯 Recent Confirmed Competitor Sales Ledger (Past 7 Days)
-| Property Name | Stay Dates | Nights | Lead Days | Realized Rate | Quality-Adjusted Rate | Market Percentile | Status |
-|---|---|---|---|---|---|---|---|
-| TEMPE ONE: AZ Luxe Escape + Heated Pool & Hot Tub | `2026-09-27 -> 2026-09-30` | 3 | 3d | $344.67 | $391.67 | 16.2% | ✅ Confirmed |
-| Heatd Pool | Hot Tub | Walk 2 Lake | Dobson Ranch | `2026-10-11 -> 2026-10-14` | 3 | 17d | $599.00 | $611.22 | 42.9% | ✅ Confirmed |
-| Perfect Family Haven: 5BR,Heated Pool + Golf Green | `2026-11-15 -> 2026-11-19` | 4 | 52d | $342.00 | $397.67 | 2.4% | ✅ Confirmed |
-| The Callahan: Pickleball, Sports Bar, Gym, Theater | `2026-10-29 -> 2026-11-01` | 3 | 37d | $831.00 | $814.71 | 47.6% | ✅ Confirmed |
-| Swanky & Stylish Old Town Scottsdale Luxe Retreat | `2026-10-29 -> 2026-11-01` | 3 | 37d | $1,166.67 | $1,155.12 | 74.6% | ✅ Confirmed |
-| Resort Style 6BR Heated Pool + Mini Golf Sleeps 18 | `2026-12-03 -> 2026-12-06` | 3 | 72d | $768.67 | $792.44 | 28.3% | ✅ Confirmed |
-| Resort Style 6BR Heated Pool + Mini Golf Sleeps 18 | `2026-12-06 -> 2026-12-10` | 4 | 75d | $712.00 | $734.02 | 40.8% | ✅ Confirmed |
-| The Desert Diamond - LUXE Desert GOLD - Old Town | `2026-09-24 -> 2026-09-27` | 3 | 3d | $641.33 | $577.77 | 55.0% | ✅ Confirmed |
-| Scottsdale Oasis | Pickleball, Pool, Spa & Hoops | `2026-12-03 -> 2026-12-06` | 3 | 73d | $1,215.67 | $1,075.81 | 63.8% | ✅ Confirmed |
-| NEW! Meticulous Manor - Scottsdale`s Finest Luxury | `2026-12-27 -> 2026-12-31` | 4 | 97d | $2,627.75 | $2,226.91 | 85.2% | ✅ Confirmed |
-| YNotStay_GilbertAZ | `2026-09-21 -> 2026-09-24` | 3 | 1d | $869.33 | $844.01 | 78.0% | ✅ Confirmed |
-| Gilbert Resort w/ Pool, Theater & MiniGolf•Sleep16 | `2026-09-24 -> 2026-09-27` | 3 | 4d | $477.33 | $472.60 | 28.6% | ✅ Confirmed |
-| The Desert Diamond - LUXE Desert GOLD - Old Town | `2026-11-08 -> 2026-11-11` | 3 | 49d | $732.00 | $659.46 | 35.3% | ✅ Confirmed |
-| Paradise Reserve | Luxe Pool, GolfSim & Pickleball | `2026-12-03 -> 2026-12-06` | 3 | 74d | $3,072.67 | $2,582.08 | 100.0% | ✅ Confirmed |
-| Heated Pool + Spa + Fire Pit + Hammock Swings | `2026-12-03 -> 2026-12-06` | 3 | 74d | $591.00 | $748.10 | 7.7% | ✅ Confirmed |
-| Serene Home, Heated Pool & Games | `2026-12-03 -> 2026-12-06` | 3 | 74d | $1,061.00 | $1,010.48 | 59.0% | ✅ Confirmed |
-| Paradise Reserve | Luxe Pool, GolfSim & Pickleball | `2026-12-06 -> 2026-12-10` | 4 | 77d | $2,045.25 | $1,718.70 | 100.0% | ✅ Confirmed |
-| Heated Pool + Hot Tub + Game Room + Water Slide | `2026-12-06 -> 2026-12-10` | 4 | 77d | $573.50 | $573.50 | 21.1% | ✅ Confirmed |
-| Heated Pool + Spa + Fire Pit + Hammock Swings | `2026-12-06 -> 2026-12-10` | 4 | 77d | $456.00 | $577.22 | 10.5% | ✅ Confirmed |
-| 6BR Mesa Pool Spa Slide Sleeps 15 | `2026-12-27 -> 2026-12-31` | 4 | 98d | $774.50 | $730.66 | 4.2% | ✅ Confirmed |
-| Wildflower: New Build, Heated Pool & Dual Masters | `2027-01-21 -> 2027-01-24` | 3 | 123d | $1,080.33 | $1,227.65 | 48.6% | ✅ Confirmed |
-| Modern Dream Home Heated Pool Hot Tub 6BR 9 Beds | `2027-01-28 -> 2027-01-31` | 3 | 130d | $2,457.33 | $2,275.31 | 89.7% | ✅ Confirmed |
-| Ahwatukee relax and play! Mountains to pool. | `2027-04-15 -> 2027-04-18` | 3 | 207d | $539.33 | $691.45 | 2.6% | ✅ Confirmed |
-| Heatd Pool | Hot Tub | Walk 2 Lake | Dobson Ranch | `2027-06-10 -> 2027-06-13` | 3 | 263d | $653.33 | $666.66 | 16.1% | ✅ Confirmed |
-| Pool, Hot Tub & Mini Golf! Brand New Luxury 5BR | `2026-12-27 -> 2026-12-31` | 4 | 99d | $681.25 | $695.15 | 4.5% | ✅ Confirmed |
-| The Grand Saguaro, Heated Pool-Hot Tub-Pickleball | `2026-09-27 -> 2026-09-30` | 3 | 9d | $1,077.00 | $979.09 | 88.9% | ✅ Confirmed |
-| The Grand Saguaro, Heated Pool-Hot Tub-Pickleball | `2026-10-11 -> 2026-10-14` | 3 | 23d | $1,252.00 | $1,138.18 | 86.5% | ✅ Confirmed |
-| The Desert Diamond - LUXE Desert GOLD - Old Town | `2026-10-26 -> 2026-10-29` | 3 | 38d | $424.67 | $382.59 | 13.3% | ✅ Confirmed |
-| Mega Mesa Retreat: Heated Pool, Spa & Pickle Ball | `2026-12-03 -> 2026-12-06` | 3 | 76d | $1,113.33 | $1,040.50 | 72.7% | ✅ Confirmed |
-| Heatd Pool | Hot Tub | Walk 2 Lake | Dobson Ranch | `2026-12-06 -> 2026-12-10` | 4 | 79d | $575.75 | $587.50 | 21.2% | ✅ Confirmed |
-| New Luxe 5BR Resort | Pool, Pickleball | Theater | `2027-06-17 -> 2027-06-20` | 3 | 272d | $1,166.67 | $1,178.45 | 57.1% | ✅ Confirmed |
-| New Luxe 5BR Resort | Pool, Pickleball | Theater | `2027-06-24 -> 2027-06-27` | 3 | 279d | $1,265.67 | $1,278.45 | 75.0% | ✅ Confirmed |
-| New Luxe 5BR Resort | Pool, Pickleball | Theater | `2027-07-11 -> 2027-07-15` | 4 | 296d | $719.00 | $726.26 | 53.7% | ✅ Confirmed |
-| Resort Vibes | Heated Pool, Hot Tub & Arcade Fun | `2027-07-29 -> 2027-08-01` | 3 | 314d | $793.00 | $734.26 | 39.5% | ✅ Confirmed |
-| New Luxe 5BR Resort | Pool, Pickleball | Theater | `2027-07-29 -> 2027-08-01` | 3 | 314d | $956.67 | $966.33 | 55.3% | ✅ Confirmed |
-| New Luxe 5BR Resort | Pool, Pickleball | Theater | `2027-08-12 -> 2027-08-15` | 3 | 328d | $948.67 | $958.25 | 62.9% | ✅ Confirmed |
-| New Luxe 5BR Resort | Pool, Pickleball | Theater | `2027-08-15 -> 2027-08-19` | 4 | 331d | $717.50 | $724.75 | 60.0% | ✅ Confirmed |
-| New Luxe 5BR Resort | Pool, Pickleball | Theater | `2027-09-02 -> 2027-09-05` | 3 | 349d | $1,102.33 | $1,113.46 | 59.5% | ✅ Confirmed |
-| Family, Golf, Friends 6BR/4BA, heated pool/spa. | `2026-09-24 -> 2026-09-27` | 3 | 7d | $663.00 | $669.70 | 70.6% | ✅ Confirmed |
-| Arizona Oasis Resort Style Estate (Pool, Hot Tub) | `2026-12-03 -> 2026-12-06` | 3 | 77d | $1,009.00 | $942.99 | 65.2% | ✅ Confirmed |
-| Luxury Scottsdale Home | Pool & Heated Spa | `2026-12-27 -> 2026-12-31` | 4 | 101d | $938.50 | $1,020.11 | 35.3% | ✅ Confirmed |
-| Family, Golf, Friends 6BR/4BA, heated pool/spa. | `2026-12-27 -> 2026-12-31` | 4 | 101d | $1,315.00 | $1,328.28 | 94.1% | ✅ Confirmed |
-| Swanky & Stylish Old Town Scottsdale Luxe Retreat | `2027-01-07 -> 2027-01-10` | 3 | 112d | $1,711.00 | $1,694.06 | 76.2% | ✅ Confirmed |
-| Arizona Oasis Resort Style Estate (Pool, Hot Tub) | `2027-01-07 -> 2027-01-10` | 3 | 112d | $1,009.00 | $942.99 | 49.2% | ✅ Confirmed |
-| Old Town - 6BD/5BA + Heated Pool + BBQ + Hot Tub | `2027-01-21 -> 2027-01-24` | 3 | 126d | $927.00 | $866.36 | 27.8% | ✅ Confirmed |
-| Arizona Oasis Resort Style Estate (Pool, Hot Tub) | `2027-01-28 -> 2027-01-31` | 3 | 133d | $1,009.00 | $942.99 | 41.2% | ✅ Confirmed |
-| Arizona Oasis Resort Style Estate (Pool, Hot Tub) | `2027-01-31 -> 2027-02-04` | 4 | 136d | $975.50 | $911.68 | 47.2% | ✅ Confirmed |
-| Arizona Oasis Resort Style Estate (Pool, Hot Tub) | `2027-02-04 -> 2027-02-07` | 3 | 140d | $1,009.00 | $942.99 | 17.3% | ✅ Confirmed |
-| Arizona Oasis Resort Style Estate (Pool, Hot Tub) | `2027-02-07 -> 2027-02-10` | 3 | 143d | $1,009.00 | $942.99 | 17.0% | ✅ Confirmed |
-| Brand new! Heated Pool | Game Room | Golf | Arcade | `2027-03-04 -> 2027-03-07` | 3 | 168d | $1,290.00 | $1,316.33 | 22.0% | ✅ Confirmed |
-| Brand new! Heated Pool | Game Room | Golf | Arcade | `2027-03-07 -> 2027-03-11` | 4 | 171d | $1,129.50 | $1,152.55 | 34.8% | ✅ Confirmed |
-| Wildflower: New Build, Heated Pool & Dual Masters | `2027-03-11 -> 2027-03-14` | 3 | 175d | $1,510.00 | $1,715.91 | 27.7% | ✅ Confirmed |
-| Old Town - 6BD/5BA + Heated Pool + BBQ + Hot Tub | `2027-04-08 -> 2027-04-11` | 3 | 203d | $1,100.00 | $1,028.04 | 28.8% | ✅ Confirmed |
-| Old Town - 6BD/5BA + Heated Pool + BBQ + Hot Tub | `2027-04-11 -> 2027-04-15` | 4 | 206d | $608.50 | $568.69 | 8.6% | ✅ Confirmed |
-| Chandler Estate w/ Pool/Pickleball/Putting Green! | `2027-05-13 -> 2027-05-16` | 3 | 238d | $949.33 | $840.12 | 34.5% | ✅ Confirmed |
-| Chandler Estate w/ Pool/Pickleball/Putting Green! | `2027-05-16 -> 2027-05-20` | 4 | 241d | $743.75 | $658.19 | 44.3% | ✅ Confirmed |
-| Pickleball + Hot Tub + Pool + Gym + Sauna + Mini Golf + Sleeps 24 | `2027-06-24 -> 2027-06-27` | 3 | 280d | $1,504.67 | $1,253.89 | 75.0% | ✅ Confirmed |
-| Old Town - 6BD/5BA + Heated Pool + BBQ + Hot Tub | `2027-08-26 -> 2027-08-29` | 3 | 343d | $608.00 | $568.22 | 17.0% | ✅ Confirmed |
-| Old Town - 6BD/5BA + Heated Pool + BBQ + Hot Tub | `2027-08-29 -> 2027-09-02` | 4 | 346d | $294.75 | $275.47 | 1.5% | ✅ Confirmed |
-
 ---
 
 ## 🚨 Section 1: Urgent Action Required (Action This Week)
@@ -157,11 +20,12 @@ The following dates have major pricing anomalies that require immediate update i
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 52 | $722 | $846 (75%) | $790 | $584 (30%) | 🔴 **+76.6%** | **$499** | $353–$920 (med $505, Aligned With Track Record) |
-| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 33 | $596 | $762 (94%) | $601 | $535 (30%) | 🔴 **+65.3%** | **$499** | $333–$554 (med $447, Aligned With Track Record) |
-| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $674 | 19 | $1060 | $1185 (74%) | $982 | $979 (47.3%) | 🔴 **+48.2%** | **$674** | $313–$1574 (med $605, +36% vs Track Record) |
-| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $351 → $300 | 44 | $351 | $518 (64%) | $528 | $459 (30%) | 🔴 **+47.9%** | **$300** | $347–$554 (med $427, -30% vs Track Record) |
-| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $450 • High compression | 17 | $549 | $716 (65%) | $620 | $620 (50%) | 🔴 **+29.3%** | **$450** | $520–$1485 (med $648, -30% vs Track Record) |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 60 | $722 | $846 (73%) | $776 | $559 (30%) | 🔴 **+84.5%** | **$499** | $627–$627 (med $627, Aligned With Track Record) |
+| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 35 | $596 | $762 (94%) | $565 | $501 (30%) | 🔴 **+76.5%** | **$499** | $433–$433 (med $433, Aligned With Track Record) |
+| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $351 → $300 | 44 | $351 | $518 (66%) | $527 | $459 (30%) | 🔴 **+47.9%** | **$300** | $347–$554 (med $416, Aligned With Track Record) |
+| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $728 | 22 | $1060 | $1185 (64%) | $1073 | $1044 (47.3%) | 🔴 **+39.0%** | **$728** | $872–$1574 (med $888, Aligned With Track Record) |
+| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $450 • High compression | 17 | $549 | $716 (65%) | $620 | $620 (50%) | 🔴 **+29.3%** | **$450** | $513–$831 (med $648, Aligned With Track Record) |
+| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 49 | $399 | $566 (53%) | $611 | $509 (30%) | 🔴 **+28.1%** | **$300** | $333–$532 (med $452, Aligned With Track Record) |
 
 ---
 
@@ -170,9 +34,8 @@ The following dates are 10%–25% off the target percentile for future dates:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 39 | $399 | $566 (54%) | $611 | $530 (30%) | 🟡 +23.1% | **$300** | $333–$969 (med $472, -36% vs Track Record) |
-| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $344 | 46 | $424 | $549 (46%) | $652 | $544 (30%) | 🟡 +17.0% | **$344** | $365–$969 (med $523, -32% vs Track Record) |
-| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $431 | 43 | $494 | $619 (37%) | $950 | $673 (30%) | 🟡 +11.4% | **$431** | $353–$760 (med $535, Aligned With Track Record) |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $344 | 56 | $424 | $549 (50%) | $631 | $544 (30%) | 🟡 +17.0% | **$344** | $365–$969 (med $489, Aligned With Track Record) |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $432 | 44 | $494 | $619 (39%) | $959 | $674 (30%) | 🟡 +11.2% | **$432** | $353–$888 (med $424, Aligned With Track Record) |
 
 ---
 
@@ -181,18 +44,87 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 52 | $722 | $846 (75%) | $790 | $584 (30%) | 🔴 **+76.6%** | **$499** | $353–$920 (med $505, Aligned With Track Record) |
-| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 33 | $596 | $762 (94%) | $601 | $535 (30%) | 🔴 **+65.3%** | **$499** | $333–$554 (med $447, Aligned With Track Record) |
-| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $674 | 19 | $1060 | $1185 (74%) | $982 | $979 (47.3%) | 🔴 **+48.2%** | **$674** | $313–$1574 (med $605, +36% vs Track Record) |
-| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $351 → $300 | 44 | $351 | $518 (64%) | $528 | $459 (30%) | 🔴 **+47.9%** | **$300** | $347–$554 (med $427, -30% vs Track Record) |
-| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $450 • High compression | 17 | $549 | $716 (65%) | $620 | $620 (50%) | 🔴 **+29.3%** | **$450** | $520–$1485 (med $648, -30% vs Track Record) |
-| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 39 | $399 | $566 (54%) | $611 | $530 (30%) | 🟡 +23.1% | **$300** | $333–$969 (med $472, -36% vs Track Record) |
-| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $344 | 46 | $424 | $549 (46%) | $652 | $544 (30%) | 🟡 +17.0% | **$344** | $365–$969 (med $523, -32% vs Track Record) |
-| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $431 | 43 | $494 | $619 (37%) | $950 | $673 (30%) | 🟡 +11.4% | **$431** | $353–$760 (med $535, Aligned With Track Record) |
-| `2026-10-29 -> 2026-11-01` | Weekend | 3 | - | 43 | $694 | $861 (63%) | $862 | $973 (60.7%) | +2.8% | **$694** | $541–$1453 (med $679, Aligned With Track Record) |
-| `2026-11-08 -> 2026-11-11` | Midweek | 3 | - | 31 | $424 | $591 (29%) | $874 | $699 (30%) | -2.3% | **$424** | $365–$969 (med $503, Aligned With Track Record) |
-| `2026-12-03 -> 2026-12-06` | Weekend | 3 | - | 36 | $714 | $881 (58%) | $976 | $1156 (60.7%) | -7.6% | **$786** | $530–$1379 (med $657, Aligned With Track Record) |
-| `2027-01-04 -> 2027-01-07` | Midweek | 3 | - | 46 | $578 | $745 (44%) | $1025 | $954 (47.3%) | -5.7% | **$623** | $313–$1574 (med $567, Aligned With Track Record) |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 60 | $722 | $846 (73%) | $776 | $559 (30%) | 🔴 **+84.5%** | **$499** | $627–$627 (med $627, Aligned With Track Record) |
+| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 35 | $596 | $762 (94%) | $565 | $501 (30%) | 🔴 **+76.5%** | **$499** | $433–$433 (med $433, Aligned With Track Record) |
+| `2026-09-27 -> 2026-09-30` | Midweek | 3 | ↓ Reduce $351 → $300 | 44 | $351 | $518 (66%) | $527 | $459 (30%) | 🔴 **+47.9%** | **$300** | $347–$554 (med $416, Aligned With Track Record) |
+| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $728 | 22 | $1060 | $1185 (64%) | $1073 | $1044 (47.3%) | 🔴 **+39.0%** | **$728** | $872–$1574 (med $888, Aligned With Track Record) |
+| `2026-09-24 -> 2026-09-27` | Weekend | 3 | ↓ Reduce $549 → $450 • High compression | 17 | $549 | $716 (65%) | $620 | $620 (50%) | 🔴 **+29.3%** | **$450** | $513–$831 (med $648, Aligned With Track Record) |
+| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 49 | $399 | $566 (53%) | $611 | $509 (30%) | 🔴 **+28.1%** | **$300** | $333–$532 (med $452, Aligned With Track Record) |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $344 | 56 | $424 | $549 (50%) | $631 | $544 (30%) | 🟡 +17.0% | **$344** | $365–$969 (med $489, Aligned With Track Record) |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $432 | 44 | $494 | $619 (39%) | $959 | $674 (30%) | 🟡 +11.2% | **$432** | $353–$888 (med $424, Aligned With Track Record) |
+| `2026-10-29 -> 2026-11-01` | Weekend | 3 | - | 51 | $694 | $861 (61%) | $862 | $997 (60.7%) | +0.3% | **$694** | $520–$1485 (med $674, Aligned With Track Record) |
+| `2026-11-08 -> 2026-11-11` | Midweek | 3 | - | 36 | $424 | $591 (31%) | $806 | $671 (30%) | +1.8% | **$424** | $365–$969 (med $489, Aligned With Track Record) |
+| `2026-12-03 -> 2026-12-06` | Weekend | 3 | - | 41 | $714 | $881 (58%) | $974 | $1107 (60.7%) | -3.5% | **$714** | $530–$908 (med $623, Aligned With Track Record) |
+| `2027-01-04 -> 2027-01-07` | Midweek | 3 | - | 61 | $578 | $745 (43%) | $991 | $944 (47.3%) | -4.6% | **$614** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-01-07 -> 2027-01-10` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $964 | $1131 (50%) | $0 | $0 (65%) | 0.0% | **$964** | $650–$933 (med $834, Aligned With Track Record) |
+| `2027-01-10 -> 2027-01-14` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $578 | $703 (50%) | $0 | $0 (47.3%) | 0.0% | **$578** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-01-19 -> 2027-01-21` | Midweek | 2 | - | 🔥 0 *(Near Sold Out)* | $578 | $828 (50%) | $0 | $0 (47.3%) | 0.0% | **$578** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-01-21 -> 2027-01-24` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $964 | $1131 (50%) | $0 | $0 (65%) | 0.0% | **$964** | $650–$933 (med $834, Aligned With Track Record) |
+| `2027-01-24 -> 2027-01-28` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $578 | $703 (50%) | $0 | $0 (47.3%) | 0.0% | **$578** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-01-28 -> 2027-01-31` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $964 | $1131 (50%) | $0 | $0 (65%) | 0.0% | **$964** | $650–$933 (med $834, Aligned With Track Record) |
+| `2027-01-31 -> 2027-02-04` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $750 | $876 (50%) | $0 | $0 (47.3%) | 0.0% | **$750** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-02-04 -> 2027-02-07` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1272 | $1439 (50%) | $0 | $0 (65%) | 0.0% | **$1272** | $525–$2131 (med $1006, Aligned With Track Record) |
+| `2027-02-07 -> 2027-02-10` | Midweek | 3 | - | 🔥 0 *(Near Sold Out)* | $808 | $975 (50%) | $0 | $0 (47.3%) | 0.0% | **$808** | $501–$1421 (med $616, Aligned With Track Record) |
+| `2027-02-21 -> 2027-02-25` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $808 | $933 (50%) | $0 | $0 (47.3%) | 0.0% | **$808** | $501–$1421 (med $616, Aligned With Track Record) |
+| `2027-03-01 -> 2027-03-04` | Midweek | 3 | - | 🔥 0 *(Near Sold Out)* | $1001 | $1168 (50%) | $0 | $0 (47.3%) | 0.0% | **$1001** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-03-04 -> 2027-03-07` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1492 | $1659 (50%) | $0 | $0 (65%) | 0.0% | **$1492** | $861–$1730 (med $1368, Aligned With Track Record) |
+| `2027-03-07 -> 2027-03-11` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $1001 | $1126 (50%) | $0 | $0 (47.3%) | 0.0% | **$1001** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-03-11 -> 2027-03-14` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1492 | $1659 (50%) | $0 | $0 (65%) | 0.0% | **$1492** | $861–$1730 (med $1368, Aligned With Track Record) |
+| `2027-03-14 -> 2027-03-17` | Midweek | 3 | - | 🔥 0 *(Near Sold Out)* | $1001 | $1168 (50%) | $0 | $0 (47.3%) | 0.0% | **$1001** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-03-21 -> 2027-03-25` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $1099 | $1224 (50%) | $0 | $0 (47.3%) | 0.0% | **$1099** | $516–$1252 (med $758, Aligned With Track Record) |
+| `2027-03-25 -> 2027-03-28` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1564 | $1731 (50%) | $0 | $0 (80%) | 0.0% | **$1564** | $773–$1878 (med $1138, Aligned With Track Record) |
+| `2027-03-28 -> 2027-04-01` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $1026 | $1150 (50%) | $0 | $0 (49.3%) | 0.0% | **$1026** | $516–$1252 (med $758, Aligned With Track Record) |
+| `2027-04-01 -> 2027-04-04` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1554 | $1721 (50%) | $0 | $0 (80%) | 0.0% | **$1554** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-04-04 -> 2027-04-08` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $749 | $874 (50%) | $0 | $0 (49.3%) | 0.0% | **$749** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-04-08 -> 2027-04-11` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1554 | $1721 (50%) | $0 | $0 (80%) | 0.0% | **$1554** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-04-11 -> 2027-04-15` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $749 | $874 (50%) | $0 | $0 (49.3%) | 0.0% | **$749** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-04-15 -> 2027-04-18` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1554 | $1721 (50%) | $0 | $0 (80%) | 0.0% | **$1554** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-04-18 -> 2027-04-22` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $749 | $874 (50%) | $0 | $0 (49.3%) | 0.0% | **$749** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-04-22 -> 2027-04-25` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1554 | $1721 (50%) | $0 | $0 (80%) | 0.0% | **$1554** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-04-25 -> 2027-04-29` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $749 | $874 (50%) | $0 | $0 (49.3%) | 0.0% | **$749** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-04-29 -> 2027-05-02` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1465 | $1631 (50%) | $0 | $0 (80%) | 0.0% | **$1465** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-05-02 -> 2027-05-06` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $595 | $720 (50%) | $0 | $0 (49.3%) | 0.0% | **$595** | $330–$1149 (med $563, Aligned With Track Record) |
+| `2027-05-06 -> 2027-05-09` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1286 | $1453 (50%) | $0 | $0 (80%) | 0.0% | **$1286** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-05-09 -> 2027-05-13` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $595 | $720 (50%) | $0 | $0 (49.3%) | 0.0% | **$595** | $330–$1149 (med $563, Aligned With Track Record) |
+| `2027-05-13 -> 2027-05-16` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1286 | $1453 (50%) | $0 | $0 (80%) | 0.0% | **$1286** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-05-16 -> 2027-05-20` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $595 | $720 (50%) | $0 | $0 (49.3%) | 0.0% | **$595** | $330–$1149 (med $563, Aligned With Track Record) |
+| `2027-05-20 -> 2027-05-23` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1286 | $1453 (50%) | $0 | $0 (80%) | 0.0% | **$1286** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-05-23 -> 2027-05-27` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $595 | $720 (50%) | $0 | $0 (49.3%) | 0.0% | **$595** | $330–$1149 (med $563, Aligned With Track Record) |
+| `2027-05-27 -> 2027-05-30` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1286 | $1453 (50%) | $0 | $0 (80%) | 0.0% | **$1286** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-05-30 -> 2027-06-03` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $902 | $1026 (50%) | $0 | $0 (49.3%) | 0.0% | **$902** | $439–$567 (med $439, Aligned With Track Record) |
+| `2027-06-03 -> 2027-06-06` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1009 | $1176 (50%) | $0 | $0 (80%) | 0.0% | **$1009** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-06-06 -> 2027-06-10` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $517 | $642 (50%) | $0 | $0 (49.3%) | 0.0% | **$517** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-06-10 -> 2027-06-13` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1009 | $1176 (50%) | $0 | $0 (80%) | 0.0% | **$1009** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-06-13 -> 2027-06-17` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $517 | $642 (50%) | $0 | $0 (49.3%) | 0.0% | **$517** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-06-17 -> 2027-06-20` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1009 | $1176 (50%) | $0 | $0 (80%) | 0.0% | **$1009** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-06-20 -> 2027-06-24` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $517 | $642 (50%) | $0 | $0 (49.3%) | 0.0% | **$517** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-06-24 -> 2027-06-27` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $1009 | $1176 (50%) | $0 | $0 (80%) | 0.0% | **$1009** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-06-27 -> 2027-07-01` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $517 | $642 (50%) | $0 | $0 (49.3%) | 0.0% | **$517** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-07-01 -> 2027-07-04` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $851 | $1018 (50%) | $0 | $0 (80%) | 0.0% | **$851** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-07-04 -> 2027-07-08` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $504 | $629 (50%) | $0 | $0 (49.3%) | 0.0% | **$504** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-07-08 -> 2027-07-11` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $851 | $1018 (50%) | $0 | $0 (80%) | 0.0% | **$851** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-07-11 -> 2027-07-15` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $504 | $629 (50%) | $0 | $0 (49.3%) | 0.0% | **$504** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-07-15 -> 2027-07-18` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $851 | $1018 (50%) | $0 | $0 (80%) | 0.0% | **$851** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-07-18 -> 2027-07-22` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $504 | $629 (50%) | $0 | $0 (49.3%) | 0.0% | **$504** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-07-22 -> 2027-07-25` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $851 | $1018 (50%) | $0 | $0 (80%) | 0.0% | **$851** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-07-25 -> 2027-07-29` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $504 | $629 (50%) | $0 | $0 (49.3%) | 0.0% | **$504** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-07-29 -> 2027-08-01` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $851 | $1018 (50%) | $0 | $0 (80%) | 0.0% | **$851** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-08-01 -> 2027-08-05` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $457 | $582 (50%) | $0 | $0 (49.3%) | 0.0% | **$457** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-08-05 -> 2027-08-08` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $869 | $1036 (50%) | $0 | $0 (80%) | 0.0% | **$869** | $418–$854 (med $599, Aligned With Track Record) |
+| `2027-08-08 -> 2027-08-12` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $457 | $582 (50%) | $0 | $0 (49.3%) | 0.0% | **$457** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-08-12 -> 2027-08-15` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $869 | $1036 (50%) | $0 | $0 (80%) | 0.0% | **$869** | $418–$854 (med $599, Aligned With Track Record) |
+| `2027-08-15 -> 2027-08-19` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $457 | $582 (50%) | $0 | $0 (49.3%) | 0.0% | **$457** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-08-19 -> 2027-08-22` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $869 | $1036 (50%) | $0 | $0 (80%) | 0.0% | **$869** | $418–$854 (med $599, Aligned With Track Record) |
+| `2027-08-22 -> 2027-08-26` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $457 | $582 (50%) | $0 | $0 (49.3%) | 0.0% | **$457** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-08-26 -> 2027-08-29` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $869 | $1036 (50%) | $0 | $0 (80%) | 0.0% | **$869** | $418–$854 (med $599, Aligned With Track Record) |
+| `2027-08-29 -> 2027-09-02` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $492 | $618 (50%) | $0 | $0 (49.3%) | 0.0% | **$492** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-09-02 -> 2027-09-05` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $599 | $766 (50%) | $0 | $0 (80%) | 0.0% | **$599** | $432–$854 (med $613, Aligned With Track Record) |
+| `2027-09-05 -> 2027-09-09` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $599 | $724 (50%) | $0 | $0 (49.3%) | 0.0% | **$599** | $324–$569 (med $401, +50% vs Track Record) |
+| `2027-09-09 -> 2027-09-12` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $599 | $766 (50%) | $0 | $0 (80%) | 0.0% | **$599** | $486–$804 (med $630, Aligned With Track Record) |
+| `2027-09-12 -> 2027-09-16` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $599 | $724 (50%) | $0 | $0 (49.3%) | 0.0% | **$599** | $324–$554 (med $427, +40% vs Track Record) |
+| `2027-09-16 -> 2027-09-19` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $599 | $766 (50%) | $0 | $0 (80%) | 0.0% | **$599** | $513–$831 (med $635, Aligned With Track Record) |
+| `2027-09-19 -> 2027-09-23` | Midweek | 4 | - | 🔥 0 *(Near Sold Out)* | $599 | $724 (50%) | $0 | $0 (49.3%) | 0.0% | **$599** | $347–$554 (med $416, +44% vs Track Record) |
+| `2027-09-23 -> 2027-09-26` | Weekend | 3 | - | 🔥 0 *(Near Sold Out)* | $599 | $766 (50%) | $0 | $0 (80%) | 0.0% | **$599** | $520–$1485 (med $648, Aligned With Track Record) |
 
 ---
 *Generated autonomously by STR Price Advisor Agent.*

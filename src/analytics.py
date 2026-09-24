@@ -446,12 +446,21 @@ class PricingAnalyticsEngine:
             reg_comps = self.sales_tracker.load_registered_comps()
             tot_reg = len(reg_comps) if reg_comps else (sum(1 for c in self.comp_registry.values() if c.get("is_valid_comp", True)) if self.comp_registry else 97)
             if is_live:
-                compression = self.sales_tracker.detect_market_compression(
-                    check_in=segment.get("check_in", ""),
-                    check_out=segment.get("check_out"),
-                    total_cohort_count=tot_reg,
-                    current_available_count=len(effective_rates_to_use),
-                )
+                try:
+                    compression = self.sales_tracker.detect_market_compression(
+                        check_in=segment.get("check_in", ""),
+                        check_out=segment.get("check_out"),
+                        total_cohort_count=tot_reg,
+                        current_available_count=len(effective_rates_to_use),
+                        is_live_scan=is_live,
+                    )
+                except TypeError:
+                    compression = self.sales_tracker.detect_market_compression(
+                        check_in=segment.get("check_in", ""),
+                        check_out=segment.get("check_out"),
+                        total_cohort_count=tot_reg,
+                        current_available_count=len(effective_rates_to_use),
+                    )
             else:
                 compression = {"is_compressed": False}
             if compression.get("is_compressed"):
@@ -467,7 +476,7 @@ class PricingAnalyticsEngine:
         else:
             tot_reg = sum(1 for c in self.comp_registry.values() if c.get("is_valid_comp", True)) if self.comp_registry else 97
             n_avail = len(effective_rates_to_use)
-            if is_live and n_avail < 20 and tot_reg > 0 and (n_avail / tot_reg) < 0.20:
+            if is_live and 0 < n_avail < 20 and tot_reg > 0 and (n_avail / tot_reg) < 0.20:
                 target_pct = self.get_target_percentile(lead_days, segment_type=seg_type, aggressive=True)
                 segment["is_compression_surge"] = True
                 segment["compression_details"] = {
@@ -540,7 +549,11 @@ class PricingAnalyticsEngine:
 
         # Sample size & statistical significance analysis
         n_comps = len(clean_comps)
-        if n_comps == 0:
+        if not is_live and n_comps == 0:
+            sample_significance = "UNSCRAPED"
+            sample_label = "ℹ️ Unscraped"
+            sample_note = "Interval not scanned in current run."
+        elif n_comps == 0:
             sample_significance = "SOLD_OUT"
             sample_label = "🔥 Sold Out (N=0)"
             sample_note = "Zero available luxury comps in market (100% booked)."

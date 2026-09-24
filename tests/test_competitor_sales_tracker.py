@@ -1246,5 +1246,79 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             self.assertRegex(str(created_at), r"^\d{4}-\d{2}-\d{2}")
 
 
+    def test_detect_market_compression_guards_unscraped_intervals(self):
+        """Verify detect_market_compression guards against treating unscraped or missing comp data as compression."""
+        # Unscraped interval (is_live_scan = False)
+        res_unscraped = self.tracker.detect_market_compression(
+            check_in="2027-04-01",
+            check_out="2027-04-04",
+            total_cohort_count=100,
+            current_available_count=0,
+            is_live_scan=False,
+        )
+        self.assertFalse(res_unscraped["is_compressed"])
+        self.assertIn("Unscraped interval", res_unscraped["reason"])
+
+        # Missing inventory (avail_count = 0 with no live scan confirmation)
+        res_missing = self.tracker.detect_market_compression(
+            check_in="2027-04-01",
+            check_out="2027-04-04",
+            total_cohort_count=100,
+            current_available_count=0,
+            is_live_scan=None,
+        )
+        self.assertFalse(res_missing["is_compressed"])
+        self.assertIn("Unscraped interval or missing comp inventory", res_missing["reason"])
+
+        # Genuine compression on live scan (5 available out of 100)
+        res_live_comp = self.tracker.detect_market_compression(
+            check_in="2026-11-26",
+            check_out="2026-11-29",
+            total_cohort_count=100,
+            current_available_count=5,
+            is_live_scan=True,
+        )
+        self.assertTrue(res_live_comp["is_compressed"])
+        self.assertEqual(res_live_comp["available_count"], 5)
+
+    def test_timeline_overlays_empty_comps_from_prior_snapshot(self):
+        """Verify compute_daily_market_inventory_timeline replaces empty comps intervals with valid comps from prior snapshots."""
+        snap_dir = self.data_dir
+        # Create prior snapshot with 10 comps
+        prior_snap = snap_dir / "pricing_data_2026-09-20.json"
+        prior_data = {
+            "report_date": "2026-09-20",
+            "urgent_intervals": [{
+                "check_in": "2027-04-01",
+                "check_out": "2027-04-04",
+                "comps_list": [{"listing_id": f"comp_{i}", "effective_nightly": 1000.0} for i in range(10)],
+            }]
+        }
+        prior_snap.write_text(json.dumps(prior_data))
+
+        # Create target snapshot with interval present but 0 comps
+        curr_snap = snap_dir / "pricing_data_2026-09-21.json"
+        curr_data = {
+            "report_date": "2026-09-21",
+            "urgent_intervals": [{
+                "check_in": "2027-04-01",
+                "check_out": "2027-04-04",
+                "comps_list": [],
+            }]
+        }
+        curr_snap.write_text(json.dumps(curr_data))
+
+        # Configure tracker registered comps
+        reg_comps = {f"comp_{i}": {"tier": "tier_a" if i < 5 else "tier_b"} for i in range(10)}
+        with patch.object(self.tracker, "load_registered_comps", return_value=reg_comps):
+            timeline = self.tracker.compute_daily_market_inventory_timeline(snapshot_path=curr_snap)
+            # Find 2027-04-01
+            self.assertIn("2027-04-01", timeline["dates"])
+            idx = timeline["dates"].index("2027-04-01")
+            # Should have overlaid the 10 comps from prior snapshot rather than dropping to 0
+            self.assertEqual(timeline["cohorts"]["all"]["available"][idx], 10)
+
+
 if __name__ == "__main__":
     unittest.main()
+

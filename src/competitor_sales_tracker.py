@@ -297,8 +297,9 @@ class CompetitorSalesTracker:
             try:
                 _, p_ints = self.extract_intervals_from_snapshot(p)
                 for key, data in p_ints.items():
-                    if key not in merged_intervals:
-                        merged_intervals[key] = data
+                    if key not in merged_intervals or len(merged_intervals[key].get("comps", {})) == 0:
+                        if len(data.get("comps", {})) > 0 or key not in merged_intervals:
+                            merged_intervals[key] = data
             except Exception as e:
                 logger.warning(f"Error loading snapshot {p} during predecessor prep: {e}")
 
@@ -1384,6 +1385,7 @@ class CompetitorSalesTracker:
         check_out: Optional[str] = None,
         total_cohort_count: Optional[int] = None,
         current_available_count: Optional[int] = None,
+        is_live_scan: Optional[bool] = None,
     ) -> Dict[str, Any]:
         """
         Evaluate pure market scarcity for an interval.
@@ -1404,6 +1406,15 @@ class CompetitorSalesTracker:
         reg_comps = self.load_registered_comps()
         reg_total = total_cohort_count if total_cohort_count is not None else (len(reg_comps) if reg_comps else 97)
 
+        if is_live_scan is False:
+            return {
+                "is_compressed": False,
+                "available_count": current_available_count or 0,
+                "total_cohort_count": reg_total,
+                "available_ratio": 1.0,
+                "reason": f"Unscraped interval: compression evaluation requires active market scan",
+            }
+
         avail_count = current_available_count
         if avail_count is None:
             # Fallback: resolve available comps from latest snapshot if not directly passed
@@ -1421,6 +1432,16 @@ class CompetitorSalesTracker:
 
         if avail_count is None:
             avail_count = reg_total
+
+        # Guard against treating missing/unscraped intervals (0 comps with no live scan) as 100% sold out compression
+        if avail_count == 0 and is_live_scan is None:
+            return {
+                "is_compressed": False,
+                "available_count": 0,
+                "total_cohort_count": reg_total,
+                "available_ratio": 0.0,
+                "reason": f"Unscraped interval or missing comp inventory for check-in {check_in}",
+            }
 
         avail_ratio = round(avail_count / reg_total, 3) if reg_total > 0 else 1.0
         is_compressed = bool(avail_count < 20 and avail_ratio < 0.20)
@@ -1457,19 +1478,28 @@ class CompetitorSalesTracker:
         reg_comps = self.load_registered_comps()
         reg_total = len(reg_comps) if reg_comps else 97
 
-        cohort_counts = {}
+        cohort_counts: Dict[Tuple[str, str], Tuple[int, bool]] = {}
         all_snaps = sorted(self.data_dir.glob("pricing_data_*.json"))
         if all_snaps:
             try:
-                _, s_ints = self.extract_intervals_from_snapshot(all_snaps[-1])
-                for k, v in s_ints.items():
+                merged_snaps: Dict[Tuple[str, str], Dict[str, Any]] = {}
+                for s in reversed(all_snaps):
+                    _, s_ints = self.extract_intervals_from_snapshot(s)
+                    for k, v in s_ints.items():
+                        if k not in merged_snaps or len(merged_snaps[k].get("comps", {})) == 0:
+                            if len(v.get("comps", {})) > 0 or k not in merged_snaps:
+                                merged_snaps[k] = v
+                for k, v in merged_snaps.items():
                     raw_comps = v.get("comps", {})
-                    cohort_counts[k] = sum(1 for cid in raw_comps.keys() if cid in reg_comps) if reg_comps else len(raw_comps)
+                    avail_count = sum(1 for cid in raw_comps.keys() if cid in reg_comps) if reg_comps else len(raw_comps)
+                    if avail_count == 0 and not v.get("is_live_scan"):
+                        continue
+                    cohort_counts[k] = (avail_count, bool(v.get("is_live_scan", True)))
             except Exception:
                 pass
 
         alerts = []
-        for (cin, cout), avail_count in sorted(cohort_counts.items(), key=lambda x: x[0][0]):
+        for (cin, cout), (avail_count, is_live) in sorted(cohort_counts.items(), key=lambda x: x[0][0]):
             if cin < today_iso:
                 continue
             comp_info = self.detect_market_compression(
@@ -1477,6 +1507,7 @@ class CompetitorSalesTracker:
                 check_out=cout,
                 total_cohort_count=reg_total,
                 current_available_count=avail_count,
+                is_live_scan=is_live,
             )
             if comp_info["is_compressed"]:
                 alerts.append({
@@ -2203,8 +2234,9 @@ class CompetitorSalesTracker:
                 try:
                     _, p_ints = self.extract_intervals_from_snapshot(p)
                     for k, v in p_ints.items():
-                        if k not in merged_intervals:
-                            merged_intervals[k] = v
+                        if k not in merged_intervals or len(merged_intervals[k].get("comps", {})) == 0:
+                            if len(v.get("comps", {})) > 0 or k not in merged_intervals:
+                                merged_intervals[k] = v
                 except Exception:
                     pass
 
@@ -2298,20 +2330,22 @@ class CompetitorSalesTracker:
                 continue
 
         def get_nearest_interval(d: date) -> Optional[Dict[str, Any]]:
-            if d in day_to_interval:
+            if d in day_to_interval and len(day_to_interval[d].get("comps", {})) > 0:
                 return day_to_interval[d]
             if not parsed_intervals:
                 return None
             best_int = None
             min_dist = 999999
             for c_in, c_out, item in parsed_intervals:
+                if len(item.get("comps", {})) == 0:
+                    continue
                 if c_in <= d < c_out:
                     return item
                 dist = (c_in - d).days if d < c_in else (d - c_out).days
                 if dist < min_dist:
                     min_dist = dist
                     best_int = item
-            return best_int
+            return best_int or day_to_interval.get(d)
 
         # Build daily series
         days = [anchor_date + timedelta(days=i) for i in range(days_ahead)]

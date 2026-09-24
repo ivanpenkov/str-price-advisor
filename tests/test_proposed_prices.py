@@ -1129,9 +1129,33 @@ class TestProposedPrices(unittest.TestCase):
         self.assertEqual(proposed[0]["weekend_base"], 549)
         self.assertEqual(proposed[0]["weekend_avg"], 549)  # HELD at 549, NOT 714!
 
+    def test_consensus_holds_base_rate_when_comps_absent(self):
+        """Verify that when comps are absent and rec merely holds base rate, consensus holds base rate."""
+        segment = {
+            "check_in": "2027-04-01",
+            "check_out": "2027-04-04",
+            "segment_type": "weekend",
+            "our_base_nightly": 1554.0,
+            "recommended_base_nightly_adj": 1554.0,  # Merely holding base
+            "is_live_scan": False,
+            "comps_list": [],
+            "historical_benchmark": {
+                "sample_count": 10,
+                "avg_rate": 1037.0,
+                "median_rate": 1000.0,
+            },
+        }
+        res = compute_interval_consensus(segment)
+        self.assertEqual(res["base_rate"], 1554)
+        # Must hold at base rate 1554 rather than synthesizing 0.67*1554 + 0.33*1037 = 1383!
+        self.assertEqual(res["consensus_rate"], 1554)
+        self.assertEqual(res["status"], "HOLD")
+        self.assertIsNone(res["market_rec"])
+
 
 if __name__ == "__main__":
     unittest.main()
+
 
 
 

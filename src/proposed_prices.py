@@ -299,8 +299,15 @@ def compute_interval_consensus(
     w_hist = hw / (cw + hw)
 
     is_surge = bool(segment.get("is_compression_surge"))
+    comps_present = bool(segment.get("comps_list")) or bool(segment.get("comps")) or (
+        bool(segment.get("is_live_scan")) and segment.get("comps_count", 0) > 0
+    )
 
-    if rec_r > 0 and hist_cnt > 0 and hist_r > 0:
+    if not comps_present and rec_r == base_r:
+        # Without market comps, hold current base price rather than synthesizing with historical benchmark
+        consensus = base_r
+        market_rec_out = None
+    elif rec_r > 0 and hist_cnt > 0 and hist_r > 0:
         consensus = round(w_comp * rec_r + w_hist * hist_r)
     elif rec_r > 0:
         consensus = rec_r

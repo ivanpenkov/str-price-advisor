@@ -244,11 +244,38 @@ class HTMLDashboardGenerator:
                     pass
         return cached
 
+    def _load_prior_snapshot_comps(self) -> Tuple[Dict[str, List[Dict[str, Any]]], Dict[str, str]]:
+        """
+        Load historical comp distributions from previous pricing snapshots.
+        Ensures intervals not scanned in daily quick scans retain real comp data
+        from the most recent weekly full scan.
+        """
+        cache_dir = Path("data")
+        prior_comps: Dict[str, List[Dict[str, Any]]] = {}
+        prior_seg_types: Dict[str, str] = {}
+        for p in sorted(cache_dir.glob("pricing_data_*.json"), reverse=True):
+            try:
+                data = json.loads(p.read_text(encoding="utf-8"))
+                for grp in ("urgent_intervals", "moderate_intervals", "informational_intervals"):
+                    for item in data.get(grp, []):
+                        cin = item.get("check_in")
+                        cout = item.get("check_out")
+                        clist = item.get("comps_list", [])
+                        if cin and cout and len(clist) > 0:
+                            k = f"{cin}_{cout}"
+                            if k not in prior_comps or len(prior_comps[k]) == 0:
+                                prior_comps[k] = clist
+                                if item.get("segment_type"):
+                                    prior_seg_types[k] = str(item["segment_type"]).lower()
+            except Exception:
+                pass
+        return prior_comps, prior_seg_types
+
     def generate_full_12_month_evaluation(self) -> List[Dict[str, Any]]:
         """
         Evaluate all 82 unbooked intervals across the 12-month calendar.
-        Uses exact cached comp results where available, and robust seasonal
-        luxury comp distributions for future intervals.
+        Uses exact cached comp results where available, and carries forward
+        the most recent full-market comp distributions for future intervals.
         """
         kivoya = KivoyaClient()
         segmenter = CalendarSegmenter(kivoya_client=kivoya, cleaning_fee=500.0)
@@ -272,6 +299,7 @@ class HTMLDashboardGenerator:
         )
 
         cached_comps = self._load_cached_comps_by_key()
+        prior_comps, prior_seg_types = self._load_prior_snapshot_comps()
 
         evaluated: List[Dict[str, Any]] = []
 
@@ -301,9 +329,38 @@ class HTMLDashboardGenerator:
                 ]
                 rates = [c["effective_nightly"] for c in comps_list]
                 is_live = bool(comps_list)
+            elif cache_key in prior_comps and len(prior_comps[cache_key]) > 0:
+                comps_list = [
+                    c for c in prior_comps[cache_key]
+                    if not self.comps_dict or str(c.get("listing_id") or "") in self.comps_dict
+                ]
+                rates = [c["effective_nightly"] for c in comps_list]
+                is_live = False
             else:
-                comps_list = []
-                rates = []
+                # Fuzzy match: find nearest prior interval within +/- 4 days of check_in
+                # Strongly prefer matching segment_type (weekend vs midweek)
+                target_seg_type = str(seg.get("segment_type") or "").lower()
+                c_in_dt = datetime.strptime(c_in, "%Y-%m-%d").date()
+                best_cand = []
+                best_diff = 999
+                for pk, pclist in prior_comps.items():
+                    try:
+                        p_cin_dt = datetime.strptime(pk.split("_")[0], "%Y-%m-%d").date()
+                        diff = abs((p_cin_dt - c_in_dt).days)
+                        if diff <= 4:
+                            p_type = prior_seg_types.get(pk)
+                            type_penalty = 0 if (target_seg_type and p_type and target_seg_type == p_type) else 10
+                            score = diff + type_penalty
+                            if score < best_diff:
+                                best_diff = score
+                                best_cand = pclist
+                    except Exception:
+                        pass
+                comps_list = [
+                    c for c in best_cand
+                    if not self.comps_dict or str(c.get("listing_id") or "") in self.comps_dict
+                ] if best_cand else []
+                rates = [c["effective_nightly"] for c in comps_list]
                 is_live = False
 
             seg["is_live_scan"] = is_live
@@ -319,6 +376,7 @@ class HTMLDashboardGenerator:
             evaluated_segments = self.generate_full_12_month_evaluation()
         else:
             cached_comps = self._load_cached_comps_by_key()
+            prior_comps, _ = self._load_prior_snapshot_comps()
             for s in evaluated_segments:
                 c_in = s["check_in"]
                 c_out = s["check_out"]
@@ -334,7 +392,7 @@ class HTMLDashboardGenerator:
                             s["is_our_airbnb_live"] = True
                     except Exception:
                         pass
-                if not s.get("comps_list"):
+                if not s.get("comps_list") or len(s.get("comps_list", [])) == 0:
                     cache_key = f"{s['check_in']}_{s['check_out']}"
                     if cache_key in cached_comps and len(cached_comps[cache_key]) > 0:
                         s["comps_list"] = [
@@ -342,6 +400,12 @@ class HTMLDashboardGenerator:
                             if not self.comps_dict or str(c.get("listing_id") or "") in self.comps_dict
                         ]
                         s["is_live_scan"] = bool(s["comps_list"])
+                    elif cache_key in prior_comps and len(prior_comps[cache_key]) > 0:
+                        s["comps_list"] = [
+                            c for c in prior_comps[cache_key]
+                            if not self.comps_dict or str(c.get("listing_id") or "") in self.comps_dict
+                        ]
+                        s["is_live_scan"] = False
                     else:
                         s["comps_list"] = []
                         s["is_live_scan"] = False

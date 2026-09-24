@@ -493,6 +493,30 @@ async def run_weekly_advisory(
         step4_start = time.perf_counter()
         urgent_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("urgent_percent_diff", URGENT_PCT_DIFF)
         mod_pct = config.get("strategy", {}).get("anomaly_thresholds", {}).get("moderate_percent_diff", MODERATE_PCT_DIFF)
+
+        from src.html_generator import HTMLDashboardGenerator
+        html_gen = HTMLDashboardGenerator(
+            output_path="docs/index.html",
+            urgent_pct_diff=urgent_pct,
+            moderate_pct_diff=mod_pct,
+        )
+
+        if quick:
+            # Carry forward full 12-month calendar from latest weekly scan so daily quickscan
+            # never truncates snapshots or leaves future months without comps
+            full_evaluated = html_gen.generate_full_12_month_evaluation()
+            quick_by_key = {s["check_in"]: s for s in evaluated_results}
+            merged_results = []
+            for s in full_evaluated:
+                cin = s["check_in"]
+                if cin in quick_by_key:
+                    merged_results.append(quick_by_key[cin])
+                else:
+                    merged_results.append(s)
+            report_segments = merged_results
+        else:
+            report_segments = evaluated_results
+
         reporter = PriceReportGenerator(
             output_dir="data",
             urgent_pct_diff=urgent_pct,
@@ -500,7 +524,7 @@ async def run_weekly_advisory(
             sales_tracker=sales_tracker,
         )
         outputs = reporter.generate_all(
-            evaluated_segments=evaluated_results,
+            evaluated_segments=report_segments,
             property_name=config["property"]["name"],
         )
         step4_time = time.perf_counter() - step4_start
@@ -566,24 +590,18 @@ async def run_weekly_advisory(
     # 5. HTML Dashboard Generation (docs/index.html)
     print("\n[Step 5/5] Generating interactive static HTML dashboard in docs/...")
     step5_start = time.perf_counter()
-    from src.html_generator import HTMLDashboardGenerator
-    html_gen = HTMLDashboardGenerator(
-        output_path="docs/index.html",
-        urgent_pct_diff=urgent_pct,
-        moderate_pct_diff=mod_pct,
-    )
-    html_file = html_gen.generate()
+    html_file = html_gen.generate(report_segments)
     shutil.copy("data/latest_sheet.csv", "docs/latest_sheet.csv")
     shutil.copy("data/latest_report.md", "docs/latest_report.md")
     step5_time = time.perf_counter() - step5_start
 
-    urgent_count = sum(1 for s in evaluated_results if s["priority_tier"] == "URGENT_ACTION")
-    mod_count = sum(1 for s in evaluated_results if s["priority_tier"] == "MODERATE_ADJUSTMENT")
-    info_count = sum(1 for s in evaluated_results if s["priority_tier"] == "INFORMATIONAL")
+    urgent_count = sum(1 for s in report_segments if s["priority_tier"] == "URGENT_ACTION")
+    mod_count = sum(1 for s in report_segments if s["priority_tier"] == "MODERATE_ADJUSTMENT")
+    info_count = sum(1 for s in report_segments if s["priority_tier"] == "INFORMATIONAL")
 
     if tracker is not None:
         try:
-            total_comps = sum(len(s.get("comp_listings", [])) for s in evaluated_results)
+            total_comps = sum(len(s.get("comps_list") or s.get("comp_listings", [])) for s in evaluated_results)
             w_ctx = getattr(collector, "worker_contexts", [])
             max_w = getattr(getattr(collector, "proxy_mgr", None), "max_workers", 10)
             proxy_str = f"{len(w_ctx)}/{max_w} active" if w_ctx else "10/10 active"

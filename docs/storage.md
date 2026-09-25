@@ -140,7 +140,7 @@ flowchart TD
 #### Schema & Data Contents:
 - **`comps_registry.json`**: Primary competitive universe dictionary organized into `tier_a` (16+ guests), `tier_b` (12–15 guests), `disqualified` (disqualified homes with audit trails), and `excluded_comps`. Each entry stores listing title, URL, location corridor, bedrooms, bathrooms, guest capacity, pool features, 6-factor luxury rubric scores, quality tier, and derived desirability ratio.
 - **`listing_specs.json`**: Granular architectural specifications (exact bed arrangements, bedroom counts, bathroom counts, square footage, pool heating type, amenities like pickleball/putting green, coordinates, and primary photo URLs).
-- **`settings.yaml`**: Core business logic parameters: `urgent_percent_diff` (25%), `moderate_percent_diff` (10%), `urgent_lead_days` (60), `base_percentile` (65%), `cleaning_fee` ($500), `comp_weight` (0.67), `historical_weight` (0.33), `weekend_premium_factor` (1.50), Bayesian shrinkage $k$ (5.0), and operational rate floors ($450 weekend / $300 midweek).
+- **`settings.yaml`**: Core business logic parameters: `urgent_percent_diff` (25%), `moderate_percent_diff` (10%), `base_percentile` (65%), `cleaning_fee` ($500), `comp_weight` (0.67), `historical_weight` (0.33), `weekend_premium_factor` (1.50), Bayesian shrinkage $k$ (5.0), and operational rate floors ($450 weekend / $300 midweek).
 - **`holidays.json`**: Peak demand period definitions (Thanksgiving, Christmas/New Year, WM Phoenix Open, Super Bowl, Spring Break, etc.) specifying rate floor minimums, length-of-stay minimums, and premium markup multipliers.
 
 #### Accessing Commands & Scripts:

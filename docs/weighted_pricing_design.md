@@ -287,7 +287,6 @@ strategy:
   anomaly_thresholds:
     urgent_percent_diff: 25.0
     moderate_percent_diff: 10.0
-    urgent_lead_days: 60
   proposed_pricing:
     comp_weight: 0.67          # Double weight for comp-derived price (target percentile)
     historical_weight: 0.33    # Single weight for historical benchmark price
@@ -314,7 +313,7 @@ HISTORICAL_PRICE_WEIGHT: float = float(_pricing_cfg.get("historical_weight", 0.3
 WEEKEND_PREMIUM_FACTOR: float = float(_pricing_cfg.get("weekend_premium_factor", 1.50))
 
 def reload_settings(config_path: Optional[str] = None) -> Dict[str, Any]:
-    global _SETTINGS, URGENT_PCT_DIFF, MODERATE_PCT_DIFF, URGENT_LEAD_DAYS, BASE_PERCENTILE, CLEANING_FEE, COMP_PRICE_WEIGHT, HISTORICAL_PRICE_WEIGHT, WEEKEND_PREMIUM_FACTOR, FALLBACK_INTERVALS
+    global _SETTINGS, URGENT_PCT_DIFF, MODERATE_PCT_DIFF, BASE_PERCENTILE, CLEANING_FEE, COMP_PRICE_WEIGHT, HISTORICAL_PRICE_WEIGHT, WEEKEND_PREMIUM_FACTOR, FALLBACK_INTERVALS
     _SETTINGS = load_settings(config_path)
     FALLBACK_INTERVALS = load_fallback_intervals()
     ...

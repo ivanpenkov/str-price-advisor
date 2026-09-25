@@ -18,7 +18,7 @@
   {
     "holiday_name": "Thanksgiving",
     "kivoya_period_name": "Thanksgiving 26",
-    "premium_pct": 10,
+    "premium_pct": 0,
     "floor_rate": 499,
     "min_nights": 3,
     "description": "High family & ASU alumni compression; multi-gen gathering"
@@ -26,7 +26,7 @@
   {
     "holiday_name": "Christmas & New Year",
     "kivoya_period_name": "Christmas & New Year 2026",
-    "premium_pct": 10,
+    "premium_pct": 0,
     "floor_rate": 499,
     "min_nights": 3,
     "description": "Peak national holiday winter escape; 6BR luxury estate demand"

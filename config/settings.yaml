@@ -25,55 +25,54 @@ strategy:
     ">180d":
       description: "Ultra-advance booking window (>180d). Captures high-value planners and prevents early luxury bargain hunting."
       weekend:
-        target: 85.0
-        floor: 80.0
-        p75: 90.0
+        target: 75.0
+        floor: 70.0
+        p75: 80.0
       midweek:
         target: 50.0
         floor: 45.0
         p75: 60.0
-      action_guidance: "Hold firm at 85% (Weekend) / 50% (Midweek). Premium anchor protects far-out luxury yield against early underpriced bargain hunters."
+      action_guidance: "Hold firm at 75% (Weekend) / 50% (Midweek). Premium anchor protects far-out luxury yield against early underpriced bargain hunters."
 
     "91–180d":
       description: "Early booking window (91–180d) with high willingness-to-pay. Anchor at premium percentiles."
       weekend:
-        target: 67.5
-        floor: 65.0
+        target: 65.0
+        floor: 60.0
         p75: 75.0
       midweek:
-        target: 47.5
-        floor: 45.0
+        target: 45.0
+        floor: 40.0
         p75: 55.0
-      action_guidance: "Hold firm at 65%–70% (Weekend) / 45%–50% (Midweek). Strategic floor protects far-out luxury yield against early underpriced bargain hunters."
+      action_guidance: "Hold firm at 60%–65% (Weekend) / 40%–45% (Midweek). Strategic floor protects far-out luxury yield against early underpriced bargain hunters."
 
     "31–90d":
       description: "Prime conversion period for family vacations and luxury group travel."
       weekend:
-        target: 62.5
-        floor: 60.0
+        target: 60.0
+        floor: 55.0
         p75: 70.0
       midweek:
-        target: 32.5
+        target: 35.0
         floor: 30.0
         p75: 45.0
-      action_guidance: "Target 60%–65% (Weekend) / 30%–35% (Midweek). Aligned with empirical comp conversion band and protected by $300 midweek floor."
+      action_guidance: "Target 55%–60% (Weekend) / 30%–35% (Midweek). Aligned with empirical comp conversion band and protected by $300 midweek floor."
 
     "≤30d":
       description: "Near-term and distress inventory liquidation window where unbooked nights risk perishable loss."
       weekend:
-        target: 42.5
+        target: 45.0
         floor: 40.0
         p75: 50.0
       midweek:
         target: 30.0
-        floor: 28.0
-        p75: 38.0
-      action_guidance: "Aggressive liquidation: 40%–45% (Weekend) / 28%–32% (Midweek) to secure occupancy above $300 operational floor."
+        floor: 25.0
+        p75: 40.0
+      action_guidance: "Aggressive liquidation: 40%–45% (Weekend) / 25%–30% (Midweek) to secure occupancy above $300 operational floor."
 
   anomaly_thresholds:
-    urgent_percent_diff: 25.0  # >25% discrepancy triggers weekly urgent action
-    urgent_lead_days: 60       # Unbooked dates <60 days away get elevated priority
-    moderate_percent_diff: 10.0 # 10-25% discrepancy for monthly adjustment
+    urgent_percent_diff: 25.0  # UI filter: >25% diff between proposed and current rates -> "Urgent"
+    moderate_percent_diff: 10.0 # UI filter: 10-25% diff between proposed and current rates -> "Review"
   proposed_pricing:
     comp_weight: 0.67          # Double weight for comp-derived price (target percentile)
     historical_weight: 0.33    # Single weight for historical benchmark price

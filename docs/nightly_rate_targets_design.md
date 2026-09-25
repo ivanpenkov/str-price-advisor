@@ -221,7 +221,6 @@ strategy:
 
   anomaly_thresholds:
     urgent_percent_diff: 25.0
-    urgent_lead_days: 60
     moderate_percent_diff: 10.0
   proposed_pricing:
     comp_weight: 0.67

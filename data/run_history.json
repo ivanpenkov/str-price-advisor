@@ -1,8 +1,31 @@
 {
   "version": "1.0",
-  "last_updated": "2026-09-25T13:00:07.417641Z",
+  "last_updated": "2026-09-25T13:20:45.048377Z",
   "active_host": "ivans-mac-mini",
   "runs": [
+    {
+      "run_id": "2026-09-25_131514_daily-quickscan",
+      "job_type": "daily-quickscan",
+      "job_title": "Daily 90-Day Quick Market Scan",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-25T13:15:14.950560Z",
+      "end_time": "2026-09-25T13:20:45.046524Z",
+      "duration_sec": 330.1,
+      "duration_formatted": "5m 30s",
+      "exit_code": 0,
+      "git_commit": "058d62c",
+      "log_file": "logs/2026-09-25_131514_daily-quickscan.txt",
+      "summary": {
+        "intervals_evaluated": 12,
+        "comps_scraped": 620,
+        "urgent_adjustments": 19,
+        "moderate_adjustments": 45,
+        "proxy_pool_health": "10/10 active",
+        "message": "Scanned 12 intervals; 19 urgent and 45 moderate price adjustments identified."
+      },
+      "error_excerpt": null
+    },
     {
       "run_id": "2026-09-25_130001_pms-sync",
       "job_type": "pms-sync",

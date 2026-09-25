@@ -4602,7 +4602,7 @@
       "beds": 9,
       "baths": 5.5,
       "rating": 4.97,
-      "reviews": 108,
+      "reviews": 109,
       "is_guest_favorite": true,
       "guest_favorite_badge": "Guest Favorite",
       "url": "https://www.airbnb.com/rooms/858613170601453396",
@@ -4622,7 +4622,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.97★ with 108 reviews)",
+          "Flawless guest track record (4.97★ with 109 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -9374,7 +9374,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-09-24T19:52:47.411715",
+    "last_ratings_sync": "2026-09-25T06:19:24.412618",
     "total_guest_favorites": 82
   },
   "excluded_comps": {

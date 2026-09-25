@@ -91,3 +91,24 @@ scripts/notify_mobile.sh \
 - **Default Topic**: `ivan-str-advisor-xyz` (overridable via `NTFY_TOPIC`).
 - **Client App**: Free `ntfy` app on Android or iOS subscribed to topic `ivan-str-advisor-xyz`.
 
+---
+
+## 5. Mandatory Git Pre-Flight Synchronization Protocol
+
+To ensure agents always analyze and operate on the freshest code and data in multi-machine environments (e.g. dedicated Mac Mini background scrapers, automated launchd daemons, and multiple development workstations), agents MUST adhere to this pre-flight synchronization protocol:
+
+### 1. Freshness Invariant & Execution Triggers
+Before beginning any non-trivial diagnostic, code analysis, bug investigation, or feature development:
+1. **Session & Task Start**: Check if a git sync/fetch has occurred within the last **60 minutes**. If not, execute the synchronization command before inspecting files or running commands.
+2. **Remote Machine / Daemon References**: If the user or context references remote machines (e.g., `Ivans-Mac-Mini`, dedicated scrapers, cloud nodes) or automated background jobs (`daily-quickscan`, `weekly-fullscan`, `pms-sync`), execute a synchronization check immediately regardless of when the last check was run.
+3. **Unexpected Behavior / Regression Reports**: If the user reports that a previously fixed bug is recurring or data seems stale/missing, verify git synchronization first before attempting code changes.
+
+### 2. Synchronization Command Protocol
+Always execute the rebase pull with automatic stashing to avoid losing local uncommitted work or scratch notes:
+```bash
+git pull --rebase --autostash origin main
+```
+- **Autostash Safety**: Any uncommitted edits or dirty working tree states are safely stashed, the local branch is cleanly rebased on top of `origin/main`, and stashed changes are restored automatically.
+- **Conflict Handling**: If a genuine rebase conflict occurs, abort the rebase (`git rebase --abort`), report the conflicting files directly to the user, and request guidance before modifying code.
+
+

@@ -85,6 +85,33 @@ def format_comp_sales_line(label: str, sales: List[Dict[str, Any]]) -> str:
     return f"   - {label}: {', '.join(items)}"
 
 
+def compute_min_nights_test_intervals(
+    check_in_str: str,
+    check_out_str: str,
+) -> Tuple[Tuple[str, str], Tuple[str, str]]:
+    """
+    Compute Check 1 (extended before) and Check 2 (extended after) test intervals
+    for a stay with nights < 4 to validate against 4-night minimum restrictions.
+
+    Both test intervals strictly contain all original stay nights:
+    delta_days = max(1, 4 - nights)
+    Check 1: cin - delta_days to cout (at least 4 nights).
+    Check 2: cin to cout + delta_days (at least 4 nights).
+    """
+    cin = datetime.strptime(check_in_str, "%Y-%m-%d").date()
+    cout = datetime.strptime(check_out_str, "%Y-%m-%d").date()
+    nights = (cout - cin).days
+    delta_days = max(1, 4 - nights)
+
+    cin_1 = cin - timedelta(days=delta_days)
+    cout_1 = cout
+
+    cin_2 = cin
+    cout_2 = cout + timedelta(days=delta_days)
+
+    return (cin_1.isoformat(), cout_1.isoformat()), (cin_2.isoformat(), cout_2.isoformat())
+
+
 class CompetitorSalesTracker:
     """Tracks competitor booking events across daily snapshots and computes absorption strategy."""
 
@@ -242,7 +269,7 @@ class CompetitorSalesTracker:
                 intervals[key] = {
                     "check_in": cin,
                     "check_out": cout,
-                    "nights": item.get("nights", 3),
+                    "nights": item.get("nights") or max(1, (datetime.strptime(cout, "%Y-%m-%d").date() - datetime.strptime(cin, "%Y-%m-%d").date()).days),
                     "segment_type": item.get("segment_type", "midweek"),
                     "lead_time_days": item.get("lead_time_days", 0),
                     "is_live_scan": is_live,
@@ -525,8 +552,13 @@ class CompetitorSalesTracker:
                             )
                             purged_count += cursor.rowcount
                             conn.commit()
-                        total_p = float(v_res["price"])
-                        eff_nightly = round(total_p / max(1, nights), 2)
+                        total_p_raw = float(v_res["price"])
+                        if v_res.get("false_sale_min_nights"):
+                            eff_nightly = float(v_res.get("effective_nightly") or round(total_p_raw / max(4, nights), 2))
+                            total_p = round(eff_nightly * nights, 2)
+                        else:
+                            total_p = total_p_raw
+                            eff_nightly = round(total_p / max(1, nights), 2)
                         cache_dir = self.data_dir / "cache"
                         cache_dir.mkdir(parents=True, exist_ok=True)
                         try:
@@ -540,9 +572,19 @@ class CompetitorSalesTracker:
                             }]), encoding="utf-8")
                         except Exception:
                             pass
-                        logger.info(f"Comp {cid} missing from broad search but confirmed available on Airbnb (${eff_nightly:.0f}/nt, total ${total_p:.0f}). Discarding false sale.")
+                        if v_res.get("false_sale_min_nights"):
+                            logger.info(
+                                f"Comp {cid} missing from broad search but verified available on 4-night minimum extension "
+                                f"(${eff_nightly:.0f}/nt, estimated {nights}n total ${total_p:.0f}). Discarding false sale."
+                            )
+                        else:
+                            logger.info(f"Comp {cid} missing from broad search but confirmed available on Airbnb (${eff_nightly:.0f}/nt, total ${total_p:.0f}). Discarding false sale.")
                     else:
                         logger.info(f"Comp {cid} calendar could not be confirmed blocked ({v_res.get('reason')}). Skipping sales ledger entry.")
+                    continue
+
+                if "minimum stay" in (v_res.get("reason") or "").lower() or "min stay" in (v_res.get("reason") or "").lower():
+                    logger.info(f"Comp {cid} unavailable due to minimum stay restriction ({v_res.get('reason')}). Skipping sales ledger entry.")
                     continue
 
                 # Confirmed blocked sale (calendar verified)
@@ -651,6 +693,15 @@ class CompetitorSalesTracker:
             logger.info(f"Skipping direct sale recording for unregistered or disqualified comp {listing_id}")
             return False
         reg_info = registered_comps[str(listing_id)]
+
+        # Guard: If raw_snippet indicates a minimum stay restriction rather than a confirmed booking, reject
+        snippet_lower = (raw_snippet or "").lower()
+        if "minimum stay" in snippet_lower or "min stay" in snippet_lower:
+            logger.info(
+                f"Skipping direct sale recording for {listing_id} ({check_in}->{check_out}): "
+                f"Unavailability was due to minimum stay restriction ({raw_snippet})."
+            )
+            return False
 
         if not detected_date:
             detected_date = date.today().isoformat()
@@ -913,20 +964,32 @@ class CompetitorSalesTracker:
         check_out: str,
         accommodates: int = 16,
         pdp_timeout: float = 5.0,
+        validate_min_nights: bool = True,
     ) -> Dict[str, Any]:
         """
         Directly verify live availability of a comp for an interval on Airbnb
         via Playwright and NordVPN proxy by checking StaysPdpSections.
+
+        When validate_min_nights is True and stay duration is < 4 nights:
+        If initial search on [check_in, check_out] returns unavailable, automatically
+        tests 4-night superset extensions (Check 1: cin - delta -> cout; Check 2: cin -> cout + delta).
+        If either 4-night interval is available, the property is unbooked (enforces 4-night minimum)
+        and is marked available/false_sale_min_nights to prevent false sale commits.
         """
         import asyncio
         from playwright.async_api import async_playwright
         from src.stealth_connection import StealthConnectionManager
         from src.comp_manager import CompManager
 
+        cin_d = datetime.strptime(check_in, "%Y-%m-%d").date()
+        cout_d = datetime.strptime(check_out, "%Y-%m-%d").date()
+        nights = (cout_d - cin_d).days
+
         result = {
             "listing_id": str(listing_id),
             "check_in": check_in,
             "check_out": check_out,
+            "nights": nights,
             "available": False,
             "unavail": False,
             "price": None,
@@ -947,93 +1010,236 @@ class CompetitorSalesTracker:
 
             async with async_playwright() as p:
                 browser = await p.chromium.launch(**launch_kwargs)
-                context = await browser.new_context(
-                    viewport={"width": 1366, "height": 850},
-                    user_agent=(
-                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
-                    ),
-                )
-                page = await context.new_page()
-
-                pdp_event = asyncio.Event()
-
-                async def on_resp(resp):
-                    if "StaysPdpSections" in resp.url:
-                        try:
-                            body = await resp.text()
-                            data = json.loads(body)
-                            price, label, unavail, reason = CompManager.parse_stays_pdp_sections(data)
-                            if price and not result["price"]:
-                                result["price"] = price
-                            if unavail:
-                                result["unavail"] = True
-                                result["available"] = False
-                            if reason and not result["reason"]:
-                                result["reason"] = reason
-                            if price or unavail:
-                                pdp_event.set()
-                        except Exception:
-                            pass
-
-                page.on("response", on_resp)
-                url = f"https://www.airbnb.com/rooms/{listing_id}?check_in={check_in}&check_out={check_out}&adults={accommodates}&locale=en&currency=USD"
                 try:
-                    await page.goto(url, wait_until="domcontentloaded", timeout=25000)
-                    try:
-                        await page.evaluate("() => window.scrollTo(0, 1500)")
-                    except Exception:
-                        pass
-                    try:
-                        await asyncio.wait_for(pdp_event.wait(), timeout=pdp_timeout)
-                    except asyncio.TimeoutError:
-                        pass
+                    context = await browser.new_context(
+                        viewport={"width": 1366, "height": 850},
+                        user_agent=(
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+                        ),
+                    )
 
-                    # If StaysPdpSections did not resolve price or unavail, fallback to DOM inspection
-                    if not result["price"] and not result.get("unavail"):
+                    async def _check_interval_on_page(page, c_in: str, c_out: str) -> Dict[str, Any]:
+                        int_res = {
+                            "check_in": c_in,
+                            "check_out": c_out,
+                            "available": False,
+                            "unavail": False,
+                            "price": None,
+                            "reason": None,
+                        }
+                        pdp_event = asyncio.Event()
+
+                        async def on_resp(resp):
+                            if "StaysPdpSections" in resp.url:
+                                try:
+                                    body = await resp.text()
+                                    data = json.loads(body)
+                                    price, label, unavail, reason = CompManager.parse_stays_pdp_sections(data)
+                                    if price and not int_res["price"]:
+                                        int_res["price"] = price
+                                    if unavail:
+                                        int_res["unavail"] = True
+                                        int_res["available"] = False
+                                    if reason and not int_res["reason"]:
+                                        int_res["reason"] = reason
+                                    if price or unavail:
+                                        pdp_event.set()
+                                except Exception:
+                                    pass
+
+                        page.on("response", on_resp)
+                        url = f"https://www.airbnb.com/rooms/{listing_id}?check_in={c_in}&check_out={c_out}&adults={accommodates}&locale=en&currency=USD"
                         try:
-                            body_text = await page.evaluate("() => document.body.innerText")
-                        except Exception:
-                            body_text = ""
-                        lower_body = (body_text or "").lower()
-                        if any(bot_phrase in lower_body for bot_phrase in [
-                            "verify you are human", "press and hold", "access denied",
-                            "please verify", "security check", "robot or human",
-                        ]):
-                            result["reason"] = "Bot challenge detected on listing page"
-                        elif any(phrase in lower_body for phrase in [
-                            "dates are not available", "dates aren't available",
-                            "selected dates are unavailable", "these dates are unavailable",
-                            "dates not available", "unavailable for these dates",
-                            "minimum stay", "dates are unavailable",
-                        ]):
-                            result["unavail"] = True
-                            result["available"] = False
-                            result["reason"] = "Dates unavailable on listing page"
-                        else:
-                            current_url = getattr(page, "url", "")
-                            if (
-                                isinstance(current_url, str)
-                                and current_url.startswith("http")
-                                and f"/rooms/{listing_id}" in current_url
-                                and f"check_in={check_in}" not in current_url
-                            ):
-                                result["unavail"] = True
-                                result["available"] = False
-                                result["reason"] = "Client-side SPA navigation reset: requested check_in stripped from URL"
-                            else:
-                                m = re.search(r"\$([0-9,]+(?:\.[0-9]{2})?)\s*for\s+\d+\s+nights", body_text, re.IGNORECASE)
-                                if m:
-                                    result["price"] = float(m.group(1).replace(",", ""))
+                            await page.goto(url, wait_until="domcontentloaded", timeout=25000)
+                            try:
+                                await page.evaluate("() => window.scrollTo(0, 1500)")
+                            except Exception:
+                                pass
+                            try:
+                                await asyncio.wait_for(pdp_event.wait(), timeout=pdp_timeout)
+                            except asyncio.TimeoutError:
+                                pass
+
+                            # Fallback to DOM inspection if StaysPdpSections did not resolve
+                            if not int_res["price"] and not int_res.get("unavail"):
+                                try:
+                                    body_text = await page.evaluate("() => document.body.innerText")
+                                except Exception:
+                                    body_text = ""
+                                lower_body = (body_text or "").lower()
+                                if any(bot_phrase in lower_body for bot_phrase in [
+                                    "verify you are human", "press and hold", "access denied",
+                                    "please verify", "security check", "robot or human",
+                                ]):
+                                    int_res["reason"] = "Bot challenge detected on listing page"
+                                elif any(phrase in lower_body for phrase in [
+                                    "dates are not available", "dates aren't available",
+                                    "selected dates are unavailable", "these dates are unavailable",
+                                    "dates not available", "unavailable for these dates",
+                                    "minimum stay", "dates are unavailable",
+                                ]):
+                                    int_res["unavail"] = True
+                                    int_res["available"] = False
+                                    if "minimum stay" in lower_body or "min stay" in lower_body:
+                                        m_stay = re.search(r"([^.\n\r]*min(?:imum)?[\s-]+stay[^.\n\r]*)", body_text or "", re.IGNORECASE)
+                                        snippet = m_stay.group(1).strip() if m_stay else "Minimum stay restriction"
+                                        int_res["reason"] = f"{snippet} detected on listing page"
+                                    else:
+                                        int_res["reason"] = "Dates unavailable on listing page"
                                 else:
-                                    m2 = re.search(r"\$([0-9,]+(?:\.[0-9]{2})?)\s*(?:before taxes|total)", body_text, re.IGNORECASE)
-                                    if m2:
-                                        result["price"] = float(m2.group(1).replace(",", ""))
-                except Exception as e:
-                    result["reason"] = str(e)
+                                    current_url = getattr(page, "url", "")
+                                    if (
+                                        isinstance(current_url, str)
+                                        and current_url.startswith("http")
+                                        and f"/rooms/{listing_id}" in current_url
+                                        and f"check_in={c_in}" not in current_url
+                                    ):
+                                        int_res["unavail"] = True
+                                        int_res["available"] = False
+                                        int_res["reason"] = "Client-side SPA navigation reset: requested check_in stripped from URL"
+                                    else:
+                                        m = re.search(r"\$([0-9,]+(?:\.[0-9]{2})?)\s*for\s+\d+\s+nights", body_text, re.IGNORECASE)
+                                        if m:
+                                            int_res["price"] = float(m.group(1).replace(",", ""))
+                                        else:
+                                            m2 = re.search(r"\$([0-9,]+(?:\.[0-9]{2})?)\s*(?:before taxes|total)", body_text, re.IGNORECASE)
+                                            if m2:
+                                                int_res["price"] = float(m2.group(1).replace(",", ""))
+                        except Exception as e:
+                            int_res["reason"] = str(e)
+                        finally:
+                            page.remove_listener("response", on_resp)
+
+                        if int_res["price"] and not int_res.get("unavail") and not int_res.get("reason"):
+                            int_res["available"] = True
+
+                        return int_res
+
+                    # Run Primary Check for [check_in, check_out]
+                    page = await context.new_page()
+                    try:
+                        primary_res = await _check_interval_on_page(page, check_in, check_out)
+                        result.update(primary_res)
+                    finally:
+                        await page.close()
+
+                    # Primary Minimum Stay Rule Evaluation
+                    # If primary check indicates unavailability due to a minimum stay rule:
+                    # - If nights >= 4: the stay already met/exceeded 4 nights, so any minimum stay restriction
+                    #   reported by Airbnb (e.g. 5, 7, 14, 30 nights) means the property is unbooked but restricted.
+                    # - If nights < 4: if the listing enforces > 4 nights (e.g. 5, 7 nights), 4-night extensions
+                    #   will also fail, so short-circuit immediately.
+                    primary_reason = primary_res.get("reason") or ""
+                    if validate_min_nights and result.get("unavail") and (
+                        "minimum stay" in primary_reason.lower() or "min stay" in primary_reason.lower()
+                    ):
+                        m_min = re.search(
+                            r"(?:(\d+)[\s-]+nights?\s+minimum|minimum(?:\s+stay)?(?:\s*(?:is|of|:))?\s*(\d+)\s*nights?|(\d+)[\s-]+nights?\s+min(?:\s+stay)?)",
+                            primary_reason,
+                            re.IGNORECASE,
+                        )
+                        min_nights = int(m_min.group(1) or m_min.group(2) or m_min.group(3)) if m_min else None
+                        if nights >= 4 or (min_nights and min_nights > 4):
+                            result["available"] = False
+                            result["unavail"] = False
+                            result["reason"] = f"Listing enforces stricter minimum stay rule ({primary_reason})."
+                            return result
+
+                    # 4-Night Minimum Validation Protocol (for candidate stays < 4 nights)
+                    # If initial check indicates unavailable and stay is < 4 nights, verify if
+                    # unavailability was simply caused by host's strict 4-night minimum requirement.
+                    if validate_min_nights and nights < 4 and result.get("unavail"):
+                        (cin_1, cout_1), (cin_2, cout_2) = compute_min_nights_test_intervals(check_in, check_out)
+                        cin_1_d = datetime.strptime(cin_1, "%Y-%m-%d").date()
+                        cout_1_d = datetime.strptime(cout_1, "%Y-%m-%d").date()
+                        cin_2_d = datetime.strptime(cin_2, "%Y-%m-%d").date()
+                        cout_2_d = datetime.strptime(cout_2, "%Y-%m-%d").date()
+                        today = date.today()
+
+                        false_sale_found = False
+                        res1: Optional[Dict[str, Any]] = None
+
+                        # Reset unavail flag during 4-night validation; only re-enable if confirmed blocked across extensions
+                        result["unavail"] = False
+
+                        # Check 1: Extended before (skip if check-in is in the past)
+                        if cin_1_d >= today:
+                            page1 = await context.new_page()
+                            try:
+                                res1 = await _check_interval_on_page(page1, cin_1, cout_1)
+                            finally:
+                                await page1.close()
+
+                            if res1.get("available") and res1.get("price"):
+                                n1 = (cout_1_d - cin_1_d).days
+                                eff1 = round(res1["price"] / max(1, n1), 2)
+                                result["available"] = True
+                                result["unavail"] = False
+                                result["false_sale_min_nights"] = True
+                                result["price"] = res1["price"]
+                                result["extension_nights"] = n1
+                                result["effective_nightly"] = eff1
+                                result["reason"] = (
+                                    f"Available on 4-night extension ({cin_1} -> {cout_1}) for ${res1['price']:,.0f} "
+                                    f"(${eff1:,.0f}/nt). Unavailability on {check_in}->{check_out} was due to 4-night minimum."
+                                )
+                                false_sale_found = True
+                            elif "minimum stay" in (res1.get("reason") or "").lower() or "min stay" in (res1.get("reason") or "").lower():
+                                result["available"] = False
+                                result["unavail"] = False
+                                result["reason"] = f"Listing enforces stricter minimum stay rule ({res1.get('reason')})."
+                                false_sale_found = True
+
+                        if not false_sale_found:
+                            # Check 2: Extended after (skip if check-in is in the past)
+                            if cin_2_d >= today:
+                                page2 = await context.new_page()
+                                try:
+                                    res2 = await _check_interval_on_page(page2, cin_2, cout_2)
+                                finally:
+                                    await page2.close()
+
+                                if res2.get("available") and res2.get("price"):
+                                    n2 = (cout_2_d - cin_2_d).days
+                                    eff2 = round(res2["price"] / max(1, n2), 2)
+                                    result["available"] = True
+                                    result["unavail"] = False
+                                    result["false_sale_min_nights"] = True
+                                    result["price"] = res2["price"]
+                                    result["extension_nights"] = n2
+                                    result["effective_nightly"] = eff2
+                                    result["reason"] = (
+                                        f"Available on 4-night extension ({cin_2} -> {cout_2}) for ${res2['price']:,.0f} "
+                                        f"(${eff2:,.0f}/nt). Unavailability on {check_in}->{check_out} was due to 4-night minimum."
+                                    )
+                                elif "minimum stay" in (res2.get("reason") or "").lower() or "min stay" in (res2.get("reason") or "").lower():
+                                    result["available"] = False
+                                    result["unavail"] = False
+                                    result["reason"] = f"Listing enforces stricter minimum stay rule ({res2.get('reason')})."
+                                elif res2.get("unavail"):
+                                    if cin_1_d >= today and not (res1 and res1.get("unavail")):
+                                        # Check 1 was inconclusive (e.g. bot challenge or timeout) while Check 2 was unavail
+                                        result["unavail"] = False
+                                        result["available"] = False
+                                        inconclusive_reason = (res1.get("reason") if res1 else None) or "Check 1 inconclusive"
+                                        result["reason"] = f"4-night validation inconclusive ({inconclusive_reason})"
+                                    else:
+                                        result["unavail"] = True
+                                        result["available"] = False
+                                        p_reason = primary_res.get("reason") or "Dates unavailable"
+                                        ext_label = "4-night extensions" if cin_1_d >= today else "4-night extension"
+                                        result["reason"] = f"{p_reason} (confirmed blocked across {ext_label})"
+                                else:
+                                    # Inconclusive Check 2 (e.g. timeout or bot challenge) - do NOT commit sale
+                                    result["unavail"] = False
+                                    result["available"] = False
+                                    result["reason"] = f"4-night validation inconclusive ({res2.get('reason')})"
+                            else:
+                                result["unavail"] = False
+                                result["available"] = False
+                                result["reason"] = "Dates are in the past; 4-night extension check skipped"
                 finally:
-                    page.remove_listener("response", on_resp)
-                    await page.close()
                     await browser.close()
         except Exception as e:
             if not result.get("reason"):
@@ -1691,6 +1897,9 @@ class CompetitorSalesTracker:
                     res = {"available": False, "unavail": False, "price": None, "reason": str(e)}
 
             if res.get("unavail") is True:
+                if "minimum stay" in (res.get("reason") or "").lower() or "min stay" in (res.get("reason") or "").lower():
+                    logger.info(f"Comp {cid} unavailable due to minimum stay restriction ({res.get('reason')}). Skipping sales ledger entry.")
+                    return
                 # CONFIRMED_BLOCKED
                 raw_eff = cinfo.get("effective_nightly")
                 if raw_eff is None:
@@ -1810,8 +2019,13 @@ class CompetitorSalesTracker:
                 cache_dir = self.data_dir / "cache"
                 cache_dir.mkdir(parents=True, exist_ok=True)
                 try:
-                    total_p = float(res["price"])
-                    eff_nightly = round(total_p / max(1, nights), 2)
+                    total_p_raw = float(res["price"])
+                    if res.get("false_sale_min_nights"):
+                        eff_nightly = float(res.get("effective_nightly") or round(total_p_raw / max(4, nights), 2))
+                        total_p = round(eff_nightly * nights, 2)
+                    else:
+                        total_p = total_p_raw
+                        eff_nightly = round(total_p / max(1, nights), 2)
                     c_file = cache_dir / f"search_{cin_str}_{cout_str}_comp_{cid}.json"
                     c_file.write_text(json.dumps([{
                         "listing_id": cid,
@@ -2053,6 +2267,9 @@ class CompetitorSalesTracker:
                     res = {"available": False, "unavail": False, "price": None, "reason": str(e)}
 
             if res.get("unavail") is True:
+                if "minimum stay" in (res.get("reason") or "").lower() or "min stay" in (res.get("reason") or "").lower():
+                    logger.info(f"Comp {cid} unavailable due to minimum stay restriction ({res.get('reason')}). Skipping sales ledger entry.")
+                    return
                 # CONFIRMED_BLOCKED
                 raw_eff = cinfo.get("effective_nightly")
                 if raw_eff is None:
@@ -2166,8 +2383,13 @@ class CompetitorSalesTracker:
                 cache_dir.mkdir(parents=True, exist_ok=True)
                 if res.get("price"):
                     try:
-                        total_p = float(res["price"])
-                        eff_nightly = round(total_p / max(1, nights), 2)
+                        total_p_raw = float(res["price"])
+                        if res.get("false_sale_min_nights"):
+                            eff_nightly = float(res.get("effective_nightly") or round(total_p_raw / max(4, nights), 2))
+                            total_p = round(eff_nightly * nights, 2)
+                        else:
+                            total_p = total_p_raw
+                            eff_nightly = round(total_p / max(1, nights), 2)
                         c_file = cache_dir / f"search_{cin_str}_{cout_str}_comp_{cid}.json"
                         c_file.write_text(json.dumps([{
                             "listing_id": cid,

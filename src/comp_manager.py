@@ -855,21 +855,34 @@ class CompManager:
                                 pass
 
                         if prev_rate and float(prev_rate) > 0:
-                            try:
-                                from src.competitor_sales_tracker import CompetitorSalesTracker
-                                tracker = CompetitorSalesTracker()
-                                tracker.record_direct_sale(
-                                    listing_id=listing_id,
-                                    check_in=c_in,
-                                    check_out=c_out,
-                                    nights=nights,
-                                    last_observed_rate=float(prev_rate),
-                                    verification_status="CONFIRMED_BLOCKED",
-                                    raw_snippet=f"Direct Verified Checkout Sweep | {status}",
+                            # Do not record sales if unavailability was due to a minimum stay restriction
+                            reason_lower = (intercepted_reason or "").lower()
+                            status_lower = (status or "").lower()
+                            if (
+                                "minimum stay" in reason_lower
+                                or "min stay" in reason_lower
+                                or (nights < 4 and ("minimum" in status_lower or "min stay" in status_lower))
+                            ):
+                                logger.info(
+                                    f"Comp {listing_id} ({c_in}->{c_out}) is unavailable due to minimum stay rule "
+                                    f"({intercepted_reason or status}). Skipping sale recording."
                                 )
-                                logger.info(f"Recorded confirmed competitor sale for {listing_id} ({c_in}->{c_out}) at ${prev_rate:.0f}/night.")
-                            except Exception as e:
-                                logger.warning(f"Could not record direct competitor sale: {e}")
+                            else:
+                                try:
+                                    from src.competitor_sales_tracker import CompetitorSalesTracker
+                                    tracker = CompetitorSalesTracker()
+                                    tracker.record_direct_sale(
+                                        listing_id=listing_id,
+                                        check_in=c_in,
+                                        check_out=c_out,
+                                        nights=nights,
+                                        last_observed_rate=float(prev_rate),
+                                        verification_status="CONFIRMED_BLOCKED",
+                                        raw_snippet=f"Direct Verified Checkout Sweep | {status}",
+                                    )
+                                    logger.info(f"Recorded confirmed competitor sale for {listing_id} ({c_in}->{c_out}) at ${prev_rate:.0f}/night.")
+                                except Exception as e:
+                                    logger.warning(f"Could not record direct competitor sale: {e}")
 
                         return {"interval": f"{c_in}_{c_out}", "status": status, "rate": None, "total": None}
 

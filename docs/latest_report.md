@@ -7,55 +7,12 @@
 
 ## 📊 Executive Summary
 - **Total Open Calendar Intervals**: 80
-- 🚨 **Urgent Adjustments (This Week)**: **17** intervals
-- ⚠️ **Moderate Adjustments (Monthly Review)**: **31** intervals
-- ✅ **Competitive / On Target**: **32** intervals
+- 🚨 **Urgent Adjustments (This Week)**: **14** intervals
+- ⚠️ **Moderate Adjustments (Monthly Review)**: **36** intervals
+- ✅ **Competitive / On Target**: **30** intervals
 
 > 💡 **Action Guidance for Kivoya Property Manager**:
 > Review **Section 1** immediately. These intervals are substantially mispriced (>25% off market) and directly impact booking conversion or leave significant revenue on the table. **Section 2** can be reviewed during monthly rate adjustments.
----
-
-## ⚡ Market Compression & Scarcity Alerts
-> ⚡ **Market Compression Alert for `2026-10-25 -> 2026-10-29`**: High scarcity compression: only 13/102 (12.7%) comps available for check-in 2026-10-25. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-11-27 -> 2026-11-29`**: High scarcity compression: only 2/102 (2.0%) comps available for check-in 2026-11-27. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-12-18 -> 2026-12-20`**: High scarcity compression: only 6/102 (5.9%) comps available for check-in 2026-12-18. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2026-12-20 -> 2026-12-23`**: High scarcity compression: only 9/102 (8.8%) comps available for check-in 2026-12-20. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-07-22 -> 2027-07-25`**: High scarcity compression: only 12/102 (11.8%) comps available for check-in 2027-07-22. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-08-08 -> 2027-08-12`**: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-08-08. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-> ⚡ **Market Compression Alert for `2027-09-26 -> 2027-09-30`**: High scarcity compression: only 19/102 (18.6%) comps available for check-in 2027-09-26. Scarcity compression detected; elevated target percentile applied to capture high-urgency market demand.
-
-## 🎯 Recent Confirmed Competitor Sales Ledger (Past 7 Days)
-| Property Name | Stay Dates | Nights | Lead Days | Realized Rate | Quality-Adjusted Rate | Market Percentile | Status |
-|---|---|---|---|---|---|---|---|
-| Pool, Hot Tub & Mini Golf! Brand New Luxury 5BR | `2026-10-26 -> 2026-10-29` | 3 | 28d | $481.67 | $491.50 | 26.0% | ✅ Confirmed |
-| Perfect Family Haven: 5BR,Heated Pool + Golf Green | `2026-11-15 -> 2026-11-19` | 4 | 48d | $348.75 | $405.52 | 2.0% | ✅ Confirmed |
-| 4 King Beds • Heated Pool • Grill • Game room | `2026-11-15 -> 2026-11-19` | 4 | 48d | $456.75 | $557.01 | 11.8% | ✅ Confirmed |
-| YNotStay_GilbertAZ | `2026-12-03 -> 2026-12-06` | 3 | 66d | $1,339.67 | $1,300.65 | 74.4% | ✅ Confirmed |
-| Minutes From Old Town Scottsdale, Sleeps 20 | `2026-12-03 -> 2026-12-06` | 3 | 66d | $1,133.33 | $1,039.75 | 56.4% | ✅ Confirmed |
-| Backyard Basecamp | Pool, Hoops & Arcade | `2026-12-27 -> 2026-12-31` | 4 | 90d | $2,432.75 | $1,977.85 | 80.8% | ✅ Confirmed |
-| Modern Scottsdale Luxury w/ Pool & Guest Retreat | `2026-09-27 -> 2026-09-30` | 3 | 0d | $519.33 | $489.93 | 54.1% | ✅ Confirmed |
-| Desert Daze • A Fun-Filled 5BR Retreat • Sleeps 12 | `2026-09-27 -> 2026-09-30` | 3 | 0d | $407.00 | $423.96 | 21.6% | ✅ Confirmed |
-| Fun-Filled Oasis • Pool, Pickleball, Games Galore | `2026-09-27 -> 2026-09-30` | 3 | 0d | $719.67 | $609.89 | 70.3% | ✅ Confirmed |
-| 9BR Compound | Sauna, Pool & Outdoor Cinema | `2026-09-27 -> 2026-09-30` | 3 | 0d | $1,293.67 | $1,069.15 | 97.3% | ✅ Confirmed |
-| Lux 20 Guest w/ Pickle, Pool, & More | `2026-09-27 -> 2026-09-30` | 3 | 0d | $901.33 | $850.31 | 86.5% | ✅ Confirmed |
-| Casa Mesa • Private Paradise w Pool, Putt, & Games | `2026-09-27 -> 2026-09-30` | 3 | 0d | $519.67 | $604.27 | 56.8% | ✅ Confirmed |
-| Pickleball + Hot Tub + Pool + Gym + Sauna + Mini Golf + Sleeps 24 | `2026-09-27 -> 2026-09-30` | 3 | 0d | $728.00 | $606.67 | 73.0% | ✅ Confirmed |
-| Serene Home, Heated Pool & Games | `2026-09-27 -> 2026-09-30` | 3 | 0d | $746.33 | $710.79 | 78.4% | ✅ Confirmed |
-| Luxury Estate~Resort Backyard~Pool/Spa~Pickleball | `2026-09-27 -> 2026-09-30` | 3 | 2d | $1,124.00 | $921.31 | 89.1% | ✅ Confirmed |
-| Desert Diamond HTD Pool/Hot Tub/Tennis/BBall/Sauna | `2026-09-27 -> 2026-09-30` | 3 | 2d | $1,119.33 | $895.46 | 87.0% | ✅ Confirmed |
-| Themed Luxury Retreat | Pool, BBQ & Arcade | `2026-09-27 -> 2026-09-30` | 3 | 2d | $611.00 | $686.52 | 58.7% | ✅ Confirmed |
-| TEMPE ONE: AZ Luxe Escape + Heated Pool & Hot Tub | `2026-10-11 -> 2026-10-14` | 3 | 16d | $470.33 | $534.47 | 11.9% | ✅ Confirmed |
-| Themed Luxury Retreat | Pool, BBQ & Arcade | `2026-10-11 -> 2026-10-14` | 3 | 16d | $617.67 | $694.01 | 52.4% | ✅ Confirmed |
-| Themed Luxury Retreat | Pool, BBQ & Arcade | `2026-10-26 -> 2026-10-29` | 3 | 31d | $598.00 | $671.91 | 42.6% | ✅ Confirmed |
-| TEMPE ONE: AZ Luxe Escape + Heated Pool & Hot Tub | `2026-09-27 -> 2026-09-30` | 3 | 3d | $344.67 | $391.67 | 16.2% | ✅ Confirmed |
-| The Callahan: Pickleball, Sports Bar, Gym, Theater | `2026-10-29 -> 2026-11-01` | 3 | 37d | $831.00 | $814.71 | 47.6% | ✅ Confirmed |
-| Swanky & Stylish Old Town Scottsdale Luxe Retreat | `2026-10-29 -> 2026-11-01` | 3 | 37d | $1,166.67 | $1,155.12 | 74.6% | ✅ Confirmed |
-| Resort Style 6BR Heated Pool + Mini Golf Sleeps 18 | `2026-12-03 -> 2026-12-06` | 3 | 72d | $768.67 | $792.44 | 28.3% | ✅ Confirmed |
-| Resort Style 6BR Heated Pool + Mini Golf Sleeps 18 | `2026-12-06 -> 2026-12-10` | 4 | 75d | $712.00 | $734.02 | 40.8% | ✅ Confirmed |
-| The Desert Diamond - LUXE Desert GOLD - Old Town | `2026-09-24 -> 2026-09-27` | 3 | 3d | $641.33 | $577.77 | 55.0% | ✅ Confirmed |
-| Scottsdale Oasis | Pickleball, Pool, Spa & Hoops | `2026-12-03 -> 2026-12-06` | 3 | 73d | $1,215.67 | $1,075.81 | 63.8% | ✅ Confirmed |
-| NEW! Meticulous Manor - Scottsdale`s Finest Luxury | `2026-12-27 -> 2026-12-31` | 4 | 97d | $2,627.75 | $2,226.91 | 85.2% | ✅ Confirmed |
-
 ---
 
 ## 🚨 Section 1: Urgent Action Required (Action This Week)
@@ -63,23 +20,20 @@ The following dates have major pricing anomalies that require immediate update i
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 67 | $722 | $846 (76%) | $709 | $555 (30%) | 🔴 **+86.1%** | **$499** | $353–$920 (med $505, Aligned With Track Record) |
-| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 36 | $596 | $762 (89%) | $574 | $501 (30%) | 🔴 **+83.8%** | **$499** | $333–$554 (med $447, Aligned With Track Record) |
-| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $632 | 22 | $1060 | $1185 (73%) | $1021 | $928 (30%) | 🔴 **+56.5%** | **$632** | $313–$1574 (med $605, +29% vs Track Record) |
-| `2027-07-22 -> 2027-07-25` | Weekend | 3 | ↑ Increase $851 → $1531 • High compression | 12 | $851 | $1018 (25%) | $1590 | $1698 (70%) | 🔵 **-40.1%** | **$1531** | $350–$875 (med $595, +126% vs Track Record) |
-| `2027-09-02 -> 2027-09-05` | Weekend | 3 | ↑ Increase $599 → $1071 | 22 | $599 | $766 (23%) | $936 | $1238 (70%) | 🔵 **-38.2%** | **$1071** | $432–$854 (med $613, +65% vs Track Record) |
-| `2027-07-15 -> 2027-07-18` | Weekend | 3 | ↑ Increase $851 → $1468 | 26 | $851 | $1018 (46%) | $1274 | $1634 (70%) | 🔵 **-37.7%** | **$1468** | $350–$875 (med $596, +118% vs Track Record) |
-| `2027-07-29 -> 2027-08-01` | Weekend | 3 | ↑ Increase $851 → $1384 | 25 | $851 | $1018 (52%) | $1000 | $1551 (70%) | 🔵 **-34.4%** | **$1384** | $350–$751 (med $595, +103% vs Track Record) |
-| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 63 | $399 | $566 (56%) | $587 | $486 (30%) | 🔴 **+34.3%** | **$300** | $333–$969 (med $472, -36% vs Track Record) |
-| `2027-02-21 -> 2027-02-25` | Midweek | 4 | ↑ Increase $808 → $1213 | 39 | $808 | $933 (23%) | $1672 | $1634 (46.6%) | 🔵 **-30.3%** | **$1213** | $501–$1421 (med $644, +76% vs Track Record) |
-| `2027-07-01 -> 2027-07-04` | Weekend | 3 | ↑ Increase $851 → $1287 | 20 | $851 | $1018 (40%) | $1184 | $1454 (70%) | 🔵 **-30.0%** | **$1287** | $350–$1242 (med $595, +93% vs Track Record) |
-| `2027-08-08 -> 2027-08-12` | Midweek | 4 | ↑ Increase $457 → $688 • High compression | 15 | $457 | $582 (27%) | $746 | $813 (60%) | 🔵 **-28.4%** | **$688** | $344–$569 (med $422, +45% vs Track Record) |
-| `2027-06-20 -> 2027-06-24` | Midweek | 4 | ↑ Increase $517 → $767 | 25 | $517 | $642 (16%) | $894 | $892 (49.3%) | 🔵 **-28.1%** | **$767** | $308–$526 (med $392, +98% vs Track Record) |
-| `2027-05-09 -> 2027-05-13` | Midweek | 4 | ↑ Increase $595 → $859 | 47 | $595 | $720 (21%) | $988 | $984 (49.3%) | 🔵 **-26.8%** | **$859** | $368–$1149 (med $565, +57% vs Track Record) |
-| `2027-07-25 -> 2027-07-29` | Midweek | 4 | ↑ Increase $504 → $731 | 21 | $504 | $629 (24%) | $860 | $856 (49.3%) | 🔵 **-26.5%** | **$731** | $400–$501 (med $429, +49% vs Track Record) |
-| `2027-08-12 -> 2027-08-15` | Weekend | 3 | ↑ Increase $869 → $1239 | 32 | $869 | $1036 (47%) | $1116 | $1406 (70%) | 🔵 **-26.3%** | **$1239** | $418–$854 (med $599, +95% vs Track Record) |
-| `2027-05-30 -> 2027-06-03` | Midweek | 4 | ↓ Reduce $902 → $699 | 44 | $902 | $1026 (70%) | $820 | $815 (49.3%) | 🔴 **+25.9%** | **$699** | $330–$567 (med $479, +46% vs Track Record) |
-| `2027-01-31 -> 2027-02-04` | Midweek | 4 | ↓ Reduce $750 → $573 | 57 | $750 | $876 (58%) | $905 | $852 (46.6%) | 🔴 **+25.4%** | **$573** | $433–$1421 (med $618, Aligned With Track Record) |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 66 | $722 | $846 (77%) | $701 | $566 (31.4%) | 🔴 **+88.9%** | **$499** | $627–$627 (med $627, Aligned With Track Record) |
+| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $656 | 23 | $1060 | $1185 (65%) | $1049 | $957 (31.4%) | 🔴 **+51.7%** | **$656** | $872–$1574 (med $888, Aligned With Track Record) |
+| `2027-09-16 -> 2027-09-19` | Weekend | 3 | ↑ Increase $599 → $1396 | 46 | $599 | $766 (26%) | $983 | $1563 (70%) | 🔵 **-51.0%** | **$1396** | $513–$831 (med $635, +104% vs Track Record) |
+| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 39 | $596 | $762 (92%) | $600 | $552 (31.4%) | 🔴 **+46.7%** | **$499** | $433–$433 (med $433, Aligned With Track Record) |
+| `2027-09-09 -> 2027-09-12` | Weekend | 3 | ↑ Increase $599 → $1261 | 49 | $599 | $766 (26%) | $936 | $1427 (70%) | 🔵 **-46.4%** | **$1261** | $486–$804 (med $630, +94% vs Track Record) |
+| `2027-09-02 -> 2027-09-05` | Weekend | 3 | ↑ Increase $599 → $1243 | 45 | $599 | $766 (22%) | $944 | $1410 (70%) | 🔵 **-45.7%** | **$1243** | $432–$854 (med $613, +90% vs Track Record) |
+| `2027-05-30 -> 2027-06-03` | Midweek | 4 | ↓ Reduce $902 → $699 | 69 | $902 | $1026 (71%) | $812 | $812 (50%) | 🔴 **+38.1%** | **$699** | $439–$567 (med $439, Aligned With Track Record) |
+| `2027-04-01 -> 2027-04-04` | Weekend | 3 | ↑ Increase $1554 → $2447 | 46 | $1554 | $1721 (48%) | $1692 | $2536 (70%) | 🔵 **-34.2%** | **$2447** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-04-08 -> 2027-04-11` | Weekend | 3 | ↑ Increase $1554 → $2361 | 53 | $1554 | $1721 (51%) | $1633 | $2452 (70%) | 🔵 **-31.9%** | **$2361** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-06-06 -> 2027-06-10` | Midweek | 4 | ↓ Reduce $517 → $362 | 73 | $517 | $642 (64%) | $658 | $658 (50%) | 🔴 **+31.9%** | **$362** | $308–$564 (med $390, Aligned With Track Record) |
+| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 66 | $399 | $566 (54%) | $600 | $498 (31.4%) | 🔴 **+31.1%** | **$300** | $333–$532 (med $452, Aligned With Track Record) |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $300 | 62 | $424 | $549 (60%) | $644 | $553 (31.4%) | 🔴 **+29.1%** | **$300** | $365–$969 (med $489, Aligned With Track Record) |
+| `2027-04-25 -> 2027-04-29` | Midweek | 4 | ↓ Reduce $749 → $568 | 73 | $749 | $874 (66%) | $845 | $845 (50%) | 🔴 **+26.2%** | **$568** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-08-22 -> 2027-08-26` | Midweek | 4 | ↓ Reduce $457 → $340 | 67 | $457 | $582 (67%) | $683 | $683 (50%) | 🔴 **+25.1%** | **$340** | $324–$569 (med $426, Aligned With Track Record) |
 
 ---
 
@@ -88,37 +42,42 @@ The following dates are 10%–25% off the target percentile for future dates:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2027-07-11 -> 2027-07-15` | Midweek | 4 | ↑ Increase $504 → $702 | 28 | $504 | $629 (25%) | $828 | $827 (49.3%) | 🟡 -23.9% | **$702** | $300–$583 (med $423, +48% vs Track Record) |
-| `2027-06-17 -> 2027-06-20` | Weekend | 3 | ↑ Increase $1009 → $1325 | 29 | $1009 | $1176 (52%) | $1167 | $1491 (70%) | 🟡 -21.2% | **$1325** | $429–$1242 (med $589, +92% vs Track Record) |
-| `2027-05-23 -> 2027-05-27` | Midweek | 4 | ↑ Increase $595 → $788 | 49 | $595 | $720 (31%) | $914 | $913 (49.3%) | 🟡 -21.1% | **$788** | $330–$567 (med $519, +46% vs Track Record) |
-| `2027-04-25 -> 2027-04-29` | Midweek | 4 | ↓ Reduce $749 → $602 | 50 | $749 | $874 (66%) | $890 | $887 (49.3%) | 🟡 +20.2% | **$602** | $518–$1149 (med $569, Aligned With Track Record) |
-| `2027-04-11 -> 2027-04-15` | Midweek | 4 | ↑ Increase $749 → $965 | 39 | $749 | $874 (33%) | $1090 | $1090 (49.3%) | 🟡 -19.8% | **$965** | $516–$1252 (med $847, Aligned With Track Record) |
-| `2027-05-16 -> 2027-05-20` | Midweek | 4 | ↑ Increase $595 → $772 | 42 | $595 | $720 (33%) | $918 | $897 (49.3%) | 🟡 -19.7% | **$772** | $330–$572 (med $563, +28% vs Track Record) |
-| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $334 | 60 | $424 | $549 (48%) | $653 | $533 (30%) | 🟡 +19.5% | **$334** | $365–$969 (med $523, -32% vs Track Record) |
-| `2027-06-24 -> 2027-06-27` | Weekend | 3 | ↑ Increase $1009 → $1275 | 20 | $1009 | $1176 (60%) | $936 | $1441 (70%) | 🟡 -18.4% | **$1275** | $360–$1242 (med $592, +96% vs Track Record) |
-| `2027-04-18 -> 2027-04-22` | Midweek | 4 | ↑ Increase $749 → $941 | 43 | $749 | $874 (33%) | $1075 | $1066 (49.3%) | 🟡 -18.0% | **$941** | $518–$1149 (med $758, Aligned With Track Record) |
-| `2027-01-07 -> 2027-01-10` | Weekend | 3 | ↓ Reduce $964 → $794 | 68 | $964 | $1131 (66%) | $1060 | $1171 (60%) | 🟡 +17.7% | **$794** | $650–$2361 (med $867, Aligned With Track Record) |
-| `2027-03-14 -> 2027-03-17` | Midweek | 3 | ↑ Increase $1001 → $1236 | 35 | $1001 | $1168 (26%) | $1766 | $1711 (46.6%) | 🟡 -16.7% | **$1236** | $574–$1252 (med $960, +29% vs Track Record) |
-| `2027-07-04 -> 2027-07-08` | Midweek | 4 | ↑ Increase $504 → $625 | 25 | $504 | $629 (20%) | $751 | $750 (49.3%) | 🟡 -16.2% | **$625** | $300–$583 (med $406, +76% vs Track Record) |
-| `2027-08-22 -> 2027-08-26` | Midweek | 4 | ↑ Increase $457 → $566 | 28 | $457 | $582 (21%) | $696 | $691 (49.3%) | 🟡 -15.8% | **$566** | $324–$569 (med $426, Aligned With Track Record) |
-| `2027-06-06 -> 2027-06-10` | Midweek | 4 | ↑ Increase $517 → $635 | 44 | $517 | $642 (39%) | $761 | $760 (49.3%) | 🟡 -15.6% | **$635** | $308–$567 (med $353, +72% vs Track Record) |
-| `2027-09-09 -> 2027-09-12` | Weekend | 3 | ↑ Increase $599 → $737 | 24 | $599 | $766 (29%) | $824 | $904 (70%) | 🟡 -15.3% | **$737** | $486–$804 (med $630, Aligned With Track Record) |
-| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↓ Reduce $424 → $346 | 45 | $424 | $591 (42%) | $724 | $593 (30%) | 🟡 +15.2% | **$346** | $365–$969 (med $503, -26% vs Track Record) |
-| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $415 | 48 | $494 | $619 (40%) | $856 | $654 (30%) | 🟡 +14.5% | **$415** | $353–$760 (med $535, Aligned With Track Record) |
-| `2027-09-26 -> 2027-09-30` | Midweek | 4 | ↑ Increase $599 → $716 • High compression | 18 | $599 | $724 (50%) | $767 | $841 (60%) | 🟡 -13.9% | **$716** | $347–$554 (med $427, +72% vs Track Record) |
-| `2027-04-15 -> 2027-04-18` | Weekend | 3 | ↑ Increase $1554 → $1825 | 43 | $1554 | $1721 (60%) | $1378 | $1992 (70%) | 🟡 -13.6% | **$1825** | $578–$1723 (med $1049, +73% vs Track Record) |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $379 | 48 | $494 | $619 (46%) | $870 | $671 (31.4%) | 🟡 +22.9% | **$379** | $353–$888 (med $424, Aligned With Track Record) |
+| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↓ Reduce $424 → $315 | 47 | $424 | $591 (53%) | $700 | $620 (31.4%) | 🟡 +22.6% | **$315** | $365–$969 (med $489, Aligned With Track Record) |
+| `2027-07-11 -> 2027-07-15` | Midweek | 4 | ↓ Reduce $504 → $388 | 68 | $504 | $629 (62%) | $718 | $718 (50%) | 🟡 +22.6% | **$388** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-07-25 -> 2027-07-29` | Midweek | 4 | ↓ Reduce $504 → $392 | 66 | $504 | $629 (62%) | $723 | $723 (50%) | 🟡 +21.6% | **$392** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-08-15 -> 2027-08-19` | Midweek | 4 | ↓ Reduce $457 → $354 | 67 | $457 | $582 (67%) | $703 | $703 (50%) | 🟡 +21.5% | **$354** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-06-24 -> 2027-06-27` | Weekend | 3 | ↑ Increase $1009 → $1317 | 43 | $1009 | $1176 (58%) | $985 | $1484 (70%) | 🟡 -20.8% | **$1317** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-08-08 -> 2027-08-12` | Midweek | 4 | ↓ Reduce $457 → $359 | 67 | $457 | $582 (63%) | $710 | $710 (50%) | 🟡 +20.3% | **$359** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-03-01 -> 2027-03-04` | Midweek | 3 | ↓ Reduce $1001 → $812 | 55 | $1001 | $1168 (67%) | $1182 | $1176 (46.6%) | 🟡 +19.3% | **$812** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-06-17 -> 2027-06-20` | Weekend | 3 | ↑ Increase $1009 → $1290 | 48 | $1009 | $1176 (60%) | $971 | $1548 (70%) | 🟡 -19.3% | **$1290** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-05-20 -> 2027-05-23` | Weekend | 3 | ↑ Increase $1286 → $1631 | 62 | $1286 | $1453 (63%) | $1176 | $1758 (70%) | 🟡 -19.2% | **$1631** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-06-27 -> 2027-07-01` | Midweek | 4 | ↓ Reduce $517 → $416 | 67 | $517 | $642 (58%) | $732 | $732 (50%) | 🟡 +18.6% | **$416** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-04-18 -> 2027-04-22` | Midweek | 4 | ↓ Reduce $749 → $615 | 73 | $749 | $874 (63%) | $903 | $903 (50%) | 🟡 +18.1% | **$615** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-03-14 -> 2027-03-17` | Midweek | 3 | ↑ Increase $1001 → $1257 | 61 | $1001 | $1168 (30%) | $1728 | $1711 (46.6%) | 🟡 -18.0% | **$1257** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-02-21 -> 2027-02-25` | Midweek | 4 | ↑ Increase $808 → $1007 | 62 | $808 | $933 (24%) | $1380 | $1294 (46.6%) | 🟡 -17.6% | **$1007** | $501–$1421 (med $616, Aligned With Track Record) |
+| `2027-04-29 -> 2027-05-02` | Weekend | 3 | ↑ Increase $1465 → $1813 | 58 | $1465 | $1631 (59%) | $1300 | $1925 (70%) | 🟡 -17.6% | **$1813** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-07-04 -> 2027-07-08` | Midweek | 4 | ↑ Increase $504 → $636 | 68 | $504 | $629 (31%) | $761 | $761 (50%) | 🟡 -17.3% | **$636** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-04-22 -> 2027-04-25` | Weekend | 3 | ↑ Increase $1554 → $1904 | 53 | $1554 | $1721 (58%) | $1378 | $2009 (70%) | 🟡 -16.9% | **$1904** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-01-07 -> 2027-01-10` | Weekend | 3 | ↓ Reduce $964 → $804 | 67 | $964 | $1131 (66%) | $1062 | $1184 (60%) | 🟡 +16.5% | **$804** | $650–$933 (med $834, Aligned With Track Record) |
+| `2027-07-18 -> 2027-07-22` | Midweek | 4 | ↓ Reduce $504 → $415 | 66 | $504 | $629 (62%) | $755 | $755 (50%) | 🟡 +16.5% | **$415** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-04-15 -> 2027-04-18` | Weekend | 3 | ↑ Increase $1554 → $1870 | 55 | $1554 | $1721 (64%) | $1348 | $1976 (70%) | 🟡 -15.5% | **$1870** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↑ Increase $1286 → $1538 | 58 | $1286 | $1453 (62%) | $1220 | $1667 (70%) | 🟡 -14.8% | **$1538** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-03-07 -> 2027-03-11` | Midweek | 4 | ↓ Reduce $1001 → $858 | 64 | $1001 | $1126 (58%) | $1202 | $1185 (46.6%) | 🟡 +14.6% | **$858** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-05-13 -> 2027-05-16` | Weekend | 3 | ↑ Increase $1286 → $1529 | 59 | $1286 | $1453 (66%) | $1187 | $1658 (70%) | 🟡 -14.3% | **$1529** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-02-07 -> 2027-02-10` | Midweek | 3 | ↑ Increase $808 → $968 | 45 | $808 | $975 (27%) | $1348 | $1295 (46.6%) | 🟡 -14.1% | **$968** | $501–$1421 (med $616, Aligned With Track Record) |
+| `2027-07-29 -> 2027-08-01` | Weekend | 3 | ↑ Increase $851 → $1015 | 52 | $851 | $1018 (64%) | $865 | $1438 (70%) | 🟡 -13.9% | **$1015** | $350–$875 (med $596, Aligned With Track Record) |
 | `2027-09-23 -> 2027-09-26` | Weekend | 3 | ↑ Increase $599 → $711 | 21 | $599 | $766 (38%) | $791 | $878 (70%) | 🟡 -12.8% | **$711** | $520–$1485 (med $648, Aligned With Track Record) |
-| `2027-05-13 -> 2027-05-16` | Weekend | 3 | ↑ Increase $1286 → $1494 | 39 | $1286 | $1453 (67%) | $1187 | $1661 (70%) | 🟡 -12.5% | **$1494** | $495–$1723 (med $844, +67% vs Track Record) |
-| `2027-07-18 -> 2027-07-22` | Midweek | 4 | ↑ Increase $504 → $593 | 28 | $504 | $629 (36%) | $731 | $718 (49.3%) | 🟡 -12.4% | **$593** | $300–$583 (med $423, +38% vs Track Record) |
-| `2027-04-29 -> 2027-05-02` | Weekend | 3 | ↑ Increase $1465 → $1681 | 38 | $1465 | $1631 (60%) | $1298 | $1847 (70%) | 🟡 -11.7% | **$1681** | $552–$1723 (med $848, +73% vs Track Record) |
-| `2027-06-03 -> 2027-06-06` | Weekend | 3 | ↓ Reduce $1009 → $890 | 33 | $1009 | $1176 (73%) | $811 | $1057 (70%) | 🟡 +11.2% | **$890** | $429–$1311 (med $658, +27% vs Track Record) |
-| `2027-03-07 -> 2027-03-11` | Midweek | 4 | ↑ Increase $1001 → $1141 | 42 | $1001 | $1126 (33%) | $1351 | $1266 (46.6%) | 🟡 -11.1% | **$1141** | $574–$1139 (med $949, +25% vs Track Record) |
-| `2027-09-16 -> 2027-09-19` | Weekend | 3 | ↑ Increase $599 → $689 | 24 | $599 | $766 (38%) | $791 | $856 (70%) | 🟡 -10.6% | **$689** | $513–$831 (med $635, Aligned With Track Record) |
-| `2027-01-10 -> 2027-01-14` | Midweek | 4 | ↓ Reduce $578 → $512 | 78 | $578 | $703 (54%) | $812 | $774 (46.6%) | 🟡 +10.3% | **$512** | $313–$872 (med $556, Aligned With Track Record) |
-| `2027-01-21 -> 2027-01-24` | Weekend | 3 | ↓ Reduce $964 → $858 | 50 | $964 | $1131 (68%) | $1124 | $1249 (60%) | 🟡 +10.3% | **$858** | $650–$1037 (med $834, Aligned With Track Record) |
-| `2027-09-12 -> 2027-09-16` | Midweek | 4 | ↓ Reduce $599 → $532 | 30 | $599 | $724 (63%) | $658 | $657 (49.3%) | 🟡 +10.2% | **$532** | $324–$554 (med $427, Aligned With Track Record) |
-| `2027-05-02 -> 2027-05-06` | Midweek | 4 | ↑ Increase $595 → $675 | 54 | $595 | $720 (46%) | $974 | $973 (49.3%) | 🟡 -10.1% | **$675** | $368–$1149 (med $565, Aligned With Track Record) |
-| `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↓ Reduce $1286 → $1153 | 40 | $1286 | $1453 (72%) | $998 | $1320 (70%) | 🟡 +10.1% | **$1153** | $552–$1723 (med $848, Aligned With Track Record) |
+| `2027-06-13 -> 2027-06-17` | Midweek | 4 | ↑ Increase $517 → $611 | 67 | $517 | $642 (40%) | $736 | $736 (50%) | 🟡 -12.7% | **$611** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-08-01 -> 2027-08-05` | Midweek | 4 | ↓ Reduce $457 → $392 | 66 | $457 | $582 (59%) | $759 | $759 (50%) | 🟡 +12.6% | **$392** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-08-29 -> 2027-09-02` | Midweek | 4 | ↑ Increase $492 → $577 | 62 | $492 | $618 (40%) | $702 | $702 (50%) | 🟡 -12.1% | **$577** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-01-31 -> 2027-02-04` | Midweek | 4 | ↓ Reduce $750 → $663 | 68 | $750 | $876 (53%) | $965 | $913 (46.6%) | 🟡 +11.1% | **$663** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-07-01 -> 2027-07-04` | Weekend | 3 | ↑ Increase $851 → $974 | 50 | $851 | $1018 (66%) | $965 | $1388 (70%) | 🟡 -10.8% | **$974** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-01-24 -> 2027-01-28` | Midweek | 4 | ↑ Increase $578 → $662 | 70 | $578 | $703 (34%) | $1001 | $957 (46.6%) | 🟡 -10.7% | **$662** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-06-20 -> 2027-06-24` | Midweek | 4 | ↓ Reduce $517 → $456 | 66 | $517 | $642 (58%) | $785 | $785 (50%) | 🟡 +10.6% | **$456** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-05-27 -> 2027-05-30` | Weekend | 3 | ↑ Increase $1286 → $1457 | 58 | $1286 | $1453 (60%) | $1227 | $1587 (70%) | 🟡 -10.5% | **$1457** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-09-19 -> 2027-09-23` | Midweek | 4 | ↓ Reduce $599 → $530 | 24 | $599 | $724 (58%) | $656 | $656 (50%) | 🟡 +10.5% | **$530** | $347–$554 (med $416, +44% vs Track Record) |
+| `2027-02-04 -> 2027-02-07` | Weekend | 3 | ↑ Increase $1272 → $1438 | 52 | $1272 | $1439 (50%) | $1568 | $1724 (60%) | 🟡 -10.4% | **$1438** | $525–$2131 (med $1006, Aligned With Track Record) |
 
 ---
 
@@ -127,86 +86,86 @@ Complete 12-month calendar of unbooked intervals and market benchmarks:
 
 | Dates | Type | Nights | Action Needed | Comps (N) | Kivoya | Effective Total | Comp Median | Comp Target | Market Diff | Rec. Base Rate | Track Record (±15d) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 67 | $722 | $846 (76%) | $709 | $555 (30%) | 🔴 **+86.1%** | **$499** | $353–$920 (med $505, Aligned With Track Record) |
-| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 36 | $596 | $762 (89%) | $574 | $501 (30%) | 🔴 **+83.8%** | **$499** | $333–$554 (med $447, Aligned With Track Record) |
-| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $632 | 22 | $1060 | $1185 (73%) | $1021 | $928 (30%) | 🔴 **+56.5%** | **$632** | $313–$1574 (med $605, +29% vs Track Record) |
-| `2027-07-22 -> 2027-07-25` | Weekend | 3 | ↑ Increase $851 → $1531 • High compression | 12 | $851 | $1018 (25%) | $1590 | $1698 (70%) | 🔵 **-40.1%** | **$1531** | $350–$875 (med $595, +126% vs Track Record) |
-| `2027-09-02 -> 2027-09-05` | Weekend | 3 | ↑ Increase $599 → $1071 | 22 | $599 | $766 (23%) | $936 | $1238 (70%) | 🔵 **-38.2%** | **$1071** | $432–$854 (med $613, +65% vs Track Record) |
-| `2027-07-15 -> 2027-07-18` | Weekend | 3 | ↑ Increase $851 → $1468 | 26 | $851 | $1018 (46%) | $1274 | $1634 (70%) | 🔵 **-37.7%** | **$1468** | $350–$875 (med $596, +118% vs Track Record) |
-| `2027-07-29 -> 2027-08-01` | Weekend | 3 | ↑ Increase $851 → $1384 | 25 | $851 | $1018 (52%) | $1000 | $1551 (70%) | 🔵 **-34.4%** | **$1384** | $350–$751 (med $595, +103% vs Track Record) |
-| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 63 | $399 | $566 (56%) | $587 | $486 (30%) | 🔴 **+34.3%** | **$300** | $333–$969 (med $472, -36% vs Track Record) |
-| `2027-02-21 -> 2027-02-25` | Midweek | 4 | ↑ Increase $808 → $1213 | 39 | $808 | $933 (23%) | $1672 | $1634 (46.6%) | 🔵 **-30.3%** | **$1213** | $501–$1421 (med $644, +76% vs Track Record) |
-| `2027-07-01 -> 2027-07-04` | Weekend | 3 | ↑ Increase $851 → $1287 | 20 | $851 | $1018 (40%) | $1184 | $1454 (70%) | 🔵 **-30.0%** | **$1287** | $350–$1242 (med $595, +93% vs Track Record) |
-| `2027-08-08 -> 2027-08-12` | Midweek | 4 | ↑ Increase $457 → $688 • High compression | 15 | $457 | $582 (27%) | $746 | $813 (60%) | 🔵 **-28.4%** | **$688** | $344–$569 (med $422, +45% vs Track Record) |
-| `2027-06-20 -> 2027-06-24` | Midweek | 4 | ↑ Increase $517 → $767 | 25 | $517 | $642 (16%) | $894 | $892 (49.3%) | 🔵 **-28.1%** | **$767** | $308–$526 (med $392, +98% vs Track Record) |
-| `2027-05-09 -> 2027-05-13` | Midweek | 4 | ↑ Increase $595 → $859 | 47 | $595 | $720 (21%) | $988 | $984 (49.3%) | 🔵 **-26.8%** | **$859** | $368–$1149 (med $565, +57% vs Track Record) |
-| `2027-07-25 -> 2027-07-29` | Midweek | 4 | ↑ Increase $504 → $731 | 21 | $504 | $629 (24%) | $860 | $856 (49.3%) | 🔵 **-26.5%** | **$731** | $400–$501 (med $429, +49% vs Track Record) |
-| `2027-08-12 -> 2027-08-15` | Weekend | 3 | ↑ Increase $869 → $1239 | 32 | $869 | $1036 (47%) | $1116 | $1406 (70%) | 🔵 **-26.3%** | **$1239** | $418–$854 (med $599, +95% vs Track Record) |
-| `2027-05-30 -> 2027-06-03` | Midweek | 4 | ↓ Reduce $902 → $699 | 44 | $902 | $1026 (70%) | $820 | $815 (49.3%) | 🔴 **+25.9%** | **$699** | $330–$567 (med $479, +46% vs Track Record) |
-| `2027-01-31 -> 2027-02-04` | Midweek | 4 | ↓ Reduce $750 → $573 | 57 | $750 | $876 (58%) | $905 | $852 (46.6%) | 🔴 **+25.4%** | **$573** | $433–$1421 (med $618, Aligned With Track Record) |
-| `2027-07-11 -> 2027-07-15` | Midweek | 4 | ↑ Increase $504 → $702 | 28 | $504 | $629 (25%) | $828 | $827 (49.3%) | 🟡 -23.9% | **$702** | $300–$583 (med $423, +48% vs Track Record) |
-| `2027-06-17 -> 2027-06-20` | Weekend | 3 | ↑ Increase $1009 → $1325 | 29 | $1009 | $1176 (52%) | $1167 | $1491 (70%) | 🟡 -21.2% | **$1325** | $429–$1242 (med $589, +92% vs Track Record) |
-| `2027-05-23 -> 2027-05-27` | Midweek | 4 | ↑ Increase $595 → $788 | 49 | $595 | $720 (31%) | $914 | $913 (49.3%) | 🟡 -21.1% | **$788** | $330–$567 (med $519, +46% vs Track Record) |
-| `2027-04-25 -> 2027-04-29` | Midweek | 4 | ↓ Reduce $749 → $602 | 50 | $749 | $874 (66%) | $890 | $887 (49.3%) | 🟡 +20.2% | **$602** | $518–$1149 (med $569, Aligned With Track Record) |
-| `2027-04-11 -> 2027-04-15` | Midweek | 4 | ↑ Increase $749 → $965 | 39 | $749 | $874 (33%) | $1090 | $1090 (49.3%) | 🟡 -19.8% | **$965** | $516–$1252 (med $847, Aligned With Track Record) |
-| `2027-05-16 -> 2027-05-20` | Midweek | 4 | ↑ Increase $595 → $772 | 42 | $595 | $720 (33%) | $918 | $897 (49.3%) | 🟡 -19.7% | **$772** | $330–$572 (med $563, +28% vs Track Record) |
-| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $334 | 60 | $424 | $549 (48%) | $653 | $533 (30%) | 🟡 +19.5% | **$334** | $365–$969 (med $523, -32% vs Track Record) |
-| `2027-06-24 -> 2027-06-27` | Weekend | 3 | ↑ Increase $1009 → $1275 | 20 | $1009 | $1176 (60%) | $936 | $1441 (70%) | 🟡 -18.4% | **$1275** | $360–$1242 (med $592, +96% vs Track Record) |
-| `2027-04-18 -> 2027-04-22` | Midweek | 4 | ↑ Increase $749 → $941 | 43 | $749 | $874 (33%) | $1075 | $1066 (49.3%) | 🟡 -18.0% | **$941** | $518–$1149 (med $758, Aligned With Track Record) |
-| `2027-01-07 -> 2027-01-10` | Weekend | 3 | ↓ Reduce $964 → $794 | 68 | $964 | $1131 (66%) | $1060 | $1171 (60%) | 🟡 +17.7% | **$794** | $650–$2361 (med $867, Aligned With Track Record) |
-| `2027-03-14 -> 2027-03-17` | Midweek | 3 | ↑ Increase $1001 → $1236 | 35 | $1001 | $1168 (26%) | $1766 | $1711 (46.6%) | 🟡 -16.7% | **$1236** | $574–$1252 (med $960, +29% vs Track Record) |
-| `2027-07-04 -> 2027-07-08` | Midweek | 4 | ↑ Increase $504 → $625 | 25 | $504 | $629 (20%) | $751 | $750 (49.3%) | 🟡 -16.2% | **$625** | $300–$583 (med $406, +76% vs Track Record) |
-| `2027-08-22 -> 2027-08-26` | Midweek | 4 | ↑ Increase $457 → $566 | 28 | $457 | $582 (21%) | $696 | $691 (49.3%) | 🟡 -15.8% | **$566** | $324–$569 (med $426, Aligned With Track Record) |
-| `2027-06-06 -> 2027-06-10` | Midweek | 4 | ↑ Increase $517 → $635 | 44 | $517 | $642 (39%) | $761 | $760 (49.3%) | 🟡 -15.6% | **$635** | $308–$567 (med $353, +72% vs Track Record) |
-| `2027-09-09 -> 2027-09-12` | Weekend | 3 | ↑ Increase $599 → $737 | 24 | $599 | $766 (29%) | $824 | $904 (70%) | 🟡 -15.3% | **$737** | $486–$804 (med $630, Aligned With Track Record) |
-| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↓ Reduce $424 → $346 | 45 | $424 | $591 (42%) | $724 | $593 (30%) | 🟡 +15.2% | **$346** | $365–$969 (med $503, -26% vs Track Record) |
-| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $415 | 48 | $494 | $619 (40%) | $856 | $654 (30%) | 🟡 +14.5% | **$415** | $353–$760 (med $535, Aligned With Track Record) |
-| `2027-09-26 -> 2027-09-30` | Midweek | 4 | ↑ Increase $599 → $716 • High compression | 18 | $599 | $724 (50%) | $767 | $841 (60%) | 🟡 -13.9% | **$716** | $347–$554 (med $427, +72% vs Track Record) |
-| `2027-04-15 -> 2027-04-18` | Weekend | 3 | ↑ Increase $1554 → $1825 | 43 | $1554 | $1721 (60%) | $1378 | $1992 (70%) | 🟡 -13.6% | **$1825** | $578–$1723 (med $1049, +73% vs Track Record) |
+| `2026-11-29 -> 2026-12-03` | Midweek | 4 | ↓ Reduce $722 → $499 | 66 | $722 | $846 (77%) | $701 | $566 (31.4%) | 🔴 **+88.9%** | **$499** | $627–$627 (med $627, Aligned With Track Record) |
+| `2026-12-27 -> 2026-12-31` | Midweek | 4 | ↓ Reduce $1060 → $656 | 23 | $1060 | $1185 (65%) | $1049 | $957 (31.4%) | 🔴 **+51.7%** | **$656** | $872–$1574 (med $888, Aligned With Track Record) |
+| `2027-09-16 -> 2027-09-19` | Weekend | 3 | ↑ Increase $599 → $1396 | 46 | $599 | $766 (26%) | $983 | $1563 (70%) | 🔵 **-51.0%** | **$1396** | $513–$831 (med $635, +104% vs Track Record) |
+| `2026-10-11 -> 2026-10-14` | Midweek | 3 | ↓ Reduce $596 → $499 | 39 | $596 | $762 (92%) | $600 | $552 (31.4%) | 🔴 **+46.7%** | **$499** | $433–$433 (med $433, Aligned With Track Record) |
+| `2027-09-09 -> 2027-09-12` | Weekend | 3 | ↑ Increase $599 → $1261 | 49 | $599 | $766 (26%) | $936 | $1427 (70%) | 🔵 **-46.4%** | **$1261** | $486–$804 (med $630, +94% vs Track Record) |
+| `2027-09-02 -> 2027-09-05` | Weekend | 3 | ↑ Increase $599 → $1243 | 45 | $599 | $766 (22%) | $944 | $1410 (70%) | 🔵 **-45.7%** | **$1243** | $432–$854 (med $613, +90% vs Track Record) |
+| `2027-05-30 -> 2027-06-03` | Midweek | 4 | ↓ Reduce $902 → $699 | 69 | $902 | $1026 (71%) | $812 | $812 (50%) | 🔴 **+38.1%** | **$699** | $439–$567 (med $439, Aligned With Track Record) |
+| `2027-04-01 -> 2027-04-04` | Weekend | 3 | ↑ Increase $1554 → $2447 | 46 | $1554 | $1721 (48%) | $1692 | $2536 (70%) | 🔵 **-34.2%** | **$2447** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-04-08 -> 2027-04-11` | Weekend | 3 | ↑ Increase $1554 → $2361 | 53 | $1554 | $1721 (51%) | $1633 | $2452 (70%) | 🔵 **-31.9%** | **$2361** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-06-06 -> 2027-06-10` | Midweek | 4 | ↓ Reduce $517 → $362 | 73 | $517 | $642 (64%) | $658 | $658 (50%) | 🔴 **+31.9%** | **$362** | $308–$564 (med $390, Aligned With Track Record) |
+| `2026-10-26 -> 2026-10-29` | Midweek | 3 | ↓ Reduce $399 → $300 | 66 | $399 | $566 (54%) | $600 | $498 (31.4%) | 🔴 **+31.1%** | **$300** | $333–$532 (med $452, Aligned With Track Record) |
+| `2026-11-15 -> 2026-11-19` | Midweek | 4 | ↓ Reduce $424 → $300 | 62 | $424 | $549 (60%) | $644 | $553 (31.4%) | 🔴 **+29.1%** | **$300** | $365–$969 (med $489, Aligned With Track Record) |
+| `2027-04-25 -> 2027-04-29` | Midweek | 4 | ↓ Reduce $749 → $568 | 73 | $749 | $874 (66%) | $845 | $845 (50%) | 🔴 **+26.2%** | **$568** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-08-22 -> 2027-08-26` | Midweek | 4 | ↓ Reduce $457 → $340 | 67 | $457 | $582 (67%) | $683 | $683 (50%) | 🔴 **+25.1%** | **$340** | $324–$569 (med $426, Aligned With Track Record) |
+| `2026-12-06 -> 2026-12-10` | Midweek | 4 | ↓ Reduce $494 → $379 | 48 | $494 | $619 (46%) | $870 | $671 (31.4%) | 🟡 +22.9% | **$379** | $353–$888 (med $424, Aligned With Track Record) |
+| `2026-11-08 -> 2026-11-11` | Midweek | 3 | ↓ Reduce $424 → $315 | 47 | $424 | $591 (53%) | $700 | $620 (31.4%) | 🟡 +22.6% | **$315** | $365–$969 (med $489, Aligned With Track Record) |
+| `2027-07-11 -> 2027-07-15` | Midweek | 4 | ↓ Reduce $504 → $388 | 68 | $504 | $629 (62%) | $718 | $718 (50%) | 🟡 +22.6% | **$388** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-07-25 -> 2027-07-29` | Midweek | 4 | ↓ Reduce $504 → $392 | 66 | $504 | $629 (62%) | $723 | $723 (50%) | 🟡 +21.6% | **$392** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-08-15 -> 2027-08-19` | Midweek | 4 | ↓ Reduce $457 → $354 | 67 | $457 | $582 (67%) | $703 | $703 (50%) | 🟡 +21.5% | **$354** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-06-24 -> 2027-06-27` | Weekend | 3 | ↑ Increase $1009 → $1317 | 43 | $1009 | $1176 (58%) | $985 | $1484 (70%) | 🟡 -20.8% | **$1317** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-08-08 -> 2027-08-12` | Midweek | 4 | ↓ Reduce $457 → $359 | 67 | $457 | $582 (63%) | $710 | $710 (50%) | 🟡 +20.3% | **$359** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-03-01 -> 2027-03-04` | Midweek | 3 | ↓ Reduce $1001 → $812 | 55 | $1001 | $1168 (67%) | $1182 | $1176 (46.6%) | 🟡 +19.3% | **$812** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-06-17 -> 2027-06-20` | Weekend | 3 | ↑ Increase $1009 → $1290 | 48 | $1009 | $1176 (60%) | $971 | $1548 (70%) | 🟡 -19.3% | **$1290** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-05-20 -> 2027-05-23` | Weekend | 3 | ↑ Increase $1286 → $1631 | 62 | $1286 | $1453 (63%) | $1176 | $1758 (70%) | 🟡 -19.2% | **$1631** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-06-27 -> 2027-07-01` | Midweek | 4 | ↓ Reduce $517 → $416 | 67 | $517 | $642 (58%) | $732 | $732 (50%) | 🟡 +18.6% | **$416** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-04-18 -> 2027-04-22` | Midweek | 4 | ↓ Reduce $749 → $615 | 73 | $749 | $874 (63%) | $903 | $903 (50%) | 🟡 +18.1% | **$615** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-03-14 -> 2027-03-17` | Midweek | 3 | ↑ Increase $1001 → $1257 | 61 | $1001 | $1168 (30%) | $1728 | $1711 (46.6%) | 🟡 -18.0% | **$1257** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-02-21 -> 2027-02-25` | Midweek | 4 | ↑ Increase $808 → $1007 | 62 | $808 | $933 (24%) | $1380 | $1294 (46.6%) | 🟡 -17.6% | **$1007** | $501–$1421 (med $616, Aligned With Track Record) |
+| `2027-04-29 -> 2027-05-02` | Weekend | 3 | ↑ Increase $1465 → $1813 | 58 | $1465 | $1631 (59%) | $1300 | $1925 (70%) | 🟡 -17.6% | **$1813** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-07-04 -> 2027-07-08` | Midweek | 4 | ↑ Increase $504 → $636 | 68 | $504 | $629 (31%) | $761 | $761 (50%) | 🟡 -17.3% | **$636** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-04-22 -> 2027-04-25` | Weekend | 3 | ↑ Increase $1554 → $1904 | 53 | $1554 | $1721 (58%) | $1378 | $2009 (70%) | 🟡 -16.9% | **$1904** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-01-07 -> 2027-01-10` | Weekend | 3 | ↓ Reduce $964 → $804 | 67 | $964 | $1131 (66%) | $1062 | $1184 (60%) | 🟡 +16.5% | **$804** | $650–$933 (med $834, Aligned With Track Record) |
+| `2027-07-18 -> 2027-07-22` | Midweek | 4 | ↓ Reduce $504 → $415 | 66 | $504 | $629 (62%) | $755 | $755 (50%) | 🟡 +16.5% | **$415** | $300–$583 (med $501, Aligned With Track Record) |
+| `2027-04-15 -> 2027-04-18` | Weekend | 3 | ↑ Increase $1554 → $1870 | 55 | $1554 | $1721 (64%) | $1348 | $1976 (70%) | 🟡 -15.5% | **$1870** | $578–$1730 (med $1006, Aligned With Track Record) |
+| `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↑ Increase $1286 → $1538 | 58 | $1286 | $1453 (62%) | $1220 | $1667 (70%) | 🟡 -14.8% | **$1538** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-03-07 -> 2027-03-11` | Midweek | 4 | ↓ Reduce $1001 → $858 | 64 | $1001 | $1126 (58%) | $1202 | $1185 (46.6%) | 🟡 +14.6% | **$858** | $574–$1153 (med $1017, Aligned With Track Record) |
+| `2027-05-13 -> 2027-05-16` | Weekend | 3 | ↑ Increase $1286 → $1529 | 59 | $1286 | $1453 (66%) | $1187 | $1658 (70%) | 🟡 -14.3% | **$1529** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-02-07 -> 2027-02-10` | Midweek | 3 | ↑ Increase $808 → $968 | 45 | $808 | $975 (27%) | $1348 | $1295 (46.6%) | 🟡 -14.1% | **$968** | $501–$1421 (med $616, Aligned With Track Record) |
+| `2027-07-29 -> 2027-08-01` | Weekend | 3 | ↑ Increase $851 → $1015 | 52 | $851 | $1018 (64%) | $865 | $1438 (70%) | 🟡 -13.9% | **$1015** | $350–$875 (med $596, Aligned With Track Record) |
 | `2027-09-23 -> 2027-09-26` | Weekend | 3 | ↑ Increase $599 → $711 | 21 | $599 | $766 (38%) | $791 | $878 (70%) | 🟡 -12.8% | **$711** | $520–$1485 (med $648, Aligned With Track Record) |
-| `2027-05-13 -> 2027-05-16` | Weekend | 3 | ↑ Increase $1286 → $1494 | 39 | $1286 | $1453 (67%) | $1187 | $1661 (70%) | 🟡 -12.5% | **$1494** | $495–$1723 (med $844, +67% vs Track Record) |
-| `2027-07-18 -> 2027-07-22` | Midweek | 4 | ↑ Increase $504 → $593 | 28 | $504 | $629 (36%) | $731 | $718 (49.3%) | 🟡 -12.4% | **$593** | $300–$583 (med $423, +38% vs Track Record) |
-| `2027-04-29 -> 2027-05-02` | Weekend | 3 | ↑ Increase $1465 → $1681 | 38 | $1465 | $1631 (60%) | $1298 | $1847 (70%) | 🟡 -11.7% | **$1681** | $552–$1723 (med $848, +73% vs Track Record) |
-| `2027-06-03 -> 2027-06-06` | Weekend | 3 | ↓ Reduce $1009 → $890 | 33 | $1009 | $1176 (73%) | $811 | $1057 (70%) | 🟡 +11.2% | **$890** | $429–$1311 (med $658, +27% vs Track Record) |
-| `2027-03-07 -> 2027-03-11` | Midweek | 4 | ↑ Increase $1001 → $1141 | 42 | $1001 | $1126 (33%) | $1351 | $1266 (46.6%) | 🟡 -11.1% | **$1141** | $574–$1139 (med $949, +25% vs Track Record) |
-| `2027-09-16 -> 2027-09-19` | Weekend | 3 | ↑ Increase $599 → $689 | 24 | $599 | $766 (38%) | $791 | $856 (70%) | 🟡 -10.6% | **$689** | $513–$831 (med $635, Aligned With Track Record) |
-| `2027-01-10 -> 2027-01-14` | Midweek | 4 | ↓ Reduce $578 → $512 | 78 | $578 | $703 (54%) | $812 | $774 (46.6%) | 🟡 +10.3% | **$512** | $313–$872 (med $556, Aligned With Track Record) |
-| `2027-01-21 -> 2027-01-24` | Weekend | 3 | ↓ Reduce $964 → $858 | 50 | $964 | $1131 (68%) | $1124 | $1249 (60%) | 🟡 +10.3% | **$858** | $650–$1037 (med $834, Aligned With Track Record) |
-| `2027-09-12 -> 2027-09-16` | Midweek | 4 | ↓ Reduce $599 → $532 | 30 | $599 | $724 (63%) | $658 | $657 (49.3%) | 🟡 +10.2% | **$532** | $324–$554 (med $427, Aligned With Track Record) |
-| `2027-05-02 -> 2027-05-06` | Midweek | 4 | ↑ Increase $595 → $675 | 54 | $595 | $720 (46%) | $974 | $973 (49.3%) | 🟡 -10.1% | **$675** | $368–$1149 (med $565, Aligned With Track Record) |
-| `2027-05-06 -> 2027-05-09` | Weekend | 3 | ↓ Reduce $1286 → $1153 | 40 | $1286 | $1453 (72%) | $998 | $1320 (70%) | 🟡 +10.1% | **$1153** | $552–$1723 (med $848, Aligned With Track Record) |
-| `2026-10-29 -> 2026-11-01` | Weekend | 3 | - | 53 | $694 | $861 (64%) | $816 | $920 (59.2%) | +8.7% | **$625** | $541–$1453 (med $679, Aligned With Track Record) |
-| `2026-12-03 -> 2026-12-06` | Weekend | 3 | - | 42 | $714 | $881 (64%) | $932 | $1017 (59.2%) | +5.0% | **$672** | $530–$1379 (med $657, Aligned With Track Record) |
-| `2027-01-04 -> 2027-01-07` | Midweek | 3 | - | 75 | $578 | $745 (49%) | $908 | $835 (46.6%) | +7.8% | **$524** | $313–$1574 (med $567, Aligned With Track Record) |
-| `2027-01-19 -> 2027-01-21` | Midweek | 2 | - | 36 | $578 | $828 (50%) | $851 | $817 (46.6%) | +1.4% | **$578** | $313–$691 (med $535, Aligned With Track Record) |
-| `2027-01-24 -> 2027-01-28` | Midweek | 4 | - | 52 | $578 | $703 (38%) | $968 | $920 (46.6%) | -7.2% | **$632** | $433–$1421 (med $578, Aligned With Track Record) |
-| `2027-01-28 -> 2027-01-31` | Weekend | 3 | - | 46 | $964 | $1131 (67%) | $1058 | $1263 (60%) | +9.2% | **$869** | $650–$2131 (med $873, Aligned With Track Record) |
-| `2027-02-04 -> 2027-02-07` | Weekend | 3 | - | 43 | $1272 | $1439 (70%) | $1349 | $1609 (60%) | +9.4% | **$1148** | $525–$2131 (med $966, Aligned With Track Record) |
-| `2027-02-07 -> 2027-02-10` | Midweek | 3 | - | 34 | $808 | $975 (41%) | $1253 | $1194 (46.6%) | -0.7% | **$808** | $501–$1421 (med $644, +55% vs Track Record) |
-| `2027-03-01 -> 2027-03-04` | Midweek | 3 | - | 45 | $1001 | $1168 (44%) | $1204 | $1192 (46.6%) | -2.0% | **$1001** | $501–$1038 (med $681, +47% vs Track Record) |
-| `2027-03-04 -> 2027-03-07` | Weekend | 3 | - | 32 | $1492 | $1659 (59%) | $1818 | $2015 (60%) | +0.9% | **$1492** | $751–$1711 (med $1200, Aligned With Track Record) |
-| `2027-03-11 -> 2027-03-14` | Weekend | 3 | - | 38 | $1492 | $1659 (60%) | $1877 | $2034 (60%) | -0.0% | **$1492** | $857–$1711 (med $1256, Aligned With Track Record) |
-| `2027-03-21 -> 2027-03-25` | Midweek | 4 | - | 44 | $1099 | $1224 (34%) | $1434 | $1357 (46.6%) | -9.8% | **$1232** | $516–$1252 (med $970, +30% vs Track Record) |
-| `2027-03-25 -> 2027-03-28` | Weekend | 3 | - | 28 | $1564 | $1731 (61%) | $1594 | $1737 (60%) | -0.4% | **$1564** | $773–$1878 (med $1263, Aligned With Track Record) |
-| `2027-03-28 -> 2027-04-01` | Midweek | 4 | - | 42 | $1026 | $1150 (45%) | $1386 | $1385 (49.3%) | -2.5% | **$1026** | $516–$1252 (med $960, Aligned With Track Record) |
-| `2027-04-01 -> 2027-04-04` | Weekend | 3 | - | 30 | $1554 | $1721 (63%) | $1773 | $2306 (70%) | -8.5% | **$1714** | $691–$1878 (med $1229, +36% vs Track Record) |
-| `2027-04-04 -> 2027-04-08` | Midweek | 4 | - | 44 | $749 | $874 (48%) | $1090 | $1083 (49.3%) | -1.5% | **$749** | $516–$1252 (med $960, Aligned With Track Record) |
-| `2027-04-08 -> 2027-04-11` | Weekend | 3 | - | 43 | $1554 | $1721 (67%) | $1502 | $2260 (70%) | -6.6% | **$1676** | $578–$1878 (med $1137, +37% vs Track Record) |
-| `2027-04-22 -> 2027-04-25` | Weekend | 3 | - | 38 | $1554 | $1721 (68%) | $1484 | $2106 (70%) | +0.2% | **$1554** | $578–$1723 (med $881, +64% vs Track Record) |
-| `2027-05-20 -> 2027-05-23` | Weekend | 3 | - | 45 | $1286 | $1453 (71%) | $1166 | $1413 (70%) | +2.8% | **$1286** | $467–$1451 (med $803, +47% vs Track Record) |
-| `2027-05-27 -> 2027-05-30` | Weekend | 3 | - | 43 | $1286 | $1453 (63%) | $1263 | $1580 (70%) | -8.1% | **$1414** | $467–$1451 (med $750, +72% vs Track Record) |
-| `2027-06-10 -> 2027-06-13` | Weekend | 3 | - | 27 | $1009 | $1176 (67%) | $988 | $1242 (70%) | -5.3% | **$1075** | $429–$1242 (med $589, +61% vs Track Record) |
-| `2027-06-13 -> 2027-06-17` | Midweek | 4 | - | 29 | $517 | $642 (38%) | $704 | $704 (49.3%) | -8.8% | **$579** | $308–$564 (med $392, +62% vs Track Record) |
-| `2027-06-27 -> 2027-07-01` | Midweek | 4 | - | 25 | $517 | $642 (40%) | $662 | $661 (49.3%) | -2.9% | **$517** | $300–$583 (med $399, +48% vs Track Record) |
-| `2027-07-08 -> 2027-07-11` | Weekend | 3 | - | 23 | $851 | $1018 (70%) | $865 | $1033 (70%) | -1.5% | **$851** | $350–$1242 (med $599, +35% vs Track Record) |
-| `2027-08-01 -> 2027-08-05` | Midweek | 4 | - | 25 | $457 | $582 (56%) | $661 | $658 (49.3%) | +6.9% | **$420** | $344–$440 (med $418, Aligned With Track Record) |
-| `2027-08-05 -> 2027-08-08` | Weekend | 3 | - | 24 | $869 | $1036 (67%) | $842 | $1099 (70%) | -5.8% | **$933** | $418–$729 (med $599, +33% vs Track Record) |
-| `2027-08-15 -> 2027-08-19` | Midweek | 4 | - | 30 | $457 | $582 (57%) | $660 | $657 (49.3%) | +7.0% | **$419** | $324–$569 (med $422, Aligned With Track Record) |
-| `2027-08-19 -> 2027-08-22` | Weekend | 3 | - | 23 | $869 | $1036 (61%) | $824 | $1140 (70%) | -9.1% | **$973** | $418–$854 (med $563, +54% vs Track Record) |
-| `2027-08-26 -> 2027-08-29` | Weekend | 3 | - | 25 | $869 | $1036 (72%) | $831 | $994 (70%) | +4.2% | **$869** | $432–$854 (med $596, +30% vs Track Record) |
-| `2027-08-29 -> 2027-09-02` | Midweek | 4 | - | 26 | $492 | $618 (38%) | $670 | $667 (49.3%) | -7.4% | **$542** | $324–$569 (med $427, Aligned With Track Record) |
-| `2027-09-05 -> 2027-09-09` | Midweek | 4 | - | 27 | $599 | $724 (44%) | $756 | $752 (49.3%) | -3.7% | **$599** | $324–$569 (med $401, +50% vs Track Record) |
-| `2027-09-19 -> 2027-09-23` | Midweek | 4 | - | 26 | $599 | $724 (42%) | $800 | $794 (49.3%) | -8.9% | **$669** | $347–$554 (med $416, +44% vs Track Record) |
+| `2027-06-13 -> 2027-06-17` | Midweek | 4 | ↑ Increase $517 → $611 | 67 | $517 | $642 (40%) | $736 | $736 (50%) | 🟡 -12.7% | **$611** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-08-01 -> 2027-08-05` | Midweek | 4 | ↓ Reduce $457 → $392 | 66 | $457 | $582 (59%) | $759 | $759 (50%) | 🟡 +12.6% | **$392** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-08-29 -> 2027-09-02` | Midweek | 4 | ↑ Increase $492 → $577 | 62 | $492 | $618 (40%) | $702 | $702 (50%) | 🟡 -12.1% | **$577** | $324–$569 (med $426, Aligned With Track Record) |
+| `2027-01-31 -> 2027-02-04` | Midweek | 4 | ↓ Reduce $750 → $663 | 68 | $750 | $876 (53%) | $965 | $913 (46.6%) | 🟡 +11.1% | **$663** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-07-01 -> 2027-07-04` | Weekend | 3 | ↑ Increase $851 → $974 | 50 | $851 | $1018 (66%) | $965 | $1388 (70%) | 🟡 -10.8% | **$974** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-01-24 -> 2027-01-28` | Midweek | 4 | ↑ Increase $578 → $662 | 70 | $578 | $703 (34%) | $1001 | $957 (46.6%) | 🟡 -10.7% | **$662** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-06-20 -> 2027-06-24` | Midweek | 4 | ↓ Reduce $517 → $456 | 66 | $517 | $642 (58%) | $785 | $785 (50%) | 🟡 +10.6% | **$456** | $308–$564 (med $390, Aligned With Track Record) |
+| `2027-05-27 -> 2027-05-30` | Weekend | 3 | ↑ Increase $1286 → $1457 | 58 | $1286 | $1453 (60%) | $1227 | $1587 (70%) | 🟡 -10.5% | **$1457** | $467–$1451 (med $846, Aligned With Track Record) |
+| `2027-09-19 -> 2027-09-23` | Midweek | 4 | ↓ Reduce $599 → $530 | 24 | $599 | $724 (58%) | $656 | $656 (50%) | 🟡 +10.5% | **$530** | $347–$554 (med $416, +44% vs Track Record) |
+| `2027-02-04 -> 2027-02-07` | Weekend | 3 | ↑ Increase $1272 → $1438 | 52 | $1272 | $1439 (50%) | $1568 | $1724 (60%) | 🟡 -10.4% | **$1438** | $525–$2131 (med $1006, Aligned With Track Record) |
+| `2026-10-29 -> 2026-11-01` | Weekend | 3 | - | 56 | $694 | $861 (57%) | $823 | $971 (59.3%) | -8.5% | **$774** | $520–$1485 (med $674, Aligned With Track Record) |
+| `2026-12-03 -> 2026-12-06` | Weekend | 3 | - | 43 | $714 | $881 (58%) | $967 | $1083 (59.3%) | -1.3% | **$714** | $530–$908 (med $623, Aligned With Track Record) |
+| `2027-01-04 -> 2027-01-07` | Midweek | 3 | - | 75 | $578 | $745 (48%) | $908 | $862 (46.6%) | +4.5% | **$546** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-01-10 -> 2027-01-14` | Midweek | 4 | - | 77 | $578 | $703 (52%) | $826 | $796 (46.6%) | +7.3% | **$530** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-01-19 -> 2027-01-21` | Midweek | 2 | - | 37 | $578 | $828 (50%) | $828 | $816 (46.6%) | +1.5% | **$578** | $313–$699 (med $478, Aligned With Track Record) |
+| `2027-01-21 -> 2027-01-24` | Weekend | 3 | - | 51 | $964 | $1131 (59%) | $1254 | $1433 (60%) | -3.8% | **$964** | $650–$933 (med $834, Aligned With Track Record) |
+| `2027-01-28 -> 2027-01-31` | Weekend | 3 | - | 49 | $964 | $1131 (61%) | $1136 | $1347 (60%) | +2.3% | **$964** | $650–$933 (med $834, Aligned With Track Record) |
+| `2027-03-04 -> 2027-03-07` | Weekend | 3 | - | 48 | $1492 | $1659 (58%) | $1796 | $2131 (60%) | -4.6% | **$1572** | $861–$1730 (med $1368, Aligned With Track Record) |
+| `2027-03-11 -> 2027-03-14` | Weekend | 3 | - | 49 | $1492 | $1659 (53%) | $1944 | $2165 (60%) | -6.1% | **$1600** | $861–$1730 (med $1368, Aligned With Track Record) |
+| `2027-03-21 -> 2027-03-25` | Midweek | 4 | - | 61 | $1099 | $1224 (44%) | $1574 | $1514 (46.6%) | -1.0% | **$1099** | $516–$1252 (med $758, Aligned With Track Record) |
+| `2027-03-25 -> 2027-03-28` | Weekend | 3 | - | 45 | $1564 | $1731 (60%) | $1868 | $2182 (60%) | -2.7% | **$1564** | $773–$1878 (med $1138, Aligned With Track Record) |
+| `2027-03-28 -> 2027-04-01` | Midweek | 4 | - | 65 | $1026 | $1150 (48%) | $1406 | $1406 (50%) | -3.9% | **$1026** | $516–$1252 (med $758, Aligned With Track Record) |
+| `2027-04-04 -> 2027-04-08` | Midweek | 4 | - | 71 | $749 | $874 (49%) | $1082 | $1082 (50%) | -1.4% | **$749** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-04-11 -> 2027-04-15` | Midweek | 4 | - | 76 | $749 | $874 (58%) | $970 | $970 (50%) | +9.9% | **$670** | $516–$1252 (med $935, Aligned With Track Record) |
+| `2027-05-02 -> 2027-05-06` | Midweek | 4 | - | 79 | $595 | $720 (53%) | $848 | $848 (50%) | +3.2% | **$595** | $330–$1149 (med $563, Aligned With Track Record) |
+| `2027-05-09 -> 2027-05-13` | Midweek | 4 | - | 80 | $595 | $720 (42%) | $921 | $921 (50%) | -4.9% | **$632** | $330–$1149 (med $563, Aligned With Track Record) |
+| `2027-05-16 -> 2027-05-20` | Midweek | 4 | - | 81 | $595 | $720 (53%) | $848 | $848 (50%) | +3.2% | **$595** | $330–$1149 (med $563, Aligned With Track Record) |
+| `2027-05-23 -> 2027-05-27` | Midweek | 4 | - | 75 | $595 | $720 (49%) | $888 | $888 (50%) | -1.4% | **$595** | $330–$1149 (med $563, Aligned With Track Record) |
+| `2027-06-03 -> 2027-06-06` | Weekend | 3 | - | 55 | $1009 | $1176 (66%) | $846 | $1319 (70%) | -5.3% | **$1075** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-06-10 -> 2027-06-13` | Weekend | 3 | - | 53 | $1009 | $1176 (62%) | $1003 | $1387 (70%) | -9.9% | **$1139** | $429–$1242 (med $589, Aligned With Track Record) |
+| `2027-07-08 -> 2027-07-11` | Weekend | 3 | - | 54 | $851 | $1018 (65%) | $884 | $1370 (70%) | -9.6% | **$959** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-07-15 -> 2027-07-18` | Weekend | 3 | - | 50 | $851 | $1018 (66%) | $875 | $1300 (70%) | -4.8% | **$902** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-07-22 -> 2027-07-25` | Weekend | 3 | - | 51 | $851 | $1018 (67%) | $870 | $1338 (70%) | -7.4% | **$933** | $350–$875 (med $596, Aligned With Track Record) |
+| `2027-08-05 -> 2027-08-08` | Weekend | 3 | - | 50 | $869 | $1036 (64%) | $866 | $1356 (70%) | -7.1% | **$948** | $418–$854 (med $599, Aligned With Track Record) |
+| `2027-08-12 -> 2027-08-15` | Weekend | 3 | - | 51 | $869 | $1036 (69%) | $845 | $1266 (70%) | -0.4% | **$869** | $418–$854 (med $599, Aligned With Track Record) |
+| `2027-08-19 -> 2027-08-22` | Weekend | 3 | - | 49 | $869 | $1036 (67%) | $848 | $1279 (70%) | -1.5% | **$869** | $418–$854 (med $599, Aligned With Track Record) |
+| `2027-08-26 -> 2027-08-29` | Weekend | 3 | - | 47 | $869 | $1036 (66%) | $852 | $1319 (70%) | -4.4% | **$917** | $418–$854 (med $599, Aligned With Track Record) |
+| `2027-09-05 -> 2027-09-09` | Midweek | 4 | - | 70 | $599 | $724 (44%) | $790 | $790 (50%) | -8.3% | **$665** | $324–$569 (med $401, +65% vs Track Record) |
+| `2027-09-12 -> 2027-09-16` | Midweek | 4 | - | 62 | $599 | $724 (53%) | $710 | $710 (50%) | +2.0% | **$599** | $324–$554 (med $427, +40% vs Track Record) |
+| `2027-09-26 -> 2027-09-30` | Midweek | 4 | - | 18 | $599 | $724 (50%) | $767 | $767 (50%) | -5.6% | **$642** | $347–$554 (med $427, +50% vs Track Record) |
 
 ---
 *Generated autonomously by STR Price Advisor Agent.*

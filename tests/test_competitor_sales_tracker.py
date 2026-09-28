@@ -411,8 +411,8 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         cell_last_minute = grid_data["grid"]["≤30d"]["weekend"]
         self.assertEqual(cell_last_minute["count"], 0)
         self.assertIsNone(cell_last_minute["empirical_p50"])
-        # Design Doc §3.4: ≤30d weekend target prior is 42.5%, p75 prior is 50.0%
-        self.assertEqual(cell_last_minute["recommended_target"], 42.5)
+        # Design Doc §3.4: ≤30d weekend target prior is 45.0%, p75 prior is 50.0%
+        self.assertEqual(cell_last_minute["recommended_target"], 45.0)
         self.assertEqual(cell_last_minute["recommended_aggressive"], 50.0)
 
         # Insert 1 sale in 31–90d weekend bucket with 80% percentile
@@ -429,12 +429,12 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             conn.execute("UPDATE competitor_sales SET last_observed_percentile = 80.0 WHERE listing_id = '1001'")
             conn.commit()
 
-        # With n = 1 (< 5), should stay anchored to prior baseline (62.5%)
+        # With n = 1 (< 5), should stay anchored to prior baseline (60.0%)
         grid_1 = self.tracker.compute_strategy_grid()
         cell_31_90 = grid_1["grid"]["31–90d"]["weekend"]
         self.assertEqual(cell_31_90["count"], 1)
         self.assertEqual(cell_31_90["empirical_p50"], 80.0)
-        self.assertEqual(cell_31_90["recommended_target"], 62.5)
+        self.assertEqual(cell_31_90["recommended_target"], 60.0)
         self.assertFalse(cell_31_90["is_empirical"])
 
         # Insert 4 more sales (total n = 5) all with 80% percentile
@@ -702,38 +702,38 @@ class TestCompetitorSalesTracker(unittest.TestCase):
     # 13. Dynamic Target Lookup
     def test_get_target_percentile_empirical_lookup(self):
         """Verify get_target_percentile() maps lead days to horizons, uses cached grid, and returns Bayesian targets."""
-        # Ultra-advance (>180d) weekend prior is 85.0% (aggressive p75 is 90.0%)
+        # Ultra-advance (>180d) weekend prior is 75.0% (aggressive p75 is 80.0%)
         p_ultra_wkd = self.tracker.get_target_percentile(lead_time_days=200, segment_type="weekend")
-        self.assertEqual(p_ultra_wkd, 85.0)
+        self.assertEqual(p_ultra_wkd, 75.0)
         p_ultra_aggr = self.tracker.get_target_percentile(lead_time_days=200, segment_type="weekend", aggressive=True)
-        self.assertEqual(p_ultra_aggr, 90.0)
+        self.assertEqual(p_ultra_aggr, 80.0)
 
-        # Early booking (91–180d) weekend prior is 67.5% (aggressive p75 is 75.0%)
+        # Early booking (91–180d) weekend prior is 65.0% (aggressive p75 is 75.0%)
         p_far_wkd = self.tracker.get_target_percentile(lead_time_days=100, segment_type="weekend")
-        self.assertEqual(p_far_wkd, 67.5)
+        self.assertEqual(p_far_wkd, 65.0)
         p_far_aggr = self.tracker.get_target_percentile(lead_time_days=100, segment_type="weekend", aggressive=True)
         self.assertEqual(p_far_aggr, 75.0)
 
-        # Peak booking (31–90d) weekend prior is 62.5% (aggressive p75 is 70.0%)
+        # Peak booking (31–90d) weekend prior is 60.0% (aggressive p75 is 70.0%)
         p_peak_wkd = self.tracker.get_target_percentile(lead_time_days=60, segment_type="weekend")
-        self.assertEqual(p_peak_wkd, 62.5)
+        self.assertEqual(p_peak_wkd, 60.0)
         p_peak_aggr = self.tracker.get_target_percentile(lead_time_days=60, segment_type="weekend", aggressive=True)
         self.assertEqual(p_peak_aggr, 70.0)
 
-        # Near-term / distress (<=30d) midweek prior is 30.0% (aggressive p75 is 38.0%)
+        # Near-term / distress (<=30d) midweek prior is 30.0% (aggressive p75 is 40.0%)
         p_near_mid = self.tracker.get_target_percentile(lead_time_days=20, segment_type="midweek")
         self.assertEqual(p_near_mid, 30.0)
         p_near_mid_aggr = self.tracker.get_target_percentile(lead_time_days=20, segment_type="midweek", aggressive=True)
-        self.assertEqual(p_near_mid_aggr, 38.0)
+        self.assertEqual(p_near_mid_aggr, 40.0)
 
-        # Last-minute (<=30d) weekend prior is 42.5% (aggressive p75 is 50.0%)
+        # Last-minute (<=30d) weekend prior is 45.0% (aggressive p75 is 50.0%)
         p_last_wkd = self.tracker.get_target_percentile(lead_time_days=10, segment_type="weekend")
-        self.assertEqual(p_last_wkd, 42.5)
+        self.assertEqual(p_last_wkd, 45.0)
         p_last_aggr = self.tracker.get_target_percentile(lead_time_days=10, segment_type="weekend", aggressive=True)
         self.assertEqual(p_last_aggr, 50.0)
 
     def test_compute_strategy_grid_with_floors(self):
-        """Verify early booking weekend does not drop below strategic floor 65.0% despite empirical p50 = 41.0%."""
+        """Verify early booking weekend does not drop below strategic floor 60.0% despite empirical p50 = 41.0%."""
         # Insert 24 early booking (91–180d) weekend bookings with p50 = 41.0%
         with self.tracker._get_connection() as conn:
             for i in range(24):
@@ -754,8 +754,8 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         self.assertEqual(far_wkd["count"], 24)
         self.assertTrue(far_wkd["is_empirical"])
         self.assertTrue(far_wkd["is_floor_clamped"])
-        # Strategic floor is 65.0%; empirical shrinkage without floor would be ~45.6%
-        self.assertEqual(far_wkd["recommended_target"], 65.0)
+        # Strategic floor is 60.0%; empirical shrinkage without floor would be ~45.6%
+        self.assertEqual(far_wkd["recommended_target"], 60.0)
 
     def test_is_floor_clamped_flag(self):
         """Verify is_floor_clamped is True when hat_Y < floor and False when hat_Y >= floor."""
@@ -848,7 +848,7 @@ class TestCompetitorSalesTracker(unittest.TestCase):
         cell = grid["grid"]["≤30d"]["weekend"]
         self.assertEqual(cell["count"], 4)
         self.assertFalse(cell["is_empirical"])
-        self.assertEqual(cell["recommended_target"], 42.5)  # exact prior target
+        self.assertEqual(cell["recommended_target"], 45.0)  # exact prior target
 
     # 14. Advisory Report Alerts
     def test_reporter_embeds_sales_and_surge_alerts(self):
@@ -1318,7 +1318,667 @@ class TestCompetitorSalesTracker(unittest.TestCase):
             # Should have overlaid the 10 comps from prior snapshot rather than dropping to 0
             self.assertEqual(timeline["cohorts"]["all"]["available"][idx], 10)
 
+    # 25. 4-Night Minimum Invariant Pre-Recording Verification Tests
+    def test_compute_min_nights_test_intervals_helpers(self):
+        """Test interval calculation for 3-night, 2-night, and 1-night candidate stays."""
+        from src.competitor_sales_tracker import compute_min_nights_test_intervals
+
+        # 3-night stay: extends by 1 day before (Check 1) and 1 day after (Check 2)
+        (c1_in, c1_out), (c2_in, c2_out) = compute_min_nights_test_intervals("2026-11-20", "2026-11-23")
+        self.assertEqual(c1_in, "2026-11-19")
+        self.assertEqual(c1_out, "2026-11-23")
+        self.assertEqual(c2_in, "2026-11-20")
+        self.assertEqual(c2_out, "2026-11-24")
+
+        # 2-night stay: delta_days = max(1, 4 - 2) = 2
+        (c1_in, c1_out), (c2_in, c2_out) = compute_min_nights_test_intervals("2026-11-20", "2026-11-22")
+        self.assertEqual(c1_in, "2026-11-18")
+        self.assertEqual(c1_out, "2026-11-22")
+        self.assertEqual(c2_in, "2026-11-20")
+        self.assertEqual(c2_out, "2026-11-24")
+
+        # 1-night stay: delta_days = max(1, 4 - 1) = 3
+        (c1_in, c1_out), (c2_in, c2_out) = compute_min_nights_test_intervals("2026-11-20", "2026-11-21")
+        self.assertEqual(c1_in, "2026-11-17")
+        self.assertEqual(c1_out, "2026-11-21")
+        self.assertEqual(c2_in, "2026-11-20")
+        self.assertEqual(c2_out, "2026-11-24")
+
+    def test_verify_listing_availability_min_nights_extension_available(self):
+        """Verify that when a 3-night check returns blocked but Check 1 extension is available, false_sale_min_nights is returned."""
+        mock_pm = MagicMock()
+        mock_pm.start = AsyncMock(return_value=None)
+        mock_pm.stop = AsyncMock(return_value=None)
+
+        with patch("src.stealth_connection.StealthConnectionManager", return_value=mock_pm), \
+             patch("playwright.async_api.async_playwright") as mock_ap:
+
+            mock_p = MagicMock()
+            mock_browser = MagicMock()
+            mock_context = MagicMock()
+            mock_page = MagicMock()
+
+            mock_ap.return_value.__aenter__ = AsyncMock(return_value=mock_p)
+            mock_ap.return_value.__aexit__ = AsyncMock(return_value=None)
+            mock_p.chromium.launch = AsyncMock(return_value=mock_browser)
+            mock_browser.new_context = AsyncMock(return_value=mock_context)
+            mock_context.new_page = AsyncMock(return_value=mock_page)
+            mock_page.goto = AsyncMock(return_value=None)
+            mock_page.evaluate = AsyncMock(return_value=None)
+            mock_page.close = AsyncMock(return_value=None)
+            mock_browser.close = AsyncMock(return_value=None)
+
+            call_count = 0
+
+            def fake_on_handler(event, handler):
+                nonlocal call_count
+                if event == "response":
+                    call_count += 1
+                    mock_resp = MagicMock()
+                    mock_resp.url = "https://www.airbnb.com/api/v3/StaysPdpSections"
+                    if call_count == 1:
+                        # Primary 3-night check: Unavailable due to minimum stay
+                        mock_resp.text = AsyncMock(return_value=json.dumps({
+                            "data": {"presentation": {"stayProductDetailPage": {"sections": {"sections": [
+                                {"section": {"localizedUnavailabilityMessage": "Requires 4-night minimum stay", "available": False}}
+                            ]}}}}
+                        }))
+                    else:
+                        # Check 1 (4-night extension): Available with price!
+                        mock_resp.text = AsyncMock(return_value=json.dumps({
+                            "data": {"presentation": {"stayProductDetailPage": {"sections": {"sections": [
+                                {"section": {"structuredDisplayPrice": {"primaryLine": {"price": "$1,600"}}}}
+                            ]}}}}
+                        }))
+                    asyncio.create_task(handler(mock_resp))
+
+            mock_page.on.side_effect = fake_on_handler
+
+            res = asyncio.run(self.tracker.verify_listing_availability(
+                "1001", "2026-11-20", "2026-11-23", pdp_timeout=0.01, validate_min_nights=True
+            ))
+
+            self.assertTrue(res["available"])
+            self.assertFalse(res["unavail"])
+            self.assertTrue(res.get("false_sale_min_nights"))
+            self.assertEqual(res["price"], 1600.0)
+            self.assertIn("Available on 4-night extension", res["reason"])
+
+    def test_record_direct_sale_rejects_minimum_stay_restriction(self):
+        """record_direct_sale should reject recording when raw_snippet indicates a minimum stay restriction."""
+        reg_comps = {"1001": {"tier": "tier_a", "desirability_ratio": 1.0, "name": "Desert Villa"}}
+        with patch.object(self.tracker, "load_registered_comps", return_value=reg_comps):
+            # Attempt with minimum stay snippet
+            recorded = self.tracker.record_direct_sale(
+                listing_id="1001",
+                check_in="2026-11-20",
+                check_out="2026-11-23",
+                nights=3,
+                last_observed_rate=500.0,
+                raw_snippet="Direct Verified Checkout Sweep | UNAVAILABLE (Requires 4-night minimum stay)",
+            )
+            self.assertFalse(recorded)
+
+            # Confirm not inserted into DB
+            with self.tracker._get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(*) FROM competitor_sales WHERE listing_id = '1001'")
+                count = cursor.fetchone()[0]
+                self.assertEqual(count, 0)
+
+            # Normal recorded sale succeeds
+            recorded_valid = self.tracker.record_direct_sale(
+                listing_id="1001",
+                check_in="2026-11-20",
+                check_out="2026-11-23",
+                nights=3,
+                last_observed_rate=500.0,
+                raw_snippet="Direct Verified Checkout Sweep | BOOKED / UNAVAILABLE",
+            )
+            self.assertTrue(recorded_valid)
+
+    def test_verify_listing_availability_primary_stricter_min_stay(self):
+        """Primary check reporting stricter minimum stay (> 4 nights) should short-circuit with unavail=False."""
+        mock_pm = MagicMock()
+        mock_pm.start = AsyncMock(return_value=None)
+        mock_pm.stop = AsyncMock(return_value=None)
+
+        with patch("src.stealth_connection.StealthConnectionManager", return_value=mock_pm), \
+             patch("playwright.async_api.async_playwright") as mock_ap:
+
+            mock_p = MagicMock()
+            mock_browser = MagicMock()
+            mock_context = MagicMock()
+            mock_page = MagicMock()
+
+            mock_ap.return_value.__aenter__ = AsyncMock(return_value=mock_p)
+            mock_ap.return_value.__aexit__ = AsyncMock(return_value=None)
+            mock_p.chromium.launch = AsyncMock(return_value=mock_browser)
+            mock_browser.new_context = AsyncMock(return_value=mock_context)
+            mock_context.new_page = AsyncMock(return_value=mock_page)
+            mock_page.goto = AsyncMock(return_value=None)
+            mock_page.evaluate = AsyncMock(return_value=None)
+            mock_page.close = AsyncMock(return_value=None)
+            mock_browser.close = AsyncMock(return_value=None)
+
+            def fake_on_handler(event, handler):
+                if event == "response":
+                    mock_resp = MagicMock()
+                    mock_resp.url = "https://www.airbnb.com/api/v3/StaysPdpSections"
+                    mock_resp.text = AsyncMock(return_value=json.dumps({
+                        "data": {"presentation": {"stayProductDetailPage": {"sections": {"sections": [
+                            {"section": {"localizedUnavailabilityMessage": "Requires 7-night minimum stay", "available": False}}
+                        ]}}}}
+                    }))
+                    asyncio.create_task(handler(mock_resp))
+
+            mock_page.on.side_effect = fake_on_handler
+
+            res = asyncio.run(self.tracker.verify_listing_availability(
+                "1001", "2026-11-20", "2026-11-23", pdp_timeout=0.01, validate_min_nights=True
+            ))
+
+            self.assertFalse(res["available"])
+            self.assertFalse(res["unavail"])
+            self.assertIn("stricter minimum stay rule", res["reason"])
+            self.assertEqual(mock_context.new_page.call_count, 1)
+
+    def test_verify_listing_availability_primary_stricter_min_stay_for_four_plus_nights(self):
+        """Primary check for a stay >= 4 nights reporting minimum stay (e.g. 7 nights) must short-circuit with unavail=False."""
+        mock_pm = MagicMock()
+        mock_pm.start = AsyncMock(return_value=None)
+        mock_pm.stop = AsyncMock(return_value=None)
+
+        with patch("src.stealth_connection.StealthConnectionManager", return_value=mock_pm), \
+             patch("playwright.async_api.async_playwright") as mock_ap:
+
+            mock_p = MagicMock()
+            mock_browser = MagicMock()
+            mock_context = MagicMock()
+            mock_page = MagicMock()
+
+            mock_ap.return_value.__aenter__ = AsyncMock(return_value=mock_p)
+            mock_ap.return_value.__aexit__ = AsyncMock(return_value=None)
+            mock_p.chromium.launch = AsyncMock(return_value=mock_browser)
+            mock_browser.new_context = AsyncMock(return_value=mock_context)
+            mock_context.new_page = AsyncMock(return_value=mock_page)
+            mock_page.goto = AsyncMock(return_value=None)
+            mock_page.evaluate = AsyncMock(return_value=None)
+            mock_page.close = AsyncMock(return_value=None)
+            mock_browser.close = AsyncMock(return_value=None)
+
+            def fake_on_handler(event, handler):
+                if event == "response":
+                    mock_resp = MagicMock()
+                    mock_resp.url = "https://www.airbnb.com/api/v3/StaysPdpSections"
+                    mock_resp.text = AsyncMock(return_value=json.dumps({
+                        "data": {"presentation": {"stayProductDetailPage": {"sections": {"sections": [
+                            {"section": {"localizedUnavailabilityMessage": "Requires 7-night minimum stay", "available": False}}
+                        ]}}}}
+                    }))
+                    asyncio.create_task(handler(mock_resp))
+
+            mock_page.on.side_effect = fake_on_handler
+
+            # 4-night candidate stay: 2026-11-20 -> 2026-11-24 (nights = 4)
+            res = asyncio.run(self.tracker.verify_listing_availability(
+                "1001", "2026-11-20", "2026-11-24", pdp_timeout=0.01, validate_min_nights=True
+            ))
+
+            self.assertFalse(res["available"])
+            self.assertFalse(res["unavail"])
+            self.assertIn("stricter minimum stay rule", res["reason"])
+            self.assertEqual(mock_context.new_page.call_count, 1)
+
+    def test_verify_listing_availability_both_extensions_unavail_confirms_blocked(self):
+        """When primary check and both 4-night extensions are affirmatively unavailable, unavail must be True."""
+        mock_pm = MagicMock()
+        mock_pm.start = AsyncMock(return_value=None)
+        mock_pm.stop = AsyncMock(return_value=None)
+
+        with patch("src.stealth_connection.StealthConnectionManager", return_value=mock_pm), \
+             patch("playwright.async_api.async_playwright") as mock_ap:
+
+            mock_p = MagicMock()
+            mock_browser = MagicMock()
+            mock_context = MagicMock()
+            mock_page = MagicMock()
+
+            mock_ap.return_value.__aenter__ = AsyncMock(return_value=mock_p)
+            mock_ap.return_value.__aexit__ = AsyncMock(return_value=None)
+            mock_p.chromium.launch = AsyncMock(return_value=mock_browser)
+            mock_browser.new_context = AsyncMock(return_value=mock_context)
+            mock_context.new_page = AsyncMock(return_value=mock_page)
+            mock_page.goto = AsyncMock(return_value=None)
+            mock_page.evaluate = AsyncMock(return_value=None)
+            mock_page.close = AsyncMock(return_value=None)
+            mock_browser.close = AsyncMock(return_value=None)
+
+            def fake_on_handler(event, handler):
+                if event == "response":
+                    mock_resp = MagicMock()
+                    mock_resp.url = "https://www.airbnb.com/api/v3/StaysPdpSections"
+                    mock_resp.text = AsyncMock(return_value=json.dumps({
+                        "data": {"presentation": {"stayProductDetailPage": {"sections": {"sections": [
+                            {"section": {"localizedUnavailabilityMessage": "These dates are not available", "available": False}}
+                        ]}}}}
+                    }))
+                    asyncio.create_task(handler(mock_resp))
+
+            mock_page.on.side_effect = fake_on_handler
+
+            res = asyncio.run(self.tracker.verify_listing_availability(
+                "1001", "2026-11-20", "2026-11-23", pdp_timeout=0.01, validate_min_nights=True
+            ))
+
+            self.assertFalse(res["available"])
+            self.assertTrue(res["unavail"])
+            self.assertIn("confirmed blocked across 4-night extensions", res["reason"])
+            self.assertEqual(mock_context.new_page.call_count, 3)
+
+    def test_verify_listing_availability_check2_inconclusive_does_not_commit_sale(self):
+        """If Check 2 is inconclusive (e.g. bot challenge), unavail must remain False to prevent false sale commit."""
+        mock_pm = MagicMock()
+        mock_pm.start = AsyncMock(return_value=None)
+        mock_pm.stop = AsyncMock(return_value=None)
+
+        with patch("src.stealth_connection.StealthConnectionManager", return_value=mock_pm), \
+             patch("playwright.async_api.async_playwright") as mock_ap:
+
+            mock_p = MagicMock()
+            mock_browser = MagicMock()
+            mock_context = MagicMock()
+            mock_page = MagicMock()
+
+            mock_ap.return_value.__aenter__ = AsyncMock(return_value=mock_p)
+            mock_ap.return_value.__aexit__ = AsyncMock(return_value=None)
+            mock_p.chromium.launch = AsyncMock(return_value=mock_browser)
+            mock_browser.new_context = AsyncMock(return_value=mock_context)
+            mock_context.new_page = AsyncMock(return_value=mock_page)
+            mock_page.goto = AsyncMock(return_value=None)
+            mock_page.close = AsyncMock(return_value=None)
+            mock_browser.close = AsyncMock(return_value=None)
+
+            call_count = 0
+
+            def fake_on_handler(event, handler):
+                nonlocal call_count
+                if event == "response":
+                    call_count += 1
+                    mock_resp = MagicMock()
+                    mock_resp.url = "https://www.airbnb.com/api/v3/StaysPdpSections"
+                    if call_count <= 2:
+                        # Primary check & Check 1 return dates unavailable
+                        mock_resp.text = AsyncMock(return_value=json.dumps({
+                            "data": {"presentation": {"stayProductDetailPage": {"sections": {"sections": [
+                                {"section": {"localizedUnavailabilityMessage": "These dates are not available", "available": False}}
+                            ]}}}}
+                        }))
+                        asyncio.create_task(handler(mock_resp))
+                    else:
+                        # Check 2 triggers bot challenge (no valid response)
+                        pass
+
+            mock_page.on.side_effect = fake_on_handler
+
+            async def fake_eval(js_code):
+                if call_count >= 2:
+                    return "Please verify you are human. Press and hold."
+                return ""
+
+            mock_page.evaluate = AsyncMock(side_effect=fake_eval)
+
+            res = asyncio.run(self.tracker.verify_listing_availability(
+                "1001", "2026-11-20", "2026-11-23", pdp_timeout=0.01, validate_min_nights=True
+            ))
+
+            self.assertFalse(res["available"])
+            self.assertFalse(res["unavail"])
+            self.assertIn("inconclusive", res["reason"])
+
+    def test_verify_listing_availability_check1_inconclusive_check2_unavail_does_not_commit_sale(self):
+        """If Check 1 is inconclusive (bot challenge) while Check 2 is unavailable, unavail must remain False."""
+        mock_pm = MagicMock()
+        mock_pm.start = AsyncMock(return_value=None)
+        mock_pm.stop = AsyncMock(return_value=None)
+
+        with patch("src.stealth_connection.StealthConnectionManager", return_value=mock_pm), \
+             patch("playwright.async_api.async_playwright") as mock_ap:
+
+            mock_p = MagicMock()
+            mock_browser = MagicMock()
+            mock_context = MagicMock()
+            mock_page = MagicMock()
+
+            mock_ap.return_value.__aenter__ = AsyncMock(return_value=mock_p)
+            mock_ap.return_value.__aexit__ = AsyncMock(return_value=None)
+            mock_p.chromium.launch = AsyncMock(return_value=mock_browser)
+            mock_browser.new_context = AsyncMock(return_value=mock_context)
+            mock_context.new_page = AsyncMock(return_value=mock_page)
+            mock_page.goto = AsyncMock(return_value=None)
+            mock_page.close = AsyncMock(return_value=None)
+            mock_browser.close = AsyncMock(return_value=None)
+
+            call_count = 0
+
+            def fake_on_handler(event, handler):
+                nonlocal call_count
+                if event == "response":
+                    call_count += 1
+                    mock_resp = MagicMock()
+                    mock_resp.url = "https://www.airbnb.com/api/v3/StaysPdpSections"
+                    if call_count == 1 or call_count == 3:
+                        # Primary check (1) & Check 2 (3) return dates unavailable
+                        mock_resp.text = AsyncMock(return_value=json.dumps({
+                            "data": {"presentation": {"stayProductDetailPage": {"sections": {"sections": [
+                                {"section": {"localizedUnavailabilityMessage": "These dates are not available", "available": False}}
+                            ]}}}}
+                        }))
+                        asyncio.create_task(handler(mock_resp))
+                    else:
+                        # Check 1 (2) triggers bot challenge (no valid response)
+                        pass
+
+            mock_page.on.side_effect = fake_on_handler
+
+            async def fake_eval(js_code):
+                if call_count == 2:
+                    return "Please verify you are human. Press and hold."
+                return ""
+
+            mock_page.evaluate = AsyncMock(side_effect=fake_eval)
+
+            res = asyncio.run(self.tracker.verify_listing_availability(
+                "1001", "2026-11-20", "2026-11-23", pdp_timeout=0.01, validate_min_nights=True
+            ))
+
+            self.assertFalse(res["available"])
+            self.assertFalse(res["unavail"])
+            self.assertIn("inconclusive", res["reason"])
+
+    def test_detect_sales_scales_rate_accurately_without_inflation(self):
+        """detect_sales must cache accurate nightly rates scaled to stay nights when false_sale_min_nights is reported."""
+        snap_dir = self.tracker.data_dir / "snapshots"
+        snap_dir.mkdir(parents=True, exist_ok=True)
+
+        prev_snap = snap_dir / "pricing_data_2026-10-01.json"
+        prev_data = {
+            "report_date": "2026-10-01",
+            "urgent_intervals": [{
+                "check_in": "2026-11-20",
+                "check_out": "2026-11-22",
+                "nights": 2,
+                "is_live_scan": True,
+                "comps_list": [{
+                    "listing_id": "1001",
+                    "effective_nightly": 400.0,
+                    "total_price": 800.0,
+                    "location": "Scottsdale",
+                    "bedrooms": 6,
+                }],
+            }],
+        }
+        prev_snap.write_text(json.dumps(prev_data))
+
+        curr_snap = snap_dir / "pricing_data_2026-10-02.json"
+        curr_data = {
+            "report_date": "2026-10-02",
+            "urgent_intervals": [{
+                "check_in": "2026-11-20",
+                "check_out": "2026-11-22",
+                "nights": 2,
+                "is_live_scan": True,
+                "comps_list": [],  # Disappeared from search
+            }],
+        }
+        curr_snap.write_text(json.dumps(curr_data))
+
+        # Mock verify_listing_availability returning false_sale_min_nights with 4-night rate $1,600 ($400/nt)
+        fake_verify = {
+            "available": True,
+            "unavail": False,
+            "false_sale_min_nights": True,
+            "price": 1600.0,
+            "extension_nights": 4,
+            "effective_nightly": 400.0,
+            "reason": "Available on 4-night extension",
+        }
+
+        reg_comps = {"1001": {"tier": "tier_a", "desirability_ratio": 1.0, "name": "Desert Villa"}}
+        with patch.object(self.tracker, "load_registered_comps", return_value=reg_comps), \
+             patch.object(self.tracker, "verify_listing_availability", return_value=fake_verify):
+
+            detected = self.tracker.diff_snapshots(prev_snap, curr_snap, verify_calendar=True)
+            # Should NOT detect a sale!
+            self.assertEqual(len(detected), 0)
+
+            # Check cache file: effective_nightly must be $400 (NOT $800), and total_price must be $800 ($400 * 2)
+            cache_file = self.tracker.data_dir / "cache" / "search_2026-11-20_2026-11-22_comp_1001.json"
+            self.assertTrue(cache_file.exists())
+            cached = json.loads(cache_file.read_text())[0]
+            self.assertEqual(cached["effective_nightly"], 400.0)
+            self.assertEqual(cached["total_price"], 800.0)
+
+    def test_check_interval_on_page_dom_fallback_minimum_stay_reason(self):
+        """When StaysPdpSections does not fire and DOM reports 'minimum stay', reason must indicate minimum stay restriction."""
+        mock_pm = MagicMock()
+        mock_pm.start = AsyncMock(return_value=None)
+        mock_pm.stop = AsyncMock(return_value=None)
+
+        with patch("src.stealth_connection.StealthConnectionManager", return_value=mock_pm), \
+             patch("playwright.async_api.async_playwright") as mock_ap:
+
+            mock_p = MagicMock()
+            mock_browser = MagicMock()
+            mock_context = MagicMock()
+            mock_page = MagicMock()
+
+            mock_ap.return_value.__aenter__ = AsyncMock(return_value=mock_p)
+            mock_ap.return_value.__aexit__ = AsyncMock(return_value=None)
+            mock_p.chromium.launch = AsyncMock(return_value=mock_browser)
+            mock_browser.new_context = AsyncMock(return_value=mock_context)
+            mock_context.new_page = AsyncMock(return_value=mock_page)
+            mock_page.goto = AsyncMock(return_value=None)
+            mock_page.close = AsyncMock(return_value=None)
+            mock_browser.close = AsyncMock(return_value=None)
+
+            # No network response event for StaysPdpSections
+            mock_page.on = MagicMock()
+            # DOM innerText contains "This listing requires a 5-night minimum stay"
+            mock_page.evaluate = AsyncMock(return_value="This listing requires a 5-night minimum stay to book.")
+
+            res = asyncio.run(self.tracker.verify_listing_availability(
+                "1001", "2026-11-20", "2026-11-23", pdp_timeout=0.01, validate_min_nights=True
+            ))
+
+            self.assertFalse(res["available"])
+            self.assertFalse(res["unavail"])
+            self.assertIn("stricter minimum stay rule", res["reason"])
+            self.assertEqual(mock_context.new_page.call_count, 1)
+
+    def test_reconcile_and_verify_interval_scales_rate_accurately(self):
+        """reconcile_and_verify_interval must scale rates accurately to stay nights without inflation when false_sale_min_nights is reported."""
+        self.tracker._cached_prev_intervals = {
+            ("2026-11-20", "2026-11-22"): {
+                "check_in": "2026-11-20",
+                "check_out": "2026-11-22",
+                "nights": 2,
+                "is_live_scan": True,
+                "comps": {
+                    "1001": {
+                        "listing_id": "1001",
+                        "effective_nightly": 400.0,
+                        "total_price": 800.0,
+                        "location": "Scottsdale",
+                        "bedrooms": 6,
+                    }
+                },
+            }
+        }
+        registered_comps = {
+            "1001": {"tier": "tier_a", "desirability_ratio": 1.0, "name": "Desert Villa", "location": "Scottsdale"}
+        }
+
+        fake_verify = {
+            "available": True,
+            "unavail": False,
+            "false_sale_min_nights": True,
+            "price": 1600.0,
+            "extension_nights": 4,
+            "effective_nightly": 400.0,
+            "reason": "Available on 4-night extension",
+        }
+
+        with patch.object(self.tracker, "load_registered_comps", return_value=registered_comps), \
+             patch.object(self.tracker, "verify_listing_availability", return_value=fake_verify):
+            recorded, erased = asyncio.run(self.tracker.reconcile_and_verify_interval(
+                check_in="2026-11-20",
+                check_out="2026-11-22",
+                curr_comps=[],
+                pdp_timeout=0.01,
+            ))
+
+            self.assertEqual(len(recorded), 0)
+            cache_file = self.tracker.data_dir / "cache" / "search_2026-11-20_2026-11-22_comp_1001.json"
+            self.assertTrue(cache_file.exists())
+            cached = json.loads(cache_file.read_text())[0]
+            self.assertEqual(cached["effective_nightly"], 400.0)
+            self.assertEqual(cached["total_price"], 800.0)
+
+    def test_diff_and_verify_staged_comps_scales_rate_accurately(self):
+        """diff_and_verify_staged_comps must scale rates accurately to stay nights without inflation when false_sale_min_nights is reported."""
+        snap_dir = self.tracker.data_dir / "snapshots"
+        snap_dir.mkdir(parents=True, exist_ok=True)
+
+        prev_snap = snap_dir / "pricing_data_2026-10-01.json"
+        prev_data = {
+            "report_date": "2026-10-01",
+            "urgent_intervals": [{
+                "check_in": "2026-11-20",
+                "check_out": "2026-11-22",
+                "nights": 2,
+                "is_live_scan": True,
+                "comps_list": [{
+                    "listing_id": "1001",
+                    "effective_nightly": 400.0,
+                    "total_price": 800.0,
+                    "location": "Scottsdale",
+                    "bedrooms": 6,
+                }],
+            }],
+        }
+        prev_snap.write_text(json.dumps(prev_data))
+
+        staged_intervals = {
+            ("2026-11-20", "2026-11-22"): {
+                "check_in": "2026-11-20",
+                "check_out": "2026-11-22",
+                "nights": 2,
+                "is_live_scan": True,
+                "comps": {},
+            }
+        }
+
+        fake_verify = {
+            "available": True,
+            "unavail": False,
+            "false_sale_min_nights": True,
+            "price": 1600.0,
+            "extension_nights": 4,
+            "effective_nightly": 400.0,
+            "reason": "Available on 4-night extension",
+        }
+
+        reg_comps = {"1001": {"tier": "tier_a", "desirability_ratio": 1.0, "name": "Desert Villa"}}
+        with patch.object(self.tracker, "load_registered_comps", return_value=reg_comps), \
+             patch.object(self.tracker, "verify_listing_availability", return_value=fake_verify):
+
+            confirmed = asyncio.run(self.tracker.diff_and_verify_staged_comps(
+                staged_intervals=staged_intervals,
+                prev_snapshot_path=prev_snap,
+                pdp_timeout=0.01,
+            ))
+
+            self.assertEqual(len(confirmed), 0)
+            cache_file = self.tracker.data_dir / "cache" / "search_2026-11-20_2026-11-22_comp_1001.json"
+            self.assertTrue(cache_file.exists())
+            cached = json.loads(cache_file.read_text())[0]
+            self.assertEqual(cached["effective_nightly"], 400.0)
+            self.assertEqual(cached["total_price"], 800.0)
+
+    def test_extract_intervals_from_snapshot_computes_dynamic_nights_when_omitted(self):
+        """extract_intervals_from_snapshot must calculate nights dynamically as (cout - cin).days when nights is omitted or None."""
+        snap_path = self.tracker.data_dir / "test_snapshot_dynamic_nights.json"
+        snap_data = {
+            "report_date": "2026-10-01",
+            "urgent_intervals": [{
+                "check_in": "2026-11-20",
+                "check_out": "2026-11-25",  # 5 nights
+                # 'nights' key intentionally omitted
+                "is_live_scan": True,
+                "comps_list": [{
+                    "listing_id": "1001",
+                    "effective_nightly": 500.0,
+                    "total_price": 2500.0,
+                }],
+            }],
+        }
+        snap_path.write_text(json.dumps(snap_data))
+        report_date, intervals = self.tracker.extract_intervals_from_snapshot(snap_path)
+        self.assertEqual(report_date, "2026-10-01")
+        self.assertIn(("2026-11-20", "2026-11-25"), intervals)
+        self.assertEqual(intervals[("2026-11-20", "2026-11-25")]["nights"], 5)
+
+    def test_verify_listing_availability_check2_past_date_skipped(self):
+        """When check_in is in the past, Check 2 must be skipped with unavail=False to avoid past calendar errors."""
+        mock_pm = MagicMock()
+        mock_pm.start = AsyncMock(return_value=None)
+        mock_pm.stop = AsyncMock(return_value=None)
+
+        with patch("src.stealth_connection.StealthConnectionManager", return_value=mock_pm), \
+             patch("playwright.async_api.async_playwright") as mock_ap:
+
+            mock_p = MagicMock()
+            mock_browser = MagicMock()
+            mock_context = MagicMock()
+            mock_page = MagicMock()
+
+            mock_ap.return_value.__aenter__ = AsyncMock(return_value=mock_p)
+            mock_ap.return_value.__aexit__ = AsyncMock(return_value=None)
+            mock_p.chromium.launch = AsyncMock(return_value=mock_browser)
+            mock_browser.new_context = AsyncMock(return_value=mock_context)
+            mock_context.new_page = AsyncMock(return_value=mock_page)
+            mock_page.goto = AsyncMock(return_value=None)
+            mock_page.evaluate = AsyncMock(return_value=None)
+            mock_page.close = AsyncMock(return_value=None)
+            mock_browser.close = AsyncMock(return_value=None)
+
+            def fake_on_handler(event, handler):
+                if event == "response":
+                    mock_resp = MagicMock()
+                    mock_resp.url = "https://www.airbnb.com/api/v3/StaysPdpSections"
+                    mock_resp.text = AsyncMock(return_value=json.dumps({
+                        "data": {"presentation": {"stayProductDetailPage": {"sections": {"sections": [
+                            {"section": {"localizedUnavailabilityMessage": "These dates are not available", "available": False}}
+                        ]}}}}
+                    }))
+                    asyncio.create_task(handler(mock_resp))
+
+            mock_page.on.side_effect = fake_on_handler
+
+            # Primary check is in the past: 2020-01-01 -> 2020-01-03
+            res = asyncio.run(self.tracker.verify_listing_availability(
+                "1001", "2020-01-01", "2020-01-03", pdp_timeout=0.01, validate_min_nights=True
+            ))
+
+            self.assertFalse(res["available"])
+            self.assertFalse(res["unavail"])
+            self.assertIn("past", res["reason"])
+            # Only primary check was run (call_count == 1); Check 1 and Check 2 were skipped
+            self.assertEqual(mock_context.new_page.call_count, 1)
+
 
 if __name__ == "__main__":
     unittest.main()
+
 

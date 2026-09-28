@@ -1,8 +1,26 @@
 {
   "version": "1.0",
-  "last_updated": "2026-09-28T13:21:15.998749Z",
-  "active_host": "mac",
+  "last_updated": "2026-09-28T20:59:40.009013Z",
+  "active_host": "ivanpe-mac",
   "runs": [
+    {
+      "run_id": "2026-09-28_205933_weekly-fullscan",
+      "job_type": "weekly-fullscan",
+      "job_title": "Weekly Full 12-Month Market Scan",
+      "trigger": "launchd",
+      "status": "FAILED",
+      "start_time": "2026-09-28T20:59:33.571799Z",
+      "end_time": "2026-09-28T20:59:40.003935Z",
+      "duration_sec": 6.4,
+      "duration_formatted": "6s",
+      "exit_code": 1,
+      "git_commit": "de219dd",
+      "log_file": "logs/2026-09-28_205933_weekly-fullscan.txt",
+      "summary": {
+        "message": "Aborted due to error: 'urgent_lead_days'"
+      },
+      "error_excerpt": "    urgent_lead_days=config[\"strategy\"][\"anomaly_thresholds\"][\"urgent_lead_days\"],\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\nKeyError: 'urgent_lead_days'"
+    },
     {
       "run_id": "2026-09-28_131517_daily-quickscan",
       "job_type": "daily-quickscan",

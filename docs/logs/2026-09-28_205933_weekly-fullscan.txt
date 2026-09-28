@@ -1,0 +1,42 @@
+======================================================================
+🏠 STR Competitive Price Advisor: Villa del Sol
+📍 Location: 920 E Carver Rd, Tempe, AZ 85284
+======================================================================
+
+[Step 1/5] Querying Kivoya / Streamline VRS API...
+  ✓ Found 18 active reservations / blocked periods.
+  ✓ Found 19 seasonal rate periods configured in Kivoya.
+  ✓ Snapshotted 358 daily published rates in database.
+
+[Step 2/5] Segmenting open calendar over next 12 months...
+  ✓ Generated 80 unbooked intervals (weekends & midweeks).
+
+[Step 3/5] Collecting luxury competitive listings from Airbnb...
+🛡️  Stealth Feeder Pool: Initializing 8 parallel proxy bridges across out-of-state travel hubs...
+  🛡️ Stealth Multi-IP Feeder Pool Online (8 endpoints): feeder-sf-1 (San Francisco port 59260, 603ms), feeder-dal-1 (Dallas port 59261, 745ms), feeder-chi-1 (Chicago port 59262, 779ms), feeder-ny-1 (New York port 59263, 780ms), feeder-us-1 (US Anycast port 59264, 745ms), feeder-sf-2 (San Francisco port 59265, 619ms), feeder-sf-3 (San Francisco port 59266, 631ms), feeder-dal-2 (Dallas port 59267, 751ms)
+
+
+Traceback (most recent call last):
+  File "/Users/ivanpe/str-price-advisor/src/cli.py", line 1019, in main
+    asyncio.run(run_weekly_advisory(
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+        quick=False,
+        ^^^^^^^^^^^^
+    ...<8 lines>...
+        tracker=tracker,
+        ^^^^^^^^^^^^^^^^
+    ))
+    ^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ivanpe/str-price-advisor/src/cli.py", line 459, in run_weekly_advisory
+    urgent_lead_days=config["strategy"]["anomaly_thresholds"]["urgent_lead_days"],
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'urgent_lead_days'

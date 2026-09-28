@@ -1,25 +1,30 @@
 {
   "version": "1.0",
-  "last_updated": "2026-09-28T20:59:40.009013Z",
+  "last_updated": "2026-09-28T22:21:19.623509Z",
   "active_host": "ivanpe-mac",
   "runs": [
     {
-      "run_id": "2026-09-28_205933_weekly-fullscan",
+      "run_id": "2026-09-28_214459_weekly-fullscan",
       "job_type": "weekly-fullscan",
       "job_title": "Weekly Full 12-Month Market Scan",
       "trigger": "launchd",
-      "status": "FAILED",
-      "start_time": "2026-09-28T20:59:33.571799Z",
-      "end_time": "2026-09-28T20:59:40.003935Z",
-      "duration_sec": 6.4,
-      "duration_formatted": "6s",
-      "exit_code": 1,
-      "git_commit": "de219dd",
-      "log_file": "logs/2026-09-28_205933_weekly-fullscan.txt",
+      "status": "SUCCESS",
+      "start_time": "2026-09-28T21:44:59.426934Z",
+      "end_time": "2026-09-28T22:21:19.621916Z",
+      "duration_sec": 2180.2,
+      "duration_formatted": "36m 20s",
+      "exit_code": 0,
+      "git_commit": "c8c7d7b",
+      "log_file": "logs/2026-09-28_214459_weekly-fullscan.txt",
       "summary": {
-        "message": "Aborted due to error: 'urgent_lead_days'"
+        "intervals_evaluated": 80,
+        "comps_scraped": 3811,
+        "urgent_adjustments": 20,
+        "moderate_adjustments": 28,
+        "proxy_pool_health": "10/10 active",
+        "message": "Scanned 80 intervals; 20 urgent and 28 moderate price adjustments identified."
       },
-      "error_excerpt": "    urgent_lead_days=config[\"strategy\"][\"anomaly_thresholds\"][\"urgent_lead_days\"],\n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\nKeyError: 'urgent_lead_days'"
+      "error_excerpt": null
     },
     {
       "run_id": "2026-09-28_131517_daily-quickscan",

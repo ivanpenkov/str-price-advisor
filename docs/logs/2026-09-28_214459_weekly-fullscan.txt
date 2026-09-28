@@ -1,0 +1,487 @@
+======================================================================
+🏠 STR Competitive Price Advisor: Villa del Sol
+📍 Location: 920 E Carver Rd, Tempe, AZ 85284
+======================================================================
+
+[Step 1/5] Querying Kivoya / Streamline VRS API...
+  ✓ Found 18 active reservations / blocked periods.
+  ✓ Found 19 seasonal rate periods configured in Kivoya.
+  ✓ Snapshotted 358 daily published rates in database.
+
+[Step 2/5] Segmenting open calendar over next 12 months...
+  ✓ Generated 80 unbooked intervals (weekends & midweeks).
+
+[Step 3/5] Collecting luxury competitive listings from Airbnb...
+🛡️  Stealth Feeder Pool: Initializing 8 parallel proxy bridges across out-of-state travel hubs...
+  🛡️ Stealth Multi-IP Feeder Pool Online (8 endpoints): feeder-sf-1 (San Francisco port 62498, 544ms), feeder-dal-1 (Dallas port 62499, 652ms), feeder-chi-1 (Chicago port 62500, 712ms), feeder-ny-1 (New York port 62501, 739ms), feeder-us-1 (US Anycast port 62502, 595ms), feeder-sf-2 (San Francisco port 62503, 547ms), feeder-sf-3 (San Francisco port 62504, 461ms), feeder-dal-2 (Dallas port 62505, 609ms)
+  [1/80] Scanning 2026-10-11 -> 2026-10-14 (midweek, 3n, lead=13d)... ✓ [OK] 36 comps available (66 booked) in 46.4s (454.17 MB)
+  [2/80] Scanning 2026-10-26 -> 2026-10-29 (midweek, 3n, lead=28d)... ✓ [OK] 64 comps available (38 booked) in 53.9s (402.71 MB)
+   - Comp sales recorded: $482 (26.0%)
+  [3/80] Scanning 2026-10-29 -> 2026-11-01 (weekend, 3n, lead=31d)... ✓ [OK] 54 comps available (48 booked) in 37.4s (399.73 MB)
+  [4/80] Scanning 2026-11-08 -> 2026-11-11 (midweek, 3n, lead=41d)... ✓ [OK] 47 comps available (55 booked) in 50.7s (467.07 MB)
+  [5/80] Scanning 2026-11-15 -> 2026-11-19 (midweek, 4n, lead=48d)... ✓ [OK] 61 comps available (41 booked) in 44.5s (415.33 MB)
+   - Comp sales recorded: $349 (2.0%), $457 (11.8%)
+  [6/80] Scanning 2026-11-29 -> 2026-12-03 (midweek, 4n, lead=62d)... ✓ [OK] 67 comps available (35 booked) in 40.1s (390.15 MB)
+  [7/80] Scanning 2026-12-03 -> 2026-12-06 (weekend, 3n, lead=66d)... ✓ [OK] 43 comps available (59 booked) in 51.1s (442.06 MB)
+   - Comp sales recorded: $1,133 (56.4%), $1,340 (74.4%)
+  [8/80] Scanning 2026-12-06 -> 2026-12-10 (midweek, 4n, lead=69d)... ✓ [OK] 49 comps available (53 booked) in 40.0s (455.50 MB)
+  [9/80] Scanning 2027-01-04 -> 2027-01-07 (midweek, 3n, lead=98d)... ✓ [OK] 76 comps available (26 booked) in 43.0s (428.26 MB)
+  [10/80] Scanning 2026-12-27 -> 2026-12-31 (midweek, 4n, lead=90d)... ✓ [OK] 22 comps available (80 booked) in 58.2s (538.13 MB)
+   - Comp sales recorded: $2,433 (80.8%)
+  [11/80] Scanning 2027-01-07 -> 2027-01-10 (weekend, 3n, lead=101d)... ✓ [OK] 69 comps available (33 booked) in 37.6s (396.70 MB)
+  [12/80] Scanning 2027-01-10 -> 2027-01-14 (midweek, 4n, lead=104d)... ✓ [OK] 79 comps available (23 booked) in 42.9s (404.78 MB)
+  [13/80] Scanning 2027-01-21 -> 2027-01-24 (weekend, 3n, lead=115d)... ✓ [OK] 52 comps available (50 booked) in 43.2s (448.77 MB)
+  [14/80] Scanning 2027-01-19 -> 2027-01-21 (midweek, 2n, lead=113d)... ✓ [OK] 36 comps available (66 booked) in 66.8s (503.32 MB)
+  [15/80] Scanning 2027-01-24 -> 2027-01-28 (midweek, 4n, lead=118d)... ✓ [OK] 75 comps available (27 booked) in 43.2s (421.12 MB)
+  [16/80] Scanning 2027-01-28 -> 2027-01-31 (weekend, 3n, lead=122d)... ✓ [OK] 51 comps available (51 booked) in 54.5s (450.61 MB)
+   - Comp sales recorded: $1,687 (74.5%)
+  [17/80] Scanning 2027-01-31 -> 2027-02-04 (midweek, 4n, lead=125d)... ✓ [OK] 74 comps available (28 booked) in 40.1s (401.72 MB)
+  [18/80] Scanning 2027-02-04 -> 2027-02-07 (weekend, 3n, lead=129d)... ✓ [OK] 52 comps available (50 booked) in 57.3s (421.43 MB)
+   - Comp sales recorded: $2,610 (86.7%)
+  [19/80] Scanning 2027-02-07 -> 2027-02-10 (midweek, 3n, lead=132d)... ✓ [OK] 48 comps available (54 booked) in 52.2s (484.65 MB)
+  [20/80] Scanning 2027-02-21 -> 2027-02-25 (midweek, 4n, lead=146d)... ✓ [OK] 66 comps available (36 booked) in 47.1s (428.05 MB)
+   - Comp sales recorded: $988 (17.1%)
+  [21/80] Scanning 2027-03-01 -> 2027-03-04 (midweek, 3n, lead=154d)... ✓ [OK] 63 comps available (39 booked) in 41.1s (400.81 MB)
+  [22/80] Scanning 2027-03-04 -> 2027-03-07 (weekend, 3n, lead=157d)... ✓ [OK] 45 comps available (57 booked) in 32.1s (366.71 MB)
+  [23/80] Scanning 2027-03-07 -> 2027-03-11 (midweek, 4n, lead=160d)... ✓ [OK] 56 comps available (46 booked) in 40.7s (283.51 MB)
+  [24/80] Scanning 2027-03-11 -> 2027-03-14 (weekend, 3n, lead=164d)... ✓ [OK] 47 comps available (55 booked) in 49.8s (353.15 MB)
+   - Comp sales recorded: $1,469 (31.7%)
+  [25/80] Scanning 2027-03-14 -> 2027-03-17 (midweek, 3n, lead=167d)... ✓ [OK] 50 comps available (52 booked) in 34.6s (231.53 MB)
+  [26/80] Scanning 2027-03-21 -> 2027-03-25 (midweek, 4n, lead=174d)... ✓ [OK] 54 comps available (48 booked) in 31.6s (228.21 MB)
+  [27/80] Scanning 2027-03-25 -> 2027-03-28 (weekend, 3n, lead=178d)... ✓ [OK] 40 comps available (62 booked) in 29.0s (248.08 MB)
+  [28/80] Scanning 2027-04-01 -> 2027-04-04 (weekend, 3n, lead=185d)... ✓ [OK] 41 comps available (61 booked) in 36.5s (273.55 MB)
+  [29/80] Scanning 2027-03-28 -> 2027-04-01 (midweek, 4n, lead=181d)... ✓ [OK] 46 comps available (56 booked) in 36.8s (208.31 MB)
+  [30/80] Scanning 2027-04-04 -> 2027-04-08 (midweek, 4n, lead=188d)... ✓ [OK] 54 comps available (48 booked) in 33.6s (189.12 MB)
+  [31/80] Scanning 2027-04-08 -> 2027-04-11 (weekend, 3n, lead=192d)... ✓ [OK] 46 comps available (56 booked) in 33.8s (235.47 MB)
+  [32/80] Scanning 2027-04-11 -> 2027-04-15 (midweek, 4n, lead=195d)... ✓ [OK] 68 comps available (34 booked) in 33.8s (227.02 MB)
+  [33/80] Scanning 2027-04-15 -> 2027-04-18 (weekend, 3n, lead=199d)... ✓ [OK] 49 comps available (53 booked) in 37.0s (244.34 MB)
+  [34/80] Scanning 2027-04-18 -> 2027-04-22 (midweek, 4n, lead=202d)... ✓ [OK] 59 comps available (43 booked) in 30.0s (241.07 MB)
+  [35/80] Scanning 2027-04-22 -> 2027-04-25 (weekend, 3n, lead=206d)... ✓ [OK] 50 comps available (52 booked) in 33.7s (225.59 MB)
+  [36/80] Scanning 2027-04-25 -> 2027-04-29 (midweek, 4n, lead=209d)... ✓ [OK] 64 comps available (38 booked) in 30.3s (199.21 MB)
+  [37/80] Scanning 2027-04-29 -> 2027-05-02 (weekend, 3n, lead=213d)... ✓ [OK] 58 comps available (44 booked) in 23.7s (222.78 MB)
+  [38/80] Scanning 2027-05-06 -> 2027-05-09 (weekend, 3n, lead=220d)... ✓ [OK] 55 comps available (47 booked) in 30.0s (226.74 MB)
+  [39/80] Scanning 2027-05-02 -> 2027-05-06 (midweek, 4n, lead=216d)... ✓ [OK] 65 comps available (37 booked) in 34.7s (212.69 MB)
+  [40/80] Scanning 2027-05-09 -> 2027-05-13 (midweek, 4n, lead=223d)... ✓ [OK] 69 comps available (33 booked) in 67.1s (185.44 MB)
+  [41/80] Scanning 2027-05-13 -> 2027-05-16 (weekend, 3n, lead=227d)... ✓ [OK] 48 comps available (54 booked) in 66.3s (111.02 MB)
+  [42/80] Scanning 2027-05-20 -> 2027-05-23 (weekend, 3n, lead=234d)... ✓ [OK] 57 comps available (45 booked) in 80.0s (138.00 MB)
+  [43/80] Scanning 2027-05-16 -> 2027-05-20 (midweek, 4n, lead=230d)... ✓ [OK] 68 comps available (34 booked) in 84.6s (184.81 MB)
+  [44/80] Scanning 2027-05-27 -> 2027-05-30 (weekend, 3n, lead=241d)... ✓ [OK] 51 comps available (51 booked) in 56.7s (150.13 MB)
+   - Comp sales recorded: $1,792 (77.3%)
+Warning: could not fetch Scottsdale--AZ page 1 for 2027-05-23: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/s/Scottsdale--AZ/homes?adults=16&min_bedrooms=6&checkin=2027-05-23&checkout=2027-05-27&locale=en&currency=USD
+Call log:
+  - navigating to "https://www.airbnb.com/s/Scottsdale--AZ/homes?adults=16&min_bedrooms=6&checkin=2027-05-23&checkout=2027-05-27&locale=en&currency=USD", waiting until "domcontentloaded"
+
+Warning: could not fetch Scottsdale--AZ page 1 for 2027-05-23: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/s/Scottsdale--AZ/homes?adults=16&min_bedrooms=6&checkin=2027-05-23&checkout=2027-05-27&locale=en&currency=USD
+Call log:
+  - navigating to "https://www.airbnb.com/s/Scottsdale--AZ/homes?adults=16&min_bedrooms=6&checkin=2027-05-23&checkout=2027-05-27&locale=en&currency=USD", waiting until "domcontentloaded"
+
+  [45/80] Scanning 2027-05-23 -> 2027-05-27 (midweek, 4n, lead=237d)... ✓ [OK] 60 comps available (42 booked) in 73.0s (165.58 MB)
+  [46/80] Scanning 2027-06-03 -> 2027-06-06 (weekend, 3n, lead=248d)... ✓ [OK] 52 comps available (50 booked) in 41.7s (171.71 MB)
+  [47/80] Scanning 2027-05-30 -> 2027-06-03 (midweek, 4n, lead=244d)... ✓ [OK] 64 comps available (38 booked) in 82.1s (147.21 MB)
+   - Comp sales recorded: $1,282 (82.6%)
+  [48/80] Scanning 2027-06-06 -> 2027-06-10 (midweek, 4n, lead=251d)... ✓ [OK] 76 comps available (26 booked) in 49.7s (328.17 MB)
+  [49/80] Scanning 2027-06-10 -> 2027-06-13 (weekend, 3n, lead=255d)... ✓ [OK] 56 comps available (46 booked) in 43.4s (371.55 MB)
+  [50/80] Scanning 2027-06-13 -> 2027-06-17 (midweek, 4n, lead=258d)... ✓ [OK] 74 comps available (28 booked) in 43.1s (361.53 MB)
+  [51/80] Scanning 2027-06-17 -> 2027-06-20 (weekend, 3n, lead=262d)... ✓ [OK] 53 comps available (49 booked) in 47.4s (315.45 MB)
+  [52/80] Scanning 2027-06-20 -> 2027-06-24 (midweek, 4n, lead=265d)... ✓ [OK] 53 comps available (49 booked) in 24.1s (150.92 MB)
+  [53/80] Scanning 2027-06-24 -> 2027-06-27 (weekend, 3n, lead=269d)... ✓ [OK] 45 comps available (57 booked) in 32.9s (204.29 MB)
+  [54/80] Scanning 2027-06-27 -> 2027-07-01 (midweek, 4n, lead=272d)... ✓ [OK] 59 comps available (43 booked) in 32.1s (144.28 MB)
+  [55/80] Scanning 2027-07-01 -> 2027-07-04 (weekend, 3n, lead=276d)... ✓ [OK] 9 comps available (93 booked) in 17.1s (41.81 MB)
+  [56/80] Scanning 2027-07-04 -> 2027-07-08 (midweek, 4n, lead=279d)... ✓ [OK] 26 comps available (76 booked) in 20.1s (73.64 MB)
+  [57/80] Scanning 2027-07-08 -> 2027-07-11 (weekend, 3n, lead=283d)... ✓ [OK] 32 comps available (70 booked) in 20.9s (73.51 MB)
+  [58/80] Scanning 2027-07-11 -> 2027-07-15 (midweek, 4n, lead=286d)... ✓ [OK] 23 comps available (79 booked) in 18.6s (56.92 MB)
+  [59/80] Scanning 2027-07-15 -> 2027-07-18 (weekend, 3n, lead=290d)... ✓ [OK] 16 comps available (86 booked) in 19.3s (43.14 MB)
+  [60/80] Scanning 2027-07-18 -> 2027-07-22 (midweek, 4n, lead=293d)... ✓ [OK] 34 comps available (68 booked) in 30.5s (99.16 MB)
+   - Comp sales recorded: $1,686 (100.0%)
+  [61/80] Scanning 2027-07-22 -> 2027-07-25 (weekend, 3n, lead=297d)... ✓ [OK] 21 comps available (81 booked) in 22.9s (60.10 MB)
+  [62/80] Scanning 2027-07-25 -> 2027-07-29 (midweek, 4n, lead=300d)... ✓ [OK] 22 comps available (80 booked) in 21.4s (72.42 MB)
+  [63/80] Scanning 2027-07-29 -> 2027-08-01 (weekend, 3n, lead=304d)... ✓ [OK] 20 comps available (82 booked) in 23.8s (63.17 MB)
+  [64/80] Scanning 2027-08-01 -> 2027-08-05 (midweek, 4n, lead=307d)... ✓ [OK] 25 comps available (77 booked) in 24.3s (73.71 MB)
+  [65/80] Scanning 2027-08-05 -> 2027-08-08 (weekend, 3n, lead=311d)... ✓ [OK] 16 comps available (86 booked) in 24.2s (77.53 MB)
+  [66/80] Scanning 2027-08-08 -> 2027-08-12 (midweek, 4n, lead=314d)... ✓ [OK] 25 comps available (77 booked) in 19.5s (63.11 MB)
+  [67/80] Scanning 2027-08-12 -> 2027-08-15 (weekend, 3n, lead=318d)... ✓ [OK] 23 comps available (79 booked) in 21.3s (64.99 MB)
+  [68/80] Scanning 2027-08-15 -> 2027-08-19 (midweek, 4n, lead=321d)... ✓ [OK] 33 comps available (69 booked) in 15.8s (52.14 MB)
+  [69/80] Scanning 2027-08-19 -> 2027-08-22 (weekend, 3n, lead=325d)... ✓ [OK] 14 comps available (88 booked) in 19.3s (40.14 MB)
+  [70/80] Scanning 2027-08-22 -> 2027-08-26 (midweek, 4n, lead=328d)... ✓ [OK] 34 comps available (68 booked) in 26.1s (110.71 MB)
+  [71/80] Scanning 2027-08-26 -> 2027-08-29 (weekend, 3n, lead=332d)... ✓ [OK] 13 comps available (89 booked) in 26.0s (63.71 MB)
+  [72/80] Scanning 2027-08-29 -> 2027-09-02 (midweek, 4n, lead=335d)... ✓ [OK] 30 comps available (72 booked) in 24.4s (74.23 MB)
+  [73/80] Scanning 2027-09-05 -> 2027-09-09 (midweek, 4n, lead=342d)... ✓ [OK] 32 comps available (70 booked) in 26.4s (54.51 MB)
+  [74/80] Scanning 2027-09-02 -> 2027-09-05 (weekend, 3n, lead=339d)... ✓ [OK] 24 comps available (78 booked) in 32.6s (65.09 MB)
+  [75/80] Scanning 2027-09-09 -> 2027-09-12 (weekend, 3n, lead=346d)... ✓ [OK] 14 comps available (88 booked) in 22.1s (48.76 MB)
+  [76/80] Scanning 2027-09-12 -> 2027-09-16 (midweek, 4n, lead=349d)... ✓ [OK] 27 comps available (75 booked) in 28.5s (80.26 MB)
+  [77/80] Scanning 2027-09-16 -> 2027-09-19 (weekend, 3n, lead=353d)... ✓ [OK] 27 comps available (75 booked) in 24.8s (98.91 MB)
+  [78/80] Scanning 2027-09-19 -> 2027-09-23 (midweek, 4n, lead=356d)... ✓ [OK] 25 comps available (77 booked) in 26.9s (55.22 MB)
+  [79/80] Scanning 2027-09-23 -> 2027-09-26 (weekend, 3n, lead=360d)... ✓ [OK] 20 comps available (82 booked) in 34.5s (55.20 MB)
+  [80/80] Scanning 2027-09-26 -> 2027-09-30 (midweek, 4n, lead=363d)... ✓ [OK] 16 comps available (86 booked) in 26.1s (76.12 MB)
+
+  ✓ Competitor Sales Engine: Recorded 13 new sales, erased 0 sales (Total active sales in ledger: 105).
+
+[Step 3b/5] Refreshing competitor Airbnb ratings and Guest Favorite badges...
+
+🔍 Synchronizing Airbnb ratings & Guest Favorite badges for 102 active comps (all)...
+  ✓ Identified 101 comps from recent high-fidelity search sweeps.
+  ⚡ Live scraping 1 comps via stealth NordVPN proxy pool...
+Navigation warning for comp 1136293547142522527: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/1136293547142522527
+Call log:
+  - navigating to "https://www.airbnb.com/rooms/1136293547142522527", waiting until "domcontentloaded"
+
+Failed to scrape comp 1136293547142522527: Page.query_selector_all: Execution context was destroyed, most likely because of a navigation
+
+💾 Saved updated comp registry and listing specifications (101 comps updated).
+🏅 Total Comps with Airbnb Guest Favorite Badge: 82 / 102
+
+Sample Updated Comps:
+ID                  Name                                Rating  GF Badge   Old Ratio  New Ratio
+--------------------------------------------------------------------------------------------
+1077813310260513265 Desert Diamond HTD Pool/Hot Tub/Te  4.97    🏅 YES      1.25       1.25
+628534576871518102  The Mulberry | Lux Pool/Hot Tub Mi  4.96    🏅 YES      1.01       1.01
+1452623425630736376 Family Resort: Pool, Outdoor Theat  4.88    🏅 YES      1.05       1.05
+1558065119520691944 Mega Mesa Retreat: Heated Pool, Sp  4.83    🏅 YES      1.07       1.07
+746927337513825183  HÓZHÓ |Mountain View Home| Pool, H  5.0     No         1.25       1.25
+1143202699620728397 Game Time - 6 Bedroom Elite Vacati  4.8     No         1.00       1.00
+1442997693061036066 Scottsdale Jetsetter - Modern Dese  5.0     🏅 YES      1.09       1.09
+1329097682770073862 Resort-Style Escape: Pool, Courts,  4.87    🏅 YES      1.16       1.16
+1628548270397523375 Fun-Filled Oasis • Pool, Picklebal  4.93    🏅 YES      1.18       1.18
+1240027547507854574 Backyard Arcade | Mini Golf, Pool   4.93    🏅 YES      1.03       1.03
+
+[Step 4/5] Generating multi-format advisory reports...
+
+[Step 4b] Scraping cross-platform prices across Airbnb, VRBO, Booking.com, and Kivoya...
+
+🌐 [PlatformComparator] Comparing 4 channels across 80 intervals...
+Airbnb scrape warning for 2026-10-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-10-11&check_out=2026-10-14&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2026-10-26: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-10-26&check_out=2026-10-29&adults=16&locale=en&currency=USD
+VRBO scrape warning for 2026-10-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-10-11&chkout=2026-10-14&adults=16
+Booking.com scrape warning for 2026-10-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-10-11&checkout=2026-10-14&group_adults=16&no_rooms=1
+VRBO scrape warning for 2026-10-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-10-11&chkout=2026-10-14&adults=16
+Booking.com scrape warning for 2026-10-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-10-11&checkout=2026-10-14&group_adults=16&no_rooms=1
+VRBO scrape warning for 2026-10-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-10-11&chkout=2026-10-14&adults=16
+Airbnb scrape warning for 2026-10-26: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-10-26&check_out=2026-10-29&adults=16&locale=en&currency=USD
+  [1/80] 2026-10-11 -> 2026-10-14 (3n)... ✓ [OK] Airbnb: $3,110 | VRBO: $3,397 | Booking: $3,243 | Kivoya: $2,861 (Max Div: 13.2%) in 17.7s
+Booking.com scrape warning for 2026-10-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-10-29&checkout=2026-11-01&group_adults=16&no_rooms=1
+VRBO scrape warning for 2026-10-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-10-29&chkout=2026-11-01&adults=16
+  [2/80] 2026-10-26 -> 2026-10-29 (3n)... ✓ [OK] Airbnb: $2,203 | VRBO: $2,513 | Booking: $2,409 | Kivoya: $2,129 (Max Div: 12.0%) in 19.0s
+Booking.com scrape warning for 2026-11-08: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-11-08&checkout=2026-11-11&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2026-10-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-10-29&checkout=2026-11-01&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2026-11-08: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-11-08&checkout=2026-11-11&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2026-11-08: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-11-08&check_out=2026-11-11&adults=16&locale=en&currency=USD
+Booking.com scrape warning for 2026-11-08: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-11-08&checkout=2026-11-11&group_adults=16&no_rooms=1
+  [3/80] 2026-10-29 -> 2026-11-01 (3n)... ✓ [OK] Airbnb: $3,377 | VRBO: $3,839 | Booking: $3,641 | Kivoya: $3,228 (Max Div: 13.6%) in 17.1s
+Airbnb scrape warning for 2026-11-15: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-11-15&check_out=2026-11-19&adults=16&locale=en&currency=USD
+  [4/80] 2026-11-08 -> 2026-11-11 (3n)... ✓ [OK] Airbnb: $2,307 | VRBO: $2,626 | Booking: $2,520 | Kivoya: $2,222 (Max Div: 12.2%) in 21.7s
+Booking.com scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-11-29&checkout=2026-12-03&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2026-11-15: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-11-15&checkout=2026-11-19&group_adults=16&no_rooms=1
+VRBO scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-11-29&chkout=2026-12-03&adults=16
+Airbnb scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-11-29&check_out=2026-12-03&adults=16&locale=en&currency=USD
+VRBO scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-11-29&chkout=2026-12-03&adults=16
+VRBO scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2026-11-29&chkout=2026-12-03&adults=16
+  [5/80] 2026-11-15 -> 2026-11-19 (4n)... ✓ [OK] Airbnb: $2,868 | VRBO: $3,261 | Booking: $3,115 | Kivoya: $2,749 (Max Div: 13.0%) in 17.9s
+Airbnb scrape warning for 2026-12-03: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-12-03&check_out=2026-12-06&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2026-11-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-11-29&check_out=2026-12-03&adults=16&locale=en&currency=USD
+  [6/80] 2026-11-29 -> 2026-12-03 (4n)... ✓ [OK] Airbnb: $4,814 | VRBO: $5,044 | Booking: $4,796 | Kivoya: $4,225 (Max Div: 14.3%) in 20.8s
+Booking.com scrape warning for 2026-12-06: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-12-06&checkout=2026-12-10&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2026-12-03: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2026-12-03&check_out=2026-12-06&adults=16&locale=en&currency=USD
+Booking.com scrape warning for 2026-12-06: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-12-06&checkout=2026-12-10&group_adults=16&no_rooms=1
+  [7/80] 2026-12-03 -> 2026-12-06 (3n)... ✓ [OK] Airbnb: $3,606 | VRBO: $3,929 | Booking: $3,714 | Kivoya: $3,302 (Max Div: 13.6%) in 22.2s
+  [8/80] 2026-12-06 -> 2026-12-10 (4n)... ✓ [OK] Airbnb: $3,373 | VRBO: $3,681 | Booking: $3,494 | Kivoya: $3,096 (Max Div: 13.4%) in 13.3s
+Booking.com scrape warning for 2026-12-27: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2026-12-27&checkout=2026-12-31&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-01-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-04&check_out=2027-01-07&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-01-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-04&check_out=2027-01-07&adults=16&locale=en&currency=USD
+  [9/80] 2027-01-04 -> 2027-01-07 (3n)... ✓ [OK] Airbnb: $3,039 | VRBO: $3,318 | Booking: $3,169 | Kivoya: $2,796 (Max Div: 13.1%) in 19.5s
+Airbnb scrape warning for 2027-01-07: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-07&check_out=2027-01-10&adults=16&locale=en&currency=USD
+  [10/80] 2026-12-27 -> 2026-12-31 (4n)... ✓ [OK] Airbnb: $6,533 | VRBO: $7,073 | Booking: $6,649 | Kivoya: $5,905 (Max Div: 15.0%) in 35.7s
+Booking.com scrape warning for 2027-01-10: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-01-10&checkout=2027-01-14&group_adults=16&no_rooms=1
+  [11/80] 2027-01-07 -> 2027-01-10 (3n)... ✓ [OK] Airbnb: $4,653 | VRBO: $5,053 | Booking: $4,763 | Kivoya: $4,233 (Max Div: 14.3%) in 22.8s
+Booking.com scrape warning for 2027-01-10: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-01-10&checkout=2027-01-14&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-01-10: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-10&check_out=2027-01-14&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-01-10: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-10&check_out=2027-01-14&adults=16&locale=en&currency=USD
+  [12/80] 2027-01-10 -> 2027-01-14 (4n)... ✓ [OK] Airbnb: $3,846 | VRBO: $4,184 | Booking: $3,952 | Kivoya: $3,513 (Max Div: 13.8%) in 21.8s
+Airbnb scrape warning for 2027-01-21: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-21&check_out=2027-01-24&adults=16&locale=en&currency=USD
+  [13/80] 2027-01-19 -> 2027-01-21 (2n)... ✓ [OK] Airbnb: Unavail | VRBO: $2,452 | Booking: $2,360 | Kivoya: $2,078 (Max Div: 11.9%) in 16.8s
+Booking.com scrape warning for 2027-01-24: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-01-24&checkout=2027-01-28&group_adults=16&no_rooms=1
+  [14/80] 2027-01-21 -> 2027-01-24 (3n)... ✓ [OK] Airbnb: $4,653 | VRBO: $5,053 | Booking: $4,805 | Kivoya: $4,233 (Max Div: 14.3%) in 17.4s
+Airbnb scrape warning for 2027-01-24: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-24&check_out=2027-01-28&adults=16&locale=en&currency=USD
+  [15/80] 2027-01-28 -> 2027-01-31 (3n)... ✓ [OK] Airbnb: $4,653 | VRBO: $5,053 | Booking: $4,805 | Kivoya: $4,233 (Max Div: 14.3%) in 10.1s
+  [16/80] 2027-01-24 -> 2027-01-28 (4n)... ✓ [OK] Airbnb: $3,846 | VRBO: $4,184 | Booking: $4,252 | Kivoya: $3,513 (Max Div: 15.7%) in 26.6s
+Airbnb scrape warning for 2027-01-31: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-31&check_out=2027-02-04&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-02-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-02-04&check_out=2027-02-07&adults=16&locale=en&currency=USD
+VRBO scrape warning for 2027-01-31: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-01-31&chkout=2027-02-04&adults=16
+Booking.com scrape warning for 2027-02-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-02-04&checkout=2027-02-07&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-02-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-02-04&check_out=2027-02-07&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-02-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-02-04&check_out=2027-02-07&adults=16&locale=en&currency=USD
+  [17/80] 2027-02-04 -> 2027-02-07 (3n)... ✓ [OK] Airbnb: $5,216 | VRBO: $6,437 | Booking: $6,110 | Kivoya: $5,379 (Max Div: 14.8%) in 15.8s
+Airbnb scrape warning for 2027-01-31: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-01-31&check_out=2027-02-04&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-02-07: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-02-07&check_out=2027-02-10&adults=16&locale=en&currency=USD
+  [18/80] 2027-01-31 -> 2027-02-04 (4n)... ✓ [OK] Airbnb: $4,562 | VRBO: $5,218 | Booking: $5,306 | Kivoya: $4,369 (Max Div: 16.3%) in 21.2s
+Airbnb scrape warning for 2027-02-21: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-02-21&check_out=2027-02-25&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-02-07: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-02-07&check_out=2027-02-10&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-02-21: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-02-21&check_out=2027-02-25&adults=16&locale=en&currency=USD
+  [19/80] 2027-02-07 -> 2027-02-10 (3n)... ✓ [OK] Airbnb: $4,001 | VRBO: $4,352 | Booking: $4,108 | Kivoya: $3,652 (Max Div: 13.9%) in 21.4s
+  [20/80] 2027-02-21 -> 2027-02-25 (4n)... ✓ [OK] Airbnb: $5,129 | VRBO: $5,562 | Booking: $5,238 | Kivoya: $4,655 (Max Div: 14.5%) in 18.9s
+Airbnb scrape warning for 2027-03-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-03-04&check_out=2027-03-07&adults=16&locale=en&currency=USD
+VRBO scrape warning for 2027-03-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-03-04&chkout=2027-03-07&adults=16
+Airbnb scrape warning for 2027-03-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-03-04&check_out=2027-03-07&adults=16&locale=en&currency=USD
+Booking.com scrape warning for 2027-03-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-03-04&checkout=2027-03-07&group_adults=16&no_rooms=1
+  [21/80] 2027-03-01 -> 2027-03-04 (3n)... ✓ [OK] Airbnb: $4,808 | VRBO: $5,219 | Booking: $4,919 | Kivoya: $4,370 (Max Div: 14.4%) in 10.3s
+Airbnb scrape warning for 2027-03-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-03-04&check_out=2027-03-07&adults=16&locale=en&currency=USD
+  [22/80] 2027-03-04 -> 2027-03-07 (3n)... ✓ [OK] Airbnb: $6,864 | VRBO: $7,426 | Booking: $6,979 | Kivoya: $6,198 (Max Div: 15.0%) in 16.1s
+Booking.com scrape warning for 2027-03-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-03-11&checkout=2027-03-14&group_adults=16&no_rooms=1
+  [23/80] 2027-03-07 -> 2027-03-11 (4n)... ✓ [OK] Airbnb: $6,204 | VRBO: $6,719 | Booking: $6,319 | Kivoya: $5,613 (Max Div: 14.9%) in 11.5s
+Booking.com scrape warning for 2027-03-14: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-03-14&checkout=2027-03-17&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-03-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-03-11&check_out=2027-03-14&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-03-14: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-03-14&check_out=2027-03-17&adults=16&locale=en&currency=USD
+  [24/80] 2027-03-14 -> 2027-03-17 (3n)... ✓ [OK] Airbnb: $4,808 | VRBO: $5,219 | Booking: $4,962 | Kivoya: $4,370 (Max Div: 14.4%) in 17.4s
+  [25/80] 2027-03-21 -> 2027-03-25 (4n)... ✓ [OK] Airbnb: $6,749 | VRBO: $7,306 | Booking: $6,867 | Kivoya: $6,099 (Max Div: 15.0%) in 10.4s
+Booking.com scrape warning for 2027-03-25: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-03-25&checkout=2027-03-28&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-03-25: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-03-25&check_out=2027-03-28&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-03-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-03-11&check_out=2027-03-14&adults=16&locale=en&currency=USD
+  [26/80] 2027-03-11 -> 2027-03-14 (3n)... ✓ [OK] Airbnb: $6,864 | VRBO: $7,426 | Booking: $7,043 | Kivoya: $6,198 (Max Div: 15.0%) in 44.6s
+VRBO scrape warning for 2027-03-28: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-03-28&chkout=2027-04-01&adults=16
+Airbnb scrape warning for 2027-03-25: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-03-25&check_out=2027-03-28&adults=16&locale=en&currency=USD
+  [27/80] 2027-03-25 -> 2027-03-28 (3n)... ✓ [OK] Airbnb: $7,164 | VRBO: $7,750 | Booking: $7,348 | Kivoya: $6,466 (Max Div: 15.1%) in 19.6s
+Airbnb scrape warning for 2027-04-01: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-04-01&check_out=2027-04-04&adults=16&locale=en&currency=USD
+  [28/80] 2027-03-28 -> 2027-04-01 (4n)... ✓ [OK] Airbnb: $6,077 | VRBO: $6,583 | Booking: $6,191 | Kivoya: $5,500 (Max Div: 14.8%) in 15.9s
+  [29/80] 2027-04-01 -> 2027-04-04 (3n)... ✓ [OK] Airbnb: $7,124 | VRBO: $7,705 | Booking: $7,305 | Kivoya: $6,429 (Max Div: 15.1%) in 10.1s
+Airbnb scrape warning for 2027-04-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-04-04&check_out=2027-04-08&adults=16&locale=en&currency=USD
+VRBO scrape warning for 2027-04-04: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-04-04&chkout=2027-04-08&adults=16
+Airbnb scrape warning for 2027-04-08: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-04-08&check_out=2027-04-11&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-04-08: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-04-08&check_out=2027-04-11&adults=16&locale=en&currency=USD
+  [30/80] 2027-04-04 -> 2027-04-08 (4n)... ✓ [OK] Airbnb: $4,800 | VRBO: $5,209 | Booking: $5,297 | Kivoya: $4,362 (Max Div: 16.3%) in 16.3s
+Airbnb scrape warning for 2027-04-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-04-11&check_out=2027-04-15&adults=16&locale=en&currency=USD
+  [31/80] 2027-04-08 -> 2027-04-11 (3n)... ✓ [OK] Airbnb: $5,635 | VRBO: $7,705 | Booking: $7,844 | Kivoya: $6,429 (Max Div: 17.2%) in 20.8s
+Booking.com scrape warning for 2027-04-15: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-04-15&checkout=2027-04-18&group_adults=16&no_rooms=1
+  [32/80] 2027-04-11 -> 2027-04-15 (4n)... ✓ [OK] Airbnb: $4,800 | VRBO: $5,209 | Booking: $4,905 | Kivoya: $4,362 (Max Div: 14.4%) in 16.3s
+  [33/80] 2027-04-15 -> 2027-04-18 (3n)... ✓ [OK] Airbnb: $7,124 | VRBO: $7,705 | Booking: $7,305 | Kivoya: $6,429 (Max Div: 15.1%) in 16.9s
+Booking.com scrape warning for 2027-04-22: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-04-22&checkout=2027-04-25&group_adults=16&no_rooms=1
+  [34/80] 2027-04-18 -> 2027-04-22 (4n)... ✓ [OK] Airbnb: $4,800 | VRBO: $5,209 | Booking: $5,297 | Kivoya: $4,362 (Max Div: 16.3%) in 10.0s
+  [35/80] 2027-04-22 -> 2027-04-25 (3n)... ✓ [OK] Airbnb: $7,124 | VRBO: $7,705 | Booking: $7,305 | Kivoya: $6,429 (Max Div: 15.1%) in 10.5s
+Booking.com scrape warning for 2027-04-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-04-29&checkout=2027-05-02&group_adults=16&no_rooms=1
+  [36/80] 2027-04-25 -> 2027-04-29 (4n)... ✓ [OK] Airbnb: $4,800 | VRBO: $5,209 | Booking: $4,951 | Kivoya: $4,362 (Max Div: 14.4%) in 15.2s
+Airbnb scrape warning for 2027-04-29: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-04-29&check_out=2027-05-02&adults=16&locale=en&currency=USD
+  [37/80] 2027-05-02 -> 2027-05-06 (4n)... ✓ [OK] Airbnb: $3,940 | VRBO: $4,286 | Booking: $4,047 | Kivoya: $3,597 (Max Div: 13.9%) in 10.6s
+  [38/80] 2027-04-29 -> 2027-05-02 (3n)... ✓ [OK] Airbnb: $5,355 | VRBO: $7,303 | Booking: $6,864 | Kivoya: $6,097 (Max Div: 15.7%) in 26.1s
+Booking.com scrape warning for 2027-05-09: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-09&checkout=2027-05-13&group_adults=16&no_rooms=1
+  [39/80] 2027-05-06 -> 2027-05-09 (3n)... ✓ [OK] Airbnb: $6,000 | VRBO: $6,500 | Booking: $6,114 | Kivoya: $5,431 (Max Div: 14.8%) in 10.5s
+Booking.com scrape warning for 2027-05-13: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-13&checkout=2027-05-16&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2027-05-13: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-13&checkout=2027-05-16&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-05-09: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-05-09&check_out=2027-05-13&adults=16&locale=en&currency=USD
+  [40/80] 2027-05-09 -> 2027-05-13 (4n)... ✓ [OK] Airbnb: $3,940 | VRBO: $4,286 | Booking: $4,047 | Kivoya: $3,597 (Max Div: 13.9%) in 17.6s
+Booking.com scrape warning for 2027-05-13: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-13&checkout=2027-05-16&group_adults=16&no_rooms=1
+  [41/80] 2027-05-13 -> 2027-05-16 (3n)... ✓ [OK] Airbnb: $6,000 | VRBO: $6,500 | Booking: $6,098 | Kivoya: $5,431 (Max Div: 14.8%) in 17.8s
+Airbnb scrape warning for 2027-05-20: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-05-20&check_out=2027-05-23&adults=16&locale=en&currency=USD
+  [42/80] 2027-05-16 -> 2027-05-20 (4n)... ✓ [OK] Airbnb: $3,940 | VRBO: $4,286 | Booking: $4,081 | Kivoya: $3,597 (Max Div: 13.9%) in 15.4s
+  [43/80] 2027-05-20 -> 2027-05-23 (3n)... ✓ [OK] Airbnb: $6,000 | VRBO: $6,500 | Booking: $6,114 | Kivoya: $5,431 (Max Div: 14.8%) in 13.1s
+VRBO scrape warning for 2027-05-23: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-05-23&chkout=2027-05-27&adults=16
+Booking.com scrape warning for 2027-05-23: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-23&checkout=2027-05-27&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2027-05-23: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-23&checkout=2027-05-27&group_adults=16&no_rooms=1
+  [44/80] 2027-05-27 -> 2027-05-30 (3n)... ✓ [OK] Airbnb: $6,000 | VRBO: $6,500 | Booking: $6,170 | Kivoya: $5,431 (Max Div: 14.8%) in 16.1s
+Booking.com scrape warning for 2027-05-30: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-30&checkout=2027-06-03&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2027-05-30: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-30&checkout=2027-06-03&group_adults=16&no_rooms=1
+  [45/80] 2027-05-23 -> 2027-05-27 (4n)... ✓ [OK] Airbnb: $3,940 | VRBO: $4,286 | Booking: $4,053 | Kivoya: $3,597 (Max Div: 13.9%) in 30.8s
+Booking.com scrape warning for 2027-05-30: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-05-30&checkout=2027-06-03&group_adults=16&no_rooms=1
+  [46/80] 2027-05-30 -> 2027-06-03 (4n)... ✓ [OK] Airbnb: $5,646 | VRBO: $6,123 | Booking: $5,749 | Kivoya: $5,119 (Max Div: 14.7%) in 15.4s
+Booking.com scrape warning for 2027-06-03: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-06-03&checkout=2027-06-06&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-06-06: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-06-06&check_out=2027-06-10&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-06-06: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-06-06&check_out=2027-06-10&adults=16&locale=en&currency=USD
+Airbnb scrape warning for 2027-06-06: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-06-06&check_out=2027-06-10&adults=16&locale=en&currency=USD
+  [47/80] 2027-06-03 -> 2027-06-06 (3n)... ✓ [OK] Airbnb: $4,842 | VRBO: $5,255 | Booking: $4,952 | Kivoya: $4,400 (Max Div: 14.4%) in 15.2s
+  [48/80] 2027-06-06 -> 2027-06-10 (4n)... ✓ [OK] Airbnb: $3,499 | VRBO: $3,818 | Booking: $3,640 | Kivoya: $3,210 (Max Div: 13.6%) in 16.0s
+Booking.com scrape warning for 2027-06-13: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-06-13&checkout=2027-06-17&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2027-06-13: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-06-13&checkout=2027-06-17&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-06-10: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-06-10&check_out=2027-06-13&adults=16&locale=en&currency=USD
+  [49/80] 2027-06-10 -> 2027-06-13 (3n)... ✓ [OK] Airbnb: $4,842 | VRBO: $5,255 | Booking: $4,996 | Kivoya: $4,400 (Max Div: 14.4%) in 17.6s
+  [50/80] 2027-06-13 -> 2027-06-17 (4n)... ✓ [OK] Airbnb: $3,499 | VRBO: $3,818 | Booking: $3,640 | Kivoya: $3,210 (Max Div: 13.6%) in 15.3s
+Airbnb scrape warning for 2027-06-17: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-06-17&check_out=2027-06-20&adults=16&locale=en&currency=USD
+Booking.com scrape warning for 2027-06-20: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-06-20&checkout=2027-06-24&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2027-06-20: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-06-20&checkout=2027-06-24&group_adults=16&no_rooms=1
+  [51/80] 2027-06-17 -> 2027-06-20 (3n)... ✓ [OK] Airbnb: $4,842 | VRBO: $5,255 | Booking: $4,996 | Kivoya: $4,400 (Max Div: 14.4%) in 10.8s
+VRBO scrape warning for 2027-06-24: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-06-24&chkout=2027-06-27&adults=16
+  [52/80] 2027-06-20 -> 2027-06-24 (4n)... ✓ [OK] Airbnb: $3,499 | VRBO: $3,818 | Booking: $3,621 | Kivoya: $3,210 (Max Div: 13.6%) in 16.6s
+  [53/80] 2027-06-24 -> 2027-06-27 (3n)... ✓ [OK] Airbnb: $4,842 | VRBO: $5,255 | Booking: $4,952 | Kivoya: $4,400 (Max Div: 14.4%) in 17.7s
+Booking.com scrape warning for 2027-07-01: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-07-01&checkout=2027-07-04&group_adults=16&no_rooms=1
+  [54/80] 2027-06-27 -> 2027-07-01 (4n)... ✓ [OK] Airbnb: $3,499 | VRBO: $3,818 | Booking: $3,640 | Kivoya: $3,210 (Max Div: 13.6%) in 15.0s
+Booking.com scrape warning for 2027-07-01: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-07-01&checkout=2027-07-04&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2027-07-01: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-07-01&checkout=2027-07-04&group_adults=16&no_rooms=1
+  [55/80] 2027-07-01 -> 2027-07-04 (3n)... ✓ [OK] Airbnb: $4,180 | VRBO: $4,545 | Booking: $4,292 | Kivoya: $3,812 (Max Div: 14.0%) in 17.1s
+  [56/80] 2027-07-08 -> 2027-07-11 (3n)... ✓ [OK] Airbnb: $4,180 | VRBO: $4,545 | Booking: $4,288 | Kivoya: $3,812 (Max Div: 14.0%) in 11.4s
+Booking.com scrape warning for 2027-07-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-07-11&checkout=2027-07-15&group_adults=16&no_rooms=1
+VRBO scrape warning for 2027-07-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-07-11&chkout=2027-07-15&adults=16
+  [57/80] 2027-07-04 -> 2027-07-08 (4n)... ⚠️ [Scrape Error] Airbnb: ❌ Error | VRBO: $3,740 | Booking: $3,538 | Kivoya: $3,146 (Max Div: 13.5%) in 31.4s
+VRBO scrape warning for 2027-07-15: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-07-15&chkout=2027-07-18&adults=16
+Booking.com scrape warning for 2027-07-15: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-07-15&checkout=2027-07-18&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-07-11: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-07-11&check_out=2027-07-15&adults=16&locale=en&currency=USD
+  [58/80] 2027-07-15 -> 2027-07-18 (3n)... ✓ [OK] Airbnb: $4,180 | VRBO: $4,545 | Booking: $4,326 | Kivoya: $3,812 (Max Div: 14.0%) in 16.0s
+  [59/80] 2027-07-11 -> 2027-07-15 (4n)... ✓ [OK] Airbnb: $3,427 | VRBO: $3,740 | Booking: $3,538 | Kivoya: $3,146 (Max Div: 13.5%) in 23.6s
+Booking.com scrape warning for 2027-07-18: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-07-18&checkout=2027-07-22&group_adults=16&no_rooms=1
+Airbnb scrape warning for 2027-07-18: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-07-18&check_out=2027-07-22&adults=16&locale=en&currency=USD
+VRBO scrape warning for 2027-07-22: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-07-22&chkout=2027-07-25&adults=16
+Airbnb scrape warning for 2027-07-18: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-07-18&check_out=2027-07-22&adults=16&locale=en&currency=USD
+Booking.com scrape warning for 2027-07-18: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-07-18&checkout=2027-07-22&group_adults=16&no_rooms=1
+  [60/80] 2027-07-22 -> 2027-07-25 (3n)... ✓ [OK] Airbnb: $4,180 | VRBO: $4,545 | Booking: $4,326 | Kivoya: $3,812 (Max Div: 14.0%) in 15.7s
+  [61/80] 2027-07-18 -> 2027-07-22 (4n)... ✓ [OK] Airbnb: $3,427 | VRBO: $3,740 | Booking: $3,550 | Kivoya: $3,146 (Max Div: 13.5%) in 17.3s
+  [62/80] 2027-07-29 -> 2027-08-01 (3n)... ✓ [OK] Airbnb: $4,180 | VRBO: $4,545 | Booking: $4,620 | Kivoya: $3,812 (Max Div: 15.9%) in 9.7s
+Booking.com scrape warning for 2027-08-01: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-08-01&checkout=2027-08-05&group_adults=16&no_rooms=1
+  [63/80] 2027-08-01 -> 2027-08-05 (4n)... ✓ [OK] Airbnb: $3,166 | VRBO: $3,459 | Booking: $3,302 | Kivoya: $2,912 (Max Div: 13.2%) in 11.5s
+  [64/80] 2027-07-25 -> 2027-07-29 (4n)... ✓ [OK] Airbnb: $3,427 | VRBO: $3,740 | Booking: $3,538 | Kivoya: $3,146 (Max Div: 13.5%) in 26.2s
+Airbnb scrape warning for 2027-08-08: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-08-08&check_out=2027-08-12&adults=16&locale=en&currency=USD
+  [65/80] 2027-08-05 -> 2027-08-08 (3n)... ✓ [OK] Airbnb: $4,254 | VRBO: $4,626 | Booking: $4,364 | Kivoya: $3,879 (Max Div: 14.1%) in 10.2s
+Booking.com scrape warning for 2027-08-12: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-08-12&checkout=2027-08-15&group_adults=16&no_rooms=1
+Booking.com scrape warning for 2027-08-12: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.booking.com/hotel/us/villa-del-sol-amazing-house-by-kivoya.html?checkin=2027-08-12&checkout=2027-08-15&group_adults=16&no_rooms=1
+  [66/80] 2027-08-08 -> 2027-08-12 (4n)... ✓ [OK] Airbnb: $3,166 | VRBO: $3,459 | Booking: $3,274 | Kivoya: $2,912 (Max Div: 13.2%) in 21.8s
+Airbnb scrape warning for 2027-08-12: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-08-12&check_out=2027-08-15&adults=16&locale=en&currency=USD
+  [67/80] 2027-08-12 -> 2027-08-15 (3n)... ✓ [OK] Airbnb: $4,254 | VRBO: $4,626 | Booking: $4,402 | Kivoya: $3,879 (Max Div: 14.1%) in 23.7s
+VRBO scrape warning for 2027-08-19: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.vrbo.com/2685684?chkin=2027-08-19&chkout=2027-08-22&adults=16
+  [68/80] 2027-08-15 -> 2027-08-19 (4n)... ✓ [OK] Airbnb: $3,166 | VRBO: $3,459 | Booking: $3,274 | Kivoya: $2,912 (Max Div: 13.2%) in 15.7s
+Airbnb scrape warning for 2027-08-22: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-08-22&check_out=2027-08-26&adults=16&locale=en&currency=USD
+  [69/80] 2027-08-19 -> 2027-08-22 (3n)... ✓ [OK] Airbnb: $4,254 | VRBO: $4,626 | Booking: $4,402 | Kivoya: $3,879 (Max Div: 14.1%) in 15.9s
+  [70/80] 2027-08-26 -> 2027-08-29 (3n)... ✓ [OK] Airbnb: $4,254 | VRBO: $4,626 | Booking: $4,364 | Kivoya: $3,879 (Max Div: 14.1%) in 10.0s
+  [71/80] 2027-08-29 -> 2027-09-02 (4n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+  [72/80] 2027-09-02 -> 2027-09-05 (3n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+  [73/80] 2027-09-05 -> 2027-09-09 (4n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+  [74/80] 2027-09-09 -> 2027-09-12 (3n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+  [75/80] 2027-09-12 -> 2027-09-16 (4n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+  [76/80] 2027-09-16 -> 2027-09-19 (3n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+  [77/80] 2027-09-19 -> 2027-09-23 (4n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+  [78/80] 2027-09-23 -> 2027-09-26 (3n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+  [79/80] 2027-09-26 -> 2027-09-30 (4n)... 🔒 [Calendar Closed] Airbnb: Unavail | VRBO: Unavail | Booking: Unavail | Kivoya: Unavail (Max Div: N/A)
+Airbnb scrape warning for 2027-08-22: Page.goto: net::ERR_EMPTY_RESPONSE at https://www.airbnb.com/rooms/573857947793833342?check_in=2027-08-22&check_out=2027-08-26&adults=16&locale=en&currency=USD
+  [80/80] 2027-08-22 -> 2027-08-26 (4n)... ✓ [OK] Airbnb: $3,166 | VRBO: $3,459 | Booking: $3,302 | Kivoya: $2,912 (Max Div: 13.2%) in 21.1s
+
+⚠️  [PLATFORM COMPARISON WARNING] Channel scrape errors detected: Airbnb: 1/80 failed.
+   Review the errors above or inspect proxy connection health.
+
+🎨 Refreshed dashboard (docs/index.html) with latest platform comparisons.
+
+[Step 4c] Empirical Absorption Velocity Summary...
+  - Total Confirmed Sales:        105
+  - Overall Median Percentile:    46.0%
+  - Average Lead Time at Sale:    126.6 days
+  - Average Realized Nightly:     $1,008.98
+  - ⚡ Active Market Compression: 11 interval(s) surging!
+      • 2026-10-25 -> 2026-10-29: High scarcity compression: only 13/102 (12.7%) comps available for check-in 2026-10-25
+      • 2026-11-27 -> 2026-11-29: High scarcity compression: only 2/102 (2.0%) comps available for check-in 2026-11-27
+      • 2026-12-18 -> 2026-12-20: High scarcity compression: only 6/102 (5.9%) comps available for check-in 2026-12-18
+      • 2026-12-20 -> 2026-12-23: High scarcity compression: only 9/102 (8.8%) comps available for check-in 2026-12-20
+      • 2027-07-01 -> 2027-07-04: High scarcity compression: only 9/102 (8.8%) comps available for check-in 2027-07-01
+      • 2027-07-15 -> 2027-07-18: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-07-15
+      • 2027-08-05 -> 2027-08-08: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-08-05
+      • 2027-08-19 -> 2027-08-22: High scarcity compression: only 15/102 (14.7%) comps available for check-in 2027-08-19
+      • 2027-08-26 -> 2027-08-29: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-08-26
+      • 2027-09-09 -> 2027-09-12: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-09-09
+      • 2027-09-26 -> 2027-09-30: High scarcity compression: only 17/102 (16.7%) comps available for check-in 2027-09-26
+
+[Step 5/5] Generating interactive static HTML dashboard in docs/...
+
+======================================================================
+🎉 ADVISORY REPORT GENERATION COMPLETE
+======================================================================
+  🚨 Urgent Adjustments Required (This Week): 20
+  ⚠️  Moderate Adjustments (Monthly Review):   28
+  ✅  Competitive / On Target:                 32
+
+📁 Output Files:
+  - Markdown Summary: data/pricing_report_2026-09-28.md
+  - Google Sheets CSV: data/pricing_sheet_2026-09-28.csv
+  - Raw JSON Archive:  data/pricing_data_2026-09-28.json
+======================================================================
+
+==============================================================================
+📊 RUNTIME & DATA TRANSFER PERFORMANCE AUDIT
+==============================================================================
+Scrape Architecture: Stealth Multi-IP Feeder Pool (up to 8 hubs)
+Step / Sub-Interval                                  Duration Network Transfer
+------------------------------------------------------------------------------
+[Step 1] Kivoya & Database Ingestion                     1.3s          0.00 MB
+[Step 2] Calendar Segmentation                           1.0s          0.00 MB
+[Step 3] Luxury Comp Scraping (80 intervals)        25m 31.2s      18441.08 MB
+  • 2026-10-11 -> 2026-10-14 (midweek, 3n)              46.4s        454.17 MB
+  • 2026-10-26 -> 2026-10-29 (midweek, 3n)              53.9s        402.71 MB
+  • 2026-10-29 -> 2026-11-01 (weekend, 3n)              37.4s        399.73 MB
+  • 2026-11-08 -> 2026-11-11 (midweek, 3n)              50.7s        467.07 MB
+  • 2026-11-15 -> 2026-11-19 (midweek, 4n)              44.5s        415.33 MB
+  • 2026-11-29 -> 2026-12-03 (midweek, 4n)              40.1s        390.15 MB
+  • 2026-12-03 -> 2026-12-06 (weekend, 3n)              51.1s        442.06 MB
+  • 2026-12-06 -> 2026-12-10 (midweek, 4n)              40.0s        455.50 MB
+  • 2026-12-27 -> 2026-12-31 (midweek, 4n)              58.2s        538.13 MB
+  • 2027-01-04 -> 2027-01-07 (midweek, 3n)              43.0s        428.26 MB
+  • 2027-01-07 -> 2027-01-10 (weekend, 3n)              37.6s        396.70 MB
+  • 2027-01-10 -> 2027-01-14 (midweek, 4n)              42.9s        404.78 MB
+  • 2027-01-19 -> 2027-01-21 (midweek, 2n)           1m 06.8s        503.32 MB
+  • 2027-01-21 -> 2027-01-24 (weekend, 3n)              43.2s        448.77 MB
+  • 2027-01-24 -> 2027-01-28 (midweek, 4n)              43.2s        421.12 MB
+  • 2027-01-28 -> 2027-01-31 (weekend, 3n)              54.5s        450.61 MB
+  • 2027-01-31 -> 2027-02-04 (midweek, 4n)              40.1s        401.72 MB
+  • 2027-02-04 -> 2027-02-07 (weekend, 3n)              57.3s        421.43 MB
+  • 2027-02-07 -> 2027-02-10 (midweek, 3n)              52.2s        484.65 MB
+  • 2027-02-21 -> 2027-02-25 (midweek, 4n)              47.1s        428.05 MB
+  • 2027-03-01 -> 2027-03-04 (midweek, 3n)              41.1s        400.81 MB
+  • 2027-03-04 -> 2027-03-07 (weekend, 3n)              32.1s        366.71 MB
+  • 2027-03-07 -> 2027-03-11 (midweek, 4n)              40.7s        283.51 MB
+  • 2027-03-11 -> 2027-03-14 (weekend, 3n)              49.8s        353.15 MB
+  • 2027-03-14 -> 2027-03-17 (midweek, 3n)              34.6s        231.53 MB
+  • 2027-03-21 -> 2027-03-25 (midweek, 4n)              31.6s        228.21 MB
+  • 2027-03-25 -> 2027-03-28 (weekend, 3n)              29.0s        248.08 MB
+  • 2027-03-28 -> 2027-04-01 (midweek, 4n)              36.8s        208.31 MB
+  • 2027-04-01 -> 2027-04-04 (weekend, 3n)              36.5s        273.55 MB
+  • 2027-04-04 -> 2027-04-08 (midweek, 4n)              33.6s        189.12 MB
+  • 2027-04-08 -> 2027-04-11 (weekend, 3n)              33.8s        235.47 MB
+  • 2027-04-11 -> 2027-04-15 (midweek, 4n)              33.8s        227.02 MB
+  • 2027-04-15 -> 2027-04-18 (weekend, 3n)              37.0s        244.34 MB
+  • 2027-04-18 -> 2027-04-22 (midweek, 4n)              30.0s        241.07 MB
+  • 2027-04-22 -> 2027-04-25 (weekend, 3n)              33.7s        225.59 MB
+  • 2027-04-25 -> 2027-04-29 (midweek, 4n)              30.3s        199.21 MB
+  • 2027-04-29 -> 2027-05-02 (weekend, 3n)              23.7s        222.78 MB
+  • 2027-05-02 -> 2027-05-06 (midweek, 4n)              34.7s        212.69 MB
+  • 2027-05-06 -> 2027-05-09 (weekend, 3n)              30.0s        226.74 MB
+  • 2027-05-09 -> 2027-05-13 (midweek, 4n)           1m 07.1s        185.44 MB
+  • 2027-05-13 -> 2027-05-16 (weekend, 3n)           1m 06.3s        111.02 MB
+  • 2027-05-16 -> 2027-05-20 (midweek, 4n)           1m 24.6s        184.81 MB
+  • 2027-05-20 -> 2027-05-23 (weekend, 3n)           1m 20.0s        138.00 MB
+  • 2027-05-23 -> 2027-05-27 (midweek, 4n)           1m 13.0s        165.58 MB
+  • 2027-05-27 -> 2027-05-30 (weekend, 3n)              56.7s        150.13 MB
+  • 2027-05-30 -> 2027-06-03 (midweek, 4n)           1m 22.1s        147.21 MB
+  • 2027-06-03 -> 2027-06-06 (weekend, 3n)              41.7s        171.71 MB
+  • 2027-06-06 -> 2027-06-10 (midweek, 4n)              49.7s        328.17 MB
+  • 2027-06-10 -> 2027-06-13 (weekend, 3n)              43.4s        371.55 MB
+  • 2027-06-13 -> 2027-06-17 (midweek, 4n)              43.1s        361.53 MB
+  • 2027-06-17 -> 2027-06-20 (weekend, 3n)              47.4s        315.45 MB
+  • 2027-06-20 -> 2027-06-24 (midweek, 4n)              24.1s        150.92 MB
+  • 2027-06-24 -> 2027-06-27 (weekend, 3n)              32.9s        204.29 MB
+  • 2027-06-27 -> 2027-07-01 (midweek, 4n)              32.1s        144.28 MB
+  • 2027-07-01 -> 2027-07-04 (weekend, 3n)              17.1s         41.81 MB
+  • 2027-07-04 -> 2027-07-08 (midweek, 4n)              20.1s         73.64 MB
+  • 2027-07-08 -> 2027-07-11 (weekend, 3n)              20.9s         73.51 MB
+  • 2027-07-11 -> 2027-07-15 (midweek, 4n)              18.6s         56.92 MB
+  • 2027-07-15 -> 2027-07-18 (weekend, 3n)              19.3s         43.14 MB
+  • 2027-07-18 -> 2027-07-22 (midweek, 4n)              30.5s         99.16 MB
+  • 2027-07-22 -> 2027-07-25 (weekend, 3n)              22.9s         60.10 MB
+  • 2027-07-25 -> 2027-07-29 (midweek, 4n)              21.4s         72.42 MB
+  • 2027-07-29 -> 2027-08-01 (weekend, 3n)              23.8s         63.17 MB
+  • 2027-08-01 -> 2027-08-05 (midweek, 4n)              24.3s         73.71 MB
+  • 2027-08-05 -> 2027-08-08 (weekend, 3n)              24.2s         77.53 MB
+  • 2027-08-08 -> 2027-08-12 (midweek, 4n)              19.5s         63.11 MB
+  • 2027-08-12 -> 2027-08-15 (weekend, 3n)              21.3s         64.99 MB
+  • 2027-08-15 -> 2027-08-19 (midweek, 4n)              15.8s         52.14 MB
+  • 2027-08-19 -> 2027-08-22 (weekend, 3n)              19.3s         40.14 MB
+  • 2027-08-22 -> 2027-08-26 (midweek, 4n)              26.1s        110.71 MB
+  • 2027-08-26 -> 2027-08-29 (weekend, 3n)              26.0s         63.71 MB
+  • 2027-08-29 -> 2027-09-02 (midweek, 4n)              24.4s         74.23 MB
+  • 2027-09-02 -> 2027-09-05 (weekend, 3n)              32.6s         65.09 MB
+  • 2027-09-05 -> 2027-09-09 (midweek, 4n)              26.4s         54.51 MB
+  • 2027-09-09 -> 2027-09-12 (weekend, 3n)              22.1s         48.76 MB
+  • 2027-09-12 -> 2027-09-16 (midweek, 4n)              28.5s         80.26 MB
+  • 2027-09-16 -> 2027-09-19 (weekend, 3n)              24.8s         98.91 MB
+  • 2027-09-19 -> 2027-09-23 (midweek, 4n)              26.9s         55.22 MB
+  • 2027-09-23 -> 2027-09-26 (weekend, 3n)              34.5s         55.20 MB
+  • 2027-09-26 -> 2027-09-30 (midweek, 4n)              26.1s         76.12 MB
+[Step 4] Advisory & Anomaly Analytics                    0.9s          0.00 MB
+[Step 4b] Cross-Platform Comparison (⚠️ Scrape Errors)    10m 40.6s        519.54 MB
+[Step 4c] Sales Detection & Absorption                   0.4s          0.00 MB
+[Step 5] HTML Dashboard & Asset Sync                     4.0s          0.00 MB
+------------------------------------------------------------------------------
+Total End-to-End Execution                          36m 20.2s      18960.62 MB
+==============================================================================
+
+⚠️  [ALERT] Cross-platform comparison encountered scrape errors: Airbnb: 1 failed.
+   Examine the logs above or verify NordVPN proxy health.
+

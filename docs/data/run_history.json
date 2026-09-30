@@ -1,8 +1,30 @@
 {
   "version": "1.0",
-  "last_updated": "2026-09-29T13:20:50.022000Z",
+  "last_updated": "2026-09-30T13:00:13.774796Z",
   "active_host": "ivans-mac-mini",
   "runs": [
+    {
+      "run_id": "2026-09-30_130007_pms-sync",
+      "job_type": "pms-sync",
+      "job_title": "Daily Streamline PMS Sync",
+      "trigger": "launchd",
+      "status": "SUCCESS",
+      "start_time": "2026-09-30T13:00:07.500702Z",
+      "end_time": "2026-09-30T13:00:13.773127Z",
+      "duration_sec": 6.3,
+      "duration_formatted": "6s",
+      "exit_code": 0,
+      "git_commit": "0300d94",
+      "log_file": "logs/2026-09-30_130007_pms-sync.txt",
+      "summary": {
+        "total_reservations": 210,
+        "new_reservations": 0,
+        "shifted_reservations": 0,
+        "next_arrival": "2026-09-30 (Guest)",
+        "message": "Synced 210 reservations from Streamline; 28 records updated."
+      },
+      "error_excerpt": null
+    },
     {
       "run_id": "2026-09-29_131516_daily-quickscan",
       "job_type": "daily-quickscan",

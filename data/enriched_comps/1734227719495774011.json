@@ -115,6 +115,6 @@
     "additional_rules": "Early/late check-out requires approval\nOnly registered guests may stay\n Max occupancy: 20\nNo smoking or vaping\nNo pets"
   },
   "rules_enriched_at": "2026-09-07T01:18:47.218942",
-  "is_guest_favorite": false,
-  "guest_favorite_badge": null
+  "is_guest_favorite": true,
+  "guest_favorite_badge": "Guest Favorite"
 }

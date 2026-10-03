@@ -465,7 +465,7 @@
       "beds": 17,
       "baths": 3.0,
       "rating": 4.8,
-      "reviews": 44,
+      "reviews": 45,
       "url": "https://www.airbnb.com/rooms/1143202699620728397",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1143202699620728397/original/5bb17579-1db8-44a9-b120-c5a6dd40f340.jpeg",
@@ -736,26 +736,26 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.93,
-      "reviews": 15,
+      "reviews": 14,
       "url": "https://www.airbnb.com/rooms/1628548270397523375",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1628548270397523375/original/ad8e466f-d256-42b9-ae0f-0879789ef3d1.jpeg",
       "amenities_count": 72,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.19,
+      "desirability_ratio": 1.18,
       "category_scores": {
         "outdoor": 100,
         "capacity": 91,
         "property_value": 93,
         "interior": 100,
         "location": 95,
-        "reputation": 100
+        "reputation": 95
       },
-      "composite_score": 96.4,
-      "rationale": "Premium comp (19% superior desirability, Winter). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
-      "winter_ratio": 1.19,
-      "summer_ratio": 1.19,
+      "composite_score": 95.9,
+      "rationale": "Premium comp (18% superior desirability, Winter). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
+      "winter_ratio": 1.18,
+      "summer_ratio": 1.18,
       "pool_specs": {
         "has_pool": true,
         "heating": "fee",
@@ -764,15 +764,15 @@
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 96.4,
-      "summer_composite_score": 96.4,
+      "winter_composite_score": 95.9,
+      "summer_composite_score": 95.9,
       "winter_category_scores": {
         "outdoor": 100,
         "capacity": 91,
         "property_value": 93,
         "interior": 100,
         "location": 95,
-        "reputation": 100
+        "reputation": 95
       },
       "summer_category_scores": {
         "outdoor": 100,
@@ -780,10 +780,10 @@
         "property_value": 93,
         "interior": 100,
         "location": 95,
-        "reputation": 100
+        "reputation": 95
       },
-      "winter_rationale": "Premium comp (19% superior desirability, Winter). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
-      "summer_rationale": "Premium comp (19% superior desirability, Summer). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
+      "winter_rationale": "Premium comp (18% superior desirability, Winter). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
+      "summer_rationale": "Premium comp (18% superior desirability, Summer). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
       "property_specs": {
         "sqft": 5450,
         "sqft_source": "Corridor Hedonic Est.",
@@ -4142,7 +4142,7 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.94,
-      "reviews": 70,
+      "reviews": 69,
       "url": "https://www.airbnb.com/rooms/1052192059622520398",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTA1MjE5MjA1OTYyMjUyMDM5OA%3D%3D/original/9991f05d-d4a3-4892-bbf7-785978e980f5.jpeg",
       "amenities_count": 83,
@@ -4326,7 +4326,7 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.86,
-      "reviews": 187,
+      "reviews": 186,
       "url": "https://www.airbnb.com/rooms/49429064",
       "photo_url": "https://a0.muscache.com/im/pictures/3820697b-d907-43c8-8148-60d7dab511ff.jpg",
       "amenities_count": 57,
@@ -5249,7 +5249,7 @@
       "beds": 8,
       "baths": 3.0,
       "rating": 4.94,
-      "reviews": 238,
+      "reviews": 236,
       "url": "https://www.airbnb.com/rooms/42545559",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-42545559/original/d8e4b5b5-5e0d-4350-bcf3-dac80af67586.jpeg",
@@ -7723,7 +7723,7 @@
       "beds": 9,
       "baths": 5.5,
       "rating": 4.98,
-      "reviews": 55,
+      "reviews": 54,
       "url": "https://www.airbnb.com/rooms/620502220252141438",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-620502220252141438/original/beff8579-4e90-4d96-b67a-4afad83c1145.jpeg",
@@ -7793,7 +7793,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.98★ with 55 reviews)",
+          "Flawless guest track record (4.98★ with 54 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -8733,7 +8733,7 @@
       "beds": 8,
       "baths": 3.5,
       "rating": 5.0,
-      "reviews": 5,
+      "reviews": 4,
       "url": "https://www.airbnb.com/rooms/1734227719495774011",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1734227719495774011/original/89f226c7-e7fc-48ee-ab16-278cf358edbd.png",
@@ -9098,7 +9098,7 @@
       "beds": 8,
       "baths": 3.0,
       "rating": 4.96,
-      "reviews": 125,
+      "reviews": 127,
       "url": "https://www.airbnb.com/rooms/699608423581201252",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-699608423581201252/original/cb90406d-2adc-49a1-86a2-a6fcda10d40a.jpeg",
       "amenities_count": 65,
@@ -9169,7 +9169,7 @@
         },
         "strengths": [
           "Free / complimentary pool heating included",
-          "Flawless guest track record (4.96★ with 125 reviews)",
+          "Flawless guest track record (4.96★ with 127 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -9376,7 +9376,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-10-02T06:20:11.821052",
+    "last_ratings_sync": "2026-10-03T06:18:38.326058",
     "total_guest_favorites": 83
   },
   "excluded_comps": {

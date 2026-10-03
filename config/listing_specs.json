@@ -59,7 +59,7 @@
     "beds": 17,
     "baths": 3.0,
     "rating": 4.8,
-    "reviews": 44,
+    "reviews": 45,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1143202699620728397/original/5bb17579-1db8-44a9-b120-c5a6dd40f340.jpeg",
     "is_guest_favorite": false,
     "guest_favorite_badge": null
@@ -98,7 +98,7 @@
     "beds": 9,
     "baths": 3.0,
     "rating": 4.93,
-    "reviews": 15,
+    "reviews": 14,
     "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1628548270397523375/original/ad8e466f-d256-42b9-ae0f-0879789ef3d1.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -605,7 +605,7 @@
     "beds": 8,
     "baths": 3.0,
     "rating": 4.94,
-    "reviews": 238,
+    "reviews": 236,
     "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-42545559/original/d8e4b5b5-5e0d-4350-bcf3-dac80af67586.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -969,7 +969,7 @@
     "beds": 9,
     "baths": 5.5,
     "rating": 4.98,
-    "reviews": 55,
+    "reviews": 54,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-620502220252141438/original/beff8579-4e90-4d96-b67a-4afad83c1145.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -1125,7 +1125,7 @@
     "beds": 8,
     "baths": 3.5,
     "rating": 5.0,
-    "reviews": 5,
+    "reviews": 4,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1734227719495774011/original/89f226c7-e7fc-48ee-ab16-278cf358edbd.png",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -1474,7 +1474,7 @@
     "beds": 9,
     "baths": 3.0,
     "rating": 4.86,
-    "reviews": 187,
+    "reviews": 186,
     "photo_url": "https://a0.muscache.com/im/pictures/3820697b-d907-43c8-8148-60d7dab511ff.jpg",
     "is_guest_favorite": false,
     "guest_favorite_badge": null
@@ -3290,7 +3290,7 @@
     "beds": 9,
     "baths": 3.0,
     "rating": 4.94,
-    "reviews": 70,
+    "reviews": 69,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTA1MjE5MjA1OTYyMjUyMDM5OA%3D%3D/original/9991f05d-d4a3-4892-bbf7-785978e980f5.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -3303,7 +3303,7 @@
     "beds": 8,
     "baths": 3.0,
     "rating": 4.96,
-    "reviews": 125,
+    "reviews": 127,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-699608423581201252/original/cb90406d-2adc-49a1-86a2-a6fcda10d40a.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"

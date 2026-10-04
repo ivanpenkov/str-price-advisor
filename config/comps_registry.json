@@ -191,8 +191,8 @@
       "bedrooms": 6,
       "beds": 7,
       "baths": 3.5,
-      "rating": 4.88,
-      "reviews": 41,
+      "rating": 4.86,
+      "reviews": 44,
       "url": "https://www.airbnb.com/rooms/1452623425630736376",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ1MjYyMzQyNTYzMDczNjM3Ng==/original/65ce9616-5142-4651-a1f8-2c73b4aad379.png",
@@ -736,26 +736,26 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.93,
-      "reviews": 14,
+      "reviews": 15,
       "url": "https://www.airbnb.com/rooms/1628548270397523375",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1628548270397523375/original/ad8e466f-d256-42b9-ae0f-0879789ef3d1.jpeg",
       "amenities_count": 72,
       "is_valid_comp": true,
       "validity_reason": "Valid 6BR luxury estate comp in Scottsdale.",
-      "desirability_ratio": 1.18,
+      "desirability_ratio": 1.19,
       "category_scores": {
         "outdoor": 100,
         "capacity": 91,
         "property_value": 93,
         "interior": 100,
         "location": 95,
-        "reputation": 95
+        "reputation": 100
       },
-      "composite_score": 95.9,
-      "rationale": "Premium comp (18% superior desirability, Winter). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
-      "winter_ratio": 1.18,
-      "summer_ratio": 1.18,
+      "composite_score": 96.4,
+      "rationale": "Premium comp (19% superior desirability, Winter). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
+      "winter_ratio": 1.19,
+      "summer_ratio": 1.19,
       "pool_specs": {
         "has_pool": true,
         "heating": "fee",
@@ -764,15 +764,15 @@
         "size_source": "Standard residential backyard pool",
         "gallons": null
       },
-      "winter_composite_score": 95.9,
-      "summer_composite_score": 95.9,
+      "winter_composite_score": 96.4,
+      "summer_composite_score": 96.4,
       "winter_category_scores": {
         "outdoor": 100,
         "capacity": 91,
         "property_value": 93,
         "interior": 100,
         "location": 95,
-        "reputation": 95
+        "reputation": 100
       },
       "summer_category_scores": {
         "outdoor": 100,
@@ -780,10 +780,10 @@
         "property_value": 93,
         "interior": 100,
         "location": 95,
-        "reputation": 95
+        "reputation": 100
       },
-      "winter_rationale": "Premium comp (18% superior desirability, Winter). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
-      "summer_rationale": "Premium comp (18% superior desirability, Summer). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
+      "winter_rationale": "Premium comp (19% superior desirability, Winter). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
+      "summer_rationale": "Premium comp (19% superior desirability, Summer). Features Airbnb Guest Favorite, dedicated sports court, private sauna, movie theater.",
       "property_specs": {
         "sqft": 5450,
         "sqft_source": "Corridor Hedonic Est.",
@@ -1928,7 +1928,7 @@
       "beds": 9,
       "baths": 4.0,
       "rating": 4.98,
-      "reviews": 63,
+      "reviews": 64,
       "url": "https://www.airbnb.com/rooms/757175004186905494",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-757175004186905494/original/f914c710-3ad5-48e9-b1ba-0ed6efc38b52.jpeg",
@@ -1999,7 +1999,7 @@
         },
         "strengths": [
           "Prime Scottsdale corridor commanding high regional demand",
-          "Flawless guest track record (4.98★ with 63 reviews)",
+          "Flawless guest track record (4.98★ with 64 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -2482,7 +2482,7 @@
       "beds": 9,
       "baths": 4.5,
       "rating": 5.0,
-      "reviews": 26,
+      "reviews": 28,
       "url": "https://www.airbnb.com/rooms/1125598445109401829",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1125598445109401829/original/d1a4efc4-1df8-46b3-b919-9c82ec6435f9.jpeg",
@@ -2554,7 +2554,7 @@
         "strengths": [
           "High bedroom count (8 bedrooms) accommodating large travel groups",
           "Expansive floor plan (~7,300 sq ft)",
-          "Flawless guest track record (5.00★ with 26 reviews)",
+          "Flawless guest track record (5.00★ with 28 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -3314,7 +3314,7 @@
       "beds": 16,
       "baths": 4.5,
       "rating": 5.0,
-      "reviews": 7,
+      "reviews": 8,
       "url": "https://www.airbnb.com/rooms/1625632307698164475",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1625632307698164475/original/cf225acf-7cd1-45a5-8589-ce8f680d6319.jpeg",
@@ -4142,7 +4142,7 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.94,
-      "reviews": 69,
+      "reviews": 70,
       "url": "https://www.airbnb.com/rooms/1052192059622520398",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTA1MjE5MjA1OTYyMjUyMDM5OA%3D%3D/original/9991f05d-d4a3-4892-bbf7-785978e980f5.jpeg",
       "amenities_count": 83,
@@ -4974,7 +4974,7 @@
       "beds": 7,
       "baths": 3.0,
       "rating": 4.98,
-      "reviews": 123,
+      "reviews": 124,
       "url": "https://www.airbnb.com/rooms/47868708",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-47868708/original/897c7308-513c-4555-bbfc-f949cfa1bfa0.jpeg",
@@ -5044,7 +5044,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.98★ with 123 reviews)",
+          "Flawless guest track record (4.98★ with 124 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -5249,7 +5249,7 @@
       "beds": 8,
       "baths": 3.0,
       "rating": 4.94,
-      "reviews": 236,
+      "reviews": 238,
       "url": "https://www.airbnb.com/rooms/42545559",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-42545559/original/d8e4b5b5-5e0d-4350-bcf3-dac80af67586.jpeg",
@@ -6533,7 +6533,7 @@
       "beds": 8,
       "baths": 5.0,
       "rating": 4.99,
-      "reviews": 160,
+      "reviews": 164,
       "url": "https://www.airbnb.com/rooms/750624596918284483",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-750624596918284483/original/4dc7d7e4-c540-4024-8a85-133d0bd1eb51.jpeg",
@@ -6603,7 +6603,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.99★ with 160 reviews)",
+          "Flawless guest track record (4.99★ with 164 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -7633,8 +7633,8 @@
       "bedrooms": 6,
       "beds": 8,
       "baths": 3.0,
-      "rating": 5.0,
-      "reviews": 5,
+      "rating": 4.83,
+      "reviews": 6,
       "url": "https://www.airbnb.com/rooms/1637937154787852120",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-1637937154787852120/original/2f7428ce-54b7-4b0e-a845-bd710a66ee4b.jpeg",
@@ -7998,7 +7998,7 @@
       "beds": 10,
       "baths": 6.0,
       "rating": 5.0,
-      "reviews": 37,
+      "reviews": 38,
       "url": "https://www.airbnb.com/rooms/1319814591019877062",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMxOTgxNDU5MTAxOTg3NzA2Mg==/original/6ff2e36c-637b-4acd-8975-a93ab5b5ecc9.jpeg",
@@ -8071,7 +8071,7 @@
           "High bedroom count (7 bedrooms) accommodating large travel groups",
           "Excellent bathroom ratio (6.0 bathrooms) avoiding morning bottlenecks",
           "Expansive floor plan (~6,650 sq ft)",
-          "Flawless guest track record (5.00★ with 37 reviews)",
+          "Flawless guest track record (5.00★ with 38 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -8273,7 +8273,7 @@
       "beds": 7,
       "baths": 3.0,
       "rating": 4.94,
-      "reviews": 17,
+      "reviews": 18,
       "url": "https://www.airbnb.com/rooms/1686281156322769090",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1686281156322769090/original/22cc9268-79aa-4bac-a42c-1a941ee69ad8.jpeg",
@@ -8458,7 +8458,7 @@
       "beds": 9,
       "baths": 2.5,
       "rating": 5.0,
-      "reviews": 11,
+      "reviews": 13,
       "url": "https://www.airbnb.com/rooms/1670456737865497023",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1670456737865497023/original/2e66b19b-af47-408b-bcd4-5263338a5552.jpeg",
@@ -8549,7 +8549,7 @@
       "beds": 7,
       "baths": 3.0,
       "rating": 4.93,
-      "reviews": 149,
+      "reviews": 150,
       "url": "https://www.airbnb.com/rooms/52867134",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-52867134/original/a2dc5a94-9ea2-483d-9c54-17daf28a549b.jpeg",
@@ -9098,7 +9098,7 @@
       "beds": 8,
       "baths": 3.0,
       "rating": 4.96,
-      "reviews": 127,
+      "reviews": 125,
       "url": "https://www.airbnb.com/rooms/699608423581201252",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-699608423581201252/original/cb90406d-2adc-49a1-86a2-a6fcda10d40a.jpeg",
       "amenities_count": 65,
@@ -9169,7 +9169,7 @@
         },
         "strengths": [
           "Free / complimentary pool heating included",
-          "Flawless guest track record (4.96★ with 127 reviews)",
+          "Flawless guest track record (4.96★ with 125 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -9376,7 +9376,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-10-03T06:18:38.326058",
+    "last_ratings_sync": "2026-10-04T02:09:36.892610",
     "total_guest_favorites": 83
   },
   "excluded_comps": {

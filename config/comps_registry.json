@@ -191,8 +191,8 @@
       "bedrooms": 6,
       "beds": 7,
       "baths": 3.5,
-      "rating": 4.86,
-      "reviews": 44,
+      "rating": 4.88,
+      "reviews": 41,
       "url": "https://www.airbnb.com/rooms/1452623425630736376",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ1MjYyMzQyNTYzMDczNjM3Ng==/original/65ce9616-5142-4651-a1f8-2c73b4aad379.png",
@@ -2669,7 +2669,7 @@
       "beds": 16,
       "baths": 6.0,
       "rating": 5.0,
-      "reviews": 50,
+      "reviews": 51,
       "url": "https://www.airbnb.com/rooms/1543607622549442899",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1543607622549442899/original/5d63fd3f-dcec-43bb-867a-a90663250367.jpeg",
@@ -2854,7 +2854,7 @@
       "beds": 10,
       "baths": 5.0,
       "rating": 4.93,
-      "reviews": 29,
+      "reviews": 30,
       "url": "https://www.airbnb.com/rooms/1247200709739597595",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1247200709739597595/original/36f40aa1-7167-4763-9425-77472a1850ba.jpeg",
@@ -3314,7 +3314,7 @@
       "beds": 16,
       "baths": 4.5,
       "rating": 5.0,
-      "reviews": 8,
+      "reviews": 7,
       "url": "https://www.airbnb.com/rooms/1625632307698164475",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1625632307698164475/original/cf225acf-7cd1-45a5-8589-ce8f680d6319.jpeg",
@@ -3867,7 +3867,7 @@
       "beds": 12,
       "baths": 4.0,
       "rating": 4.91,
-      "reviews": 135,
+      "reviews": 136,
       "url": "https://www.airbnb.com/rooms/918812982062542680",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-918812982062542680/original/dfc1df47-74d9-4161-bdcd-533558cb57d0.jpeg",
       "amenities_count": 55,
@@ -4142,7 +4142,7 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.94,
-      "reviews": 70,
+      "reviews": 69,
       "url": "https://www.airbnb.com/rooms/1052192059622520398",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTA1MjE5MjA1OTYyMjUyMDM5OA%3D%3D/original/9991f05d-d4a3-4892-bbf7-785978e980f5.jpeg",
       "amenities_count": 83,
@@ -4326,7 +4326,7 @@
       "beds": 9,
       "baths": 3.0,
       "rating": 4.86,
-      "reviews": 186,
+      "reviews": 187,
       "url": "https://www.airbnb.com/rooms/49429064",
       "photo_url": "https://a0.muscache.com/im/pictures/3820697b-d907-43c8-8148-60d7dab511ff.jpg",
       "amenities_count": 57,
@@ -4602,7 +4602,7 @@
       "beds": 9,
       "baths": 5.5,
       "rating": 4.97,
-      "reviews": 109,
+      "reviews": 111,
       "is_guest_favorite": true,
       "guest_favorite_badge": "Guest Favorite",
       "url": "https://www.airbnb.com/rooms/858613170601453396",
@@ -4622,7 +4622,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.97★ with 109 reviews)",
+          "Flawless guest track record (4.97★ with 111 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -4974,7 +4974,7 @@
       "beds": 7,
       "baths": 3.0,
       "rating": 4.98,
-      "reviews": 124,
+      "reviews": 123,
       "url": "https://www.airbnb.com/rooms/47868708",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-47868708/original/897c7308-513c-4555-bbfc-f949cfa1bfa0.jpeg",
@@ -5044,7 +5044,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.98★ with 124 reviews)",
+          "Flawless guest track record (4.98★ with 123 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -5803,7 +5803,7 @@
       "beds": 11,
       "baths": 3.0,
       "rating": 4.96,
-      "reviews": 79,
+      "reviews": 80,
       "url": "https://www.airbnb.com/rooms/39090468",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-39090468/original/3211daea-5bb9-47d0-9fbe-3364e04e6ea7.jpeg",
@@ -5873,7 +5873,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.96★ with 79 reviews)",
+          "Flawless guest track record (4.96★ with 80 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -6533,7 +6533,7 @@
       "beds": 8,
       "baths": 5.0,
       "rating": 4.99,
-      "reviews": 164,
+      "reviews": 160,
       "url": "https://www.airbnb.com/rooms/750624596918284483",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-750624596918284483/original/4dc7d7e4-c540-4024-8a85-133d0bd1eb51.jpeg",
@@ -6603,7 +6603,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.99★ with 164 reviews)",
+          "Flawless guest track record (4.99★ with 160 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -7542,7 +7542,7 @@
       "beds": 8,
       "baths": 3.0,
       "rating": 4.99,
-      "reviews": 191,
+      "reviews": 193,
       "url": "https://www.airbnb.com/rooms/695672305834920067",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-695672305834920067/original/9e4894ab-fb65-4e23-b50a-4d50bbc822b2.jpeg",
@@ -7612,7 +7612,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.99★ with 191 reviews)",
+          "Flawless guest track record (4.99★ with 193 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -7998,7 +7998,7 @@
       "beds": 10,
       "baths": 6.0,
       "rating": 5.0,
-      "reviews": 38,
+      "reviews": 37,
       "url": "https://www.airbnb.com/rooms/1319814591019877062",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTMxOTgxNDU5MTAxOTg3NzA2Mg==/original/6ff2e36c-637b-4acd-8975-a93ab5b5ecc9.jpeg",
@@ -8071,7 +8071,7 @@
           "High bedroom count (7 bedrooms) accommodating large travel groups",
           "Excellent bathroom ratio (6.0 bathrooms) avoiding morning bottlenecks",
           "Expansive floor plan (~6,650 sq ft)",
-          "Flawless guest track record (5.00★ with 38 reviews)",
+          "Flawless guest track record (5.00★ with 37 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -8090,8 +8090,8 @@
       "bedrooms": 5,
       "beds": 10,
       "baths": 4.5,
-      "rating": 4.85,
-      "reviews": 34,
+      "rating": 4.86,
+      "reviews": 35,
       "url": "https://www.airbnb.com/rooms/1498682060046080673",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5ODY4MjA2MDA0NjA4MDY3Mw==/original/e17bfd22-ed3c-472e-9fc3-b6f4b5e95ab5.jpeg",
@@ -8549,7 +8549,7 @@
       "beds": 7,
       "baths": 3.0,
       "rating": 4.93,
-      "reviews": 150,
+      "reviews": 149,
       "url": "https://www.airbnb.com/rooms/52867134",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-52867134/original/a2dc5a94-9ea2-483d-9c54-17daf28a549b.jpeg",
@@ -8733,7 +8733,7 @@
       "beds": 8,
       "baths": 3.5,
       "rating": 5.0,
-      "reviews": 4,
+      "reviews": 5,
       "url": "https://www.airbnb.com/rooms/1734227719495774011",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1734227719495774011/original/89f226c7-e7fc-48ee-ab16-278cf358edbd.png",
@@ -8917,7 +8917,7 @@
       "beds": 13,
       "baths": 4.0,
       "rating": 4.84,
-      "reviews": 105,
+      "reviews": 104,
       "url": "https://www.airbnb.com/rooms/1153792853758526471",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1153792853758526471/original/66536d51-1790-41dd-94ed-edb5f65a3494.jpeg",
@@ -9098,7 +9098,7 @@
       "beds": 8,
       "baths": 3.0,
       "rating": 4.96,
-      "reviews": 125,
+      "reviews": 128,
       "url": "https://www.airbnb.com/rooms/699608423581201252",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-699608423581201252/original/cb90406d-2adc-49a1-86a2-a6fcda10d40a.jpeg",
       "amenities_count": 65,
@@ -9169,7 +9169,7 @@
         },
         "strengths": [
           "Free / complimentary pool heating included",
-          "Flawless guest track record (4.96★ with 125 reviews)",
+          "Flawless guest track record (4.96★ with 128 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -9376,7 +9376,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-10-04T02:09:36.892610",
+    "last_ratings_sync": "2026-10-04T06:18:32.688011",
     "total_guest_favorites": 83
   },
   "excluded_comps": {

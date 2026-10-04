@@ -1,0 +1,119 @@
+======================================================================
+🏠 STR Competitive Price Advisor: Villa del Sol
+📍 Location: 920 E Carver Rd, Tempe, AZ 85284
+======================================================================
+
+[Step 1/5] Querying Kivoya / Streamline VRS API...
+  ✓ Found 18 active reservations / blocked periods.
+  ✓ Found 18 seasonal rate periods configured in Kivoya.
+  ✓ Snapshotted 335 daily published rates in database.
+
+[Step 2/5] Segmenting open calendar over next 12 months...
+  ✓ Generated 28 unbooked intervals (weekends & midweeks).
+  ⚡ Quick mode: Evaluating first 12 upcoming intervals.
+
+[Step 3/5] Collecting luxury competitive listings from Airbnb...
+🛡️  Stealth Feeder Pool: Initializing 8 parallel proxy bridges across out-of-state travel hubs...
+  🛡️ Stealth Multi-IP Feeder Pool Online (8 endpoints): feeder-sf-1 (San Francisco port 60318, 334ms), feeder-dal-1 (Dallas port 60319, 445ms), feeder-chi-1 (Chicago port 60320, 513ms), feeder-ny-1 (New York port 60321, 508ms), feeder-us-1 (US Anycast port 60322, 513ms), feeder-sf-2 (San Francisco port 60323, 343ms), feeder-sf-3 (San Francisco port 60324, 340ms), feeder-dal-2 (Dallas port 60325, 464ms)
+  [1/12] Scanning 2026-10-11 -> 2026-10-14 (midweek, 3n, lead=7d)... ✓ [OK] 30 comps available (72 booked) in 44.1s (483.67 MB)
+  [2/12] Scanning 2026-10-26 -> 2026-10-29 (midweek, 3n, lead=22d)... ✓ [OK] 62 comps available (40 booked) in 45.8s (431.40 MB)
+  [3/12] Scanning 2026-11-08 -> 2026-11-11 (midweek, 3n, lead=35d)... ✓ [OK] 38 comps available (64 booked) in 39.3s (318.17 MB)
+  [4/12] Scanning 2026-10-29 -> 2026-11-01 (weekend, 3n, lead=25d)... ✓ [OK] 49 comps available (53 booked) in 46.8s (372.03 MB)
+  [5/12] Scanning 2026-11-15 -> 2026-11-19 (midweek, 4n, lead=42d)... ✓ [OK] 47 comps available (55 booked) in 23.1s (185.46 MB)
+  [6/12] Scanning 2026-11-29 -> 2026-12-03 (midweek, 4n, lead=56d)... ✓ [OK] 47 comps available (55 booked) in 24.5s (153.43 MB)
+  [7/12] Scanning 2026-12-03 -> 2026-12-06 (weekend, 3n, lead=60d)... ✓ [OK] 39 comps available (63 booked) in 19.5s (143.97 MB)
+  [8/12] Scanning 2026-12-06 -> 2026-12-10 (midweek, 4n, lead=63d)... ✓ [OK] 43 comps available (59 booked) in 27.2s (176.19 MB)
+  [9/12] Scanning 2026-12-27 -> 2026-12-31 (midweek, 4n, lead=84d)... ✓ [OK] 22 comps available (80 booked) in 28.8s (212.00 MB)
+  [10/12] Scanning 2027-01-04 -> 2027-01-07 (midweek, 3n, lead=92d)... ✓ [OK] 52 comps available (50 booked) in 30.3s (180.63 MB)
+  [11/12] Scanning 2027-01-07 -> 2027-01-10 (weekend, 3n, lead=95d)... ✓ [OK] 51 comps available (51 booked) in 22.7s (210.83 MB)
+  [12/12] Scanning 2027-01-10 -> 2027-01-14 (midweek, 4n, lead=98d)... ✓ [OK] 54 comps available (48 booked) in 17.8s (179.23 MB)
+
+  ✓ Competitor Sales Engine: Recorded 0 new sales, erased 0 sales (Total active sales in ledger: 134).
+
+[Step 3b/5] Refreshing competitor Airbnb ratings and Guest Favorite badges...
+
+🔍 Synchronizing Airbnb ratings & Guest Favorite badges for 102 active comps (all)...
+  ✓ Identified 102 comps from recent high-fidelity search sweeps.
+
+💾 Saved updated comp registry and listing specifications (102 comps updated).
+🏅 Total Comps with Airbnb Guest Favorite Badge: 83 / 102
+
+Sample Updated Comps:
+ID                  Name                                Rating  GF Badge   Old Ratio  New Ratio
+--------------------------------------------------------------------------------------------
+1077813310260513265 Desert Diamond HTD Pool/Hot Tub/Te  4.97    🏅 YES      1.25       1.25
+628534576871518102  The Mulberry | Lux Pool/Hot Tub Mi  4.96    🏅 YES      1.01       1.01
+1452623425630736376 Family Resort: Pool, Outdoor Theat  4.88    🏅 YES      1.05       1.05
+1558065119520691944 Mega Mesa Retreat: Heated Pool, Sp  4.83    🏅 YES      1.07       1.07
+746927337513825183  HÓZHÓ |Mountain View Home| Pool, H  5.0     No         1.25       1.25
+1143202699620728397 Game Time - 6 Bedroom Elite Vacati  4.8     No         1.00       1.00
+1442997693061036066 Scottsdale Jetsetter - Modern Dese  5.0     🏅 YES      1.09       1.09
+1329097682770073862 Resort-Style Escape: Pool, Courts,  4.87    🏅 YES      1.16       1.16
+1628548270397523375 Fun-Filled Oasis • Pool, Picklebal  4.93    🏅 YES      1.19       1.19
+1136293547142522527 Private Desert Compound w/ pickle-  4.88    No         1.21       1.21
+
+[Step 4/5] Generating multi-format advisory reports...
+
+[Step 4b] ℹ️ No Streamline price changes detected in the last 7 days for quick scan intervals.
+  Skipping platform comparison (handled by weekly full scan).
+
+[Step 4c] Empirical Absorption Velocity Summary...
+  - Total Confirmed Sales:        134
+  - Overall Median Percentile:    46.1%
+  - Average Lead Time at Sale:    108.8 days
+  - Average Realized Nightly:     $998.47
+  - ⚡ Active Market Compression: 11 interval(s) surging!
+      • 2026-10-25 -> 2026-10-29: High scarcity compression: only 13/102 (12.7%) comps available for check-in 2026-10-25
+      • 2026-11-27 -> 2026-11-29: High scarcity compression: only 2/102 (2.0%) comps available for check-in 2026-11-27
+      • 2026-12-18 -> 2026-12-20: High scarcity compression: only 6/102 (5.9%) comps available for check-in 2026-12-18
+      • 2026-12-20 -> 2026-12-23: High scarcity compression: only 9/102 (8.8%) comps available for check-in 2026-12-20
+      • 2027-07-01 -> 2027-07-04: High scarcity compression: only 9/102 (8.8%) comps available for check-in 2027-07-01
+      • 2027-07-15 -> 2027-07-18: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-07-15
+      • 2027-08-05 -> 2027-08-08: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-08-05
+      • 2027-08-19 -> 2027-08-22: High scarcity compression: only 15/102 (14.7%) comps available for check-in 2027-08-19
+      • 2027-08-26 -> 2027-08-29: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-08-26
+      • 2027-09-09 -> 2027-09-12: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-09-09
+      • 2027-09-26 -> 2027-09-30: High scarcity compression: only 17/102 (16.7%) comps available for check-in 2027-09-26
+
+[Step 5/5] Generating interactive static HTML dashboard in docs/...
+
+======================================================================
+🎉 ADVISORY REPORT GENERATION COMPLETE
+======================================================================
+  🚨 Urgent Adjustments Required (This Week): 3
+  ⚠️  Moderate Adjustments (Monthly Review):   13
+  ✅  Competitive / On Target:                 12
+
+📁 Output Files:
+  - Markdown Summary: data/pricing_report_2026-10-04.md
+  - Google Sheets CSV: data/pricing_sheet_2026-10-04.csv
+  - Raw JSON Archive:  data/pricing_data_2026-10-04.json
+======================================================================
+
+==============================================================================
+📊 RUNTIME & DATA TRANSFER PERFORMANCE AUDIT
+==============================================================================
+Scrape Architecture: Stealth Multi-IP Feeder Pool (up to 8 hubs)
+Step / Sub-Interval                                  Duration Network Transfer
+------------------------------------------------------------------------------
+[Step 1] Kivoya & Database Ingestion                     2.0s          0.00 MB
+[Step 2] Calendar Segmentation                           0.9s          0.00 MB
+[Step 3] Luxury Comp Scraping (12 intervals)         3m 13.9s       3047.07 MB
+  • 2026-10-11 -> 2026-10-14 (midweek, 3n)              44.1s        483.67 MB
+  • 2026-10-26 -> 2026-10-29 (midweek, 3n)              45.8s        431.40 MB
+  • 2026-10-29 -> 2026-11-01 (weekend, 3n)              46.8s        372.03 MB
+  • 2026-11-08 -> 2026-11-11 (midweek, 3n)              39.3s        318.17 MB
+  • 2026-11-15 -> 2026-11-19 (midweek, 4n)              23.1s        185.46 MB
+  • 2026-11-29 -> 2026-12-03 (midweek, 4n)              24.5s        153.43 MB
+  • 2026-12-03 -> 2026-12-06 (weekend, 3n)              19.5s        143.97 MB
+  • 2026-12-06 -> 2026-12-10 (midweek, 4n)              27.2s        176.19 MB
+  • 2026-12-27 -> 2026-12-31 (midweek, 4n)              28.8s        212.00 MB
+  • 2027-01-04 -> 2027-01-07 (midweek, 3n)              30.3s        180.63 MB
+  • 2027-01-07 -> 2027-01-10 (weekend, 3n)              22.7s        210.83 MB
+  • 2027-01-10 -> 2027-01-14 (midweek, 4n)              17.8s        179.23 MB
+[Step 4] Advisory & Anomaly Analytics                    4.0s          0.00 MB
+[Step 4c] Sales Detection & Absorption                   0.3s          0.00 MB
+[Step 5] HTML Dashboard & Asset Sync                     2.2s          0.00 MB
+------------------------------------------------------------------------------
+Total End-to-End Execution                           3m 23.7s       3047.07 MB
+==============================================================================

@@ -191,8 +191,8 @@
       "bedrooms": 6,
       "beds": 7,
       "baths": 3.5,
-      "rating": 4.88,
-      "reviews": 41,
+      "rating": 4.86,
+      "reviews": 44,
       "url": "https://www.airbnb.com/rooms/1452623425630736376",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ1MjYyMzQyNTYzMDczNjM3Ng==/original/65ce9616-5142-4651-a1f8-2c73b4aad379.png",
@@ -1928,7 +1928,7 @@
       "beds": 9,
       "baths": 4.0,
       "rating": 4.98,
-      "reviews": 64,
+      "reviews": 63,
       "url": "https://www.airbnb.com/rooms/757175004186905494",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-757175004186905494/original/f914c710-3ad5-48e9-b1ba-0ed6efc38b52.jpeg",
@@ -1999,7 +1999,7 @@
         },
         "strengths": [
           "Prime Scottsdale corridor commanding high regional demand",
-          "Flawless guest track record (4.98★ with 64 reviews)",
+          "Flawless guest track record (4.98★ with 63 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -2482,7 +2482,7 @@
       "beds": 9,
       "baths": 4.5,
       "rating": 5.0,
-      "reviews": 28,
+      "reviews": 26,
       "url": "https://www.airbnb.com/rooms/1125598445109401829",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1125598445109401829/original/d1a4efc4-1df8-46b3-b919-9c82ec6435f9.jpeg",
@@ -2554,7 +2554,7 @@
         "strengths": [
           "High bedroom count (8 bedrooms) accommodating large travel groups",
           "Expansive floor plan (~7,300 sq ft)",
-          "Flawless guest track record (5.00★ with 28 reviews)",
+          "Flawless guest track record (5.00★ with 26 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -3314,7 +3314,7 @@
       "beds": 16,
       "baths": 4.5,
       "rating": 5.0,
-      "reviews": 7,
+      "reviews": 8,
       "url": "https://www.airbnb.com/rooms/1625632307698164475",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1625632307698164475/original/cf225acf-7cd1-45a5-8589-ce8f680d6319.jpeg",
@@ -4974,7 +4974,7 @@
       "beds": 7,
       "baths": 3.0,
       "rating": 4.98,
-      "reviews": 123,
+      "reviews": 124,
       "url": "https://www.airbnb.com/rooms/47868708",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-47868708/original/897c7308-513c-4555-bbfc-f949cfa1bfa0.jpeg",
@@ -5044,7 +5044,7 @@
           "is_guest_favorite": true
         },
         "strengths": [
-          "Flawless guest track record (4.98★ with 123 reviews)",
+          "Flawless guest track record (4.98★ with 124 reviews)",
           "Airbnb Guest Favorite badge (+reputation boost)"
         ],
         "deficits": [
@@ -8273,7 +8273,7 @@
       "beds": 7,
       "baths": 3.0,
       "rating": 4.94,
-      "reviews": 18,
+      "reviews": 17,
       "url": "https://www.airbnb.com/rooms/1686281156322769090",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1686281156322769090/original/22cc9268-79aa-4bac-a42c-1a941ee69ad8.jpeg",
@@ -8549,7 +8549,7 @@
       "beds": 7,
       "baths": 3.0,
       "rating": 4.93,
-      "reviews": 149,
+      "reviews": 150,
       "url": "https://www.airbnb.com/rooms/52867134",
       "discovered_at_sample": "2026-10-15 to 2026-10-18",
       "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-52867134/original/a2dc5a94-9ea2-483d-9c54-17daf28a549b.jpeg",
@@ -9376,7 +9376,7 @@
     "valid_comps_count": 102,
     "disqualified_comps_count": 6,
     "total_comps": 102,
-    "last_ratings_sync": "2026-10-04T06:18:32.688011",
+    "last_ratings_sync": "2026-10-05T06:18:43.993222",
     "total_guest_favorites": 83
   },
   "excluded_comps": {

@@ -1,0 +1,264 @@
+======================================================================
+🏠 STR Competitive Price Advisor: Villa del Sol
+📍 Location: 920 E Carver Rd, Tempe, AZ 85284
+======================================================================
+
+[Step 1/5] Querying Kivoya / Streamline VRS API...
+  ✓ Found 18 active reservations / blocked periods.
+  ✓ Found 18 seasonal rate periods configured in Kivoya.
+  ✓ Snapshotted 335 daily published rates in database.
+
+[Step 2/5] Segmenting open calendar over next 12 months...
+  ✓ Generated 28 unbooked intervals (weekends & midweeks).
+  ⚡ Quick mode: Evaluating first 12 upcoming intervals.
+
+[Step 3/5] Collecting luxury competitive listings from Airbnb...
+🛡️  Stealth Feeder Pool: Initializing 8 parallel proxy bridges across out-of-state travel hubs...
+  🛡️ Stealth Multi-IP Feeder Pool Online (8 endpoints): feeder-sf-1 (San Francisco port 51746, 330ms), feeder-dal-1 (Dallas port 51747, 477ms), feeder-chi-1 (Chicago port 51748, 487ms), feeder-ny-1 (New York port 51749, 557ms), feeder-us-1 (US Anycast port 51750, 491ms), feeder-sf-2 (San Francisco port 51751, 354ms), feeder-sf-3 (San Francisco port 51752, 345ms), feeder-dal-2 (Dallas port 51753, 474ms)
+  [1/12] Scanning 2026-10-11 -> 2026-10-14 (midweek, 3n, lead=5d)... ✓ [OK] 29 comps available (73 booked) in 56.7s (506.88 MB)
+  [2/12] Scanning 2026-10-26 -> 2026-10-29 (midweek, 3n, lead=20d)... ✓ [OK] 61 comps available (41 booked) in 64.1s (444.40 MB)
+  [3/12] Scanning 2026-10-29 -> 2026-11-01 (weekend, 3n, lead=23d)... ✓ [OK] 54 comps available (48 booked) in 45.1s (448.49 MB)
+  [4/12] Scanning 2026-11-08 -> 2026-11-11 (midweek, 3n, lead=33d)... ✓ [OK] 42 comps available (60 booked) in 55.4s (489.62 MB)
+  [5/12] Scanning 2026-11-15 -> 2026-11-19 (midweek, 4n, lead=40d)... ✓ [OK] 61 comps available (41 booked) in 48.7s (425.55 MB)
+================================================================================
+⏳ [2026-10-06 06:18:16] WAITING FOR HEALTHY STEALTH SERVERS (0/1 Healthy)
+================================================================================
+Elapsed: 0m 09s | Target: 1 healthy servers | Next check in 60s
+
+❌ UNHEALTHY SERVERS (11 failing):
+    1. feeder-single    (Out-of-State Travel Hub) -> san-francisco.us.socks.nordhold.net:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    2. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us71.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    3. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us52.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    4. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us51.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    5. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us50.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    6. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us72.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    7. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us42.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+   ... and 4 more reserve candidate nodes failing.
+
+🔍 INVESTIGATION & TROUBLESHOOTING HINTS:
+   • [AUTH_FAIL/REJECTED]: SOCKS5 authentication rejected or session closed. NordVPN limits accounts to 10 active concurrent connections. Ensure no other scrape jobs, VPN clients, or processes are using your credentials.
+   • [DNS_FAIL]: Remote host could not be resolved via DNS. Check your DNS resolver, or node hostname may have been retired by NordVPN.
+
+🔄 Re-probing unhealthy nodes and auto-refreshing NordVPN candidates in 60s...
+   (To abort waiting, press Ctrl+C)
+================================================================================
+  [6/12] Scanning 2026-12-03 -> 2026-12-06 (weekend, 3n, lead=58d)... ✓ [OK] 42 comps available (60 booked) in 37.8s (465.84 MB)
+  [7/12] Scanning 2026-12-06 -> 2026-12-10 (midweek, 4n, lead=61d)... ✓ [OK] 47 comps available (55 booked) in 27.2s (381.43 MB)
+================================================================================
+⏳ [2026-10-06 06:19:08] WAITING FOR HEALTHY STEALTH SERVERS (0/1 Healthy)
+================================================================================
+Elapsed: 1m 01s | Target: 1 healthy servers | Next check in 0s
+
+❌ UNHEALTHY SERVERS (11 failing):
+    1. feeder-single    (Out-of-State Travel Hub) -> san-francisco.us.socks.nordhold.net:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 2
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    2. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us71.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 2
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    3. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us52.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 2
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    4. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us51.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 2
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    5. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us50.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 2
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    6. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us72.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 2
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    7. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us42.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 2
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+   ... and 4 more reserve candidate nodes failing.
+
+🔍 INVESTIGATION & TROUBLESHOOTING HINTS:
+   • [AUTH_FAIL/REJECTED]: SOCKS5 authentication rejected or session closed. NordVPN limits accounts to 10 active concurrent connections. Ensure no other scrape jobs, VPN clients, or processes are using your credentials.
+   • [DNS_FAIL]: Remote host could not be resolved via DNS. Check your DNS resolver, or node hostname may have been retired by NordVPN.
+
+🔄 Re-probing unhealthy nodes and auto-refreshing NordVPN candidates in 0s...
+   (To abort waiting, press Ctrl+C)
+================================================================================
+  [8/12] Scanning 2026-11-29 -> 2026-12-03 (midweek, 4n, lead=54d)... ✓ [OK] 66 comps available (36 booked) in 110.5s (432.18 MB)
+  [9/12] Scanning 2026-12-27 -> 2026-12-31 (midweek, 4n, lead=82d)... ✓ [OK] 21 comps available (81 booked) in 23.9s (187.86 MB)
+  [10/12] Scanning 2027-01-04 -> 2027-01-07 (midweek, 3n, lead=90d)... ✓ [OK] 55 comps available (47 booked) in 27.0s (173.62 MB)
+================================================================================
+⏳ [2026-10-06 06:19:44] WAITING FOR HEALTHY STEALTH SERVERS (0/1 Healthy)
+================================================================================
+Elapsed: 0m 01s | Target: 1 healthy servers | Next check in 60s
+
+❌ UNHEALTHY SERVERS (11 failing):
+    1. feeder-single    (Out-of-State Travel Hub) -> san-francisco.us.socks.nordhold.net:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    2. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us71.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    3. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us52.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    4. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us51.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    5. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us50.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    6. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us72.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    7. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us42.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+   ... and 4 more reserve candidate nodes failing.
+
+🔍 INVESTIGATION & TROUBLESHOOTING HINTS:
+   • [AUTH_FAIL/REJECTED]: SOCKS5 authentication rejected or session closed. NordVPN limits accounts to 10 active concurrent connections. Ensure no other scrape jobs, VPN clients, or processes are using your credentials.
+   • [DNS_FAIL]: Remote host could not be resolved via DNS. Check your DNS resolver, or node hostname may have been retired by NordVPN.
+
+🔄 Re-probing unhealthy nodes and auto-refreshing NordVPN candidates in 60s...
+   (To abort waiting, press Ctrl+C)
+================================================================================
+================================================================================
+⏳ [2026-10-06 06:19:44] WAITING FOR HEALTHY STEALTH SERVERS (0/1 Healthy)
+================================================================================
+Elapsed: 0m 01s | Target: 1 healthy servers | Next check in 60s
+
+❌ UNHEALTHY SERVERS (11 failing):
+    1. feeder-single    (Out-of-State Travel Hub) -> san-francisco.us.socks.nordhold.net:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    2. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us71.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    3. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us52.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    4. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us51.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    5. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us50.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    6. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us72.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+    7. Backup (feeder-single) (Out-of-State Travel Hub) -> socks-us42.nordvpn.com:1080
+      Stage: SOCKS5_AUTH | Category: [AUTH_FAIL] | Fails: 1
+      Detail: SOCKS5 auth rejected (status 0x01: credentials invalid or 10-connection limit reached)
+   ... and 4 more reserve candidate nodes failing.
+
+🔍 INVESTIGATION & TROUBLESHOOTING HINTS:
+   • [AUTH_FAIL/REJECTED]: SOCKS5 authentication rejected or session closed. NordVPN limits accounts to 10 active concurrent connections. Ensure no other scrape jobs, VPN clients, or processes are using your credentials.
+   • [DNS_FAIL]: Remote host could not be resolved via DNS. Check your DNS resolver, or node hostname may have been retired by NordVPN.
+
+🔄 Re-probing unhealthy nodes and auto-refreshing NordVPN candidates in 60s...
+   (To abort waiting, press Ctrl+C)
+================================================================================
+  [11/12] Scanning 2027-01-10 -> 2027-01-14 (midweek, 4n, lead=96d)... ✓ [OK] 53 comps available (49 booked) in 26.8s (190.77 MB)
+  [12/12] Scanning 2027-01-07 -> 2027-01-10 (weekend, 3n, lead=93d)... ✓ [OK] 52 comps available (50 booked) in 93.4s (165.10 MB)
+   - Comp sales recorded: $1,531 (69.1%)
+
+  ✓ Competitor Sales Engine: Recorded 1 new sales, erased 0 sales (Total active sales in ledger: 140).
+
+[Step 3b/5] Refreshing competitor Airbnb ratings and Guest Favorite badges...
+
+🔍 Synchronizing Airbnb ratings & Guest Favorite badges for 102 active comps (all)...
+  ✓ Identified 102 comps from recent high-fidelity search sweeps.
+
+💾 Saved updated comp registry and listing specifications (102 comps updated).
+🏅 Total Comps with Airbnb Guest Favorite Badge: 83 / 102
+
+Sample Updated Comps:
+ID                  Name                                Rating  GF Badge   Old Ratio  New Ratio
+--------------------------------------------------------------------------------------------
+1077813310260513265 Desert Diamond HTD Pool/Hot Tub/Te  4.97    🏅 YES      1.25       1.25
+628534576871518102  The Mulberry | Lux Pool/Hot Tub Mi  4.96    🏅 YES      1.01       1.01
+1452623425630736376 Family Resort: Pool, Outdoor Theat  4.88    🏅 YES      1.05       1.05
+1558065119520691944 Mega Mesa Retreat: Heated Pool, Sp  4.83    🏅 YES      1.07       1.07
+746927337513825183  HÓZHÓ |Mountain View Home| Pool, H  5.0     No         1.25       1.25
+1143202699620728397 Game Time - 6 Bedroom Elite Vacati  4.8     No         1.00       1.00
+1442997693061036066 Scottsdale Jetsetter - Modern Dese  5.0     🏅 YES      1.09       1.09
+1329097682770073862 Resort-Style Escape: Pool, Courts,  4.87    🏅 YES      1.16       1.16
+1628548270397523375 Fun-Filled Oasis • Pool, Picklebal  4.93    🏅 YES      1.19       1.19
+1136293547142522527 Private Desert Compound w/ pickle-  4.88    No         1.21       1.21
+
+[Step 4/5] Generating multi-format advisory reports...
+
+[Step 4b] ℹ️ No Streamline price changes detected in the last 7 days for quick scan intervals.
+  Skipping platform comparison (handled by weekly full scan).
+
+[Step 4c] Empirical Absorption Velocity Summary...
+  - Total Confirmed Sales:        140
+  - Overall Median Percentile:    45.9%
+  - Average Lead Time at Sale:    106.9 days
+  - Average Realized Nightly:     $995.69
+  - ⚡ Active Market Compression: 11 interval(s) surging!
+      • 2026-10-25 -> 2026-10-29: High scarcity compression: only 13/102 (12.7%) comps available for check-in 2026-10-25
+      • 2026-11-27 -> 2026-11-29: High scarcity compression: only 2/102 (2.0%) comps available for check-in 2026-11-27
+      • 2026-12-18 -> 2026-12-20: High scarcity compression: only 6/102 (5.9%) comps available for check-in 2026-12-18
+      • 2026-12-20 -> 2026-12-23: High scarcity compression: only 9/102 (8.8%) comps available for check-in 2026-12-20
+      • 2027-07-01 -> 2027-07-04: High scarcity compression: only 9/102 (8.8%) comps available for check-in 2027-07-01
+      • 2027-07-15 -> 2027-07-18: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-07-15
+      • 2027-08-05 -> 2027-08-08: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-08-05
+      • 2027-08-19 -> 2027-08-22: High scarcity compression: only 15/102 (14.7%) comps available for check-in 2027-08-19
+      • 2027-08-26 -> 2027-08-29: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-08-26
+      • 2027-09-09 -> 2027-09-12: High scarcity compression: only 16/102 (15.7%) comps available for check-in 2027-09-09
+      • 2027-09-26 -> 2027-09-30: High scarcity compression: only 17/102 (16.7%) comps available for check-in 2027-09-26
+
+[Step 5/5] Generating interactive static HTML dashboard in docs/...
+
+======================================================================
+🎉 ADVISORY REPORT GENERATION COMPLETE
+======================================================================
+  🚨 Urgent Adjustments Required (This Week): 3
+  ⚠️  Moderate Adjustments (Monthly Review):   15
+  ✅  Competitive / On Target:                 10
+
+📁 Output Files:
+  - Markdown Summary: data/pricing_report_2026-10-06.md
+  - Google Sheets CSV: data/pricing_sheet_2026-10-06.csv
+  - Raw JSON Archive:  data/pricing_data_2026-10-06.json
+======================================================================
+
+==============================================================================
+📊 RUNTIME & DATA TRANSFER PERFORMANCE AUDIT
+==============================================================================
+Scrape Architecture: Stealth Multi-IP Feeder Pool (up to 8 hubs)
+Step / Sub-Interval                                  Duration Network Transfer
+------------------------------------------------------------------------------
+[Step 1] Kivoya & Database Ingestion                     2.7s          0.00 MB
+[Step 2] Calendar Segmentation                           1.1s          0.00 MB
+[Step 3] Luxury Comp Scraping (12 intervals)         5m 36.2s       4311.87 MB
+  • 2026-10-11 -> 2026-10-14 (midweek, 3n)              56.7s        506.88 MB
+  • 2026-10-26 -> 2026-10-29 (midweek, 3n)           1m 04.1s        444.40 MB
+  • 2026-10-29 -> 2026-11-01 (weekend, 3n)              45.1s        448.49 MB
+  • 2026-11-08 -> 2026-11-11 (midweek, 3n)              55.4s        489.62 MB
+  • 2026-11-15 -> 2026-11-19 (midweek, 4n)              48.7s        425.55 MB
+  • 2026-11-29 -> 2026-12-03 (midweek, 4n)           1m 50.5s        432.18 MB
+  • 2026-12-03 -> 2026-12-06 (weekend, 3n)              37.8s        465.84 MB
+  • 2026-12-06 -> 2026-12-10 (midweek, 4n)              27.2s        381.43 MB
+  • 2026-12-27 -> 2026-12-31 (midweek, 4n)              23.9s        187.86 MB
+  • 2027-01-04 -> 2027-01-07 (midweek, 3n)              27.0s        173.62 MB
+  • 2027-01-07 -> 2027-01-10 (weekend, 3n)           1m 33.4s        165.10 MB
+  • 2027-01-10 -> 2027-01-14 (midweek, 4n)              26.8s        190.77 MB
+[Step 4] Advisory & Anomaly Analytics                    3.9s          0.00 MB
+[Step 4c] Sales Detection & Absorption                   0.3s          0.00 MB
+[Step 5] HTML Dashboard & Asset Sync                     2.8s          0.00 MB
+------------------------------------------------------------------------------
+Total End-to-End Execution                           5m 47.5s       4311.87 MB
+==============================================================================

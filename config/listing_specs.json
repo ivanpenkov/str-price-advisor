@@ -19,8 +19,8 @@
     "bedrooms": 6,
     "beds": 7,
     "baths": 3.5,
-    "rating": 4.88,
-    "reviews": 41,
+    "rating": 4.86,
+    "reviews": 44,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ1MjYyMzQyNTYzMDczNjM3Ng==/original/65ce9616-5142-4651-a1f8-2c73b4aad379.png",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -306,7 +306,7 @@
     "beds": 9,
     "baths": 3.5,
     "rating": 4.87,
-    "reviews": 166,
+    "reviews": 167,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MjI1Njk2MTQ%3D/original/25d98295-3917-4c1d-89ca-7bf52a655ce4.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -514,7 +514,7 @@
     "beds": 10,
     "baths": 3.0,
     "rating": 5.0,
-    "reviews": 70,
+    "reviews": 71,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTM0MTIyOTc2MDEzMDgxMDI4MA==/original/8c81a610-b19f-4553-b819-905d5b6262d8.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -540,7 +540,7 @@
     "beds": 9,
     "baths": 3.0,
     "rating": 4.96,
-    "reviews": 158,
+    "reviews": 157,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-875197009188058699/original/3a81ac63-e21d-4d5a-ae42-3addf1b5dcff.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -800,7 +800,7 @@
     "beds": 9,
     "baths": 3.0,
     "rating": 4.97,
-    "reviews": 33,
+    "reviews": 34,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTI4MzUxMzkwMzQ0MTkyODEwNw%3D%3D/original/5ff0879e-d2c1-4142-a011-cd9308758d99.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -1125,7 +1125,7 @@
     "beds": 8,
     "baths": 3.5,
     "rating": 5.0,
-    "reviews": 7,
+    "reviews": 5,
     "photo_url": "https://a0.muscache.com/im/pictures/hosting/Hosting-1734227719495774011/original/89f226c7-e7fc-48ee-ab16-278cf358edbd.png",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -1612,7 +1612,7 @@
     "beds": 12,
     "baths": 4.0,
     "rating": 4.91,
-    "reviews": 137,
+    "reviews": 136,
     "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-918812982062542680/original/dfc1df47-74d9-4161-bdcd-533558cb57d0.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -1669,7 +1669,7 @@
     "beds": 9,
     "baths": 3.0,
     "rating": 4.85,
-    "reviews": 111,
+    "reviews": 112,
     "photo_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-944305567506818495/original/96633032-1d31-4c7e-a2e1-d470c94d47bf.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"
@@ -2078,7 +2078,7 @@
     "beds": 11,
     "baths": 6.5,
     "rating": 4.97,
-    "reviews": 33,
+    "reviews": 34,
     "photo_url": "https://a0.muscache.com/im/pictures/miso/Hosting-1077813310260513265/original/123122b6-3b05-41bc-abb0-db4ae36dad8b.jpeg",
     "is_guest_favorite": true,
     "guest_favorite_badge": "Guest Favorite"

@@ -3,8 +3,8 @@
 ======================================================================
 🔑 Authenticating with Streamline OwnerX...
   ✓ Authenticated as processor #549713
-⚡ Incremental Sync: Fetching reservations ending >= 2026-07-28 (past 60 days + all future)...
-  ✓ Fetched 27 reservation records.
-  ✓ Upserted into database: 27 records (18 future, 9 past).
+⚡ Incremental Sync: Fetching reservations ending >= 2026-08-11 (past 60 days + all future)...
+  ✓ Fetched 26 reservation records.
+  ✓ Upserted into database: 26 records (18 future, 8 past).
   ✓ Synced JSON database at: data/reservations.json
-  ✓ Recorded 358 published nightly rate snapshots for today (2026-09-26).
+  ✓ Recorded 328 published nightly rate snapshots for today (2026-10-10).

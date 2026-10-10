@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "last_updated": "2026-10-09T06:15:15.433368-07:00",
+  "last_updated": "2026-10-10T06:15:13.576509-07:00",
   "recent_window_days": 30,
   "recent_reviews_count": 2,
   "platforms": {
@@ -19,7 +19,7 @@
         "check_in": 4.92,
         "value": 4.73
       },
-      "last_scraped": "2026-10-09T06:15:12.694243-07:00",
+      "last_scraped": "2026-10-10T06:15:12.280497-07:00",
       "status": "ok",
       "harvested_count": 82,
       "harvest_ratio": 1.038
@@ -43,7 +43,7 @@
         "communication": 9.6,
         "location": 9.8
       },
-      "last_scraped": "2026-10-09T06:15:15.394024-07:00",
+      "last_scraped": "2026-10-10T06:15:13.529146-07:00",
       "status": "ok",
       "harvested_count": 24,
       "harvest_ratio": 1.0
@@ -64,7 +64,7 @@
         "location": 9.3,
         "free_wifi": 10.0
       },
-      "last_scraped": "2026-10-09T06:15:11.575718-07:00",
+      "last_scraped": "2026-10-10T06:15:12.605236-07:00",
       "status": "ok",
       "harvested_count": 3,
       "harvest_ratio": 1.0
@@ -96,7 +96,7 @@
       "body": "Large property, everyone felt comfortable. House was clean and host was great answering any questions. Would stay again.",
       "host_response": {
         "responder_name": "Villa del Sol Host",
-        "date": "2026-10-02",
+        "date": "2026-10-03",
         "body": "Dear Nicole,<br/>Thank you so much for your wonderful review! We’re delighted to hear that everyone felt comfortable and that you found the home clean and spacious. It was truly a pleasure hosting you, and we greatly appreciate your kind words about our communication and service.<br/>We would be very happy to welcome you and your group back anytime. Thank you again for choosing to stay with us!<br/>Best regards,<br/>Carlos Sánchez<br/>Kivoya Reservations Team."
       },
       "is_recent": true
